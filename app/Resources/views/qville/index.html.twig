@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {{ dump(qvilles) }}
+    <h1>Qvilles list</h1>
+
+    <table>
+        <thead>
+
+            <tr>
+                <th>Id</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for qville in qvilles %}
+            <tr>
+                <td><a href="{{ path('qville_show', { 'id': qville.id }) }}">{{ qville.id }}</a></td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('qville_show', { 'id': qville.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('qville_edit', { 'id': qville.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('qville_new') }}">Create a new qville</a>
+        </li>
+    </ul>
+{% endblock %}

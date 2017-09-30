@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Scategories list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Libelle</th>
+                <th>Slug</th>
+                <th>Details</th>
+                <th>Id</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for scategory in scategories %}
+            <tr>
+                <td><a href="{{ path('scategory_show', { 'id': scategory.id }) }}">{{ scategory.libelle }}</a></td>
+                <td>{{ scategory.slug }}</td>
+                <td>{{ scategory.details }}</td>
+                <td>{{ scategory.id }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('scategory_show', { 'id': scategory.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('scategory_edit', { 'id': scategory.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('scategory_new') }}">Create a new scategory</a>
+        </li>
+    </ul>
+{% endblock %}

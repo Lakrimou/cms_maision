@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<head>
+
+    <meta charset="UTF-8"/>
+    <title>{% block title %}Welcome!{% endblock %}</title>
+    {% block stylesheets %}
+
+        {% set link = 'http://ween.tn' %}
+
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Blank page | SARAH ADMIN</title>
+
+
+        <!--TIME PIKER-->
+        <link href='{{ asset('/asset-back/css/timepicki.css') }}' rel='stylesheet' type='text/css'>
+
+
+        <!--Bootstrap Stylesheet [ REQUIRED ]-->
+        <link href="{{ asset('/asset-back/css/bootstrap.min.css') }}" rel="stylesheet">
+
+
+        <!--Sarah Stylesheet [ REQUIRED ]-->
+        <link href="{{ asset('/asset-back/css/sarah.min.css') }}" rel="stylesheet">
+
+        <!--wmm Stylesheet [ REQUIRED ]-->
+        <link href="{{ asset('/asset-back/css/wmm.css') }}" rel="stylesheet">
+
+
+        <!--Sarah Premium Icon [ DEMONSTRATION ]-->
+        <link href="{{ asset('/asset-back/css/demo/sarah-demo-icons.min.css') }}" rel="stylesheet">
+
+
+        <!--Demo [ DEMONSTRATION ]-->
+        <link href="{{ asset('/asset-back/css/demo/sarah-demo.min.css') }}" rel="stylesheet">
+
+        <!--JAVASCRIPT-->
+        <!--=================================================-->
+
+        <!--Pace - Page Load Progress Par [OPTIONAL]-->
+        <link href="{{ asset('asset-back/plugins/pace/pace.min.css') }}" rel="stylesheet">
+        <script src="{{ asset('asset-back/plugins/pace/pace.min.js') }}"></script>
+
+
+        <!--jQuery [ REQUIRED ]-->
+        <script src="{{ asset('asset-back/js/jquery-2.2.4.min.js') }}"></script>
+
+
+        <!--BootstrapJS [ RECOMMENDED ]-->
+        <script src="{{ asset('/asset-back/js/bootstrap.min.js') }}"></script>
+
+
+        <!--SarahJS [ RECOMMENDED ]-->
+        <script src="{{ asset('asset-back/js/sarah.min.js') }}"></script>
+
+        <script src="https://use.fontawesome.com/7209a80f07.js"></script>
+
+        <script src="{{ asset('/asset-back/js/timepicki.js') }}"></script>
+    {% endblock %}
+
+</head>
+<body>
+{% block body %}
+
+
+
+
+
+    <div id="container" class="effect aside-float aside-bright mainnav-lg">
+
+
+        <!--NAVBAR-->
+        <!--===================================================-->
+        <header id="navbar">
+            <div id="navbar-container" class="boxed">
+
+                <!--Brand logo & name-->
+                <!--================================-->
+                <div class="navbar-header">
+                    <a href="index.html" class="navbar-brand">
+
+                        <div class="brand-title">
+                            <span class="brand-text">Annuaire Admin</span>
+                        </div>
+                    </a>
+                </div>
+                <!--================================-->
+                <!--End brand logo & name-->
+
+
+                <!--Navbar Dropdown-->
+                <!--================================-->
+
+                {% include ('back/mainnav.twig') %}
+        </header>
+        <!--===================================================-->
+        <!--END NAVBAR-->
+
+        <div class="boxed">
+
+            <!--CONTENT CONTAINER-->
+            <!--===================================================-->
+            <div id="content-container">
+
+                <!--Page Title-->
+                <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+                <div id="page-title">
+                    <h1 class="page-header text-overflow">Dashboard</h1>
+
+                    <!--Searchbox-->
+                    <div class="searchbox">
+                        <div class="input-group custom-search-form">
+                            <input type="text" class="form-control" placeholder="Search..">
+                            <span class="input-group-btn">
+                                <button class="text-muted" type="button"><i class="fa fa-search" aria-hidden="true"></i></button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+                <!--End page title-->
+
+
+
+                {% block contant %}
+
+                {% endblock %}
+
+
+
+            </div>
+            <!--===================================================-->
+            <!--END CONTENT CONTAINER-->
+
+
+
+
+
+            <!--MAIN NAVIGATION-->
+            <!--===================================================-->
+            <nav id="mainnav-container">
+
+                {% include 'back/sidenav.twig' %}
+            </nav>
+            <!--===================================================-->
+            <!--END MAIN NAVIGATION-->
+
+
+
+        </div>
+
+
+
+        <!-- FOOTER -->
+        <!--===================================================-->
+        <footer id="footer">
+
+            <!-- Visible when footer positions are fixed -->
+            <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+            <div class="show-fixed pull-right">
+                You have <a href="#" class="text-bold text-main"><span class="label label-danger">3</span> pending action.</a>
+            </div>
+
+
+
+
+            <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+            <!-- Remove the class "show-fixed" and "hide-fixed" to make the content always appears. -->
+            <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+            <p class="pad-lft">&#0169; 2017 Powered By Webmaster-Media</p>
+
+
+
+        </footer>
+        <!--===================================================-->
+        <!-- END FOOTER -->
+
+
+        <!-- SCROLL PAGE BUTTON -->
+        <!--===================================================-->
+        <button class="scroll-top btn">
+            <i class="pci-chevron chevron-up"></i>
+        </button>
+        <!--===================================================-->
+
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.15/r-2.1.1/sc-1.4.2/datatables.min.css"/>
+        <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.15/r-2.1.1/sc-1.4.2/datatables.min.js"></script>
+
+
+    </div>
+    <!--===================================================-->
+    <!-- END OF CONTAINER -->
+
+
+
+
+
+
+{% endblock %}
+
+
+</body>
+
+
+{% block javascripts %}
+
+{% endblock %}
+
+            </html>

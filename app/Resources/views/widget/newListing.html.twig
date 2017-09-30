@@ -1,0 +1,437 @@
+{#===================== MODAL ADD LISTING ===================#}
+<div class="modal fade" id="modalAddListing" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document" style="width: 92%;">
+        <div class="modal-content">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h2 class="text-center" style="color: #337ab7; text-transform: uppercase;"><strong>Créer votre site web gratuit</strong></h2>
+                </div>
+
+                <form id="formAddNewListingF" action="{{ path('template_add_new_listing') }}" method="post" style="margin-top: 30px;">
+
+                    <div class="modal-body">
+                        <div class="">
+                            <div class="siginincontainer">
+
+
+                                {#data user#}
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-envelope-o" aria-hidden="true"></i></span>
+                                            <input name="user[email]" type="email" class="form-control" placeholder="Email *" aria-describedby="basic-addon1" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-unlock-alt" aria-hidden="true"></i></span>
+                                            <input name="user[pwd]" id="addPwd1" type="password" class="form-control" placeholder="Mot de passe *" aria-describedby="basic-addon1" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-unlock-alt" aria-hidden="true"></i></span>
+                                            <input name="user[pwd2]" id="addPwd2" type="password" class="form-control" placeholder="Répéter le mot de passe *" aria-describedby="basic-addon1" required>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <hr>
+                                {#name, slug, categorie#}
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="adminbundle_ngn_qouiqui_firstName">Nom de votre société *</label>
+                                            <input type="text" id="adminbundle_ngn_qouiqui_firstName" name="adminbundle_ngn[qouiqui][firstName]" required="required" class="form-control" minlength="3" maxlength="120">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="adminbundle_ngn_qouiqui_firstName">Url * (choisissez le non de votre site web)</label>
+                                            <div class="input-group">
+                                                <input pattern="[a-z-]+" type="text" id="adminbundle_ngn_qouiqui_slug" name="adminbundle_ngn[qouiqui][slug]" minlength="3" maxlength="60" required="required" class="slug form-control" placeholder="ex: votre-nom-de-société">
+                                                <span class="input-group-addon" id="basic-addon2"><strong class="domain-name">.ween.tn</strong></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="adminbundle_ngn_qouiqui_firstName">Categorie *</label>
+                                            <select id="adminbundle_ngn_category" name="adminbundle_ngn[category]" class="form-control form-control" required>
+                                                <option disabled selected></option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="adminbundle_ngn_qouiqui_shortDescription">Description courte * (max 160 caractères)</label>
+                                            <textarea name="adminbundle_ngn[qouiqui][shortDescription]" id="adminbundle_ngn_qouiqui_shortDescription" class="form-control" rows="1" maxlength="160" minlength="60" required></textarea>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <hr>
+                                <div class="row">
+                                    <div class="col-md-9">
+                                        {#adresse 1, adresse 2#}
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="adminbundle_ngn_qouiqui_firstName">Adresse *</label>
+                                                    <input type="text" id="adminbundle_ngn_qouiqui_address1" name="adminbundle_ngn[qouiqui][address1]" maxlength="200" class="form-control form-control" required>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="adminbundle_ngn_qouiqui_firstName">Adresse additionnelle</label>
+                                                    <input type="text" id="adminbundle_ngn_qouiqui_adress2" name="adminbundle_ngn[qouiqui][adress2]" maxlength="100" class="form-control form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        {#code postal, ville, delegation#}
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="adminbundle_ngn_qouiqui_firstName">Code postal *</label>
+                                                    <input type="text" id="adminbundle_ngn_qouiqui_zipCode" name="adminbundle_ngn[qouiqui][zipCode]" maxlength="45" class="form-control" required>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="adminbundle_ngn_qouiqui_firstName">Ville *</label>
+                                                    <select id="adminbundle_ngn_ville" name="adminbundle_ngn[ville]" class="form-control" required>
+                                                        <option disabled selected></option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="adminbundle_ngn_qouiqui_firstName">Délégation *</label>
+                                                    <select id="add-delegation-hidden" style="display: none;"></select>
+                                                    <select id="adminbundle_ngn_delegation" name="adminbundle_ngn[delegation]" class="form-control" required>
+                                                        <option disabled selected></option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        {#tel, tel2, fax#}
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="adminbundle_ngn_qouiqui_firstName">Téléphone *</label>
+                                                    <input type="text" id="adminbundle_ngn_qouiqui_phone" name="adminbundle_ngn[qouiqui][phone]" maxlength="45" class="form-control" required>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="adminbundle_ngn_qouiqui_firstName">Téléphone additionnel</label>
+                                                    <input type="text" id="adminbundle_ngn_qouiqui_phone2" name="adminbundle_ngn[qouiqui][phone2]" maxlength="45" class="form-control">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="adminbundle_ngn_qouiqui_firstName">Fax</label>
+                                                    <input type="text" id="adminbundle_ngn_qouiqui_phone2" name="adminbundle_ngn[qouiqui][fax]" maxlength="45" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        {#reseaux sociaux#}
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="adminbundle_ngn_qouiqui_firstName">Facebook</label>
+                                                    <input type="url" name="qouiqui[rs][facebook]" class="form-control" placeholder="https://facebook.com/ween.tn">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="adminbundle_ngn_qouiqui_firstName">Linkedin</label>
+                                                    <input type="url" name="qouiqui[rs][linkedin]" class="form-control" placeholder="https://linkedin.com/ween.tn">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="adminbundle_ngn_qouiqui_firstName">Google Plus</label>
+                                                    <input type="url" name="qouiqui[rs][google]" class="form-control" placeholder="https://plus.google.com/ween.tn">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="adminbundle_ngn_qouiqui_firstName">Twitter</label>
+                                                    <input type="url" name="qouiqui[rs][twitter]" class="form-control" placeholder="https://twitter.com/ween.tn">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="adminbundle_ngn_qouiqui_firstName">Instagram</label>
+                                                    <input type="url" name="qouiqui[rs][instagram]" class="form-control" placeholder="https://instagram.com/ween.tn">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="adminbundle_ngn_qouiqui_firstName">Pinterest</label>
+                                                    <input type="url" name="qouiqui[rs][pinterest]" class="form-control" placeholder="https://pinterest.com/ween.tn">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+
+                                    <div class="col-md-3">
+
+                                        <button data-toggle="popover"
+                                                data-trigger="body"
+                                                data-placement="top"
+                                                title="Notification"
+                                                data-content="Cliquez ici pour détecter votre localisation GPS"
+                                                class="btn btn-default myLocationGPS" style="width: 100%;margin-top: 31px;"><i class="fa fa-map-marker" aria-hidden="true"></i> &nbsp;<strong>Détecter ma position</strong>
+                                        </button>
+
+                                        <div style="width:100%;height:350px;" id="myMap"></div>
+                                        <input type="hidden" id="adminbundle_ngn_qouiqui_geoLat" name="adminbundle_ngn[qouiqui][geoLat]" class="form-control">
+                                        <input type="hidden" id="adminbundle_ngn_qouiqui_geoLong" name="adminbundle_ngn[qouiqui][geoLong]" class="form-control">
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="adminbundle_ngn_qouiqui_numRegistre">N° Registre de Commerce (optionnel)</label>
+                                            <input type="text" id="adminbundle_ngn_qouiqui_numRegistre" name="adminbundle_ngn[qouiqui][numRegistre]" class="form-control" minlength="3" maxlength="40" placeholder="ex: B186502000">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="adminbundle_ngn_qouiqui_numPatente">Matricule fiscal (optionnel)</label>
+                                            <input type="text" id="adminbundle_ngn_qouiqui_numPatente" name="adminbundle_ngn[qouiqui][numPatente]" class="form-control" minlength="3" maxlength="40" placeholder="ex: 0031458D">
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <hr>
+                                <div class="row">
+                                    <div class="col-md-12 ">
+                                        <div class="">
+                                            <button type="submit" class="btn btn-primary btn-lg btnSaveListing" style="width: 100%;text-transform: uppercase;"><strong>Voir votre site web</strong></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </form>
+            </div>
+        </div>
+    </div>
+    </div>
+
+
+    <script>
+        jQuery('#formAddNewListingF').on('submit', function (e) {
+            var inputLat = jQuery('#adminbundle_ngn_qouiqui_geoLat').val();
+            var inputLng = jQuery('#adminbundle_ngn_qouiqui_geoLong').val();
+            if (inputLat.length == 0 || inputLng.len_after == 0) {
+                e.preventDefault();
+                jQuery('.myLocationGPS').addClass('btnClignote');
+                jQuery('.myLocationGPS').popover('show');
+            } else {
+                jQuery('.myLocationGPS').popover('hide');
+            }
+        });
+    </script>
+
+
+    <script>
+        var password = document.getElementById("addPwd1")
+            , confirm_password = document.getElementById("addPwd2");
+
+        function validatePassword() {
+            if (password.value != confirm_password.value) {
+                confirm_password.setCustomValidity("Les mots de passe ne correspondent pas");
+            } else {
+                confirm_password.setCustomValidity('');
+            }
+        }
+
+        password.onchange = validatePassword;
+        confirm_password.onkeyup = validatePassword;
+
+
+        jQuery('.slug').on('keyup', function () {
+            //$('#adminbundle_ngn_qouiqui_slug').keyup(function () {
+            var slug = jQuery('#adminbundle_ngn_qouiqui_slug').val();
+            var minlength = 1;
+
+
+            if (slug.length >= minlength) {
+                jQuery.ajax({
+                    url: '{{ path('template_test_slug_qq') }}',
+                    data: '&slug=' + slug,
+                    type: "POST",
+                    success: function (data) {
+                        console.log(data);
+                        if (data == '0') {
+                            jQuery('.btnSaveListing').attr('disabled', false);
+                            jQuery('#adminbundle_ngn_qouiqui_slug').css({'border': '1px solid rgba(0, 150, 136, 0.42)'});
+                            jQuery('#modalAddListing span#basic-addon2').css({'background-color': '#009688)'});
+                        } else {
+                            jQuery('.btnSaveListing').attr('disabled', true);
+                            jQuery('#adminbundle_ngn_qouiqui_slug').css({'border': '1px solid rgba(243, 11, 11, 0.8)'});
+                            jQuery('#modalAddListing span#basic-addon2').css({'background-color': '#F44336)'});
+                        }
+                    }
+
+                });
+
+            } else {
+
+            }
+
+        });
+
+
+    </script>
+
+    <script>
+        {# ====== category inject to list ====== #}
+        jQuery.post("{{ path('template_get_all_category') }}", function (result) {
+            jQuery.each(jQuery.parseJSON(result), function (k, v) {
+                jQuery('#adminbundle_ngn_category').append(jQuery('<option/>', {
+                    value: v.id,
+                    text: v.libelle
+                }));
+            });
+        });
+
+        jQuery.post("{{ path('template_get_all_ville') }}", function (result) {
+            jQuery.each(jQuery.parseJSON(result), function (k, v) {
+                jQuery('#adminbundle_ngn_ville').append(jQuery('<option/>', {
+                    value: v.id,
+                    text: v.libelle
+                }));
+            });
+        });
+
+
+        jQuery.post("{{ path('template_get_all_delegation') }}", function (result) {
+            jQuery.each(jQuery.parseJSON(result), function (k, v) {
+                jQuery('#add-delegation-hidden').append(jQuery('<option/>', {
+                    value: v.id,
+                    text: v.libelle,
+                    'data-ville': v.ville.id
+                }));
+            });
+        });
+
+
+        jQuery('#adminbundle_ngn_ville').on('change', function () {
+            var parrentVal = jQuery(this).val();
+            jQuery('#adminbundle_ngn_delegation option').remove();
+            var dg = new Array();
+            jQuery('#add-delegation-hidden option').each(function () {
+                if (parrentVal == jQuery(this).attr('data-ville')) {
+                    var dgOne = new Array();
+                    dgOne.push(this.value);
+                    dgOne.push(this.text);
+                    dg.push(dgOne);
+                }
+            });
+            jQuery('#adminbundle_ngn_delegation').append('<option value="" disabled selected></option>');
+            jQuery.each(dg, function (ke, item) {
+                jQuery('#adminbundle_ngn_delegation').append('<option value="' + item[0] + '" data-ville="' + item[1] + '">' + item[1] + '</option>');
+            });
+
+
+        });
+
+    </script>
+
+    <script>
+
+
+        var map;
+        var marker;
+
+        function initialize() {
+
+
+            var myLatlng = new google.maps.LatLng(36.8074946164338, 10.171504433593782);
+            var myOptions = {
+                zoom: 10,
+                zoomControl: true,
+                center: myLatlng,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            };
+            map = new google.maps.Map(document.getElementById("myMap"), myOptions);
+
+            marker = new google.maps.Marker({
+                draggable: true,
+                position: myLatlng,
+                map: map,
+                title: "Votre position"
+            });
+
+            google.maps.event.addListener(marker, 'dragend', function (event) {
+
+                jQuery('#adminbundle_ngn_qouiqui_geoLat').val(event.latLng.lat());
+                jQuery('#adminbundle_ngn_qouiqui_geoLong').val(event.latLng.lng());
+
+
+//                infoWindow.open(map, marker);
+            });
+
+            jQuery('.myLocationGPS').on('click', function (e) {
+                e.preventDefault();
+//            var infoWindow = new google.maps.InfoWindow({map: map});
+                // Try HTML5 geolocation.
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(function (position) {
+                        var pos = {
+                            lat: position.coords.latitude,
+                            lng: position.coords.longitude
+                        };
+                        jQuery('#adminbundle_ngn_qouiqui_geoLat').val(pos.lat);
+                        jQuery('#adminbundle_ngn_qouiqui_geoLong').val(pos.lng);
+                        var markerP = new google.maps.Marker({
+                            draggable: true,
+                            position: pos,
+                            map: map
+                        });
+                        marker.setMap(null);
+
+                        map.panTo(pos);
+                        google.maps.event.addListener(markerP, 'dragend', function (event) {
+                            document.getElementById("lat").value = event.latLng.lat();
+                            document.getElementById("lng").value = event.latLng.lng();
+                        });
+                        map.setZoom(15);
+
+                    }, function () {
+                        handleLocationError(true, infoWindow, map.getCenter());
+                    });
+                } else {
+                    // Browser doesn't support Geolocation
+                    handleLocationError(false, infoWindow, map.getCenter());
+                }
+            });
+
+        }
+
+        google.maps.event.addDomListener(window, "load", initialize());
+
+
+    </script>

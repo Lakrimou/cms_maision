@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Modecommerces list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Section</th>
+                <th>Data</th>
+                <th>Status</th>
+                <th>Datecreate</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for modECommerce in modECommerces %}
+            <tr>
+                <td><a href="{{ path('modecommerce_show', { 'id': modECommerce.id }) }}">{{ modECommerce.id }}</a></td>
+                <td>{{ modECommerce.section }}</td>
+                <td>{{ modECommerce.data }}</td>
+                <td>{% if modECommerce.status %}Yes{% else %}No{% endif %}</td>
+                <td>{% if modECommerce.datecreate %}{{ modECommerce.datecreate|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('modecommerce_show', { 'id': modECommerce.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('modecommerce_edit', { 'id': modECommerce.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('modecommerce_new') }}">Create a new modECommerce</a>
+        </li>
+    </ul>
+{% endblock %}

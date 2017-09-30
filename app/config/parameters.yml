@@ -1,0 +1,19 @@
+# This file is auto-generated during the composer install
+parameters:
+    database_host: cms.tn
+    database_port: null
+    database_name: base
+    database_user: user
+    database_password: YoooJvXH7_
+    mailer_transport: smtp
+    mailer_host: cms.tn
+    mailer_user: akrem.boussaha@gmail.com
+    mailer_password: dfdfdf
+    secret: 0a094a29f9fb413d58796a6424ecb0bd11c2b953
+    domain: ween.tn
+
+
+
+    mail_selector: 'default._domainkey'
+
+    mail_privateKey:

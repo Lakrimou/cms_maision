@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<!--[if IE 7 ]>
+<html class="ie7"> <![endif]-->
+<!--[if IE 8 ]>
+<html class="ie8"> <![endif]-->
+<html lang="fr-FR">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    {#<meta name="viewport" content="width=device-width, initial-scale=1">#}
+    {#<meta name='viewport' content='width=device-width, maximum-scale=1.0, minimum-scale=1.0, initial-scale=1.0' />#}
+    <meta name='viewport' content='content="width=device-width, maximum-scale=1.0, minimum-scale=1.0, initial-scale=1.0' />
+
+
+    <link rel="shortcut icon" href="http://studio.listingprowp.com/wp-content/themes/listingpro/assets/images/favicon.png"/>
+    <title>Ween.tn</title>
+
+
+    <meta name='robots' content='noindex,follow'/>
+    <meta name="generator" content="webmaster-media.tn"/>
+    <link rel='dns-prefetch' href='//maps.googleapis.com'/>
+    <link rel='dns-prefetch' href='//html5shim.googlecode.com'/>
+    <link rel='dns-prefetch' href='//s.w.org'/>
+    <link rel="alternate" type="application/rss+xml" title="Listingpro Multipurpose Directory Theme &raquo; Feed" href="http://studio.listingprowp.com/feed/"/>
+    <link rel="alternate" type="application/rss+xml" title="Listingpro Multipurpose Directory Theme &raquo; Comments Feed" href="http://studio.listingprowp.com/comments/feed/"/>
+
+
+    <link rel='stylesheet' id='nextend_fb_connect_stylesheet-css' href='http://studio.listingprowp.com/wp-content/plugins/nextend-facebook-connect/buttons/facebook-btn.css' type='text/css' media='all'/>
+    <link rel='stylesheet' id='nextend_google_connect_stylesheet-css' href='http://studio.listingprowp.com/wp-content/plugins/nextend-google-connect/buttons/google-btn.css' type='text/css' media='all'/>
+    <link rel='stylesheet' id='nextend_twitter_connect_stylesheet-css' href='http://studio.listingprowp.com/wp-content/plugins/nextend-twitter-connect/buttons/twitter-btn.css' type='text/css' media='all'/>
+    <link rel='stylesheet' id='bootstrap-css' href='{{ asset('tpl/css/bootstrap.css') }}' type='text/css' media='all'/>
+    <link rel='stylesheet' id='Magnific-Popup-css' href='{{ asset('tpl/css/magnific-popup.css') }}' type='text/css' media='all'/>
+    <link rel='stylesheet' id='popup-component-css' href='{{ asset('tpl/css/component.css') }}' type='text/css' media='all'/>
+    <link rel='stylesheet' id='Mmenu-css' href='{{ asset('tpl/css/jquery.mmenu.all.css') }}' type='text/css' media='all'/>
+    <link rel='stylesheet' id='MapBox-css' href='{{ asset('tpl/css/mapbox.css') }}' type='text/css' media='all'/>
+    <link rel='stylesheet' id='Chosen-css' href='{{ asset('tpl/css/chosen.css') }}' type='text/css' media='all'/>
+
+
+    <link rel='stylesheet' id='Slick-css-css' href='http://studio.listingprowp.com/wp-content/themes/listingpro/assets/lib/slick/slick.css' type='text/css' media='all'/>
+    <link rel='stylesheet' id='Slick-theme-css' href='http://studio.listingprowp.com/wp-content/themes/listingpro/assets/lib/slick/slick-theme.css' type='text/css' media='all'/>
+    <link rel='stylesheet' id='css-prettyphoto-css' href='http://studio.listingprowp.com/wp-content/themes/listingpro/assets/css/prettyphoto.css' type='text/css' media='all'/>
+
+
+    <link rel='stylesheet' id='css-prettyphoto-css' href='{{ asset('tpl/css/prettyphoto.css') }}' type='text/css' media='all'/>
+    <link rel='stylesheet' id='icon8-css' href='{{ asset('tpl/css/styles.min.css') }}' type='text/css' media='all'/>
+    <link rel='stylesheet' id='Color-css' href='{{ asset('tpl/css/colors.css') }}' type='text/css' media='all'/>
+    <link rel='stylesheet' id='custom-font-css' href='{{ asset('tpl/css/font.css') }}' type='text/css' media='all'/>
+    <link rel='stylesheet' id='Main-css' href='{{ asset('tpl/css/main.css') }}' type='text/css' media='all'/>
+    <link rel='stylesheet' id='Responsive-css' href='{{ asset('tpl/css/responsive.css') }}' type='text/css' media='all'/>
+    <link rel='stylesheet' id='select2-css' href='{{ asset('tpl/css/select2.css') }}' type='text/css' media='all'/>
+    <link rel='stylesheet' id='listingpro-css' href='{{ asset('tpl/css/style.css') }}' type='text/css' media='all'/>
+    <link rel='stylesheet' id='js_composer_front-css' href='{{ asset('tpl/css/js_composer.min.css') }}' type='text/css' media='all'/>
+    <link rel='stylesheet' href='//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' type='text/css' media='all'/>
+    <link rel='stylesheet' id='listingpro-css' href='{{ asset('tpl/css/ween.css') }}' type='text/css' media='all'/>
+
+    {% block scriptTop %}
+        <script type='text/javascript' src='{{ asset('tpl/js/jquery.js') }}'></script>
+        <script type='text/javascript' src='{{ asset('tpl/js/jquery-migrate.min.js') }}'></script>
+        <script type='text/javascript' src='{{ asset('tpl/js/login.js') }}'></script>
+        <script type='text/javascript' src='{{ asset('tpl/js/search-ajax.js') }}'></script>
+        <script type='text/javascript' src='{{ asset('tpl/js/single-ajax.js') }}'></script>
+        <script type='text/javascript' src='{{ asset('tpl/js/approve-review.js') }}'></script>
+        <script type='text/javascript' src='{{ asset('tpl/js/home-map.js') }}'></script>
+        <script type='text/javascript' src='{{ asset('tpl/js/checkout.js') }}'></script>
+        <script type='text/javascript' src='{{ asset('tpl/js/main.js') }}'></script>
+        <script type='text/javascript' src='{{ asset('tpl/js/review-submit.js') }}'></script>
+        <script type='text/javascript' src='https://maps.googleapis.com/maps/api/js?v=3&#038;key=AIzaSyDQt64oivgdLy88A3j6-_Yl-4wP1Y1dz8s&#038;libraries=places'></script>
+        <script type='text/javascript' src='{{ asset('tpl/js/child-term.js') }}'></script>
+    {% endblock %}
+    <style type="text/css">.recentcomments a {
+            display: inline !important;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+
+
+
+
+    </style>
+
+
+    <meta name="generator" content="Powered by Visual Composer - drag and drop page builder for WordPress."/>
+    <!--[if lte IE 9]>
+    <link rel="stylesheet" type="text/css" href="http://studio.listingprowp.com/wp-content/plugins/js_composer/assets/css/vc_lte_ie9.min.css" media="screen"><![endif]--><!--[if IE  8]>
+    <link rel="stylesheet" type="text/css" href="http://studio.listingprowp.com/wp-content/plugins/js_composer/assets/css/vc-ie8.min.css" media="screen"><![endif]-->
+
+
+    <style type="text/css" title="dynamic-css" class="options-output">
+        .menu-item a {
+            font-family: Quicksand;
+            font-weight: bold;
+            font-style: normal;
+            opacity: 1;
+            visibility: visible;
+            -webkit-transition: opacity 0.24s ease-in-out;
+            -moz-transition: opacity 0.24s ease-in-out;
+            transition: opacity 0.24s ease-in-out;
+        }
+
+        .wf-loading .menu-item a {
+            opacity: 0;
+        }
+
+        .ie.wf-loading .menu-item a {
+            visibility: hidden;
+        }
+    </style>
+    <noscript>
+        <style type="text/css">
+            .wpb_animate_when_almost_visible {
+                opacity: 1;
+            }
+        </style>
+    </noscript>
+    {% block stylesheet %}{% endblock %}
+</head>
+<body>
+{% block body %}
+{% endblock %}
+
+
+<!-- Modal S'identifier/ S'inscrire-->
+<div class="modal fade" id="modalLogin" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+
+            <div class="modal-body">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <div class="login-form-popup lp-border-radius-8">
+                    <div class="siginincontainer">
+                        <h1 class="text-center">S'identifier</h1>
+                        <form id="login" class="form-horizontal margin-top-30" method="post" action="/login_check">
+                            <input type="hidden" name="_csrf_token" value="Kk4KcJ-i6lPzu7pUx0wOja7L0g5uu9CI6uWJYDGVT4Q"/>
+                            <p class="status"></p>
+                            <div class="form-group">
+                                <label for="username">Adresse email *</label>
+                                <input type="text" class="form-control" id="username" name="_username" required/>
+                            </div>
+                            <div class="form-group">
+                                <label for="password">Mot de passe *</label>
+                                <input type="password" class="form-control" id="password" name="_password" required/>
+                            </div>
+                            <div class="form-group">
+                            </div>
+                            <div class="form-group">
+                                <div class="checkbox pad-bottom-10">
+                                    <input id="check1" type="checkbox" name="_remember_me" value="on">
+                                    <label for="check1">Se souvenir de moi</label>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <input type="submit" value="Se connecter" class="lp-secondary-btn width-full btn-first-hover"/>
+                            </div>
+                            <input type="hidden" id="security" name="security" value="9f8756cb45"/><input type="hidden" name="_wp_http_referer" value="/"/></form>
+                        <div class="pop-form-bottom">
+                            <div class="bottom-links">
+                                <a class="signUpClick">Nouveau sur Ween.tn? S'inscrire</a>
+                                <a class="forgetPasswordClick pull-right">Mot de passe oublié</a>
+                            </div>
+                            <p class="margin-top-15">Connectez-vous avec réseau social</p>
+                            <ul class="social-login list-style-none">
+                                <li>
+                                    <a id="logingoogle" class="google flaticon-googleplus" href="{{ path('hwi_oauth_connect') }}google">
+                                        <i class="fa fa-google-plus"></i>
+                                        <span>Google</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a id="loginfacebook" class="facebook flaticon-facebook" href="{{ path('hwi_oauth_connect') }}facebook">
+                                        <i class="fa fa-facebook"></i>
+                                        <span>Facebook</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a id="logintwitter" class="twitter flaticon-twitter" href="{{ path('hwi_oauth_connect') }}facebook">
+                                        <i class="fa fa-twitter"></i>
+                                        <span>Twitter</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <a class="md-close"><i class="fa fa-close"></i></a>
+                    </div>
+
+                    <div class="siginupcontainer">
+                        <h1 class="text-center">S'inscrire</h1>
+                        <form id="register" class="form-horizontal margin-top-30" method="post">
+                            <p class="status"></p>
+                            <div class="form-group">
+                                <label for="username">Nom et prénom *</label>
+                                <input type="text" class="form-control" id="username2" name="username"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Adresse email *</label>
+                                <input type="email" class="form-control" id="email" name="email"/>
+                            </div>
+                            <div class="form-group">
+                                <p>Le mot de passe vous sera envoyé par email.</p>
+                            </div>
+                            <div class="form-group">
+                            </div>
+                            <div class="form-group">
+                                <input type="submit" value="Enregistrer" class="lp-secondary-btn width-full btn-first-hover"/>
+                            </div>
+                            <input type="hidden" id="security" name="security" value="fac3396f28"/><input type="hidden" name="_wp_http_referer" value="/"/></form>
+                        <div class="pop-form-bottom">
+                            <div class="bottom-links">
+                                <a class="signInClick">Vous avez déjà un compte? Se connecter</a>
+                                <a class="forgetPasswordClick pull-right">Mot de passe oublié</a>
+                            </div>
+                            <p class="margin-top-15">Connectez-vous avec réseau social</p>
+                            <ul class="social-login list-style-none">
+                                <li>
+                                    <a id="logingoogle" class="google flaticon-googleplus" href="{{ path('hwi_oauth_connect') }}google">
+                                        <i class="fa fa-google-plus"></i>
+                                        <span>Google</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a id="loginfacebook" class="facebook flaticon-facebook" href="{{ path('hwi_oauth_connect') }}facebook">
+                                        <i class="fa fa-facebook"></i>
+                                        <span>Facebook</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a id="logintwitter" class="twitter flaticon-twitter" href="{{ path('hwi_oauth_connect') }}facebook">
+                                        <i class="fa fa-twitter"></i>
+                                        <span>Twitter</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <a class="md-close"><i class="fa fa-close"></i></a>
+                    </div>
+                    <div class="forgetpasswordcontainer">
+                        <h1 class="text-center">Mot de passe oublié</h1>
+                        <form class="form-horizontal margin-top-30" id="lp_forget_pass_form" action="#" method="post">
+                            <p class="status"></p>
+                            <div class="form-group">
+                                <label for="password">Adresse email *</label>
+                                <input type="email" name="user_login" class="form-control" id="email3"/>
+                            </div>
+                            <div class="form-group">
+                                <input type="submit" name="submit" value="Obtenir un nouveau mot de passe" class="lp-secondary-btn width-full btn-first-hover"/>
+                                <input type="hidden" id="security3" name="security3" value="48ca5eeb94"/><input type="hidden" name="_wp_http_referer" value="/"/></div>
+                        </form>
+                        <div class="pop-form-bottom">
+                            <div class="bottom-links"><a class="cancelClick">Annuler</a></div>
+                        </div>
+                        <a class="md-close"><i class="fa fa-close"></i></a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- END Modal S'identifier/ S'inscrire-->
+
+
+<div class="md-overlay"></div> <!-- Overlay for Popup -->
+
+
+<!-- ../Login Popup -->
+
+
+<!--==================================Footer Open=================================-->
+{#{% if app.request.get('_route') != 'recherche_result' %}#}
+{{ include('@User/template/footer.html.twig') }}
+{#{% endif %}#}
+
+{% block scriptBottom %}
+    <script type='text/javascript' src='{{ asset('tpl/js/submit-listing.js') }}'></script>
+    <script type='text/javascript' src='{{ asset('tpl/js/mapbox.js') }}'></script>
+    <script type='text/javascript' src='{{ asset('tpl/js/leaflet.markercluster.js') }}'></script>
+    <script type='text/javascript' src='{{ asset('tpl/js/chosen.jquery.js') }}'></script>
+    <script type='text/javascript' src='{{ asset('tpl/js/bootstrap.min.js') }}'></script>
+    <script type='text/javascript' src='{{ asset('tpl/js/bootstrap-typeahead.min.js') }}'></script>
+
+
+
+
+    <script type='text/javascript' src='{{ asset('tpl/js/jquery.mmenu.min.all.js') }}'></script>
+    <script type='text/javascript' src='{{ asset('tpl/js/jquery.magnific-popup.min.js') }}'></script>
+    <script type='text/javascript' src='{{ asset('tpl/js/select2.full.min.js') }}'></script>
+    <script type='text/javascript' src='{{ asset('tpl/js/classie.js') }}'></script>
+    <script type='text/javascript' src='{{ asset('tpl/js/modalEffects.js') }}'></script>
+    <!--[if lt IE 9]>
+    <script type='text/javascript' src="{{ asset('tpl/js/html5.js') }}"></script>
+    <![endif]-->
+
+    <script type='text/javascript' src='{{ asset('tpl/js/bootstrap-rating.js') }}'></script>
+    <script type='text/javascript' src='{{ asset('tpl/js/slick.min.js') }}'></script>
+
+    <script type='text/javascript' src='{{ asset('tpl/js/jquery.nicescroll.min.js') }}'></script>
+    <script type='text/javascript' src='{{ asset('tpl/js/chosen.jquery.min.js') }}'></script>
+    <script type='text/javascript' src='{{ asset('tpl/js/jquery-ui.js') }}'></script>
+    <script type='text/javascript' src='{{ asset('tpl/js/jquery.prettyPhoto.js') }}'></script>
+
+    <script type='text/javascript' src='{{ asset('tpl/js/main.js') }}'></script>
+    <script type='text/javascript' src='{{ asset('tpl/js/wp-embed.min.js') }}'></script>
+    <script type='text/javascript' src='{{ asset('tpl/js/js_composer_front.min.js') }}'></script>
+{% endblock %}
+
+
+<script>
+    /*
+     ============================= block recherche autoComplete Position ================================
+     */
+    jQuery(function () {
+        function displayResult(item) {
+            jQuery('#inputLocationHidden').val(item.value);
+        }
+
+        jQuery.post("{{ path('json_get_all_location') }}", function (data) {
+            jQuery("#header-search-location").typeahead({
+                source: data,
+                displayField: 'name',
+                valueField: 'id',
+                onSelect: displayResult
+            });
+        }, 'json');
+
+
+//        if (jQuery_GET('ville'))
+//            jQuery("#header-search-location").val(replaceAll(decodeURIComponent(jQuery_GET('ville')), '+', ' '));
+
+    });
+</script>
+{% block javascripts %}{% endblock %}
+
+{% include('widget/newListing.html.twig') %}
+
+
+<script>
+   jQuery('.modal').on('shown.bs.modal', function () {
+        google.maps.event.trigger(map, "resize");
+    });
+</script>
+
+
+</body>
+</html>

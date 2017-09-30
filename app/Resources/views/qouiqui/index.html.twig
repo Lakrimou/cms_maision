@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Qouiquis list</h1>
+   <table>
+        <thead>
+            <tr>
+                <th>Firstname</th>
+                <th>Lastname</th>
+                <th>Address1</th>
+                <th>Adress2</th>
+                <th>Website</th>
+                <th>Zipcode</th>
+                <th>Phone</th>
+                <th>Phone2</th>
+                <th>Mail</th>
+                <th>Geolat</th>
+                <th>Geolong</th>
+                <th>Opening</th>
+                <th>Image</th>
+                <th>Id</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for qouiqui in qouiquis %}
+            <tr>
+                <td><a href="{{ path('qouiqui_show', { 'id': qouiqui.id }) }}">{{ qouiqui.firstName }}</a></td>
+                <td>{{ qouiqui.lastName }}</td>
+                <td>{{ qouiqui.address1 }}</td>
+                <td>{{ qouiqui.adress2 }}</td>
+                <td>{{ qouiqui.website }}</td>
+                <td>{{ qouiqui.zipCode }}</td>
+                <td>{{ qouiqui.phone }}</td>
+                <td>{{ qouiqui.phone2 }}</td>
+                <td>{{ qouiqui.mail }}</td>
+                <td>{{ qouiqui.geoLat }}</td>
+                <td>{{ qouiqui.geoLong }}</td>
+                <td>{{ qouiqui.opening }}</td>
+                <td>{{ qouiqui.image }}</td>
+                <td>{{ qouiqui.id }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('qouiqui_show', { 'id': qouiqui.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('qouiqui_edit', { 'id': qouiqui.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('qouiqui_new') }}">Create a new qouiqui</a>
+        </li>
+    </ul>
+{% endblock %}

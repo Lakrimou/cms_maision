@@ -1,0 +1,72 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Foyerprive</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ foyerPrive.id }}</td>
+            </tr>
+            <tr>
+                <th>Titreannonce</th>
+                <td>{{ foyerPrive.titreAnnonce }}</td>
+            </tr>
+            <tr>
+                <th>Detailannonce</th>
+                <td>{{ foyerPrive.detailAnnonce }}</td>
+            </tr>
+            <tr>
+                <th>Chambre</th>
+                <td>{{ foyerPrive.chambre }}</td>
+            </tr>
+            <tr>
+                <th>Lit</th>
+                <td>{{ foyerPrive.lit }}</td>
+            </tr>
+            <tr>
+                <th>Bureau</th>
+                <td>{{ foyerPrive.bureau }}</td>
+            </tr>
+            <tr>
+                <th>Armoire</th>
+                <td>{{ foyerPrive.armoire }}</td>
+            </tr>
+            <tr>
+                <th>Chaise</th>
+                <td>{{ foyerPrive.chaise }}</td>
+            </tr>
+            <tr>
+                <th>Balcone</th>
+                <td>{{ foyerPrive.balcone }}</td>
+            </tr>
+            <tr>
+                <th>Fenetre</th>
+                <td>{{ foyerPrive.fenetre }}</td>
+            </tr>
+            <tr>
+                <th>Prix</th>
+                <td>{{ foyerPrive.prix }}</td>
+            </tr>
+            <tr>
+                <th>Nbdisponible</th>
+                <td>{{ foyerPrive.nbDisponible }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('foyerprive_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('foyerprive_edit', { 'id': foyerPrive.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

@@ -1,0 +1,68 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Agencevoyage</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ agenceVoyage.id }}</td>
+            </tr>
+            <tr>
+                <th>Prix</th>
+                <td>{{ agenceVoyage.prix }}</td>
+            </tr>
+            <tr>
+                <th>Service</th>
+                <td>{{ agenceVoyage.service }}</td>
+            </tr>
+            <tr>
+                <th>Offrename</th>
+                <td>{{ agenceVoyage.offreName }}</td>
+            </tr>
+            <tr>
+                <th>Departplace</th>
+                <td>{{ agenceVoyage.departPlace }}</td>
+            </tr>
+            <tr>
+                <th>Retourplace</th>
+                <td>{{ agenceVoyage.retourPlace }}</td>
+            </tr>
+            <tr>
+                <th>Datedepart</th>
+                <td>{% if agenceVoyage.dateDepart %}{{ agenceVoyage.dateDepart|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Dateretour</th>
+                <td>{% if agenceVoyage.dateRetour %}{{ agenceVoyage.dateRetour|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Cabine</th>
+                <td>{{ agenceVoyage.cabine }}</td>
+            </tr>
+            <tr>
+                <th>Nbrescale</th>
+                <td>{{ agenceVoyage.nbrEscale }}</td>
+            </tr>
+            <tr>
+                <th>Boatplanemodel</th>
+                <td>{{ agenceVoyage.boatPlaneModel }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('agencevoyage_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('agencevoyage_edit', { 'id': agenceVoyage.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

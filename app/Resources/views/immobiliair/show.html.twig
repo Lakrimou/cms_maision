@@ -1,0 +1,76 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Immobiliair</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ immobiliair.id }}</td>
+            </tr>
+            <tr>
+                <th>Adresse</th>
+                <td>{{ immobiliair.adresse }}</td>
+            </tr>
+            <tr>
+                <th>Geolat</th>
+                <td>{{ immobiliair.geoLat }}</td>
+            </tr>
+            <tr>
+                <th>Geolong</th>
+                <td>{{ immobiliair.geoLong }}</td>
+            </tr>
+            <tr>
+                <th>Statu</th>
+                <td>{{ immobiliair.statu }}</td>
+            </tr>
+            <tr>
+                <th>Cuisineequipee</th>
+                <td>{{ immobiliair.cuisineEquipee }}</td>
+            </tr>
+            <tr>
+                <th>Sallon</th>
+                <td>{{ immobiliair.sallon }}</td>
+            </tr>
+            <tr>
+                <th>Suits</th>
+                <td>{{ immobiliair.suits }}</td>
+            </tr>
+            <tr>
+                <th>Salledebain</th>
+                <td>{{ immobiliair.salleDeBain }}</td>
+            </tr>
+            <tr>
+                <th>Ascenseur</th>
+                <td>{{ immobiliair.ascenseur }}</td>
+            </tr>
+            <tr>
+                <th>Archive</th>
+                <td>{{ immobiliair.archive }}</td>
+            </tr>
+            <tr>
+                <th>Equipment</th>
+                <td>{{ immobiliair.equipment }}</td>
+            </tr>
+            <tr>
+                <th>Details</th>
+                <td>{{ immobiliair.details }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('immobiliair_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('immobiliair_edit', { 'id': immobiliair.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

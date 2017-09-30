@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Foyerprives list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Titreannonce</th>
+                <th>Detailannonce</th>
+                <th>Chambre</th>
+                <th>Lit</th>
+                <th>Bureau</th>
+                <th>Armoire</th>
+                <th>Chaise</th>
+                <th>Balcone</th>
+                <th>Fenetre</th>
+                <th>Prix</th>
+                <th>Nbdisponible</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for foyerPrive in foyerPrives %}
+            <tr>
+                <td><a href="{{ path('foyerprive_show', { 'id': foyerPrive.id }) }}">{{ foyerPrive.id }}</a></td>
+                <td>{{ foyerPrive.titreAnnonce }}</td>
+                <td>{{ foyerPrive.detailAnnonce }}</td>
+                <td>{{ foyerPrive.chambre }}</td>
+                <td>{{ foyerPrive.lit }}</td>
+                <td>{{ foyerPrive.bureau }}</td>
+                <td>{{ foyerPrive.armoire }}</td>
+                <td>{{ foyerPrive.chaise }}</td>
+                <td>{{ foyerPrive.balcone }}</td>
+                <td>{{ foyerPrive.fenetre }}</td>
+                <td>{{ foyerPrive.prix }}</td>
+                <td>{{ foyerPrive.nbDisponible }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('foyerprive_show', { 'id': foyerPrive.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('foyerprive_edit', { 'id': foyerPrive.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('foyerprive_new') }}">Create a new foyerPrive</a>
+        </li>
+    </ul>
+{% endblock %}

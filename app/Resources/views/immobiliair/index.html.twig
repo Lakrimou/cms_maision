@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Immobiliairs list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Adresse</th>
+                <th>Geolat</th>
+                <th>Geolong</th>
+                <th>Statu</th>
+                <th>Cuisineequipee</th>
+                <th>Sallon</th>
+                <th>Suits</th>
+                <th>Salledebain</th>
+                <th>Ascenseur</th>
+                <th>Archive</th>
+                <th>Equipment</th>
+                <th>Details</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for immobiliair in immobiliairs %}
+            <tr>
+                <td><a href="{{ path('immobiliair_show', { 'id': immobiliair.id }) }}">{{ immobiliair.id }}</a></td>
+                <td>{{ immobiliair.adresse }}</td>
+                <td>{{ immobiliair.geoLat }}</td>
+                <td>{{ immobiliair.geoLong }}</td>
+                <td>{{ immobiliair.statu }}</td>
+                <td>{{ immobiliair.cuisineEquipee }}</td>
+                <td>{{ immobiliair.sallon }}</td>
+                <td>{{ immobiliair.suits }}</td>
+                <td>{{ immobiliair.salleDeBain }}</td>
+                <td>{{ immobiliair.ascenseur }}</td>
+                <td>{{ immobiliair.archive }}</td>
+                <td>{{ immobiliair.equipment }}</td>
+                <td>{{ immobiliair.details }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('immobiliair_show', { 'id': immobiliair.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('immobiliair_edit', { 'id': immobiliair.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            {#<a href="{{ path('immobiliair_new') }}">Create a new immobiliair</a>#}
+        </li>
+    </ul>
+{% endblock %}

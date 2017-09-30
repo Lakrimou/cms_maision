@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Ween!{% endblock %}</title>
+    <meta name="viewport" content="initial-scale=1.0, width=device-width"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    {% block stylesheets %}
+        <!-- Style Sheets -->
+        <link rel="stylesheet" type="text/css" href="{{ asset('asset-front/css/bootstrap.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('asset-front/css/animate.css') }}" type="text/css">
+        <link href="{{ asset('asset-front/css/hover-min.css') }}" type="text/css" rel="stylesheet">
+        <link href="{{ asset('asset-front/css/jquery.bxslider.css') }}" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" type="text/css" href="{{ asset('asset-front/css/main-styles.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('asset-front/css/responsive.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('asset-front/css/loader.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('asset-front/css/wmm.css') }}">
+        <!-- Google Fonts-->
+        <link href='https://fonts.googleapis.com/css?family=Roboto:400,500,700' rel='stylesheet' type='text/css'>
+
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.15/datatables.min.css"/>
+
+        {#----------------jquery-confirm-----------------------#}
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.2.0/jquery-confirm.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.2.0/jquery-confirm.min.js"></script>
+
+        {#----------------pnotify-confirm-----------------------#}
+        <script src="{{ asset('module/ecommerce/js/pnotify.custom.min.js') }}"></script>
+        <link rel="stylesheet" href="{{ asset('module/ecommerce/css/pnotify.custom.min.css') }}" id="theme-stylesheet">
+
+    {% endblock %}
+</head>
+
+<body>
+
+{#=======================================header===========================================#}
+{% include 'UserBundle::header.html.twig' %}
+{#=======================================header===========================================#}
+
+<hr class="">
+<div class="container target">
+    {#=========================header Profile===============================#}
+    {% include 'DashboardBundle::headerProfile.html.twig' %}
+    {#=========================header Profile===============================#}
+    <br>
+    <div class="row">
+        {#==============================dashboard Menu col-md-3==================================#}
+        {% include 'DashboardBundle::dashboardMenu.html.twig' %}
+        {#==============================dashboard Menu col-md-3==================================#}
+        <!--start apartment-->
+        <div class="col-md-9">
+            {% block body %}
+
+            {% endblock %}
+
+        </div>
+        <!-- end apartment-->
+
+        <!-- start reviews section-->
+
+    </div>
+</div>
+<!-- end reviews section-->
+
+
+{#=======================================footer===========================================#}
+{% include 'UserBundle::footer.html.twig' %}
+{#=======================================footer===========================================#}
+
+
+
+
+
+
+
+
+
+{% block javascripts %}
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyBTdMydc9PUE0gPkcgjRZXOuFPXc5BUSrg"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.15/datatables.min.js"></script>
+    <script>
+
+        function filtre() {
+            v = jQuery('#search-location').val();
+            info = jQuery('input[name="info"]').val();
+
+            if (info == "") {
+
+                link = '{{ path('user_homepage') }}recherche/' + v + '/all';
+                location.replace(link);
+
+            } else {
+                link = '{{ path('user_homepage') }}recherche/' + v + '/' + info + '';
+                location.replace(link);
+            }
+        }
+    </script>
+    <script>
+        if ($(window).width() < 768) {
+            $('.panel-heading').attr('aria-expanded', 'false');
+            $('.list-group').removeClass('in');
+        }
+    </script>
+    <script>
+        if ($(window).width() < 768) {
+            $('a').removeClass('pull-right');
+        }
+    </script>
+
+
+{% endblock %}
+<script src="https://use.fontawesome.com/7209a80f07.js"></script>
+</body>
+</html>

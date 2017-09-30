@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Ngns list</h1>
+    {{ dump(nGNs) }}
+
+    {% for ngn in nGNs %}
+
+        {{ dump(ngn.category.libelle) }}
+
+    {% endfor %}
+
+
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for nGN in nGNs %}
+            <tr>
+                <td><a href="{{ path('ngn_show', { 'id': nGN.id }) }}">{{ nGN.id }}</a></td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('ngn_show', { 'id': nGN.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('ngn_edit', { 'id': nGN.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('ngn_new') }}">Create a new nGN</a>
+        </li>
+    </ul>
+{% endblock %}

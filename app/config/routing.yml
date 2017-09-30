@@ -1,0 +1,92 @@
+module:
+    resource: "@ModuleBundle/Resources/config/routing.yml"
+    prefix:   /module
+
+sub:
+    host: "{subdomain}.ween.tn"
+    path:     /
+    defaults: { _controller: UserBundle:Default:subdomain }
+
+dashboard:
+    resource: "@DashboardBundle/Resources/config/routing.yml"
+    prefix:   /dashboard/
+
+user:
+    resource: "@UserBundle/Resources/config/routing.yml"
+    prefix:   /
+admin:
+    resource: "@AdminBundle/Resources/config/routing.yml"
+    prefix:   /admin/
+
+app:
+    resource: "@AppBundle/Controller/"
+    type:     annotation
+
+
+json_get_all_location:
+    path:     /getAllLocation
+    defaults: { _controller: UserBundle:Search:getAllLocation }
+    methods:  [POST]
+
+#fos_user:
+#    resource: "@FOSUserBundle/Resources/config/routing/all.xml"
+#
+#hwi_oauth_redirect:
+#    resource: "@HWIOAuthBundle/Resources/config/routing/redirect.xml"
+#    prefix:   /{_locale}/connect
+#
+#hwi_oauth_connect:
+#    resource: "@HWIOAuthBundle/Resources/config/routing/connect.xml"
+#    prefix:   /{_locale}/connect
+#
+#hwi_oauth_login:
+#    resource: "@HWIOAuthBundle/Resources/config/routing/login.xml"
+#    prefix:   /{_locale}/connect
+
+#FosUserBundle Routes
+fos_user_security:
+    resource: "@FOSUserBundle/Resources/config/routing/security.xml"
+
+fos_user_profile:
+    resource: "@FOSUserBundle/Resources/config/routing/profile.xml"
+    prefix: /profile
+
+fos_user_register:
+    resource: "@FOSUserBundle/Resources/config/routing/registration.xml"
+    prefix: /register
+
+fos_user_resetting:
+    resource: "@FOSUserBundle/Resources/config/routing/resetting.xml"
+    prefix: /resetting
+
+fos_user_change_password:
+    resource: "@FOSUserBundle/Resources/config/routing/change_password.xml"
+    prefix: /login
+
+#HWIOAuthBundle routes
+hwi_oauth_security:
+    resource: "@HWIOAuthBundle/Resources/config/routing/login.xml"
+    prefix: /login
+
+hwi_oauth_connect:
+    resource: "@HWIOAuthBundle/Resources/config/routing/connect.xml"
+    prefix: /login
+
+hwi_oauth_redirect:
+    resource: "@HWIOAuthBundle/Resources/config/routing/redirect.xml"
+    prefix:   /login
+
+facebook_login:
+    path: /login/check-facebook
+
+google_login:
+    path: /login/check-google
+
+custom_login:
+    path: /login/check-custom
+
+github_login:
+    path: /login/check-github
+
+fos_js_routing:
+    resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"

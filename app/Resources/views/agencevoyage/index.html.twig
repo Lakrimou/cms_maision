@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Agencevoyages list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Prix</th>
+                <th>Service</th>
+                <th>Offrename</th>
+                <th>Departplace</th>
+                <th>Retourplace</th>
+                <th>Datedepart</th>
+                <th>Dateretour</th>
+                <th>Cabine</th>
+                <th>Nbrescale</th>
+                <th>Boatplanemodel</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for agenceVoyage in agenceVoyages %}
+            <tr>
+                <td><a href="{{ path('agencevoyage_show', { 'id': agenceVoyage.id }) }}">{{ agenceVoyage.id }}</a></td>
+                <td>{{ agenceVoyage.prix }}</td>
+                <td>{{ agenceVoyage.service }}</td>
+                <td>{{ agenceVoyage.offreName }}</td>
+                <td>{{ agenceVoyage.departPlace }}</td>
+                <td>{{ agenceVoyage.retourPlace }}</td>
+                <td>{% if agenceVoyage.dateDepart %}{{ agenceVoyage.dateDepart|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if agenceVoyage.dateRetour %}{{ agenceVoyage.dateRetour|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ agenceVoyage.cabine }}</td>
+                <td>{{ agenceVoyage.nbrEscale }}</td>
+                <td>{{ agenceVoyage.boatPlaneModel }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('agencevoyage_show', { 'id': agenceVoyage.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('agencevoyage_edit', { 'id': agenceVoyage.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('agencevoyage_new') }}">Create a new agenceVoyage</a>
+        </li>
+    </ul>
+{% endblock %}

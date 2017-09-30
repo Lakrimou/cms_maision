@@ -1,0 +1,165 @@
+<div id="mainnav">
+
+    <!--Menu-->
+    <!--================================-->
+    <div id="mainnav-menu-wrap">
+        <div class="nano">
+            <div class="nano-content">
+
+                <!--Profile Widget-->
+                <!--================================-->
+                <div id="mainnav-profile" class="mainnav-profile">
+                    <div class="profile-wrap">
+                        <div class="pad-btm">
+                            <a href="#profile-nav" class="box-block" data-toggle="collapse" aria-expanded="false">
+                                            <span class="pull-right dropdown-toggle">
+                                                <i class="dropdown-caret"></i>
+                                            </span>
+                                <p class="mnp-name">Welcome {{ app.user.username }}</p>
+                            </a>
+                            <img class="img-circle img-sm img-border" src="{{ asset('uploads/users/') }}{{ app.user.image }}.jpg" alt="Profile Picture">
+                        </div>
+                    </div>
+                    <div id="profile-nav" class="collapse list-group bg-trans">
+                        <a href="{{ path('user_edit_admin') }}" class="list-group-item">
+                            <i class="demo-pli-male icon-lg icon-fw"></i> View Profile
+                        </a>
+                        <a href="#" class="list-group-item">
+                            <i class="demo-pli-gear icon-lg icon-fw"></i> Settings
+                        </a>
+                        <a href="#" class="list-group-item">
+                            <i class="demo-pli-information icon-lg icon-fw"></i> Help
+                        </a>
+                        <a href="{{ path('user_homepage') }}logout" class="list-group-item">
+                            <i class="demo-pli-unlock icon-lg icon-fw"></i> Logout
+                        </a>
+                    </div>
+                </div>
+
+
+                <!--Shortcut buttons-->
+                <!--================================-->
+                <div id="mainnav-shortcut">
+                    <ul class="list-unstyled">
+                        <li class="col-xs-3" data-content="My Profile">
+                            <a class="shortcut-grid" href="#">
+                                <i class="fa fa-user" aria-hidden="true"></i>
+                            </a>
+                        </li>
+                        <li class="col-xs-3" data-content="Messages">
+                            <a class="shortcut-grid" href="#">
+                                <i class="fa fa-comments-o" aria-hidden="true"></i>
+                            </a>
+                        </li>
+                        <li class="col-xs-3" data-content="New Quoiqui">
+                            <a class="shortcut-grid" href="{{ path('qouiqui_new') }}">
+                                <i class="fa fa-file" aria-hidden="true"></i>
+                            </a>
+                        </li>
+
+                        <li class="col-xs-3" data-content="Setting">
+                            <a class="shortcut-grid" href="#">
+                                <i class="fa fa-cog" aria-hidden="true"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <!--================================-->
+                <!--End shortcut buttons-->
+
+
+                <ul id="mainnav-menu" class="list-group">
+
+                    <!--Category name-->
+                    <li class="list-header">Navigation</li>
+
+                    <!--Menu list item-->
+                    <li>
+                        <a href="{{ path('admin_homepage') }}">
+                            <i class="fa fa-tachometer" aria-hidden="true"></i>
+                            <span class="menu-title">
+                                <strong>Gestion Quoiqui</strong>
+											</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="{{ path('user_list_admin') }}">
+                            <i class="fa fa-users" aria-hidden="true"></i>
+                            <span class="menu-title">
+												Gestion D'utilisateur
+                            </span>
+                        </a>
+                    </li>
+
+
+
+                    <!--Menu list item-->
+                    <li>
+                        <a href="{{ path('admin_weenmail') }}">
+                            <i class="fa fa-envelope" aria-hidden="true"></i>
+                            <span class="menu-title">messagerie</span>
+                        </a>
+                    </li>
+
+
+                    <li>
+                        <a href="#">
+                            <i class="fa fa-gg" aria-hidden="true"></i>
+                            <span class="menu-title">
+												Gestion De statistique
+                            </span>
+                        </a>
+                    </li>
+
+
+                </ul>
+
+
+                <!--Widget-->
+                <!--================================-->
+                <div class="mainnav-widget">
+
+                    <!-- Show the button on collapsed navigation -->
+                    <div class="show-small">
+                        <a href="#" data-toggle="menu-widget" data-target="#demo-wg-server">
+                            <i class="demo-pli-monitor-2"></i>
+                        </a>
+                    </div>
+
+                    <!-- Hide the content on collapsed navigation -->
+                    <div id="demo-wg-server" class="hide-small mainnav-widget-content">
+                        <ul class="list-group">
+                            <li class="list-header pad-no pad-ver">Server Status</li>
+                            <li class="mar-btm">
+                                <span class="label label-primary pull-right">15%</span>
+                                <p>CPU Usage</p>
+                                <div class="progress progress-sm">
+                                    <div class="progress-bar progress-bar-primary" style="width: 15%;">
+                                        <span class="sr-only">15%</span>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="mar-btm">
+                                <span class="label label-purple pull-right">75%</span>
+                                <p>Bandwidth</p>
+                                <div class="progress progress-sm">
+                                    <div class="progress-bar progress-bar-purple" style="width: 75%;">
+                                        <span class="sr-only">75%</span>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="pad-ver"><a href="#" class="btn btn-success btn-bock">View Details</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <!--================================-->
+                <!--End widget-->
+
+            </div>
+        </div>
+    </div>
+    <!--================================-->
+    <!--End menu-->
+
+</div>
