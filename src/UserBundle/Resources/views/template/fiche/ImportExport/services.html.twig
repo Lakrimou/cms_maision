@@ -1,0 +1,440 @@
+<!--===== WHAT WE DO =====-->
+<section id="section-services" class="we_are bg_light padding">
+    <div class="ooo">
+
+        <span class="o bg" data-toggle="tooltip" data-placement="left" title="Couleur d'arrière plan!"></span>
+        <span class="o mt" data-toggle="tooltip" data-placement="left" title="Motif d'arrière plan!"></span>
+        <span class="o an" data-toggle="tooltip" data-placement="left" title="Animation d'arrière plan!"></span>
+
+    </div>
+    <div class="container">
+        {% if attributes.connected %}
+            <div class="shake pull-right margin-bott-40 numService">
+                <button type="button" class="theme-btn button11 btn-style-one pull-right" data-toggle="modal"
+                        data-target="#list-services">Gérrer les services
+                </button>
+            </div>
+        {% endif %}
+        <div class="row">
+            <div class="col-md-12" style="font-size: 43px">
+                <h2 class="text-uppercase">Nos <span class="color_red">services</span></h2>
+                <span class="heading-letter-style">
+                 Nos Services
+                </span>
+            </div>
+        </div>
+
+
+        <div class="row">
+
+
+            {#{% for iconservice in DirAssetParcour(asset('uploads/image/iconService/'~attributes.category.slug|lower~'/SVG/')) %}#}
+            {#<img width="50px" height="50px" src="{{ asset('uploads/image/iconService/') }}{{ attributes.category.slug|lower~'/SVG/' }}{{ iconservice }}" alt="">#}
+            {#{% endfor %}#}
+
+            {% set theme = attributes.theme %}
+            {% if theme !=null %}
+
+
+                {% if theme["Service"] is defined and theme["Service"]|length>0 %}
+                    {% for key, service in theme["Service"] %}
+                        {% if (theme.Service|length == 1) %}
+                            <div class="col-md-4 col-sm-4 col-xs-12"></div>
+                        {% endif %}
+                        {% if (theme.Service|length == 2) and (loop.index == 1) %}
+                            <div class="col-md-2 col-sm-2 col-xs-12"></div>
+                        {% endif %}
+                        {% if loop.index < 7 %}
+                            <div class=" col-md-4 col-sm-4 top40 " style="min-height: 380px;">
+                                <div class="block-service margin15 pad15" style="background: white">
+                                    <div class="row">
+                                        <div class="col-md-12 text-center">
+                                    <span class="icon-shortcode">
+                            {% if service["serviceIcon"] is defined %}
+                                {% if 'fa ' in service["serviceIcon"] %}
+                                    <i class="{% if service["serviceIcon"] is defined %}{{ service["serviceIcon"] }}{% endif %}" aria-hidden="true"></i>
+                                    {% else %}
+                                    <img class="svg" width="80px" src='{{ service["serviceIcon"] }}' alt="">
+                                {% endif %}
+                            {% endif %}
+
+                                    </span>
+                                        </div>
+                                        <h3 class="serviceTitle text-center pad15">
+                                            {% if service["service"] is defined %}{{ service["service"]|slice(0,31) }}{% endif %}
+                                        </h3>
+                                        <div class="clearfix">
+                                            <div class="separator" style="width: 100px;border-bottom-width: 2px"></div>
+                                        </div>
+                                        <p class="service-text">
+                                            {% if service["description"] is defined %}{{ service["description"]|slice(0,50) }}..{% endif %}
+
+                                        </p>
+                                    </div>
+
+                                </div>
+                                <div class="row lireLasuite">
+                                    <a href="#" data-toggle="modal" class="service-details-btn btn-default btn-xs pull-right suite"
+                                       data-target="#service-details" data-module='{"service":"{% if service["service"] is defined %}{{ service["service"] }}{% endif %}","description":"{% if service["description"] is defined %}{{ service["description"]|raw }}{% endif %}"}'>Lire la suite</a>
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                {% else %}
+                    {% for i in 1..3 %}
+                        <div class=" col-md-4 col-sm-4 top40 " style="min-height: 380px;">
+                            <div class="block-service margin15 pad15" style="background: white">
+                                <div class="row">
+                                    <div class="col-md-12 text-center">
+                                    <span class="icon-shortcode">
+                                                                                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Calque_1" x="0px" y="0px" viewBox="0 0 612 792" style="width: 128px;" xml:space="preserve" class="svg replaced-svg">
+<g>
+	<path d="M96,131.3c7.1,6.6,7.6,10.8-0.1,17.1c-9.5,7.7-12.3,16.7-12.1,28.9c0.8,42.5,0.3,85,0.3,127.5c0,1.6,0,3.3,0,5.3   c14.6,0,28.8,0,43,0c9.8-35.1,37.7-50.7,68.6-62.5c21.8-8.3,44.6-12,67.8-13.4c3.9-0.2,7.9-1.2,11.5-2.7   c17.4-7.2,34.6-14.7,51.9-22.1c5.3-2.3,9.4-1.2,11.9,2.8c2.9,4.7,1.1,10.1-4.6,12.7c-7.4,3.3-14.9,6.4-23.5,10.1   c9.2,1.6,17.3,2.8,25.3,4.5c25.5,5.4,49.6,14.1,70.4,30.4c0.8,0.6,1.6,1.2,2.3,1.9c8.3,7.1,8.3,7,18,1.5   c11.7-6.7,23.4-13.4,35.1-20c8.5-4.8,14.7-1.2,14.8,8.7c0.1,16,0,32,0,48.3c17,0,33.8,0,51.2,0c0-1.8,0-3.5,0-5.3   c0-46.5,0-93,0.1-139.5c0-3.5-0.9-6-3.5-8.2c-3-2.6-5.7-5.6-8.5-8.4c-7.1-7-7.1-10.7,0-17.3c2,0,4,0,6,0c4.8,4.4,9.6,8.7,14.3,13   c5.1-4.5,9.9-8.7,14.7-13c3.7,0,7.3,0,11,0c0,3.7,0,7.3,0,11c-4.6,5-9.5,9.8-13.8,15c-1.6,2-3.1,4.8-3.1,7.3   c-0.1,148.5-0.1,296.9,0,445.4c0,2.5,1.5,5.3,3.1,7.3c4.4,5.2,9.2,10.1,13.8,15.1c0,3.7,0,7.3,0,11c-3.7,0-7.3,0-11,0   c-4.9-4.3-9.8-8.7-14.7-13c-4.8,4.4-9.6,8.7-14.3,13c-2,0-4,0-6,0c-7.1-6.6-7.7-10.9,0.1-17.1c9.8-7.8,12.2-17.1,12.1-29.4   c-0.5-87.8-0.3-175.6-0.3-263.4c0-1.8,0-3.6,0-5.7c-17.1,0-33.7,0-50.9,0c-0.1,1.7-0.3,3.5-0.3,5.2c0,14.2,0,28.3,0,42.5   c0,11-5.9,14.6-15.4,9.2c-14.9-8.5-29.8-17-44.6-25.4c-29.4,28.2-66.1,38.2-104.9,44.3c4.3,1.9,8.6,3.8,12.9,5.6   c3.2,1.4,6.5,2.7,9.6,4.1c5,2.4,6.9,7,4.9,11.5c-2,4.5-6.7,6.2-11.8,4.1c-8.8-3.6-17.7-6.9-26.1-11.3   c-19.7-10.2-40.6-14.4-62.5-16.7c-27.5-2.9-53.7-11.6-77-27.1c-16.2-10.8-29.2-24.2-34.1-43.9c-0.2-1-1.6-2.3-2.5-2.3   c-13.6-0.1-27.2-0.1-41.1-0.1c-0.1,2.2-0.2,3.8-0.2,5.4c0,91.8,0,183.6-0.1,275.4c0,4.2,1.1,7.3,4.2,10c2.8,2.4,5.2,5.1,7.8,7.7   c7.1,7.1,7.1,10.6,0,17.3c-2,0-4,0-6,0c-4.8-4.4-9.7-8.8-14.4-13c-5.1,4.5-9.8,8.8-14.6,13c-3.7,0-7.3,0-11,0c0-3.7,0-7.3,0-11   c4.4-4.8,8.6-9.7,13.2-14.2c2.9-2.8,3.9-5.7,3.9-9.6c-0.2-25.3-0.1-50.7-0.1-76c0-122.6,0-245.3-0.1-367.9c0-2.4-1.5-5.3-3.1-7.2   c-4.3-5.2-9.2-10.1-13.8-15.1c0-3.7,0-7.3,0-11c3.7,0,7.3,0,11,0c4.9,4.3,9.8,8.7,14.7,13c4.9-4.4,9.6-8.7,14.3-13   C92,131.3,94,131.3,96,131.3z M288.8,250.9c-34,0-59,3.3-83.2,11.5c-18.5,6.2-35.9,14.4-49.4,29c-16.4,17.7-16.4,37.6-0.1,55.3   c9.4,10.2,21,17.6,33.7,22.8c55.5,22.8,111.7,23.5,168.4,5.1c16.8-5.4,32.3-13.5,44.9-26.2c16.7-16.8,18.1-35.2,3.9-54.1   c-8.3-11.1-19.9-18.1-32.1-24C344.9,256.1,313.1,251.1,288.8,250.9z M459.3,274.2c-11.1,6.3-21.5,12.3-32.3,18.4   c9.4,17.6,9.5,35.1,0,52.8c10.7,6.1,21.2,12.1,32.3,18.4C459.3,333.8,459.3,304.5,459.3,274.2z"></path>
+	<path d="M288,643.3c-8.1-1.7-16.3-2.9-24.3-5.1c-18.9-5.1-36.1-13.7-50.1-27.7c-8.9-8.9-15.2-19.2-17.9-31.7c-1-4.6-0.6-8.4,3.5-11   c3.9-2.6,7.6-1.3,11,1.5c5.1,4.1,10.8,6.4,17.9,5.6c-0.6-1.2-1-2-1.5-2.8c-13.8-21.4-15.6-44.4-8-68c6.8-21.3,23.4-32.4,44.4-37.6   c4.2-1,8.5-1.8,12.8-2.1c7.8-0.7,11.7,4.5,9.5,12c-3.9,13.2-6.9,26.4-5.4,40.3c0.3,2.3,0.9,4.5,1.5,7.1c6.4-0.5,12.3-1.7,16.9-5.7   c2-1.8,3.3-4.9,4-7.6c1-4.3,2.6-7.6,7.3-8.4c4.8-0.8,8.1,1.5,9.8,5.9c4.7,12.8,9.3,25.6,14,38.6c9.4-11,17.6-23.4,20.8-38.6   c0.6-2.8,0.9-5.6,1-8.4c0.1-4.4,2.1-7.3,6.2-8.7c4.3-1.4,8,0.3,9.8,4c4.2,9,8.8,18,11.2,27.5c4.9,19.2,6.5,38.9,1.3,58.3   c-8.7,32.9-36.7,56.9-70.7,61.6c-1.3,0.2-2.5,0.7-3.7,1C302,643.3,295,643.3,288,643.3z M265.1,483.6c-15,4-26.7,11.8-30.7,26.8   c-6,22.8-4.4,44.3,15,61.2c4.8,4.2,4.3,10.6-1.1,13.9c-3.3,2.1-7.1,3.8-10.9,4.8c-5.2,1.3-10.6,1.7-16.8,2.7   c3.1,3.1,5.7,6.3,8.8,8.8c22,17.7,47.3,25.8,75.2,24.1c32.1-1.9,56.7-22.2,62.6-51.5c2.1-10.2,1.1-21.2,1-31.8   c0-4.8-1.3-9.5-2-14.3c-8.8,16.6-19.9,30.6-33.2,43c-3.2,3-6.5,5.3-11.1,3.4c-4.6-1.9-5.1-5.9-5.3-10.3   c-0.5-11.3-2.6-22.3-6.2-31.6c-8.8,2.8-16.9,6.1-25.4,8c-10.7,2.4-15.8-0.1-19-10.8c-2.4-7.9-3.1-16.6-3.4-24.9   C262.5,498.2,264.2,491.3,265.1,483.6z"></path>
+	<path d="M212.3,313.3c-4.3,4.5-7.5,8.1-11,11.4c-3.8,3.6-8.7,3.7-12.1,0.5c-3.5-3.4-3.7-8.6,0.1-12.5c3.5-3.6,7.3-6.8,11.6-10.7   c-4.2-3.9-7.7-6.9-11-10.2c-4.2-4.2-4.5-9.3-1-12.8c3.7-3.8,8.7-3.5,13.2,0.9c3,2.9,5.9,5.9,8.9,8.8c0.2,0.2,0.6,0.3,1.9,1.1   c2.9-3.1,6-6.6,9.2-9.8c4.5-4.5,9.4-4.8,13.2-1c3.8,3.8,3.4,8.5-1.2,13.2c-3,3.1-6.1,6.2-9.1,9.3c-0.1,0.1-0.2,0.3-0.9,1.7   c2.5,2.2,5.6,4.5,8.3,7.1c6.2,6.1,7,10.8,2.7,14.9c-4,3.9-9,3-15-3.1C217.6,319.5,215.3,316.7,212.3,313.3z"></path>
+	<path d="M319,293.4c-4.3,0-8.6,0.1-13,0c-5-0.2-8.6-3.8-8.6-8.5c0-4.6,3.6-8.4,8.7-8.5c8.5-0.2,16.9-0.2,25.4,0   c5.1,0.1,8.5,3.8,8.5,8.5c0,4.8-3.4,8.2-8.6,8.4C327.3,293.5,323.1,293.4,319,293.4C319,293.4,319,293.4,319,293.4z"></path>
+	<path d="M284.8,327.5c-4.3,0-8.6,0.1-13,0c-5-0.2-8.6-4-8.6-8.6c0.1-4.4,3.5-8.3,8.3-8.4c8.6-0.2,17.3-0.2,25.9,0   c5.1,0.1,8.6,4,8.5,8.6c-0.1,4.7-3.5,8.1-8.7,8.3C293.1,327.6,289,327.5,284.8,327.5C284.8,327.5,284.8,327.5,284.8,327.5z"></path>
+	<path d="M352.7,327.5c-4.2,0-8.3,0.1-12.5,0c-5.2-0.2-8.5-3.5-8.6-8.4c0-4.8,3.3-8.4,8.5-8.6c8.5-0.2,16.9-0.2,25.4,0   c5.2,0.1,8.5,3.7,8.6,8.5c0,5-3.4,8.3-9,8.5C361,327.6,356.9,327.5,352.7,327.5z"></path>
+	<path d="M318.6,361.7c-4.2,0-8.3,0.1-12.4,0c-5.2-0.2-8.6-3.7-8.6-8.4c0-4.7,3.4-8.4,8.6-8.5c8.5-0.2,16.9-0.2,25.4,0   c5.2,0.1,8.6,3.8,8.6,8.5c0,5-3.4,8.3-9,8.5C326.9,361.8,322.7,361.7,318.6,361.7z"></path>
+</g>
+</svg>
+
+                                    </span>
+                                    </div>
+                                    <h3 class="serviceTitle text-center pad15">
+                                        Service {{ i }}                                        </h3>
+                                    <div class="clearfix">
+                                        <div class="separator" style="width: 100px;border-bottom-width: 2px"></div>
+                                    </div>
+                                    <p class="service-text">
+                                        Le Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page avant impression ..
+                                    </p>
+                                </div>
+                                <div class="row service pad15">
+                                    <a href="#" data-toggle="modal" class="service-details-btn btn-default btn-xs pull-right suite" data-target="#service-details" data-module="{&quot;service&quot;:&quot;MÉCHOUI&quot;,&quot;description&quot;:&quot;MECHOUI MECHOUI MECHOUI MECHOUI MECHOUI MECHOUI MECHOUI MECHOUI MECHOUI MECHOUI MECHOUI MECHOUI &quot;}">Lire la suite</a>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+
+            {% endif %}
+
+        </div>
+    </div>
+    <div class="paralax-icon">
+        <div class="particle elem1 anim-delay1"></div>
+        <div class="particle elem2 anim-delay5"></div>
+        <div class="particle elem3 anim-delay3"></div>
+        <div class="particle elem4 anim-delay8"></div>
+        <div class="particle elem5 anim-delay9"></div>
+        <div class="particle elem6 anim-delay2"></div>
+        <div class="particle elem7 anim-delay4"></div>
+        <div class="particle elem8 anim-delay3"></div>
+        <div class="particle elem9 anim-delay10"></div>
+        <div class="particle elem8 anim-delay11"></div>
+        <div class="particle elem6 anim-delay12"></div>
+        <div class="particle elem1 anim-delay14"></div>
+        <div class="particle elem13 anim-delay16"></div>
+        <div class="particle elem17 anim-delay18"></div>
+        <div class="particle elem2 anim-delay6"></div>
+        <div class="particle elem16 anim-delay9"></div>
+        <div class="particle elem8 anim-delay3"></div>
+        <div class="particle elem9 anim-delay10"></div>
+        <div class="particle elem18 anim-delay11"></div>
+        <div class="particle elem11 anim-delay12"></div>
+        <div class="particle elem12 anim-delay14"></div>
+        <div class="particle elem13 anim-delay16"></div>
+        <div class="particle elem14 anim-delay18"></div>
+        <div class="particle elem15 anim-delay6"></div>
+        <div class="particle elem16 anim-delay9"></div>
+        <div class="particle elem17 anim-delay7"></div>
+        <div class="particle elem18 anim-delay6"></div>
+        <div class="particle elem19 anim-delay3"></div>
+    </div>
+</section>
+
+{% if attributes.connected %}
+    <!-- Modal -->
+    <div class="modal fade" id="list-services" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-md" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">liste des services</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            {% if attributes.theme["Service"]|default %}
+                                {% if attributes.theme["Service"] is not empty %}
+                                    <ul class="list-group">
+                                        {% for key,service in attributes.theme["Service"] %}
+                                            <li class="list-group-item">
+                                                {{ service["service"] }}
+                                                <span class="pull-right">
+                                        <button type="button" class="btn btn-warning form_update_service_global" data-toggle="modal" data-target="#update-service" data-service='{"service_update":"{% if service["service"] is defined %}{{ service["service"] }}{% endif %}","icon_update":"{% if service["serviceIcon"] is defined %}{{ service["serviceIcon"] }}{% endif %}","description_update":"{% if service["description"] is defined %}{{ service["description"] }}{% endif %}" }'
+                                                data-id="{{ key }}"
+                                                data-link='{{ path('update_service_global',{"serviceId":key,"themeId":attributes["themeId"]}) }}'>Modifier</button>
+                                        <a href="{{ path('delete_service_global',{"serviceId": key,"themeId":attributes["themeId"]}) }}" type="button" class="btn btn-danger">Supprimer</a>
+                                        </span>
+                                            </li>
+                                        {% endfor %}
+                                    </ul>
+                                {% endif %}
+                            {% else %}
+                                <div class="text-center">
+                                    <h3> Pas de service pour le moment !</h3>
+                                </div>
+                            {% endif %}
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-info form_add_service_global" data-toggle="modal"
+                            data-target="#add-service">Ajouter service
+                    </button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="update-service" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-md" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Modifier service</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+
+                        <div class="col-md-10 col-md-offset-1">
+
+                            <form method="post" id="update_service_form" action="" enctype="multipart/form-data">
+
+                                <h2 class="text-center" id="title-form-ajout">Modifier service</h2>
+
+                                <div class="form-group row element-form">
+                                    <div class="col-md-3">
+                                        <label class="control-label">Les Services</label>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <select class="form-control" id="servicess" name="service">
+                                            <option value="Connaître les réseaux d’importateurs, les canaux de distribution dans le pays cible.">Connaître les réseaux d’importateurs, les canaux de distribution dans le pays cible.</option>
+                                            <option value="Connaître la réglementation du pays cible."> Connaître la réglementation du pays cible.</option>
+                                            <option value="Connaître l’environnement d’un marché.">Connaître l’environnement d’un marché.</option>
+                                            <option value="analyser et caractériser la concurrence.">Savoir analyser et caractériser la concurrence.</option>
+                                            <option value="animer et mobiliser un réseau de correspondants.">animer et mobiliser un réseau de correspondants.</option>
+                                            <option value="diagnostiquer une panne ou un dysfonctionnement.">diagnostiquer une panne ou un dysfonctionnement.</option>
+                                            <option value="analyser des données techniques.">analyser des données techniques.</option>
+                                            <option value="analyser des données techniques.">analyser des données techniques.</option>
+                                            <option value="se référer à une notice technique">se référer à une notice technique</option>
+                                            <option value="" id="auto-remplire">Choisir autre Service</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group row element-form" id="title-service-mod">
+                                    <div class="col-md-3">
+                                        <label class="control-label">Nom</label>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <input type="text" id="service_update" name="service"
+                                               class="form-control name_service" placeholder="Ecrire le nom du service">
+                                    </div>
+                                </div>
+
+                                <div class="form-group row element-form">
+
+                                    <div class="col-md-3">
+                                        <label class="control-label">Description</label>
+                                    </div>
+
+                                    <div class="col-sm-9">
+
+                                         <textarea id="description_update" class="form-control" cols="60" name="description"
+                                                   rows="10" required></textarea>
+                                    </div>
+                                </div>
+                                <div class="form-group row element-form">
+                                    <div class="col-md-3">
+                                        <label class="control-label">Image de Service</label>
+                                    </div>
+                                    <div class="col-sm-9 DefaultIcon">
+
+                                        {% for iconservice in DirAssetParcour(asset('uploads/image/iconService/'~attributes.category.slug|lower~'/SVG/')) %}
+                                            <a href="#" onclick="javascript:;">
+                                                <img width="50px" height="50px" src="{{ asset('uploads/image/iconService/') }}{{ attributes.category.slug|lower~'/SVG/' }}{{ iconservice }}" alt="">
+                                            </a>
+                                        {% endfor %}
+
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-9 col-md-offset-3">
+
+                                        <input type="text" class="form-control icon-filtre2 name_service" placeholder="recherche Votre Image">
+                                        <input type="hidden" name="serviceIcon" class="form-control name_service" placeholder="recherche Votre Image" value="">
+                                        <button type="button" class="btn btn-primary btn-lg btn-block"><i class="fa fa-search" aria-hidden="true"></i></button>
+
+                                    </div>
+
+                                    <div class=" pull-right col-sm-9 icon_list icon_list-edit">
+                                        <span class="current-icon" style="font-size: 20px">
+                                            Votre Icon Actuelle <img width="50px" src="" alt="">
+                                            <i class="{% if service["serviceIcon"] is defined %}{{ service["serviceIcon"] }}{% endif %}" aria-hidden="true" style="font-size: 35px;"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-default " data-target="modifier" data-selector="update_service_form">Enregistrer</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="add-service" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Modal Header</h4>
+                </div>
+                <div class="modal-body">
+                    <form id="ajout_service_global" action="#" method="post" enctype="multipart/form-data">
+
+                        <h2 class="text-center" id="title-form-ajout">Ajout service</h2>
+
+                        <div class="form-group row element-form">
+
+
+                            <div class="col-sm-9">
+
+                                <input name="logo" id="logo_service" type="hidden" value="fa-home">
+
+                            </div>
+
+                        </div>
+                        <div class="form-group row element-form">
+                            <div class="col-md-3">
+                                <label class="control-label">Les Services</label>
+                            </div>
+                            <div class="col-sm-9">
+                                <select class="form-control" id="services" name="service">
+                                    <option value="Connaître les réseaux d’importateurs, les canaux de distribution dans le pays cible.">Connaître les réseaux d’importateurs, les canaux de distribution dans le pays cible.</option>
+                                    <option value="Connaître la réglementation du pays cible."> Connaître la réglementation du pays cible.</option>
+                                    <option value="Connaître l’environnement d’un marché.">Connaître l’environnement d’un marché.</option>
+                                    <option value="analyser et caractériser la concurrence.">Savoir analyser et caractériser la concurrence.</option>
+                                    <option value="animer et mobiliser un réseau de correspondants.">animer et mobiliser un réseau de correspondants.</option>
+                                    <option value="diagnostiquer une panne ou un dysfonctionnement.">diagnostiquer une panne ou un dysfonctionnement.</option>
+                                    <option value="analyser des données techniques.">analyser des données techniques.</option>
+                                    <option value="analyser des données techniques.">analyser des données techniques.</option>
+                                    <option value="se référer à une notice technique">se référer à une notice technique</option>
+                                    <option value="" id="auto-remplire">Choisir autre Service</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row element-form" id="title-service-add">
+                            <div class="col-md-3">
+                                <label class="control-label">Nom</label>
+                            </div>
+                            <div class="col-sm-9">
+                                <input type="text" name="service" class="form-control name_service" placeholder="Ecrire le nom du service" id="name-add">
+                            </div>
+                        </div>
+
+                        <div class="form-group row element-form">
+
+                            <div class="col-md-3">
+                                <label class="control-label">Description</label>
+                            </div>
+
+                            <div class="col-sm-9">
+
+                                         <textarea class="form-control" cols="60" name="description"
+                                                   rows="10" placeholder="Ajoutez des details par rapport à ce service.." required></textarea>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group row element-form">
+                            <div class="col-md-3">
+                                <label class="control-label">Image de Service</label>
+                            </div>
+
+                            <div class="col-sm-9 DefaultIcon">
+
+                                {% for iconservice in DirAssetParcour(asset('uploads/image/iconService/'~attributes.category.slug|lower~'/SVG/')) %}
+                                    <a href="#" onclick="javascript:;">
+                                        <img width="50px" height="50px" src="{{ asset('uploads/image/iconService/') }}{{ attributes.category.slug|lower~'/SVG/' }}{{ iconservice }}" alt="">
+                                    </a>
+                                {% endfor %}
+
+                            </div>
+
+
+                        </div>
+                        <div class="row">
+                            <div class="col-md-9 col-md-offset-3">
+
+                                <input type="text" id="icon-filtre-2" class="icon-filtre form-control name_service" placeholder="recherche Votre Image">
+                                <input type="hidden" name="serviceIcon" class="form-control name_service" placeholder="recherche Votre Image">
+                                <button type="button" class="btn btn-primary btn-lg btn-block"><i class="fa fa-search" aria-hidden="true"></i></button>
+                            </div>
+
+                            <div class=" pull-right col-sm-9 icon_list">
+                                {{ include('@User/template/fontawesomeIcons.html.twig') }}
+                            </div>
+                        </div>
+
+
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Annuler</button>
+                    <button type="submit" class="btn btn-primary " data-target="modifier" data-selector="ajout_service_global">Enregistrer</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+{% endif %}
+<div class="modal fade" id="service-details" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Service Détails</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h3 class="text-uppercase  bottom20 top10"><span class="service-details-titre color_red">Description</span></h3>
+                        <p class="p-font-15 service-details-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras et dui vestibulum, bibendum purus sit amet, vulputate mauris. Ut adipiscing gravida tincidunt. Duis euismod placerat rhoncus. Phasellus mollis imperdiet placerat. Sed ac turpis nisl. Mauris at ante mauris. Aliquam posuere fermentum lorem, a aliquam mauris rutrum a. Curabitur sit amet pretium lectus, nec consequat orci.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">fermer</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--===== #/WHAT WE DO =====-->

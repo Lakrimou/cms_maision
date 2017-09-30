@@ -1,0 +1,3310 @@
+<style xmlns="http://www.w3.org/1999/html">
+
+
+    #section-annonces {
+        font-family: Acme !important;
+    }
+
+    label, .valide-btn {
+        margin-top: 19px !important;
+    }
+
+    .input-form {
+        margin-top: 15px !important;
+    }
+
+    textarea {
+        margin-top: 5px;
+    }
+
+    .detail-annonce-title {
+        font-size: 36px;
+        text-transform: uppercase;
+        color: #fe5353;
+    }
+
+    .icon-style {
+        background: red;
+        color: #ffffff;
+        padding: 5px;
+    }
+
+    .item-food {
+        border-radius: 5px;
+        border: 1px solid #red;
+    }
+
+    .nom-produit {
+        font-size: 28px;
+        font-weight: 600;
+    }
+
+    .categorie-produit {
+        font-size: 22px;
+        font-weight: 500;
+        margin-top: 20px;
+    }
+
+    .description-produit {
+        font-size: 14px;
+        font-weight: 400;
+        margin-top: 10px;
+    }
+
+    .item-food-detail {
+        margin: 20px 20px -75px 20px;
+    }
+
+    .menu-item-description {
+        margin: 45px;
+    }
+
+    .espace-50 {
+        padding: 15px;
+    }
+
+    .description-plat {
+        margin: 20px 20px 20px 10px;
+        color: black;
+        font-weight: 500;
+    }
+
+    .categorie-plat {
+        font-size: 36px;
+        text-transform: capitalize;
+        color: rgba(255, 0, 0, 0.5);
+        font-weight: 600;
+    }
+
+    .prix-plat {
+        margin-right: 15px;
+        font-size: 35px;
+        color: rgba(255, 0, 0, 0.7);
+        font-weight: 600;
+    }
+
+    .btn-command, .btn-supprimer {
+        padding: 6px 15px;
+        background: transparent;
+        margin-right: 20px;
+        border: 2px solid red;
+        color: red;
+        font-weight: 600;
+    }
+
+    .btn-modif {
+        padding: 6px 15px;
+        margin-top: 25px;
+        background: transparent;
+        margin-right: 10px;
+        border: 2px solid #8f1010;
+        color: #8f1010;
+        font-weight: 600;
+    }
+
+    .btn-commmand {
+        padding: 6px 15px;
+        background: transparent;
+        margin-right: 6px;
+        border: 2px solid rgba(255, 0, 0, 0.7);
+        color: rgba(255, 0, 0, 0.7);
+        font-weight: 600;
+        margin-top: -20px;
+    }
+
+    .modal {
+        text-align: center;
+        padding: 0 !important;
+    }
+
+    .modal:before {
+        content: '';
+        display: inline-block;
+        height: 100%;
+        vertical-align: middle;
+        margin-right: -4px;
+    }
+
+    .modal-dialog {
+        display: inline-block;
+        text-align: left;
+        vertical-align: middle;
+    }
+
+    .single-query option {
+        background: #fff !important;
+        color: #999 !important;
+    }
+
+    .single-query option:hover {
+        background: red !important;
+        color: #fff !important;
+    }
+
+    .ajout-panier {
+        color: red;
+        border: 2px solid red;
+        padding: 5px 5px 5px 7px;
+        margin-bottom: 15px;
+        cursor: pointer;
+        transition-duration: 1s;
+    }
+
+    .ajout-panier:hover {
+        color: white;
+        background: red;
+    }
+
+    .augmenter-produit, .diminuer-produit {
+        color: #a63f3f;
+        font-weight: 600;
+    }
+
+    .augmenter-produit:hover, .diminuer-produit:hover {
+        color: red;
+    }
+
+    .panier-bloc {
+        padding: 20px 10px 10px 10px;
+        box-shadow: 0 0 5px 1px rgba(0, 0, 0, .15);
+        background: #fff;
+    }
+
+    .categorie-menus {
+        background: white !important;
+    }
+
+    .media {
+        margin-left: 10px !important;
+        margin-right: 10px !important;
+        border-bottom: 1px dashed #f47171;
+        padding-bottom: 10px;
+        margin-bottom: 0px !important;
+    }
+
+    .media-heading {
+        width: 90%;
+    }
+
+    .title-panier {
+        text-align: center;
+        font-size: 37px;
+        color: red;
+        font-family: Acme !important;
+    }
+
+    .prix-total {
+        font-size: 22px;
+        font-weight: 600;
+        color: #e89090;
+    }
+
+    .prix-unitaire {
+        color: #f26565;
+        font-size: 19px;
+    }
+
+    .plat-categorie {
+        color: #6e0303;
+    }
+
+    .detail-commande {
+        text-align: center;
+        color: #ea3c3c;
+        font-weight: 600;
+        font-size: 19px;
+    }
+
+    .detail-modal {
+        margin: 10px 0px;
+        text-align: center;
+    }
+
+    .sous-total, .frais-Livraison {
+        margin-left: 25px;
+        color: black;
+        font-weight: 600;
+        font-size: 17px;
+    }
+
+    .livraison-model {
+        border-bottom: 1px dashed #f47171;
+        margin: 8px 12px 10px 11px !important;
+    }
+
+    .livraison-number, .total-number {
+        font-size: 24px;
+        margin-right: 20px;
+        font-weight: 600;
+        color: #f28383;
+    }
+
+    .taux-total {
+        margin-bottom: 15px;
+    }
+
+    .totall-number {
+        margin-right: 25px;
+        font-weight: 800;
+        color: #f88181;
+        font-size: 28px;
+    }
+
+    .fix-panier-panel {
+        position: fixed;
+        top: 84px;
+        z-index: 110;
+        width: 20%;
+    }
+
+    .fix-panier-orpanel {
+        position: fixed;
+        top: 84px;
+        z-index: 110;
+        width: 20%;
+        right: 2px;
+    }
+
+    .fix-panier-height-1 {
+        overflow-y: scroll;
+        height: 100px;
+    }
+
+    .menu-product-rest {
+        overflow-y: scroll;
+        height: 406px;
+    }
+
+    .commande-btn-bloc {
+        margin: 0 12px;
+    }
+
+    .btn-custom-commande {
+        width: 100%;
+        background: #ea5d5d;
+        color: #fff;
+        border-radius: 0px;
+    }
+
+    .media-heading a {
+        font-family: Acme !important;
+    }
+
+    .btn-custom-commande:hover, .btn-custom-commande:active {
+        background: #fff !important;
+        color: #ea5d5d !important;
+        border: 1px solid #ea5d5d !important;
+    }
+
+    .confirm-block {
+        margin-top: 15px;
+    }
+
+    textarea {
+        resize: vertical;
+    }
+
+    .sous-categorie-label {
+        margin-top: -15px !important;
+    }
+
+    .property_item {
+        background: #fff;
+        margin-bottom: 50px;
+        height: 400px;
+        -ms-box-shadow: 0 0 5px 1px rgba(0, 0, 0, .15);
+        -webkit-box-shadow: 0 0 5px 1px rgba(0, 0, 0, .15);
+        box-shadow: 0 0 5px 1px rgba(0, 0, 0, .15);
+    }
+
+    .nomProduit, .modal-title {
+        color: #fe5353;
+    }
+
+    .btn-modif-custom {
+        border: 2px solid #8f1010 !important;
+    }
+
+    .modal-footer .btn + .btn {
+        margin-left: -5px !important;
+    }
+
+    .badge {
+        background: rgb(234, 93, 93) !important;
+        width: auto;
+        height: auto;
+        margin: 0;
+        border-radius: 50%;
+        position: absolute;
+        top: 6px !important;
+        padding: 3px 6px;
+    }
+
+    .icon-wrapper {
+        position: relative;
+        color: #791a1a !important;
+    }
+
+    @media (max-width: 992px) {
+        .fix-panier-orpanel {
+            position: fixed;
+            top: 84px;
+            z-index: 110;
+            width: 31%;
+            right: 2px;
+        }
+
+        .fix-panier-panel {
+            width: 38%;
+        }
+
+        .detail-annonce-title {
+            font-size: 25px;
+            text-transform: uppercase;
+            color: #fe5353;
+        }
+
+        .categorie-plat {
+            font-size: 23px;
+            text-transform: capitalize;
+            color: rgba(255, 0, 0, 0.5);
+            font-weight: 600;
+        }
+
+        .prix-plat {
+            margin-right: 4px;
+            font-size: 26px;
+            color: rgba(255, 0, 0, 0.7);
+            font-weight: 600;
+        }
+
+        .carousel-inner {
+            border-radius: 15px;
+        }
+
+        .btn-command, .btn-supprimer {
+            margin-right: 6px;
+            border-radius: 10px;
+        }
+
+        .btn-modif {
+            border-radius: 10px;
+        }
+    }
+
+    @media (max-width: 767px) {
+        .detail-annonce-title, .nomProduit {
+            font-size: 21px !important;
+        }
+
+        .detail-annonce-categorie {
+            font-size: 14px !important;
+        }
+
+        .prix-plat {
+            margin-right: 15px;
+            font-size: 22px;
+            margin-top: 10px;
+            color: rgba(255, 0, 0, 0.7);
+            font-weight: 600;
+        }
+
+        .detail-annonce-modele {
+            font-size: 19px;
+        }
+
+        .detail-annonce-sex {
+            font-size: 16px;
+            color: #811f1f;
+        }
+
+        .col-custom {
+            width: 50%;
+        }
+
+        .fix-panier-orpanel, .fix-panier-panel {
+            position: fixed;
+            bottom: 0;
+            z-index: 110;
+            width: 100%;
+            left: 0;
+            margin: 0;
+            top: auto;
+        }
+
+        .title-panier {
+            font-size: 25px;
+        }
+
+        .sous-total, .frais-Livraison {
+            margin-left: 25px;
+            font-weight: 600;
+            font-size: 15px;
+        }
+
+        .livraison-number, .total-number {
+            font-size: 18px;
+        }
+
+        .menu-product-rest {
+            overflow-y: scroll;
+            max-height: 420px;
+            display: none;
+        }
+
+        .totall-number {
+            margin-right: 70px;
+            font-size: 21px;
+        }
+
+        .col-xs-custom-btn {
+            width: 4%;
+            margin-right: 5%;
+        }
+
+        .col-xs-custom-btnn {
+            width: 45%;
+            margin-left: 5%;
+        }
+
+        .badge {
+            background: rgb(234, 93, 93);
+            width: auto;
+            height: auto;
+            margin: 0;
+            border-radius: 50%;
+            position: absolute;
+            top: -4px !important;
+            right: -14px !important;
+        }
+
+        .sous-categorie-label {
+            margin-top: -15px !important;
+            margin-bottom: 35px;
+        }
+    }
+
+    @media (max-width: 550px) {
+        .col-custom {
+            width: 100%;
+        }
+
+        .col-xs-offset-5 {
+            margin-left: 38%;
+        }
+    }
+
+    @media (max-width: 400px) {
+        .col-xs-offset-5 {
+            margin-left: 36%;
+        }
+    }
+
+    @media (max-width: 350px) {
+        .col-xs-offset-5 {
+            margin-left: 32%;
+        }
+    }
+
+    .fileuploader-input-button:active {
+        background: #d9534f;
+        box-shadow: inset 0 1px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .fileuploader-input-button:hover {
+        background: #d9534f;
+    }
+
+    .fileuploader-input-button {
+        display: inline-block;
+        background: #ff4c4c;
+        padding: 12px 20px;
+        border-radius: 4px;
+        color: #fff;
+        text-align: center;
+        font-weight: bold;
+        vertical-align: top;
+        cursor: pointer;
+        -webkit-transition: all .2s ease-out;
+        transition: all .2s ease-out;
+    }
+
+    .fileuploader-input-caption {
+        position: relative;
+        display: inline-block;
+        -webkit-box-flex: 1;
+        -ms-flex: 1;
+        flex: 1;
+        -ms-flex-item-align: start;
+        align-self: flex-start;
+        padding: 11px 15px;
+        margin-right: 15px;
+        background: #fff;
+        border: 1px solid #f2adad;
+        border-radius: 4px;
+        color: #ff4c4c;
+        font-weight: bold;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        -webkit-transition: all .2s ease-out;
+        transition: all .2s ease-out;
+    }
+
+    .fileuploader {
+        display: block;
+        width: 100%;
+        padding: 15px;
+        margin: 15px 0;
+        background: #ffe8e8;
+        border-radius: 4px;
+        line-height: normal;
+        text-align: left;
+        overflow: hidden;
+    }
+
+    .media.in {
+        display: none;
+    }
+
+    .categorie-sous-menus {
+        background: #fff !important;
+    }
+
+    .tab-content {
+        border: none;
+    }
+
+    nav-pills > li.active > a, .nav-pills > li.active > a:focus, .nav-pills > li.active > a:hover {
+        color: #fff;
+        background-color: #e84c4c;
+    }
+
+    .nav-pills > li.active > a, .nav-pills > li.active > a:focus, .nav-pills > li.active > a:hover {
+        color: #fff;
+        background-color: #e84c4c;
+    }
+
+    .filter-lentilles {
+        display: table;
+        background: #ffe1e1;
+        padding: 10px;
+        border-radius: 10px;
+        margin-bottom: 50px;
+        width: 100%;
+    }
+
+    .color-lentille {
+        padding: 1px 11px;
+        border-radius: 50%;
+        border: 2px solid #000;
+    }
+
+    .proerty_content .proerty_text {
+        padding: 19px 20px;
+    }
+
+    .margin-lentille-color {
+        margin-top: 9px;
+        margin-right: 7px;
+    }
+
+    .property_item {
+        background: #fff;
+        margin-bottom: 50px;
+        height: 400px;
+        -ms-box-shadow: 0 0 5px 1px rgba(0, 0, 0, .15);
+        -webkit-box-shadow: 0 0 5px 1px rgba(0, 0, 0, .15);
+        box-shadow: 0 0 5px 1px rgba(255, 0, 0, 0.2);
+    }
+
+    th {
+        background: rgba(255, 0, 0, .7);
+        color: white;
+        text-align: center;
+    }
+
+    td {
+        text-align: center;
+    }
+
+    .gestion-produit-opticien {
+        background: #e28686;
+        color: #fff;
+        padding: 8px 15px;
+        border-radius: 10px;
+        margin: 20px 0px;
+        transition-duration: 1s;
+    }
+
+    .gestion-produit-opticien:hover, .gestion-produit-opticien:active {
+        background: #f02020;
+        color: #fff;
+        padding: 8px 15px;
+        border-radius: 10px;
+        margin: 20px 0px;
+    }
+
+    .price-lentille {
+        color: #f66363;
+    }
+
+    .marque-lentille {
+        color: #c13737;
+    }
+
+    .modele-lentille {
+        margin-left: 7px;
+        color: #fa2020;
+    }
+
+    .forme-lentille {
+        color: #5a0404;
+        font-size: 17px;
+    }
+
+    .espace-20 {
+        padding: 20px;
+    }
+
+    .detail-annonce-modele {
+        font-size: 30px;
+        color: #c75a5a;
+    }
+
+    .detail-annonce-sex {
+        font-size: 20px;
+        color: #811f1f;
+    }
+
+    select {
+        width: 100% !important;
+    }
+    .title-labo{
+        font-weight: 800;
+    }
+    .title-labo span{
+        font-weight: 400;
+    }
+</style>
+<section id="section-annonces" class="property-details padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-md-9 bottom40">
+                <h2 class="text-uppercase">Nos <span class="color_red">Articles </span></h2>
+                <div class="line_1"></div>
+                <div class="line_2"></div>
+                <div class="line_3"></div>
+            </div>
+        </div>
+        <!-- Section starts: Appetizers -->
+        <div class="menu-section">
+            <div class="container">
+                <ul class="nav nav-pills nav-justified">
+                    <li class="active"><a data-toggle="pill" href="#home">Lentilles</a></li>
+                    <li><a data-toggle="pill" href="#menu1">Lunette Soleil</a></li>
+                    <li><a data-toggle="pill" href="#menu2">Lunette de Vue</a></li>
+                    <li><a data-toggle="pill" href="#menu3">Verres</a></li>
+                </ul>
+
+                <div class="tab-content">
+                    <div id="home" class="tab-pane fade in active">
+                        <div class="col-xs-12 col-md-3 col-md-offset-9">
+                            {% if app.user != null and app.user == attributes.quoiqui.user %}
+                                <div class="pull-right theme-btn ">
+                                    <button type="button" class="gestion-produit-opticien pull-right"
+                                            data-toggle="modal" data-target=".liste-lentilles">liste des Lentilles
+                                    </button>
+                                </div>
+                            {% endif %}
+                        </div>
+                        <div class="filter-lentilles">
+                            <div class="filter-element col-md-2 col-sm-4 col-xs-12">
+                                <select class="selectpicker">
+                                    <option>Marque</option>
+                                    <option value="Acuvue">Acuvue</option>
+                                    <option value="Air Optix">Air Optix</option>
+                                    <option value="Bio Air">Bio Air</option>
+                                    <option value="Biofinity">Biofinity</option>
+                                    <option value="Biomedics">Biomedics</option>
+                                    <option value="Biotrue">Biotrue</option>
+                                    <option value="Clariti">Clariti</option>
+                                    <option value="Dailies">Dailies</option>
+                                    <option value="Freshlook">Freshlook</option>
+                                    <option value="Miru">Miru</option>
+                                    <option value="MyDay">MyDay</option>
+                                    <option value="Premio">Premio</option>
+                                    <option value="Proclear">Proclear</option>
+                                    <option value="Pure Vision">Pure Vision</option>
+                                    <option value="Soflens">Soflens</option>
+                                </select>
+                            </div>
+                            <div class="filter-element col-md-2 col-sm-4 col-xs-12">
+                                <select class="selectpicker">
+                                    <option value="">Conditionnement</option>
+                                    <option value="Boîte de 12">Boîte de 12</option>
+                                    <option value="Boîte de 24">Boîte de 24</option>
+                                    <option value="Boîte de 2">Boîte de 2</option>
+                                    <option value="Boîte de 6">Boîte de 6</option>
+                                    <option value="Boîte de 10">Boîte de 10</option>
+                                    <option value="Boîte de 30">Boîte de 30</option>
+                                    <option value="Boîte de 90">Boîte de 90</option>
+                                    <option value="Boîte de 180">Boîte de 180</option>
+                                </select>
+                            </div>
+                            <div class="filter-element col-md-2 col-sm-4 col-xs-12">
+                                <select class="selectpicker">
+                                    <option value="">Matière</option>
+                                    <option value="Alphafilcon A">Alphafilcon A</option>
+                                    <option value="Balafilcon A">Balafilcon A</option>
+                                    <option value="Comfilcon A">Comfilcon A</option>
+                                    <option value="Delefilcon A">Delefilcon A</option>
+                                    <option value=">Etafilcon A">Etafilcon A</option>
+                                    <option value="Hilafilcon B">Hilafilcon B</option>
+                                    <option value="Hioxifilcon A">Hioxifilcon A</option>
+                                    <option value="Lotrafilcon A">Lotrafilcon A</option>
+                                    <option value="Lotrafilcon B">Lotrafilcon B</option>
+                                    <option value="Narafilcon A">Narafilcon A</option>
+                                    <option value="Nelfilcon A">Nelfilcon A</option>
+                                    <option value="Nesofilcon A">Nesofilcon A</option>
+                                    <option value="Ocufilcon B">Ocufilcon B</option>
+                                    <option value="Ocufilcon D">Ocufilcon D</option>
+                                    <option value="Omafilcon A">Omafilcon A</option>
+                                    <option value="Phemfilcon A">Phemfilcon A</option>
+                                    <option value="Polymacon">Polymacon</option>
+                                    <option value="Senofilcon A">Senofilcon A</option>
+                                    <option value="Senofilcon C">Senofilcon C</option>
+                                    <option value="Silicone Hydrogel">Silicone Hydrogel</option>
+                                    <option value="Stenfilcon A">Stenfilcon A</option>
+                                </select>
+                            </div>
+                            <div class="filter-element col-md-2 col-sm-4 col-xs-12">
+                                <select class="selectpicker">
+                                    <option value="">Couleur</option>
+                                    <option value="">Amazone</option>
+                                    <option value="">Ambre (Honey)</option>
+                                    <option value="">Aquamarine</option>
+                                    <option value="">Bleu</option>
+                                    <option value="">Bleu Azur</option>
+                                    <option value="">Bleu Brillant</option>
+                                    <option value="">Bleu Passion</option>
+                                    <option value="">Cannelle</option>
+                                    <option value="">Caramel</option>
+                                    <option value="">Dark Hazel</option>
+                                    <option value="">Emerald</option>
+                                    <option value="">Gris</option>
+                                    <option value="">Gris Etincelant</option>
+                                    <option value="">Gris Perle</option>
+                                    <option value="">India</option>
+                                    <option value="">Indigo</option>
+                                    <option value="">Jade</option>
+                                    <option value="">Noisette</option>
+                                    <option value="">Pacific</option>
+                                    <option value="">Platinium</option>
+                                    <option value="">Saphir</option>
+                                    <option value="">Topaz</option>
+                                    <option value="">Turquoise</option>
+                                    <option value="">Vert</option>
+                                    <option value="">Vert Amande</option>
+                                    <option value="">Vert Emeraude</option>
+                                    <option value="">Violet</option>
+                                </select>
+                            </div>
+                            <div class="filter-element col-md-2 col-sm-4 col-xs-12">
+                                <select class="selectpicker">
+                                    <option value="">Laboratoire</option>
+                                    <option value="Alcon">Alcon</option>
+                                    <option value="Bausch &amp; Lomb">Bausch &amp; Lomb</option>
+                                    <option value="CooperVision">CooperVision</option>
+                                    <option value="Johnson &amp; Johnson">Johnson &amp; Johnson</option>
+                                    <option value="Menicon">Menicon</option>
+                                </select>
+                            </div>
+                            <div class="filter-element col-md-2 col-sm-4 col-xs-12">
+                                <select class="selectpicker">
+                                    <option value="">Type de correction</option>
+                                    <option value="Unifocal">Unifocal</option>
+                                    <option value="Unifocal">Progressif</option>
+                                    <option value="Torique">Torique</option>
+                                    <option value="Sans correction">Sans correction</option>
+                                </select>
+                            </div>
+                            <div class="filter-element col-md-2 col-sm-4 col-xs-12">
+                                <select class="selectpicker">
+                                    <option value="">Périodicité</option>
+                                    <option value="ournalière">Journalière</option>
+                                    <option value="Bi-mensuelle">Bi-mensuelle</option>
+                                    <option value="Mensuelle">Mensuelle</option>
+                                </select>
+                                </select>
+                            </div>
+                            <div class="col-md-2 col-sm-4 col-xs-12">
+                                <select class="selectpicker">
+                                    <option value="">Prix</option>
+                                    <option value="">0,00&nbsp;DT - 29,99&nbsp;DT</option>
+                                    <option value="">30,00&nbsp;DT - 59,99&nbsp;DT</option>
+                                    <option value="">60,00&nbsp;DT - 89,99&nbsp;DT</option>
+                                    <option value="">90,00&nbsp;DT et au dessus</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="item-food-content">
+                            {% for p in lentille %}
+                                <div class="col-md-4 col-sm-6 col-xs-12 col-lg-3 col-custom">
+                                    <div class="item item-produit" data-prod="1">
+                                        <div class="property_item bottom40">
+                                            <div class="image">
+                                                <img src="https://i.pinimg.com/736x/4b/15/1e/4b151e64b00188771e65cacdf4cec59d.jpg{# p.photo|first #}" alt="listin"
+                                                     class="img-responsive"
+                                                     style="height: 230px;">
+                                                <div class="overlay">
+                                                    <div class="centered">
+                                                        <a class="link_arrow white_border show-lentille-detail"
+                                                           data-toggle="modal"
+                                                           data-target="#showLentille"
+                                                           data-lien="{{ path('Opticien_annonce_show',{'id':p.id,'idq':attributes.quoiqui.id}) }}"
+                                                           data-mod="{{ path('Opticien_annonce_edit',{'id':p.id}) }}"
+                                                           data-sup="{{ path('Opticien_annonce_remove',{'id':p.id}) }}"
+                                                           data-identifiant="{{ p.id }}"
+                                                           data-podui="{{ loop.index }}">View Detail
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="proerty_content">
+                                                <div class="proerty_text">
+                                                    <h3>{{ p.nom }} <span class="pull-right price-lentille">{{ p.price }} DT</span></h3>
+                                                    <p><strong class="marque-lentille">{{ p.marque }} </strong> <span class="bottom10 modele-lentille">{{ p.model }}</span></p>
+                                                    <p class="forme-lentille">{{ p.forme }}</p>
+                                                </div>
+                                                <div class="favroute clearfix">
+                                                    <p class="pull-left">{{ p.conditions }}</p>
+                                                    <ul class="pull-right margin-lentille-color">
+                                                        <li><span class="color-lentille" style="background:{{ p.color }}"></span></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div id="menu1" class="tab-pane fade">
+                        <div class="col-xs-12 col-md-3 col-md-offset-9">
+                            {% if app.user != null and app.user == attributes.quoiqui.user %}
+                                <div class="pull-right theme-btn ">
+                                    <button type="button" class="gestion-produit-opticien pull-right" data-toggle="modal" data-target=".liste-soleil">liste des Lunettes</button>
+                                </div>
+                            {% endif %}
+                        </div>
+                        <div class="filter-lentilles">
+                            <div class="filter-element col-sm-4 col-xs-12 col-lg-2">
+                                <select class="selectpicker">
+                                    <option>Marque</option>
+                                    <option value="Acuvue">Acuvue</option>
+                                    <option value="Air Optix">Air Optix</option>
+                                    <option value="Bio Air">Bio Air</option>
+                                    <option value="Biofinity">Biofinity</option>
+                                    <option value="Biomedics">Biomedics</option>
+                                    <option value="Biotrue">Biotrue</option>
+                                    <option value="Clariti">Clariti</option>
+                                    <option value="Dailies">Dailies</option>
+                                    <option value="Freshlook">Freshlook</option>
+                                    <option value="Miru">Miru</option>
+                                    <option value="MyDay">MyDay</option>
+                                    <option value="Premio">Premio</option>
+                                    <option value="Proclear">Proclear</option>
+                                    <option value="Pure Vision">Pure Vision</option>
+                                    <option value="Soflens">Soflens</option>
+                                </select>
+                            </div>
+                            <div class="filter-elemen col-sm-4 col-xs-12 col-md-2 col-lg-2">
+                                <select class="selectpicker">
+                                    <option value="">Sexe</option>
+                                    <option value="1">Homme</option>
+                                    <option value="2">Femme</option>
+                                    <option value="3">Enfant</option>
+                                </select>
+                            </div>
+                            <div class="filter-element col-md-3 col-sm-4 col-xs-12 col-lg-2">
+                                <select class="selectpicker">
+                                    <option value="">Matière</option>
+                                    <option value="Acétate">Acétate</option>
+                                    <option value="Combiné">Combiné</option>
+                                    <option value="Combiné Acier/Acétate">Combiné Acier/Acétate</option>
+                                    <option value="Métal">Métal</option>
+                                    <option value="Plastique">Plastique</option>
+                                    <option value="Plastique Acétate">Plastique Acétate</option>
+                                    <option value="Titane">Titane</option>
+                                </select>
+
+
+                            </div>
+                            <div class="filter-element col-md-2 col-sm-4 col-xs-12 col-lg-2">
+                                <select class="selectpicker">
+                                    <option value="">Couleur</option>
+                                    <option value="Argent">Argent</option>
+                                    <option value="Bleu">Bleu</option>
+                                    <option value="Bleu / Gris">Bleu / Gris</option>
+                                    <option value="Bleu perle">Bleu perle</option>
+                                    <option value="Bleu Pétrole">Bleu Pétrole</option>
+                                    <option value="Blush Crystal">Blush Crystal</option>
+                                    <option value="Bordeaux">Bordeaux</option>
+                                    <option value="Bordeaux perle">Bordeaux perle</option>
+                                    <option value="Brun">Brun</option>
+                                    <option value="Brun doré">Brun doré</option>
+                                    <option value="Brun Ecaille">Brun Ecaille</option>
+                                    <option value="Brun Griffon">Brun Griffon</option>
+                                    <option value="Cognac">Cognac</option>
+                                    <option value="Cristal Rosélite">Cristal Rosélite</option>
+                                    <option value="Denim">Denim</option>
+                                    <option value="Doré">Doré</option>
+                                    <option value="Ecaille">Ecaille</option>
+                                    <option value="Ecaille bleue">Ecaille bleue</option>
+                                    <option value="Ecaille foncée">Ecaille foncée</option>
+                                    <option value="Ecaille olive">Ecaille olive</option>
+                                    <option value="Ecaille rouge">Ecaille rouge</option>
+                                    <option value="Graphite">Graphite</option>
+                                    <option value="Gris">Gris</option>
+                                    <option value="Gris Zèbre">Gris Zèbre</option>
+                                    <option value="Gun">Gun</option>
+                                    <option value="Havane">Havane</option>
+                                    <option value="Honey Crystal">Honey Crystal</option>
+                                    <option value="Kaki">Kaki</option>
+                                    <option value="Marron">Marron</option>
+                                    <option value="Mauve">Mauve</option>
+                                    <option value="Noir">Noir</option>
+                                    <option value="Noir / Jaune">Noir / Jaune</option>
+                                    <option value="Prune">Prune</option>
+                                    <option value="Rose">Rose</option>
+                                    <option value="Rouge">Rouge</option>
+                                    <option value="Vert foncé">Vert foncé</option>
+                                    <option value="Violet">Violet</option>
+                                </select>
+                            </div>
+                            <div class="filter-element col-md-2 col-sm-4 col-xs-12">
+                                <select class="selectpicker">
+                                    <option value="">Forme</option>
+                                    <option value="Angulaire">Angulaire</option>
+                                    <option value="Arrondie">Arrondie</option>
+                                    <option value="Aviateur">Aviateur</option>
+                                    <option value="Carré">Carré</option>
+                                    <option value="Couture">Couture</option>
+                                    <option value="Ovale">Ovale</option>
+                                    <option value="Pantos">Pantos</option>
+                                    <option value="Papillonnante">Papillonnante</option>
+                                    <option value="Pilote">Pilote</option>
+                                    <option value="Rectangle">Rectangle</option>
+                                    <option value="Rond">Rond</option>
+                                    <option value="Sport">Sport</option>
+                                    <option value="Vintage">Vintage</option>
+                                </select>
+
+                            </div>
+                            <div class="filter-element col-md-2 col-sm-4 col-xs-12">
+                                <select class="selectpicker">
+                                    <option value="">Prix</option>
+                                    <option value="https://www.lynx-optique.com/lunettes-de-soleil/price_-30">0,00&nbsp;DT- 29,99&nbsp;DT</option>
+                                    <option value="https://www.lynx-optique.com/lunettes-de-soleil/price_30-60">30,00&nbsp;DT - 59,99&nbsp;DT</option>
+                                    <option value="https://www.lynx-optique.com/lunettes-de-soleil/price_60-90">60,00&nbsp;DT - 89,99&nbsp;DT</option>
+                                    <option value="https://www.lynx-optique.com/lunettes-de-soleil/price_90-120">90,00&nbsp;DT - 119,99&nbsp;DT</option>
+                                    <option value="https://www.lynx-optique.com/lunettes-de-soleil/price_120-150">120,00&nbsp;DT - 149,99&nbsp;DT</option>
+                                    <option value="https://www.lynx-optique.com/lunettes-de-soleil/price_150-">150,00&nbsp;DT et au dessus</option>
+                                </select>
+
+                            </div>
+                        </div>
+                        <div class="item-food-content">
+                            {% for p in soleil %}
+                                <div class="col-xs-12 col-sm-6 col-custom col-md-4 col-lg-3">
+                                    <div class="property_item heading_space">
+                                        <div class="image">
+                                            <img src="{{ p.picture|first }}" alt="listin" class="img-responsive" style="height: 230px;">
+                                            <div class="overlay">
+                                                <div class="centered">
+                                                    <a class="link_arrow white_border show-soleil-detail"
+                                                       data-toggle="modal"
+                                                       data-target="#showSoleil"
+                                                       data-lien="{{ path('Opticien_annonce_show',{'id':p.id,'idq':attributes.quoiqui.id}) }}"
+                                                       data-mod="{{ path('Opticien_annonce_edit',{'id':p.id}) }}"
+                                                       data-sup="{{ path('Opticien_annonce_remove',{'id':p.id}) }}"
+                                                       data-identifiant="{{ p.id }}"
+                                                       data-podui="{{ loop.index }}">View Detail
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="proerty_content">
+                                            <div class="proerty_text">
+                                                <h3>{{ p.nom }} <span class="pull-right price-lentille">{{ p.price }} DT</span></h3>
+                                                <p><strong class="marque-lentille">{{ p.marque }} </strong> <span class="bottom10 modele-lentille">{{ p.model }}</span></p>
+                                                <p class="forme-lentille">{{ p.forme }}</p>
+                                                <p class="forme-lentille pull-right">{{ p.color }}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div id="menu2" class="tab-pane fade">
+                        <div class="col-xs-12 col-md-3 col-md-offset-9">
+                            {% if app.user != null and app.user == attributes.quoiqui.user %}
+                                <div class="pull-right theme-btn ">
+                                    <button type="button" class="gestion-produit-opticien pull-right" data-toggle="modal" data-target=".liste-vue">liste des Lunette</button>
+                                </div>
+                            {% endif %}
+                        </div>
+
+                        <div class="filter-lentilles">
+                            <div class="filter-element col-md-2 col-sm-4 col-xs-12">
+                                <select class="selectpicker">
+                                    <option value="">Prix</option>
+                                    <option value="https://www.lynx-optique.com/lunettes-de-soleil/price_-30">0,00&nbsp;DT- 29,99&nbsp;DT</option>
+                                    <option value="https://www.lynx-optique.com/lunettes-de-soleil/price_30-60">30,00&nbsp;DT - 59,99&nbsp;DT</option>
+                                    <option value="https://www.lynx-optique.com/lunettes-de-soleil/price_60-90">60,00&nbsp;DT - 89,99&nbsp;DT</option>
+                                    <option value="https://www.lynx-optique.com/lunettes-de-soleil/price_90-120">90,00&nbsp;DT - 119,99&nbsp;DT</option>
+                                    <option value="https://www.lynx-optique.com/lunettes-de-soleil/price_120-150">120,00&nbsp;DT - 149,99&nbsp;DT</option>
+                                    <option value="https://www.lynx-optique.com/lunettes-de-soleil/price_150-">150,00&nbsp;DT et plus</option>
+                                </select>
+                            </div>
+                            <div class="filter-element col-md-2 col-sm-4 col-xs-12">
+                                <select class="selectpicker">
+                                    <option value="">Matière</option>
+                                    <option value="Acétate">Acétate</option>
+                                    <option value="Combiné">Combiné</option>
+                                    <option value="Acier/Acétate">Acier/Acétate</option>
+                                    <option value="Métal">Métal</option>
+                                    <option value="Plastique">Plastique</option>
+                                    <option value="Plastique Acétate">Plastique Acétate</option>
+                                    <option value="Titane">Titane</option>
+                                </select>
+                            </div>
+                            <div class="filter-element col-md-2 col-sm-4 col-xs-12">
+                                <select class="selectpicker">
+                                    <option value="">Sexe</option>
+                                    <option value="0">Homme</option>
+                                    <option value="1">Femme</option>
+                                    <option value="2">Enfant</option>
+                                </select>
+                            </div>
+                            <div class="filter-element col-md-2 col-sm-4 col-xs-12">
+                                <select class="selectpicker">
+                                    <option>Marque</option>
+                                    <option value="Acuvue">Acuvue</option>
+                                    <option value="Air Optix">Air Optix</option>
+                                    <option value="Bio Air">Bio Air</option>
+                                    <option value="Biofinity">Biofinity</option>
+                                    <option value="Biomedics">Biomedics</option>
+                                    <option value="Biotrue">Biotrue</option>
+                                    <option value="Clariti">Clariti</option>
+                                    <option value="Dailies">Dailies</option>
+                                    <option value="Freshlook">Freshlook</option>
+                                    <option value="Miru">Miru</option>
+                                    <option value="MyDay">MyDay</option>
+                                    <option value="Premio">Premio</option>
+                                    <option value="Proclear">Proclear</option>
+                                    <option value="Pure Vision">Pure Vision</option>
+                                    <option value="Soflens">Soflens</option>
+                                </select>
+                            </div>
+                            <div class="filter-element col-md-2 col-sm-4 col-xs-12">
+                                <select class="selectpicker" name="couleur">
+                                    <option value="">Couleur</option>
+                                    <option value="Bleu">Bleu</option>
+                                    <option value="Bordeaux">Bordeaux</option>
+                                    <option value="Brun">Brun</option>
+                                    <option value="Cristal">Cristal</option>
+                                    <option value="Doré">Doré</option>
+                                    <option value="Ecaille">Ecaille</option>
+                                    <option value="Fuschia">Fuschia</option>
+                                    <option value="Gris">Gris</option>
+                                    <option value="Gun">Gun</option>
+                                    <option value="Marron">Marron</option>
+                                    <option value="Noir">Noir</option>
+                                    <option value="Noir / Blanc">Noir / Blanc</option>
+                                    <option value="Or">Or</option>
+                                    <option value="Prune">Prune</option>
+                                    <option value="Rose">Rose</option>
+                                    <option value="Rouge">Rouge</option>
+                                    <option value="Vert">Vert</option>
+                                    <option value="Violet">Violet</option>
+                                </select>
+                            </div>
+                            <div class="filter-element col-md-2 col-sm-4 col-xs-12">
+                                <select class="selectpicker">
+                                    <option value="">Forme</option>
+                                    <option value="Angulaire">Angulaire</option>
+                                    <option value="Arrondie">Arrondie</option>
+                                    <option value="Aviateur">Aviateur</option>
+                                    <option value="Carré">Carré</option>
+                                    <option value="Couture">Couture</option>
+                                    <option value="Ovale">Ovale</option>
+                                    <option value="Pantos">Pantos</option>
+                                    <option value="Papillonnante">Papillonnante</option>
+                                    <option value="Pilote">Pilote</option>
+                                    <option value="Rectangle">Rectangle</option>
+                                    <option value="Rond">Rond</option>
+                                    <option value="Sport">Sport</option>
+                                    <option value="Vintage">Vintage</option>
+                                </select>
+
+                            </div>
+                        </div>
+                        <div class="item-food-content">
+                            {% for p in vue %}
+                                <div class="col-xs-12 col-sm-6 col-custom col-md-4 col-lg-3">
+                                    <div class="property_item heading_space">
+                                        <div class="image">
+                                            <img src="{{ p.picture|first }}" alt="listin" class="img-responsive" style="height: 230px;">
+                                            <div class="overlay">
+                                                <div class="centered">
+                                                    <a class="link_arrow white_border show-vue-detail"
+                                                       data-toggle="modal"
+                                                       data-target="#showVue"
+                                                       data-lien="{{ path('Opticien_annonce_show',{'id':p.id,'idq':attributes.quoiqui.id}) }}"
+                                                       data-mod="{{ path('Opticien_annonce_edit',{'id':p.id}) }}"
+                                                       data-sup="{{ path('Opticien_annonce_remove',{'id':p.id}) }}"
+                                                       data-identifiant="{{ p.id }}"
+                                                       data-podui="{{ loop.index }}">View Detail
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="proerty_content">
+                                            <div class="proerty_text">
+                                                <h3>{{ p.nom }} <span class="pull-right price-lentille">{{ p.price }} DT</span></h3>
+                                                <p><strong class="marque-lentille">{{ p.marque }} </strong> <span class="bottom10 modele-lentille">{{ p.model }}</span></p>
+                                                <p class="forme-lentille">{{ p.forme }}</p>
+                                                <p class="forme-lentille pull-right">{{ p.color }}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div id="menu3" class="tab-pane fade">
+                        <div class="col-xs-12 col-md-3 col-md-offset-9">
+                            {% if app.user != null and app.user == attributes.quoiqui.user %}
+                                <div class="pull-right theme-btn ">
+                                    <button type="button" class="gestion-produit-opticien pull-right" data-toggle="modal" data-target=".liste-verres">liste des Verres</button>
+                                </div>
+                            {% endif %}
+                        </div>
+                        <div class="filter-lentilles">
+                            <div class="filter-element col-md-2 col-sm-4 col-xs-12">
+                                <select class="selectpicker">
+                                    <option>Marque</option>
+                                    <option value="Boss Orange">Boss Orange</option>
+                                    <option value="Carrera">Carrera</option>
+                                    <option value="Elle">Elle</option>
+                                    <option value="Esprit">Esprit</option>
+                                    <option value="Gucci">Gucci</option>
+                                    <option value="Hugo Boss">Hugo Boss</option>
+                                    <option value="Pierre Cardin">Pierre Cardin</option>
+                                    <option value="Ray Ban">Ray Ban</option>
+                                    <option value="Tommy Hilfiger">Tommy Hilfiger</option>
+                                </select>
+                            </div>
+                            <div class="filter-element col-md-2 col-sm-4 col-xs-12">
+                                <select class="selectpicker" name="couleur">
+                                    <option value="">Couleur</option>
+                                    <option value="Blanc">Blanc</option>
+                                    <option value="Noir">Noir</option>
+                                    <option value="Blue">Blue</option>
+                                    <option value="Vert">Vert</option>
+                                    <option value="Jaune">Jaune</option>
+                                    <option value="Rouge">Rouge</option>
+                                    <option value="Orange">Orange</option>
+                                    <option value="Blue marine">Blue marine</option>
+                                    <option value="Maron">Maron</option>
+                                    <option value="Rose">Rose</option>
+                                    <option value="Gris">Gris</option>
+                                    <option value="Argent">Argent</option>
+                                    <option value="Or">Or</option>
+                                    <option value="Transparent">Transparent</option>
+                                </select>
+                            </div>
+                            <div class="filter-element col-md-2 col-sm-4 col-xs-12">
+                                <select class="selectpicker" name="modele">
+                                    <option value="">Modele</option>
+                                    <option value="Cerclée">Cerclée</option>
+                                    <option value="Demi Cerclée">Demi Cerclée</option>
+                                    <option value="Percée">Percée</option>
+                                </select>
+                            </div>
+                            <div class="filter-element col-md-2 col-sm-4 col-xs-12">
+                                <select class="selectpicker">
+                                    <option value="">Forme</option>
+                                    <option value="Rectangle">Rectangle</option>
+                                    <option value="Ovale">Ovale</option>
+                                    <option value="Ronde">Ronde</option>
+                                </select>
+                            </div>
+                            <div class="filter-element col-md-2 col-sm-4 col-xs-12">
+                                <select class="selectpicker">
+                                    <option value="">Dimension</option>
+                                </select>
+                            </div>
+                            <div class="filter-element col-md-2 col-sm-4 col-xs-12">
+                                <select class="selectpicker">
+                                    <option value="">Weight</option>
+                                </select>
+                            </div>
+                            <div class="col-md-2 col-sm-4 col-xs-12">
+                                <select class="selectpicker">
+                                    <option value="">Prix</option>
+                                    <option value="">0,00&nbsp;DT - 29,99&nbsp;DT</option>
+                                    <option value="">30,00&nbsp;DT - 59,99&nbsp;DT</option>
+                                    <option value="">60,00&nbsp;DT - 89,99&nbsp;DT</option>
+                                    <option value="">90,00&nbsp;DT et au dessus</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="item-food-content">
+                            {% for p in verre %}
+                                <div class="col-xs-12 col-sm-6 col-custom col-md-4 col-lg-3">
+                                    <div class="property_item heading_space">
+                                        <div class="image">
+                                            <img src="{{ p.picture|first }}" alt="listin" class="img-responsive" style="height: 230px;">
+                                            <div class="overlay">
+                                                <div class="centered">
+                                                    <a class="link_arrow white_border show-verre-detail"
+                                                       data-toggle="modal"
+                                                       data-target="#showVerre"
+                                                       data-lien="{{ path('Opticien_annonce_show',{'id':p.id,'idq':attributes.quoiqui.id}) }}"
+                                                       data-mod="{{ path('Opticien_annonce_edit',{'id':p.id}) }}"
+                                                       data-sup="{{ path('Opticien_annonce_remove',{'id':p.id}) }}"
+                                                       data-identifiant="{{ p.id }}"
+                                                       data-podui="{{ loop.index }}">View Detail
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="proerty_content">
+                                            <div class="proerty_text">
+                                                <h3>{{ p.nom }} <span class="pull-right price-lentille">{{ p.price }} DT</span></h3>
+                                                <p><strong class="marque-lentille">{{ p.marque }} </strong> <span class="bottom10 modele-lentille">{{ p.model }}</span></p>
+                                                <p class="forme-lentille">{{ p.forme }}</p>
+                                                <p class="forme-lentille pull-left">{{ p.dimensions }} </p>
+                                                <p class="forme-lentille pull-right">{{ p.color }}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Section ends: Appetizers -->
+    </div>
+</section>
+
+<!-- modal detail lentille -->
+<div id="showLentille" class="modal fade in" role="dialog">
+    <div class="modal-dialog modal-md">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title"><span class="detail-annonce-title"></span></h4>
+            </div>
+            <div class="modal-body">
+                <div style="margin-top:20px;"></div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                            <!-- Indicators -->
+                            <ol class="carousel-indicators show-indicators">
+                            </ol>
+
+                            <!-- Wrapper for slides -->
+                            <div class="carousel-inner show-image">
+                            </div>
+
+                            <!-- Left and right controls -->
+                            <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+                                <span class="glyphicon glyphicon-chevron-left"></span>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                            <a class="right carousel-control" href="#myCarousel" data-slide="next">
+                                <span class="glyphicon glyphicon-chevron-right"></span>
+                                <span class="sr-only">Next</span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="prix-plat">
+                            <span class="detail-annonce-prix pull-right">1500</span>
+                        </div>
+                        <div class="categorie-plat">
+                            <span class="detail-annonce-marque">marque</span>
+                            <span class="detail-annonce-modele">modele</span>
+                            <span class="detail-annonce-sex">(sex)</span>
+                        </div>
+                        <div class="espace-20"></div>
+                        <div class="description-plat">
+                            <span class="detail-annonce-description">fssf</span>
+                        </div>
+                        <div class="descript-lentille">
+                            <div class="col-md-4">
+                                <span class="title-labo">Laboratoire : <span class="detail-annoce-labo">Labo</span></span>
+                            </div>
+                            <div class="col-md-4">
+                                <span class="title-labo">Conditionnement : <span class="detail-annoce-boite">Boite</span></span>
+                            </div>
+                            <div class="col-md-4">
+                                <span class="title-labo">Matiere : <span class="detail-annoce-matiere">Matiere</span></span>
+                            </div>
+                            <div class="col-md-4">
+                                <span class="title-labo">Type de Correction : <span class="detail-annoce-correction">Correction</span></span>
+                            </div>
+                            <div class="col-md-4">
+                                <span class="title-labo">Couleur : <span class="detail-annoce-couleur">Couleur</span></span>
+                            </div>
+                            <div class="col-md-4">
+                                <span class="title-labo">Périodicité : <span class="detail-annoce-periodiciite">Periodicite</span></span>
+                            </div>
+                        </div>
+                        <div class="action-button">
+                            {% if app.user == attributes.quoiqui.user %}
+                                <div class="pull-right">
+                                    <button type="button" class="btn-modif edit-annonce" data-toggle="modal" data-target="#edit-lentilles">Modifier</button>
+                                    <button type="button" class="btn-supprimer annonce-supprimer-1" data-toggle="modal" data-target="#del-annonce">Supprimer</button>
+                                </div>
+                            {% else %}
+                                <div class="commander-plat">
+                                    <button class="btn-command pull-right" data-base="">Commander</button>
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- modal detail lunette soleil -->
+<div id="showSoleil" class="modal fade in" role="dialog">
+    <div class="modal-dialog modal-md">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title"><span class="detail-annonce-title"></span></h4>
+            </div>
+            <div class="modal-body">
+                <div style="margin-top:20px;"></div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                            <!-- Indicators -->
+                            <ol class="carousel-indicators show-indicators">
+                            </ol>
+                            <!-- Wrapper for slides -->
+                            <div class="carousel-inner show-image">
+                            </div>
+
+                            <!-- Left and right controls -->
+                            <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+                                <span class="glyphicon glyphicon-chevron-left"></span>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                            <a class="right carousel-control" href="#myCarousel" data-slide="next">
+                                <span class="glyphicon glyphicon-chevron-right"></span>
+                                <span class="sr-only">Next</span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="prix-plat">
+                            <span class="detail-annonce-prix pull-right">1500</span>
+                        </div>
+                        <div class="categorie-plat">
+                            <span class="detail-annonce-marque">marque</span>
+                            <span class="detail-annonce-modele">modele</span>
+                            <span class="detail-annonce-sex">(sex)</span>
+                        </div>
+                        <div class="espace-20"></div>
+                        <div class="description-plat">
+                            <span class="detail-annonce-description">fssf</span>
+                        </div>
+                        <div class="descript-lentille">
+                            <div class="col-md-4">
+                                <span class="title-labo">Forme : <span class="detail-annoce-forme">Forme</span></span>
+                            </div>
+                            <div class="col-md-4">
+                                <span class="title-labo">Indice :<span class="detail-annoce-indice">indice</span></span>
+                            </div>
+                            <div class="col-md-4">
+                                <span class="title-labo">Couleur :<span class="detail-annoce-couleur">Couleur</span></span>
+                            </div>
+                        </div>
+                        <div class="espace-20"></div>
+                        {% if app.user == attributes.quoiqui.user %}
+                            <div class="pull-right">
+                                <button type="button" class="btn-modif edit-annonce" data-toggle="modal" data-target="#edit-soleil">Modifier</button>
+                                <button type="button" class="btn-supprimer annonce-supprimer-1" data-toggle="modal" data-target="#del-annonce">Supprimer</button>
+                            </div>
+                        {% else %}
+                            <div class="commander-plat">
+                                <button class="btn-command pull-right" data-base="">Commander</button>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- modal detail lunette de vue -->
+<div id="showVue" class="modal fade in" role="dialog">
+    <div class="modal-dialog modal-md">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title"><span class="detail-annonce-title"></span></h4>
+            </div>
+            <div class="modal-body">
+                <div style="margin-top:20px;"></div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                            <!-- Indicators -->
+                            <ol class="carousel-indicators show-indicators">
+                            </ol>
+
+                            <!-- Wrapper for slides -->
+                            <div class="carousel-inner show-image">
+                            </div>
+
+                            <!-- Left and right controls -->
+                            <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+                                <span class="glyphicon glyphicon-chevron-left"></span>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                            <a class="right carousel-control" href="#myCarousel" data-slide="next">
+                                <span class="glyphicon glyphicon-chevron-right"></span>
+                                <span class="sr-only">Next</span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="prix-plat">
+                            <span class="detail-annonce-prix pull-right">1500</span>
+                        </div>
+                        <div class="categorie-plat">
+                            <span class="detail-annonce-marque">marque</span>
+                            <span class="detail-annonce-modele">modele</span>
+                            <span class="detail-annonce-sex">(sex)</span>
+                        </div>
+                        <div class="espace-20"></div>
+                        <div class="description-plat">
+                            <span class="detail-annonce-description">fssf</span>
+                        </div>
+                        <div class="descript-lentille">
+                            <div class="col-md-6">
+                                <span class="title-labo">Forme : <span class="detail-annoce-forme">Forme</span></span>
+                            </div>
+                            <div class="col-md-6">
+                                <span class="title-labo">Couleur : <span class="detail-annoce-couleur">Couleur</span></span>
+                            </div>
+                        </div>
+                        <div class="espace-20"></div>
+                        {% if app.user == attributes.quoiqui.user %}
+                            <div class="pull-right">
+                                <button type="button" class="btn-modif edit-annonce" data-toggle="modal" data-target="#edit-vue">Modifier</button>
+                                <button type="button" class="btn-supprimer annonce-supprimer-1" data-toggle="modal" data-target="#del-annonce">Supprimer</button>
+                            </div>
+                        {% else %}
+                            <div class="commander-plat">
+                                <button class="btn-command pull-right" data-base="">Commander</button>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- modal detail verre -->
+<div id="showVerre" class="modal fade in" role="dialog">
+    <div class="modal-dialog modal-md">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title"><span class="detail-annonce-title"></span></h4>
+            </div>
+            <div class="modal-body">
+                <div style="margin-top:20px;"></div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                            <!-- Indicators -->
+                            <ol class="carousel-indicators show-indicators">
+                            </ol>
+
+                            <!-- Wrapper for slides -->
+                            <div class="carousel-inner show-image">
+                            </div>
+
+                            <!-- Left and right controls -->
+                            <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+                                <span class="glyphicon glyphicon-chevron-left"></span>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                            <a class="right carousel-control" href="#myCarousel" data-slide="next">
+                                <span class="glyphicon glyphicon-chevron-right"></span>
+                                <span class="sr-only">Next</span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="prix-plat">
+                            <span class="detail-annonce-prix pull-right">1500</span>
+                        </div>
+                        <div class="categorie-plat">
+                            <span class="detail-annonce-marque">marque</span>
+                            <span class="detail-annonce-modele">modele</span>
+                        </div>
+                        <div class="espace-20"></div>
+                        <div class="description-plat">
+                            <span class="detail-annonce-description">fssf</span>
+                        </div>
+                        <div class="descript-lentille">
+                            <div class="col-md-3">
+                                <span class="title-labo">Forme : <span class="detail-annoce-forme">Forme</span></span>
+                            </div>
+                            <div class="col-md-3">
+                                <span class="title-labo">Couleur : <span class="detail-annoce-couleur">Couleur</span></span>
+                            </div>
+                            <div class="col-md-4">
+                                <span class="title-labo">Dimension : <span class="detail-annoce-dimension">Dimension</span></span>
+                            </div>
+                            <div class="col-md-2">
+                                <span class="title-labo">Poids : <span class="detail-annoce-weight">Weight</span></span>
+                            </div>
+                        </div>
+                        <div class="espace-20"></div>
+                        {% if app.user == attributes.quoiqui.user %}
+                            <div class="pull-right">
+                                <button type="button" class="btn-modif edit-annonce" data-toggle="modal" data-target="#edit-verre">Modifier</button>
+                                <button type="button" class="btn-supprimer annonce-supprimer-1" data-toggle="modal" data-target="#del-annonce">Supprimer</button>
+                            </div>
+                        {% else %}
+                            <div class="commander-plat">
+                                <button class="btn-command pull-right" data-base="">Commander</button>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% if app.user != null and  app.user == attributes.quoiqui.user %}
+    <!-- modals Lentille-->
+    <!-- modal de lister les annonces -->
+    <div class="modal fade liste-lentilles" role="dialog" aria-labelledby="myLargeModalLabel">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Liste des Lentilles</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="pull-right">
+                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#addLentille">
+                            Ajouter une Lentille
+                        </button>
+                    </div>
+                    <table class="table table-responsive table-hover table-striped dataTable" style="width: 100%;"
+                           id="service-tables">
+                        <thead>
+                        <tr>
+                            <th style="border:none;border-top-left-radius:5px;">Nom</th>
+                            <th style="border:none">Réferene</th>
+                            <th style="border:none">Sexe</th>
+                            <th style="border:none">Prix</th>
+                            <th style="border:none">Model</th>
+                            <th style="border:none">Marqaue</th>
+                            <th style="border:none">Forme</th>
+                            <th style="border:none">Couleur</th>
+                            <th style="border:none">Périodicité</th>
+                            <th style="border:none">Laboratoire</th>
+                            <th style="border:none">Conditionnement</th>
+                            <th style="border:none">Type de correction</th>
+                            <th style="border:none">Matiere</th>
+                            <th style="border:none">Stock</th>
+                            <th style="border:none;border-top-right-radius:5px;" class="text-center">Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for p in lentille %}
+                            <tr data-prod="{{ loop.index }}">
+                                <td>{{ p.nom }}</td>
+                                <td>{{ p.reference }}</td>
+                                <td>{% if p.sex == 1 %}Homme{% else %} Femme {% endif %}</td>
+                                <td>{{ p.price }}</td>
+                                <td>{{ p.model }}</td>
+                                <td>{{ p.marque }}</td>
+                                <td>{{ p.forme }}</td>
+                                <td>{{ p.color }}</td>
+                                <td>{{ p.periodicite }}</td>
+                                <td>{{ p.labo }}</td>
+                                <td>{{ p.conditions }}</td>
+                                <td>{{ p.correction }}</td>
+                                <td>{{ p.correction }}</td>
+                                <td>{{ p.material }}</td>
+                                <td>
+                                    <div class="btn-group pull-right">
+                                        <button type="button" class="btn btn-default icon-style-modifier edit-annonce"
+                                                data-toggle="modal" data-target="#edit-lentilles" data-nom="{{ p.nom }}"
+                                                data-id="{{ p.id }}"
+                                                data-lien="{{ path('Opticien_annonce_edit',{'id':p.id}) }}"><span class="glyphicon glyphicon-pencil"></span>
+                                        </button>
+                                        <button type="button" class="btn btn-danger icon-annonce-supprimer"
+                                                data-nom="{{ p.nom }}"
+                                                data-id="{{ p.id }}"
+                                                data-lien="{{ path('Opticien_annonce_remove',{'id':p.id}) }}"
+                                                data-loop="{{ loop.index }}"><span class="glyphicon glyphicon-remove"></span>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- modal d'ajout lentille -->
+    <div id="addLentille" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-md">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Ajouter une Lentille</h4>
+                </div>
+                <div class="modal-body">
+                    <form action="{{ path('Opticien_annonce_add') }}" class="clearfix" method="post" enctype="multipart/form-data">
+                        <div class="col-sm-6 col-xs-12">
+                            <label>Réference</label>
+                            <div class="inner-addon left-addon">
+                                <input type="text" class="form-control input-form" name="reference" required="required"/>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-xs-12">
+                            <label>Nom</label>
+                            <div class="inner-addon left-addon">
+                                <input type="text" class="form-control input-form" name="nom" required="required"/>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-xs-12">
+                            <label>Sexe</label>
+                            <div class="inner-addon left-addon" style="margin-top: 15px;margin-bottom: 16px;">
+                                <select class="" name="sexe">
+                                    <option data-target="">Choisi votre Sexe</option>
+                                    <option data-target="1" value="1">Homme</option>
+                                    <option data-target="0" value="0">Femme</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-xs-12">
+                            <label>Couleur</label>
+                            <div class="inner-addon left-addon" style="margin-top: 15px;margin-bottom: 16px;">
+                                <select class="" name="couleur">
+                                    <option value="">Couleur</option>
+                                    <option value="Amazone">Amazone</option>
+                                    <option value="Ambre (Honey)">Ambre (Honey)</option>
+                                    <option value="Aquamarine">Aquamarine</option>
+                                    <option value="Bleu">Bleu</option>
+                                    <option value="Bleu Azur">Bleu Azur</option>
+                                    <option value="Bleu Brillant">Bleu Brillant</option>
+                                    <option value="Bleu Passion">Bleu Passion</option>
+                                    <option value="Cannelle">Cannelle</option>
+                                    <option value="Caramel">Caramel</option>
+                                    <option value="Dark Hazel">Dark Hazel</option>
+                                    <option value="Emerald">Emerald</option>
+                                    <option value="Gris">Gris</option>
+                                    <option value="Gris Etincelant">Gris Etincelant</option>
+                                    <option value="Gris Perle">Gris Perle</option>
+                                    <option value="India">India</option>
+                                    <option value="Indigo">Indigo</option>
+                                    <option value="Jade">Jade</option>
+                                    <option value="Noisette">Noisette</option>
+                                    <option value="Pacific">Pacific</option>
+                                    <option value="Platinium">Platinium</option>
+                                    <option value="Saphir">Saphir</option>
+                                    <option value="Topaz">Topaz</option>
+                                    <option value="Turquoise">Turquoise</option>
+                                    <option value="Vert">Vert</option>
+                                    <option value="Vert Amande">Vert Amande</option>
+                                    <option value="Vert Emeraude">Vert Emeraude</option>
+                                    <option value="Violet">Violet</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-xs-12">
+                            <label>Model</label>
+                            <div class="inner-addon left-addon" style="margin-top: 15px;margin-bottom: 16px;">
+                                <select class="categorie-menus-add" name="modele">
+                                    <option data-target="" data-lien="">Modéle</option>
+                                    <option data-target="Progressif progressif de 1 jour par voie ophtalmique" data-lien="">Progressif progressif de 1 jour par voie ophtalmique</option>
+                                    <option data-target="Air Optix Aqua Multifocal" data-lien="">Air Optix Aqua Multifocal</option>
+                                    <option data-target="Biofinity Multifocal">Biofinity Multifocal</option>
+                                    <option data-target="Proclear Multifocal" data-lien="">Proclear Multifocal</option>
+                                    <option data-target="Acuvue Bifocal" data-lien="">Acuvue Bifocal</option>
+                                    <option data-target="Ophtamic HR" data-lien="">Ophtamic HR</option>
+                                    <option data-target="PureVision Multifocal" data-lien="">PureVision Multifocal</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-xs-12">
+                            <label>Marque</label>
+                            <div class="inner-addon left-addon" style="margin-top: 15px;margin-bottom: 16px;">
+                                <select class="" name="marque">
+                                    <option value="">Choisi La Marque</option>
+                                    <option value="Acuvue">Acuvue</option>
+                                    <option value="Air Optix">Air Optix</option>
+                                    <option value="Bio Air">Bio Air</option>
+                                    <option value="Biofinity">Biofinity</option>
+                                    <option value="Biomedics">Biomedics</option>
+                                    <option value="Biotrue">Biotrue</option>
+                                    <option value="Clariti">Clariti</option>
+                                    <option value="Dailies">Dailies</option>
+                                    <option value="Freshlook">Freshlook</option>
+                                    <option value="Miru">Miru</option>
+                                    <option value="MyDay">MyDay</option>
+                                    <option value="Premio">Premio</option>
+                                    <option value="Proclear">Proclear</option>
+                                    <option value="Pure Vision">Pure Vision</option>
+                                    <option value="Soflens">Soflens</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-xs-12">
+                            <label>Forme</label>
+                            <div class="inner-addon left-addon" style="margin-top: 15px;margin-bottom: 16px;">
+                                <select class="" name="forme">
+                                    <option data-target="">Forme</option>
+                                    <option data-target="lentilles convergentes">lentilles convergentes</option>
+                                    <option data-target="lentilles divergentes">lentilles divergentes</option>
+                                </select>
+                            </div>
+                            <label>Stock</label>
+                            <input type="number" class="form-control input-form" name="quantite" required="required"/>
+                            <label>Photo</label>
+                            <div class="inner-addon left-addon">
+                                <input type="file" class="form-control input-form" name="photo" required="required"/>
+                            </div>
+                            <label>Prix</label>
+                            <div class="inner-addon left-addon">
+                                <input type="text" class="form-control input-form" name="title" required="required"/>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-xs-12">
+                            <label>Description</label>
+                            <textarea class="form-control ckeditor" id="editeur" name="editeur" rows="10" required="required"></textarea>
+                        </div>
+                        <div class="col-sm-6 col-xs-12">
+                            <label>Périodicité</label>
+                            <div class="inner-addon left-addon" style="margin-top: 15px;margin-bottom: 16px;">
+                                <select class="categorie-menus-add" name="periodicite">
+                                    <option value="">Périodicité</option>
+                                    <option value="Journalière">Journalière</option>
+                                    <option value="Bi-mensuelle">Bi-mensuelle</option>
+                                    <option value="Mensuelle">Mensuelle</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-xs-12">
+                            <label>Laboratoire</label>
+                            <div class="inner-addon left-addon" style="margin-top: 15px;margin-bottom: 16px;">
+                                <select class="categorie-menus-add" name="labo">
+                                    <option value="">Laboratoire</option>
+                                    <option value="Alcon">Alcon</option>
+                                    <option value="Bausch &amp; Lomb">Bausch &amp; Lomb</option>
+                                    <option value="CooperVision">CooperVision</option>
+                                    <option value="Johnson &amp; Johnson">Johnson &amp; Johnson</option>
+                                    <option value="Menicon">Menicon</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-xs-12">
+                            <label>Conditionnement</label>
+                            <div class="inner-addon left-addon" style="margin-top: 15px;margin-bottom: 16px;">
+                                <select class="" name="condition">
+                                    <option value="">Conditionnement</option>
+                                    <option value="Boîte de 12">Boîte de 12</option>
+                                    <option value="Boîte de 24">Boîte de 24</option>
+                                    <option value="Boîte de 2">Boîte de 2</option>
+                                    <option value="Boîte de 6">Boîte de 6</option>
+                                    <option value="Boîte de 10">Boîte de 10</option>
+                                    <option value="Boîte de 30">Boîte de 30</option>
+                                    <option value="Boîte de 90">Boîte de 90</option>
+                                    <option value="Boîte de 180">Boîte de 180</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-xs-12">
+                            <label>Type de correction</label>
+                            <div class="inner-addon left-addon" style="margin-top: 15px;margin-bottom: 16px;">
+                                <select class="" name="correction">
+                                    <option value="">Type de correction</option>
+                                    <option value="Unifocal">Unifocal</option>
+                                    <option value="Unifocal">Progressif</option>
+                                    <option value="Torique">Torique</option>
+                                    <option value="Sans correction">Sans correction</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-xs-12">
+                            <label>Matiere</label>
+                            <div class="inner-addon left-addon" style="margin-top: 15px;margin-bottom: 16px;">
+                                <select class="" name="matiere">
+                                    <option value="">Matière</option>
+                                    <option value="Alphafilcon A">Alphafilcon A</option>
+                                    <option value="Balafilcon A">Balafilcon A</option>
+                                    <option value="Comfilcon A">Comfilcon A</option>
+                                    <option value="Delefilcon A">Delefilcon A</option>
+                                    <option value=">Etafilcon A">Etafilcon A</option>
+                                    <option value="Hilafilcon B">Hilafilcon B</option>
+                                    <option value="Hioxifilcon A">Hioxifilcon A</option>
+                                    <option value="Lotrafilcon A">Lotrafilcon A</option>
+                                    <option value="Lotrafilcon B">Lotrafilcon B</option>
+                                    <option value="Narafilcon A">Narafilcon A</option>
+                                    <option value="Nelfilcon A">Nelfilcon A</option>
+                                    <option value="Nesofilcon A">Nesofilcon A</option>
+                                    <option value="Ocufilcon B">Ocufilcon B</option>
+                                    <option value="Ocufilcon D">Ocufilcon D</option>
+                                    <option value="Omafilcon A">Omafilcon A</option>
+                                    <option value="Phemfilcon A">Phemfilcon A</option>
+                                    <option value="Polymacon">Polymacon</option>
+                                    <option value="Senofilcon A">Senofilcon A</option>
+                                    <option value="Senofilcon C">Senofilcon C</option>
+                                    <option value="Silicone Hydrogel">Silicone Hydrogel</option>
+                                    <option value="Stenfilcon A">Stenfilcon A</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-2 col-sm-offset-5">
+                            <input type="hidden" value="lentille" name="categorie"/>
+                            <input type="hidden" value="{{ attributes.quoiqui.id }}" name="id"/>
+                            <input type="submit" class="btn btn-danger valide-btn" value="Enregistrer"/>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--modal de modifier une annonce -->
+    <div class="modal fade edit-lentilles" role="dialog" id="edit-lentilles">
+        <div class="modal-dialog modal-md">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title"><span class="nomProduit"></span></h4>
+                </div>
+                <div class="modal-body">
+                    <form action="{{ path('Opticien_annonce_update') }}" class="clearfix" method="post" enctype="multipart/form-data">
+                        <div class="col-sm-6 col-xs-12">
+                            <label>Réference</label>
+                            <div class="inner-addon left-addon">
+                                <input type="text" class="form-control input-form ref-lentille-form" name="reference" required="required"/>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-xs-12">
+                            <label>Nom</label>
+                            <div class="inner-addon left-addon">
+                                <input type="text" class="form-control input-form nom-lentille-form" name="nom" required="required"/>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-xs-12">
+                            <label>Sexe</label>
+                            <div class="inner-addon left-addon" style="margin-top: 15px;margin-bottom: 16px;">
+                                <select class="sex-lentille-form" name="sex">
+                                    <option data-target="">Sexe</option>
+                                    <option data-target="1" value="1">Homme</option>
+                                    <option data-target="0" value="0">Femme</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-xs-12">
+                            <label>Couleur</label>
+                            <div class="inner-addon left-addon" style="margin-top: 15px;margin-bottom: 16px;">
+                                <select class="couleur-lentille-form" name="couleur">
+                                    <option value="">Couleur</option>
+                                    <option value="Amazone">Amazone</option>
+                                    <option value="Ambre (Honey)">Ambre (Honey)</option>
+                                    <option value="Aquamarine">Aquamarine</option>
+                                    <option value="Bleu">Bleu</option>
+                                    <option value="Bleu Azur">Bleu Azur</option>
+                                    <option value="Bleu Brillant">Bleu Brillant</option>
+                                    <option value="Bleu Passion">Bleu Passion</option>
+                                    <option value="Cannelle">Cannelle</option>
+                                    <option value="Caramel">Caramel</option>
+                                    <option value="Dark Hazel">Dark Hazel</option>
+                                    <option value="Emerald">Emerald</option>
+                                    <option value="Gris">Gris</option>
+                                    <option value="Gris Etincelant">Gris Etincelant</option>
+                                    <option value="Gris Perle">Gris Perle</option>
+                                    <option value="India">India</option>
+                                    <option value="Indigo">Indigo</option>
+                                    <option value="Jade">Jade</option>
+                                    <option value="Noisette">Noisette</option>
+                                    <option value="Pacific">Pacific</option>
+                                    <option value="Platinium">Platinium</option>
+                                    <option value="Saphir">Saphir</option>
+                                    <option value="Topaz">Topaz</option>
+                                    <option value="Turquoise">Turquoise</option>
+                                    <option value="Vert">Vert</option>
+                                    <option value="Vert Amande">Vert Amande</option>
+                                    <option value="Vert Emeraude">Vert Emeraude</option>
+                                    <option value="Violet">Violet</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-xs-12">
+                            <label>Model</label>
+                            <div class="inner-addon left-addon" style="margin-top: 15px;margin-bottom: 16px;">
+                                <select class="modele-lentille-form" name="modele">
+                                    <option data-target="modele-lentille-form" data-lien="">Modéle</option>
+                                    <option data-target="Progressif progressif de 1 jour par voie ophtalmique" data-lien="">Progressif progressif de 1 jour par voie ophtalmique</option>
+                                    <option data-target="Air Optix Aqua Multifocal" data-lien="">Air Optix Aqua Multifocal</option>
+                                    <option data-target="Biofinity Multifocal">Biofinity Multifocal</option>
+                                    <option data-target="Proclear Multifocal" data-lien="">Proclear Multifocal</option>
+                                    <option data-target="Acuvue Bifocal" data-lien="">Acuvue Bifocal</option>
+                                    <option data-target="Ophtamic HR" data-lien="">Ophtamic HR</option>
+                                    <option data-target="PureVision Multifocal" data-lien="">PureVision Multifocal</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-xs-12">
+                            <label>Marque</label>
+                            <div class="inner-addon left-addon" style="margin-top: 15px;margin-bottom: 16px;">
+                                <select class="marque-lentille-form" name="marque">
+                                    <option value="">Choisi La Marque</option>
+                                    <option value="Acuvue">Acuvue</option>
+                                    <option value="Air Optix">Air Optix</option>
+                                    <option value="Bio Air">Bio Air</option>
+                                    <option value="Biofinity">Biofinity</option>
+                                    <option value="Biomedics">Biomedics</option>
+                                    <option value="Biotrue">Biotrue</option>
+                                    <option value="Clariti">Clariti</option>
+                                    <option value="Dailies">Dailies</option>
+                                    <option value="Freshlook">Freshlook</option>
+                                    <option value="Miru">Miru</option>
+                                    <option value="MyDay">MyDay</option>
+                                    <option value="Premio">Premio</option>
+                                    <option value="Proclear">Proclear</option>
+                                    <option value="Pure Vision">Pure Vision</option>
+                                    <option value="Soflens">Soflens</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-xs-12">
+                            <label>Forme</label>
+                            <div class="inner-addon left-addon" style="margin-top: 15px;margin-bottom: 16px;">
+                                <select class="forme-lentille-form" name="forme">
+                                    <option data-target="">Forme</option>
+                                    <option data-target="lentilles convergentes">lentilles convergentes</option>
+                                    <option data-target="lentilles divergentes">lentilles divergentes</option>
+                                </select>
+                            </div>
+                            <label>Stock</label>
+                            <input type="number" class="form-control input-form stock-lentille-form" name="quantite" required="required"/>
+                            <label>Photo</label>
+                            <div class="inner-addon left-addon">
+                                <input type="file" class="form-control input-form" name="photo"/>
+                            </div>
+                            <label>Prix</label>
+                            <div class="inner-addon left-addon">
+                                <input type="text" class="form-control input-form prix-lentille-form" name="prix" required="required"/>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-xs-12">
+                            <label>Description</label>
+                            <textarea class="form-control ckeditor" id="description-lentille" name="editeur" rows="10" required="required"></textarea>
+                        </div>
+                        <div class="col-sm-6 col-xs-12">
+                            <label>Périodicité</label>
+                            <div class="inner-addon left-addon" style="margin-top: 15px;margin-bottom: 16px;">
+                                <select class="periodicite-lentille-form" name="periodicite">
+                                    <option value="">Périodicité</option>
+                                    <option value="Journalière">Journalière</option>
+                                    <option value="Bi-mensuelle">Bi-mensuelle</option>
+                                    <option value="Mensuelle">Mensuelle</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-xs-12">
+                            <label>Laboratoire</label>
+                            <div class="inner-addon left-addon" style="margin-top: 15px;margin-bottom: 16px;">
+                                <select class="labo-lentille-form" name="labo">
+                                    <option value="">Laboratoire</option>
+                                    <option value="Alcon">Alcon</option>
+                                    <option value="Bausch &amp; Lomb">Bausch &amp; Lomb</option>
+                                    <option value="CooperVision">CooperVision</option>
+                                    <option value="Johnson &amp; Johnson">Johnson &amp; Johnson</option>
+                                    <option value="Menicon">Menicon</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-xs-12">
+                            <label>Conditionnement</label>
+                            <div class="inner-addon left-addon" style="margin-top: 15px;margin-bottom: 16px;">
+                                <select class="boite-lentille-form" name="condition">
+                                    <option value="">Conditionnement</option>
+                                    <option value="Boîte de 12">Boîte de 12</option>
+                                    <option value="Boîte de 24">Boîte de 24</option>
+                                    <option value="Boîte de 2">Boîte de 2</option>
+                                    <option value="Boîte de 6">Boîte de 6</option>
+                                    <option value="Boîte de 10">Boîte de 10</option>
+                                    <option value="Boîte de 30">Boîte de 30</option>
+                                    <option value="Boîte de 90">Boîte de 90</option>
+                                    <option value="Boîte de 180">Boîte de 180</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-xs-12">
+                            <label>Type de correction</label>
+                            <div class="inner-addon left-addon" style="margin-top: 15px;margin-bottom: 16px;">
+                                <select class="correction-lentille-form" name="correction">
+                                    <option value="">Type de correction</option>
+                                    <option value="Unifocal">Unifocal</option>
+                                    <option value="Unifocal">Progressif</option>
+                                    <option value="Torique">Torique</option>
+                                    <option value="Sans correction">Sans correction</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-xs-12">
+                            <label>Matiere</label>
+                            <div class="inner-addon left-addon" style="margin-top: 15px;margin-bottom: 16px;">
+                                <select class="matiere-lentille-form" name="matiere">
+                                    <option value="">Matière</option>
+                                    <option value="Alphafilcon A">Alphafilcon A</option>
+                                    <option value="Balafilcon A">Balafilcon A</option>
+                                    <option value="Comfilcon A">Comfilcon A</option>
+                                    <option value="Delefilcon A">Delefilcon A</option>
+                                    <option value=">Etafilcon A">Etafilcon A</option>
+                                    <option value="Hilafilcon B">Hilafilcon B</option>
+                                    <option value="Hioxifilcon A">Hioxifilcon A</option>
+                                    <option value="Lotrafilcon A">Lotrafilcon A</option>
+                                    <option value="Lotrafilcon B">Lotrafilcon B</option>
+                                    <option value="Narafilcon A">Narafilcon A</option>
+                                    <option value="Nelfilcon A">Nelfilcon A</option>
+                                    <option value="Nesofilcon A">Nesofilcon A</option>
+                                    <option value="Ocufilcon B">Ocufilcon B</option>
+                                    <option value="Ocufilcon D">Ocufilcon D</option>
+                                    <option value="Omafilcon A">Omafilcon A</option>
+                                    <option value="Phemfilcon A">Phemfilcon A</option>
+                                    <option value="Polymacon">Polymacon</option>
+                                    <option value="Senofilcon A">Senofilcon A</option>
+                                    <option value="Senofilcon C">Senofilcon C</option>
+                                    <option value="Silicone Hydrogel">Silicone Hydrogel</option>
+                                    <option value="Stenfilcon A">Stenfilcon A</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-2 col-sm-offset-5">
+                            <input type="hidden" value="lentille" name="categorie"/>
+                            <input type="hidden" value="" name="id" class="id-lentille-form"/>
+                            <input type="hidden" value="{{ attributes.quoiqui.id }}" name="idQ"/>
+                            <input type="submit" class="btn btn-danger valide-btn" value="Enregistrer"/>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end modals Lentille-->
+
+    <!-- modals Lunettes Soleil-->
+    <!-- modal de lister les annonces -->
+    <div class="modal fade liste-soleil" role="dialog" aria-labelledby="myLargeModalLabel">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Liste des Lunettes Soleil</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="pull-right">
+                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#addSoleil">
+                            Ajouter une Lentille
+                        </button>
+                    </div>
+                    <table class="table table-responsive table-hover table-striped dataTable" style="width: 100%;"
+                           id="service-tables">
+                        <thead>
+                        <tr>
+                            <th style="border:none;border-top-left-radius:5px;">Nom</th>
+                            <th style="border:none">Réferene</th>
+                            <th style="border:none">Sexe</th>
+                            <th style="border:none">Description</th>
+                            <th style="border:none">Prix</th>
+                            <th style="border:none">Model</th>
+                            <th style="border:none">Indice</th>
+                            <th style="border:none">Marqaue</th>
+                            <th style="border:none">Forme</th>
+                            <th style="border:none">Couleur</th>
+                            <th style="border:none">Stock</th>
+                            <th style="border:none;border-top-right-radius:5px;" class="text-center">Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for p in soleil %}
+                            <tr data-prod="{{ loop.index }}">
+                                <td>{{ p.nom }}</td>
+                                <td>{{ p.reference }}</td>
+                                <td>{% if p.sex == 1 %}Homme{% else %} Femme {% endif %}</td>
+                                <td>{{ p.description[:50]|raw }}</td>
+                                <td>{{ p.price }}</td>
+                                <td>{{ p.model }}</td>
+                                <td>{{ p.indice }}</td>
+                                <td>{{ p.marque }}</td>
+                                <td>{{ p.forme }}</td>
+                                <td>{{ p.color }}</td>
+                                <td>{{ p.quantity }}</td>
+                                <td>
+                                    <div class="btn-group pull-right">
+                                        <button type="button" class="btn btn-default icon-style-modifier edit-annonce"
+                                                data-toggle="modal" data-target="#edit-soleil" data-nom="{{ p.nom }}"
+                                                data-id="{{ p.id }}"
+                                                data-lien="{{ path('Opticien_annonce_edit',{'id':p.id}) }}">
+                                            <span class="glyphicon glyphicon-pencil"></span>
+                                        </button>
+                                        <button type="button" class="btn btn-danger icon-annonce-supprimer"
+                                                data-nom="{{ p.nom }}"
+                                                data-id="{{ p.id }}"
+                                                data-lien="{{ path('Opticien_annonce_remove',{'id':p.id}) }}"
+                                                data-loop="{{ loop.index }}"><span class="glyphicon glyphicon-remove"></span>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- modal d'ajout les Lunettes Soleil -->
+    <div id="addSoleil" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-md">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Ajouter une Lentille Soleil</h4>
+                </div>
+                <div class="modal-body">
+                    <form action="{{ path('Opticien_annonce_add') }}" class="clearfix" method="post" enctype="multipart/form-data">
+                        <div class="col-sm-6 col-xs-12">
+                            <label>Réference</label>
+                            <div class="inner-addon left-addon">
+                                <input type="text" class="form-control input-form ref-lentille-form" name="reference" required="required"/>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-xs-12">
+                            <label>Nom</label>
+                            <div class="inner-addon left-addon">
+                                <input type="text" class="form-control input-form nom-lentille-form" name="nom" required="required"/>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-xs-12">
+                            <label>Sexe</label>
+                            <div class="inner-addon left-addon" style="margin-top: 15px;margin-bottom: 16px;">
+                                <select class="sex-lentille-form" name="sex">
+                                    <option value="">Sexe</option>
+                                    <option value="1">Homme</option>
+                                    <option value="2">Femme</option>
+                                    <option value="3">Enfant</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-xs-12">
+                            <label>Couleur</label>
+                            <div class="inner-addon left-addon" style="margin-top: 15px;margin-bottom: 16px;">
+                                <select class="" name="couleur">
+                                    <option value="">Couleur</option>
+                                    <option value="Argent">Argent</option>
+                                    <option value="Bleu">Bleu</option>
+                                    <option value="Bleu / Gris">Bleu / Gris</option>
+                                    <option value="Bleu perle">Bleu perle</option>
+                                    <option value="Bleu Pétrole">Bleu Pétrole</option>
+                                    <option value="Blush Crystal">Blush Crystal</option>
+                                    <option value="Bordeaux">Bordeaux</option>
+                                    <option value="Bordeaux perle">Bordeaux perle</option>
+                                    <option value="Brun">Brun</option>
+                                    <option value="Brun doré">Brun doré</option>
+                                    <option value="Brun Ecaille">Brun Ecaille</option>
+                                    <option value="Brun Griffon">Brun Griffon</option>
+                                    <option value="Cognac">Cognac</option>
+                                    <option value="Cristal Rosélite">Cristal Rosélite</option>
+                                    <option value="Denim">Denim</option>
+                                    <option value="Doré">Doré</option>
+                                    <option value="Ecaille">Ecaille</option>
+                                    <option value="Ecaille bleue">Ecaille bleue</option>
+                                    <option value="Ecaille foncée">Ecaille foncée</option>
+                                    <option value="Ecaille olive">Ecaille olive</option>
+                                    <option value="Ecaille rouge">Ecaille rouge</option>
+                                    <option value="Graphite">Graphite</option>
+                                    <option value="Gris">Gris</option>
+                                    <option value="Gris Zèbre">Gris Zèbre</option>
+                                    <option value="Gun">Gun</option>
+                                    <option value="Havane">Havane</option>
+                                    <option value="Honey Crystal">Honey Crystal</option>
+                                    <option value="Kaki">Kaki</option>
+                                    <option value="Marron">Marron</option>
+                                    <option value="Mauve">Mauve</option>
+                                    <option value="Noir">Noir</option>
+                                    <option value="Noir / Jaune">Noir / Jaune</option>
+                                    <option value="Prune">Prune</option>
+                                    <option value="Rose">Rose</option>
+                                    <option value="Rouge">Rouge</option>
+                                    <option value="Vert foncé">Vert foncé</option>
+                                    <option value="Violet">Violet</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-xs-12">
+                            <label>Marque</label>
+                            <div class="inner-addon left-addon" style="margin-top: 15px;margin-bottom: 16px;">
+                                <select class="" name="marque">
+                                    <option>Marque</option>
+                                    <option value="Acuvue">Acuvue</option>
+                                    <option value="Air Optix">Air Optix</option>
+                                    <option value="Bio Air">Bio Air</option>
+                                    <option value="Biofinity">Biofinity</option>
+                                    <option value="Biomedics">Biomedics</option>
+                                    <option value="Biotrue">Biotrue</option>
+                                    <option value="Clariti">Clariti</option>
+                                    <option value="Dailies">Dailies</option>
+                                    <option value="Freshlook">Freshlook</option>
+                                    <option value="Miru">Miru</option>
+                                    <option value="MyDay">MyDay</option>
+                                    <option value="Premio">Premio</option>
+                                    <option value="Proclear">Proclear</option>
+                                    <option value="Pure Vision">Pure Vision</option>
+                                    <option value="Soflens">Soflens</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-xs-12">
+                            <label>Forme</label>
+                            <div class="inner-addon left-addon" style="margin-top: 15px;margin-bottom: 16px;">
+                                <select class="" name="forme">
+                                    <option value="">Forme</option>
+                                    <option value="Angulaire">Angulaire</option>
+                                    <option value="Arrondie">Arrondie</option>
+                                    <option value="Aviateur">Aviateur</option>
+                                    <option value="Carré">Carré</option>
+                                    <option value="Couture">Couture</option>
+                                    <option value="Ovale">Ovale</option>
+                                    <option value="Pantos">Pantos</option>
+                                    <option value="Papillonnante">Papillonnante</option>
+                                    <option value="Pilote">Pilote</option>
+                                    <option value="Rectangle">Rectangle</option>
+                                    <option value="Rond">Rond</option>
+                                    <option value="Sport">Sport</option>
+                                    <option value="Vintage">Vintage</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-xs-12">
+                            <label>Indice</label>
+                            <div class="inner-addon left-addon" style="margin-top: 15px;margin-bottom: 16px;">
+                                <select class="" name="indice">
+                                    <option value="">indice</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                </select>
+                            </div>
+                            <label>Stock</label>
+                            <input type="number" class="form-control input-form stock-lentille-form" name="stock" required="required"/>
+                            <label>Photo</label>
+                            <div class="inner-addon left-addon">
+                                <input type="file" class="form-control input-form" name="photo" required="required"/>
+                            </div>
+                            <label>Prix</label>
+                            <div class="inner-addon left-addon">
+                                <input type="text" class="form-control input-form prix-lentille-form" name="prix" required="required"/>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-xs-12">
+                            <label>Description</label>
+                            <textarea class="form-control ckeditor" id="soleil-description" name="editeur" rows="10"
+                                      required="required"></textarea>
+                        </div>
+                        <div class="col-xs-12 col-sm-2 col-sm-offset-5">
+                            <input type="hidden" value="{{ attributes.quoiqui.id }}" name="id"/>
+                            <input type="hidden" value="lunette soleil" name="categorie"/>
+                            <input type="submit" class="btn btn-danger valide-btn" value="Enregistrer"/>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--modal de modifier une annonce -->
+    <div class="modal fade edit-soleil" role="dialog" id="edit-soleil">
+        <div class="modal-dialog modal-md">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title"><span class="nomProduit"></span></h4>
+                </div>
+                <div class="modal-body">
+                    <form action="{{ path('Opticien_annonce_update') }}" class="clearfix" method="post" enctype="multipart/form-data">
+                        <div class="col-sm-6 col-xs-12">
+                            <label>Réference</label>
+                            <div class="inner-addon left-addon">
+                                <input type="text" class="form-control input-form ref-lentille-form" name="reference" required="required"/>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-xs-12">
+                            <label>Nom</label>
+                            <div class="inner-addon left-addon">
+                                <input type="text" class="form-control input-form ref-lentille-form" name="nom" required="required"/>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-xs-12">
+                            <label>Sexe</label>
+                            <div class="inner-addon left-addon" style="margin-top: 15px;margin-bottom: 16px;">
+                                <select class="sex-lentille-form" name="sex">
+                                    <option value="">Sexe</option>
+                                    <option value="1">Homme</option>
+                                    <option value="2">Femme</option>
+                                    <option value="3">Enfant</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-xs-12">
+                            <label>Couleur</label>
+                            <div class="inner-addon left-addon" style="margin-top: 15px;margin-bottom: 16px;">
+                                <select class="couleur-lentille-form" name="couleur">
+                                    <option value="">Couleur</option>
+                                    <option value="Argent">Argent</option>
+                                    <option value="Bleu">Bleu</option>
+                                    <option value="Bleu / Gris">Bleu / Gris</option>
+                                    <option value="Bleu perle">Bleu perle</option>
+                                    <option value="Bleu Pétrole">Bleu Pétrole</option>
+                                    <option value="Blush Crystal">Blush Crystal</option>
+                                    <option value="Bordeaux">Bordeaux</option>
+                                    <option value="Bordeaux perle">Bordeaux perle</option>
+                                    <option value="Brun">Brun</option>
+                                    <option value="Brun doré">Brun doré</option>
+                                    <option value="Brun Ecaille">Brun Ecaille</option>
+                                    <option value="Brun Griffon">Brun Griffon</option>
+                                    <option value="Cognac">Cognac</option>
+                                    <option value="Cristal Rosélite">Cristal Rosélite</option>
+                                    <option value="Denim">Denim</option>
+                                    <option value="Doré">Doré</option>
+                                    <option value="Ecaille">Ecaille</option>
+                                    <option value="Ecaille bleue">Ecaille bleue</option>
+                                    <option value="Ecaille foncée">Ecaille foncée</option>
+                                    <option value="Ecaille olive">Ecaille olive</option>
+                                    <option value="Ecaille rouge">Ecaille rouge</option>
+                                    <option value="Graphite">Graphite</option>
+                                    <option value="Gris">Gris</option>
+                                    <option value="Gris Zèbre">Gris Zèbre</option>
+                                    <option value="Gun">Gun</option>
+                                    <option value="Havane">Havane</option>
+                                    <option value="Honey Crystal">Honey Crystal</option>
+                                    <option value="Kaki">Kaki</option>
+                                    <option value="Marron">Marron</option>
+                                    <option value="Mauve">Mauve</option>
+                                    <option value="Noir">Noir</option>
+                                    <option value="Noir / Jaune">Noir / Jaune</option>
+                                    <option value="Prune">Prune</option>
+                                    <option value="Rose">Rose</option>
+                                    <option value="Rouge">Rouge</option>
+                                    <option value="Vert foncé">Vert foncé</option>
+                                    <option value="Violet">Violet</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-xs-12">
+                            <label>Marque</label>
+                            <div class="inner-addon left-addon" style="margin-top: 15px;margin-bottom: 16px;">
+                                <select class="marque-lentille-form" name="marque">
+                                    <option>Marque</option>
+                                    <option value="Acuvue">Acuvue</option>
+                                    <option value="Air Optix">Air Optix</option>
+                                    <option value="Bio Air">Bio Air</option>
+                                    <option value="Biofinity">Biofinity</option>
+                                    <option value="Biomedics">Biomedics</option>
+                                    <option value="Biotrue">Biotrue</option>
+                                    <option value="Clariti">Clariti</option>
+                                    <option value="Dailies">Dailies</option>
+                                    <option value="Freshlook">Freshlook</option>
+                                    <option value="Miru">Miru</option>
+                                    <option value="MyDay">MyDay</option>
+                                    <option value="Premio">Premio</option>
+                                    <option value="Proclear">Proclear</option>
+                                    <option value="Pure Vision">Pure Vision</option>
+                                    <option value="Soflens">Soflens</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-xs-12">
+                            <label>Forme</label>
+                            <div class="inner-addon left-addon" style="margin-top: 15px;margin-bottom: 16px;">
+                                <select class="forme-lentille-form" name="forme">
+                                    <option value="">Forme</option>
+                                    <option value="Angulaire">Angulaire</option>
+                                    <option value="Arrondie">Arrondie</option>
+                                    <option value="Aviateur">Aviateur</option>
+                                    <option value="Carré">Carré</option>
+                                    <option value="Couture">Couture</option>
+                                    <option value="Ovale">Ovale</option>
+                                    <option value="Pantos">Pantos</option>
+                                    <option value="Papillonnante">Papillonnante</option>
+                                    <option value="Pilote">Pilote</option>
+                                    <option value="Rectangle">Rectangle</option>
+                                    <option value="Rond">Rond</option>
+                                    <option value="Sport">Sport</option>
+                                    <option value="Vintage">Vintage</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-xs-12">
+                            <label>Indice</label>
+                            <div class="inner-addon left-addon" style="margin-top: 15px;margin-bottom: 16px;">
+                                <select class="indice-lentille-form" name="indice">
+                                    <option value="">indice</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                </select>
+                            </div>
+                            <label>Stock</label>
+                            <input type="number" class="form-control input-form stock-lentille-form" name="quantite" required="required"/>
+                            <label>Photo</label>
+                            <div class="inner-addon left-addon">
+                                <input type="file" class="form-control input-form" name="photo"/>
+                            </div>
+                            <label>Prix</label>
+                            <div class="inner-addon left-addon">
+                                <input type="text" class="form-control input-form prix-lentille-form" name="prix" required="required"/>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-xs-12">
+                            <label>Description</label>
+                            <textarea class="form-control ckeditor" id="description-soleil" name="editeur" rows="10" required="required"></textarea>
+                        </div>
+                        <div class="col-xs-12 col-sm-2 col-sm-offset-5">
+                            <input type="hidden" value="{{ attributes.quoiqui.id }}" name="id"/>
+                            <input type="hidden" value="" name="id" class="id-lentille-form"/>
+                            <input type="hidden" value="lunette soleil" name="categorie"/>
+                            <input type="submit" class="btn btn-danger valide-btn" value="Enregistrer"/>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end modals Lentille-->
+
+    <!-- modals Lunettes de vue-->
+    <!-- modal de lister les annonces -->
+    <div class="modal fade liste-vue" role="dialog" aria-labelledby="myLargeModalLabel">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Liste des Lunettes de Vue</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="pull-right">
+                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#addVue">
+                            Ajouter une Lunette de Vue
+                        </button>
+                    </div>
+                    <table class="table table-responsive table-hover table-striped dataTable" style="width: 100%;"
+                           id="service-tables">
+                        <thead>
+                        <tr>
+                            <th style="border:none;border-top-left-radius:5px;">Nom</th>
+                            <th style="border:none">Réferene</th>
+                            <th style="border:none">Sexe</th>
+                            <th style="border:none">Description</th>
+                            <th style="border:none">Prix</th>
+                            <th style="border:none">Model</th>
+                            <th style="border:none">Marqaue</th>
+                            <th style="border:none">Forme</th>
+                            <th style="border:none">Couleur</th>
+                            <th style="border:none">Stock</th>
+                            <th style="border:none;border-top-right-radius:5px;" class="text-center">Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for p in vue %}
+                            <tr data-prod="{{ loop.index }}">
+                                <td>{{ p.nom }}</td>
+                                <td>{{ p.reference }}</td>
+                                <td>{% if p.sex == 1 %}Homme{% else %} Femme {% endif %}</td>
+                                <td>{{ p.description[:50]|raw }}</td>
+                                <td>{{ p.price }}</td>
+                                <td>{{ p.model }}</td>
+                                <td>{{ p.marque }}</td>
+                                <td>{{ p.forme }}</td>
+                                <td>{{ p.color }}</td>
+                                <td>{{ p.quantity }}</td>
+                                <td>
+                                    <div class="btn-group pull-right">
+                                        <button type="button" class="btn btn-default icon-style-modifier edit-annonce"
+                                                data-toggle="modal" data-target="#edit-vue" data-nom="{{ p.nom }}"
+                                                data-id="{{ p.id }}"
+                                                data-lien="{{ path('Opticien_annonce_edit',{'id':p.id}) }}"><span class="glyphicon glyphicon-pencil"></span>
+                                        </button>
+                                        <button type="button" class="btn btn-danger icon-annonce-supprimer"
+                                                data-nom="{{ p.nom }}"
+                                                data-id="{{ p.id }}"
+                                                data-lien="{{ path('Opticien_annonce_remove',{'id':p.id}) }}"
+                                                data-loop="{{ loop.index }}"><span class="glyphicon glyphicon-remove"></span>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- modal d'ajout Lunettes de vue -->
+    <div id="addVue" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-md">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Ajouter une Lunette de Vue</h4>
+                </div>
+                <div class="modal-body">
+                    <form action="{{ path('Opticien_annonce_add') }}" class="clearfix" method="post" enctype="multipart/form-data">
+                        <div class="col-sm-6 col-xs-12">
+                            <label>Réference</label>
+                            <div class="inner-addon left-addon">
+                                <input type="text" class="form-control input-form" name="reference" required="required"/>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-xs-12">
+                            <label>Nom</label>
+                            <div class="inner-addon left-addon">
+                                <input type="text" class="form-control input-form" name="nom" required="required"/>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-xs-12">
+                            <label>Sexe</label>
+                            <div class="inner-addon left-addon" style="margin-top: 15px;margin-bottom: 16px;">
+                                <select class="selectpicker" name="sex">
+                                    <option value="">Sexe</option>
+                                    <option value="0">Homme</option>
+                                    <option value="1">Femme</option>
+                                    <option value="2">Enfant</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-xs-12">
+                            <label>Couleur</label>
+                            <div class="inner-addon left-addon" style="margin-top: 15px;margin-bottom: 16px;">
+                                <select class="selectpicker" name="couleur">
+                                    <option value="">Couleur</option>
+                                    <option value="Bleu">Bleu</option>
+                                    <option value="Bordeaux">Bordeaux</option>
+                                    <option value="Brun">Brun</option>
+                                    <option value="Cristal">Cristal</option>
+                                    <option value="Doré">Doré</option>
+                                    <option value="Ecaille">Ecaille</option>
+                                    <option value="Fuschia">Fuschia</option>
+                                    <option value="Gris">Gris</option>
+                                    <option value="Gun">Gun</option>
+                                    <option value="Marron">Marron</option>
+                                    <option value="Noir">Noir</option>
+                                    <option value="Noir / Blanc">Noir / Blanc</option>
+                                    <option value="Or">Or</option>
+                                    <option value="Prune">Prune</option>
+                                    <option value="Rose">Rose</option>
+                                    <option value="Rouge">Rouge</option>
+                                    <option value="Vert">Vert</option>
+                                    <option value="Violet">Violet</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-xs-12">
+                            <label>Model</label>
+                            <div class="inner-addon left-addon">
+                                <input type="text" class="form-control input-form" name="modele" required="required"/>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-xs-12">
+                            <label>Marque</label>
+                            <div class="inner-addon left-addon" style="margin-top: 15px;margin-bottom: 16px;">
+                                <select class="" name="marque">
+                                    <option>Marque</option>
+                                    <option value="Acuvue">Acuvue</option>
+                                    <option value="Air Optix">Air Optix</option>
+                                    <option value="Bio Air">Bio Air</option>
+                                    <option value="Biofinity">Biofinity</option>
+                                    <option value="Biomedics">Biomedics</option>
+                                    <option value="Biotrue">Biotrue</option>
+                                    <option value="Clariti">Clariti</option>
+                                    <option value="Dailies">Dailies</option>
+                                    <option value="Freshlook">Freshlook</option>
+                                    <option value="Miru">Miru</option>
+                                    <option value="MyDay">MyDay</option>
+                                    <option value="Premio">Premio</option>
+                                    <option value="Proclear">Proclear</option>
+                                    <option value="Pure Vision">Pure Vision</option>
+                                    <option value="Soflens">Soflens</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-xs-12">
+                            <label>Forme</label>
+                            <div class="inner-addon left-addon" style="margin-top: 15px;margin-bottom: 16px;">
+                                <select class="" name="forme">
+                                    <option value="">Forme</option>
+                                    <option value="Angulaire">Angulaire</option>
+                                    <option value="Arrondie">Arrondie</option>
+                                    <option value="Aviateur">Aviateur</option>
+                                    <option value="Carré">Carré</option>
+                                    <option value="Couture">Couture</option>
+                                    <option value="Ovale">Ovale</option>
+                                    <option value="Pantos">Pantos</option>
+                                    <option value="Papillonnante">Papillonnante</option>
+                                    <option value="Pilote">Pilote</option>
+                                    <option value="Rectangle">Rectangle</option>
+                                    <option value="Rond">Rond</option>
+                                    <option value="Sport">Sport</option>
+                                    <option value="Vintage">Vintage</option>
+                                </select>
+                            </div>
+                            <label>Stock</label>
+                            <input type="number" class="form-control input-form" name="quantite" required="required"/>
+                            <label>Photo</label>
+                            <div class="inner-addon left-addon">
+                                <input type="file" class="form-control input-form" name="photo" required="required"/>
+                            </div>
+                            <label>Prix</label>
+                            <div class="inner-addon left-addon">
+                                <input type="text" class="form-control input-form" name="prix" required="required"/>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-xs-12">
+                            <label>Description</label>
+                            <textarea class="form-control ckeditor" id="editeur" name="editeur" rows="10"
+                                      required="required"></textarea>
+                        </div>
+                        <div class="col-xs-12 col-sm-2 col-sm-offset-5">
+                            <input type="hidden" value="{{ attributes.quoiqui.id }}" name="id"/>
+                            <input type="hidden" value="lunette vue" name="categorie"/>
+                            <input type="submit" class="btn btn-danger valide-btn" value="Enregistrer"/>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--modal de modifier une annonce -->
+    <div id="edit-vue" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-md">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Ajouter une Lunette de Vue</h4>
+                </div>
+                <div class="modal-body">
+                    <form action="{{ path('Opticien_annonce_update') }}" class="clearfix" method="post" enctype="multipart/form-data">
+                        <div class="col-sm-6 col-xs-12">
+                            <label>Réference</label>
+                            <div class="inner-addon left-addon">
+                                <input type="text" class="form-control input-form ref-lentille-form" name="reference" required="required"/>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-xs-12">
+                            <label>Nom</label>
+                            <div class="inner-addon left-addon">
+                                <input type="text" class="form-control input-form nom-lentille-form" name="nom" required="required"/>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-xs-12">
+                            <label>Sexe</label>
+                            <div class="inner-addon left-addon" style="margin-top: 15px;margin-bottom: 16px;">
+                                <select class="sex-lentille-form" name="sex">
+                                    <option value="">Sexe</option>
+                                    <option value="0">Homme</option>
+                                    <option value="1">Femme</option>
+                                    <option value="2">Enfant</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-xs-12">
+                            <label>Couleur</label>
+                            <div class="inner-addon left-addon" style="margin-top: 15px;margin-bottom: 16px;">
+                                <select class="couleur-lentille-form" name="couleur">
+                                    <option value="">Couleur</option>
+                                    <option value="Bleu">Bleu</option>
+                                    <option value="Bordeaux">Bordeaux</option>
+                                    <option value="Brun">Brun</option>
+                                    <option value="Cristal">Cristal</option>
+                                    <option value="Doré">Doré</option>
+                                    <option value="Ecaille">Ecaille</option>
+                                    <option value="Fuschia">Fuschia</option>
+                                    <option value="Gris">Gris</option>
+                                    <option value="Gun">Gun</option>
+                                    <option value="Marron">Marron</option>
+                                    <option value="Noir">Noir</option>
+                                    <option value="Noir / Blanc">Noir / Blanc</option>
+                                    <option value="Or">Or</option>
+                                    <option value="Prune">Prune</option>
+                                    <option value="Rose">Rose</option>
+                                    <option value="Rouge">Rouge</option>
+                                    <option value="Vert">Vert</option>
+                                    <option value="Violet">Violet</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-xs-12">
+                            <label>Model</label>
+                            <div class="inner-addon left-addon">
+                                <input type="text" class="form-control input-form modele-lentille-form" name="modele" required="required"/>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-xs-12">
+                            <label>Marque</label>
+                            <div class="inner-addon left-addon" style="margin-top: 15px;margin-bottom: 16px;">
+                                <select class="marque-lentille-form" name="marque">
+                                    <option>Marque</option>
+                                    <option value="Acuvue">Acuvue</option>
+                                    <option value="Air Optix">Air Optix</option>
+                                    <option value="Bio Air">Bio Air</option>
+                                    <option value="Biofinity">Biofinity</option>
+                                    <option value="Biomedics">Biomedics</option>
+                                    <option value="Biotrue">Biotrue</option>
+                                    <option value="Clariti">Clariti</option>
+                                    <option value="Dailies">Dailies</option>
+                                    <option value="Freshlook">Freshlook</option>
+                                    <option value="Miru">Miru</option>
+                                    <option value="MyDay">MyDay</option>
+                                    <option value="Premio">Premio</option>
+                                    <option value="Proclear">Proclear</option>
+                                    <option value="Pure Vision">Pure Vision</option>
+                                    <option value="Soflens">Soflens</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-xs-12">
+                            <label>Forme</label>
+                            <div class="inner-addon left-addon" style="margin-top: 15px;margin-bottom: 16px;">
+                                <select class="forme-lentille-form" name="forme">
+                                    <option value="">Forme</option>
+                                    <option value="Angulaire">Angulaire</option>
+                                    <option value="Arrondie">Arrondie</option>
+                                    <option value="Aviateur">Aviateur</option>
+                                    <option value="Carré">Carré</option>
+                                    <option value="Couture">Couture</option>
+                                    <option value="Ovale">Ovale</option>
+                                    <option value="Pantos">Pantos</option>
+                                    <option value="Papillonnante">Papillonnante</option>
+                                    <option value="Pilote">Pilote</option>
+                                    <option value="Rectangle">Rectangle</option>
+                                    <option value="Rond">Rond</option>
+                                    <option value="Sport">Sport</option>
+                                    <option value="Vintage">Vintage</option>
+                                </select>
+                            </div>
+                            <label>Stock</label>
+                            <input type="number" class="form-control input-form stock-lentille-form" name="quantite" required="required"/>
+                            <label>Photo</label>
+                            <div class="inner-addon left-addon">
+                                <input type="file" class="form-control input-form" name="photo"/>
+                            </div>
+                            <label>Prix</label>
+                            <div class="inner-addon left-addon">
+                                <input type="text" class="form-control input-form prix-lentille-form" name="prix" required="required"/>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-xs-12">
+                            <label>Description</label>
+                            <textarea class="form-control ckeditor" id="description-vue" name="editeur" rows="10" required="required"></textarea>
+                        </div>
+                        <div class="col-xs-12 col-sm-2 col-sm-offset-5">
+                            <input type="hidden" value="{{ attributes.quoiqui.id }}" name="id"/>
+                            <input type="hidden" value="" name="id" class="id-lentille-form"/>
+                            <input type="hidden" value="lunette vue" name="categorie"/>
+                            <input type="submit" class="btn btn-danger valide-btn" value="Enregistrer"/>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end modals Lentille-->
+
+    <!-- modals Verres-->
+    <!-- modal de lister les annonces -->
+    <div class="modal fade liste-verres" role="dialog" aria-labelledby="myLargeModalLabel">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Liste des Verres</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="pull-right">
+                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#addVerre">Ajouter une Verre</button>
+                    </div>
+                    <table class="table table-responsive table-hover table-striped dataTable" style="width: 100%;"
+                           id="service-tables">
+                        <thead>
+                        <tr>
+                            <th style="border:none;border-top-left-radius:5px;">Nom</th>
+                            <th style="border:none">Réferene</th>
+                            <th style="border:none">Prix</th>
+                            <th style="border:none">Model</th>
+                            <th style="border:none">Marqaue</th>
+                            <th style="border:none">Forme</th>
+                            <th style="border:none">Couleur</th>
+                            <th style="border:none">Dimension</th>
+                            <th style="border:none">Weight</th>
+                            <th style="border:none">Stock</th>
+                            <th style="border:none;border-top-right-radius:5px;" class="text-center">Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for p in verre %}
+                            <tr data-prod="{{ loop.index }}">
+                                <td>{{ p.nom }}</td>
+                                <td>{{ p.reference }}</td>
+                                <td>{{ p.price }}</td>
+                                <td>{{ p.model }}</td>
+                                <td>{{ p.marque }}</td>
+                                <td>{{ p.forme }}</td>
+                                <td>{{ p.color }}</td>
+                                <td>{{ p.weight }}</td>
+                                <td>{{ p.dimensions }}</td>
+                                <td>{{ p.quantity }}</td>
+                                <td>
+                                    <div class="btn-group pull-right">
+                                        <button type="button" class="btn btn-default icon-style-modifier edit-annonce"
+                                                data-toggle="modal" data-target="#edit-verre" data-nom="{{ p.nom }}"
+                                                data-id="{{ p.id }}"
+                                                data-lien="{{ path('Opticien_annonce_edit',{'id':p.id}) }}"><span class="glyphicon glyphicon-pencil"></span>
+                                        </button>
+                                        <button type="button" class="btn btn-danger icon-annonce-supprimer"
+                                                data-nom="{{ p.nom }}"
+                                                data-id="{{ p.id }}"
+                                                data-lien="{{ path('Opticien_annonce_remove',{'id':p.id}) }}"
+                                                data-loop="{{ loop.index }}"><span class="glyphicon glyphicon-remove"></span>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- modal d'ajout Verres -->
+    <div id="addVerre" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-md">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Ajouter une Verre</h4>
+                </div>
+                <div class="modal-body">
+                    <form action="{{ path('Opticien_annonce_add') }}" class="clearfix" method="post" enctype="multipart/form-data">
+                        <div class="col-sm-6 col-xs-12">
+                            <label>Réference</label>
+                            <div class="inner-addon left-addon">
+                                <input type="text" class="form-control input-form" name="reference" required="required"/>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-xs-12">
+                            <label>Nom</label>
+                            <div class="inner-addon left-addon">
+                                <input type="text" class="form-control input-form" name="nom" required="required"/>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-xs-12">
+                            <label>Couleur</label>
+                            <div class="inner-addon left-addon" style="margin-top: 15px;margin-bottom: 16px;">
+                                <select class="" name="couleur">
+                                    <option value="">Couleur</option>
+                                    <option value="Blanc">Blanc</option>
+                                    <option value="Noir">Noir</option>
+                                    <option value="Blue">Blue</option>
+                                    <option value="Vert">Vert</option>
+                                    <option value="Jaune">Jaune</option>
+                                    <option value="Rouge">Rouge</option>
+                                    <option value="Orange">Orange</option>
+                                    <option value="Blue marine">Blue marine</option>
+                                    <option value="Maron">Maron</option>
+                                    <option value="Rose">Rose</option>
+                                    <option value="Gris">Gris</option>
+                                    <option value="Argent">Argent</option>
+                                    <option value="Or">Or</option>
+                                    <option value="Transparent">Transparent</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-xs-12">
+                            <label>Model</label>
+                            <div class="inner-addon left-addon" style="margin-top: 15px;margin-bottom: 16px;">
+                                <select class="categorie-menus-add" name="modele">
+                                    <option value="">Modele</option>
+                                    <option value="Cerclée">Cerclée</option>
+                                    <option value="Demi Cerclée">Demi Cerclée</option>
+                                    <option value="Percée">Percée</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-xs-12">
+                            <label>Marque</label>
+                            <div class="inner-addon left-addon" style="margin-top: 15px;margin-bottom: 16px;">
+                                <select class="categorie-menus-add" name="marque">
+                                    <option>Marque</option>
+                                    <option value="Boss Orange">Boss Orange</option>
+                                    <option value="Carrera">Carrera</option>
+                                    <option value="Elle">Elle</option>
+                                    <option value="Esprit">Esprit</option>
+                                    <option value="Gucci">Gucci</option>
+                                    <option value="Hugo Boss">Hugo Boss</option>
+                                    <option value="Pierre Cardin">Pierre Cardin</option>
+                                    <option value="Ray Ban">Ray Ban</option>
+                                    <option value="Tommy Hilfiger">Tommy Hilfiger</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-xs-12">
+                            <label>Forme</label>
+                            <div class="inner-addon left-addon" style="margin-top: 15px;margin-bottom: 16px;">
+                                <select class="categorie-menus-add" name="forme">
+                                    <option value="">Forme</option>
+                                    <option value="Rectangle">Rectangle</option>
+                                    <option value="Ovale">Ovale</option>
+                                    <option value="Ronde">Ronde</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-xs-12">
+                            <label>Stock</label>
+                            <input type="number" class="form-control input-form" name="quantite" required="required"/>
+                            <label>Photo</label>
+                            <div class="inner-addon left-addon">
+                                <input type="file" class="form-control input-form" name="photo" required="required"/>
+                            </div>
+                            <label>Prix</label>
+                            <div class="inner-addon left-addon">
+                                <input type="text" class="form-control input-form" name="prix" required="required"/>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-xs-12">
+                            <label>Description</label>
+                            <textarea class="form-control ckeditor" id="editeur" name="editeur" rows="10"
+                                      required="required"></textarea>
+                        </div>
+                        <div class="col-sm-6 col-xs-12">
+                            <label>Weight</label>
+                            <div class="inner-addon left-addon">
+                                <input type="text" class="form-control input-form" name="weight" required="required"/>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-xs-12">
+                            <label>Dimension</label>
+                            <div class="inner-addon left-addon">
+                                <input type="text" class="form-control input-form" name="dimension" required="required"/>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-2 col-sm-offset-5">
+                            <input type="hidden" value="{{ attributes.quoiqui.id }}" name="id"/>
+                            <input type="hidden" value="verre" name="categorie"/>
+                            <input type="submit" class="btn btn-danger valide-btn" value="Enregistrer"/>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--modal de modifier une annonce -->
+    <div class="modal fade edit-verre" role="dialog" id="edit-verre">
+        <div class="modal-dialog modal-md">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title"><span class="nomProduit"></span></h4>
+                </div>
+                <div class="modal-body">
+                    <form action="{{ path('Opticien_annonce_update') }}" class="clearfix" method="post" enctype="multipart/form-data">
+                        <div class="col-sm-6 col-xs-12">
+                            <label>Réference</label>
+                            <div class="inner-addon left-addon">
+                                <input type="text" class="form-control input-form ref-lentille-form" name="reference" required="required"/>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-xs-12">
+                            <label>Nom</label>
+                            <div class="inner-addon left-addon">
+                                <input type="text" class="form-control input-form nom-lentille-form" name="nom" required="required"/>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-xs-12">
+                            <label>Couleur</label>
+                            <div class="inner-addon left-addon" style="margin-top: 15px;margin-bottom: 16px;">
+                                <select class="couleur-lentille-form" name="couleur">
+                                    <option value="">Couleur</option>
+                                    <option value="Blanc">Blanc</option>
+                                    <option value="Noir">Noir</option>
+                                    <option value="Blue">Blue</option>
+                                    <option value="Vert">Vert</option>
+                                    <option value="Jaune">Jaune</option>
+                                    <option value="Rouge">Rouge</option>
+                                    <option value="Orange">Orange</option>
+                                    <option value="Blue marine">Blue marine</option>
+                                    <option value="Maron">Maron</option>
+                                    <option value="Rose">Rose</option>
+                                    <option value="Gris">Gris</option>
+                                    <option value="Argent">Argent</option>
+                                    <option value="Or">Or</option>
+                                    <option value="Transparent">Transparent</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-xs-12">
+                            <label>Model</label>
+                            <div class="inner-addon left-addon" style="margin-top: 15px;margin-bottom: 16px;">
+                                <select class="categorie-menus-add modele-lentille-form" name="modele">
+                                    <option value="">Modele</option>
+                                    <option value="Cerclée">Cerclée</option>
+                                    <option value="Demi Cerclée">Demi Cerclée</option>
+                                    <option value="Percée">Percée</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-xs-12">
+                            <label>Marque</label>
+                            <div class="inner-addon left-addon" style="margin-top: 15px;margin-bottom: 16px;">
+                                <select class="marque-lentille-form" name="marque">
+                                    <option>Marque</option>
+                                    <option value="Boss Orange">Boss Orange</option>
+                                    <option value="Carrera">Carrera</option>
+                                    <option value="Elle">Elle</option>
+                                    <option value="Esprit">Esprit</option>
+                                    <option value="Gucci">Gucci</option>
+                                    <option value="Hugo Boss">Hugo Boss</option>
+                                    <option value="Pierre Cardin">Pierre Cardin</option>
+                                    <option value="Ray Ban">Ray Ban</option>
+                                    <option value="Tommy Hilfiger">Tommy Hilfiger</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-xs-12">
+                            <label>Forme</label>
+                            <div class="inner-addon left-addon" style="margin-top: 15px;margin-bottom: 16px;">
+                                <select class="forme-lentille-form" name="forme">
+                                    <option value="">Forme</option>
+                                    <option value="Rectangle">Rectangle</option>
+                                    <option value="Ovale">Ovale</option>
+                                    <option value="Ronde">Ronde</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-xs-12">
+                            <label>Stock</label>
+                            <input type="number" class="form-control input-form stock-lentille-form" name="quantite" required="required"/>
+                            <label>Photo</label>
+                            <div class="inner-addon left-addon">
+                                <input type="file" class="form-control input-form" name="photo"/>
+                            </div>
+                            <label>Prix</label>
+                            <div class="inner-addon left-addon">
+                                <input type="text" class="form-control input-form prix-lentille-form" name="prix" required="required"/>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-xs-12">
+                            <label>Description</label>
+                            <textarea class="form-control ckeditor" id="description-verre" name="editeur" rows="10" required="required"></textarea>
+                        </div>
+                        <div class="col-sm-6 col-xs-12">
+                            <label>Weight</label>
+                            <div class="inner-addon left-addon">
+                                <input type="text" class="form-control input-form weight-lentille-form" name="weight" required="required"/>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-xs-12">
+                            <label>Dimension</label>
+                            <div class="inner-addon left-addon">
+                                <input type="text" class="form-control input-form dimension-lentille-form" name="dimension" required="required"/>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-2 col-sm-offset-5">
+                            <input type="hidden" value="{{ attributes.quoiqui.id }}" name="idQ"/>
+                            <input type="hidden" value="" name="id" class="id-lentille-form"/>
+                            <input type="submit" class="btn btn-danger valide-btn" value="Enregistrer"/>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end modals Verres-->
+
+    <!--modal de modifier une annonce -->
+    <div class="modal fade" role="dialog" id="edit-annonce">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title"><span class="nomProduit"></span></h4>
+                </div>
+                <div class="modal-body">
+                    <form action="{{ path('restaurant_annonce_update') }}" method="post" enctype="multipart/form-data">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <label>Nom</label>
+                            </div>
+                            <div class="col-md-10">
+                                <div class="inner-addon left-addon">
+                                    <input type="text" class="form-control input-form form-annonce-nom" name="title"
+                                           required/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-2">
+                                <label>Prix</label>
+                            </div>
+                            <div class="col-md-10">
+                                <div class="inner-addon left-addon">
+                                    <input type="text" class="form-control input-form form-annonce-prix" name="prix"
+                                           min="1" required="required"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-2">
+                                <label>Categorie</label>
+                            </div>
+                            <div class="col-md-10">
+                                <div class="inner-addon left-addon">
+                                    <select class="form-control form-annonce-categorie categorie-menus-mod" name="categorie" style="margin-top: 13px;margin-bottom: 16px;">
+                                        <option data-target="Meilleures ventes du moment">Meilleures ventes du moment</option>
+                                        <option data-target="Offre spéciale : 3 pour 2">Offre spéciale : 3 pour 2</option>
+                                        <option data-target="Menus Midi">Menus Midi</option>
+                                        <option data-target="Menus Burgers">Menus Burgers</option>
+                                        <option data-target="Menus Sandwiches">Menus Sandwiches</option>
+                                        <option data-target="Menus Panini">Menus Panini</option>
+                                        <option data-target="Salades">Salades</option>
+                                        <option data-target="Pizza" value="Pizza">Pizza</option>
+                                        <option data-target="Pâtes">Pâtes</option>
+                                        <option data-target="Assiettes">Assiettes</option>
+                                        <option data-target="Tacos">Tacos</option>
+                                        <option data-target="Panini">Panini</option>
+                                        <option data-target="Pizzanini">Pizzanini</option>
+                                        <option data-target="Tex-Mex">Tex-Mex</option>
+                                        <option data-target="Desserts">Desserts</option>
+                                        <option data-target="Boissons">Boissons</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row categorie-sous-menus-mod">
+                            <div class="col-md-2">
+                                <label style="margin-top: 9px !important;">Sous Categorie</label>
+                            </div>
+                            <div class="col-md-10">
+                                <div class="inner-addon left-addon" style="margin-bottom: 15px;margin-top: 11px;">
+                                    <select class="" name="sous-categorie">
+                                        <option data-target="Pizza Junior" value="Pizza Junior">Pizza Junior</option>
+                                        <option data-target="Pizza Sénior" value="Pizza Sénior">Pizza Sénior</option>
+                                        <option data-target="Pizza Méga" value="Pizza Méga">Pizza Méga</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-2">
+                                <label>Description</label>
+                            </div>
+                            <div class="col-md-10">
+                                <div class="inner-addon left-addon">
+                                    <textarea cols="80" class="ckeditor form-annonce-desc" id="editeur" name="editeur"
+                                              rows="10" required="required"></textarea>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-xs-12">
+                                <label>Photo</label>
+                                <div class="inner-addon left-addon">
+                                    <input type="file" class="form-control input-form" name="photo"/>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-xs-12">
+                                <label>Prix</label>
+                                <div class="inner-addon left-addon">
+                                    <input type="text" class="form-control input-form" name="prix" min="1" required="required"/>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-10 col-md-offset-2 form-annonce-image"></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-2 col-xs-offset-5">
+                                    <input type="submit" class="btn btn-modif valide-btn btn-modif-custom"
+                                           value="Modifier"/>
+                                </div>
+                            </div>
+                            <input type="hidden" value="" name="id" class="id"/>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--modal de suppression un service -->
+    <div class="modal fade" role="dialog" id="del-annonce">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Supprimer ce Plat</h4>
+                </div>
+                <div class="modal-body">
+                    <center>Confirmer votre suppression de Plat <span class="nomSpan"></span></center>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-modif-custom btn-modif confirm-del-annonce">Oui</button>
+                    <button type="button" class="btn btn-supprimer" data-dismiss="modal">Non</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+{% endif %}

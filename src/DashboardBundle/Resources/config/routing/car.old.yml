@@ -1,0 +1,24 @@
+dashboard_car_ajout:
+    path:     /
+    defaults: { _controller: DashboardBundle:Car:new }
+    methods:  [GET, POST]
+
+dashboard_car_liste:
+    path:     /liste
+    defaults: { _controller: DashboardBundle:Car:index }
+    methods:  [GET, POST]
+
+dashboard_car_afficher:
+    path:     /afficher
+    defaults: { _controller: DashboardBundle:Car:show }
+    methods:  [GET, POST]
+
+dashboard_car_edit:
+    path:     /edit
+    defaults: { _controller: DashboardBundle:Car:edit }
+    methods:  [GET, POST]
+
+dashboard_car_supprimer:
+    path:     /delete
+    defaults: { _controller: DashboardBundle:Car:delete }
+    methods:  [GET, POST, DELETE]

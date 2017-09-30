@@ -1,0 +1,285 @@
+<div class="theme_changer">
+    {% if connected %}
+        <tog style="float: right;margin-right:-2px;" class="tog">
+            <i class="fa fa-cog" style="background: #ffbe00;padding: 15px;float: right;
+    margin-right: -242px;" aria-hidden="true"><strong> Personaliser couleurs de vote site!</strong> </i>
+
+            {#<h6 class="bnv" style="display: inline; font-size: 19px;"> Personaliser le section bienvennue</h6>#}
+            {#<h6 class="services"style="display: inline;font-size: 19px;"> Personaliser le section service</h6>#}
+            {#<h6 class="tarif" style="display: inline;font-size: 19px;"> Personaliser le section carte</h6>#}
+            {#<h6 class="offres"style="display: inline;font-size: 19px;"> Personaliser le section offre</h6>#}
+            {#<h6 class="images"style="display: inline;font-size: 19px;"> Personaliser le section gallery</h6>#}
+            {#<h6 class="contact"style="display: inline;font-size: 19px;"> Personaliser le section contact</h6>#}
+        </tog>
+    {% endif %}
+
+    <form id="change_color_form " class="formPos" action="{{ path('change_color',{'qq_id': qouiqui.id }) }}" method="POST">
+        <h5><b class="theme_color">Pèrsonnaliser votre théme</b></h5>
+        <h6 class="menu_color1">Couleur de menu</h6>
+        <div class="bfh-colorpicker menu_color" data-pour="menu" data-name="color[menu]" data-color="{% if theme.color is defined %}{{ theme.color.menu }}{% endif %}"></div>
+        <h6 class="logo_color1">Couleur de Logo</h6>
+        <div class="bfh-colorpicker logo_color" data-pour="logo" data-name="color[logo]" data-color="{% if theme.color is defined %}{{ theme.color.logo }}{% endif %}"></div>
+        <h6 class="info_color1">Couleur des informations</h6>
+        <div class="bfh-colorpicker info_color" data-pour="info" data-name="color[info]" data-color="{% if theme.color is defined %}{{ theme.color.info }}{% endif %}"></div>
+        <h6 class="button_color1">Couleurs des boutons</h6>
+        <div class="bfh-colorpicker button_color" data-pour="bouton" data-name="color[bouton]" data-color="{% if theme.color is defined %}{{ theme.color.bouton }}{% endif %}"></div>
+        <h6 class="act_color">Couleur des Horaires et Actualités</h6>
+        <div class="bfh-colorpicker act_color1" data-pour="horairesActualites" data-name="color[horairesActualites]" data-color="{% if theme.color is defined %}{{ theme.color.horairesActualites }}{% endif %}"></div>
+        <h6 class="grand_titre_color1">Couleur des grand titre d'horaires et actualités</h6>
+        <div class="bfh-colorpicker grand_titre_color" data-pour="blanc" data-name="color[blanc]" data-color="{% if theme.color is defined %}{{ theme.color.blanc }}{% endif %}"></div>
+        <h6 class="titre_color1">Couleurs des titres</h6>
+        <div class="bfh-colorpicker titre_color" data-pour="titre" data-name="color[titre]" data-color="{% if theme.color is defined %}{{ theme.color.titre }}{% endif %}"></div>
+        {#<h6 class="sous_titre_color1">Couleurs des Sous-titres</h6>#}
+        {#<div class="bfh-colorpicker sous_titre_color" data-pour="Soustitre" data-name="color[Soustitre]" data-color="{% if theme.color is defined %}{{ theme.color.Soustitre }}{% endif %}"></div>#}
+        <h6 class="texte_color1">Couleurs des textes</h6>
+        <div class="bfh-colorpicker texte_color" data-pour="Text" data-name="color[Text]" data-color="{% if theme.color is defined %}{{ theme.color.Text }}{% endif %}"></div>
+        <div class="background horaire">
+            <h6>couleur d'arrière plan "Les Horaires"</h6>
+            <input type="hidden" data-pour="background-horaires" name="color[background][horaires]" data-color="{% if theme.color.background.horaires is defined %}{{ theme.color.background.horaires }}{% endif %}">
+        </div>
+        <div class="background about">
+            <h6>Couleur d'arrière plan "A Propos"</h6>
+            <input type="hidden" data-pour="background-propo" name="color[background][about]" data-color="{% if theme.color.background.about is defined %}{{ theme.color.background.about }}{% endif %}">
+        </div>
+        <h6 class="chambre_color1">Couleur des informations des chambres</h6>
+        <div class="bfh-colorpicker chambre_color" data-pour="chambres" data-name="color[chambres]" data-color="{% if theme.color is defined %}{{ theme.color.chambres }}{% endif %}"></div>
+        <div class="background service">
+            <h6>couleur d'arrière plan "Services"</h6>
+            <input type="hidden" data-pour="background-service" name="color[background][service]" data-color="{% if theme.color.background.service is defined %}{{ theme.color.background.service }}{% endif %}">
+        </div>
+        <div class="background annonce">
+            <h6>couleur d'arrière plan "Événements"</h6>
+            <input type="hidden" data-pour="background-annonce" name="color[background][annone]" data-color="{% if theme.color.background.annone is defined %}{{ theme.color.background.annone }}{% endif %}">
+        </div>
+        <div class="background gallery">
+            <h6>couleur d'arrière plan "Actualités"</h6>
+            <input type="hidden" data-pour="background-gallery" name="color[background][gallery]" data-color="{% if theme.color.background.gallery  is defined %}{{ theme.color.background.gallery }}{% endif %}">
+        </div>
+        <div class="background footer">
+            <h6>couleur d'arrière plan "Footer"</h6>
+            <input type="hidden" data-pour="background-footer" name="color[background][footer]" data-color="{% if theme.color.background.footer is defined %}{{ theme.color.background.footer }}{% endif %}">
+        </div>
+
+        {% set themecolo = false %}
+        {% if theme.color.background.animation is defined %}
+            {% set themecolo = true %}
+        {% endif %}
+        <input type="hidden" name="color[background][animation][horaires]" id="animation_horaires"{% if theme.color is defined %} {% if themecolo %}  value="{{ theme.color.background.animation.horaires }}" {% endif %} {% endif %}>
+        <input type="hidden" name="color[background][animation][about]" id="animation_about" {% if theme.color is defined %} {% if themecolo %} value="{{ theme.color.background.animation.about }}" {% endif %}{% endif %}>
+        <input type="hidden" name="color[background][animation][service]" id="annimation_service" {% if theme.color is defined %} {% if themecolo %} value="{{ theme.color.background.animation.service }}" {% endif %}{% endif %}>
+        <input type="hidden" name="color[background][animation][annone]" id="animation_annonce" {% if theme.color is defined %} {% if themecolo %} value="{{ theme.color.background.animation.annone }}" {% endif %}{% endif %} >
+        <input type="hidden" name="color[background][animation][gallery]" id="annimation_gallery" {% if theme.color is defined %} {% if themecolo %} value="{{ theme.color.background.animation.gallery }}" {% endif %}{% endif %}>
+        <input type="hidden" name="color[background][animation][footer]" id="annimation_footer" {% if theme.color is defined %} {% if themecolo %} value="{{ theme.color.background.animation.footer }}" {% endif %}{% endif %}>
+
+
+        <div class="panel-group" id="accordion">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <h6 data-toggle="collapse" data-parent="#accordion" href="#backgroundcolor">Couleurs d'arrière plan</h6>
+                    </h4>
+                </div>
+                <div id="backgroundcolor" class="panel-collapse collapse in">
+                    <div class="panel-body over_y">
+                        <div setbg_color style="margin: 1px;border: 1px dashed grey ;width: 30px;height: 30px;float: left;background: #fff"></div>
+
+                        <div setbg_color style="margin: 1px;border: 1px dashed grey ;width: 30px;height: 30px;float: left;background: #000"></div>
+
+                        <div setbg_color style="margin: 1px;border: 1px dashed grey ;width: 30px;height: 30px;float: left;background: #292A0A"></div>
+
+                        <div setbg_color style="margin: 1px;border: 1px dashed grey ;width: 30px;height: 30px;float: left;background: #585858"></div>
+
+                        <div setbg_color style="margin: 1px;border: 1px dashed grey ;width: 30px;height: 30px;float: left;background: #0e385d"></div>
+
+                        <div setbg_color style="margin: 1px;border: 1px dashed grey ;width: 30px;height: 30px;float: left;background: #f9f9f9"></div>
+
+                        <div setbg_color style="margin: 1px;border: 1px dashed grey ;width: 30px;height: 30px;float: left;background: #fff"></div>
+
+                        <div setbg_color style="margin: 1px;border: 1px dashed grey ;width: 30px;height: 30px;float: left;background: #cc99ff"></div>
+
+                        <div setbg_color style="margin: 1px;border: 1px dashed grey ;width: 30px;height: 30px;float: left;background: #ffcc99"></div>
+
+                        <div setbg_color style="margin: 1px;border: 1px dashed grey ;width: 30px;height: 30px;float: left;background: #210B61"></div>
+
+                        <div setbg_color style="margin: 1px;border: 1px dashed grey ;width: 30px;height: 30px;float: left;background: #380B61"></div>
+
+                        <div setbg_color style="margin: 1px;border: 1px dashed grey ;width: 30px;height: 30px;float: left;background: #ccffcc"></div>
+
+                        <div setbg_color style="margin: 1px;border: 1px dashed grey ;width: 30px;height: 30px;float: left;background: #cff"></div>
+
+                        <div setbg_color style="margin: 1px;border: 1px dashed grey ;width: 30px;height: 30px;float: left;background: #9cf"></div>
+
+                        <div setbg_color style="margin: 1px;border: 1px dashed grey ;width: 30px;height: 30px;float: left;background: #ffc"></div>
+
+                        <div setbg_color style="margin: 1px;border: 1px dashed grey ;width: 30px;height: 30px;float: left;background: #c6c3c6"></div>
+
+                        <div setbg_color style="margin: 1px;border: 1px dashed grey ;width: 30px;height: 30px;float: left;background: #eaf5fb"></div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <h6 data-toggle="collapse" data-parent="#accordion" href="#backgropundmotif">Motif d'arrière plan</h6>
+                    </h4>
+                </div>
+                <div id="backgropundmotif" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <div data-pour="" class="motif-container">
+
+                            <div set_icon style="width: 30px;height: 30px;float: left">
+                                <img style="width:100%;border: 1px solid;" src="" alt="">
+                            </div>
+                            <div set_icon style="width: 50px;height: 50px;float: left">
+                                <img style="width:100%" src="{{ asset('/module/Hotel/icon/e1.png') }}" alt="">
+                            </div>
+                            <div set_icon style="width: 30px;height: 30px;float: left">
+                                <img style="width:100%" src="{{ asset('/module/Hotel/icon/e3.png') }}" alt="">
+                            </div>
+                            <div set_icon style="width: 30px;height: 30px;float: left">
+                                <img style="width:100%; z-index: 1" src="{{ asset('/module/Hotel/icon/e4.png') }}" alt="">
+                            </div>
+                            <div set_icon style="width: 30px;height: 30px;float: left">
+                                <img style="width:100%" src="{{ asset('/module/Hotel/icon/e5.png') }}" alt="">
+                            </div>
+                            <div set_icon style="width: 30px;height: 30px;float: left">
+                                <img style="width:100%" src="{{ asset('/module/Hotel/icon/e6.png') }}" alt="">
+                            </div>
+                            <div set_icon style="width: 30px;height: 30px;float: left">
+                                <img style="width:100%" src="{{ asset('/module/Hotel/icon/e7.png') }}" alt="">
+                            </div>
+                            <div set_icon style="width: 30px;height: 30px;float: left">
+                                <img style="width:100%" src="{{ asset('/module/Hotel/icon/e8.png') }}" alt="">
+                            </div>
+                            <div set_icon style="width: 30px;height: 30px;float: left">
+                                <img style="width:100%" src="{{ asset('/module/Hotel/icon/e9.png') }}" alt="">
+                            </div>
+                            <div set_icon style="width: 30px;height: 30px;float: left">
+                                <img style="width:100%" src="{{ asset('/module/Hotel/icon/e11.png') }}" alt="">
+                            </div>
+                            <div set_icon style="width: 30px;height: 30px;float: left">
+                                <img style="width:100%" src="{{ asset('/module/Hotel/icon/e12.png') }}" alt="">
+                            </div>
+                            <div set_icon style="width: 30px;height: 30px;float: left">
+                                <img style="width:100%" src="{{ asset('uploads/image/icon/ambulance.png') }}" alt="">
+                            </div>
+                            <div set_icon style="width: 30px;height: 30px;float: left">
+                                <img style="width:100%" src="{{ asset('uploads/image/icon/Building.png') }}" alt="">
+                            </div>
+                            <div set_icon style="width: 30px;height: 30px;float: left">
+                                <img style="width:100%" src="{{ asset('uploads/image/icon/car-repair.png') }}" alt="">
+                            </div>
+                            <div set_icon style="width: 30px;height: 30px;float: left">
+                                <img style="width:100%" src="{{ asset('uploads/image/icon/champignon.png') }}" alt="">
+                            </div>
+                            <div set_icon style="width: 30px;height: 30px;float: left">
+                                <img style="width:100%" src="{{ asset('uploads/image/icon/doctor.png') }}" alt="">
+                            </div>
+                            <div set_icon style="width: 30px;height: 30px;float: left">
+                                <img style="width:100%" src="{{ asset('uploads/image/icon/food.png') }}" alt="">
+                            </div>
+                            <div set_icon style="width: 30px;height: 30px;float: left">
+                                <img style="width:100%" src="{{ asset('uploads/image/icon/forsale.png') }}" alt="">
+                            </div>
+                            <div set_icon style="width: 30px;height: 30px;float: left">
+                                <img style="width:100%" src="{{ asset('uploads/image/icon/fraise.png') }}" alt="">
+                            </div>
+                            <div set_icon style="width: 30px;height: 30px;float: left">
+                                <img style="width:100%" src="{{ asset('uploads/image/icon/girl-chef.png') }}" alt="">
+                            </div>
+                            <div set_icon style="width: 30px;height: 30px;float: left">
+                                <img style="width:100%" src="{{ asset('uploads/image/icon/hamer-avocat.png') }}" alt="">
+                            </div>
+                            <div set_icon style="width: 30px;height: 30px;float: left">
+                                <img style="width:100%" src="{{ asset('uploads/image/icon/icon-car.png') }}" alt="">
+                            </div>
+                            <div set_icon style="width: 30px;height: 30px;float: left">
+                                <img style="width:100%" src="{{ asset('uploads/image/icon/icone-avocat.png') }}" alt="">
+                            </div>
+                            <div set_icon style="width: 30px;height: 30px;float: left">
+                                <img style="width:100%" src="{{ asset('uploads/image/icon/integrators-1.png') }}" alt="">
+                            </div>
+                            <div set_icon style="width: 30px;height: 30px;float: left">
+                                <img style="width:100%" src="{{ asset('uploads/image/icon/key.png') }}" alt="">
+                            </div>
+                            <div set_icon style="width: 30px;height: 30px;float: left">
+                                <img style="width:100%" src="{{ asset('uploads/image/icon/nutrition-icon.png') }}" alt="">
+                            </div>
+                            <div set_icon style="width: 30px;height: 30px;float: left">
+                                <img style="width:100%" src="{{ asset('uploads/image/icon/payment-cards.png') }}" alt="">
+                            </div>
+                            <div set_icon style="width: 30px;height: 30px;float: left">
+                                <img style="width:100%" src="{{ asset('uploads/image/icon/pic.png') }}" alt="">
+                            </div>
+                            <div set_icon style="width: 30px;height: 30px;float: left">
+                                <img style="width:100%" src="{{ asset('uploads/image/icon/plane.png') }}" alt="">
+                            </div>
+                            <div set_icon style="width: 30px;height: 30px;float: left">
+                                <img style="width:100%" src="{{ asset('uploads/image/icon/poop.png') }}" alt="">
+                            </div>
+                            <div set_icon style="width: 30px;height: 30px;float: left">
+                                <img style="width:100%" src="{{ asset('uploads/image/icon/presentation-grisf.png') }}" alt="">
+                            </div>
+                            <div set_icon style="width: 30px;height: 30px;float: left">
+                                <img style="width:100%" src="{{ asset('uploads/image/icon/Shipping.png') }}" alt="">
+                            </div>
+                            <div set_icon style="width: 30px;height: 30px;float: left">
+                                <img style="width:100%" src="{{ asset('uploads/image/icon/star.png') }}" alt="">
+                            </div>
+                            <div set_icon style="width: 30px;height: 30px;float: left">
+                                <img style="width:100%" src="{{ asset('uploads/image/icon/star2.png') }}" alt="">
+                            </div>
+                            <div set_icon style="width: 30px;height: 30px;float: left">
+                                <img style="width:100%" src="{{ asset('uploads/image/icon/star3.png') }}" alt="">
+                            </div>
+                            <div set_icon style="width: 30px;height: 30px;float: left">
+                                <img style="width:100%" src="{{ asset('uploads/image/icon/symbole.png') }}" alt="">
+                            </div>
+                            <div set_icon style="width: 30px;height: 30px;float: left">
+                                <img style="width:100%" src="{{ asset('uploads/image/icon/symbole3.png') }}" alt="">
+                            </div>
+                            <div set_icon style="width: 30px;height: 30px;float: left">
+                                <img style="width:100%" src="{{ asset('uploads/image/icon/tree.png') }}" alt="">
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <input type="submit" class="btn btn-success btn-block" style="z-index: 97;" value="Valider votre choix ">
+    <a href="{{ path('hoel_deleteColor',{'id_qq':qouiqui.id}) }}" class="btn btn-danger btn-block">Couleur par défaut</a>
+    </form>
+</div>
+{% include 'ModuleBundle:Module/hotel:color.html.twig' %}
+<style>
+    .motif-container {
+
+        overflow: auto;
+        height: 60px;
+
+    }
+
+    .theme_changer {
+        top: 15%;
+        position: fixed;
+        width: 462px;
+        background: #ffbe00;
+        z-index: 1052;
+        padding: 10px;
+        transform: translate(-462px);
+        transition: transform 2s;
+    }
+    .theme_changer .formPos{
+        overflow-y: auto;
+        height: 300px;
+        overflow-x: hidden;
+    }
+
+    .bfh-colorpicker-popover {
+        position: relative !important;
+    }
+</style>

@@ -1,0 +1,4 @@
+details_profil:
+    path:     /
+    defaults: { _controller: UserBundle:Default:subdomain }
+    methods:  [GET, POST]

@@ -1,0 +1,42 @@
+<section  class="new-arrivals">
+    <div class="container text-center">
+        <div class="pull-right">
+            <button class="btn btn-primary" data-toggle="modal" data-target="#modalProduits"><i class="fa fa-edit"></i>  Gérer cette section</button>
+        </div>
+        <div class="items">
+            <div class="row">
+
+
+                {% for prod in module %}
+
+                    {% if prod.section == 'produits' and prod.status == 1 %}
+
+                        <div class="col-sm-4 item">
+                            <div class="item-image">
+                                {#<img src="{{ asset('module/ecommerce/img/f-shirt-blue.jpg') }}" alt="shirt">#}
+                                <img src="{{ asset('uploads/image/'~qouiqui.user.id~'/'~qouiqui.id~'/produits/'~prod.id~'.jpg') }}" alt="shirt">
+                                <div class="hover-overlay">
+                                    <ul class="list-unstyled list-inline">
+                                        {#<li style="display: none"><a href="javascript: return void();" class="cart"><i class="icon-cart-1"></i></a></li>#}
+                                        {#<li style="display: none"><a href="javascript: return void();" class="wishlist"><i class="icon-like"></i></a></li>#}
+                                        <li><a href="#" class="expand" data-target="#cart-popup-1" data-description-produit="{{ prod.data }}"><i class="icon-expand"></i></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="item-info">
+                                <h5>{{ prod.nom }}</h5>
+                                {#<ul class="price list-unstyled list-inline">#}
+                                {#<li class="current">70.00$</li>#}
+                                {#</ul>#}
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+
+
+            </div>
+        </div>
+    </div>
+</section>
+
+

@@ -1,0 +1,279 @@
+{% if connected %}
+    <div class="modal fade" id="Ajouter_gallery" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">×</button>
+                    <h4 class="modal-title">Modifier les image de sider</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row norow">
+
+
+                        <div class="panel-body">
+
+                            <!-- Standar Form -->
+                            <h4>Sélectionner les image depuis votre ordinateur</h4>
+                            <form id="upload_img_to_gallery" action="{{ path('uploadgallery',{'id_qq': qouiqui.id}) }}" method="post"
+                                  enctype="multipart/form-data" id="js-upload-form">
+
+                                <div class="col-md-12">
+                                    <div class="form-inline">
+                                        <div class="form-group" style="width: 100%">
+                                            <label class="btn btn-default btn-sm center-block btn-file">
+                                                <i class="fa fa-upload fa-2x" aria-hidden="true"></i>
+                                                <input type="file" name="files[]" style="display: none;" accept="image/*">
+                                            </label>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <button type="submit" style="width: 100%" class="btn btn-sm btn-primary">Envoi l'image</button>
+                                </div>
+                                <hr>
+                                <div class="row no-margin">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label class="control-label" for="time">Type de l'image</label>
+                                            <select id="time" name="TypeGallery" class="form-control">
+                                                <option value="tours">Tours Tourisme</option>
+                                                <option value="croisiere">Croisière</option>
+                                                <option value="hotel">Hôtel</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                            <!-- Upload Finished -->
+                            <div class="js-upload-finished">
+                                <h3>Galleries Images</h3>
+                                <div class="list-group">
+                                    {% for img in  img_gallery %}
+                                        {% set img2 = img|split('-') %}
+                                        <div class="sup-gal-{{ loop.index }}">
+                                            <div class="col-md-2">
+                                                <img style="width: 50px" src=" {{ asset('/uploads/image/') }}{{ iduser }}/{{ qouiqui.id }}/gallery/{{ img }}" alt=""></div>
+                                            <div class="col-md-10">
+                                                <a   class="list-group-item list-group-item-success">
+                                                    <span class="badge alert-success pull-right DeleteIMG" data-img="{{ img }}" data-sup=".sup-gal-{{ loop.index }}" data-link="{{ path('suppr_gallery_img',{'id_qq': qouiqui.id }) }}">Supprimer</span>{{ img2[0] }}
+                                                </a>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+                    <button type="submit" class="btn btn-default " data-target="modifier" data-selector="upload_img_to_gallery">
+                        enregistrer
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+{% endif %}
+<div id="content">
+    {% if connected %}
+        <button class="theme-btn btn-style-one pull-right" data-toggle="modal" data-target="#Ajouter_gallery">
+            ajouter des images Galleris
+        </button>
+    {% endif %}
+    <div class="container">
+
+        <div id="options" class="clearfix">
+            <ul id="filters" class="pagination option-set clearfix" data-option-key="filter">
+                <li><a href="#filter" data-option-value="*" class="selected">tous</a></li>
+                <li><a href="#filter" data-option-value=".tours">Tours Tourisme</a></li>
+                <li><a href="#filter" data-option-value=".croisiere">Croisière</a></li>
+                <li><a href="#filter" data-option-value=".hotel">Hôtel</a></li>
+            </ul>
+        </div><!-- #options -->
+
+        <div class="isotope-box">
+            <div id="container" class="clearfix" style="position: relative; height: 2186px;">
+                <ul class="thumbnails clearfix" id="isotope-items">
+                    <div class="grid-sizer col-sm-4"></div>
+                    <div class="gutter-sizer"></div>
+                    {% for img in img_gallery %}
+                    {% set img2 = img|split('-') %}
+                    <li class="element {{ img2[0] }} col-sm-4 col-xs-12" style="position: absolute; left: 0%; top: 0px;">
+                        <div class="thumb-isotope">
+                            <div class="thumbnail clearfix">
+                                <a href="{{ asset('/uploads/image/') }}{{ iduser }}/{{ qouiqui.id }}/gallery/{{ img }}" rel="prettyPhoto[mix]" title="Photo">
+                                    <figure>
+                                        <img src="{{ asset('/uploads/image/') }}{{ iduser }}/{{ qouiqui.id }}/gallery/{{ img }}" alt=""><em></em>
+                                    </figure>
+                                    <div class="caption">
+                                        <div class="txt1 text-uppercase">{{ img2[0] }}</div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </li>
+                    {% endfor %}
+                    {#<li class="element isotope-filter1 isotope-filter2 col-sm-8 col-xs-12" style="position: absolute; left: 33.3333%; top: 0px;">#}
+                        {#<div class="thumb-isotope">#}
+                            {#<div class="thumbnail clearfix">#}
+                                {#<a href="{{ asset('module/agencevoyage/images/gallery02.jpg') }}" rel="prettyPhoto[mix]" title="Photo">#}
+                                    {#<figure>#}
+                                        {#<img src="{{ asset('module/agencevoyage/images/gallery02.jpg') }}" alt=""><em></em>#}
+                                    {#</figure>#}
+                                    {#<div class="caption">#}
+                                        {#<div class="txt1">cannes, france</div>#}
+                                        {#<div class="txt2">hotel carlton</div>#}
+                                    {#</div>#}
+                                {#</a>#}
+                            {#</div>#}
+                        {#</div>#}
+                    {#</li>#}
+                    {#<li class="element isotope-filter3 col-sm-4 col-xs-12" style="position: absolute; left: 0%; top: 273px;">#}
+                        {#<div class="thumb-isotope">#}
+                            {#<div class="thumbnail clearfix">#}
+                                {#<a href="{{ asset('module/agencevoyage/images/gallery03.jpg') }}" rel="prettyPhoto[mix]" title="Photo">#}
+                                    {#<figure>#}
+                                        {#<img src="{{ asset('module/agencevoyage/images/gallery03.jpg') }}" alt=""><em></em>#}
+                                    {#</figure>#}
+                                    {#<div class="caption">#}
+                                        {#<div class="txt1">cannes, france</div>#}
+                                        {#<div class="txt2">hotel carlton</div>#}
+                                    {#</div>#}
+                                {#</a>#}
+                            {#</div>#}
+                        {#</div>#}
+                    {#</li>#}
+                    {#<li class="element isotope-filter1 col-sm-4 col-xs-12" style="position: absolute; left: 0%; top: 546px;">#}
+                        {#<div class="thumb-isotope">#}
+                            {#<div class="thumbnail clearfix">#}
+                                {#<a href="{{ asset('module/agencevoyage/images/gallery04.jpg') }}" rel="prettyPhoto[mix]" title="Photo">#}
+                                    {#<figure>#}
+                                        {#<img src="{{ asset('module/agencevoyage/images/gallery04.jpg') }}" alt=""><em></em>#}
+                                    {#</figure>#}
+                                    {#<div class="caption">#}
+                                        {#<div class="txt1">cannes, france</div>#}
+                                        {#<div class="txt2">hotel carlton</div>#}
+                                    {#</div>#}
+                                {#</a>#}
+                            {#</div>#}
+                        {#</div>#}
+                    {#</li>#}
+                    {#<li class="element isotope-filter1 col-sm-4 col-xs-12" style="position: absolute; left: 33.3333%; top: 546px;">#}
+                        {#<div class="thumb-isotope">#}
+                            {#<div class="thumbnail clearfix">#}
+                                {#<a href="{{ asset('module/agencevoyage/images/gallery05.jpg') }}" rel="prettyPhoto[mix]" title="Photo">#}
+                                    {#<figure>#}
+                                        {#<img src="{{ asset('module/agencevoyage/images/gallery05.jpg') }}" alt=""><em></em>#}
+                                    {#</figure>#}
+                                    {#<div class="caption">#}
+                                        {#<div class="txt1">cannes, france</div>#}
+                                        {#<div class="txt2">hotel carlton</div>#}
+                                    {#</div>#}
+                                {#</a>#}
+                            {#</div>#}
+                        {#</div>#}
+                    {#</li>#}
+                    {#<li class="element isotope-filter3 isotope-filter2 col-sm-4 col-xs-12" style="position: absolute; left: 66.6667%; top: 546px;">#}
+                        {#<div class="thumb-isotope">#}
+                            {#<div class="thumbnail clearfix">#}
+                                {#<a href="{{ asset('module/agencevoyage/images/gallery07.jpg') }}" rel="prettyPhoto[mix]" title="Photo">#}
+                                    {#<figure>#}
+                                        {#<img src="{{ asset('module/agencevoyage/images/gallery07.jpg') }}" alt=""><em></em>#}
+                                    {#</figure>#}
+                                    {#<div class="caption">#}
+                                        {#<div class="txt1">cannes, france</div>#}
+                                        {#<div class="txt2">hotel carlton</div>#}
+                                    {#</div>#}
+                                {#</a>#}
+                            {#</div>#}
+                        {#</div>#}
+                    {#</li>#}
+                    {#<li class="element isotope-filter1 col-sm-4 col-xs-12" style="position: absolute; left: 33.3333%; top: 819px;">#}
+                        {#<div class="thumb-isotope">#}
+                            {#<div class="thumbnail clearfix">#}
+                                {#<a href="{{ asset('module/agencevoyage/images/gallery06.jpg') }}" rel="prettyPhoto[mix]" title="Photo">#}
+                                    {#<figure>#}
+                                        {#<img src="{{ asset('module/agencevoyage/images/gallery06.jpg') }}" alt=""><em></em>#}
+                                    {#</figure>#}
+                                    {#<div class="caption">#}
+                                        {#<div class="txt1">cannes, france</div>#}
+                                        {#<div class="txt2">hotel carlton</div>#}
+                                    {#</div>#}
+                                {#</a>#}
+                            {#</div>#}
+                        {#</div>#}
+                    {#</li>#}
+                    {#<li class="element isotope-filter2 col-sm-12 col-xs-12" style="position: absolute; left: 0%; top: 1092px;">#}
+                        {#<div class="thumb-isotope">#}
+                            {#<div class="thumbnail clearfix">#}
+                                {#<a href="{{ asset('module/agencevoyage/images/gallery08.jpg') }}" rel="prettyPhoto[mix]" title="Photo">#}
+                                    {#<figure>#}
+                                        {#<img src="{{ asset('module/agencevoyage/images/gallery08.jpg') }}" alt=""><em></em>#}
+                                    {#</figure>#}
+                                    {#<div class="caption">#}
+                                        {#<div class="txt1">cannes, france</div>#}
+                                        {#<div class="txt2">hotel carlton</div>#}
+                                    {#</div>#}
+                                {#</a>#}
+                            {#</div>#}
+                        {#</div>#}
+                    {#</li>#}
+                    {#<li class="element isotope-filter3 col-sm-4 col-xs-12" style="position: absolute; left: 0%; top: 1639px;">#}
+                        {#<div class="thumb-isotope">#}
+                            {#<div class="thumbnail clearfix">#}
+                                {#<a href="{{ asset('module/agencevoyage/images/gallery09.jpg') }}" rel="prettyPhoto[mix]" title="Photo">#}
+                                    {#<figure>#}
+                                        {#<img src="{{ asset('module/agencevoyage/images/gallery09.jpg') }}" alt=""><em></em>#}
+                                    {#</figure>#}
+                                    {#<div class="caption">#}
+                                        {#<div class="txt1">cannes, france</div>#}
+                                        {#<div class="txt2">hotel carlton</div>#}
+                                    {#</div>#}
+                                {#</a>#}
+                            {#</div>#}
+                        {#</div>#}
+                    {#</li>#}
+                    {#<li class="element isotope-filter5 col-sm-8 col-xs-12" style="position: absolute; left: 33.3333%; top: 1639px;">#}
+                        {#<div class="thumb-isotope">#}
+                            {#<div class="thumbnail clearfix">#}
+                                {#<a href="{{ asset('module/agencevoyage/images/gallery11.jpg') }}" rel="prettyPhoto[mix]" title="Photo">#}
+                                    {#<figure>#}
+                                        {#<img src="{{ asset('module/agencevoyage/images/gallery11.jpg') }}" alt=""><em></em>#}
+                                    {#</figure>#}
+                                    {#<div class="caption">#}
+                                        {#<div class="txt1">cannes, france</div>#}
+                                        {#<div class="txt2">hotel carlton</div>#}
+                                    {#</div>#}
+                                {#</a>#}
+                            {#</div>#}
+                        {#</div>#}
+                    {#</li>#}
+                    {#<li class="element isotope-filter1 isotope-filter3 col-sm-4 col-xs-12" style="position: absolute; left: 0%; top: 1912px;">#}
+                        {#<div class="thumb-isotope">#}
+                            {#<div class="thumbnail clearfix">#}
+                                {#<a href="{{ asset('module/agencevoyage/images/gallery10.jpg') }}" rel="prettyPhoto[mix]" title="Photo">#}
+                                    {#<figure>#}
+                                        {#<img src="{{ asset('module/agencevoyage/images/gallery10.jpg') }}" alt=""><em></em>#}
+                                    {#</figure>#}
+                                    {#<div class="caption">#}
+                                        {#<div class="txt1">cannes, france</div>#}
+                                        {#<div class="txt2">hotel carlton</div>#}
+                                    {#</div>#}
+                                {#</a>#}
+                            {#</div>#}
+                        {#</div>#}
+                    {#</li>#}
+
+
+                </ul>
+            </div>
+        </div>
+
+
+    </div>
+</div>

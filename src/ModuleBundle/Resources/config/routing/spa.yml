@@ -1,0 +1,189 @@
+module_spa_homepage:
+    path:     /
+    defaults: { _controller: ModuleBundle:Spa:header }
+module_spa_upload:
+     path: /upload/{idqq}
+     defaults: { _controller: ModuleBundle:Spa:storeFolder}
+     methods: [GET, POST]
+module_spa_delate:
+     path: /delate
+     defaults: { _controller: ModuleBundle:Spa:DeleteFile}
+     methods: [GET, POST]
+module_spa_tmp_folder:
+     path: /tmp/{qq_id}
+     defaults: { _controller: ModuleBundle:Spa:tmpfolder}
+     methods: [GET, POST]
+module_spa_service:
+     path: /service
+     defaults: { _controller: ModuleBundle:Spa:service}
+     methods: [GET, POST]
+
+module_spa_service_edit:
+     path: /service/edit
+     defaults: { _controller: ModuleBundle:Spa:edit}
+     methods: [GET, POST]
+
+module_spa_event:
+     path: /event
+     defaults: { _controller: ModuleBundle:Spa:event}
+     methods: [GET, POST]
+module_spa_gallery:
+     path: /gallery/{id_qq}
+     defaults: { _controller: ModuleBundle:Spa:gallery}
+     methods: [GET, POST]
+module_spa_about:
+     path: /edit_about
+     defaults: { _controller: ModuleBundle:Spa:edit_about}
+     methods: [GET, POST]
+
+module_spa_avatar:
+     path: /avatar/{id}
+     defaults: { _controller: ModuleBundle:Spa:img_apropos}
+     methods: [GET, POST]
+module_spa_delate_gallery:
+     path: /delate_gallery
+     defaults: { _controller: ModuleBundle:Spa:DeleteFileFromGallery}
+     methods: [GET, POST]
+module_spa_change_color:
+     path: /colors/{qq_id}
+     defaults: { _controller: ModuleBundle:Spa:spachangecolor}
+     methods: [GET, POST]
+module_spa_booking:
+     path: /booking/{id_qq}
+     defaults: { _controller: ModuleBundle:Spa:booking}
+     methods: [GET, POST]
+module_spa_ajout_service:
+     path: /ajout
+     defaults: { _controller: ModuleBundle:Spa:ajoutservice}
+     methods: [GET, POST]
+module_spa_ajout_event:
+     path: /ajout_event
+     defaults: { _controller: ModuleBundle:Spa:ajoutevent}
+     methods: [GET, POST]
+
+module_spa_ajout_carte:
+     path: /carte
+     defaults: { _controller: ModuleBundle:Spa:ajoutcarte}
+     methods: [GET, POST]
+
+module_spa_affich_carte:
+     path: /affich/carte
+     defaults: { _controller: ModuleBundle:Spa:affichcarte}
+     methods: [GET, POST]
+module_spa_delate_service:
+     path: /supprim
+     defaults: { _controller: ModuleBundle:Spa:delateservice}
+     methods: [GET, POST]
+module_spa_delate_event:
+     path: /supprim/event
+     defaults: { _controller: ModuleBundle:Spa:delateevent}
+     methods: [GET, POST]
+module_spa_edit_service:
+     path: /edit
+     defaults: { _controller: ModuleBundle:Spa:editservice}
+     methods: [GET, POST]
+
+module_spa_modif_service:
+     path: /modif
+     defaults: { _controller: ModuleBundle:Spa:modifservice}
+     methods: [GET, POST]
+
+module_spa_edit_event:
+     path: /edit_event
+     defaults: { _controller: ModuleBundle:Spa:editevent}
+     methods: [GET, POST]
+module_spa_modif_event:
+     path: /modif_event
+     defaults: { _controller: ModuleBundle:Spa:modifevent}
+     methods: [GET, POST]
+
+module_spa_send_mail:
+     path: /send/mail/{idqq}
+     defaults: { _controller: ModuleBundle:Spa:sendMail}
+     methods: [GET, POST]
+
+module_spa_couleur:
+     path: /couleur/{idqq}
+     defaults: { _controller: ModuleBundle:Spa:ThemeColor}
+     methods: [GET, POST]
+module_spa_getcolor:
+     path: /couleur/{idqq}
+     defaults: { _controller: ModuleBundle:Spa:SetColor}
+     methods: [GET, POST]
+module_spa_ajoutcarte_type:
+     path: /ajout/carte/{idqq}
+     defaults: { _controller: ModuleBundle:Spa:ajoutcartetype}
+     methods: [GET, POST]
+module_spa_modifier_carte:
+     path: /edit_carte
+     defaults: { _controller: ModuleBundle:Spa:modifierCarte}
+     methods: [GET, POST]
+
+module_spa_modif_carte:
+     path: /modif/carte
+     defaults: { _controller: ModuleBundle:Spa:modifCarte}
+     methods: [GET, POST]
+module_spa_delate_carte:
+     path: /supprim/carte
+     defaults: { _controller: ModuleBundle:Spa:delateCarte}
+     methods: [GET, POST]
+module_spa_section-reservation:
+     path: /reserver{idqq}
+     defaults: { _controller: ModuleBundle:Spa:SectionReserver}
+     methods: [GET, POST]
+module_spa_delete_image:
+     path: /delete/photo/{idqq}
+     defaults: { _controller: ModuleBundle:Spa:deleteLogo}
+     methods: [GET, POST]
+module_spa_add_service:
+     path: /service/{idqq}
+     defaults: { _controller: ModuleBundle:Spa:addService}
+     methods: [GET, POST]
+module_spa_update_service:
+     path: /update-service/{idqq}
+     defaults: { _controller: ModuleBundle:Spa:updateService}
+     methods: [GET, POST]
+module_spa_get_json_spa:
+     path: /getjson
+     defaults: { _controller: ModuleBundle:Spa:getJsonSpa}
+     methods: [GET, POST]
+module_spa_supprim_services:
+     path: /delate/{idqq}/{idserv}
+     defaults: { _controller: ModuleBundle:Spa:delateServiceSpa}
+     methods: [GET, POST]
+module_spa_add_offre:
+      path: /offre/{idqq}
+      defaults: { _controller: ModuleBundle:Spa:addOffres}
+      methods: [GET, POST]
+
+module_spa_get_json_offre:
+     path: /jsonoffre
+     defaults: { _controller: ModuleBundle:Spa:getJsonOffreSpa}
+     methods: [GET, POST]
+
+module_spa_update_event:
+     path: /update-event/{idqq}
+     defaults: { _controller: ModuleBundle:Spa:updateEvent}
+     methods: [GET, POST]
+module_spa_delate_events:
+     path: /delate-event/{idqq}/{idevent}
+     defaults: { _controller: ModuleBundle:Spa:delateEventSpa}
+     methods: [GET, POST]
+module_spa_reservation:
+     path: /booking_spa/{idqq}
+     defaults: { _controller: ModuleBundle:Spa:spabooking}
+     methods: [GET, POST]
+module_spa_paginates:
+     path: /paginates/{page}/{id}
+     defaults: { _controller: ModuleBundle:Spa:Paginates}
+     methods: [GET, POST]
+module_spa_event_paginate:
+     path: /eventpaginate/{page}/{id}
+     defaults: { _controller: ModuleBundle:Spa:morePaginatOffre}
+     methods: [GET, POST]
+
+
+module_spa_service_moins_paginate:
+     path: /moinspaginate/{page}/{id}
+     defaults: { _controller: ModuleBundle:Spa:ficheMoinsPages}
+     methods: [GET, POST]

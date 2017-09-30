@@ -1,0 +1,24 @@
+ngn_index:
+    path:     /
+    defaults: { _controller: "AdminBundle:NGN:index" }
+    methods:  GET
+
+ngn_show:
+    path:     /{id}/show
+    defaults: { _controller: "AdminBundle:NGN:show" }
+    methods:  GET
+
+ngn_new:
+    path:     /new
+    defaults: { _controller: "AdminBundle:NGN:new" }
+    methods:  [GET, POST]
+
+ngn_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "AdminBundle:NGN:edit" }
+    methods:  [GET, POST]
+
+ngn_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "AdminBundle:NGN:delete" }
+    methods:  DELETE

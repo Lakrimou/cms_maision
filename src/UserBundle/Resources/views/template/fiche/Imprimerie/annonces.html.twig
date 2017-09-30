@@ -1,0 +1,453 @@
+<section id="section-annonces" class="property-details padding">
+    {% if attributes.connected %}
+        <div class="row">
+            <div class="pull-righ" style="    margin-right: 24px;">
+                <div data-step="4" data-intro="This is a tooltip!" class="pull-right margin-bott-40">
+                    <button type="button" class="theme-btn button11 btn-style-one pull-right" data-toggle="modal"
+                            data-target="#listOffres">Gérer cette section
+                    </button>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 bottom40">
+                <h2 class="text-uppercase">Nos <span class="color_red">Offres</span></h2>
+                <div class="line_1"></div>
+                <div class="line_2"></div>
+                <div class="line_3"></div>
+
+            </div>
+        </div>
+        {% if mission.event is defined %}
+        {% set arrayEvent= mission.event %}
+
+
+        {% if( mission.event|length == 1) %}
+        <div class="col-md-12 col-md-offset-4 col-xs-12 col-xs-offset-0">
+            {% elseif ( mission.event|length == 2) %}
+            <div class="col-md-12 col-md-offset-2 col-xs-12 col-xs-offset-0">
+                {% else %}
+                <div class="col-md-12">
+                    {% endif %}
+                    <div class="row">
+
+
+                        <div>
+                            {% for b in arrayEvent|sort|reverse %}
+
+                                <div class="item col-md-4">
+                                    <div class="property_item bottom40">
+                                        <div class="image image-content-offre"
+                                             style="background-image:url('{{ asset('uploads/image/') }}{{ attributes.quoiqui.user.id }}/{{ attributes.quoiqui.id }}/event/{{ b.idOffre~'.jpg' }}')">
+
+
+                                            <div class="price"><span class="tag" style="font-size: 26px;">
+                                                    </span></div>
+                                            <div class="overlay">
+                                                <div class="centered"><a class="link_arrow white_border voir-plus"
+                                                                         data-toggle="modal" data-target="#Show_detail"
+                                                                         href="#" data-qq="{{ attributes.quoiqui.id }}"
+                                                                         data-idevent="{{ b.idOffre }}">Voir Plus </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="proerty_content">
+                                            <div class="proerty_text" style="height: 145px">
+
+                                                <h3>
+                                                    {% if b.categorie is defined %}
+                                                        {{ b.categorie }}
+                                                    {% endif %}
+                                                </h3>
+                                                <p style="font-size: 20px;"><strong>
+
+                                                    </strong></p>
+                                                {#<span class="bottom10">Merrick Way, Miami, USA</span>#}
+                                                {% if b.description is not empty %}
+                                                    <p>{{ b.description|slice(0,40)|raw }}... </p>
+                                                {% endif %}
+                                            </div>
+                                            <div class="favroute clearfix">
+                                                <p class="pull-left" style="font-size: 25px;">
+                                                </p>
+
+                                                <ul style="margin-left: 105px;">
+                                                    <li style="font-size: 19px;margin-right: 14px;"
+                                                        class="voir-plus"
+                                                        data-qq="{{ attributes.quoiqui.id }}"
+                                                        data-idevent="{{ b.idOffre }}" data-toggle="modal"
+                                                        data-target="#Show_detail"><i class="fa fa-eye"
+                                                                                      style=" margin-top: 14px; margin-right: 10px;"
+                                                                                      aria-hidden="true" about=""
+
+                                                        ></i>Voir plus
+                                                    </li>
+                                                    {#<li><a href="#."><i class="icon-like"></i></a></li>#}
+                                                </ul>
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="paralax-icon">
+        <div class="particle elem1 anim-delay1"></div>
+        <div class="particle elem2 anim-delay5"></div>
+        <div class="particle elem3 anim-delay3"></div>
+        <div class="particle elem4 anim-delay8"></div>
+        <div class="particle elem5 anim-delay9"></div>
+        <div class="particle elem6 anim-delay2"></div>
+        <div class="particle elem7 anim-delay4"></div>
+        <div class="particle elem8 anim-delay3"></div>
+        <div class="particle elem9 anim-delay10"></div>
+        <div class="particle elem8 anim-delay11"></div>
+        <div class="particle elem6 anim-delay12"></div>
+        <div class="particle elem1 anim-delay14"></div>
+        <div class="particle elem13 anim-delay16"></div>
+        <div class="particle elem17 anim-delay18"></div>
+        <div class="particle elem2 anim-delay6"></div>
+        <div class="particle elem16 anim-delay9"></div>
+        <div class="particle elem8 anim-delay3"></div>
+        <div class="particle elem9 anim-delay10"></div>
+        <div class="particle elem18 anim-delay11"></div>
+        <div class="particle elem11 anim-delay12"></div>
+        <div class="particle elem12 anim-delay14"></div>
+        <div class="particle elem13 anim-delay16"></div>
+        <div class="particle elem14 anim-delay18"></div>
+        <div class="particle elem15 anim-delay6"></div>
+        <div class="particle elem16 anim-delay9"></div>
+        <div class="particle elem17 anim-delay7"></div>
+        <div class="particle elem18 anim-delay6"></div>
+        <div class="particle elem19 anim-delay3"></div>
+    </div>
+</section>
+
+<div class="modal fade" id="listOffres" role="dialog">
+    <div class="modal-dialog modal-lg">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Liste des offres</h4>
+
+            </div>
+            <div class="modal-body">
+                <div class="container">
+                    <table class=" dataTable table table-striped table-bordered  " cellspacing="0" width="100%">
+                        <thead>
+                        <tr>
+                            <th>Image</th>
+                            <th>Document</th>
+
+                            <th>Modifier</th>
+                            <th>Supprimer</th>
+                        </tr>
+                        </thead>
+
+                        <tbody>
+                        {% if mission .event is defined %}
+                            {% set arrayEvent=mission .event %}
+                            {% for b in arrayEvent|sort|reverse %}
+
+                                <tr data-td="{{ b.idOffre }}">
+
+                                    <td>
+
+                                        <img src="{{ asset('uploads/image/') }}{{ attributes.quoiqui.user.id }}/{{ attributes.quoiqui.id }}/event/{{ b.idOffre ~'.jpg' }}"
+                                             data-pin-nopin="true" style="  max-width:  20%;">
+
+                                    </td>
+                                    <td>
+                                        {% if b.categorie is defined %}
+                                            {{ b.categorie }}
+                                        {% endif %}
+                                    </td>
+
+
+                                    <td>
+
+                                        <a href="#" class=" btn btn-info a-btn-slide-text edit-offre"
+                                           data-serv="{{ b.idOffre }}"
+                                           data-id="{{ attributes.quoiqui.id }}" data-toggle="modal"
+                                           data-target="#editOffre">
+
+                                            <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                                            <span><strong>Modifier</strong></span>
+                                        </a>
+
+                                    </td>
+
+
+                                    <td>
+
+                                        <a href="{{ path('module_spa_delate_events',{"idqq": attributes.quoiqui.id,"idevent": b.idOffre }) }}"
+                                           class=" btn btn-danger a-btn-slide-text service_suprim"
+                                           onclick="clickOffConfirmed = confirm('Vous voulez le  supprimer ?');">
+                                            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                            <span><strong>Supprimer</strong></span>
+                                        </a>
+                                    </td>
+
+                                </tr>
+                                {#{% endfor %}#}
+                            {% endfor %}
+                        {% endif %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addEvent"
+                >Ajouter une offre
+                </button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Fermer</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="addEvent" role="dialog">
+    <div class="modal-dialog ">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Ajouter une Offre</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <form id="addOffre" method="POST"
+                          action="{{ path('imprimerie_add_offre', {"idqq":attributes.quoiqui.id}) }}"
+                          enctype="multipart/form-data">
+                        <input type="hidden" name="idOffre" value="{{ uniqueId() }}">
+
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <select class="selectpicker form-control" id="categories" name="categorie">
+                                    <option selected disabled>Type de Véhicule</option>
+                                    <option value="autre" style="font-weight: 700;font-size: 20px;">Ajouter une nouvelle offre
+                                    </option>
+                                    <option value="Flayer">Flayer</option>
+                                    <option value="carte visite">carte visite</option>
+                                    <option value="Invitations">Invitations</option>
+                                    <option value="Cartes de voeux">Cartes de voeux</option>
+                                    <option value="Enveloppes et pochettes">Enveloppes et pochettes</option>
+                                    <option value="Brochures">Brochures</option>
+                                    <option value="Pelliculage">Pelliculage</option>
+                                    <option value="Affiches (petits et grands formats)">Affiches (petits et grands formats)</option>
+                                    <option value="Ajouter une offre">Ajouter une offre</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-12">Description</label>
+                                <textarea placeholder="Entrer la description.." rows="3"
+                                          class="form-control textarea "
+                                          name="description" required="required"></textarea>
+                            </div>
+
+                            <div class=" form-group">
+                                <label class="col-md-12">Choisissez une photo</label>
+                                <input autocomplete="off" class="form-control "
+                                       name="file" type="file"
+                                       placeholder="choisissez_image" data-items="8"/>
+
+                            </div>
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Fermer</button>
+                <button type="submit" class=" btn btn-primary button-default" data-target="modifier"
+                        data-selector="addOffre">
+                    Enregistrer
+                </button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="modal fade" id="editOffre" role="dialog">
+    <div class="modal-dialog ">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Modifier l'offre</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <form id="editOffreForm" method="POST"
+                          action="{{ path('imprimerie_update_event',{"idqq":attributes.quoiqui.id}) }}"
+                          enctype="multipart/form-data">
+
+
+                        <input id="idEvent" type="hidden" name="idOffre" value="">
+
+                        <div class="col-md-12">
+
+                            <div class="form-group">
+                                <select class="selectpicker form-control" id="editcategories" name="categorie">
+                                    <option selected disabled>Type de Véhicule</option>
+                                    <option value="Flayer">Flayer</option>
+                                    <option value="carte visite">carte visite</option>
+                                    <option value="Invitations">Invitations</option>
+                                    <option value="Cartes de voeux">Cartes de voeux</option>
+                                    <option value="Enveloppes et pochettes">Enveloppes et pochettes</option>
+                                    <option value="Brochures">Brochures</option>
+                                    <option value="Pelliculage">Pelliculage</option>
+                                    <option value="Affiches (petits et grands formats)">Affiches (petits et grands formats)</option>
+                                    <option value="Ajouter une offre">Ajouter une offre</option>
+                                </select>
+                            </div>
+                            {#<div class="form-group">
+
+                                <select id="sousCategoriesHidden" style="display: none;">
+                                    <option selected disabled>Equipement</option>
+                                    {%  for model in models %}
+                                        <option value="{{ model.id }}" data-cat="{{ model.mark.id}}"> {{ model.name }}</option>
+                                    {% endfor %}
+                                </select>
+
+                                <select class="selectpicker form-control js-example-basic-multiple editequip" id="editsouscategories" name="souscategorie[]" multiple="multiple">
+                                </select>
+
+                            </div>#}
+
+                            <div class="form-group">
+                                <label class="col-md-12">Description</label>
+                                <textarea id="descr" placeholder="Entrer la description.." rows="3"
+                                          class="form-control textarea   description-edit"
+                                          name="description" required="required"></textarea>
+                            </div>
+
+
+                            <div class=" form-group">
+                                <label class="col-md-12">Choisissez une photo</label>
+                                <input autocomplete="off" class="form-control "
+                                       name="file" type="file"
+
+                                       placeholder="choisissez_image" data-items="8"/>
+
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Fermer</button>
+                <button type="submit" class="btn btn-primary button-default" data-target="modifier"
+                        data-selector="editOffreForm">
+                    Enregistrer
+                </button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="modal fade" id="Show_detail" role="dialog">
+    <div class="modal-dialog modal-md">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            {#<div class="modal-header">#}
+            <button type="button" class="close" data-dismiss="modal"
+                    style="margin-top: 15px; ;margin-right:32px;">&times;</button>
+
+            {#</div>#}
+            {#<div id="header" class="modal-header " style="text-align: center;font-size: 27px;color: {{ random(tab) }}">#}
+            {#<button type="button" class="close" data-dismiss="modal">&times;</button>#}
+
+            {#</div>#}
+            <div class="modal-body">
+                <div id="news-section-1">
+
+                    <div class="row">
+                        <div style="text-align: center">
+                            <span id="equipment" class="service-details-titre color_red G_titre" ></span>
+                            {#<h3 class="text-uppercase" id="servamb"></h3>#}
+                        </div>
+                        <div class="col-md-12 col-md-offset-5 col-xs-12 col-xs-offset-3">
+
+
+                            <div class="line_1" style="width:180px;"></div>
+                            <div class="line_2"></div>
+                            <div class="line_3"></div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+
+                            <div class="col-md-4">
+
+                                <input type="hidden" id="idImgambs" value="">
+                                <div class="col-md-12 ">
+                                    <img id="AmbsImg" src="" class="img-responsive" style="width: 100%">
+                                    {#<img src="http://logicsforest.com/ideahomes_demo_files/images/property-d-1-1.jpg" class="img-responsive" alt=""/>#}
+                                </div>
+
+
+                            </div>
+                            <div class="col-md-8 ">
+
+
+                                <h3 class="text-uppercase ">Nos <span
+                                            class="color_red">  Pack Matériel</span></h3>
+
+                                <ul id="myList">
+                                    <li></li>
+                                </ul>
+                                <h3 class="text-uppercase " style="margin-bottom:20px;">Description <span
+                                            class="color_red"> Détaillé</span></h3>
+                                <p class="bottom30" id="ambdetails"></p>
+                                {#<span id="link1"></span>#}
+                                {#<p id="lire_suite"></p>#}
+                                <button data-toggle="modal" data-target="#modalSectionRappeler" style="font-size: 22px;"
+                                        class="col-md-12 col-xs-12 spacontact top10 btn btn-danger">
+                                    <i class="fa fa-phone"aria-hidden="true" style="margin-right: 10px;"></i>Demande de rappel
+                                </button>
+
+                                <a href="tel:{{ attributes.quoiqui.phone }}" style="font-size: 22px;"
+                                   class="col-md-12 col-xs-12 spacontact top10 btn btn-danger"> Contacter Nous:  <i
+                                            class="fa fa-phone"
+                                            aria-hidden="true"></i> {{ attributes.quoiqui.phone }}
+                                </a>
+
+
+                            </div>
+
+
+                        </div>
+                    </div>
+
+                </div>
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Fermer</button>
+
+            </div>
+        </div>
+
+    </div>
+</div>

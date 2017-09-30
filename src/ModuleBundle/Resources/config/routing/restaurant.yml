@@ -1,0 +1,46 @@
+module_restaurant_addMenu:
+    path:     /module_restaurant_addMenu
+    defaults: { _controller: ModuleBundle:Restaurant:addMenu}
+
+
+restaurant_service_add:
+    path:     /service/add
+    defaults: { _controller: "ModuleBundle:Restaurant:addService" }
+restaurant_service_show:
+    path:     /service/show/{id}/{pos}
+    defaults: { _controller: "ModuleBundle:Restaurant:showService" }
+restaurant_service_remove:
+    path:     /service/delete/{id}/{pos}
+    defaults: { _controller: "ModuleBundle:Restaurant:deleteService" }
+restaurant_service_edit:
+    path:     /service/edit/{id}/{pos}
+    defaults: { _controller: "ModuleBundle:Restaurant:editService" }
+restaurant_service_update:
+    path:     /service/update/{id}
+    defaults: { _controller: "ModuleBundle:Restaurant:updateService" }
+
+
+restaurant_annonce_add:
+    path:     /annonce/add
+    defaults: { _controller: "ModuleBundle:Restaurant:addAnnonces" }
+restaurant_annonce_show:
+    path:     /annonce/show/{id}/{idq}
+    defaults: { _controller: "ModuleBundle:Restaurant:showAnnonces" }
+restaurant_annonce_remove:
+    path:     /annonce/delete/{id}
+    defaults: { _controller: "ModuleBundle:Restaurant:deleteAnnonces" }
+restaurant_annonce_edit:
+    path:     /annonce/edit/{id}
+    defaults: { _controller: "ModuleBundle:Restaurant:editAnnonces" }
+restaurant_annonce_update:
+    path:     /annonce/update
+    defaults: { _controller: "ModuleBundle:Restaurant:updateAnnonces" }
+restaurant_annonce_commande:
+    path:     /annonce/commande
+    defaults: { _controller: "ModuleBundle:Restaurant:commandeAnnonces" }
+restaurant_annonce_filter:
+    path:     /annonce/filter/{filter}/{id}
+    defaults: { _controller: "ModuleBundle:Restaurant:filterAnnonce" }
+restaurant_annonce_remove_picture:
+    path:     /annonce/delete/picture/{id}/{pic}
+    defaults: { _controller: "ModuleBundle:Restaurant:deletePictureAnnonces" }

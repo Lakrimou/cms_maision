@@ -1,0 +1,81 @@
+{#=============================Edit Service============================#}
+{% for hS in module %}
+    {% if hS.descriptionServices is not null %}
+        <div class="modal fade edit-services-modal-lg" tabindex="-1" role="dialog"
+             aria-labelledby="myLargeModalLabel" id="edit-service{{ loop.index }}">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                    aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Modifier</h4>
+                    </div>
+                    <div class="modal-body">
+
+                        <div class="col-md-12">
+                            <div class="well-block">
+                                <form action="{{ path('hotel_editService', {'id_qq': qouiqui.id, 'id_ch': hS.id}) }}"
+                                      method="POST"
+                                      name="edit-service-form" enctype="multipart/form-data">
+                                    <!-- Form start -->
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label class="control-label" for="name">Titre</label>
+                                                <input id="hotelservice" name="services[nameService]" type="text"
+                                                       placeholder="Titre" class="form-control input-md"
+                                                       value="{{ hS.descriptionServices.nameService }}" required/>
+                                            </div>
+                                        </div>
+
+                                        <!-- Text input-->
+
+                                        <!-- Text input-->
+                                        <!-- Text area -->
+                                        <!-- Textarea -->
+                                        <div class="form-group">
+                                            <label class="col-md-12 control-label"
+                                                   for="keyinformation">Description</label>
+                                            <div class="col-md-12 textareaServices">
+                                                <textarea name="services[servicesDetails]"
+                                                          class="ckeditor">{{ hS.descriptionServices.servicesDetails }}</textarea>
+                                            </div>
+
+                                        </div>
+                                        <!-- Text area -->
+                                        <div class="col-md-12"><br/></div>
+                                        <div class="col-md-12 add-room ">
+                                            <div class="form-group">
+                                                <label class="btn-bs-file theme-btn btn-style-two">
+                                                    Cliquer ici pour ajouter une photo
+                                                    <input type="file" class="imageUps"
+                                                           class="form-control inline-block uploadImage"
+                                                           name="services[imageService]" />
+                                                </label>
+                                                <img class="imageUplo" src="#" alt="image upload" class="upImg"/>
+                                            </div>
+                                        </div>
+                                        <!-- Button -->
+
+                                    </div>
+                                    <button type="submit" class="theme-btn btn-style-two envoyerUpload" id="ajouter-services">
+                                        Modifier
+                                    </button>
+                                    <button type="button" class="theme-btn btn-style-one pull-right " data-dismiss="modal">Fermer
+                                    </button>
+                                </form>
+                                <!-- form end -->
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+{% endfor %}
+
+{#=============================Edit Service============================#}

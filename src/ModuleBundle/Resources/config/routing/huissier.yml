@@ -1,0 +1,18 @@
+module_huissier_add_mission:
+     path: /addMission/{idqq}
+     defaults: { _controller: ModuleBundle:Huissier:addMissionHuissier}
+     methods: [GET, POST]
+
+module_huissier_get_data:
+      path: /datajson
+      defaults: { _controller: ModuleBundle:Huissier:getJsonHuissier}
+      methods: [GET, POST]
+
+module_huissier_update_mission:
+      path: /updateMission/{idqq}
+      defaults: { _controller: ModuleBundle:Huissier:updateHuissier}
+      methods: [GET, POST]
+module_huissier_delate_mission:
+      path: /delateMission/{idqq}/{idserv}
+      defaults: { _controller: ModuleBundle:Huissier:delateMissionHuissier}
+      methods: [GET, POST]

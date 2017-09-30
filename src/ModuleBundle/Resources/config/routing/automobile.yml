@@ -1,0 +1,90 @@
+car_new:
+    path:     /{id}/new/{idVoiture}
+    defaults: { _controller: "AdminBundle:Car:ajouter_voiture" }
+    methods:  [GET, POST]
+
+
+delete_file:
+    path:     /delete/AutomobileImage
+    defaults: { _controller: "AdminBundle:Car:deleteFile" }
+    methods:  [GET, POST]
+slider_new:
+    path:     /{id}/slide/
+    defaults: { _controller: "AdminBundle:Car:createSlider" }
+    methods:  [GET, POST]
+delete_slide:
+    path:     /deleteSlider/Automobile
+    defaults: { _controller: "AdminBundle:Car:deleteSlider" }
+    methods:  [GET, POST]
+update_about:
+    path:     /{id}/updateAbout
+    defaults: { _controller: "AdminBundle:Car:updateAbout" }
+    methods:  [GET, POST]
+list_offers:
+    path:     /listOffers
+    defaults: { _controller: "ModuleBundle:Automobile:getOffers" }
+    methods:  [GET, POST]
+list_slides:
+    path:     /listSlides
+    defaults: { _controller: "ModuleBundle:Automobile:getSlides" }
+    methods:  [GET, POST]
+list_last_offers:
+    path:     /listLastOffers
+    defaults: { _controller: "ModuleBundle:Automobile:getLastOffers" }
+    methods:  [GET, POST]
+send_mail:
+    path:   /sendMail
+    defaults: { _controller: "ModuleBundle:Automobile:sendMail" }
+    methods:  [GET, POST]
+
+
+delete_offer:
+    path:   /deletOffer/{idQuoi}/{idModule}
+    defaults: { _controller: "ModuleBundle:Automobile:deleteOffer" }
+    methods:  [GET, POST]
+
+change_principale_image:
+    path:   /changePrincipaleImage/
+    defaults: { _controller: "ModuleBundle:Automobile:changePrincipaleImage" }
+    methods:  [GET, POST]
+update_last_offers:
+    path:   /updateLastOffers/{id}
+    defaults: { _controller: "ModuleBundle:Automobile:updateLastOffers" }
+    methods:  [GET, POST]
+
+update-profile:
+    path:   /updateProfile/{id}
+    defaults: { _controller: "ModuleBundle:Automobile:updateProfile" }
+    methods:  [GET, POST]
+
+change_color_theme:
+    path:   /changeColorTheme/
+    defaults: { _controller: "ModuleBundle:Automobile:changeColorTheme" }
+    methods:  [GET, POST]
+list_models:
+   path:    /listModels
+   defaults: { _controller: "ModuleBundle:Automobile:listModels" }
+   methods:  [GET, POST]
+
+
+
+list_marks:
+     path:    /listMarks
+     defaults: { _controller: "ModuleBundle:Automobile:listMarks" }
+     methods:  [GET, POST]
+test:
+     path:    /test
+     defaults: { _controller: "ModuleBundle:secrect:addMarks" }
+     methods:  [GET, POST]
+
+update-profile-simple-user:
+    path:   /updateProfileSimpleUser/{id}
+    defaults: { _controller: "ModuleBundle:Automobile:updateProfileSimpleUser" }
+    methods:  [GET, POST]
+
+
+update_password:
+    path:   /updatePassword
+    defaults: { _controller: "ModuleBundle:Automobile:updatePassword" }
+    methods:  [GET, POST]
+

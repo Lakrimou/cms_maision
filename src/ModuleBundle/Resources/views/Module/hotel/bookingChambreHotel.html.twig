@@ -1,0 +1,92 @@
+{% for ch in module %}
+    {% if ch.descriptionRoom is not null %}
+        <div class="modal fade bookch" id="modal_booking{{ ch.id }}"  tabindex="-1" role="dialog"
+             aria-labelledby="exampleModalLabel"
+             aria-hidden="true" >
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header color-header">
+
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+
+                        <div class="container make_an_appointment events-reserv">
+                            <div class="row">
+                                <div class="col-sm-6  col-xs-12">
+                                    <form method="POST"
+                                          action="{{ path('module_hotel_booking',{'id_qq': qouiqui.id, 'id_ch': ch.id }) }}">
+                                        <div class="text-center">
+                                            <h3 class="text-uppercase resev-ht">Réserver</h3>
+                                        </div>
+
+
+                                        <div class="col-sm-12 col-xs-12 form-group">
+                                            <label>Type de chambre</label>
+                                           <select  class="chambreListe" style="width:100%"  >
+                                               {% for ch in module %}
+                                               {% if ch.descriptionRoom is not null %}
+
+                                               <option data-prix="{{ ch.descriptionRoom.prix}}"  value="{{ ch.id }}" name="type_chambre">{{ ch.descriptionRoom.nombre }} / {{ ch.descriptionRoom.nombreLit }}</option>
+
+                                               {% endif %}
+                                               {% endfor %}
+                                           </select>
+                                            <label>Prix/Nuit</label>
+                                            <strong type="number" class="form-control prix" id="price"
+                                                    name="price" >{{ ch.descriptionRoom.prix }} DT</strong>
+
+                                        </div>
+                                        <div class="col-sm-6 col-xs-12  ">
+                                            <div class="form-group">
+                                                <label>Date d'arrivée</label>
+                                                <div class='input-group'>
+                                                    <input type='date' class="form-control " name="dateDebut" required/>
+                                                    <span class="input-group-addon calandrier_reserv">
+                                                            <span class="glyphicon glyphicon-calendar"></span>
+                                                    </span>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-sm-6 col-xs-12  ">
+                                            <div class="form-group">
+                                                <label>Date de départ</label>
+                                                <div class='input-group'>
+                                                    <input type='date' class="form-control " name="dateFin" required/>
+                                                    <span class="input-group-addon calandrier_reserv">
+                                                            <span class="glyphicon glyphicon-calendar"></span>
+                                                    </span>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+
+                                        <div class="col-sm-12 col-xs-12 submit_btn text-center">
+
+                                        </div>
+                                        <button type="submit" class="theme-btn btn-style-two " data-target="modifier"
+                                                data-selector="booking">
+                                            Réserver
+                                        </button>
+                                        <button type="button" class="btn-style-four pull-right" data-dismiss="modal">
+                                            Annuler
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div class="modal-footer">
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    {% endif %}
+{% endfor %}

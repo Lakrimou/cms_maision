@@ -1,0 +1,418 @@
+{% set connected = false %}
+{% if app.user %}
+    {% if app.user.id == qouiqui.user.id %}
+        {% set connected = true %}
+    {% endif %}
+{% endif %}
+
+{% set horaire = jsonDecod(qouiqui.opening) %}
+
+{% set  data = jsonDecod(qouiqui.data) %}
+
+{% set motif = false %}
+{% if  theme.color.background.motif is defined %}
+    {% set motif = true %}
+{% endif %}
+
+{% set animation = false %}
+{% if theme.color.background.animation is defined %}
+    {% set animation = true %}
+{% endif %}
+{% set annonce_slider = randomAnnonce(module) %}
+
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <?xml version="1.0" encoding="UTF-8"?>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+    <title>{{ qouiqui.firstName|capitalize }} {% for location in qouiqui.qvilles %}{% if location.delegation %}, {{ location.delegation.libelle }}{% endif %}{% if location.ville %}, {{ location.ville.libelle }}{% endif %}{% endfor %}</title>
+    <link rel="stylesheet" type="text/css" href="{{ asset('tpl/fiche/css/master.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('asset-back/plugins/dropzone/dropzone.min.css') }}">
+    <link rel='stylesheet' href='//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' type='text/css' media='all'/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-formhelpers/2.3.0/css/bootstrap-formhelpers.css">
+    <link rel="stylesheet" type="text/css" href="{{ asset('module/ecommerce/css/pnotify.custom.min.css') }}">
+    {#<link rel="stylesheet" href="{{ asset('module/immobiliair/css/animation.css') }}">#}
+    <link rel="stylesheet" type="text/css" href="{{ asset('asset-front/css/animate.css') }}">
+    <link href="{{ asset('module/immobiliair/css/animate.css') }}" rel="stylesheet">
+    {#<link rel="stylesheet" type="text/css" href="{{ asset('module/immobiliair/css/animate.css') }}">#}
+    <link rel="stylesheet" type="text/css" href="{{ asset('tpl/css/jquery-confirm.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('tpl/fiche/css/jquery.fileuploader.css') }}">
+    {% if connected %}
+        <link rel="stylesheet" type="text/css" href="{{ asset('tpl/fiche/css/cropper.min.css') }}">
+
+    {% endif %}
+    <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/responsive/2.2.0/css/responsive.bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="{{ asset('tpl/fiche/css/fiche.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('tpl/css/introjs.css') }}">
+    <link rel="stylesheet" type="text/css" href="//csshake.surge.sh/csshake.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tokenfield/0.12.0/css/bootstrap-tokenfield.css">
+    {#<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tour/0.11.0/css/bootstrap-tour.min.css">#}
+
+    <link rel="shortcut icon" href="images/short_icon.png">
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js'"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js'"></script>
+
+    <![endif]-->
+
+    <script>(function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s);
+            js.id = id;
+            js.src = "//connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v2.10&appId=438343659868946";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));</script>
+
+</head>
+<body ng-app="weenApp" ng-controller="weenAppController">
+<div drag-circular-menu angle="18" placement="bottomLeft" button-config="menuConfig3" menu-items="menuItems" default-open="false" onwing-click="onWingClick1(wing)"></div>
+<div id="fb-root"></div>
+
+<!-- >
+
+<!-- LOADER -->
+{#<div class="loader">#}
+{#<div class="cssload-thecube">#}
+{#<div class="cssload-cube cssload-c1"></div>#}
+{#<div class="cssload-cube cssload-c2"></div>#}
+{#<div class="cssload-cube cssload-c4"></div>#}
+{#<div class="cssload-cube cssload-c3"></div>#}
+{#</div>#}
+{#</div>#}
+<canvas id="canv" style="display: none;"></canvas>
+<img id="imgCanvas" style="display: none;">
+<!-- LOADER -->
+
+<!-- BACK TO TOP -->
+<a href="#" class="back-to"><i class="icon-arrow-up2"></i></a>
+<!-- BACK TO TOP -->
+
+
+<!--  Header Top Start  -->
+{{ include('@User/template/fiche/header.html.twig') }}
+<!--  Header Top End  -->
+
+
+<!--  Slider Start  -->
+{{ include('@User/template/fiche/slider.html.twig') }}
+<!--  Slider Top End  -->
+
+
+<!--  About Start  -->
+{{ include('@User/template/fiche/about.html.twig') }}
+<!--  About Top End  -->
+
+
+<!-- Services Start  -->
+
+{% if category.customService == 0 %}
+    {{ render(controller('ModuleBundle:Traiteur:ficheServices', {'quoiqui': qouiqui, 'theme': theme, 'module': module,'themeId':themeId ,'connected': connected,'category':category,'servieListe': servieListe})) }}
+{% else %}
+    {{ render(controller('ModuleBundle:'~category.slug~':ficheServices', {'quoiqui': qouiqui, 'theme': theme, 'module': module,'themeId':themeId ,'connected': connected,'category':category,'servieListe': servieListe})) }}
+{% endif %}
+
+{#{{ render(controller('ModuleBundle:'~category.slug|capitalize~':ficheServices')) }}#}
+{#{{ include('@User/template/fiche/services.html.twig') }}#}
+<!-- #/About End  -->
+
+
+<!-- Annances PROPERTY -->
+{{ render(controller('ModuleBundle:'~category.slug~':ficheAnnonces', {'quoiqui': qouiqui, 'theme': theme, 'module': module,'themeId':themeId ,'connected': connected})) }}
+
+{#{{ include('@User/template/fiche/annonces.html.twig') }}#}
+<!-- Annances PROPERTY -->
+
+
+<!-- Banner Start -->
+{{ include('@User/template/fiche/banner.html.twig') }}
+<!-- #/Banner End -->
+
+
+<!-- Gallery Start -->
+{{ include('@User/template/fiche/gallery.html.twig') }}
+<!-- #/Gallery End -->
+
+<!-- CONTACT -->
+{{ include('@User/template/fiche/contact.html.twig') }}
+<!-- #/CONTACT -->
+
+
+<!-- FOOTER -->
+<footer>
+    <div class="footer">
+        <div class="inner">
+            <div class="content">
+                <h5 class="logo  tlt" data-in-effect="swing" data-out-effect="swing" data-out-shuffle="true">{{ qouiqui.firstName }}</h5>
+                <ul>
+                    <li><a href="#section-accueil">Accueil</a></li>
+                    <li><a href="#section-apropos">A propos</a></li>
+                    <li><a href="#section-services">Nos services</a></li>
+                    <li><a href="#section-annonces">Nos annonces</a></li>
+                    <li><a href="#section-gallerie">Gallerie</a></li>
+                    <li><a href="#section-contact">Contactez-nous</a></li>
+                </ul>
+                <p class="copyright">Tous droits réservés © copyright {{ 'now'|date('Y') }}<br><a href="https://webmaster-media.tn" target="_blank">Création site web</a>&nbsp;par Webmaster Media</p></div>
+        </div>
+    </div>
+    {#<div class="brand"><img src="http://www.astertraining.com.tn/public_html/img/logo-footer.png"></div>#}
+    <div class="brand"><img src="//ween.tn/asset-front/images/logo.png"></div>
+</footer>
+
+<!-- #/FOOTER -->
+
+
+<!-- Modal S'identifier/ S'inscrire-->
+<div class="modal fade" id="modalLogin" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+
+            <div class="modal-body">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <div class="login-form-popup lp-border-radius-8">
+                    <div class="siginincontainer">
+                        <h1 class="text-center">S'identifier</h1>
+                        <form id="login" class="form-horizontal margin-top-30" method="post" action="/login_check">
+                            <input type="hidden" name="_csrf_token" value="Kk4KcJ-i6lPzu7pUx0wOja7L0g5uu9CI6uWJYDGVT4Q"/>
+                            <p class="status"></p>
+                            <div class="form-group">
+                                <label for="username">Adresse email *</label>
+                                <input type="text" class="form-control" id="username" name="_username" required/>
+                            </div>
+                            <div class="form-group">
+                                <label for="password">Mot de passe *</label>
+                                <input type="password" class="form-control" id="password" name="_password" required/>
+                            </div>
+                            <div class="form-group">
+                            </div>
+                            <div class="form-group">
+                                <div class="checkbox pad-bottom-10">
+                                    <input id="check1" type="checkbox" name="_remember_me" value="on">
+                                    <label for="check1">Se souvenir de moi</label>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <input type="submit" value="Se connecter" class="lp-secondary-btn width-full btn-first-hover"/>
+                            </div>
+                            <input type="hidden" id="security" name="security" value="9f8756cb45"/><input type="hidden" name="_wp_http_referer" value="/"/></form>
+                        <div class="pop-form-bottom">
+                            <div class="bottom-links">
+                                <a class="signUpClick">Nouveau sur Ween.tn? <strong style="color: #009688;">S'inscrire</strong></a>
+                                <a class="forgetPasswordClick pull-right" style="color: #009688;">Mot de passe oublié</a>
+                            </div>
+                            <p class="margin-top-15">Connectez-vous avec réseau social</p>
+                            <ul class="social-login list-style-none">
+                                <li>
+                                    <a id="logingoogle" class="google flaticon-googleplus" href="{{ path('hwi_oauth_connect') }}google">
+                                        <i class="fa fa-google-plus"></i>
+                                        <span>Google</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a id="loginfacebook" class="facebook flaticon-facebook" href="{{ path('hwi_oauth_connect') }}facebook">
+                                        <i class="fa fa-facebook"></i>
+                                        <span>Facebook</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a id="logintwitter" class="twitter flaticon-twitter" href="{{ path('hwi_oauth_connect') }}facebook">
+                                        <i class="fa fa-twitter"></i>
+                                        <span>Twitter</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <a class="md-close"><i class="fa fa-close"></i></a>
+                    </div>
+
+                    <div class="siginupcontainer">
+                        <h1 class="text-center">S'inscrire</h1>
+                        <form id="register" class="form-horizontal margin-top-30" method="post">
+                            <p class="status"></p>
+                            <div class="form-group">
+                                <label for="username">Nom et prénom *</label>
+                                <input type="text" class="form-control" id="username2" name="username"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Adresse email *</label>
+                                <input type="email" class="form-control" id="email" name="email"/>
+                            </div>
+                            <div class="form-group">
+                                <p>Le mot de passe vous sera envoyé par email.</p>
+                            </div>
+                            <div class="form-group">
+                            </div>
+                            <div class="form-group">
+                                <input type="submit" value="Enregistrer" class="lp-secondary-btn width-full btn-first-hover"/>
+                            </div>
+                            <input type="hidden" id="security" name="security" value="fac3396f28"/><input type="hidden" name="_wp_http_referer" value="/"/></form>
+                        <div class="pop-form-bottom">
+                            <div class="bottom-links">
+                                <a class="signInClick">Vous avez déjà un compte? Se connecter</a>
+                                <a class="forgetPasswordClick pull-right">Mot de passe oublié</a>
+                            </div>
+                            <p class="margin-top-15">Connectez-vous avec réseau social</p>
+                            <ul class="social-login list-style-none">
+                                <li>
+                                    <a id="logingoogle" class="google flaticon-googleplus" href="{{ path('hwi_oauth_connect') }}google">
+                                        <i class="fa fa-google-plus"></i>
+                                        <span>Google</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a id="loginfacebook" class="facebook flaticon-facebook" href="{{ path('hwi_oauth_connect') }}facebook">
+                                        <i class="fa fa-facebook"></i>
+                                        <span>Facebook</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a id="logintwitter" class="twitter flaticon-twitter" href="{{ path('hwi_oauth_connect') }}facebook">
+                                        <i class="fa fa-twitter"></i>
+                                        <span>Twitter</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <a class="md-close"><i class="fa fa-close"></i></a>
+                    </div>
+                    <div class="forgetpasswordcontainer">
+                        <h1 class="text-center">Mot de passe oublié</h1>
+                        <form class="form-horizontal margin-top-30" id="lp_forget_pass_form" action="#" method="post">
+                            <p class="status"></p>
+                            <div class="form-group">
+                                <label for="password">Adresse email *</label>
+                                <input type="email" name="user_login" class="form-control" id="email3"/>
+                            </div>
+                            <div class="form-group">
+                                <input type="submit" name="submit" value="Obtenir un nouveau mot de passe" class="lp-secondary-btn width-full btn-first-hover"/>
+                                <input type="hidden" id="security3" name="security3" value="48ca5eeb94"/><input type="hidden" name="_wp_http_referer" value="/"/></div>
+                        </form>
+                        <div class="pop-form-bottom">
+                            <div class="bottom-links"><a class="cancelClick">Annuler</a></div>
+                        </div>
+                        <a class="md-close"><i class="fa fa-close"></i></a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- END Modal S'identifier/ S'inscrire-->
+
+
+<script src="{{ asset('tpl/fiche/js/jquery.2.2.3.min.js') }}"></script>
+<script src="{{ asset('module/ecommerce/js/jquery.cookie.js') }}"></script>
+<script src="{{ asset('tpl/fiche/js/ween.js') }}"></script>
+<script src="{{ asset('module/spa/js/jquery.ui.min.js') }}"></script>
+<script src="{{ asset('tpl/fiche/js/jquery.nav.js') }}"></script>
+<script src="{{ asset('tpl/fiche/js/bootstrap.min.js') }}"></script>
+<script src="{{ asset('tpl/fiche/js/jquery.appear.js') }}"></script>
+<script src="{{ asset('tpl/fiche/js/jquery.parallax-1.1.3.js') }}"></script>
+<script src="{{ asset('tpl/fiche/js/owl.carousel.min.js') }}"></script>
+<script src="{{ asset('tpl/fiche/js/jquery.fancybox.js') }}"></script>
+<script src="{{ asset('tpl/fiche/js/cubeportfolio.min.js') }}"></script>
+<script src="{{ asset('tpl/fiche/js/range-Slider.min.js') }}"></script>
+<script src="{{ asset('tpl/fiche/js/selectbox-0.2.min.js') }}"></script>
+<script src="{{ asset('tpl/fiche/js/bootsnav.js') }}"></script>
+<script src="{{ asset('tpl/fiche/js/zelect.js') }}"></script>
+<script src="{{ asset('tpl/fiche/js/datepicker.js') }}"></script>
+<script src="{{ asset('tpl/fiche/js/dropzone.min.js') }}"></script>
+<script src="{{ asset('tpl/fiche/js/image-light-box.js') }}"></script>
+<script src="{{ asset('tpl/fiche/js/wow.min.js') }}"></script>
+<script src="{{ asset('tpl/fiche/js/form.js') }}"></script>
+{#<script src="{{ asset('tpl/fiche/js/custom-map.js') }}"></script>#}
+{#<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyAOBKD6V47-g_3opmidcmFapb3kSNAR70U"></script>#}
+{#<script src="{{ asset('tpl/fiche/js/gmaps.js') }}"></script>#}
+{#<script src="{{ asset('tpl/fiche/js/contact.js') }}"></script>#}
+<script src="{{ asset('tpl/fiche/js/themepunch/jquery.themepunch.tools.min.js') }}"></script>
+<script src="{{ asset('tpl/fiche/js/themepunch/jquery.themepunch.revolution.min.js') }}"></script>
+<script src="{{ asset('tpl/fiche/js/themepunch/revolution.extension.layeranimation.min.js') }}"></script>
+<script src="{{ asset('tpl/fiche/js/themepunch/revolution.extension.navigation.min.js') }}"></script>
+<script src="{{ asset('tpl/fiche/js/themepunch/revolution.extension.parallax.min.js') }}"></script>
+<script src="{{ asset('tpl/fiche/js/themepunch/revolution.extension.slideanims.min.js') }}"></script>
+<script src="{{ asset('tpl/fiche/js/themepunch/revolution.extension.video.min.js') }}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-formhelpers/2.3.0/js/bootstrap-formhelpers.js"></script>
+<script src="{{ asset('tpl/js/ckeditor/ckeditor.js') }}"></script>
+<script src="{{ asset('module/ecommerce/js/pnotify.custom.min.js') }}"></script>
+<script src="{{ asset('tpl/js/jquery-confirm.min.js') }}"></script>
+<script src="{{ asset('tpl/js/jquery.textfill.min.js') }}"></script>
+{% if connected %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tokenfield/0.12.0/bootstrap-tokenfield.js"></script>
+{% endif %}
+<script src="{{ asset('tpl/fiche/js/jquery.fileuploader.min.js') }}"></script>
+<script src="{{ asset('tpl/fiche/js/cropper.min.js') }}"></script>
+
+<script src="{{ asset('tpl/fiche/js/functions.js') }}"></script>
+<script src="{{ asset('tpl/js/introJs.js') }}"></script>
+<script src="{{ asset('tpl/fiche/js/jquery.lettering.js') }}"></script>
+<script src="{{ asset('tpl/fiche/js/jquery.textillate.js') }}"></script>
+{#<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tour/0.11.0/js/bootstrap-tour.js"></script>#}
+<script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/responsive/2.1.1/js/dataTables.responsive.min.js"></script>
+{% if connected %}
+
+    <script>
+        //        jQuery('.modal').on('shown.bs.modal', function () {
+        //
+        //        });
+
+
+        $(".dataTable").DataTable({
+            responsive: true,
+            language: {
+                sProcessing: "Traitement en cours...",
+                sSearch: "Rechercher&nbsp;:",
+                sLengthMenu: "Afficher _MENU_ &eacute;l&eacute;ments",
+                sInfo: "Affichage de l'&eacute;l&eacute;ment _START_ &agrave; _END_ sur _TOTAL_ &eacute;l&eacute;ments",
+                sInfoEmpty: "Affichage de l'&eacute;l&eacute;ment 0 &agrave; 0 sur 0 &eacute;l&eacute;ment",
+                sInfoFiltered: "(filtr&eacute; de _MAX_ &eacute;l&eacute;ments au total)",
+                sInfoPostFix: "",
+                sLoadingRecords: "Chargement en cours...",
+                sZeroRecords: "Aucun &eacute;l&eacute;ment &agrave; afficher",
+                sEmptyTable: "Aucune donn&eacute;e disponible dans le tableau",
+                oPaginate: {sFirst: "Premier", sPrevious: "Pr&eacute;c&eacute;dent", sNext: "Suivant", sLast: "Dernier"},
+                oAria: {sSortAscending: ": activer pour trier la colonne par ordre croissant", sSortDescending: ": activer pour trier la colonne par ordre d&eacute;croissant"}
+            }
+        });
+    </script>
+{% endif %}
+
+<script>
+    generateImg(decodeURIComponent(escape(atob('{{ qouiqui.phone|base64Decode }}'))), '.imgPhone1');
+    generateImg(decodeURIComponent(escape(atob('{{ qouiqui.phone2|base64Decode }}'))), '.imgPhone2');
+    generateImg(decodeURIComponent(escape(atob('{{ qouiqui.phone|base64Decode }}'))), '.imgPhone3', 'white');
+    generateImg(decodeURIComponent(escape(atob('{{ qouiqui.phone2|base64Decode }}'))), '.imgPhone4', 'white');
+    generateImg(decodeURIComponent(escape(atob('{{ qouiqui.phone|base64Decode }}'))), '.imgPhone5', 'white');
+</script>
+
+{{ include('@User/template/fiche/javascript.html.twig') }}
+{% if not is_mobile() %}
+    {{ include('@User/template/fiche/javascrip-intro2t.html.twig') }}
+{% endif %}
+{{ include('@User/template/fiche/js/'~category.slug~'-scripts.html.twig') }}
+{{ include('@User/template/fiche/color.html.twig') }}
+
+{% block javascripts %}
+
+
+{% endblock %}
+
+
+<script src="{{ asset('tpl/fiche/js/angular.js') }}"></script>
+
+<script src="https://cuppalabs.github.io/angular-fan-menu/bower_components/angular-animate/angular-animate.js"></script>
+{#<script src="https://cuppalabs.github.io/angular-fan-menu/bower_components/angular-cookies/angular-cookies.js"></script>#}
+<script src="https://cuppalabs.github.io/angular-fan-menu/bower_components/angular-messages/angular-messages.js"></script>
+<script src="https://cuppalabs.github.io/angular-fan-menu/bower_components/angular-route/angular-route.js"></script>
+
+<script src="{{ asset('tpl/fiche/js/circularmenu-directive.js') }}"></script>
+<script src="{{ asset('tpl/fiche/js/app.js') }}"></script>
+
+
+</body>
+</html>

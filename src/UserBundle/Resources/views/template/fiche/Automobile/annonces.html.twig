@@ -1,0 +1,1007 @@
+<section id="section-annonces" class="property-details padding">
+    <div class="container">
+        {% if attributes.connected %}
+            <div class="shake pull-right margin-bott-40 numService">
+                <button type="button" class="theme-btn button11 btn-style-one pull-right" data-toggle="modal"
+                        data-target="#list-offer">Gérer les offres
+                </button>
+            </div>
+        {% endif %}
+        <div class="row">
+            <div class="col-xs-12 bottom40">
+                <h2 class="text-uppercase">Nos <span class="color_red">offres</span></h2>
+                <div class="line_1"></div>
+                <div class="line_2"></div>
+                <div class="line_3"></div>
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="well">
+                    <h3 align="center" style="margin-bottom: 10px">Recherche voiture</h3>
+                    <form id="searchform">
+                        <div class="row">
+
+
+                            <div class="form-group col-md-4">
+                                <label for="pricefrom" class="control-label">Reference</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon" id="basic-addon1">#</div>
+
+                                    <input type="text" class="form-control" aria-describedby="basic-addon1" name="reference">
+                                </div>
+                            </div>
+
+
+                            <div class="form-group col-md-4 col-md-push-4">
+                                <label class="control-label">Modèle</label>
+                                <select id="model-search" name="model[name]" class="form-control">
+                                    <option selected value="">Choisir un modèle</option>
+
+
+                                </select>
+                            </div>
+
+                            <div class="form-group col-md-4 col-md-pull-4">
+                                <label class="control-label">Marque</label>
+
+                                <select id="mark-search" name="model[mark][name]" class="form-control">
+                                    <option selected value="">Choisir une marque</option>
+
+
+                                </select>
+                            </div>
+
+
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-4">
+                                <label for="type1" class="control-label">Année minimale</label>
+                                <select name="min[modelYear]" class="form-control">
+                                    <option value="">
+                                        Année minimale
+                                    </option>
+                                    {% set nowYear = ("now"|date("Y")) +1 %}
+                                    {% for year in (1980).. nowYear %}
+                                        |
+                                        <option value= {{ nowYear -(loop.index) }}>
+                                            {{ nowYear -(loop.index) }}
+                                        </option>
+                                    {% endfor %}
+                                    <option value="0">Plus ancienne</option>
+
+                                </select>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="type1" class="control-label">Année maximale</label>
+                                <select name="max[modelYear]" class="form-control">
+                                    <option value="">
+                                        Année maximale
+                                    </option>
+                                    {% set nowYear = ("now"|date("Y")) +1 %}
+                                    {% set year =nowYear %}
+                                    {% for year in (1980).. nowYear %}
+                                        |
+                                        <option value= {{ nowYear -(loop.index) }}>
+                                            {% set year=nowYear -(loop.index) %}
+                                            {{ year }}
+                                        </option>
+                                    {% endfor %}
+                                    <option value={{ year-1 }}>Plus ancienne</option>
+
+                                </select>
+
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="type1" class="control-label">Km minimal</label>
+                                <select name="min[mileage]" class="form-control">
+                                    <option value="">
+                                        kilométrage minimal
+                                    </option>
+                                    {% set kiloMin=0 %}
+
+                                    {% for i in 0..99 %}
+                                        {% set kiloMin=kiloMin+5000 %}
+                                        <option value= {{ kiloMin }}>
+
+                                            {{ kiloMin }}
+                                        </option>
+
+
+                                    {% endfor %}
+
+                                </select>
+                            </div>
+
+
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-4">
+                                <label for="type1" class="control-label">Km maximal</label>
+                                <select name="max[mileage]" class="form-control">
+                                    <option value="">
+                                        kilométrage maximal
+                                    </option>
+                                    {% set kiloMin=0 %}
+
+                                    {% for i in 0..99 %}
+                                        {% set kiloMin=kiloMin+5000 %}
+                                        <option value={{ kiloMin }}>
+
+                                            {{ kiloMin }}
+                                        </option>
+
+
+                                    {% endfor %}
+                                    <option value="">
+                                        Plus
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="type1" class="control-label">Prix min</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon" id="basic-addon1">$</div>
+                                    <input class="form-control" aria-describedby="basic-addon1" type="text" placeholder="Prix Min"  name="min[price]" value="">
+                                </div>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="type1" class="control-label">Prix max</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon" id="basic-addon1">$</div>
+                                    <input class="form-control" type="text" placeholder="Prix Max" name="max[price]" value="">
+                                </div>
+                            </div>
+
+
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-offset-10">
+                                <p><input class="btn btn-danger " role="button" type="submit" value="Rechercher"></p>
+                                {#<p><a href="#" class="btn btn-danger " role="button" onclick="return getObjects(1,search=1);"> rechercher</a></p>#}
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row bottom30" id="list_modules">
+
+
+        </div>
+        <nav aria-label="Page navigation example">
+            <ul class="pagination" id="button_pages">
+
+            </ul>
+        </nav>
+
+    </div>
+</section>
+{% if attributes.connected %}
+    <div class="modal fade" id="list-offer" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLong">Liste des offres</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row" style="margin-bottom: 20px">
+                        <div class="col-md-12">
+                            <button type="button" class="btn btn-info  pull-right form-add-edit" data-toggle="modal"
+                                    data-target="#update-offer" data-state="">Ajouter une offre
+                            </button>
+
+                        </div>
+                    </div>
+                    <div class="row">
+
+                        <div class="col-md-10 col-md-offset-1">
+                            <table class="dataTable table table-striped table-bordered" cellspacing="0" width="100%">
+                                <thead>
+                                <tr>
+                                    <th>Référence</th>
+                                    <th>Marque</th>
+                                    <th>Modèle</th>
+                                    <th>Date d'ajout</th>
+                                    <th>Action</th>
+
+                                </tr>
+                                </thead>
+
+                                <tbody>
+                                {% for module in attributes["module"] %}
+                                    {% set listImages= browseAutomobileOfferImage(attributes["quoiqui"].user.id, attributes["quoiqui"].id , module.id) %}
+                                    {% set images ="" %}
+                                    {% set iImage=0 %}
+                                    {% if listImages != false %}
+                                        {% for image in listImages %}
+
+                                            {% set images=images~image %}
+                                            {% if iImage != (listImages|length)-1 %}
+
+
+                                                {% set images=images~"," %}
+                                            {% endif %}
+                                            {% set iImage=iImage+1 %}
+                                        {% endfor %}
+                                    {% endif %}
+                                    <tr>
+                                        <td>
+                                            {{ module.reference }}
+                                        </td>
+                                        <td>
+                                            {{ module.model.mark.name }}
+                                        </td>
+                                        <td>
+                                            {{ module.model.name }}
+                                        </td>
+                                        <td>
+                                            {{ module.dateCreation|date("m/d/Y") }}
+                                        </td>
+                                        <td><a class="btn btn-danger" href="{{ path('delete_offer',{"idQuoi":attributes["quoiqui"].id,"idModule":module.id}) }}">Supprimer</a>
+
+                                            <a href="#" class="btn btn-warning  btn-main form-add-edit" data-toggle="modal" data-target="#update-offer"
+                                               data-state='{"mark":"{{ module.model.mark.name }}","reference":"{{ module.reference }}","model":"{{ module.model.name }}","mileage":"{{ module.mileage }}","energy":"{{ module.energy }}","prix":"{{ module.price }}","kiloW":"{{ module.kiloW }}","fiscalPower":"{{ module.fiscalPower }}","modelYear":"{{ module.modelYear }}","porte":"{{ module.porte }}","details":"{{ module.details|replace({'"':'codeDouble','{':'BracketOpen','}':'BracketClose',':':'doublePonctuation',"\n":"retunLine","\r":""}) }}","id":"{{ module.id }}"}'
+                                               data-link='{{ path('car_new',{"id":attributes["quoiqui"].id,"idVoiture":module.id}) }}' data-images='{{ images }}'> <span>Modifier</span></a>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+
+
+                                </tbody>
+                            </table>
+
+
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endif %}
+<div class="modal fade" id="details-offer" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title text-center" id="exampleModalLongTitle ">Détails de l'offre</h1>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="container-fluid">
+
+                    <div class="row">
+                        <div class="col-md-5 col-xs-12 col-s-12 " id="slider_details" >
+
+
+                        </div>
+
+
+                        <div class="col-md-4 col-xs-12 col-sm-10">
+                            <h1 class="product-name" id="offer_mark" style="    color: #000000;
+    font-size: 32px;
+    font-weight: normal;
+    margin: 0 0 5px;
+    padding: 0;
+    text-transform: none;"></h1>
+                            <div class="product-featured" style="text-align: left;">
+                                <ul style="    margin: 0;
+    padding: 0;
+    width: 100%;
+    display: inline-block;
+">
+
+                                    <li style="border: 1px solid #EEEEEE;
+    display: inline-block;
+    float: left;
+    margin: 10px 10px 0 0;
+    padding: 10px;" id="offer_mileage">KM
+                                    </li>
+                                    <li style="border: 1px solid #EEEEEE;
+    display: inline-block;
+    float: left;
+    margin: 10px 10px 0 0;
+    padding: 10px;" id="offer_energy"></li>
+                                    <li style="border: 1px solid #EEEEEE;
+    display: inline-block;
+    float: left;
+    margin: 10px 10px 0 0;
+    padding: 10px;" id="offer_fiscalPower"></li>
+                                </ul>
+                            </div>
+                            <div class="desc" style="    padding: 5px 0 20px;">
+                                <p id="offer_details"></p>
+                            </div>
+                            <div class="offer_specification">
+                                <table class="table-data-sheet" style="width: 100%;border-collapse: collapse;
+    border-spacing: 0;    max-width: 100%;
+    background-color: transparent;">
+                                    <thead>
+                                    <tr>
+                                        <th style="border-bottom: 1px solid #DEE1E3;
+    padding: 10px;
+    vertical-align: middle;text-align: left;">Energie en KW
+                                        </th>
+                                        <th style="border-bottom: 1px solid #DEE1E3;
+    padding: 10px;
+    vertical-align: middle;text-align: left;">Année-modèle
+                                        </th>
+                                        <th style="border-bottom: 1px solid #DEE1E3;
+    padding: 10px;
+    vertical-align: middle;text-align: left;">Boite
+                                        </th>
+                                        <th style="border-bottom: 1px solid #DEE1E3;
+    padding: 10px;
+    vertical-align: middle;text-align: left;">Portes
+                                        </th>
+
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td style="    border-bottom: 1px solid #DEE1E3;
+    padding: 10px;
+    vertical-align: middle;" id="offer_kilow"></td>
+                                        <td style="    border-bottom: 1px solid #DEE1E3;
+    padding: 10px;
+    vertical-align: middle;" id="offer_modelYear"></td>
+                                        <td style="    border-bottom: 1px solid #DEE1E3;
+    padding: 10px;
+    vertical-align: middle;" id="offer_boite"></td>
+                                        <td style="    border-bottom: 1px solid #DEE1E3;
+    padding: 10px;
+    vertical-align: middle;" id="offer_porte"></td>
+
+                                    </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+                        <div class="pb-right-column col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                            <!-- add to cart form-->
+                            <div class="panel panel-default text-center">
+                                <div class="panel-heading">
+                                    <h3> Options</h3>
+                                </div>
+                                <div class="panel-body">
+                                    <h3 class="panel-title price" id="offer_price"></h3>
+                                </div>
+                                <ul class="list-group">
+                                    <li class="list-group-item"><a class="btn btn-main3 btn-primary btn-lg uppercase "><span>Applez nous :<strong>{{ attributes['quoiqui'].phone }}</strong></span></a></li>
+                                    <li class="list-group-item"><a class="btn btn-main3 btn-primary btn-lg"><span  class="uppercase"  >email: <strong>{{ attributes['quoiqui'].mail }}</strong></span></a></li>
+
+
+                                </ul>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div class="row">
+                        <div class="pull-right" id="offer_dateCreation">
+
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <a type="button" class="btn btn-warning  btn-main " href="#" data-toggle="modal" data-target="#Rappeler">Etre rappeler</a>
+                <a type="button" class="btn btn-info  reservation-form" href="#" data-toggle="modal" data-target="#Demandervisite" data-ref=''>Reserver un essais</a>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+            </div>
+            <!-- end content -->
+        </div>
+    </div>
+</div>
+{% if attributes.connected %}
+    <div class="modal fade" id="update-offer" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-md" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="text-center" id="title-form-ajout">Ajout voiture</h2>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+
+                        <div class="col-md-10 col-md-offset-1">
+                            <form id="ajout_voiture" name="adminbundle_automobile" action="{{ path('car_new',{"id":attributes["quoiqui"].id,"idVoiture":"null"}) }}" method="post" enctype="multipart/form-data">
+
+
+                                <div class="form-group row element-form">
+
+                                    <div class="col-md-3">
+                                        <label class="control-label pull-left">Référence </label>
+                                    </div>
+
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" id="reference" placeholder="Entrez une référence*" name="adminbundle_automobile[reference]" required>
+                                    </div>
+                                </div>
+                                <div class="form-group row element-form">
+                                    <div class="col-md-3">
+                                        <label class="control-label pull-left">En promotion</label>
+                                    </div>
+                                <input type="checkbox"  name="adminbundle_automobile[statut]" >
+                                </div>
+
+                                <div class="form-group row element-form">
+
+                                    <div class="col-md-3">
+                                        <label class="control-label pull-left">Marque</label>
+                                    </div>
+
+                                    <div class="col-sm-9">
+
+                                        <select id="mark" name="mark" class="form-control" required>
+                                            <option selected disabled value="empty">Choisir une marque</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+
+                                    <div class="col-md-3">
+                                        <label class="control-label pull-left" for="model">Modèle</label>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <select id="model" name="model" class="form-control" required>
+                                            <option selected disabled value="empty">Choisir un modèle</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-md-3">
+                                        <label class="control-label pull-left" for="anne">Année-modèle</label>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <input type="number" class="form-control" id="anne" placeholder="exp:2015*" name="adminbundle_automobile[modelYear]" required>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-md-3">
+                                        <label class="control-label  pull-left" for="prix">Prix</label>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <input type="number" class="form-control" id="prix" placeholder="exp:60000*" name="adminbundle_automobile[price]" required>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+
+                                    <label class="control-label col-sm-3 pull-left" for="kilom">Kilométrage</label>
+                                    <div class="col-sm-9">
+                                        <input type="number" step=any class="form-control" id="kilom" placeholder="exp:40000*" name="adminbundle_automobile[mileage]" required>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+
+                                    <div class="col-md-3">
+                                        <label class="control-label pull-left " for="energiF">Energie fiscale</label>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <input type="number" class="form-control" id="energiF" placeholder="exp:6*" name="adminbundle_automobile[fiscalPower]">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+
+                                    <div class="col-md-3">
+                                        <label class="control-label pull-left " for="energiK">Energie en KW</label>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <input type="number" class="form-control" id="energiK" placeholder="exp:235*" name="adminbundle_automobile[kilow]" required>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+
+                                    <div class="col-md-3">
+                                        <label class="control-label  pull-left" for="energi">Energie </label>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <select class="selectpicker" id="energi" name="adminbundle_automobile[energy]">
+                                            <option>Diesel</option>
+                                            <option>Essence</option>
+
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+
+                                    <div class="col-md-3">
+                                        <label class="control-label  pull-left" for="boite">Boite</label>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <select class="selectpicker" id="boite" name="adminbundle_automobile[boite]">
+                                            <option>Mécanique</option>
+                                            <option>Automatique</option>
+
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+
+                                    <div class="col-md-3">
+                                        <label class="control-label pull-left " for="porte">Nombre des portes</label>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <input type="number" class="form-control" id="porte" placeholder="exp:2*" name="adminbundle_automobile[porte]" required>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+
+                                    <div class="col-md-3">
+                                        <label class="control-label pull-left" for="details">Details</label>
+                                    </div>
+                                    <div class="col-sm-9">
+                        <textarea cols="60" name="adminbundle_automobile[details]"
+                                  rows="10" required id="details">Ajoutez des details par rapport à cette voiture..</textarea>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+
+                                    <div class="col-md-3">
+                                        <label class="control-label pull-left " for="image">Télécharger image</label>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <input type="file" name="images[]" id="fileInput" multiple>
+                                    </div>
+                                </div>
+
+
+
+                            </form>
+                            <div class="row" id="row-update" style="display: none">
+
+                                <div class="col-md-1">
+
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="control-label " for="image">Modifier les images téléchargées</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <table class="table table-bordered " id="downloadedImages"
+                                    >
+                                        <thead>
+                                        <tr>
+
+                                            <th>Images téléchargées</th>
+                                            <th>Action</th>
+
+                                        </tr>
+
+
+                                        </thead>
+                                        <tbody id="image-to-upload">
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Annuler</button>
+                    <button type="submit" class="btn btn-primary " data-target="modifier" data-selector="ajout_voiture">Enregistrer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endif %}
+<div id="Rappeler" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Être rappelé</h4>
+            </div>
+            <div class="modal-body">
+                <div class="well">Vous avez une question ou un commentaire ?
+                    <br>Remplissez les informations suivantes et nous vous appeler dans les plus brefs délais.
+                </div>
+
+                <form id="rapeler" class="form-horizontal" method="post" action="{{ path('rapeler',{'qq_id':attributes["quoiqui"].id}) }}" role="form">
+                    <div class="form-group" id="footer_apel">
+
+                    </div>
+                    <div class="form-group">
+                        <label for="email" class="col-sm-2 control-label">Téléphone</label>
+                        <div class="col-sm-9">
+                            <input type="text" id="tel_apel" class="form-control bfh-phone" name="rapele[phone]" placeholder="Numéro de Téléphone" required data-format="+216 (dd) ddd-ddd">
+
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="name" class="col-sm-2 control-label">Nom</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="first_name_apel" name="rapele[nom]" placeholder="Nom" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="name" class="col-sm-2 control-label">Prenom</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="last_name_apel" name="rapele[prenom]" placeholder="Prénom" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="name" class="col-sm-2 control-label">Mail</label>
+                        <div class="col-sm-9">
+                            <textarea id="mail_apel" name="rapele[mail]" class="form-control" placeholder="votre Mail" rows="3" required></textarea>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+                <button type="submit" class="btn btn-default " data-target="modifier" data-selector="rapeler">Envoyer</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+<div id="Demandervisite" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Fixer un rendez vous</h4>
+            </div>
+            <div class="modal-body">
+
+                <div class="well">
+                    Remplissez les informations suivantes et nous vous appeler dans les plus brefs délais.
+                </div>
+
+                <form id="visite" action="{{ path('visite',{'qq_id': attributes["quoiqui"].id }) }}" class="form-horizontal" method="post" role="form">
+                    <input name="visite[ref]" id="reference-modal" hidden>
+                    <input hidden name="visite[title]" value="Demandais une réservation">
+                    <div class="form-group" id="footer_visit">
+
+                    </div>
+                    <div class="form-group">
+                        <label for="email" class="col-sm-2 control-label">
+
+                            téléphone</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control bfh-phone" id="tel_visit" name="visite[phone]" placeholder="Numéro de Téléphone" required data-format="+216 (dd) ddd-ddd">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="name" class="col-sm-2 control-label">Nom</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="first_name_visit" name="visite[nom]" id="last_name_visit" placeholder="Nom" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="name" class="col-sm-2 control-label">Prenom</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="last_name_visit" name="visite[prenom]" placeholder="Prénom" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="name" class="col-sm-2 control-label">Adresse</label>
+                        <div class="col-sm-9">
+                            <input id="mail_visit" type="mail" name="visite[mail]" class="form-control" id="mail_visit" placeholder="votre Mail" rows="3" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="name" class="col-sm-2 control-label">Date</label>
+                        <div class="col-sm-9">
+                            <div class="bfh-datepicker" data-name="visite[date]" data-close="false" data-required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="name" class="col-sm-2 control-label">heure</label>
+                        <div class="col-sm-9">
+                            <div class="bfh-timepicker" data-name="visite[time]" data-close="false" data-required></div>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+
+                <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+                <button type="submit" class="btn btn-default " data-target="modifier" data-selector="visite">Envoyer</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+<div class="modal fade" id="modalLoginToVisit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+
+            <div class="modal-body">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <div class="login-form-popup lp-border-radius-8">
+                    <div class="siginincontainer">
+                        <h1 class="text-center">S'identifier</h1>
+                        <form id="login" class="form-horizontal margin-top-30" method="post" action="/login_check">
+                            <input type="hidden" name="_csrf_token" value="Kk4KcJ-i6lPzu7pUx0wOja7L0g5uu9CI6uWJYDGVT4Q"/>
+                            <p class="status"></p>
+                            <div class="form-group">
+                                <label for="username">Adresse email *</label>
+                                <input type="text" class="form-control" id="username" name="_username" required/>
+                            </div>
+                            <div class="form-group">
+                                <label for="password">Mot de passe *</label>
+                                <input type="password" class="form-control" id="password" name="_password" required/>
+                            </div>
+                            <div class="form-group">
+                            </div>
+                            <div class="form-group">
+                                <div class="checkbox pad-bottom-10">
+                                    <input id="check1" type="checkbox" name="_remember_me" value="on">
+                                    <label for="check1">Se souvenir de moi</label>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <input type="submit" value="Se connecter" id="connectToVisit" class="lp-secondary-btn width-full btn-first-hover"/>
+                            </div>
+                            <input type="hidden" id="security" name="security" value="9f8756cb45"/><input type="hidden" name="_wp_http_referer" value="/"/></form>
+                        <div class="pop-form-bottom">
+                            <div class="bottom-links">
+                                <a class="signUpClick">Nouveau sur Ween.tn? S'inscrire</a>
+                                <a class="forgetPasswordClick pull-right">Mot de passe oublié</a>
+                            </div>
+                            <p class="margin-top-15">Connectez-vous avec réseau social</p>
+                            <ul class="social-login list-style-none">
+                                <li>
+                                    <a id="logingoogle" class="google flaticon-googleplus" href="{{ path('hwi_oauth_connect') }}google">
+                                        <i class="fa fa-google-plus"></i>
+                                        <span>Google</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a id="loginfacebook" class="facebook flaticon-facebook" href="{{ path('hwi_oauth_connect') }}facebook">
+                                        <i class="fa fa-facebook"></i>
+                                        <span>Facebook</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a id="logintwitter" class="twitter flaticon-twitter" href="{{ path('hwi_oauth_connect') }}facebook">
+                                        <i class="fa fa-twitter"></i>
+                                        <span>Twitter</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <a class="md-close"><i class="fa fa-close"></i></a>
+                    </div>
+
+                    <div class="siginupcontainer">
+                        <h1 class="text-center">S'inscrire</h1>
+                        <form id="register" class="form-horizontal margin-top-30" method="post">
+                            <p class="status"></p>
+                            <div class="form-group">
+                                <label for="username">Nom et prénom *</label>
+                                <input type="text" class="form-control" id="username2" name="username"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Adresse email *</label>
+                                <input type="email" class="form-control" id="email" name="email"/>
+                            </div>
+                            <div class="form-group">
+                                <p>Le mot de passe vous sera envoyé par email.</p>
+                            </div>
+                            <div class="form-group">
+                            </div>
+                            <div class="form-group">
+                                <input type="submit" value="Enregistrer" class="lp-secondary-btn width-full btn-first-hover"/>
+                            </div>
+                            <input type="hidden" id="security" name="security" value="fac3396f28"/><input type="hidden" name="_wp_http_referer" value="/"/></form>
+                        <div class="pop-form-bottom">
+                            <div class="bottom-links">
+                                <a class="signInClick">Vous avez déjà un compte? Se connecter</a>
+                                <a class="forgetPasswordClick pull-right">Mot de passe oublié</a>
+                            </div>
+                            <p class="margin-top-15">Connectez-vous avec réseau social</p>
+                            <ul class="social-login list-style-none">
+                                <li>
+                                    <a id="logingoogle" class="google flaticon-googleplus" href="{{ path('hwi_oauth_connect') }}google">
+                                        <i class="fa fa-google-plus"></i>
+                                        <span>Google</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a id="loginfacebook" class="facebook flaticon-facebook" href="{{ path('hwi_oauth_connect') }}facebook">
+                                        <i class="fa fa-facebook"></i>
+                                        <span>Facebook</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a id="logintwitter" class="twitter flaticon-twitter" href="{{ path('hwi_oauth_connect') }}facebook">
+                                        <i class="fa fa-twitter"></i>
+                                        <span>Twitter</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <a class="md-close"><i class="fa fa-close"></i></a>
+                    </div>
+                    <div class="forgetpasswordcontainer">
+                        <h1 class="text-center">Mot de passe oublié</h1>
+                        <form class="form-horizontal margin-top-30" id="lp_forget_pass_form" action="#" method="post">
+                            <p class="status"></p>
+                            <div class="form-group">
+                                <label for="password">Adresse email *</label>
+                                <input type="email" name="user_login" class="form-control" id="email3"/>
+                            </div>
+                            <div class="form-group">
+                                <input type="submit" name="submit" value="Obtenir un nouveau mot de passe" class="lp-secondary-btn width-full btn-first-hover"/>
+                                <input type="hidden" id="security3" name="security3" value="48ca5eeb94"/><input type="hidden" name="_wp_http_referer" value="/"/></div>
+                        </form>
+                        <div class="pop-form-bottom">
+                            <div class="bottom-links"><a class="cancelClick">Annuler</a></div>
+                        </div>
+                        <a class="md-close"><i class="fa fa-close"></i></a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="modalLoginToApel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+
+            <div class="modal-body">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <div class="login-form-popup lp-border-radius-8">
+                    <div class="siginincontainer">
+                        <h1 class="text-center">S'identifier</h1>
+                        <form id="login" class="form-horizontal margin-top-30" method="post" action="/login_check">
+                            <input type="hidden" name="_csrf_token" value="Kk4KcJ-i6lPzu7pUx0wOja7L0g5uu9CI6uWJYDGVT4Q"/>
+                            <p class="status"></p>
+                            <div class="form-group">
+                                <label for="username">Adresse email *</label>
+                                <input type="text" class="form-control" id="username" name="_username" required/>
+                            </div>
+                            <div class="form-group">
+                                <label for="password">Mot de passe *</label>
+                                <input type="password" class="form-control" id="password" name="_password" required/>
+                            </div>
+                            <div class="form-group">
+                            </div>
+                            <div class="form-group">
+                                <div class="checkbox pad-bottom-10">
+                                    <input id="check1" type="checkbox" name="_remember_me" value="on">
+                                    <label for="check1">Se souvenir de moi</label>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <input type="submit" value="Se connecter" id="connectToApel" class="lp-secondary-btn width-full btn-first-hover"/>
+                            </div>
+                            <input type="hidden" id="security" name="security" value="9f8756cb45"/><input type="hidden" name="_wp_http_referer" value="/"/></form>
+                        <div class="pop-form-bottom">
+                            <div class="bottom-links">
+                                <a class="signUpClick">Nouveau sur Ween.tn? S'inscrire</a>
+                                <a class="forgetPasswordClick pull-right">Mot de passe oublié</a>
+                            </div>
+                            <p class="margin-top-15">Connectez-vous avec réseau social</p>
+                            <ul class="social-login list-style-none">
+                                <li>
+                                    <a id="logingoogle" class="google flaticon-googleplus" href="{{ path('hwi_oauth_connect') }}google">
+                                        <i class="fa fa-google-plus"></i>
+                                        <span>Google</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a id="loginfacebook" class="facebook flaticon-facebook" href="{{ path('hwi_oauth_connect') }}facebook">
+                                        <i class="fa fa-facebook"></i>
+                                        <span>Facebook</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a id="logintwitter" class="twitter flaticon-twitter" href="{{ path('hwi_oauth_connect') }}facebook">
+                                        <i class="fa fa-twitter"></i>
+                                        <span>Twitter</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <a class="md-close"><i class="fa fa-close"></i></a>
+                    </div>
+
+                    <div class="siginupcontainer">
+                        <h1 class="text-center">S'inscrire</h1>
+                        <form id="register" class="form-horizontal margin-top-30" method="post">
+                            <p class="status"></p>
+                            <div class="form-group">
+                                <label for="username">Nom et prénom *</label>
+                                <input type="text" class="form-control" id="username2" name="username"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Adresse email *</label>
+                                <input type="email" class="form-control" id="email" name="email"/>
+                            </div>
+                            <div class="form-group">
+                                <p>Le mot de passe vous sera envoyé par email.</p>
+                            </div>
+                            <div class="form-group">
+                            </div>
+                            <div class="form-group">
+                                <input type="submit" value="Enregistrer" class="lp-secondary-btn width-full btn-first-hover"/>
+                            </div>
+                            <input type="hidden" id="security" name="security" value="fac3396f28"/><input type="hidden" name="_wp_http_referer" value="/"/></form>
+                        <div class="pop-form-bottom">
+                            <div class="bottom-links">
+                                <a class="signInClick">Vous avez déjà un compte? Se connecter</a>
+                                <a class="forgetPasswordClick pull-right">Mot de passe oublié</a>
+                            </div>
+                            <p class="margin-top-15">Connectez-vous avec réseau social</p>
+                            <ul class="social-login list-style-none">
+                                <li>
+                                    <a id="logingoogle" class="google flaticon-googleplus" href="{{ path('hwi_oauth_connect') }}google">
+                                        <i class="fa fa-google-plus"></i>
+                                        <span>Google</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a id="loginfacebook" class="facebook flaticon-facebook" href="{{ path('hwi_oauth_connect') }}facebook">
+                                        <i class="fa fa-facebook"></i>
+                                        <span>Facebook</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a id="logintwitter" class="twitter flaticon-twitter" href="{{ path('hwi_oauth_connect') }}facebook">
+                                        <i class="fa fa-twitter"></i>
+                                        <span>Twitter</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <a class="md-close"><i class="fa fa-close"></i></a>
+                    </div>
+                    <div class="forgetpasswordcontainer">
+                        <h1 class="text-center">Mot de passe oublié</h1>
+                        <form class="form-horizontal margin-top-30" id="lp_forget_pass_form" action="#" method="post">
+                            <p class="status"></p>
+                            <div class="form-group">
+                                <label for="password">Adresse email *</label>
+                                <input type="email" name="user_login" class="form-control" id="email3"/>
+                            </div>
+                            <div class="form-group">
+                                <input type="submit" name="submit" value="Obtenir un nouveau mot de passe" class="lp-secondary-btn width-full btn-first-hover"/>
+                                <input type="hidden" id="security3" name="security3" value="48ca5eeb94"/><input type="hidden" name="_wp_http_referer" value="/"/></div>
+                        </form>
+                        <div class="pop-form-bottom">
+                            <div class="bottom-links"><a class="cancelClick">Annuler</a></div>
+                        </div>
+                        <a class="md-close"><i class="fa fa-close"></i></a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

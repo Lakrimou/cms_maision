@@ -1,0 +1,729 @@
+<style>
+    .media-carousel {
+        margin-bottom: 0;
+        padding: 0 40px 30px 40px;
+        margin-top: 30px;
+    }
+
+    /* Previous button  */
+    .media-carousel .carousel-control.left {
+        left: -12px;
+        background-image: none;
+        background: none repeat scroll 0 0 #222222;
+        border: 4px solid #FFFFFF;
+        border-radius: 23px 23px 23px 23px;
+        height: 40px;
+        width: 40px;
+        margin-top: 30px
+    }
+
+    /* Next button  */
+    .media-carousel .carousel-control.right {
+        right: -12px !important;
+        background-image: none;
+        background: none repeat scroll 0 0 #222222;
+        border: 4px solid #FFFFFF;
+        border-radius: 23px 23px 23px 23px;
+        height: 40px;
+        width: 40px;
+        margin-top: 30px
+    }
+
+    /* Changes the position of the indicators */
+    .media-carousel .carousel-indicators {
+        right: 50%;
+        top: auto;
+        bottom: 0px;
+        margin-right: -19px;
+    }
+
+    /* Changes the colour of the indicators */
+    .media-carousel .carousel-indicators li {
+        background: #c0c0c0;
+    }
+
+    .media-carousel .carousel-indicators .active {
+        background: #333333;
+    }
+
+    .media-carousel img {
+        width: 250px;
+        height: 100px
+    }
+</style>
+<section id="Offres" class="section">
+    <div class="container">
+
+        <header class="section-header">
+            <div class="animated animation-done bounceInLeft" data-animation="bounceInLeft"><i class="autologo_avto"></i></div>
+            <div class="heading-wrap">
+                <h2 class="heading"><span>les Offre !</span></h2>
+            </div>
+        </header>
+
+        <div class="row">
+            <!-- MAIN CONTENT -->
+            <div class="col-xs-12 col-sm-7 col-md-9">
+
+
+                <section class="main-content" role="main">
+
+
+                    <div class="container" id="reload-list-offers">
+
+
+                    </div>
+                </section>
+
+
+            </div>
+
+
+            <!-- // MAIN CONTENT -->
+            <div class="space40 visible-xs"></div>
+            <div class="col-xs-12 col-sm-5 col-md-3">
+                <aside class="sidebar">
+
+                    <div class="widget widget-search ">
+                        <h3 class="widget-title"><span>Recherche</span></h3>
+                        <form class="searchform" id="searchform" role="search">
+                            <input type="text" placeholder="Reference:exp #ref" name="reference">
+                            <select id="mark-search" name="mark" class="form-control" required>
+                                <option selected value="">Choisir une marque</option>
+
+
+                            </select>
+                            <select id="model-search" name="model" class="form-control" required>
+                                <option selected disabled value="">Choisir un modèle</option>
+
+
+                            </select>
+                            <select name="annee-min" class="form-control">
+                                <option value="">
+                                    Année minimale
+                                </option>
+                                {% set nowYear = ("now"|date("Y")) +1 %}
+                                {% for year in (1980).. nowYear %}
+                                    |
+                                    <option value= {{ nowYear -(loop.index) }}>
+                                        {{ nowYear -(loop.index) }}
+                                    </option>
+                                {% endfor %}
+                                <option value="0">Plus ancienne</option>
+
+                            </select>
+                            <select name="anne-max" class="form-control">
+                                <option value="">
+                                    Année maximale
+                                </option>
+                                {% set nowYear = ("now"|date("Y")) +1 %}
+                                {% set year =nowYear %}
+                                {% for year in (1980).. nowYear %}
+                                    |
+                                    <option value= {{ nowYear -(loop.index) }}>
+                                        {% set year=nowYear -(loop.index) %}
+                                        {{ year }}
+                                    </option>
+                                {% endfor %}
+                                <option value={{ year-1 }}>Plus ancienne</option>
+
+                            </select>
+                            <select name="km-min" class="form-control">
+                                <option value="">
+                                    kilométrage minimale
+                                </option>
+                                {% set kiloMin=0 %}
+
+                                {% for i in 0..99 %}
+                                    <option value={{ i+5000 }}>
+                                        {% set kiloMin=kiloMin+5000 %}
+                                        {{ kiloMin }}
+                                    </option>
+
+
+                                {% endfor %}
+
+                            </select>
+
+                            <select name="km-max" class="form-control">
+                                <option value="">
+                                    kilométrage maximale
+                                </option>
+                                {% set kiloMin=0 %}
+
+                                {% for i in 0..99 %}
+                                    <option value={{ i+5000 }}>
+                                        {% set kiloMin=kiloMin+5000 %}
+                                        {{ kiloMin }}
+                                    </option>
+
+
+                                {% endfor %}
+                                <option value="">
+                                    Plus
+                                </option>
+                            </select>
+
+                            <input type="text" placeholder="Prix Min" name="prix-min" value="">
+                            <input type="text" placeholder="Prix Max" name="prix-max" value="">
+                            <a class="btn btn-main btn-primary btn-lg uppercase" onclick="return renderlistOffers();"><span>CHERCHER</span></a>
+
+                        </form>
+                    </div>
+                </aside>
+            </div>
+
+        </div>
+        <!-- SIDEBAR -->
+
+        <!-- // SIDEBAR -->
+    </div>
+    </div>
+
+    <div class="particle elem1 anim-delay1"></div>
+    <div class="particle elem2 anim-delay5"></div>
+    <div class="particle elem3 anim-delay3"></div>
+    <div class="particle elem4 anim-delay8"></div>
+    <div class="particle elem5 anim-delay9"></div>
+    <div class="particle elem6 anim-delay2"></div>
+    <div class="particle elem7 anim-delay4"></div>
+    <div class="particle elem8 anim-delay3"></div>
+    <div class="particle elem9 anim-delay10"></div>
+    <div class="particle elem8 anim-delay11"></div>
+    <div class="particle elem6 anim-delay12"></div>
+    <div class="particle elem1 anim-delay14"></div>
+    <div class="particle elem13 anim-delay16"></div>
+    <div class="particle elem17 anim-delay18"></div>
+    <div class="particle elem2 anim-delay6"></div>
+    <div class="particle elem16 anim-delay9"></div>
+    <div class="particle elem8 anim-delay3"></div>
+    <div class="particle elem9 anim-delay10"></div>
+    <div class="particle elem18 anim-delay11"></div>
+    <div class="particle elem11 anim-delay12"></div>
+    <div class="particle elem12 anim-delay14"></div>
+    <div class="particle elem13 anim-delay16"></div>
+    <div class="particle elem14 anim-delay18"></div>
+    <div class="particle elem15 anim-delay6"></div>
+    <div class="particle elem16 anim-delay9"></div>
+    <div class="particle elem17 anim-delay7"></div>
+    <div class="particle elem18 anim-delay6"></div>
+    <div class="particle elem19 anim-delay3"></div>
+
+</section>
+
+
+<div class="modal fade" id="ajout" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Ajouter une Nouvelle Voiture</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+
+                    <div class="col-md-10 col-md-offset-1">
+                        <form id="ajout_voiture" name="adminbundle_automobile" action="{{ path('car_new',{"id":qouiqui.id,"idVoiture":"null"}) }}" method="post" enctype="multipart/form-data">
+
+                            <h2 class="text-center" id="title-form-ajout">Ajout voiture</h2>
+                            <div class="form-group row element-form">
+
+                                <div class="col-md-3">
+                                    <label class="control-label">Référence </label>
+                                </div>
+
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="reference" placeholder="Entrez une référence*" name="adminbundle_automobile[reference]" required>
+                                </div>
+                            </div>
+
+                            <div class="form-group row element-form">
+
+                                <div class="col-md-3">
+                                    <label class="control-label">Marque</label>
+                                </div>
+
+                                <div class="col-sm-9">
+
+                                    <select id="mark" name="mark" class="form-control" required>
+                                        <option selected disabled value="empty">Choisir une marque</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+
+                                <div class="col-md-3">
+                                    <label class="control-label " for="model">Modèle</label>
+                                </div>
+                                <div class="col-sm-9">
+                                    <select id="model" name="model" class="form-control" required>
+                                        <option selected disabled value="empty">Choisir un modèle</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-md-3">
+                                    <label class="control-label " for="anne">Année-modèle</label>
+                                </div>
+                                <div class="col-sm-9">
+                                    <input type="number" class="form-control" id="anne" placeholder="exp:2015*" name="adminbundle_automobile[modelYear]" required>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-md-3">
+                                    <label class="control-label col-sm-2" for="prix">Prix</label>
+                                </div>
+                                <div class="col-sm-9">
+                                    <input type="number" class="form-control" id="prix" placeholder="exp:60000*" name="adminbundle_automobile[price]" required>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+
+                                <label class="control-label col-sm-3" for="kilom">Kilométrage</label>
+                                <div class="col-sm-9">
+                                    <input type="number" step=any class="form-control" id="kilom" placeholder="exp:40000*" name="adminbundle_automobile[mileage]" required>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+
+                                <div class="col-md-3">
+                                    <label class="control-label " for="energiF">Energie fiscale</label>
+                                </div>
+                                <div class="col-sm-9">
+                                    <input type="number" class="form-control" id="energiF" placeholder="exp:6*" name="adminbundle_automobile[fiscalPower]">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+
+                                <div class="col-md-3">
+                                    <label class="control-label " for="energiK">Energie en KW</label>
+                                </div>
+                                <div class="col-sm-9">
+                                    <input type="number" class="form-control" id="energiK" placeholder="exp:235*" name="adminbundle_automobile[kilow]" required>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+
+                                <div class="col-md-3">
+                                    <label class="control-label col-sm-2" for="energi">Energie </label>
+                                </div>
+                                <div class="col-sm-9">
+                                    <select class="selectpicker" id="energi" name="adminbundle_automobile[energy]">
+                                        <option>Diesel</option>
+                                        <option>Essence</option>
+
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+
+                                <div class="col-md-3">
+                                    <label class="control-label col-sm-2" for="boite">Boite</label>
+                                </div>
+                                <div class="col-sm-9">
+                                    <select class="selectpicker" id="boite" name="adminbundle_automobile[boite]">
+                                        <option>Mécanique</option>
+                                        <option>Automatique</option>
+
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+
+                                <div class="col-md-3">
+                                    <label class="control-label " for="porte">Nombre des portes</label>
+                                </div>
+                                <div class="col-sm-9">
+                                    <input type="number" class="form-control" id="porte" placeholder="exp:2*" name="adminbundle_automobile[porte]" required>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+
+                                <div class="col-md-3">
+                                    <label class="control-label col-sm-2" for="details">Details</label>
+                                </div>
+                                <div class="col-sm-9">
+                        <textarea cols="60" name="adminbundle_automobile[details]"
+                                  rows="10" required id="details">Ajoutez des details par rapport à cette voiture..</textarea>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+
+                                <div class="col-md-3">
+                                    <label class="control-label " for="image">Télécharger image</label>
+                                </div>
+                                <div class="col-sm-9">
+                                    <input type="file" name="images[]" id="fileInput" multiple>
+                                </div>
+                            </div>
+                            <div class="row">
+
+                                <div class="col-md-8">
+                                    <table class="table table-bordered " id="table-new" hidden>
+                                        <thead>
+                                        <tr>
+                                            <th>Images à télécharger</th>
+                                            <th>Action</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody id="uploaded-image">
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-8 ">
+                                </div>
+                                <div class="col-md-2 ">
+                                    <input class="btn btn-main btn-primary btn-lg" type="submit" value="Enregistrer">
+                                </div>
+                            </div>
+
+
+                        </form>
+                        <div class="row" id="row-update" style="display: none">
+
+                            <div class="col-md-1">
+
+                            </div>
+                            <div class="col-md-3">
+                                <label class="control-label " for="image">Modifier les images téléchargées</label>
+                            </div>
+                            <div class="col-md-6">
+                                <table class="table table-bordered " id="downloadedImages"
+                                >
+                                    <thead>
+                                    <tr>
+
+                                        <th>Images téléchargées</th>
+                                        <th>Action</th>
+
+                                    </tr>
+
+
+                                    </thead>
+                                    <tbody id="image-to-upload">
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    var iImage;
+
+
+    $(document).ready(function () {
+        // renderlistOffers(0);
+        iImage = 0;
+        $('#media').carousel({
+            pause: true,
+            interval: false,
+        });
+
+        getMarks("mark-search");
+        getMarks("mark");
+        renderlistOffers();
+
+
+    });
+    $(document).on("click", ".form-add-edit", function () {
+
+        var module = $(this).data('state');
+        var link = $(this).data('link');
+        var images = $(this).data('images');
+        var image;
+        $("#image-to-upload").empty();
+
+        if (module != "") {
+            $.ajax({
+                url: '{{ path('list_models') }}',
+                data: {
+
+                    'mark': module.mark,
+                    'quoiqui': {{ qouiqui.id }}
+
+
+
+                },
+                type: "POST",
+                success: function (response) {
+                    $("#model").html(response);
+
+
+                },
+                error: function (xhr, status, error) {
+                    alert(xhr.responseText);
+                },
+
+
+            });
+
+            $("#title-form-ajout").html("Modifier Voiture");
+
+            $("#mark").val(module.mark);
+
+
+            document.getElementById("prix").value = module.prix;
+            document.getElementById("anne").value = module.modelYear;
+            document.getElementById("kilom").value = module.mileage;
+            document.getElementById("energiF").value = module.fiscalPower;
+            document.getElementById("energiK").value = module.kiloW;
+            document.getElementById("porte").value = module.porte;
+            document.getElementById("details").value = module.details;
+            document.getElementById("reference").value = module.reference;
+            $("#ajout_voiture").attr("action", link);
+
+            $("#row-update").show();
+
+            if (images != "") {
+                images = images.split(",");
+
+                for (i = 0; i < images.length; i++) {
+                    image = images[i];
+
+                    $("#image-to-upload").append(" <tr id='tr" + i + "old'>" +
+                        "<td>" +
+                        "<img id ='old-image" + i + "' style='width: 100%' src='#' />" +
+                        "</td>" +
+                        "<td>" +
+                        "<button  onclick='deleteOldOfferImage(" + i + "," + module.id + ",\"" + image + "\")'>Supprimer</button>" +
+                        "<input type='radio' name='principale-image' value='" + i + "' onclick='changePrincipaleImage(" + module.id + "," + i + ")'>Image principale" +
+                        "</td></tr>");
+                    $('#old-image' + i).attr('src', '{{ asset('/uploads/image/') }}{{ iduser }}/{{ qouiqui.id }}/Offres/' + module.id + '/' + images[i]);
+                }
+            }
+        }
+
+
+        else {
+
+
+            $("#mark").val("empty");
+            $("#model").html("<option selected disabled>  Choisir un modèle</option>");
+            document.getElementById("prix").value = "";
+            document.getElementById("anne").value = "";
+            document.getElementById("kilom").value = "";
+            document.getElementById("energiF").value = "";
+            document.getElementById("energiK").value = "";
+            document.getElementById("porte").value = "";
+            document.getElementById("details").value = "";
+            document.getElementById("reference").value = "";
+            $("#row-update").hide();
+        }
+    });
+    function readURL(input) {
+        for (i = 0; i < input.files.length; i++) {
+            if (input.files && input.files[i]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+
+                    $("#uploaded-image").append("<tr id='tr" + iImage + "' class='tr-inner-table'><td ><img id='blah" + iImage + "' style='width: 100%' src='#' /></td><td><button onclick='deleteNewOfferImage(" + iImage + ")'>Supprimer</button></td></tr>");
+                    $('#blah' + iImage).attr('src', e.target.result);
+                    iImage = iImage + 1;
+
+
+                }
+
+                reader.readAsDataURL(input.files[i]);
+            }
+
+        }
+
+    }
+
+    document.getElementById('fileInput').onchange = function () {
+        $("#uploaded-image").empty();
+        $("#table-new").show();
+        readURL(this);
+    };
+
+    function deleteNewOfferImage(iI) {
+
+        $("#tr" + iI).remove();
+        $("#ajout_voiture").append("<input name='deleteFile[" + iI + "]' value='" + iI + "' type='hidden'>");
+        if ($("#uploaded-image .tr-inner-table").length == 0) {
+            $("#table-new").hide();
+        }
+
+        event.preventDefault();
+
+    }
+
+    function deleteOldOfferImage(iI, moduleId, image) {
+
+        var result = confirm("Voulez vous vraiment supprimer cette images ?");
+        if (result) {
+            var data = {
+                'user': {{ iduser }},
+                'quoiqui': {{ qouiqui.id }},
+                'module': moduleId,
+                'image': image
+            };
+
+            $.ajax({
+                url: '{{ path('delete_file') }}',
+                data: data,
+                type: "POST",
+                success: function (response) {
+                    console.log(response);
+                    $("#tr" + iI + "old").remove();
+
+                    location.reload();
+
+
+                },
+
+
+            });
+
+
+        }
+
+
+    }
+    function renderlistOffers() {
+
+        var jsonSearch = {};
+
+
+        $("form#searchform :input ,form#searchform select").each(function () {
+
+
+            jsonSearch[$(this).attr("name")] = $(this).val();
+
+        })
+
+
+        $.ajax({
+            url: '{{ path('list_offers') }}',
+            data: {
+
+                'quoiqui': {{ qouiqui.id }},
+
+                'jsonSearch': jsonSearch,
+
+
+            },
+            type: "POST",
+            success: function (response) {
+
+                $("#reload-list-offers").html(response);
+
+
+            },
+            error: function (xhr, status, error) {
+                alert(xhr.responseText);
+            },
+
+
+        });
+
+
+    }
+    function changePrincipaleImage(moduleId, index) {
+
+        $.ajax({
+            url: '{{ path('change_principale_image') }}',
+            data: {
+
+                'module': moduleId,
+                'index': index,
+
+
+            },
+            type: "POST",
+            success: function (response) {
+                location.reload();
+
+
+            },
+            error: function (xhr, status, error) {
+                alert(xhr.responseText);
+            },
+
+
+        });
+
+
+    }
+
+
+    function getModels(mark, modelId) {
+
+
+        $.ajax({
+            url: '{{ path('list_models') }}',
+            data: {
+
+                'mark': mark,
+
+
+            },
+            type: "POST",
+            success: function (response) {
+                $("#" + modelId).append(response);
+
+
+            },
+            error: function (xhr, status, error) {
+                alert(xhr.responseText);
+            },
+
+
+        });
+
+    }
+
+    $('#mark').change(function () {
+
+        $("#model").empty();
+        getModels(this.value, "model");
+
+    })
+    $('#mark-search').change(function () {
+        $("#model").html("<option selected value=''>Choisir un modèle</option>");
+        getModels(this.value, "model-search");
+    })
+
+    function getMarks(markId) {
+        $.ajax({
+            url: '{{ path('list_marks') }}',
+
+            type: "POST",
+            success: function (response) {
+                $("#" + markId).append(response);
+
+
+            },
+            error: function (xhr, status, error) {
+                alert(xhr.responseText);
+            },
+
+
+        });
+    }
+
+
+    function changeListModels(number) {
+        document.cookie = "page=" + number;
+        location.reload();
+    }
+</script>
+
+
+
+

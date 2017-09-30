@@ -1,0 +1,42 @@
+<div class="row">
+    <div class="col-sm-10">
+        <div class="col-md-4">
+            <h1 class=""> {{ app.user.username }} {{ app.user.prenom }} </h1>
+            <a href="{{ path('dashboard_profile_user_edit') }}" type="button" class="btn btn-success">Modifier mon
+                profile
+            </a>
+        </div>
+        <div class="col-md-4">
+
+        </div>
+        <div class="col-md-4">
+
+        </div>
+        {#<button type="button" class="btn btn-info">Send me a message</button>#}
+        <br>
+    </div>
+    {% if app.user.image == null %}
+        <div class="col-sm-2 img-respon">
+            <a href="{{ path('dashboard_homepage') }}" class="pull-right">
+                <img title="cliquez sur l'image pour la redirection vers l'index de votre profile!"
+                     class="img-circle img-responsive" src="{{ asset('/uploads/users/default/profile-pictures.jpg') }}">
+            </a>
+
+        </div>
+    {% else %}
+        <div class="col-sm-2 img-respon">
+            <a href="{{ path('dashboard_homepage') }}" class="pull-right">
+                <img title="cliquez sur l'image pour la redirection vers l'index de votre profile!"
+                     class="img-circle img-responsive" src="{{ asset('/uploads/users/'~ app.user.image ~'.jpg') }}">
+            </a>
+        </div>
+    {% endif %}
+</div>
+<hr>
+<style>
+    @media (max-width: 767px) {
+        .img-respon img {
+            height: 150px !important;
+        }
+    }
+</style>

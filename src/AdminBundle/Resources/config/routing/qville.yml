@@ -1,0 +1,24 @@
+qville_index:
+    path:     /
+    defaults: { _controller: "AdminBundle:Qville:index" }
+    methods:  GET
+
+qville_show:
+    path:     /{id}/show
+    defaults: { _controller: "AdminBundle:Qville:show" }
+    methods:  GET
+
+qville_new:
+    path:     /new
+    defaults: { _controller: "AdminBundle:Qville:new" }
+    methods:  [GET, POST]
+
+qville_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "AdminBundle:Qville:edit" }
+    methods:  [GET, POST]
+
+qville_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "AdminBundle:Qville:delete" }
+    methods:  DELETE

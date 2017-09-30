@@ -1,0 +1,1799 @@
+<!DOCTYPE html>
+<html lang="en-US" prefix="og: http://ogp.me/ns#" class="no-js">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="profile" href="http://gmpg.org/xfn/11">
+    <link type="text/css" media="all"
+          href="{{ asset('module/locationvoiture/css/style.css') }}"
+
+          rel="stylesheet"/>
+
+    <title> Location Voiture </title>
+
+    <link rel='dns-prefetch' href='//fonts.googleapis.com'/>
+
+
+    <link rel='stylesheet' id='stm_default_google_font-css'
+          href='https://fonts.googleapis.com/css?family=Montserrat%3A400%2C700%7COpen+Sans%3A300%2C400%2C700&#038;subset=latin%2Clatin-ext&#038;ver=3.6.3'
+          type='text/css' media='all'/>
+
+
+    <script></script>
+    <link rel='https://api.w.org/' href='http://motors.stylemixthemes.com/wp-json/'/>
+    <link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://motors.stylemixthemes.com/xmlrpc.php?rsd"/>
+
+    <!--[if lte IE 9]>
+    <link rel="stylesheet" type="text/css"
+          href="http://motors.stylemixthemes.com/wp-content/plugins/js_composer/assets/css/vc_lte_ie9.min.css"
+          media="screen">
+    <![endif]-->
+
+    <!----------------------- links ---------------->
+    <script
+            src="http://code.jquery.com/jquery-3.2.1.js"
+            integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ asset('module/locationvoiture/css/cssModal.css') }}">
+    <link rel="stylesheet" href="{{ asset('module/locationvoiture/css/pnotify.min.css') }}">
+    {#----------------#}
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="https://use.fontawesome.com/7209a80f07.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.carousel.js"></script>
+    {#<script src="http://www.ultimatecycler.com/cdn/assets/plugins/revolution-slider/js/jquery.themepunch.revolution.js"></script>#}
+    {#<script src="http://www.ultimatecycler.com/cdn/assets/plugins/revolution-slider/js/jquery.themepunch.tools.min.js"></script>#}
+    <script type="text/javascript" src="{{ asset('module/locationvoiture/js/jquery.themepunch.plugins.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('module/locationvoiture/js/jquery.themepunch.revolution.min.js') }}"></script>
+    <link rel="stylesheet" type="text/css" href="{{ asset('module/locationvoiture/css/settings.css') }}" media="screen"/>
+    <script>
+        $("#rev_slider_1_1").owlCarousel({
+            navigation: true
+        });
+    </script>
+    <!----------------------- end links ------------->
+    <noscript>
+        <style type="text/css"> .wpb_animate_when_almost_visible {
+                opacity: 1;
+            }</style>
+    </noscript>
+
+    <link rel="stylesheet" type="text/css" href="{{ asset('module/locationvoiture/css/locationVoiture.css') }}" media="screen"/>
+    <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css"/>
+    <script>
+        $(document).ready(function () {
+            $('#example').DataTable({
+                responsive: true
+            });
+
+        });
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-formhelpers/2.3.0/js/bootstrap-formhelpers.js"></script>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-formhelpers/2.3.0/css/bootstrap-formhelpers.css">
+    <script src="https://cdn.ckeditor.com/4.6.2/standard/ckeditor.js"></script>
+</head>
+<body class="home page-template-default page page-id-5 stm_frontend_customizer stm-template-car_dealer stm-user-not-logged-in wpb-js-composer js-comp-ver-5.0.1 vc_responsive">
+<div id="wrapper">
+    <!--------------- Header section ------->
+    {{ include('ModuleBundle:Module:locationvoiture/header.html.twig') }}
+
+    <!--------------- End Header section ------->
+    <div id="main">
+        <!-- Breads -->
+        <div class="container">
+            <!------- Slider Section ------->
+            <div id="silder">
+                {{ include('ModuleBundle:Module:locationvoiture/sliderSection.html.twig') }}
+            </div>
+            <!-------------- about ----------->
+            <div class="vc_row-full-width"></div>
+            {{ include('ModuleBundle:Module/locationvoiture:about.html.twig') }}
+            <!------------- end about ------->
+            <!----- End Slider Section ------->
+            {#forcefullwidth_wrapper_tp_banner#}
+            <div class="vc_row-full-width"></div>
+            <!--------- Gallery Section --------->
+            {{ include('ModuleBundle:Module:locationvoiture/gallerySection.html.twig') }}
+            <!--------- End Gallery Section ------->
+
+            <div class="vc_row wpb_row vc_row-fluid stm-icon-box-adaptive-style-one vc_custom_1448967636595 stm-fullwidth-with-parallax stm-blackout-lvl-20 section-full-width">
+                <div class="wpb_column vc_column_container vc_col-sm-12 vc_col-lg-6">
+                    <div class="vc_column-inner vc_custom_1448967644598">
+                        <div class="wpb_wrapper">
+
+                            <a
+                                    class="icon-box-link"
+                                    href="http://motors.stylemixthemes.com/inventory/"
+                                    title="Inventory"
+                            >
+
+                                <div
+                                        class="icon-box icon_box_28440 stm-layout-box-car_dealer"
+                                        style="color:#232628">
+                                    <div class="boat-line"></div>
+                                    <div
+                                            class="icon boat-third-color"
+                                            style="font-size:54px;color:#232628; ">
+                                        <i class="stm-icon-car_search"></i>
+                                    </div>
+                                    <div class="icon-text">
+                                        <h3 class="title heading-font" style="color:#232628">
+                                            Are You looking for a car? </h3>
+                                        <div class="content" style=line-height:17px;>
+                                            <p><span style="color: #ffffff;">Our cars are delivered fully-registered with all requirements completed. We&#8217;ll deliver your car wherever you are.</span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="wpb_column vc_column_container vc_col-sm-12 vc_col-lg-6">
+                    <div class="vc_column-inner vc_custom_1448967649806">
+                        <div class="wpb_wrapper">
+
+                            <a
+                                    class="icon-box-link"
+                                    href="http://motors.stylemixthemes.com/sell-a-car/"
+                                    title="Sell a car"
+                            >
+
+                                <div
+                                        class="icon-box icon_box_23430 stm-layout-box-car_dealer"
+                                        style="color:#232628">
+                                    <div class="boat-line"></div>
+                                    <div
+                                            class="icon boat-third-color"
+                                            style="font-size:54px;color:#232628; ">
+                                        <i class="stm-icon-car_sale"></i>
+                                    </div>
+                                    <div class="icon-text">
+                                        <h3 class="title heading-font" style="color:#232628">
+                                            Do You want to sell a car? </h3>
+                                        <div class="content" style=line-height:17px;>
+                                            <p><span style="color: #ffffff;">What&#8217;s your car worth? Receive the absolute best value for your trade-in vehicle. We even handle all paperwork. Schedule your appointment today!</span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </a>
+
+
+                            <style></style>
+                        </div>
+                    </div>
+                </div>
+                <div class="stm-blackout-overlay"></div>
+            </div>
+
+            <!---------- Offres Section ------->
+            {{ include('ModuleBundle:Module:locationvoiture/offres.html.twig') }}
+            <!---------- End Offres Section --------->
+            <div class="vc_row-full-width"></div>
+            <div data-vc-full-width="true" data-vc-full-width-init="false"
+                 class="vc_row wpb_row vc_row-fluid stm-adaptive-tablet-margins vc_custom_1448968797570 section-full-width">
+                <div class="wpb_column vc_column_container vc_col-sm-12">
+                    <div class="vc_column-inner ">
+                        <div class="wpb_wrapper">
+                            <div class="wpb_text_column wpb_content_element  vc_custom_1451022034328">
+                                <div class="wpb_wrapper">
+                                    <h2 style="text-align: center;">WHY CHOOSE US</h2>
+
+                                </div>
+                            </div>
+                            <div class="vc_row wpb_row vc_inner vc_row-fluid vc_custom_1448532584673">
+                                <div class="wpb_column vc_column_container vc_col-sm-12">
+                                    <div class="vc_column-inner ">
+                                        <div class="wpb_wrapper">
+                                            <div class="colored-separator text-center style_1">
+                                                <div class="first-long stm-base-background-color"
+                                                     style="background-color: #cc6119"></div>
+                                                <div class="last-short stm-base-background-color"
+                                                     style="background-color: #cc6119"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="vc_row wpb_row vc_inner vc_row-fluid stm-icon-box-adaptive-style-three vc_custom_1448861118351">
+                                <div class="wpb_column vc_column_container vc_col-sm-3">
+                                    <div class="vc_column-inner ">
+                                        <div class="wpb_wrapper">
+
+
+                                            <div
+                                                    class="icon-box vc_custom_1449223351269 icon_box_44636 stm-layout-box-car_dealer"
+                                                    style="color:#232628">
+                                                <div class="boat-line"></div>
+                                                <div
+                                                        class="icon vc_custom_1449223351268 boat-third-color"
+                                                        style="font-size:52px;">
+                                                    <i class="stm-icon-label"></i>
+                                                </div>
+                                                <div class="icon-text">
+                                                    <h6 class="title heading-font" style="color:#232628">
+                                                        Financing Made Easy </h6>
+                                                    <div class="content" style=line-height:16px;>
+                                                        <p><span style="color: #888888; line-height: 16px;">Our stress-free finance department that can find financial solutions to save you money.</span>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                            <style></style>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="wpb_column vc_column_container vc_col-sm-3">
+                                    <div class="vc_column-inner ">
+                                        <div class="wpb_wrapper">
+
+
+                                            <div
+                                                    class="icon-box vc_custom_1449223379736 icon_box_42450 stm-layout-box-car_dealer"
+                                                    style="color:#232628">
+                                                <div class="boat-line"></div>
+                                                <div
+                                                        class="icon vc_custom_1449223379735 boat-third-color"
+                                                        style="font-size:54px;">
+                                                    <i class="stm-icon-speedometr"></i>
+                                                </div>
+                                                <div class="icon-text">
+                                                    <h6 class="title heading-font" style="color:#232628">
+                                                        Wide Range of Brands </h6>
+                                                    <div class="content" style=line-height:16px;>
+                                                        <p><span style="color: #888888; line-height: 16px;">With a robust selection of popular vehicles on hand, as well as leading vehicles from BMW and Ford.</span>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                            <style></style>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="wpb_column vc_column_container vc_col-sm-3">
+                                    <div class="vc_column-inner ">
+                                        <div class="wpb_wrapper">
+
+
+                                            <div
+                                                    class="icon-box vc_custom_1449223386004 icon_box_58346 stm-layout-box-car_dealer"
+                                                    style="color:#232628">
+                                                <div class="boat-line"></div>
+                                                <div
+                                                        class="icon vc_custom_1449223386003 boat-third-color"
+                                                        style="font-size:44px;">
+                                                    <i class="stm-icon-chat"></i>
+                                                </div>
+                                                <div class="icon-text">
+                                                    <h6 class="title heading-font" style="color:#232628">
+                                                        Trusted By Thousands </h6>
+                                                    <div class="content" style=line-height:16px;>
+                                                        <p><span style="color: #888888; line-height: 16px;">10 new offers every day. 350 offers on site, trusted by a community of thousands of users.</span>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                            <style></style>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="wpb_column vc_column_container vc_col-sm-3">
+                                    <div class="vc_column-inner ">
+                                        <div class="wpb_wrapper">
+
+
+                                            <div
+                                                    class="icon-box vc_custom_1449223392020 icon_box_65889 stm-layout-box-car_dealer"
+                                                    style="color:#232628">
+                                                <div class="boat-line"></div>
+                                                <div
+                                                        class="icon vc_custom_1449223392019 boat-third-color"
+                                                        style="font-size:52px;">
+                                                    <i class="stm-icon-application"></i>
+                                                </div>
+                                                <div class="icon-text">
+                                                    <h6 class="title heading-font" style="color:#232628">
+                                                        Car Service &amp; Maintenance </h6>
+                                                    <div class="content" style=line-height:16px;>
+                                                        <p><span style="color: #888888; line-height: 16px;">Our service department maintain your car to stay safe on the road for many more years.</span>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                            <style></style>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="vc_row wpb_row vc_inner vc_row-fluid">
+                                <div class="wpb_column vc_column_container vc_col-sm-12">
+                                    <div class="vc_column-inner ">
+                                        <div class="wpb_wrapper">
+                                            <div class="text-center">
+                                                <a class="button stm-button stm-button-icon stm-button-secondary-color "
+                                                   style="color:#fff!important;"
+                                                   href="http://motors.stylemixthemes.com/about-us/"
+                                                   title="Learn More"
+                                                ><i class="fa fa-suitcase"></i>Learn More</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="vc_row-full-width"></div>
+            <div class="vc_row wpb_row vc_row-fluid vc_custom_1482728153194 stm-fullwidth-with-parallax stm-blackout-lvl-40 section-full-width">
+                <div class="stm-icon-box-adaptive-style-one wpb_column vc_column_container vc_col-sm-12 vc_col-lg-6 vc_col-md-8">
+                    <div class="vc_column-inner ">
+                        <div class="wpb_wrapper">
+
+
+                            <div
+                                    class="icon-box vc_custom_1452575731939 icon_box_56300 stm-layout-box-car_dealer"
+                                    style="color:#232628">
+                                <div class="boat-line"></div>
+                                <div class="icon-text">
+                                    <div class="content">
+                                        <h2 style="margin-bottom: 25px;">CAR DEALERSHIP<br/>
+                                            <span style="color: #ffffff;">AUTOMOTIVE WP THEME</span></h2>
+                                        <p><span style="color: #232628; line-height: 20px; font-size: 14px;">With specialists on hand to help with any part of the car shopping or vehicle ownership experience, Motors provides financing, car service and a great selection of vehicles for luxury car shoppers in Chicago, IL. Motors is ultimate Car Dealer, Automotive, Auto Dealer WordPress theme.</span>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="icon-box-bottom-triangle">
+
+                                </div>
+                            </div>
+
+
+                            <style></style>
+                        </div>
+                    </div>
+                </div>
+                <div class="wpb_column vc_column_container vc_col-sm-6">
+                    <div class="vc_column-inner ">
+                        <div class="wpb_wrapper"></div>
+                    </div>
+                </div>
+                <div class="stm-blackout-overlay"></div>
+            </div>
+
+
+            <div class="clearfix">
+            </div>
+        </div>
+    </div> <!--main-->
+</div> <!--wrapper-->
+<footer id="footer">
+
+    <div id="footer-main">
+        <!---------- Contact Section ---------->
+        {{ include('ModuleBundle:Module:locationvoiture/contact.html.twig') }}
+        <!---------- End Contact Section ---------->
+    </div>
+
+
+    <div id="footer-copyright" style=background-color:#232628>
+
+
+        <div class="container footer-copyright">
+            <div class="row">
+                <div class="col-md-8 col-sm-8">
+                    <div class="clearfix">
+                        <div class="copyright-text">© 2016 <a href="http://www.stylemixthemes.com/">Stylemix
+                                Themes</a><span class="divider"></span>Trademarks and brands are the property of their
+                            respective owners.
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-4">
+                    <div class="clearfix">
+                        <div class="pull-right xs-pull-left">
+                            <!-- Header top bar Socials -->
+                            <div class="pull-right">
+                                <div class="copyright-socials">
+                                    <ul class="clearfix">
+                                        <li>
+                                            <a href="https://www.facebook.com/" target="_blank">
+                                                <i class="fa fa-facebook"></i>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="https://www.twitter.com/" target="_blank">
+                                                <i class="fa fa-twitter"></i>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="https://www.instagram.com/" target="_blank">
+                                                <i class="fa fa-instagram"></i>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="global-alerts"></div>                <!-- Searchform -->
+    <div class="modal" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="searchModal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+
+                <div class="modal-body heading_font">
+                    <div class="search-title">Search</div>
+                    <form method="get" id="searchform" action="http://motors.stylemixthemes.com/">
+                        <div class="search-wrapper">
+                            <input placeholder="Start typing here..." type="text" class="form-control search-input"
+                                   value="" name="s" id="s"/>
+                            <button type="submit" class="search-submit"><i class="fa fa-search"></i></button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</footer>
+<!--[if lte IE 9]>
+<![endif]-->
+<div class="modal" id="test-drive" tabindex="-1" role="dialog" aria-labelledby="myModalLabelTestDrive">
+    <form id="request-test-drive-form" action="http://motors.stylemixthemes.com/" method="post">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header modal-header-iconed">
+                    <i class="stm-icon-steering_wheel"></i>
+                    <h3 class="modal-title" id="myModalLabelTestDrive">Schedule a Test Drive</h3>
+                    <div class="test-drive-car-name">Home</div>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6">
+                            <div class="form-group">
+                                <div class="form-modal-label">Name</div>
+                                <input name="name" type="text"/>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-6">
+                            <div class="form-group">
+                                <div class="form-modal-label">Email</div>
+                                <input name="email" type="email"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6">
+                            <div class="form-group">
+                                <div class="form-modal-label">Phone</div>
+                                <input name="phone" type="tel"/>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-6">
+                            <div class="form-group">
+                                <div class="form-modal-label">Best time</div>
+                                <div class="stm-datepicker-input-icon">
+                                    <input name="date" class="stm-date-timepicker" type="text"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mg-bt-25px"></div>
+                    <div class="row">
+                        <div class="col-md-8 col-sm-8">
+                            <div class="g-recaptcha" data-sitekey="6Lc2pg8TAAAAAEhS3_Bgz9rtJmNs9Bz4otiRFmAy"
+                                 data-size="normal"></div>
+                        </div>
+                        <div class="col-md-4 col-sm-4">
+                            <button type="submit" class="stm-request-test-drive">Request</button>
+                            <div class="stm-ajax-loader" style="margin-top:10px;">
+                                <i class="stm-icon-load1"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mg-bt-25px"></div>
+                    <input name="vehicle_id" type="hidden" value="5"/>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="modal" id="get-car-price" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <form id="get-car-price-form">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header modal-header-iconed">
+                    <i class="stm-icon-steering_wheel"></i>
+                    <h3 class="modal-title" id="myModalLabel">Request car price</h3>
+                    <div class="test-drive-car-name">Home</div>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6">
+                            <div class="form-group">
+                                <div class="form-modal-label">Name</div>
+                                <input name="name" type="text"/>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-6">
+                            <div class="form-group">
+                                <div class="form-modal-label">Email</div>
+                                <input name="email" type="email"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6">
+                            <div class="form-group">
+                                <div class="form-modal-label">Phone</div>
+                                <input name="phone" type="tel"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 col-sm-4">
+                            <button type="submit" class="stm-request-test-drive">Request</button>
+                            <div class="stm-ajax-loader" style="margin-top:10px;">
+                                <i class="stm-icon-load1"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mg-bt-25px"></div>
+                    <input name="vehicle_id" type="hidden" value="5"/>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="modal" id="get-car-calculator" tabindex="-1" role="dialog" aria-labelledby="myModalLabelCalc">
+    <div class="modal-calculator">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header modal-header-iconed">
+                    <i class="stm-icon-steering_wheel"></i>
+
+                    <h3 class="modal-title" id="myModalLabelCalc">Calculate Payment</h3>
+
+                    <div class="test-drive-car-name">Home</div>
+                </div>
+                <div class="modal-body">
+
+                    <div class="stm_auto_loan_calculator">
+                        <div class="title">
+                            <i class="stm-icon-calculator"></i>
+                            <h5>Financing calculator</h5>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+
+                                <!--Amount-->
+                                <div class="form-group">
+                                    <div class="labeled">Vehicle price <span
+                                                class="orange">($)</span></div>
+                                    <input type="text" class="numbersOnly vehicle_price"
+                                           value=""/>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-6">
+                                        <!--Interest rate-->
+                                        <div class="form-group md-mg-rt">
+                                            <div class="labeled">Interest rate <span
+                                                        class="orange">(%)</span></div>
+                                            <input type="text" class="numbersOnly interest_rate"/>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-sm-6">
+                                        <!--Period-->
+                                        <div class="form-group md-mg-lt">
+                                            <div class="labeled">Period <span
+                                                        class="orange">(month)</span></div>
+                                            <input type="text" class="numbersOnly period_month"/>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!--Down Payment-->
+                                <div class="form-group">
+                                    <div class="labeled">Down Payment <span
+                                                class="orange">($)</span></div>
+                                    <input type="text" class="numbersOnly down_payment"/>
+                                </div>
+
+
+                                <a href="#"
+                                   class="button button-sm calculate_loan_payment dp-in">Calculate</a>
+
+
+                                <div class="calculator-alert alert alert-danger">
+
+                                </div>
+
+                            </div>
+
+                            <!--Results-->
+                            <div class="col-md-12">
+                                <div class="stm_calculator_results">
+                                    <div class="stm-calc-results-inner">
+                                        <div
+                                                class="stm-calc-label">Monthly Payment
+                                        </div>
+                                        <div class="monthly_payment h5"></div>
+
+                                        <div
+                                                class="stm-calc-label">Total Interest Payment
+                                        </div>
+                                        <div class="total_interest_payment h5"></div>
+
+                                        <div
+                                                class="stm-calc-label">Total Amount to Pay
+                                        </div>
+                                        <div class="total_amount_to_pay h5"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <script></script>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal" id="trade-offer" tabindex="-1" role="dialog" aria-labelledby="myModalLabelTradeOffer">
+    <form id="request-trade-offer-form" action="http://motors.stylemixthemes.com/" method="post">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header modal-header-iconed">
+                    <i class="stm-moto-icon-cash"></i>
+                    <h3 class="modal-title" id="myModalLabelTestDrive">Offer Price</h3>
+                    <div class="test-drive-car-name">Home</div>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6">
+                            <div class="form-group">
+                                <div class="form-modal-label">Name</div>
+                                <input name="name" type="text"/>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-6">
+                            <div class="form-group">
+                                <div class="form-modal-label">Email</div>
+                                <input name="email" type="email"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6">
+                            <div class="form-group">
+                                <div class="form-modal-label">Phone</div>
+                                <input name="phone" type="tel"/>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-6">
+                            <div class="form-group">
+                                <div class="form-modal-label">Trade price</div>
+                                <div class="stm-trade-input-icon">
+                                    <input name="trade_price" type="text"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mg-bt-25px"></div>
+                    <div class="row">
+                        <div class="col-md-8 col-sm-8">
+                            <div class="g-recaptcha" data-sitekey="6Lc2pg8TAAAAAEhS3_Bgz9rtJmNs9Bz4otiRFmAy"
+                                 data-size="normal"></div>
+                        </div>
+                        <div class="col-md-4 col-sm-4">
+                            <button type="submit" class="stm-request-test-drive">Request</button>
+                            <div class="stm-ajax-loader" style="margin-top:10px;">
+                                <i class="stm-icon-load1"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mg-bt-25px"></div>
+                    <input name="vehicle_id" type="hidden" value="5"/>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="single-add-to-compare">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9 col-sm-9">
+                <div class="single-add-to-compare-left">
+                    <i class="add-to-compare-icon stm-icon-speedometr2"></i>
+                    <span class="stm-title h5"></span>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-3">
+                <a href="http://motors.stylemixthemes.com/compare" class="compare-fixed-link pull-right heading-font">
+                    Compare </a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal  editer offres-->
+<div class="modal fade" id="Modal_editer_offres" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Editer Offres</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="col-xs-12">
+                    <div class="panel with-nav-tabs">
+                        <div class="panel-heading">
+                            <ul class="nav nav-tabs">
+                                <li class="active"><a href="#tab1info" data-toggle="tab">Nouvelle Offres</a></li>
+                                <li><a href="#tab2info" data-toggle="tab">Info 2</a></li>
+                            </ul>
+                        </div>
+                        <div class="panel-body">
+                            <div class="tab-content">
+                                <div class="tab-pane fade in active" id="tab1info">
+                                    <!----- Formulaire nouvelle offre ------->
+                                    <form id="">
+
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Anuler</button>
+                                            <button type="button" class="btn btn-secondary " id="btn_add_vehicule">Enregistrer</button>
+                                        </div>
+                                    </form>
+                                    <!----- end Formulaire nouvelle offre ------->
+                                </div>
+                                <div class="tab-pane fade" id="tab2info">Info 2</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end Modal editer offres -->
+<!-- Modale réservation -->
+<div class="modal fade" id="Modal_reservation" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="frm_reservation" method="post" action=" path('reservation')}}">
+                    <div class="stm_auto_loan_calculator">
+                        <div class="title">
+                            <i class="stm-icon-calculator"></i>
+                            <h5>Réservation :</h5>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+
+                                <!--Amount-->
+                                <div class="form-group">
+                                    <div class="labeled">Véhicule <span class="orange">($)</span></div>
+                                    <input type="text" class="vehicle_price" value="">
+                                </div>
+                                <div class="form-group">
+                                    <div class="labeled">Départ <span class="orange">($)</span></div>
+                                    <input type="text" class="down_payment" value="2000">
+                                </div>
+                                <div class="form-group">
+                                    <div class="labeled">Retour : <span class="orange">($)</span></div>
+                                    <input type="text" class="down_payment" value="2000">
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-6">
+                                        <div class="form-group md-mg-rt">
+                                            <div class="labeled">Date de Pris : <span class="orange"><i class="fa fa-calendar" aria-hidden="true"></i></span></div>
+                                            <div class='col-xs-12'>
+                                                <div class="form-group">
+                                                    <div class='input-group date' id='datetimepicker1'>
+                                                        <input type='text' class="form-control"/>
+                                                        <span class="input-group-addon">
+                                                                <span class="glyphicon glyphicon-calendar"></span>
+                                                              </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-sm-6">
+                                        <!--Period-->
+                                        <div class="form-group md-mg-lt">
+                                            <div class="labeled">Date de Retoure : <span class="orange"><i class="fa fa-calendar" aria-hidden="true"></i></span></div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <p>Date: <input type="text" id="datepicker"></p>
+                                <button type="button" class="button button-sm calculate_loan_payment dp-in pull-right">Réserver</button>
+
+
+                                <div class="calculator-alert alert alert-danger">
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end Modale réservation -->
+<!--------- datapisker -------->
+<script>
+    $(document).ready(function () {
+
+        jQuery("#datepicker").datepicker();
+
+    })
+</script>
+<script type='text/javascript'>
+    /* <![CDATA[ */
+    var _wpcf7 = {"recaptcha": {"messages": {"empty": "Please verify that you are not a robot."}}};
+    /* ]]> */
+</script>
+<script type='text/javascript' src='{{ asset('module/locationvoiture/js/pnotify.min.js') }}'></script>
+<script type='text/javascript'
+        src='http://motors.stylemixthemes.com/wp-content/plugins/mailchimp-for-wp/assets/js/third-party/placeholders.min.js?ver=4.0.10'></script>
+<script type="text/javascript">
+    window._wpemojiSettings = {
+        "baseUrl": "https:\/\/s.w.org\/images\/core\/emoji\/2.2.1\/72x72\/",
+        "ext": ".png",
+        "svgUrl": "https:\/\/s.w.org\/images\/core\/emoji\/2.2.1\/svg\/",
+        "svgExt": ".svg",
+        "source": {"concatemoji": "http:\/\/motors.stylemixthemes.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.7.5"}
+    };
+    !function (a, b, c) {
+        function d(a) {
+            var b, c, d, e, f = String.fromCharCode;
+            if (!k || !k.fillText)return !1;
+            switch (k.clearRect(0, 0, j.width, j.height), k.textBaseline = "top", k.font = "600 32px Arial", a) {
+                case"flag":
+                    return k.fillText(f(55356, 56826, 55356, 56819), 0, 0), !(j.toDataURL().length < 3e3) && (k.clearRect(0, 0, j.width, j.height), k.fillText(f(55356, 57331, 65039, 8205, 55356, 57096), 0, 0), b = j.toDataURL(), k.clearRect(0, 0, j.width, j.height), k.fillText(f(55356, 57331, 55356, 57096), 0, 0), c = j.toDataURL(), b !== c);
+                case"emoji4":
+                    return k.fillText(f(55357, 56425, 55356, 57341, 8205, 55357, 56507), 0, 0), d = j.toDataURL(), k.clearRect(0, 0, j.width, j.height), k.fillText(f(55357, 56425, 55356, 57341, 55357, 56507), 0, 0), e = j.toDataURL(), d !== e
+            }
+            return !1
+        }
+
+        function e(a) {
+            var c = b.createElement("script");
+            c.src = a, c.defer = c.type = "text/javascript", b.getElementsByTagName("head")[0].appendChild(c)
+        }
+
+        var f, g, h, i, j = b.createElement("canvas"), k = j.getContext && j.getContext("2d");
+        for (i = Array("flag", "emoji4"), c.supports = {
+            everything: !0,
+            everythingExceptFlag: !0
+        }, h = 0; h < i.length; h++)c.supports[i[h]] = d(i[h]), c.supports.everything = c.supports.everything && c.supports[i[h]], "flag" !== i[h] && (c.supports.everythingExceptFlag = c.supports.everythingExceptFlag && c.supports[i[h]]);
+        c.supports.everythingExceptFlag = c.supports.everythingExceptFlag && !c.supports.flag, c.DOMReady = !1, c.readyCallback = function () {
+            c.DOMReady = !0
+        }, c.supports.everything || (g = function () {
+            c.readyCallback()
+        }, b.addEventListener ? (b.addEventListener("DOMContentLoaded", g, !1), a.addEventListener("load", g, !1)) : (a.attachEvent("onload", g), b.attachEvent("onreadystatechange", function () {
+                "complete" === b.readyState && c.readyCallback()
+            })), f = c.source || {}, f.concatemoji ? e(f.concatemoji) : f.wpemoji && f.twemoji && (e(f.twemoji), e(f.wpemoji)))
+    }(window, document, window._wpemojiSettings);
+</script>
+<script type='text/javascript'>
+    /* <![CDATA[ */
+    var wc_add_to_cart_params = {
+        "ajax_url": "\/wp-admin\/admin-ajax.php",
+        "wc_ajax_url": "\/?wc-ajax=%%endpoint%%",
+        "i18n_view_cart": "View cart",
+        "cart_url": "http:\/\/motors.stylemixthemes.com\/cart",
+        "is_cart": "",
+        "cart_redirect_after_add": "no"
+    };
+    /* ]]> */
+</script>
+<script type="text/javascript">
+    var stm_lang_code = 'en';
+    var ajaxurl = 'http://motors.stylemixthemes.com/wp-admin/admin-ajax.php';
+    var stm_site_blog_id = "1";
+    var stm_added_to_compare_text = "Added to compare";
+    var stm_removed_from_compare_text = "was removed from compare";
+    var stm_already_added_to_compare_text = "You have already added 3 cars";
+</script>
+<script>var htmlDiv = document.getElementById("rs-plugin-settings-inline-css");
+    var htmlDivCss = "";
+    if (htmlDiv) {
+        htmlDiv.innerHTML = htmlDiv.innerHTML + htmlDivCss;
+    } else {
+        var htmlDiv = document.createElement("div");
+        htmlDiv.innerHTML = "<style>" + htmlDivCss + "</style>";
+        document.getElementsByTagName("head")[0].appendChild(htmlDiv.childNodes[0]);
+    }
+</script>
+<script>var htmlDiv = document.getElementById("rs-plugin-settings-inline-css");
+    var htmlDivCss = ".tp-caption.Fashion-BigDisplay,.Fashion-BigDisplay{color:rgba(0,0,0,1.00);font-size:60px;line-height:60px;font-weight:900;font-style:normal;font-family:Raleway;text-decoration:none;background-color:transparent;border-color:transparent;border-style:none;border-width:0px;border-radius:0px 0px 0px 0px;letter-spacing:2px}.tp-caption.stm-slider-round,.stm-slider-round{color:rgba(0,0,0,1.00);font-size:34px;line-height:34px;font-weight:900;font-style:normal;font-family:Raleway;text-decoration:none;background-color:transparent;border-color:transparent;border-style:none;border-width:0px;border-radius:0px 0px 0px 0px}.tp-caption.slider-v1-title,.slider-v1-title{color:rgba(0,0,0,1.00);font-size:60px;line-height:60px;font-weight:900;font-style:normal;font-family:Raleway;text-decoration:none;background-color:transparent;border-color:transparent;border-style:none;border-width:0px;border-radius:0px 0px 0px 0px}";
+    if (htmlDiv) {
+        htmlDiv.innerHTML = htmlDiv.innerHTML + htmlDivCss;
+    } else {
+        var htmlDiv = document.createElement("div");
+        htmlDiv.innerHTML = "<style>" + htmlDivCss + "</style>";
+        document.getElementsByTagName("head")[0].appendChild(htmlDiv.childNodes[0]);
+    }
+</script>
+<script type="text/javascript">
+    /******************************************
+     -    PREPARE PLACEHOLDER FOR SLIDER    -
+     ******************************************/
+
+    var setREVStartSize = function () {
+        try {
+            var e = new Object, i = jQuery(window).width(), t = 9999, r = 0, n = 0, l = 0, f = 0, s = 0, h = 0;
+            e.c = jQuery('#rev_slider_1_1');
+            e.responsiveLevels = [1240, 1240, 1240, 480];
+            e.gridwidth = [1140, 1024, 778, 480];
+            e.gridheight = [600, 600, 500, 400];
+
+            e.sliderLayout = "fullwidth";
+            if (e.responsiveLevels && (jQuery.each(e.responsiveLevels, function (e, f) {
+                    f > i && (t = r = f, l = e), i > f && f > r && (r = f, n = e)
+                }), t > r && (l = n)), f = e.gridheight[l] || e.gridheight[0] || e.gridheight, s = e.gridwidth[l] || e.gridwidth[0] || e.gridwidth, h = i / s, h = h > 1 ? 1 : h, f = Math.round(h * f), "fullscreen" == e.sliderLayout) {
+                var u = (e.c.width(), jQuery(window).height());
+                if (void 0 != e.fullScreenOffsetContainer) {
+                    var c = e.fullScreenOffsetContainer.split(",");
+                    if (c) jQuery.each(c, function (e, i) {
+                        u = jQuery(i).length > 0 ? u - jQuery(i).outerHeight(!0) : u
+                    }), e.fullScreenOffset.split("%").length > 1 && void 0 != e.fullScreenOffset && e.fullScreenOffset.length > 0 ? u -= jQuery(window).height() * parseInt(e.fullScreenOffset, 0) / 100 : void 0 != e.fullScreenOffset && e.fullScreenOffset.length > 0 && (u -= parseInt(e.fullScreenOffset, 0))
+                }
+                f = u
+            } else void 0 != e.minHeight && f < e.minHeight && (f = e.minHeight);
+            e.c.closest(".rev_slider_wrapper").css({height: f})
+
+        } catch (d) {
+            console.log("Failure at Presize of Slider:" + d)
+        }
+    };
+
+    setREVStartSize();
+
+    var tpj = jQuery;
+
+    var revapi1;
+    tpj(document).ready(function () {
+        if (tpj("#rev_slider_1_1").revolution == undefined) {
+            revslider_showDoubleJqueryError("#rev_slider_1_1");
+        } else {
+            revapi1 = tpj("#rev_slider_1_1").show().revolution({
+                sliderType: "standard",
+                jsFileLocation: "//motors.stylemixthemes.com/wp-content/plugins/revslider/public/assets/js/",
+                sliderLayout: "fullwidth",
+                dottedOverlay: "none",
+                delay: 5000,
+                navigation: {
+                    keyboardNavigation: "off",
+                    keyboard_direction: "horizontal",
+                    mouseScrollNavigation: "off",
+                    mouseScrollReverse: "default",
+                    onHoverStop: "off",
+                    touch: {
+                        touchenabled: "on",
+                        swipe_threshold: 75,
+                        swipe_min_touches: 50,
+                        swipe_direction: "horizontal",
+                        drag_block_vertical: false
+                    }
+                    ,
+                    arrows: {
+                        style: "hades",
+                        enable: true,
+                        hide_onmobile: true,
+                        hide_under: 600,
+                        hide_onleave: true,
+                        hide_delay: 200,
+                        hide_delay_mobile: 1200,
+                        tmp: '<div class="tp-arr-allwrapper">	<div class="tp-arr-imgholder"></div></div>',
+                        left: {
+                            h_align: "left",
+                            v_align: "center",
+                            h_offset: 30,
+                            v_offset: 0
+                        },
+                        right: {
+                            h_align: "right",
+                            v_align: "center",
+                            h_offset: 30,
+                            v_offset: 0
+                        }
+                    }
+                    ,
+                    bullets: {
+                        enable: true,
+                        hide_onmobile: true,
+                        hide_under: 600,
+                        style: "home-slider",
+                        hide_onleave: true,
+                        hide_delay: 1000,
+                        hide_delay_mobile: 1200,
+                        direction: "horizontal",
+                        h_align: "center",
+                        v_align: "bottom",
+                        h_offset: 0,
+                        v_offset: 30,
+                        space: 5,
+                        tmp: '<span class="stm-bullet-inner"></span>'
+                    }
+                },
+                responsiveLevels: [1240, 1240, 1240, 480],
+                visibilityLevels: [1240, 1240, 1240, 480],
+                gridwidth: [1140, 1024, 778, 480],
+                gridheight: [600, 600, 500, 400],
+                lazyType: "none",
+                parallax: {
+                    type: "mouse+scroll",
+                    origo: "slidercenter",
+                    speed: 2000,
+                    levels: [2, 3, 4, 5, 6, 7, 12, 16, 10, 50, 47, 48, 49, 50, 51, 55],
+                    disable_onmobile: "on"
+                },
+                shadow: 0,
+                spinner: "spinner1",
+                stopLoop: "off",
+                stopAfterLoops: -1,
+                stopAtSlide: -1,
+                shuffle: "off",
+                autoHeight: "off",
+                disableProgressBar: "on",
+                hideThumbsOnMobile: "off",
+                hideSliderAtLimit: 0,
+                hideCaptionAtLimit: 0,
+                hideAllCaptionAtLilmit: 768,
+                debugMode: false,
+                fallbacks: {
+                    simplifyAll: "on",
+                    nextSlideOnWindowFocus: "off",
+                    disableFocusListener: false,
+                }
+            });
+        }
+    });
+    /*ready*/
+</script>
+<script>
+    var htmlDivCss = ' #rev_slider_1_1_wrapper .tp-loader.spinner1{ background-color: #FFFFFF !important; } ';
+    var htmlDiv = document.getElementById('rs-plugin-settings-inline-css');
+    if (htmlDiv) {
+        htmlDiv.innerHTML = htmlDiv.innerHTML + htmlDivCss;
+    }
+    else {
+        var htmlDiv = document.createElement('div');
+        htmlDiv.innerHTML = '<style>' + htmlDivCss + '</style>';
+        document.getElementsByTagName('head')[0].appendChild(htmlDiv.childNodes[0]);
+    }
+</script>
+<script>
+    var htmlDivCss = unescape(".hades.tparrows%20%7B%0A%09cursor%3Apointer%3B%0A%09background%3Argba%280%2C0%2C0%2C0.25%29%3B%0A%09width%3A100px%3B%0A%09height%3A100px%3B%0A%09position%3Aabsolute%3B%0A%09display%3Ablock%3B%0A%09z-index%3A100%3B%0A%7D%0A%0A.hades.tparrows%3Abefore%20%7B%0A%09font-family%3A%20%22revicons%22%3B%0A%09font-size%3A30px%3B%0A%09color%3Argba%28255%2C%20255%2C%20255%2C%201%29%3B%0A%09display%3Ablock%3B%0A%09line-height%3A%20100px%3B%0A%09text-align%3A%20center%3B%0A%20%20transition%3A%20background%200.3s%2C%20color%200.3s%3B%0A%7D%0A.hades.tparrows.tp-leftarrow%3Abefore%20%7B%0A%09content%3A%20%22%5Ce824%22%3B%0A%7D%0A.hades.tparrows.tp-rightarrow%3Abefore%20%7B%0A%09content%3A%20%22%5Ce825%22%3B%0A%7D%0A%0A.hades.tparrows%3Ahover%3Abefore%20%7B%0A%20%20%20color%3Argba%280%2C0%2C0%2C0.5%29%3B%0A%20%20%20background%3Argba%28255%2C%20255%2C%20255%2C%201%29%3B%0A%20%7D%0A.hades%20.tp-arr-allwrapper%20%7B%0A%20%20position%3Aabsolute%3B%0A%20%20left%3A100%25%3B%0A%20%20top%3A0px%3B%0A%20%20background%3A%23888%3B%20%0A%20%20width%3A100px%3Bheight%3A100px%3B%0A%20%20-webkit-transition%3A%20all%200.3s%3B%0A%20%20transition%3A%20all%200.3s%3B%0A%20%20-ms-filter%3A%20%22progid%3Adximagetransform.microsoft.alpha%28opacity%3D0%29%22%3B%0A%20%20filter%3A%20alpha%28opacity%3D0%29%3B%0A%20%20-moz-opacity%3A%200.0%3B%0A%20%20-khtml-opacity%3A%200.0%3B%0A%20%20opacity%3A%200.0%3B%0A%20%20-webkit-transform%3A%20rotatey%28-90deg%29%3B%0A%20%20transform%3A%20rotatey%28-90deg%29%3B%0A%20%20-webkit-transform-origin%3A%200%25%2050%25%3B%0A%20%20transform-origin%3A%200%25%2050%25%3B%0A%7D%0A.hades.tp-rightarrow%20.tp-arr-allwrapper%20%7B%0A%20%20%20left%3Aauto%3B%0A%20%20%20right%3A100%25%3B%0A%20%20%20-webkit-transform-origin%3A%20100%25%2050%25%3B%0A%20%20transform-origin%3A%20100%25%2050%25%3B%0A%20%20%20-webkit-transform%3A%20rotatey%2890deg%29%3B%0A%20%20transform%3A%20rotatey%2890deg%29%3B%0A%7D%0A%0A.hades%3Ahover%20.tp-arr-allwrapper%20%7B%0A%20%20%20-ms-filter%3A%20%22progid%3Adximagetransform.microsoft.alpha%28opacity%3D100%29%22%3B%0A%20%20filter%3A%20alpha%28opacity%3D100%29%3B%0A%20%20-moz-opacity%3A%201%3B%0A%20%20-khtml-opacity%3A%201%3B%0A%20%20opacity%3A%201%3B%20%20%0A%20%20%20%20-webkit-transform%3A%20rotatey%280deg%29%3B%0A%20%20transform%3A%20rotatey%280deg%29%3B%0A%0A%20%7D%0A%20%20%20%20%0A.hades%20.tp-arr-iwrapper%20%7B%0A%7D%0A.hades%20.tp-arr-imgholder%20%7B%0A%20%20background-size%3Acover%3B%0A%20%20position%3Aabsolute%3B%0A%20%20top%3A0px%3Bleft%3A0px%3B%0A%20%20width%3A100%25%3Bheight%3A100%25%3B%0A%7D%0A.hades%20.tp-arr-titleholder%20%7B%0A%7D%0A.hades%20.tp-arr-subtitleholder%20%7B%0A%7D%0A%0A.home-slider.tp-bullets%20%7B%0A%09width%3Aauto%20%21important%3B%0A%7D%0A.home-slider%20.tp-bullet%20%7B%0A%09position%3Arelative%20%21important%3B%0A%20%20%20%20left%3A0%20%21important%3B%0A%20%20%20%20top%3A0%20%21important%3B%0A%09display%3Ainline-block%3B%0A%09width%3A7px%3B%0A%09height%3A7px%3B%0A%20%20%20%20margin-right%3A13px%3B%0A%09background%3A%23a4a3a5%3B%0A%09border-radius%3A50%25%3B%0A%09cursor%3A%20pointer%3B%0A%09box-sizing%3Acontent-box%3B%0A%7D%0A.home-slider%20.tp-bullet%3Ahover%20%7B%0A%09background%3A%236c98e1%3B%0A%20%20%20%20-moz-transform%3A%20scale%281.3%29%3B%0A%09-o-transform%3A%20scale%281.3%29%3B%0A%09-ms-transform%3A%20scale%281.3%29%3B%0A%09-webkit-transform%3A%20scale%281.3%29%3B%0A%09transform%3A%20scale%281.3%29%3B%0A%7D%0A%0A.home-slider%20.tp-bullet.selected%20%7B%0A%09background%3A%236c98e1%3B%0A%7D%0A");
+    var htmlDiv = document.getElementById('rs-plugin-settings-inline-css');
+    if (htmlDiv) {
+        htmlDiv.innerHTML = htmlDiv.innerHTML + htmlDivCss;
+    }
+    else {
+        var htmlDiv = document.createElement('div');
+        htmlDiv.innerHTML = '<style>' + htmlDivCss + '</style>';
+        document.getElementsByTagName('head')[0].appendChild(htmlDiv.childNodes[0]);
+    }
+</script>
+<script type="text/javascript">
+    (function ($) {
+        "use strict";
+
+
+        $(document).ready(function () {
+            $('.found-cars-cloned').html($('.listing-cars-id-20589 .car-listing-main-part .tab-pane.active .found-cars-clone').html());
+            $('.listing-cars-id-20589 a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+                var tab_href = $(e.target).attr('href');
+                var found_cars = $(tab_href).find('.found-cars-clone').html();
+                $('.found-cars-cloned').html(found_cars);
+
+            })
+        })
+    })(jQuery);
+</script>
+<script type="text/javascript">
+    (function ($) {
+        "use strict";
+
+        var owl = $('.special-carousel-75444');
+
+        $(document).ready(function () {
+            owl.on('initialized.owl.carousel', function (e) {
+                owl.find('.owl-dots').before('<div class="stm-owl-prev"><i class="fa fa-angle-left"></i></div>');
+                owl.find('.owl-dots').after('<div class="stm-owl-next"><i class="fa fa-angle-right"></i></div>');
+            });
+
+            var owlRtl = false;
+            if ($('body').hasClass('rtl')) {
+                owlRtl = true;
+            }
+
+            var owlLoop = true;
+
+            owl.owlCarousel({
+                rtl: owlRtl,
+                items: 3,
+                dots: true,
+                autoplay: false,
+                slideBy: 3,
+                loop: owlLoop,
+                responsive: {
+                    0: {
+                        items: 1,
+                        slideBy: 1
+                    },
+                    768: {
+                        items: 2,
+                        slideBy: 2
+                    },
+                    992: {
+                        items: 3,
+                        slideBy: 3
+                    }
+                }
+            });
+            owl.on('click', '.stm-owl-prev', function () {
+                console.log('prev');
+                owl.trigger('prev.owl.carousel');
+            });
+            owl.on('click', '.stm-owl-next', function () {
+                console.log('next');
+                owl.trigger('next.owl.carousel');
+            });
+
+            owl.find('.car-title').each(function () {
+                var html = $(this).html();
+                var word = html.substr(0, html.indexOf(" "));
+                var rest = html.substr(html.indexOf(" "));
+                $(this).html(rest).prepend($("<span/>").html(word).addClass("stm-base-color"));
+            });
+        });
+    })(jQuery);
+</script>
+<script type="text/javascript">var sb_instagram_js_options = {"sb_instagram_at": "1498526473.3a81a9f.f9feae0d17d14ce2a83975cf3f37862b"};</script>
+<script type="text/javascript">(function () {
+        if (!window.mc4wp) {
+            window.mc4wp = {
+                listeners: [],
+                forms: {
+                    on: function (event, callback) {
+                        window.mc4wp.listeners.push({
+                            event: event,
+                            callback: callback
+                        });
+                    }
+                }
+            }
+        }
+    })();
+</script>
+<script type="text/javascript">
+    jQuery(document).ready(function ($) {
+        "use strict";
+
+        $(window).on('load', function () {
+            $("#frontend_customizer").animate({left: -233}, 300);
+        });
+
+        $('select[name="stm-select-layout"]').select2().on('change', function () {
+            $('html').addClass('stm-site-beforeloader');
+            window.location.href = $(this).val();
+        });
+
+        $("#frontend_customizer_button").on('click', function () {
+            if ($("#frontend_customizer").hasClass('open')) {
+                $("#frontend_customizer").animate({left: -233}, 300);
+                $("#frontend_customizer").removeClass('open');
+            } else {
+                $("#frontend_customizer").animate({left: 0}, 300);
+                $("#frontend_customizer").addClass('open');
+            }
+        });
+
+        $('body').on('click', function (kik) {
+            if (!$(kik.target).is('#frontend_customizer, #frontend_customizer *') && $('#frontend_customizer').is(':visible')) {
+                $("#frontend_customizer").animate({left: -233}, 300);
+                $("#frontend_customizer").removeClass('open');
+            }
+        });
+
+        var style_id = '';
+
+        $("#skin_color span").on('click', function () {
+            $('body').removeClass('stm_style_clr_' + style_id);
+            style_id = $(this).attr('id');
+            $('body').addClass('stm_style_clr_' + style_id);
+            var logo_num = $(this).data('logo');
+
+
+            var logo_url = 'http://motors.stylemixthemes.com/wp-content/themes/motors/assets/images/tmp/logo' + logo_num + '.svg';
+            console.log(logo_url);
+
+            $("#skin_color .active").removeClass("active");
+
+            $(this).addClass("active");
+
+            $("#custom_style").remove();
+            $("#custom_style_listing").remove();
+
+            if (style_id != 'site_style_default') {
+                $('#custom_style').remove();
+                $("head").append('<link rel="stylesheet" id="custom_style" href="http://motors.stylemixthemes.com/wp-content/themes/motors/assets/css/' + style_id + '.css?v=4" type="text/css" media="all">');
+                $("head").append('<link rel="stylesheet" id="custom_style_listing" href="http://motors.stylemixthemes.com/wp-content/themes/motors/assets/css/listing/' + style_id + '.css?v=4" type="text/css" media="all">');
+
+                $('#header .logo-main img').attr('src', logo_url);
+                $('#header .service-logo-main img').attr('src', logo_url);
+                $('#stm-boats-header .listing-logo-main img,.stm-boats-footer-logo').attr('src', logo_url);
+            } else {
+
+                $('#header .logo-main img').attr('src', logo_url);
+                $('#header .service-logo-main img').attr('src', logo_url);
+                $('#stm-boats-header .listing-logo-main img,.stm-boats-footer-logo').attr('src', logo_url);
+            }
+        });
+
+
+        $("#navigation_type").on("click", function () {
+            if ($(this).hasClass('active')) {
+                $(this).removeClass('active');
+
+                $('.header-nav').removeClass('header-nav-fixed');
+
+                $('.header-service').removeClass('header-service-sticky header-service-fixed');
+
+                $('.header-listing').removeClass('header-listing-fixed stm-fixed stm-fixed-invisible');
+            } else {
+                $(this).addClass('active');
+
+                $('.header-nav').addClass('header-nav-fixed');
+
+                $('.header-service').addClass('header-service-fixed');
+
+                $('.header-listing').addClass('header-listing-fixed');
+            }
+        });
+
+        $("#navigation_transparency").on("click", function () {
+            if ($(this).hasClass('active')) {
+                $(this).removeClass('active');
+
+                $('.header-nav').removeClass('header-nav-transparent');
+                $('.header-nav').addClass('header-nav-default');
+            } else {
+                $(this).addClass('active');
+
+                $('.header-nav').addClass('header-nav-transparent');
+                $('.header-nav').removeClass('header-nav-default');
+
+            }
+        });
+
+        $("#layout_mode").on("click", function () {
+            if ($(this).hasClass('active')) {
+                $(this).removeClass('active');
+
+                $('body').addClass('stm-boxed');
+                $('.customizer_boxed_background').slideDown();
+
+                $('body').addClass('stm-background-customizer-box_img_5');
+            } else {
+                $(this).addClass('active');
+
+                $('body').removeClass('stm-boxed');
+                $('.customizer_boxed_background').slideUp();
+
+                $('body').addClass('stm-background-customizer-box_img_5');
+            }
+        });
+
+        $('#background_image span').on('click', function () {
+            $('#background_image span').removeClass('active');
+            $(this).addClass('active');
+
+            var img_src = $(this).data('image');
+
+            $('body').removeClass('stm-background-customizer-box_img_1 stm-background-customizer-box_img_2 stm-background-customizer-box_img_3 stm-background-customizer-box_img_4 stm-background-customizer-box_img_5 stm-background-customizer-box_img_6');
+
+            $('body').addClass('stm-background-customizer-' + img_src);
+        });
+
+    });
+
+</script>
+<script type="text/javascript">(function () {
+        function addEventListener(element, event, handler) {
+            if (element.addEventListener) {
+                element.addEventListener(event, handler, false);
+            } else if (element.attachEvent) {
+                element.attachEvent('on' + event, handler);
+            }
+        }
+
+        function maybePrefixUrlField() {
+            if (this.value.trim() !== '' && this.value.indexOf('http') !== 0) {
+                this.value = "http://" + this.value;
+            }
+        }
+
+        var urlFields = document.querySelectorAll('.mc4wp-form input[type="url"]');
+        if (urlFields && urlFields.length > 0) {
+            for (var j = 0; j < urlFields.length; j++) {
+                addEventListener(urlFields[j], 'blur', maybePrefixUrlField);
+            }
+        }
+        /* test if browser supports date fields */
+        var testInput = document.createElement('input');
+        testInput.setAttribute('type', 'date');
+        if (testInput.type !== 'date') {
+
+            /* add placeholder & pattern to all date fields */
+            var dateFields = document.querySelectorAll('.mc4wp-form input[type="date"]');
+            for (var i = 0; i < dateFields.length; i++) {
+                if (!dateFields[i].placeholder) {
+                    dateFields[i].placeholder = 'YYYY-MM-DD';
+                }
+                if (!dateFields[i].pattern) {
+                    dateFields[i].pattern = '[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|1[0-9]|2[0-9]|3[01])';
+                }
+            }
+        }
+
+    })();</script>
+<script type="text/javascript">
+    function revslider_showDoubleJqueryError(sliderID) {
+        var errorMessage = "Revolution Slider Error: You have some jquery.js library include that comes after the revolution files js include.";
+        errorMessage += "<br> This includes make eliminates the revolution slider libraries, and make it not work.";
+        errorMessage += "<br><br> To fix it you can:<br>&nbsp;&nbsp;&nbsp; 1. In the Slider Settings -> Troubleshooting set option:  <strong><b>Put JS Includes To Body</b></strong> option to true.";
+        errorMessage += "<br>&nbsp;&nbsp;&nbsp; 2. Find the double jquery.js include and remove it.";
+        errorMessage = "<span style='font-size:16px;color:#BC0C06;'>" + errorMessage + "</span>";
+        jQuery(sliderID).show().html(errorMessage);
+    }
+</script>
+<script type='text/javascript'>
+    /* <![CDATA[ */
+    var woocommerce_params = {"ajax_url": "\/wp-admin\/admin-ajax.php", "wc_ajax_url": "\/?wc-ajax=%%endpoint%%"};
+    /* ]]> */
+</script>
+<script type='text/javascript'>
+    /* <![CDATA[ */
+    var wc_cart_fragments_params = {
+        "ajax_url": "\/wp-admin\/admin-ajax.php",
+        "wc_ajax_url": "\/?wc-ajax=%%endpoint%%",
+        "fragment_name": "wc_fragments_11c8749c2bef3f249695cdf6da8849d3"
+    };
+    /* ]]> */
+</script>
+<script type='text/javascript'>
+    /* <![CDATA[ */
+    var mc4wp_forms_config = [];
+    /* ]]> */
+</script>
+<script type="text/javascript">
+    (function ($) {
+        "use strict";
+
+        $(document).ready(function () {
+            var vehicle_price;
+            var interest_rate;
+            var down_payment;
+            var period_month;
+
+            var stmCurrency = "$";
+            var stmPriceDel = " ";
+            var stmCurrencyPos = "left";
+
+            $('.calculate_loan_payment').click(function (e) {
+                e.preventDefault();
+
+                //Useful vars
+                var current_calculator = $(this).closest('.stm_auto_loan_calculator');
+
+                var calculator_alert = current_calculator.find('.calculator-alert');
+                //First of all hide alert
+                calculator_alert.removeClass('visible-alert');
+
+                //4 values for calculating
+                vehicle_price = parseFloat(current_calculator.find('input.vehicle_price').val());
+
+                interest_rate = parseFloat(current_calculator.find('input.interest_rate').val());
+                interest_rate = interest_rate / 1200;
+
+                down_payment = parseFloat(current_calculator.find('input.down_payment').val());
+
+                period_month = parseFloat(current_calculator.find('input.period_month').val());
+
+                //Help vars
+
+                var validation_errors = true;
+
+                var monthly_payment = 0;
+                var total_interest_payment = 0;
+                var total_amount_to_pay = 0;
+
+                //Check if not nan
+                if (isNaN(vehicle_price)) {
+                    calculator_alert.text("Please fill Vehicle Price field");
+                    calculator_alert.addClass('visible-alert');
+                    current_calculator.find('input.vehicle_price').closest('.form-group').addClass('has-error');
+                    validation_errors = true;
+                } else if (isNaN(interest_rate)) {
+                    calculator_alert.text("Please fill Interest Rate field");
+                    calculator_alert.addClass('visible-alert');
+                    current_calculator.find('input.interest_rate').closest('.form-group').addClass('has-error');
+                    validation_errors = true;
+                } else if (isNaN(period_month)) {
+                    calculator_alert.text("Please fill Period field");
+                    calculator_alert.addClass('visible-alert');
+                    current_calculator.find('input.period_month').closest('.form-group').addClass('has-error');
+                    validation_errors = true;
+                } else if (isNaN(down_payment)) {
+                    calculator_alert.text("Please fill Down Payment field");
+                    calculator_alert.addClass('visible-alert');
+                    current_calculator.find('input.down_payment').closest('.form-group').addClass('has-error');
+                    validation_errors = true;
+                } else if (down_payment > vehicle_price) {
+                    //Check if down payment is not bigger than vehicle price
+                    calculator_alert.text("Down payment can not be more than vehicle price");
+                    calculator_alert.addClass('visible-alert');
+                    current_calculator.find('input.down_payment').closest('.form-group').addClass('has-error');
+                    validation_errors = true;
+                } else {
+                    validation_errors = false;
+                }
+
+                if (!validation_errors) {
+                    var interest_rate_unused = interest_rate;
+
+                    if (interest_rate == 0) {
+                        interest_rate_unused = 1;
+                    }
+                    monthly_payment = (vehicle_price - down_payment) * interest_rate_unused * Math.pow(1 + interest_rate, period_month);
+                    var monthly_payment_div = ((Math.pow(1 + interest_rate, period_month)) - 1);
+                    if (monthly_payment_div == 0) {
+                        monthly_payment_div = 1;
+                    }
+
+                    monthly_payment = monthly_payment / monthly_payment_div;
+                    monthly_payment = monthly_payment.toFixed(2);
+
+                    total_amount_to_pay = down_payment + (monthly_payment * period_month);
+                    total_amount_to_pay = total_amount_to_pay.toFixed(2);
+
+                    total_interest_payment = total_amount_to_pay - vehicle_price;
+                    total_interest_payment = total_interest_payment.toFixed(2);
+
+                    current_calculator.find('.stm_calculator_results').slideDown();
+                    current_calculator.find('.monthly_payment').text(stm_get_price_view(monthly_payment, stmCurrency, stmCurrencyPos, stmPriceDel));
+                    current_calculator.find('.total_interest_payment').text(stm_get_price_view(total_interest_payment, stmCurrency, stmCurrencyPos, stmPriceDel));
+                    current_calculator.find('.total_amount_to_pay').text(stm_get_price_view(total_amount_to_pay, stmCurrency, stmCurrencyPos, stmPriceDel));
+                } else {
+                    current_calculator.find('.stm_calculator_results').slideUp();
+                    current_calculator.find('.monthly_payment').text('');
+                    current_calculator.find('.total_interest_payment').text('');
+                    current_calculator.find('.total_amount_to_pay').text('');
+                }
+            })
+
+            $(".numbersOnly").on("keypress keyup blur", function (event) {
+                //this.value = this.value.replace(/[^0-9\.]/g,'');
+                $(this).val($(this).val().toString().replace(/[^0-9\.]/g, ''));
+                if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
+                    event.preventDefault();
+                }
+
+                if ($(this).val() != '') {
+                    $(this).closest('.form-group').removeClass('has-error');
+                }
+            });
+        });
+
+    })(jQuery);
+</script>
+<script>
+    function ListeModeles() {
+        $.ajax({
+            url: '{{ path('list_models') }}',
+            type: "POST",
+            success: function (response) {
+                console.log(response);
+            }
+        });
+        console.log("ok");
+    }
+
+    {#function add_vehicule() {#}
+        {#var serie = $("#serie").val();#}
+        {#var nbr_place = $("#nbr_place").val();#}
+        {#var statut = $("#statut").val();#}
+        {#var prix = $('#prix').val();#}
+        {#var qq_id ={{ qouiqui.id }};#}
+        {#$.post("{{ path('add_vehicule') }}",#}
+            {#{#}
+                {#'serie': serie,#}
+                {#'nbr_place': nbr_place,#}
+                {#'statut': statut,#}
+                {#'prix': prix,#}
+                {#'qouiqui_id': qq_id#}
+            {#},#}
+            {#function (data, status) {#}
+                {#console.log("Data: " + data + "\nStatus: " + status);#}
+            {#});#}
+
+    {#}#}
+
+    /************* liste des véhicules *****************/
+    {# listVehicules();#}
+
+</script>
+<script type="text/javascript">
+    jQuery(document).ready(function () {
+        jQuery('.tp-banner').revolution(
+            {
+                delay: 9000,
+                startwidth: 1170,
+                startheight: 500,
+                hideThumbs: 10,
+                fullWidth: "on",
+                forceFullWidth: "on"
+            });
+    });
+</script>
+
+</body>
+</html>
+{# SCRIPT Delete voiture#}
+<script>
+    $(document).ready(function () {
+//        ('#listVoiture').modal('show');
+        $('#listVoiture').on('click', '.deleteAuto', function () {
+            $button_delete = $(this);
+            link = $(this).attr("data-link");
+            (new PNotify({
+                title: 'Confirmation requise',
+                text: 'Êtes-vous sûr?',
+                icon: 'glyphicon glyphicon-question-sign',
+                hide: false,
+                confirm: {
+                    confirm: true
+                },
+                buttons: {
+                    closer: false,
+                    sticker: false
+                },
+                history: {
+                    history: false
+                },
+                addclass: 'stack-modal',
+                stack: {'dir1': 'down', 'dir2': 'right', 'modal': true}
+            })).get().on('pnotify.confirm', function () {
+                url = $button_delete.attr('data-link');
+                id = $button_delete.attr('data-id');
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data: {idVoiture: id, idquoiqui: {{ qouiqui.id }} },
+                    success: function () {
+                        new PNotify('la voiture à été supprimer');
+                        $("[data-tr-voiture=" + id + "]").fadeOut();
+                    },
+                    error: function () {
+                        PNotify.desktop.permission();
+                        (new PNotify({
+                            title: 'Voiture',
+                            text: 'une erreur est survenue ',
+                            type: 'error',
+                            desktop: {
+                                desktop: true
+                            }
+                        }))
+                    }
+
+                });
+            }).on('pnotify.cancel', function () {
+            });
+        })
+    });
+</script>
+{# SCRIPT GET MARK AND MODEL RECURSIVE JSON#}
+<script>
+
+    $.get("{{ path('location_voiture_liste_mark') }}", {},
+        function (data, status) {
+            $.each($.parseJSON(data), function (index, value) {
+                $('#marque').append($('<option>', {
+                    value: value.id,
+                    text: value.name
+                }));
+            });
+        }
+    );
+
+    $('#marque').on('change', function () {
+        var selected = $('#marque option:selected').val();
+
+        $.post("{{ path('location_voiture_liste_model') }}", {id: selected},
+            function (data, status) {
+                $('#modeles option').remove();
+                $.each($.parseJSON(data), function (index, value) {
+
+                    $('#modeles').append($('<option>', {
+                        value: value.id,
+                        text: value.name
+                    }));
+                });
+            }
+        )
+    })
+</script>
+<script>
+    /*SCRIPT Get Voiture par id*/
+    $(document).ready(function () {
+        $('#listVoiture').on('click', '.edit', function () {
+
+            $('select').select2();
+            link = $(this).attr('data-link-edit');
+            // console.log(link);
+            $.ajax({
+                type: "POST",
+                url: link,
+                success: function (result) {
+                    var voiture = JSON.parse(result);
+                    document.getElementById("id1").setAttribute("value", voiture.id);
+                    document.getElementById("serie1").setAttribute("value", voiture.serie);
+                    document.getElementById("nbr_place1").setAttribute("value", voiture.nbrPlace);
+                    document.getElementById("prix1").setAttribute("value", voiture.prixJour);
+                    src="/uploads/image/40/369/vehicule/"+voiture.id+".png";
+                    $.ajax({
+                        url:src,
+                        type:"HEAD",
+                        error:function () {
+                            document.getElementById('img').innerHTML = "pas d'image";
+                        },
+                        success: function () {
+                            document.getElementById('img').innerHTML = '<img src=/uploads/image/40/369/vehicule/'+voiture.id+'.png  width=70 height=70>';
+                        }
+                    });
+                    if (voiture.statut == "reserves") {
+                        document.getElementById("statut1").checked = true;
+                    } else {
+                        document.getElementById("statut2").checked = true;
+                    }
+                    /*mark*/
+                    $.get("{{ path('location_voiture_liste_mark') }}", {},
+                        function (data, status) {
+                            $.each($.parseJSON(data), function (index, value) {
+                                if (voiture.model) {
+                                    if (voiture.model.mark.id != value.id) {
+
+                                        $('#mark1').append($('<option>', {
+                                            value: value.id,
+                                            text: value.name
+                                        }));
+                                    }
+                                } else {
+                                    $('#mark1').append($('<option>', {
+                                        value: value.id,
+                                        text: value.name
+                                    }));
+                                }
+                            });
+                        }
+                    );
+                    if (voiture.model) {
+                        var $newOptionMark = $("<option></option>").val(voiture.model.mark.id).text(voiture.model.mark.name)
+                        $("#mark1").append($newOptionMark).trigger('change');
+                        var $newOptionModel = $("<option></option>").val(voiture.model.id).text(voiture.model.name)
+                        $("#modeles1").append($newOptionModel).trigger('change');
+                    }
+                    /*  end mark*/
+                    /* model */
+                    $('#mark1').on('change', function () {
+                        var selected = $('#mark1 option:selected').val();
+
+                        $.post("{{ path('location_voiture_liste_model') }}", {id: selected},
+                            function (data, status) {
+                                $('#modeles1 option').remove();
+                                $.each($.parseJSON(data), function (index, value) {
+
+                                    $('#modeles1').append($('<option>', {
+                                        value: value.id,
+                                        text: value.name
+                                    }));
+                                });
+                            }
+                        )
+                    })
+
+                    /*end model*/
+                }
+            });
+
+        });
+    });
+</script>
+<script>
+    $(document).ready(function () {
+
+        var screenWidth = $(window).width();
+        if (screenWidth < 1140) {
+            var defaultWidth = screenWidth - 30;
+        } else {
+            var defaultWidth = 1140 - 30;
+        }
+        var marginLeft = (screenWidth - defaultWidth) / 2;
+        if ($('body').hasClass('rtl')) {
+            $('.section-full-width').css({
+                'position': 'relative',
+                'left': (marginLeft - 15) + 'px'
+            })
+        }
+        $('.section-full-width').css({
+            'width': screenWidth + 'px',
+            'margin-left': '-' + marginLeft + 'px',
+            'padding-left': (marginLeft - 15) + 'px',
+            'padding-right': (marginLeft - 15) + 'px'
+        });
+
+
+    });
+    CKEDITOR.replace('editor');
+</script>
+<script>
+    $(".log_suprim").click(function () {
+        $.ajax({
+            url: '{{ path('module_spa_delete_image',{'idqq': qouiqui.id }) }}',
+            data: '',
+            type: "POST",
+            success: function (data) {
+                new PNotify({
+                    title: 'Succès!',
+                    text: 'votre image  est bien supprimé .',
+                    type: 'success'
+                });
+
+
+            }
+
+        });
+    });
+</script>
+

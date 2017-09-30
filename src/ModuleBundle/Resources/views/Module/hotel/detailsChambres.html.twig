@@ -1,0 +1,79 @@
+<div class="container">
+    {% for ch in module %}
+        {% if ch.descriptionRoom is not null %}
+            <!-- Modal -->
+            <div class="modal fade chambreDetails" id="details_chambres{{ ch.id }}" role="dialog">
+                <div class="modal-dialog modal-lg description_details">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Description du chambre</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="single-room list">
+                                <div class="row">
+                                    <div class="col-md-5 padding-right">
+                                        {% if ch.descriptionRoom.image_chambre %}
+                                            <figure class="room-thumb"><img
+                                                        src="{{ asset('uploads/image/' ~ qouiqui.user.id ~'/' ~ qouiqui.id ~ '/chambres/'~ ch.descriptionRoom.image_chambre ) }}"
+                                                        alt="img"
+                                                        class="box-radius">
+                                            </figure>
+
+                                        {% endif %}
+                                            {#<a href="#" data-toggle="modal" data-target="#modal_booking{{ ch.id }}" data-idChambre="{{ ch.id }}" class="btn btn-details modalreserv">#}
+                                                {#Réserver maintenant#}
+                                            {#<i class="fa fa-arrow-right"></i>#}
+                                        {#</a>#}
+                                    </div><!--/.col-md-5-->
+                                    <div class="col-md-7">
+                                        <div class="room-info">
+                                            {% if ch.descriptionRoom.nombre %}
+                                                <h3><strong>{{ ch.descriptionRoom.nombre }}</strong></h3>
+                                            {% endif %}
+                                            {% if  ch.descriptionRoom.editor1 %}
+                                                <h5 class="room-structure">Déscription du chambre</h5>
+                                                <p class="room-title">{{ ch.descriptionRoom.editor1|raw }}</p>
+                                            {% endif %}
+                                            <ul class="room-services list-unstyled">
+                                                {% if ch.descriptionRoom.prix %}
+                                                    <h5 class="room-structure">Prix et nombre de lits</h5>
+                                                    <li style="margin: 2px 2px;">
+                                                        <i class="fa fa-money"></i>{{ ch.descriptionRoom.prix }}
+                                                    </li>
+                                                {% endif %}
+                                                {% if ch.descriptionRoom.nombreLit %}
+                                                    <li style="margin: 2px 2px;">
+                                                        <i class="fa fa-bed"></i>{{ ch.descriptionRoom.nombreLit }}
+                                                    </li>
+                                                {% endif %}
+                                            </ul>
+
+                                            <ul class="room-services list-unstyled">
+                                                {% if ch.descriptionRoom.chambreS %}
+                                                    <h5 class="room-structure">Les services</h5>
+                                                    {% for h in ch.descriptionRoom.chambreS %}
+                                                        {% if h %}
+                                                            <li style="margin: 2px 2px;"><i class="fa fa-cogs"></i>{{ h }}</li>
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                {% endif %}
+
+                                            </ul>
+                                        </div><!--/.room-info-->
+                                    </div><!--/.col-md-7-->
+                                </div><!--/.row-->
+                            </div><!--/.single-room-->
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        {% endif %}
+    {% endfor %}
+</div>

@@ -1,0 +1,492 @@
+<?php
+
+namespace AdminBundle\Entity;
+
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Qouiqui
+ *
+ * @ORM\Table(name="QOUIQUI", indexes={@ORM\Index(name="fk_QOUIQUI_fos_user1_idx", columns={"fos_user_id"})})
+ * @ORM\Entity
+ */
+class Qouiqui
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="bigint", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="first_name", type="string", length=45, nullable=false)
+     */
+    private $firstName;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="last_name", type="string", length=45, nullable=false)
+     */
+    private $lastName;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="address1", type="string", length=100, nullable=true)
+     */
+    private $address1;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="adress2", type="string", length=100, nullable=true)
+     */
+    private $adress2;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="website", type="string", length=255, nullable=true)
+     */
+    private $website;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="zip_code", type="string", length=45, nullable=true)
+     */
+    private $zipCode;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="phone", type="string", length=45, nullable=true)
+     */
+    private $phone;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="phone2", type="string", length=45, nullable=true)
+     */
+    private $phone2;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="mail", type="string", length=100, nullable=true)
+     */
+    private $mail;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="geo_lat", type="string", length=45, nullable=true)
+     */
+    private $geoLat;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="geo_long", type="string", length=45, nullable=true)
+     */
+    private $geoLong;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="opening", type="string", length=800, nullable=true)
+     */
+    private $opening;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="image", type="string", length=255, nullable=true)
+     */
+    private $image;
+
+    /**
+     * @var \User
+     *
+     * @ORM\ManyToOne(targetEntity="User")
+     * @ORM\JoinColumn(name="fos_user_id", referencedColumnName="id")
+     */
+    private $user;
+
+    /**
+     * @var ArrayCollection
+     * @ORM\OneToMany(targetEntity="Ngn", mappedBy="qouiqui")
+     */
+    private $ngns;
+
+
+    public  function __construct()
+    {
+        $this->ngns = new ArrayCollection();
+    }
+
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set firstName
+     *
+     * @param string $firstName
+     *
+     * @return Qouiqui
+     */
+    public function setFirstName($firstName)
+    {
+        $this->firstName = $firstName;
+
+        return $this;
+    }
+
+    /**
+     * Get firstName
+     *
+     * @return string
+     */
+    public function getFirstName()
+    {
+        return $this->firstName;
+    }
+
+    /**
+     * Set lastName
+     *
+     * @param string $lastName
+     *
+     * @return Qouiqui
+     */
+    public function setLastName($lastName)
+    {
+        $this->lastName = $lastName;
+
+        return $this;
+    }
+
+    /**
+     * Get lastName
+     *
+     * @return string
+     */
+    public function getLastName()
+    {
+        return $this->lastName;
+    }
+
+    /**
+     * Set address1
+     *
+     * @param string $address1
+     *
+     * @return Qouiqui
+     */
+    public function setAddress1($address1)
+    {
+        $this->address1 = $address1;
+
+        return $this;
+    }
+
+    /**
+     * Get address1
+     *
+     * @return string
+     */
+    public function getAddress1()
+    {
+        return $this->address1;
+    }
+
+    /**
+     * Set adress2
+     *
+     * @param string $adress2
+     *
+     * @return Qouiqui
+     */
+    public function setAdress2($adress2)
+    {
+        $this->adress2 = $adress2;
+
+        return $this;
+    }
+
+    /**
+     * Get adress2
+     *
+     * @return string
+     */
+    public function getAdress2()
+    {
+        return $this->adress2;
+    }
+
+    /**
+     * Set website
+     *
+     * @param string $website
+     *
+     * @return Qouiqui
+     */
+    public function setWebsite($website)
+    {
+        $this->website = $website;
+
+        return $this;
+    }
+
+    /**
+     * Get website
+     *
+     * @return string
+     */
+    public function getWebsite()
+    {
+        return $this->website;
+    }
+
+    /**
+     * Set zipCode
+     *
+     * @param string $zipCode
+     *
+     * @return Qouiqui
+     */
+    public function setZipCode($zipCode)
+    {
+        $this->zipCode = $zipCode;
+
+        return $this;
+    }
+
+    /**
+     * Get zipCode
+     *
+     * @return string
+     */
+    public function getZipCode()
+    {
+        return $this->zipCode;
+    }
+
+    /**
+     * Set phone
+     *
+     * @param string $phone
+     *
+     * @return Qouiqui
+     */
+    public function setPhone($phone)
+    {
+        $this->phone = $phone;
+
+        return $this;
+    }
+
+    /**
+     * Get phone
+     *
+     * @return string
+     */
+    public function getPhone()
+    {
+        return $this->phone;
+    }
+
+    /**
+     * Set phone2
+     *
+     * @param string $phone2
+     *
+     * @return Qouiqui
+     */
+    public function setPhone2($phone2)
+    {
+        $this->phone2 = $phone2;
+
+        return $this;
+    }
+
+    /**
+     * Get phone2
+     *
+     * @return string
+     */
+    public function getPhone2()
+    {
+        return $this->phone2;
+    }
+
+    /**
+     * Set mail
+     *
+     * @param string $mail
+     *
+     * @return Qouiqui
+     */
+    public function setMail($mail)
+    {
+        $this->mail = $mail;
+
+        return $this;
+    }
+
+    /**
+     * Get mail
+     *
+     * @return string
+     */
+    public function getMail()
+    {
+        return $this->mail;
+    }
+
+    /**
+     * Set geoLat
+     *
+     * @param string $geoLat
+     *
+     * @return Qouiqui
+     */
+    public function setGeoLat($geoLat)
+    {
+        $this->geoLat = $geoLat;
+
+        return $this;
+    }
+
+    /**
+     * Get geoLat
+     *
+     * @return string
+     */
+    public function getGeoLat()
+    {
+        return $this->geoLat;
+    }
+
+    /**
+     * Set geoLong
+     *
+     * @param string $geoLong
+     *
+     * @return Qouiqui
+     */
+    public function setGeoLong($geoLong)
+    {
+        $this->geoLong = $geoLong;
+
+        return $this;
+    }
+
+    /**
+     * Get geoLong
+     *
+     * @return string
+     */
+    public function getGeoLong()
+    {
+        return $this->geoLong;
+    }
+
+    /**
+     * Set opening
+     *
+     * @param string $opening
+     *
+     * @return Qouiqui
+     */
+    public function setOpening($opening)
+    {
+        $this->opening = $opening;
+
+        return $this;
+    }
+
+    /**
+     * Get opening
+     *
+     * @return string
+     */
+    public function getOpening()
+    {
+        return $this->opening;
+    }
+
+    /**
+     * Set image
+     *
+     * @param string $image
+     *
+     * @return Qouiqui
+     */
+    public function setImage($image)
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    /**
+     * Get image
+     *
+     * @return string
+     */
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \AdminBundle\Entity\User $user
+     *
+     * @return Qouiqui
+     */
+    public function setUser(\AdminBundle\Entity\User $user = null)
+    {
+        $this->user= $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \AdminBundle\Entity\User
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * Get ngns
+     *
+     * @return \AdminBundle\Entity\Ngn
+     */
+    private function getNgns() {
+        return  $this->ngns;
+    }
+
+
+}

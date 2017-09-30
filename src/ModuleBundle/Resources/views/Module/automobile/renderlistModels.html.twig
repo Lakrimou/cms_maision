@@ -1,0 +1,9 @@
+
+{% if models|length>0 %}
+{% for model in models %}
+
+    <option value="{{ model.name}}" >{{ model.name}}</option>
+{% endfor %}
+{% else %}
+    <option selected value="">Choisir un modèle</option>
+{% endif %}

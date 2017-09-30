@@ -1,0 +1,18 @@
+serrurier_service_add:
+    path:     /service/add
+    defaults: { _controller: "ModuleBundle:Serrurier:addService" }
+serrurier_service_show:
+    path:     /service/show/{id}/{pos}
+    defaults: { _controller: "ModuleBundle:Serrurier:showService" }
+serrurier_service_remove:
+    path:     /service/delete/{id}/{pos}
+    defaults: { _controller: "ModuleBundle:Serrurier:deleteService" }
+serrurier_service_edit:
+    path:     /service/edit/{id}/{pos}
+    defaults: { _controller: "ModuleBundle:Serrurier:editService" }
+serrurier_service_update:
+    path:     /service/update/{id}
+    defaults: { _controller: "ModuleBundle:Serrurier:updateService" }
+serrurier_service_appel:
+    path:     /service/appel
+    defaults: { _controller: "ModuleBundle:Serrurier:appelService" }

@@ -1,0 +1,4 @@
+module_kine_booking:
+    path: /reserver/{idqq}
+    defaults: { _controller: ModuleBundle:Kine:booking}
+    methods: [GET, POST]

@@ -1,0 +1,437 @@
+<script>
+
+    /***********************************************************************************************************************
+     * si propriétaire
+     */
+    $(document).ready(function () {
+
+        $('.nav').onePageNav({
+            currentClass: 'active'
+        });
+
+        $('#edit').editable();
+
+//        $('#modalProduits').modal('show');
+
+
+        /**
+         * actualiser la page apres la fermerture du modal liste des produits
+         */
+        $('#modalProduits').on('hidden.bs.modal', function () {
+            location.reload();
+        })
+
+        /**
+         * tableau liste des produits
+         */
+        var tableProduits = $('#tableListProduit').DataTable({
+            "ajax": "{{ path('ecommerce_liste_produit', {idQQ: qouiqui.id }) }}",
+        });
+
+
+        /*
+         * form ajouter un nouveau produit
+         */
+        $('#nouveauProduit').ajaxForm({
+            beforeSend: function () {
+                $("#btnSubmitNewProd").prop("disabled", true);
+            },
+            uploadProgress: function (event, position, total, percentComplete) {
+
+            },
+            success: function (result) {
+                $('#modalNouveauProduit').modal('hide');
+                new PNotify({
+                    title: 'Succès!',
+                    text: 'Le produit a été ajouté avec succès.',
+                    type: 'success'
+                });
+
+                tableProduits.ajax.reload(null, false);
+
+                $("#btnSubmitNewProd").prop("disabled", false);
+            },
+            error: function (result) {
+                new PNotify({
+                    title: 'Erreur',
+                    text: 'Erreur lors de l\'ajout du produit.',
+                    type: 'error'
+                });
+                $("#btnSubmitNewProd").prop("disabled", false);
+            }
+        });
+
+
+        /*
+         * form modifier un produit
+         */
+        $('#editProduit').ajaxForm({
+            beforeSend: function () {
+                $("#btnSubmitEditProd").prop("disabled", true);
+            },
+            uploadProgress: function (event, position, total, percentComplete) {
+
+            },
+            success: function (result) {
+
+                console.log(result);
+
+                $('#modalEditProduit').modal('hide');
+                new PNotify({
+                    title: 'Succès!',
+                    text: 'Le produit a été ajouté avec succès.',
+                    type: 'success'
+                });
+
+                tableProduits.ajax.reload(null, false);
+
+                $("#btnSubmitEditProd").prop("disabled", false);
+            },
+            error: function (result) {
+                new PNotify({
+                    title: 'Erreur',
+                    text: 'Erreur lors de l\'ajout du produit.',
+                    type: 'error'
+                });
+                $("#btnSubmitEditProd").prop("disabled", false);
+            }
+        });
+
+
+        /**
+         * Supprimer produit avec idProd et idQQ
+         **/
+        $('#modalProduits').on('click', '.deleteProd', function (e) {
+            e.preventDefault();
+            var idProd = $(this).attr('data-id');
+            var idQQ = '{{ qouiqui.id }}';
+            var url = '{{ path("ecommerce_delete_produit", {'idQQ': 'qq_id', 'idProd': 'produit_id'}) }}';
+            url = url.replace("qq_id", idQQ);
+            url = url.replace("produit_id", idProd);
+
+
+            $tr = $(this).parent().parent();
+
+
+            new PNotify({
+                title: 'Confirmation',
+                text: 'Êtes-vous sûr de supprimer',
+                icon: 'glyphicon glyphicon-question-sign',
+                hide: false,
+                confirm: {
+                    confirm: true
+                },
+                buttons: {
+                    closer: false,
+                    sticker: false
+                },
+                history: {
+                    history: false
+                },
+                addclass: 'stack-modal',
+                stack: {'dir1': 'down', 'dir2': 'right', 'modal': true}
+            }).get().on('pnotify.confirm', function () {
+
+                console.log(idProd, idQQ);
+                $.ajax({
+                    url: url,
+                    type: 'POST',
+                    data: {
+                        idProd: idProd,
+                        idQQ: idQQ
+                    },
+                    error: function () {
+                        new PNotify({
+                            title: 'Erreur',
+                            text: 'Erreur lors de l\'ajout du produit.',
+                            type: 'error'
+                        });
+                    },
+                    success: function (data) {
+                        if (data == 1) {
+                            $tr.fadeOut();
+                            new PNotify({
+                                title: 'Succès!',
+                                text: 'Le produit a été supprimer avec succès.',
+                                type: 'success'
+                            });
+                        } else {
+                            new PNotify({
+                                title: 'Erreur',
+                                text: 'Erreur lors de l\'ajout du produit.',
+                                type: 'error'
+                            });
+                        }
+                    },
+                });
+
+            });
+
+
+        });
+
+
+        /**
+         * Modifier produit avec idProd et idQQ
+         **/
+        $('#modalProduits').on('click', '.btnProduitModifier', function (e) {
+            e.preventDefault();
+            var idProd = $(this).attr('data-id');
+            var idQQ = '{{ qouiqui.id }}';
+            var url = '{{ path("ecommerce_delete_produit", {'idQQ': 'qq_id', 'idProd': 'produit_id'}) }}';
+            url = url.replace("qq_id", idQQ);
+            url = url.replace("produit_id", idProd);
+
+
+            $('#modalEditProduit').modal('show');
+            var $tr = $(this).parent().parent();
+
+
+            $('#editProdId').val(idProd);
+            $('#editProdNom').val($tr.children()[1].innerText);
+            $('#editProdPrix').val($tr.children()[2].innerText);
+            $('#editProdDesc').val($tr.children()[3].innerText);
+            $('#txtAjouterImage').html($tr.children()[0].innerHTML);
+
+
+//            console.log($tr.children()[4].firstChild.length);
+            if ($tr.children()[4].innerHTML == '<i class="fa fa-eye fa-2x" aria-hidden="true"></i>')
+                $('#editVisibleProd').prop('checked', true);
+            else
+                $('#editVisibleProd').prop('checked', false);
+
+        });
+
+
+        /*************************************************************************************************************************************
+         *                                                                  LOGO
+         *************************************************************************************************************************************/
+//        $('#modalEditLogo').modal('show');
+
+
+    });
+
+
+    /*************************************************************************************************************************************
+     * pour tout les utilisateur
+     *************************************************************************************************************************************/
+    $(document).ready(function () {
+        $('.expand').click(function () {
+            var description = $(this).attr('data-description-produit');
+            $('#modalDescriptionProduit').html(description);
+        })
+
+    });
+
+    /*************************************************************************************************************************************
+     * pour tout les utilisateur
+     *************************************************************************************************************************************/
+
+
+</script>
+
+
+<script>
+    /**
+     * Created by ezgoing on 14/9/2014.
+     */
+    'use strict';
+    var cropbox = function (options) {
+
+        var el = document.querySelector(options.imageBox),
+            obj =
+                {
+                    state: {},
+                    ratio: 1,
+                    options: options,
+                    imageBox: el,
+                    thumbBox: el.querySelector(options.thumbBox),
+                    spinner: el.querySelector(options.spinner),
+                    image: new Image(),
+                    getDataURL: function () {
+                        var width = this.thumbBox.clientWidth,
+                            height = this.thumbBox.clientHeight,
+                            canvas = document.createElement("canvas"),
+                            dim = el.style.backgroundPosition.split(' '),
+                            size = el.style.backgroundSize.split(' '),
+                            dx = parseInt(dim[0]) - el.clientWidth / 2 + width / 2,
+                            dy = parseInt(dim[1]) - el.clientHeight / 2 + height / 2,
+                            dw = parseInt(size[0]),
+                            dh = parseInt(size[1]),
+                            sh = parseInt(this.image.height),
+                            sw = parseInt(this.image.width);
+
+                        canvas.width = width;
+                        canvas.height = height;
+                        var context = canvas.getContext("2d");
+                        context.drawImage(this.image, 0, 0, sw, sh, dx, dy, dw, dh);
+                        var imageData = canvas.toDataURL('image/png');
+                        return imageData;
+                    },
+                    getBlob: function () {
+                        var imageData = this.getDataURL();
+                        var b64 = imageData.replace('data:image/png;base64,', '');
+                        var binary = atob(b64);
+                        var array = [];
+                        for (var i = 0; i < binary.length; i++) {
+                            array.push(binary.charCodeAt(i));
+                        }
+                        return new Blob([new Uint8Array(array)], {type: 'image/png'});
+                    },
+                    zoomIn: function () {
+                        this.ratio *= 1.1;
+                        setBackground();
+                    },
+                    zoomOut: function () {
+                        this.ratio *= 0.9;
+                        setBackground();
+                    }
+                },
+            attachEvent = function (node, event, cb) {
+                if (node.attachEvent)
+                    node.attachEvent('on' + event, cb);
+                else if (node.addEventListener)
+                    node.addEventListener(event, cb);
+            },
+            detachEvent = function (node, event, cb) {
+                if (node.detachEvent) {
+                    node.detachEvent('on' + event, cb);
+                }
+                else if (node.removeEventListener) {
+                    node.removeEventListener(event, render);
+                }
+            },
+            stopEvent = function (e) {
+                if (window.event) e.cancelBubble = true;
+                else e.stopImmediatePropagation();
+            },
+            setBackground = function () {
+                var w = parseInt(obj.image.width) * obj.ratio;
+                var h = parseInt(obj.image.height) * obj.ratio;
+
+                var pw = (el.clientWidth - w) / 2;
+                var ph = (el.clientHeight - h) / 2;
+
+                el.setAttribute('style',
+                    'background-image: url(' + obj.image.src + '); ' +
+                    'background-size: ' + w + 'px ' + h + 'px; ' +
+                    'background-position: ' + pw + 'px ' + ph + 'px; ' +
+                    'background-repeat: no-repeat');
+            },
+            imgMouseDown = function (e) {
+                stopEvent(e);
+
+                obj.state.dragable = true;
+                obj.state.mouseX = e.clientX;
+                obj.state.mouseY = e.clientY;
+            },
+            imgMouseMove = function (e) {
+                stopEvent(e);
+
+                if (obj.state.dragable) {
+                    var x = e.clientX - obj.state.mouseX;
+                    var y = e.clientY - obj.state.mouseY;
+
+                    var bg = el.style.backgroundPosition.split(' ');
+
+                    var bgX = x + parseInt(bg[0]);
+                    var bgY = y + parseInt(bg[1]);
+
+                    el.style.backgroundPosition = bgX + 'px ' + bgY + 'px';
+
+                    obj.state.mouseX = e.clientX;
+                    obj.state.mouseY = e.clientY;
+                }
+            },
+            imgMouseUp = function (e) {
+                stopEvent(e);
+                obj.state.dragable = false;
+            },
+            zoomImage = function (e) {
+                var evt = window.event || e;
+                var delta = evt.detail ? evt.detail * (-120) : evt.wheelDelta;
+                delta > -120 ? obj.ratio *= 1.1 : obj.ratio *= 0.9;
+                setBackground();
+            }
+
+        obj.spinner.style.display = 'block';
+        obj.image.onload = function () {
+            obj.spinner.style.display = 'none';
+            setBackground();
+
+            attachEvent(el, 'mousedown', imgMouseDown);
+            attachEvent(el, 'mousemove', imgMouseMove);
+            attachEvent(document.body, 'mouseup', imgMouseUp);
+            var mousewheel = (/Firefox/i.test(navigator.userAgent)) ? 'DOMMouseScroll' : 'mousewheel';
+            attachEvent(el, mousewheel, zoomImage);
+        };
+        obj.image.src = options.imgSrc;
+        attachEvent(el, 'DOMNodeRemoved', function () {
+            detachEvent(document.body, 'DOMNodeRemoved', imgMouseUp)
+        });
+
+        return obj;
+    };
+
+</script>
+<script type="text/javascript">
+    window.onload = function () {
+        var options =
+            {
+                imageBox: '.imageBox',
+                thumbBox: '.thumbBox',
+                spinner: '.spinner',
+                imgSrc: 'avatar.png'
+            }
+        var cropper;
+        document.querySelector('#file').addEventListener('change', function () {
+            $('.spinner').fadeIn();
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                options.imgSrc = e.target.result;
+                cropper = new cropbox(options);
+            }
+            reader.readAsDataURL(this.files[0]);
+//                this.files = [];
+        })
+
+        document.querySelector('#btnZoomIn').addEventListener('click', function () {
+            cropper.zoomIn();
+        })
+        document.querySelector('#btnZoomOut').addEventListener('click', function () {
+            cropper.zoomOut();
+        })
+
+
+        document.querySelector('#btnCrop').addEventListener('click', function () {
+            var img = cropper.getDataURL();
+            $('#btnCrop').html('<i class="fa fa-spinner fa-pulse fa-fw"></i>');
+//            document.querySelector('.cropped').innerHTML += '<img src="' + img + '">';
+//            document.querySelector('.cropped').innerHTML = '<img src="' + img + '">';
+//            console.log(img);
+//            return false;
+            $.ajax({
+                url: '{{ path('ecommerce_upload_logo', {'idQQ': qouiqui.id}) }}',
+                type: 'POST',
+                data: 'data=' + img,
+                success: function (result) {
+                    if (result == 1) {
+                        $('#btnCrop').css({'background-color': '#54da5a', 'border-color': '#00b508'})
+                        $('#btnCrop').html('<i class="fa fa-check" aria-hidden="true"></i>');
+
+                        setTimeout(function () {
+                            $('#modalEditLogo').modal('hide')
+                        }, 2000);
+                        location.reload();
+                    }
+                    else {
+                    }
+                }
+            });
+
+
+        })
+    };
+
+
+</script>

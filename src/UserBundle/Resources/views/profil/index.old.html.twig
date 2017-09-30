@@ -1,0 +1,486 @@
+{% extends 'front/layout_front.html.twig' %}
+
+{% block body %}
+    <div id="loader">
+        <div class="book">
+            <div class="book__page"></div>
+            <div class="book__page"></div>
+            <div class="book__page"></div>
+        </div>
+    </div>
+
+
+    {#=======================================header===========================================#}
+    {% include 'UserBundle::header.html.twig' %}
+    {#=======================================header===========================================#}
+
+    <!--start listings detail inner header section-->
+
+    <div id="listings-detail-inner-header" style="padding: 0px">
+        <div style="width: 100%;height: 392px;" id="position"></div>
+    </div>
+
+    <!-- end listings detail innder header section-->
+
+    <!--start apartment-->
+    <div id="apartment">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div id="apartment-heading">
+                        <h1>{{ qouiqui.firstName }}{% if (app.user) and (app.user.id == qouiqui.user.id) %}
+
+                                     <span>
+                                         {% set ngn_id %}{% for ngns in qouiqui.ngns %}{{ ngns.id }}{% endfor %}{% endset %}
+                                         <a href="{{ path('dashboard_edit',{'id': ngn_id  }) }}">edit</a>
+                                    </span>
+
+                                    <span style="margin: 0 5px;">
+                                            <a href="{{ path('dashboard_event_ajout',{'qq_id': qouiqui.id }) }}">ajouter un evenement !</a>
+                                    </span>
+
+                            {% elseif (app.user) and (app.user.id != qouiqui.user.id) %}
+                            <span>
+                                contact us if you have a new update
+                                 </span>
+                            {% endif %}
+
+                        </h1>
+                    </div>
+
+                </div>
+                {% if images %}
+                    <div id="apartment-images">
+                        <div class="col-sm-6 nopadding-right">
+                            {% for img in images %}
+                                {% if loop.index < '2' %}
+                                    <div class="listings-images">
+                                        <img src="/uploads/quoiqui/{{ qouiqui.id }}/{{ img }}">
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+
+                        </div>
+
+                        <div class="col-sm-6 nopadding-left">
+                            {% for img in images %}
+                                {%  if loop.index > '1' and  loop.index < '6' %}
+                                    <div class="listings-images1" style="width: 282px;height: 223px;overflow: hidden;">
+                                        <img src="/uploads/quoiqui/{{ qouiqui.id }}/{{ img }}">
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                {% endif %}
+
+
+                <div class="listing-detail">
+                    <div class="col-sm-12">
+                        <h1>Listing details</h1>
+                    </div>
+                </div>
+
+                <div class="listing-detail">
+                    <div class="col-sm-6">
+                        <div class="listing-detail-text">
+                            <div class="col-sm-6 col-xs-6 nopadding">
+                                <h1>first Name</h1>
+                            </div>
+                            <div class="col-sm-6 col-xs-6 nopadding">
+                                <p>{{ qouiqui.firstName }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="listing-detail-text">
+                            <div class="col-sm-6 col-xs-6 nopadding">
+                                <h1>rating</h1>
+                            </div>
+                            <div class="col-sm-6 col-xs-6 nopadding">
+                                <p>
+                                	<span>
+                                    	<i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star-half-empty"></i>
+                                        4.5
+                                    </span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="col-sm-6">
+                        <div class="listing-detail-text">
+                            <div class="col-sm-6 col-xs-6 nopadding">
+                                <h1>category</h1>
+                            </div>
+                            <div class="col-sm-6 col-xs-6 nopadding">
+                                <p>{% for ngn in qouiqui.ngns %}{{ ngn.category.libelle }}{% endfor %}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="listing-detail-text">
+                            <div class="col-sm-6 col-xs-6 nopadding">
+                                <h1>Contact</h1>
+                            </div>
+                            <div class="col-sm-6 col-xs-6 nopadding">
+                                <p><a href="#">{{ qouiqui.phone }}</a></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="col-sm-6">
+                        <div class="listing-detail-text">
+                            <div class="col-sm-6 col-xs-6 nopadding">
+                                <h1>address</h1>
+                            </div>
+                            <div class="col-sm-6 col-xs-6 nopadding">
+                                <p><i class="fa fa-map-marker"></i>{{ qouiqui.address1 }} </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="listing-detail-text">
+                            <div class="col-sm-6 col-xs-6 nopadding">
+                                <h1>second address</h1>
+                            </div>
+                            <div class="col-sm-6 col-xs-6 nopadding">
+                                <p><i class="fa fa-map-marker"></i>{{ qouiqui.adress2 }} </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="listing-detail-text">
+                            <div class="col-sm-6 col-xs-6 nopadding">
+                                <h1>City</h1>
+                            </div>
+                            <div class="col-sm-6 col-xs-6 nopadding">
+                                <p>{% for qville in qouiqui.qvilles %}{{ qville.ville.libelle }}{% endfor %}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <div class="listing-detail-text">
+                            <div class="col-sm-6 col-xs-6 nopadding">
+                                <h1>web site</h1>
+                            </div>
+                            <div class="col-sm-6 col-xs-6 nopadding">
+                                <p>{{ qouiqui.website }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="listing-detail-text">
+                            <div class="col-sm-6 col-xs-6 nopadding">
+                                <h1>Views</h1>
+                            </div>
+                            <div class="col-sm-6 col-xs-6 nopadding">
+                                <p>834</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+
+                <div class="listing-detail">
+                    <div class="col-sm-12">
+                        <h1>Other Details</h1>
+                    </div>
+                </div>
+                {% for ngn in qouiqui.ngns %}
+                    {% if  ngn.Scategory.details %}
+                        <div class="col-md-12">
+                            <h1><{{ ngn.Scategory.libelle }}</h1>
+                            <p>{{ ngn.Scategory.details }}</p>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+                <div id="tags-share">
+                    <div class="col-sm-6">
+                        <div id="listings-tags">
+                            <p><i class="fa fa-tags"></i>Tags:
+                                <span>
+                                	<a href="#" class="hvr-sweep-to-bottom">property</a>
+                                    <a href="#" class="hvr-sweep-to-bottom">apartment</a>
+                                    <a href="#" class="hvr-sweep-to-bottom">rent</a>
+                                </span>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div id="listings-share">
+                            <p><i class="fa fa-share-alt"></i>share:</p>
+                            <div class="social">
+                                <a href="https://www.facebook.com/" class="hvr-sweep-to-top">
+                                    <i class="fa fa-facebook"></i>
+
+                                </a>
+                                <a href="https://www.twitter.com/" class="hvr-sweep-to-top">
+                                    <i class="fa fa-twitter"></i>
+                                </a>
+                                <a href="https://plus.google.com/" class="hvr-sweep-to-top">
+                                    <i class="fa fa-google-plus"></i>
+                                </a>
+                                <a href="https://www.linkedin.com/" class="hvr-sweep-to-top">
+                                    <i class="fa fa-linkedin"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end apartment-->
+
+    <!-- start reviews section-->
+    <div id="reviews-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 col-md-6">
+                    {% for r in reviews %}
+
+                        {% if loop.index < '4' %}
+                        <div id="reviews">
+                            <h1>reviews</h1>
+                            <hr>
+                        </div>
+                        <div class="reviews-section">
+                            <div class="col-sm-2 col-xs-2 nopadding">
+                                <div class="reviews-section-image">
+                                    <img src="{{ asset('asset-front/images/review-1.png') }}" alt="review 1">
+                                </div>
+                            </div>
+                            <div class="col-sm-10 col-xs-10">
+                                <div class="reviews-section-text">
+                                    <h1><a href="#">{{ r.reviewTitle }}</a></h1>
+                                    <p>{{ r.reviewMsg }} </p>
+                                </div>
+                            </div>
+
+                        </div>
+                    {% endif %}
+
+
+                    {% endfor %}
+
+
+                </div>
+                <div class="col-sm-12 col-md-6">
+                    <div id="write-review">
+                        <h1>write a review</h1>
+                        <hr>
+                    </div>
+                    <div id="review-form">
+                        <div class="expMessage"></div>
+                        <div class="review-form">
+                            <div class="form-group">
+                                <input class="form-control" type="text" id="full-name" name="formInput[name]"
+                                       placeholder="Full Name" required>
+                            </div>
+                            <div class="form-group">
+                                Rating <div class="acidjs-rating-stars">
+                                    <input type="radio" name="group-1" id="group-1-0" value="5"/><label for="group-1-0"></label>
+                                    <input type="radio" name="group-1" id="group-1-1" value="4"/><label for="group-1-1"></label>
+                                    <input type="radio" name="group-1" id="group-1-2" value="3"/><label for="group-1-2"></label>
+                                    <input type="radio" name="group-1" id="group-1-3" value="2"/><label for="group-1-3"></label>
+                                    <input type="radio" name="group-1" id="group-1-4" value="1"/><label for="group-1-4"></label>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <textarea name="formInput[message]" id="message" class="form-control" rows="6"
+                                          placeholder="Write Your Message here...."></textarea>
+                            </div>
+                            <div id="review-button">
+                                <button  onclick="rev()" type="submit" id="review-submit">Send Message</button>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end reviews section-->
+
+
+    {#=======================================footer===========================================#}
+    {% include 'UserBundle::footer.html.twig' %}
+    {#=======================================footer===========================================#}
+
+
+
+    {% block javascripts %}
+        {{ parent() }}
+
+        <!-- Scripts -->
+        <script src="{{ asset('asset-front/js/wow.min.js') }}"></script>
+        <script src="{{ asset('asset-front/js/jquery-1.11.1.min.js') }}"></script>
+        <script src="{{ asset('asset-front/js/bootstrap.min.js') }}"></script>
+        <script src="{{ asset('asset-front/js/waypoints.js') }}"></script>
+        <script src="{{ asset('asset-front/js/jquery.counterup.js') }}"></script>
+        <script src="{{ asset('asset-front/js/jquery.bxslider-rahisified.min.js') }}"></script>
+        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+        <script src="{{ asset('asset-front/js/custom.js') }}"></script>
+
+        <script>
+            function initMap() {
+                var uluru = {lat: {{ qouiqui.geoLat }}, lng: {{ qouiqui.geoLong }}};
+                var map = new google.maps.Map(document.getElementById('position'), {
+                    zoom: 4,
+                    center: uluru,
+
+                    styles: [
+                        {
+                            "featureType": "administrative",
+                            "elementType": "labels.text.fill",
+                            "stylers": [
+                                {
+                                    "color": "#444444"
+                                }
+                            ]
+                        },
+                        {
+                            "featureType": "landscape",
+                            "elementType": "all",
+                            "stylers": [
+                                {
+                                    "color": "#f2f2f2"
+                                }
+                            ]
+                        },
+                        {
+                            "featureType": "poi",
+                            "elementType": "all",
+                            "stylers": [
+                                {
+                                    "visibility": "off"
+                                }
+                            ]
+                        },
+                        {
+                            "featureType": "road",
+                            "elementType": "all",
+                            "stylers": [
+                                {
+                                    "saturation": -100
+                                },
+                                {
+                                    "lightness": 45
+                                }
+                            ]
+                        },
+                        {
+                            "featureType": "road.highway",
+                            "elementType": "all",
+                            "stylers": [
+                                {
+                                    "visibility": "simplified"
+                                }
+                            ]
+                        },
+                        {
+                            "featureType": "road.arterial",
+                            "elementType": "labels.icon",
+                            "stylers": [
+                                {
+                                    "visibility": "off"
+                                }
+                            ]
+                        },
+                        {
+                            "featureType": "transit",
+                            "elementType": "all",
+                            "stylers": [
+                                {
+                                    "visibility": "off"
+                                }
+                            ]
+                        },
+                        {
+                            "featureType": "water",
+                            "elementType": "all",
+                            "stylers": [
+                                {
+                                    "color": "#ffbe00"
+                                },
+                                {
+                                    "visibility": "on"
+                                }
+                            ]
+                        }
+                    ]
+                });
+                var marker = new google.maps.Marker({
+                    position: uluru,
+                    map: map
+                });
+            }
+        </script>
+        <script async defer
+                src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBGPxbR1SJs41sccGoocBmu0m4_F33pMcU&callback=initMap">
+        </script>
+        {#  <script type="text/javascript">
+            jQuery(function() {
+                $('form.review-form').on('submit', function(){
+                    $("<div />").addClass("formOverlay").appendTo($(this));
+                    var curForm = jQuery(this);
+                    $.ajax({
+                        url: 'mail.php',
+                        type: 'POST',
+                        data: jQuery(curForm).serialize(),
+                        success: function(data) {
+                            var res=data.split("::");
+                            jQuery(curForm).find("div.formOverlay").remove();
+                            jQuery(curForm).prev('.expMessage').html(res[1]);
+                            if(res[0]=='Success')
+                            {
+                                jQuery(curForm).remove();
+                                jQuery(curForm).prev('.expMessage').html('');
+                            }
+                        }
+                    });
+                    return false;
+                });
+            });
+        </script> #}
+        <script>
+
+            function rev() {
+
+                note = jQuery('.acidjs-rating-stars input:checked ~ label').length;
+                title = jQuery('#full-name').val();
+                message =jQuery('#message').val();
+
+                var data = {
+                    id:"{{ qouiqui.id }}",
+                    note: note,
+                    title: title,
+                    message: message
+                };
+
+                $.ajax({
+                    type: "POST",
+                    url: "{{ path('user_reviwes') }}",
+                    data: data,
+                    success: function(result){
+                        console.log(result)
+                    }
+                });
+
+            }
+
+
+
+        </script>
+    {% endblock %}
+    </body>
+
+
+{% endblock %}

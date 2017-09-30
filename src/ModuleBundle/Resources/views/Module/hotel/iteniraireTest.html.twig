@@ -1,0 +1,26 @@
+<div class="col-md-12 row">
+    <div id="destinationForm">
+        <form action="" method="get" name="direction" id="direction">
+            <input type="hidden" value="34.7368412,10.7551053" name="destination" id="destination">
+            <div class="col-md-12">
+                <input type="text" name="origin" id="origin" placeholder='Votre emplacement' class="form-control">
+                <div class="input-group row">
+
+
+                    <span class="input-group-btn"> <input type="button" class="btn btn-default  btn-block" value='Itinéraire' onclick="javascript:geolocate()">
+
+                    </span> <span class="input-group-btn"> <a class="btn btn-default btn-block" target='_blanck' href="http://maps.google.com?q=34.7368412,10.7551053">Afficher la carte</a></span>
+
+
+                </div>
+                <!-- /input-group -->
+            </div>
+
+
+        </form>
+    </div>
+    <div id="g-map" style="height: 300px; width: 100%;"></div>
+    <div id="panel"></div>
+    <br>
+    <span id="ite" class="input-group-btn"> <a class="btn btn-default btn-block">Afficher l&#039;itinéraire</a></span>
+</div>

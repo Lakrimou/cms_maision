@@ -1,0 +1,1762 @@
+{# Developped By Webmaster Media Akrem Boussaha © #}
+
+<script>
+    /*!
+     * JavaScript Cookie v2.1.4
+     * https://github.com/js-cookie/js-cookie
+     *
+     * Copyright 2006, 2015 Klaus Hartl & Fagner Brack
+     * Released under the MIT license
+     */
+    ;
+    (function (factory) {
+        var registeredInModuleLoader = false;
+        if (typeof define === 'function' && define.amd) {
+            define(factory);
+            registeredInModuleLoader = true;
+        }
+        if (typeof exports === 'object') {
+            module.exports = factory();
+            registeredInModuleLoader = true;
+        }
+        if (!registeredInModuleLoader) {
+            var OldCookies = window.Cookies;
+            var api = window.Cookies = factory();
+            api.noConflict = function () {
+                window.Cookies = OldCookies;
+                return api;
+            };
+        }
+    }(function () {
+        function extend() {
+            var i = 0;
+            var result = {};
+            for (; i < arguments.length; i++) {
+                var attributes = arguments[i];
+                for (var key in attributes) {
+                    result[key] = attributes[key];
+                }
+            }
+            return result;
+        }
+
+        function init(converter) {
+            function api(key, value, attributes) {
+                var result;
+                if (typeof document === 'undefined') {
+                    return;
+                }
+
+                // Write
+
+                if (arguments.length > 1) {
+                    attributes = extend({
+                        path: '/'
+                    }, api.defaults, attributes);
+
+                    if (typeof attributes.expires === 'number') {
+                        var expires = new Date();
+                        expires.setMilliseconds(expires.getMilliseconds() + attributes.expires * 864e+5);
+                        attributes.expires = expires;
+                    }
+
+                    // We're using "expires" because "max-age" is not supported by IE
+                    attributes.expires = attributes.expires ? attributes.expires.toUTCString() : '';
+
+                    try {
+                        result = JSON.stringify(value);
+                        if (/^[\{\[]/.test(result)) {
+                            value = result;
+                        }
+                    } catch (e) {
+                    }
+
+                    if (!converter.write) {
+                        value = encodeURIComponent(String(value))
+                            .replace(/%(23|24|26|2B|3A|3C|3E|3D|2F|3F|40|5B|5D|5E|60|7B|7D|7C)/g, decodeURIComponent);
+                    } else {
+                        value = converter.write(value, key);
+                    }
+
+                    key = encodeURIComponent(String(key));
+                    key = key.replace(/%(23|24|26|2B|5E|60|7C)/g, decodeURIComponent);
+                    key = key.replace(/[\(\)]/g, escape);
+
+                    var stringifiedAttributes = '';
+
+                    for (var attributeName in attributes) {
+                        if (!attributes[attributeName]) {
+                            continue;
+                        }
+                        stringifiedAttributes += '; ' + attributeName;
+                        if (attributes[attributeName] === true) {
+                            continue;
+                        }
+                        stringifiedAttributes += '=' + attributes[attributeName];
+                    }
+                    return (document.cookie = key + '=' + value + stringifiedAttributes);
+                }
+
+                // Read
+
+                if (!key) {
+                    result = {};
+                }
+
+                // To prevent the for loop in the first place assign an empty array
+                // in case there are no cookies at all. Also prevents odd result when
+                // calling "get()"
+                var cookies = document.cookie ? document.cookie.split('; ') : [];
+                var rdecode = /(%[0-9A-Z]{2})+/g;
+                var i = 0;
+
+                for (; i < cookies.length; i++) {
+                    var parts = cookies[i].split('=');
+                    var cookie = parts.slice(1).join('=');
+
+                    if (cookie.charAt(0) === '"') {
+                        cookie = cookie.slice(1, -1);
+                    }
+
+                    try {
+                        var name = parts[0].replace(rdecode, decodeURIComponent);
+                        cookie = converter.read ?
+                            converter.read(cookie, name) : converter(cookie, name) ||
+                            cookie.replace(rdecode, decodeURIComponent);
+
+                        if (this.json) {
+                            try {
+                                cookie = JSON.parse(cookie);
+                            } catch (e) {
+                            }
+                        }
+
+                        if (key === name) {
+                            result = cookie;
+                            break;
+                        }
+
+                        if (!key) {
+                            result[name] = cookie;
+                        }
+                    } catch (e) {
+                    }
+                }
+
+                return result;
+            }
+
+            api.set = api;
+            api.get = function (key) {
+                return api.call(api, key);
+            };
+            api.getJSON = function () {
+                return api.apply({
+                    json: true
+                }, [].slice.call(arguments));
+            };
+            api.defaults = {};
+
+            api.remove = function (key, attributes) {
+                api(key, '', extend(attributes, {
+                    expires: -1
+                }));
+            };
+
+            api.withConverter = init;
+
+            return api;
+        }
+
+        return init(function () {
+        });
+    }));
+</script>
+
+<script>
+    /*
+     * Developped By Webmaster Media Akrem Boussaha ©
+     */
+    $(document).ready(function () {
+        {#{% if(app.user==null) %}#}
+        $('.lire_plus').click(function(){
+            var idqq = $(this).attr('data-idqq');
+            var idserv = $(this).attr('data-idServ');
+            var data = {
+                idqq: idqq,
+                idserv: idserv,
+
+            };
+            var data_targettt;
+            console.log(data);
+            $.ajax({
+                url: '{{ path('module_spa_get_json_spa') }}',
+                data: data,
+                type: "POST",
+                success: function (data) {
+
+                    var arr = [];
+                    json = JSON.stringify(eval('(' + data + ')')); //convert to json string
+                    arr = $.parseJSON(json);
+                    console.log(arr);
+                    $("#servamb").html(arr.mission);
+
+                    $("#ambdetail").html(arr.detail);
+                    $("#idImgamb").val(idserv);
+                    var id = $('#idImgamb').val();
+                    console.log(id + "." + 'jpg');
+                    $('#AmbImg').attr('src', '{{ asset('uploads/image/') }}{{ iduser }}/{{ qouiqui.id }}/service/' + id + "." + "jpg");
+
+
+
+                    id_modal = $('.lire_plus').attr('data-target');
+                    console.log('**********Je suis La********');
+                    console.log(id_modal);
+                    var title_modal = $(id_modal+' span.service-details-titre').html();
+                    console.log('titre de modal');
+                    console.log(title_modal);
+                    if(title_modal == 'Estimer le cout de votre course')
+                    {
+                        $("#planifier").hide();
+                        $("#planifier").next().remove();
+                        $("<button data-toggle=\"modal\" data-target=\"#estimer\" id =\"estimation\" style=\"font-size: 22px;\"\n" +
+                            "                                        class=\"col-md-12 col-xs-12 top10 btn btn-primary\">\n" +
+                            "                                    <i class=\"fa fa-money\"aria-hidden=\"true\" style=\"margin-right: 10px;\"></i>Estimer le cout de votre course\n" +
+                            "                                </button>").insertAfter('#planifier');
+
+
+                        data_targettt = "estimer";
+
+                        $('#lireplus').on('hidden.bs.modal', function (e) {
+                            $("#planifier").show();
+                            $("#planifier").next().remove();
+                        });
+
+                    }
+                    /*else if(title_modal == 'Planifier la date votre course'){
+                        $("#planifier").hide();
+                    $("#planifier").next().remove();
+                    $("<button data-toggle=\"modal\" data-target=\"#reserver\" id =\"planifier\" style=\"font-size: 22px;\
+                    class=\"col-md-12 col-xs-12 top10 btn btn-danger\">
+                            <i class=\"fa fa-calendar\"aria-hidden=\"true\" style=\"margin-right: 10px;\"></i>Planifier la date de votre course
+                            </button>").insertAfter('#planifier');
+                    $('#lireplus').on('hidden.bs.modal', function (e) {
+                        $("#planifier").show();
+                        $("#planifier").next().remove();
+                    });
+                    }*/
+                    else{
+                        data_targettt = $('.lire_plus').attr('data-idserv');
+                        console.log(data_targettt);
+                        $(this).attr('data-target', '#lireplus' + data_targettt);
+                        $('#lireplus').attr('id', 'lireplus' + data_targettt);
+                        console.log(data_targettt);
+                        $("#planifier").attr('data-target', '#reserver' + data_targettt);
+                        $("#reserver").attr('id', 'reserver' + data_targettt);
+                        /*dataTarget = $("#reserver"+data_target).attr('data-target');*/
+                        $('#lireplus' + data_targettt).on('hidden.bs.modal', function (e) {
+                            $(this).attr('id', 'lireplus');
+                            /*datas = $('#savoirPlus').attr('data-idserv');*/
+                            $("#planifier" + data_targettt).attr('data-target', '#reserver');
+                            $('#reserver' + data_targettt).attr('id', 'reserver');
+                        });
+                        $('div#reserver' + data_targettt).on('hidden.bs.modal', function (e) {
+                            console.log('modal reserver fermé');
+                            datas = $('#planifier').attr('data-target');
+                            datas_formated = datas.substring(1, datas.length);
+                            /*$("#planifier").attr('data-target', '#reserver'+datas);*/
+                            $(this).attr('id', datas_formated);
+                        });
+                        data_targettt = "reserver";
+                    }
+                }
+            });
+            {% if(app.user==null) %}
+            $('#modalLogin1').on('click', '#seConnecter', function () {
+                Cookies.set('dataTarget', data_targettt);
+            });
+            {% endif %}
+            if (Cookies.get('dataTarget') != undefined) {
+                console.log(Cookies.get('dataTarget'));
+                {% if(app.user) %}
+                /*$("#reserver").attr('id', 'reserver'+Cookies.get('dataTarget'));*/
+                $('#'+Cookies.get('dataTarget')).modal('show');
+                /*$("#reserver"+Cookies.get('dataTarget')).attr('id','reserver');*/
+                Cookies.remove('dataTarget');
+                {% endif %}
+            }
+        });
+        if (Cookies.get('dataTarget') != undefined) {
+            console.log(Cookies.get('dataTarget'));
+            {% if(app.user) %}
+            /*$("#reserver").attr('id', 'reserver'+Cookies.get('dataTarget'));*/
+            $('#'+Cookies.get('dataTarget')).modal('show');
+            /*$("#reserver"+Cookies.get('dataTarget')).attr('id','reserver');*/
+            Cookies.remove('dataTarget');
+            {% endif %}
+        }
+    });
+</script>
+
+<script type="text/javascript">
+    var directionsService = new google.maps.DirectionsService();
+    var mapp,geocoder, marker;
+    var depart,arrivee,ptCheck;
+    var distance, duration;
+
+    function init() {
+        directionsDisplay = new google.maps.DirectionsRenderer();
+        var maison = new google.maps.LatLng(38.8004294 ,-2.068609);
+        var myOptions = {
+            zoom:6,
+            mapTypeId: google.maps.MapTypeId.ROADMAP,
+            center: maison
+        }
+        mapp = new google.maps.Map(document.getElementById("divMap"), myOptions);
+        directionsDisplay.setMap(mapp);
+        directionsDisplay.setPanel(document.getElementById("divRoute"));
+        geocoder = new google.maps.Geocoder();
+    }
+
+
+    function trouveRoute() {
+        if (depart && arrivee)
+        {
+            var choixMode = document.getElementById("mode").value;
+
+            var request = {
+                origin:depart,
+                destination:arrivee,
+                travelMode: google.maps.DirectionsTravelMode[choixMode]
+            };
+            directionsService.route(request, function(response, status) {
+                if (status == google.maps.DirectionsStatus.OK) {
+                    directionsDisplay.setDirections(response);
+                    distance = response.routes[0].legs[0].distance;
+                    duration = response.routes[0].legs[0].duration;
+                }
+            });
+        }
+    }
+
+    function rechercher(src,code)
+    {
+        ptCheck = code;
+        if (geocoder) {
+            geocoder.geocode( { 'address': document.getElementById(src).value}, function(results, status) {
+                if (status == google.maps.GeocoderStatus.OK) {
+                    mapp.setCenter(results[0].geometry.location);
+                    if (marker) { marker.setMap(null);}
+                    marker = new google.maps.Marker({
+                        map: mapp,
+                        position: results[0].geometry.location
+                    });
+
+                    document.getElementById(src).value = results[0].formatted_address;
+                    if (ptCheck)
+                    {
+                        depart = results[0].formatted_address;
+                    } else
+                    {
+                        arrivee = results[0].formatted_address;
+                    }
+                    trouveRoute();
+                } else {
+                    alert("Geocode n'a rien trouvé !\n raison : " + status);
+                }
+            });
+        }
+
+    }
+    init();
+</script>
+
+<script type="text/javascript">
+    var directionsServices = new google.maps.DirectionsService();
+    var map,geocoder, marker;
+    var departt,arriveee,ptCheck;
+    var distancee, durationn;
+
+    function init() {
+        directionsDisplays = new google.maps.DirectionsRenderer();
+        var maison = new google.maps.LatLng(38.8004294 ,-2.068609);
+        var myOptions = {
+            zoom:6,
+            mapTypeId: google.maps.MapTypeId.ROADMAP,
+            center: maison
+        }
+        map = new google.maps.Map(document.getElementById("divMapp"), myOptions);
+        directionsDisplays.setMap(map);
+        directionsDisplays.setPanel(document.getElementById("divRoutee"));
+        geocoder = new google.maps.Geocoder();
+    }
+
+
+    function trouveRoutee() {
+        if (departt && arriveee)
+        {
+            var choixMode = document.getElementById("modee").value;
+
+            var request = {
+                origin:departt,
+                destination:arriveee,
+                travelMode: google.maps.DirectionsTravelMode[choixMode]
+            };
+            directionsServices.route(request, function(response, status) {
+                if (status == google.maps.DirectionsStatus.OK) {
+                    directionsDisplays.setDirections(response);
+                    distancee = response.routes[0].legs[0].distance.text;
+                    durationn = response.routes[0].legs[0].duration.text;
+                }
+            });
+        }
+    }
+
+    function rechercherr(src,code)
+    {
+        ptCheck = code;
+        if (geocoder) {
+            geocoder.geocode( { 'address': document.getElementById(src).value}, function(results, status) {
+                if (status == google.maps.GeocoderStatus.OK) {
+                    map.setCenter(results[0].geometry.location);
+                    if (marker) { marker.setMap(null);}
+                    marker = new google.maps.Marker({
+                        map: map,
+                        position: results[0].geometry.location
+                    });
+
+                    document.getElementById(src).value = results[0].formatted_address;
+                    if (ptCheck)
+                    {
+                        departt = results[0].formatted_address;
+                    } else
+                    {
+                        arriveee = results[0].formatted_address;
+                    }
+                    trouveRoutee();
+                } else {
+                    alert("Geocode n'a rien trouvé !\n raison : " + status);
+                }
+            });
+        }
+
+    }
+    init();
+</script>
+
+<script src="{{ asset('module/spa/js/jquery.chained.js') }}"></script>
+
+{#script pour celst chained#}
+
+<script>
+
+
+
+    (function ($, window, document, undefined) {
+
+
+        $.fn.chained = function (parent_selector, options) {
+
+            return this.each(function () {
+
+                /* Save this to child because this changes when scope changes. */
+                var child = this;
+                var backup = $(child).clone();
+
+                /* Handles maximum two parents now. */
+                $(parent_selector).each(function () {
+                    $(this).bind("change", function () {
+                        updateChildren();
+                    });
+
+                    /* Force IE to see something selected on first page load, */
+                    /* unless something is already selected */
+                    if (!$("option:selected", this).length) {
+                        $("option", this).first().attr("selected", "selected");
+                    }
+
+                    /* Force updating the children. */
+                    updateChildren();
+                });
+
+                function updateChildren() {
+                    var trigger_change = true;
+                    var currently_selected_value = $("option:selected", child).val();
+
+                    $(child).html(backup.html());
+
+                    /* If multiple parents build classname like foo\bar. */
+                    var selected = "";
+                    $(parent_selector).each(function () {
+                        var selectedClass = $("option:selected", this).val();
+                        if (selectedClass) {
+                            if (selected.length > 0) {
+                                if (window.Zepto) {
+                                    /* Zepto class regexp dies with classes like foo\bar. */
+                                    selected += "\\\\";
+                                } else {
+                                    selected += "\\";
+                                }
+                            }
+                            selected += selectedClass;
+                        }
+                    });
+
+                    /* Also check for first parent without subclassing. */
+                    /* TODO: This should be dynamic and check for each parent */
+                    /*       without subclassing. */
+                    var first;
+                    if ($.isArray(parent_selector)) {
+                        first = $(parent_selector[0]).first();
+                    } else {
+                        first = $(parent_selector).first();
+                    }
+                    var selected_first = $("option:selected", first).val();
+
+                    $("option", child).each(function () {
+                        /* Remove unneeded items but save the default value. */
+                        if ($(this).hasClass(selected) && $(this).val() === currently_selected_value) {
+                            $(this).prop("selected", true);
+                            trigger_change = false;
+                        } else if (!$(this).hasClass(selected) && !$(this).hasClass(selected_first) && $(this).val() !== "") {
+                            $(this).remove();
+                        }
+                    });
+
+                    /* If we have only the default value disable select. */
+                    if (1 === $("option", child).size() && $(child).val() === "") {
+                        $(child).prop("disabled", true);
+                    } else {
+                        $(child).prop("disabled", false);
+                    }
+                    if (trigger_change) {
+                        $(child).trigger("change");
+                    }
+                }
+            });
+        };
+
+
+        $.fn.chainedTo = $.fn.chained;
+
+
+        $.fn.chained.defaults = {};
+
+    })(window.jQuery || window.Zepto, window, document);
+
+
+    $(document).ready(function () {
+        $("#souscategories").chained("#categories");
+    });
+    $(document).ready(function () {
+        $("#editsouscategories").chained("#editcategories");
+    });
+
+</script>
+{#script pour celst chained#}
+    {# select2#}
+<script type="text/javascript">
+    $(".js-example-basic-multiple").select2({
+        width: '100%'
+    });
+</script>
+{# select2#}
+
+<script>
+    $.fn.test = function() {
+        return this.each(function(){
+            var new_id = 5;
+            $(this).attr('id',   this.id + '_' + new_id);
+            $(this).attr('name', this.name + '_' + new_id);
+            $(this).attr('value', 'test');
+        });
+    };
+
+    $('.voir-plus').click(function () {
+
+
+        var idqq = $(this).attr('data-qq');
+        var idserv = $(this).attr('data-idevent');
+
+
+        var data = {
+            idqq: idqq,
+            idserv: idserv,
+
+        };
+
+        console.log(data);
+        $.ajax({
+            url: '{{ path('module_spa_get_json_offre') }}',
+            data: data,
+            type: "POST",
+            success: function (data) {
+
+                var arr = [];
+                json = JSON.stringify(eval('(' + data + ')')); //convert to json string
+                arr = $.parseJSON(json);
+                console.log(arr);
+                $("#equipment").html(arr.souscategorie[0]);
+
+                $("#ambdetails").html(arr.description);
+                $("#planifier").attr('data-target','reserve'+arr.idserv);
+                $("#planifier").attr('data-target','reserve'+arr.idserv);
+                $("#idImgambs").val(idserv);
+                var id = $('#idImgambs').val();
+                console.log(arr.souscategorie)
+                console.log(id + "." + 'jpg');
+                $('ul#myList').empty();
+                $('#AmbsImg').attr('src', '{{ asset('uploads/image/') }}{{ iduser }}/{{ qouiqui.id }}/event/' + id + "." + "jpg");
+                $.each(arr.souscategorie, function (index, value) {
+
+                    var content = '<li><span style="Font-Weight: Bold;font-size: 34px;margin-right: 5px;">' + "." + '</span>' + value + "</li>";
+                    $('ul#myList').append(content);
+                });
+            }
+        });
+    });
+</script>
+<script>
+
+    $('.click-off').click(function () {
+        // escape here if the confirm is false;
+        if (!clickOffConfirmed) return false;
+        var btn = this;
+        setTimeout(function () {
+            $(btn).attr('disabled', 'disabled');
+        }, 1);
+        return true;
+    });
+
+    $(".addmissions").click(function () {
+        var styles = {
+            border: "1px solid #e3e3e3",
+        };
+        $('#otherServices').css(styles);
+        $('.errormsg').html("");
+        $('#otherServices').val('');
+        $('#otherServices').hide();
+        $('#serviceselect').css(styles);
+        $('#serviceselect').val('');
+        $("#addServices").prop('disabled', false);
+
+    });
+</script>
+<script>
+    //        $('#listOffres').modal('show');
+
+
+    $('.edit-offre').click(function () {
+
+
+        var idqq = $(this).attr('data-id');
+        var idserv = $(this).attr('data-serv');
+
+
+        var data = {
+            idqq: idqq,
+            idserv: idserv,
+
+        };
+//            console.log(data);
+
+        $.ajax({
+            url: '{{ path('module_spa_get_json_offre') }}',
+            data: data,
+            type: "POST",
+            success: function (data) {
+
+                var arr = [];
+                json = JSON.stringify(eval('(' + data + ')')); //convert to json string
+                arr = $.parseJSON(json);
+                console.log(arr);
+
+                $("#idEvent").val(arr.idOffre);
+
+                $(".description-edit").val(arr.description);
+
+                $("#editcategories [value='" + arr.categorie + "']").prop("selected", true);
+
+                jQuery('#editsouscategories option').remove();
+                var dg = new Array();
+                var test = [];
+                jQuery('#sousCategoriesHidden option').each(function () {
+                    var test = ' '+arr.souscategorie[0];
+                    if (test == $(this).text()) {
+                        var dgOne = new Array();
+                        dgOne.push(arr.souscategorie[0]);
+                        dgOne.push(arr.souscategorie[0]);
+                        dg.push(dgOne);
+                        return false;
+
+                    }
+                });
+                console.log(dg);
+
+
+                jQuery.each(dg, function (ke, item) {
+
+
+                    jQuery('#editsouscategories').append('<option value="' + item[0] + '" data-cat="' + arr.souscategorie[0] + '">' + item[0] + '</option>');
+                    $("#editsouscategories [value='" + arr.souscategorie[0] + "']").prop("selected", true);
+                });
+
+                jQuery('#editsouscategories').select2();
+
+
+                jQuery('#editcategories').on('change', function (e) {
+                    var dg1 = new Array();
+                    jQuery('#sousCategoriesHidden option').each(function () {
+                        var test = ' '+arr.souscategorie[0];
+                        if (test == $(this).text()) {
+                            var dgOne1 = new Array();
+                            dgOne1.push(this.value);
+                            dgOne1.push(this.text);
+                            dg1.push(dgOne1);
+                        }
+                    });
+
+                    jQuery.each(dg1, function (ke, item) {
+
+                        jQuery('#editsouscategories').append('<option value="' + item[0] + '" data-cat="' +  arr.souscategorie[0] + '">' + item[0] + '</option>');
+                        $("#editsouscategories [value='" + arr.souscategorie[0] + "']").prop("selected", true);
+                    });
+
+                    /*jQuery.each(arr.souscategorie[0], function (ke, item) {
+                        $("#editsouscategories [value='" + item + "']").prop("selected", true);
+                    });*/
+
+                    jQuery('#editsouscategories').select2();
+                });
+
+            }
+
+
+        });
+
+    });
+
+</script>
+
+
+<script>
+    $('.edit_huissier').click(function(){
+        var titleTd = $('td.sorting_1').html();
+        console.log("j'ai cliqué sur le modal de estimation du cout");
+        console.log("****** "+titleTd+" ******");
+    });
+</script>
+
+
+
+<script>
+
+    $('.edit_huissier').click(function () {
+        var styles = {
+            border: "1px solid #e3e3e3",
+        };
+        var titleTd = $('td.sorting_1').html();
+        $('#serviceselect-edit').css(styles);
+        $('#autreServices').css(styles);
+        $('#msg_error').html("");
+        $('#autreServices').val('');
+        $('#autreServices').hide();
+        var idqq = $(this).attr('data-id');
+        var idserv = $(this).attr('data-serv');
+        var data = {
+            idqq: idqq,
+            idserv: idserv,
+
+        };
+        console.log(data);
+        $.ajax({
+            url: '{{ path('module_spa_get_json_spa') }}',
+            data: data,
+            type: "POST",
+            success: function (data) {
+                var arr = [];
+                json = JSON.stringify(eval('(' + data + ')')); //convert to json string
+                arr = $.parseJSON(json);
+                console.log(arr);
+
+
+
+
+
+
+
+
+
+
+
+
+
+                if(arr.mission == "Estimer le cout de votre course")
+                {
+                    CKEDITOR.instances['detail_ambu'].setData(arr.detail);
+
+
+
+
+
+
+
+
+
+
+
+
+                    for(var ji = 0; ji<arr.vehicule.length; ji++)
+                    {
+                        if(ji == arr.vehicule.length-1){
+                            $('form#Editmission').append("<div class=\"form-group vehicule ui-widget\">\n" +
+                                "        <label for=\"vehicule\" class=\"control-label\">Véhicule</label>\n" +
+                                "        <input type=\"text\" name=\"vehicule[]\" class=\"form-control input-vehicule\" value=\""+arr.vehicule[ji]+"\" required>    <label class=\"control-label unite\">Unité</label>\n" +
+                                "                   <select name=\"currency[]\" class=\"form-control currency\">\n" +
+                                "                        <option value=\"Millime\">Millime</option>\n" +
+                                "                        <option value=\"Dinar\">Dinar</option>\n" +
+                                "                   </select> <label class='control-label'>Prix de vehicule </label><input type='number' name='carPrice[]' required value='"+arr.carPrice[ji]+"' class='form-control carPrice'>\n" +
+                                "        <span style='color: red; text-decoration: underline; cursor: pointer; vertical-align: super;' class='plus-vehiculee'>Ajouter un autre vehicule </span><i style='cursor: pointer;' class=\"fa fa-plus-circle fa-2x plus-vehiculee\" aria-hidden=\"true\"></i>\n" +
+                                "</div>");
+
+                        }else{
+                            $('form#Editmission').append("<div class=\"form-group vehicule ui-widget\">\n" +
+                                "        <label for=\"vehicule\" class=\"control-label\">Véhicule</label>\n" +
+                                "        <input type=\"text\" name=\"vehicule[]\" class=\"form-control input-vehicule\" value=\""+arr.vehicule[ji]+"\" required>    <label class=\"control-label unite\">Unité</label>\n" +
+                                "                   <select name=\"currency[]\" class=\"form-control currency\">\n" +
+                                "                        <option value="+arr.currency[ji]+">"+arr.currency[ji]+"</option>\n" +
+                                "                        <option value="+arr.currency[ji+1]+">"+arr.currency[ji+1]+"</option>\n" +
+                                "                   </select> <label class='control-label'>Prix de vehicule </label><input type='number' name='carPrice[]' required value='"+arr.carPrice[ji]+"' class='form-control carPrice'>\n" +
+                                "</div>");
+
+                               /* var x = $("#Editmission .form-group select.currency").val();
+                                var y = $("#Editmission select.currency:nth-of-type(1) .form-group").val();
+                                var z = $("#Editmission select.currency:nth-of-type(2) .form-group").val();
+                                console.log('************Test de select************');
+                                console.log(x);
+                                console.log(y);
+                                console.log(z);*/
+                        }
+                    }
+                    $( ".input-vehicule" ).autocomplete({
+                        source: "{{ path('chauffeur_get_marks') }}",
+                    });
+
+                    $(".vehicule>.carPrice").each(function(i, el) {
+                        el = $(el);
+                        el.autocomplete({
+                            source: function (request, response) {
+                                var inputs = [];
+                                var elem = $(el).parent().find('.input-vehicule').val();
+                                inputs.push(elem);
+                                var currencies = [];
+                                var current = $(el).parent().find('.currency').val();
+                                console.log(current);
+                                currencies.push(current);
+                                $.ajax({
+                                    url: "{{ path('chauffeur_get_priceMetre') }}",
+                                    datatype: "jsonp",
+                                    data: {
+                                        termm: request.term,
+                                        inputs: inputs,
+                                        currencies: currencies,
+                                    },
+                                    success: function (b) {
+                                        console.log(b);
+                                        var c = [];
+                                        $.each(b.results, function (i, a) {
+                                            console.log('je suis results');
+                                            console.log(b.results);
+                                            a.label = a.value + " " + a.label;
+                                            console.log(a);
+                                            c.push(a);
+                                        });
+                                        response(c);
+                                    }
+                                });
+                            },
+                            focus: function( event, ui ) {
+                                $(el).val( ui.item.label );
+                                return false;
+                            },
+                            select: function (event, ui) {
+                                $(el).val(ui.item.label);
+                                return false;
+                            }
+                        }).autocomplete().data("uiAutocomplete")._renderItem = function (ul, item) {
+                            return $("<li>")
+                                .data("item.autocomplete", item)
+                                .append("<div>" + item.value + "</div>")
+                                .appendTo(ul);
+                        };
+                    });
+                }
+                else {
+                    $("#otherServices").hide();
+                }
+                $('#addMission').on('hidden.bs.modal', function (e) {
+                    $('div.priceMetre').remove();
+                    $('div.vehicule').remove();
+                    $('div.vehiculee').remove();
+                });
+                $('.plus-vehiculee').click(function(){
+                    $("<div class=\"form-group vehiculee ui-widget\">\n" +
+                        "    <label for=\"\" class=\"control-label\">Véhicule</label>\n" +
+                        "    <input type=\"text\" class=\"input-vehicule form-control\" name=\"vehicule[]\" required>\n" +
+                        "<label class=\"control-label unite\">Unité</label>\n" +
+                        "                   <select name=\"currency[]\" class=\"form-control currency\">\n" +
+                        "                        <option value=\"Millime\">Millime</option>\n" +
+                        "                        <option value=\"Dinar\">Dinar</option>\n" +
+                        "                   </select> <label class='control-label'>Prix de vehicule</label><input type='number' name='carPrice[]' required placeholder='Prix' class='form-control carPrice'>\n" +
+                        "</div>").insertAfter($('.vehicule:last-child'));
+                    console.log('je clique sur ajouter vehicule');
+                    $( ".input-vehicule" ).autocomplete({
+                        source: "{{ path('chauffeur_get_marks') }}",
+                    });
+                });
+                $('.form-group').delegate(".plus-vehiculee", 'click', function() {
+                    $(".vehiculee>.carPrice").each(function(i, el){
+                        el = $(el);
+                        el.autocomplete({
+                            source: function(request, response) {
+                                var inputs=[];
+                                var currencies = [];
+                                var elem = $(el).parent().find('.input-vehicule').val();
+                                inputs.push(elem);
+                                var current = $(el).parent().find('.currency').val();
+                                console.log(current);
+                                currencies.push(current);
+                                $.ajax({
+                                    url: "{{ path('chauffeur_get_priceMetre') }}",
+                                    datatype: "jsonp",
+                                    data: {
+                                        termm: request.term,
+                                        inputs: inputs,
+                                        currencies: currencies,
+                                    },
+                                    success: function (b) {
+                                        console.log(b);
+                                        var c = [];
+                                        $.each(b.results, function (i, a) {
+                                            console.log('je suis results');
+                                            console.log(b.results);
+                                            a.label = a.value + " " + a.label;
+                                            console.log(a);
+                                            c.push(a);
+                                        });
+                                        response(c);
+                                    }
+                                });
+                            },
+                            focus: function( event, ui ) {
+                                $(el).val( ui.item.label );
+                                return false;
+                            },
+                            select: function (event, ui) {
+                                $(el).val(ui.item.label);
+                                /*$('.carPricee').val( ui.item.value );*/
+                                /*$( "#project-description" ).html( ui.item.desc );*/
+                                /*$( "#project-icon" ).attr( "src", "images/" + ui.item.icon );*/
+                                return false;
+                            }
+                        }).autocomplete().data("uiAutocomplete")._renderItem = function (ul, item) {
+                            return $("<li>")
+                                .data("item.autocomplete", item)
+                                .append("<div>" + item.value + "</div>")
+                                .appendTo(ul);
+                        };
+                    })
+                });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                /*console.log(arr.mission);*/
+                if (typeof arr.mission != "undefined") {
+                    /*$("#serviceselect-edit option:selected").remove();*/
+                    $('#autreServices').show();
+                    $('input#autreServices').val(arr.mission);
+                    var testt = [];
+                    $('#serviceselect-edit option').each(function () {
+                        console.log($(this).text());
+                        /*console.log('=========');
+                        console.log(arr.mission);
+                        console.log('*********');*/
+                        if($(this).text()==arr.mission)
+                        {
+                            console.log(true);
+                            testt.push(1)
+                        }
+                    });
+                    var verif = false;
+                    for (var iter = 0; iter <= testt.length; iter++) {
+                        if(testt[iter]==1)
+                        {
+                            verif = true;
+                            console.log("mission mawjouda");
+                            $("input#idambus").val(arr.idserv);
+                            $("#serviceselect-edit option").prop("selected", false);
+                            $("#serviceselect-edit [value='" + arr.mission + "']").prop("selected", true);
+                            $('#Editmission').on('keyup','#autreServices',function () {
+                                var newService = $(this).val();
+                                $('#serviceselect-edit').prepend(
+                                    '<option value="'+ newService +'" selected="selected">'+
+                                    newService+
+                                    '</option>'
+
+                                );
+                                $('#serviceselect-edit option[value*="'+newService.substring(1,newService.length-1)+'"]').remove();
+                            });
+                            return false;
+                        }
+                    }
+                    if(verif == false)
+                    {
+                        console.log('mission jdida');
+                        $('#serviceselect-edit').prepend(
+                            '<option value="'+ arr.mission +'">'+
+                            arr.mission+
+                            '</option>'
+                        );
+                        /*$("#serviceselect-edit option:selected").remove();*/
+
+                        $("#serviceselect-edit option").prop("selected", false);
+                        $("#serviceselect-edit [value='" + arr.mission + "']").attr("selected", true);
+                        $('#Editmission').on('keyup','#autreServices',function () {
+                            console.log('9a3ed nsob f select');
+                            var newService = $(this).val();
+                            $('#serviceselect-edit').prepend(
+                                '<option value="'+ newService +'" selected="selected">'+
+                                newService+
+                                '</option>'
+                            );
+                            console.log('bch nfassa5 m select');
+                            console.log(newService.substring(0, newService.length-1));
+                            var chaineForDelete = newService.substring(0, newService.length-1);
+                            $('#serviceselect-edit option[value*="'+chaineForDelete+'"]').hide();
+                        });
+                    }
+                    $("input#idambus").val(arr.idserv);
+                    console.log("***********************************************************************************");
+                    console.log(arr.idserv);
+                }else {
+                    $("#idambus").val(idserv);
+                    console.log('misssion mouuuch mel base !');
+                    $('#Editmission').on('keyup','#autreServices',function () {
+                        console.log('je suis là !');
+                        /* $("#serviceselect-edit option:selected").remove();*/
+                        var newService = $(this).val();
+                        $('#serviceselect-edit option[selected]').html(
+                            '<option value="'+ newService +'">'+
+                            newService+
+                            '</option>'
+                        );
+                    });
+                }
+                $("#idambus").val(idserv);
+                CKEDITOR.instances['detail_ambu'].setData(arr.detail);
+//                    $("#serviceselect-edit [value='" + arr.mission + "']").attr("selected", "selected");
+            }
+        });
+    });
+</script>
+
+<script>
+    $('div.loading').hide();
+    $('div.success').hide();
+    $('#reservationn').click(function(){
+        $('div.loading').show()
+        var dateRdv = $('#datetimepicker4').val();
+        var adrDep = $('#adrDep').val();
+        var direction = $('#mode').val();
+        /*var direction = $('#mode').val();*/
+        var adrArr = $('#adrArr').val();
+        var username = $('#username').val();
+        var telephone = $('#telephone').val();
+        var email = $('#email').val();
+        /*distance;
+        duration;*/
+        console.log('afficher adrDep');
+        console.log(adrDep);
+        $.ajax({
+            url:'{{ path('chauffeur_reserver_course') }}',
+            data: {dateRdv: dateRdv, adrDep: adrDep, direction: direction, adrArr: adrArr, distance: distance, duration: duration, username: username, telephone: telephone, email: email },
+            dataType: "json",
+            success: function (reponse) {
+                console.log(reponse);
+                $('div.loading').hide();
+                $('div.success').show();
+            }
+        })
+    });
+</script>
+
+
+
+<script>
+    $('div.loading').hide();
+    $('div.success').hide();
+    $('#reservationn').click(function(){
+        $('div.loading').show()
+        var adrDep = $('#adrDep').val();
+        var direction = $('#mode').val();
+        var adrArr = $('#adrArr').val();
+        var username = $('#username').val();
+        var telephone = $('#telephone').val();
+        var email = $('#email').val();
+        console.log(distance);
+        console.log(duration);
+        console.log('afficher adrDep');
+        console.log(adrDep);
+        $.ajax({
+            url:'{{ path('chauffeur_reserver_course') }}',
+            data: {dateRdv: dateRdv, adrDep: adrDep, direction: direction, adrArr: adrArr, distance: distance, duration: duration, username: username, telephone: telephone, email: email },
+            dataType: "json",
+            success: function (reponse) {
+                console.log(reponse);
+                $('div.loading').hide();
+                $('div.success').show();
+            }
+        })
+    });
+</script>
+
+<script>
+    $('div.loading').hide();
+    $('div.success').hide();
+    $('#estimationn').click(function(){
+        $('div.loading').show()
+        var adrDep = $('#adrDepp').val();
+        var direction = $('#modee').val();
+        var adrArr = $('#adrArrr').val();
+        var priceMetre = $('#priceMetre').val();
+        var username = $('#usernamee').val();
+        var telephone = $('#telephonee').val();
+        var email = $('#emaill').val();
+        var voiture = $('#voiture').val();
+        var currency = $('#voiture option:selected').attr('data-currency');
+        var priceCar = $('#voiture option:selected').attr('data-price');
+        var formatedDistance = distancee.replace('km', '');
+        console.log('kilometrage'+formatedDistance);
+        console.log('afficher adrDep');
+        console.log(adrDep);
+        console.log('affichage de voiture selectionné');
+        console.log(voiture);
+        console.log(currency);
+        console.log(priceCar);
+        $.ajax({
+            url:'{{ path('chauffeur_estimer_course') }}',
+            data: {adrDep: adrDep, direction: direction, adrArr: adrArr, distance: distancee, formatedDistance: formatedDistance, currency: currency ,voiture: voiture ,duration: durationn, priceCar: priceCar, username: username, telephone: telephone, email: email },
+            dataType: "json",
+            success: function (reponse) {
+                console.log(reponse);
+                $('div.loading').hide();
+                $('div.success').show();
+                $('div.success').html('Distance : '+reponse.distance+', Durée: '+reponse.duration+' <br> Prix: <strong>'+reponse.priceMetre+' Millime(s) | '+reponse.priceMetreDinars+' Dinar(s) TND</strong>');
+            }
+        })
+    });
+    $('#estimer').on('hidden.bs.modal', function (e) {
+        $('div.success').hide();
+    });
+</script>
+<script>
+    $(".modal").on("shown.bs.modal", function () {
+        google.maps.event.trigger(mapp, "resize");
+    });
+    $(".modal").on("shown.bs.modal", function () {
+        google.maps.event.trigger(map, "resize");
+    });
+</script>
+<script type="text/javascript">
+    /*$(document).ready(function(){
+        $.fn.datetimepicker.defaults.language = 'fr';
+    });*/
+    $(function () {
+        $('#datetimepicker4').datetimepicker({
+            format: 'DD/MM/Y HH:mm'
+        });
+    });
+</script>
+
+<script>
+
+    $('#serviceselect').on('change', function () {
+
+        if ($(this).val() == "autre") {
+            $("#otherServices").show();
+            console.log($(this).val());
+        }
+        else if($(this).val()=='Estimer le cout de votre course'){
+            console.log('jai cliquer sur estimation du cout');
+            $('form#addmissionss').append("<div class=\"form-group vehicule ui-widget\">\n" +
+                "        <label for=\"vehicule\" class=\"control-label\">Véhicule</label>\n" +
+                "        <input type=\"text\" name=\"vehicule[]\" class=\"form-control input-vehicule\" required>    <label class=\"control-label unite\">Unité</label>\n" +
+                "                   <select name=\"currency[]\" class=\"form-control currency\">\n" +
+                "                        <option value=\"Millime\">Millime</option>\n" +
+                "                        <option value=\"Dinar\">Dinar</option>\n" +
+                "                   </select> <label class='control-label'>Prix de vehicule </label><input type='number' name='carPrice[]' required placeholder='Prix' class='form-control carPrice'>\n" +
+                "        <span style='color: red; text-decoration: underline; cursor: pointer; vertical-align: super;' class='plus-vehicule'>Ajouter un autre vehicule </span><i style='cursor: pointer;' class=\"fa fa-plus-circle fa-2x plus-vehicule\" aria-hidden=\"true\"></i>\n" +
+                "</div>");
+            $( ".input-vehicule" ).autocomplete({
+                source: "{{ path('chauffeur_get_marks') }}",
+            });
+
+            $(".vehicule>.carPrice").each(function(i, el) {
+                el = $(el);
+                el.autocomplete({
+                    source: function (request, response) {
+                        var inputs = [];
+                        var elem = $(el).parent().find('.input-vehicule').val();
+                        inputs.push(elem);
+                        var currencies = [];
+                        var current = $(el).parent().find('.currency').val();
+                        console.log(current);
+                        currencies.push(current);
+                        $.ajax({
+                            url: "{{ path('chauffeur_get_priceMetre') }}",
+                            datatype: "jsonp",
+                            data: {
+                                termm: request.term,
+                                inputs: inputs,
+                                currencies: currencies,
+                            },
+                            success: function (b) {
+                                console.log(b);
+                                var c = [];
+                                $.each(b.results, function (i, a) {
+                                    console.log('je suis results');
+                                    console.log(b.results);
+                                    a.label = a.value + " " + a.label;
+                                    console.log(a);
+                                    c.push(a);
+                                });
+                                response(c);
+                            }
+                        });
+                    },
+                    focus: function( event, ui ) {
+                        $(el).val( ui.item.label );
+                        return false;
+                    },
+                    select: function (event, ui) {
+                        $(el).val(ui.item.label);
+                        /*$('.carPricee').val( ui.item.value );*/
+                        /*$( "#project-description" ).html( ui.item.desc );*/
+                        /*$( "#project-icon" ).attr( "src", "images/" + ui.item.icon );*/
+                        return false;
+                    }
+                }).autocomplete().data("uiAutocomplete")._renderItem = function (ul, item) {
+                    return $("<li>")
+                        .data("item.autocomplete", item)
+                        .append("<div>" + item.value + "</div>")
+                        .appendTo(ul);
+                };
+            });
+        }
+        else {
+            $("#otherServices").hide();
+        }
+        $('#addMission').on('hidden.bs.modal', function (e) {
+            $('div.priceMetre').remove();
+            $('div.vehicule').remove();
+            $('div.vehiculee').remove();
+        });
+        $('.plus-vehicule').click(function(){
+            $("<div class=\"form-group vehiculee ui-widget\">\n" +
+                "    <label for=\"\" class=\"control-label\">Véhicule</label>\n" +
+                "    <input type=\"text\" class=\"input-vehicule form-control\" name=\"vehicule[]\" required>\n" +
+                "<label class=\"control-label unite\">Unité</label>\n" +
+                "                   <select name=\"currency[]\" class=\"form-control currency\">\n" +
+                "                        <option value=\"Millime\">Millime</option>\n" +
+                "                        <option value=\"Dinar\">Dinar</option>\n" +
+                "                   </select> <label class='control-label'>Prix de vehicule</label><input type='number' name='carPrice[]' required placeholder='Prix' class='form-control carPrice'>\n" +
+                "</div>").insertAfter($('.vehicule'));
+            console.log('je clique sur ajouter vehicule');
+            $( ".input-vehicule" ).autocomplete({
+                source: "{{ path('chauffeur_get_marks') }}",
+            });
+        });
+        $('.form-group').delegate(".plus-vehicule", 'click', function() {
+            $(".vehiculee>.carPrice").each(function(i, el){
+                el = $(el);
+                el.autocomplete({
+                    source: function(request, response) {
+                        var inputs=[];
+                        var currencies = [];
+                        var elem = $(el).parent().find('.input-vehicule').val();
+                        inputs.push(elem);
+                        var current = $(el).parent().find('.currency').val();
+                        console.log(current);
+                        currencies.push(current);
+                        $.ajax({
+                            url: "{{ path('chauffeur_get_priceMetre') }}",
+                            datatype: "jsonp",
+                            data: {
+                                termm: request.term,
+                                inputs: inputs,
+                                currencies: currencies,
+                            },
+                            success: function (b) {
+                                console.log(b);
+                                var c = [];
+                                $.each(b.results, function (i, a) {
+                                    console.log('je suis results');
+                                    console.log(b.results);
+                                    a.label = a.value + " " + a.label;
+                                    console.log(a);
+                                    c.push(a);
+                                });
+                                response(c);
+                            }
+                        });
+                    },
+                    focus: function( event, ui ) {
+                        $(el).val( ui.item.label );
+                        return false;
+                    },
+                    select: function (event, ui) {
+                        $(el).val(ui.item.label);
+                        /*$('.carPricee').val( ui.item.value );*/
+                        /*$( "#project-description" ).html( ui.item.desc );*/
+                        /*$( "#project-icon" ).attr( "src", "images/" + ui.item.icon );*/
+                        return false;
+                    }
+                }).autocomplete().data("uiAutocomplete")._renderItem = function (ul, item) {
+                    return $("<li>")
+                        .data("item.autocomplete", item)
+                        .append("<div>" + item.value + "</div>")
+                        .appendTo(ul);
+                };
+            })
+        });
+        /* $('.form-group').delegate(".plus-vehicule", 'click', function(){
+         $( ".vehiculee>.carPrice" ).autocomplete({
+             source: function (request, response) {
+                 var inputs = [];
+                 $('.input-vehicule').each(function () {
+                     console.log($(this).val());
+                     inputs.push($(this).val())
+                 });
+                 var element =[]
+                 element.push(inputs[inputs.length-1]);
+                 console.log(element);
+                 $.ajax({
+                     url: "{#{{ path('chauffeur_get_priceMetre') }}#}",
+                    datatype: "jsonp",
+                    data: {
+                        termm: request.term,
+                        inputs: element,
+                    },
+                    success: function (data) {
+                        response(data);
+                        console.log(data);
+                    }
+                });
+            }
+        });
+        });*/
+        /*var Timer;
+        var Interval = 10000;
+        Timer = setTimeout(function () {
+            $('#priceMetre').keyup(function(){
+                console.log('je suis le price metre');
+            });
+        }, Interval);*/
+        /*$('.form-group').delegate('#priceMetre','focus', function() {
+            $('#priceMetre').autocomplete({
+                source: function (request, response) {
+                    var inputs = [];
+                    var carPrices = [];
+                    var currencies = [];
+                    $('.input-vehicule').each(function () {
+                        /!*console.log("je suis ici");
+                        console.log($(this).val());*!/
+                        inputs.push($(this).val())
+                    });
+                    $('.carPrice').each(function () {
+                        /!*console.log("je suis ici");
+                        console.log($(this).val());*!/
+                        carPrices.push($(this).val())
+                    });
+                    $('.currency').each(function () {
+                        /!*console.log("je suis ici");
+                        console.log($(this).val());*!/
+                        currencies.push($(this).val())
+                    });
+                    console.log('les inputs');
+                    console.log(inputs);
+                    $.ajax({
+                        url: "{{ path('chauffeur_get_priceMetre') }}",
+                        datatype: "jsonp",
+                        data: {
+                            termm: request.term,
+                            inputs: inputs,
+                            currency: currencies,
+                            priceVehicule: carPrices
+                        },
+                        success: function (data) {
+                            response(data);
+                            console.log(data);
+                        }
+                    });
+
+                }
+            });
+        });*/
+    });
+
+
+</script>
+
+<script>
+
+    myList = [];
+
+    $("#serviceselect option ").each(function () {
+
+        myList.push($(this).val())
+
+    });
+
+    var typingTimer;
+    var doneTypingInterval = 1000;
+    typingTimer = setTimeout(function () {
+        $('#otherServices').keyup(function () {
+            var autre = $('#otherServices').val();
+            $.each(myList, function (index, value) {
+                if (($('#otherServices').val()) === value.toLowerCase()) {
+                    $('.errormsg').html(" ce service  existe  déjà");
+                    $('#otherServices').css('border', 'solid 2px red');
+                    $("#addServices").attr('disabled', 'disabled');
+                }
+                else if ($('#otherServices').val() == '') {
+
+                    var styles = {
+                        border: "1px solid #e3e3e3",
+                    };
+                    $('#otherServices').css(styles);
+                    $('.errormsg').html("");
+                    $("#addServices").prop('disabled', false);
+                }
+
+
+            });
+        });
+    }, doneTypingInterval);
+    $('form#addmissionss').submit(function (e) {
+        if ($('#otherServices').val()) {
+            var autre = $('#otherServices').val();
+            $('select').prepend('<option  value=  "' + autre + '" >' + $('#otherServices').val() + '</option>');
+
+            $("#serviceselect [value='" + autre + "']").attr("selected", "selected");
+            $("#otherServices").val('');
+            $("#otherServices").hide();
+        }
+        var item = $('#serviceselect option:selected').val();
+        if (item === 'autre') {
+            e.preventDefault();
+            alert('ajouter un service ou bien choisir un autre de la liste');
+        }
+    });
+
+</script>
+
+<script>
+
+    $('#serviceselect-edit').on('change', function () {
+
+
+        if ($(this).val() == "autre") {
+
+            $("#autreServices").show();
+
+
+        }
+        else {
+            $("#autreServices").hide();
+        }
+    });
+</script>
+
+
+<script>
+
+    myList1 = [];
+
+    $("#serviceselect-edit option ").each(function () {
+
+        myList1.push($(this).val())
+
+    });
+
+    var typingTimer;
+    var doneTypingInterval = 1000;
+    typingTimer = setTimeout(function () {
+        $('#autreServices').keyup(function () {
+
+            var autre = $('#autreServices').val();
+
+            $.each(myList1, function (index, value) {
+                if (($('#autreServices').val()) === value.toLowerCase()) {
+
+                    $('#msg_error').html(" ce service  existe  déjà");
+                    $('#autreServices').css('border', 'solid 2px red');
+                    $("#updateserv").attr('disabled', 'disabled');
+
+
+                }
+                else if (($('#autreServices').val()) == '') {
+                    var styles = {
+                        border: "1px solid #e3e3e3",
+
+                    };
+
+                    $('#autreServices').css(styles);
+                    $('#msg_error').html("");
+                    $("#updateserv").prop('disabled', false);
+                }
+
+
+            });
+        });
+    }, doneTypingInterval);
+
+    function validate() {
+
+        alert(' le service est déja existé')
+
+    }
+
+
+</script>
+<script>
+
+
+    $('.click-off').click(function () {
+        // escape here if the confirm is false;
+        if (!clickOffConfirmed) return false;
+        var btn = this;
+        setTimeout(function () {
+            $(btn).attr('disabled', 'disabled');
+        }, 1);
+        return true;
+    });
+
+
+</script>
+
+
+<script>
+    ListFromBase = [];
+    $("#service_enrolled option ").each(function () {
+
+        ListFromBase.push($(this).val())
+
+    });
+
+    $('#serviceselect').click(function () {
+        var styles = {
+            border: "1px solid #e3e3e3",
+        };
+        $('.selectOption').css(styles);
+        $('#idError').html("");
+        $("#addServices").prop('disabled', false);
+
+//            var typingTimer;
+//            var doneTypingInterval = 1000;
+//            typingTimer = setTimeout(function () {
+        var item = $('#serviceselect option:selected').val();
+        console.log("this" + item);
+
+
+        $.each(ListFromBase, function (index, value) {
+            if (item === value && item != 'autre') {
+
+//                            alert("ce service est déjà existé")
+                $('#idError').html(" ce service  existe  déjà");
+                $('.selectOption').css('border', 'solid 2px red');
+                $("#addServices").attr('disabled', 'disabled');
+            }
+//
+
+
+        });
+
+//            }, doneTypingInterval);
+
+
+    });
+</script>
+
+
+
+
+<script>
+    ListFromBase = [];
+    $("#service_enrolled option ").each(function () {
+
+        ListFromBase.push($(this).val())
+
+    });
+
+    $('#serviceselect').click(function () {
+        var styles = {
+            border: "1px solid #e3e3e3",
+        };
+        $('.selectOption').css(styles);
+        $('#idError').html("");
+        $("#addServices").prop('disabled', false);
+
+//            var typingTimer;
+//            var doneTypingInterval = 1000;
+//            typingTimer = setTimeout(function () {
+        var item = $('#serviceselect option:selected').val();
+        console.log("this" + item);
+
+
+        $.each(ListFromBase, function (index, value) {
+            if (item === value && item != 'autre') {
+
+//                            alert("ce service est déjà existé")
+                $('#idError').html(" ce service  existe  déjà");
+                $('.selectOption').css('border', 'solid 2px red');
+                $("#addServices").attr('disabled', 'disabled');
+            }
+//
+
+
+        });
+
+//            }, doneTypingInterval);
+
+
+    });
+</script>
+
+<script>
+    $('select#categories').on('change', function (e) {
+        var mark_id = $(this).val();
+        //console.log(mark_id);
+        $.ajax({
+            url: '{{ path('chauffeur_model_marks') }}',
+            data: {mark_id: mark_id},
+            dataType: "json",
+            success: function (reponse) {
+                /*console.log('success');
+                console.log(reponse);
+                console.log(reponse.models);*/
+                $.each(reponse.models, function (i, item){
+                    console.log(reponse.models[i]);
+                    $('select#souscategories').append(
+                        '<option value='+ reponse.models[i].name +' data-cat='+reponse.models[i].mark+'>'+
+                        reponse.models[i].name,+
+                            '</option>'
+                    );
+                })
+            }
+        })
+    });
+</script>
+
+<script>
+    $('select#editcategories').on('change', function (e) {
+        var mark_id = $(this).val();
+        console.log(mark_id);
+        $.ajax({
+            url: '{{ path('chauffeur_model_marks') }}',
+            data: {mark_id: mark_id},
+            dataType: "json",
+            success: function (reponse) {
+                $.each(reponse.models, function (i, item){
+                    console.log(reponse.models[i]);
+                    $('select#editsouscategories').append(
+                        '<option value='+ reponse.models[i].id +' class='+reponse.models[i].mark+'>'+
+                        reponse.models[i].name,+
+                            '</option>'
+                    );
+                })
+            }
+        })
+    });
+</script>
+
+
+<style>
+    #datetimepicker4{z-index:1151 !important;}
+    /*div#reserver .modal-footer
+    {
+        border: none;
+    }*/
+    .feature_box .description h4 {
+        height: 43px;
+    }
+
+    #otherServices {
+        display: none;
+    }
+
+    #autreServices {
+        display: none;
+    }
+
+    input.error {
+        border: 2px solid red;
+    }
+
+    .image-content-offre {
+        width: 100%;
+        height: 200px;
+        background-size: cover;
+        background-position: center;
+    }
+    .G_titre {
+        font-weight: 300;
+        text-align: justify;
+        font-size: 35px;
+        line-height: 1.2;
+    }
+    .btn_bottom{
+        /*position: absolute;*/
+        bottom: 65px;
+        margin: 0 auto;
+        margin-left: 199px;
+    }
+    .pargraphe{
+
+        margin: 15px 5px 21px;
+        text-align: center;
+
+    }
+    .block-service-border{
+        border: 10px solid;
+        border-raduis: 20px;
+        box-shadow: 2px 2px 2px 2px #000000;
+    }
+    .ui-autocomplete {
+        z-index: 9999999;
+    }
+    @media screen and (min-width: 767px) and (max-width: 992px){
+        .block-service-border a.suite{
+            padding: 5px;
+            font-size: 18px;
+        }
+
+
+    }
+</style>
+

@@ -1,0 +1,49 @@
+{% extends 'dashboardLayaout/dashboardLayout.html.twig' %}
+{% block body %}
+    <div class="col-sm-9 col-md-12">
+        <div class="col-md-12">
+            <div class="col-md-7">
+                <span class="titre-spain">Liste évenements!</span>
+            </div>
+            <div class="col-md-5">
+                <span><a href="{{ path('dashboard_event_ajout', {'qq_id': quoiqui.id}) }}" class="btn btn-warning">Ajouter Evennement!</a></span>
+            </div>
+
+        </div>
+        <table id="quoiquiUsers" class="display" cellspacing="0" width="100%">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Adress</th>
+                <th>Date</th>
+                <th>Organisateur</th>
+                <th>Confirmer/Annuler</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for ev in events %}
+                <tr>
+                    <td>{{ ev.eventName }}</td>
+                    <td>{{ ev.location }}</td>
+                    <td>{{ ev.dateStart|date("m/d/Y") }} - {{ ev.dateEnd|date("m/d/Y") }}</td>
+                    <td>{{ ev.orgBy }}</td>
+                    <td><a href="{{ path('dashboard_events_liste_pepole_booking',{'id': ev.qville.qouiqui.id}) }}"
+                           class="btn btn-danger">Liste Des personne réservées</a></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        $(document).ready(function () {
+            $('#quoiquiUsers').DataTable();
+        });
+    </script>
+{% endblock %}

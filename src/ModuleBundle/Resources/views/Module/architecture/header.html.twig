@@ -1,0 +1,185 @@
+<header>
+
+    <div class="sub-header clearfix">
+
+        <div class="wrapper">
+
+            <ul>
+                <li>
+
+                    <i class="fa fa-caret-square-o-right"></i><a href="#">contactez nous :{{ qouiqui.phone }}</a>
+
+                </li>
+
+
+
+                <li>
+
+                    <i class="fa fa-caret-square-o-right"></i><a href="#">email:{{ qouiqui.mail }}</a>
+
+                </li>
+
+
+
+
+            </ul>
+
+            <div class="socials">
+                {% set sociaux= jsonDecod(qouiqui.sociaux) %}
+
+                <a target="_blank" href="{{ sociaux["google"]}}" title=""><i class="fa fa-google-plus"></i></a>
+
+
+                <a target="_blank" href="{{ sociaux["tweeter"] }}" title=""><i class="fa fa-twitter"></i></a>
+
+
+
+
+                <a target="_blank" href="{{ sociaux["linkedin"] }}" title=""><i class="fa fa-linkedin"></i></a>
+
+
+                <a target="_blank" href="{{ sociaux["facebook"]  }}" title=""><i class="fa fa-facebook"></i></a>
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="upper-header wrapper">
+
+        <div class="logo">
+
+
+            <a href="#" title="Arkitekt">
+                {% set path =  asset('uploads/image/')~qouiqui.user.id ~'/'~ qouiqui.id ~'/avatar/avatar.jpg' %}
+                {% if asset_exists(path) %}
+                    <img src="{{  asset('uploads/image/') }}{{ qouiqui.user.id }}/{{ qouiqui.id }}/avatar/avatar.jpg" alt="" style=" width:196px; height:43px;"/>
+                {% else %}
+
+                        <h1 style="text-transform: uppercase;
+                                    font-family: 'Lobster', cursive;
+                                    margin: 0 auto;
+
+                                     ">
+                            {{ qouiqui.firstName }}
+                        </h1>
+
+                {% endif %}
+              </a>
+
+
+        </div>
+
+        <!-- Navigation -->
+
+
+        <div id="nav">
+
+            <ul id="navlist" class="sf-menu clearfix sf-js-enabled sf-shadow">
+                <li id="menu-item-553" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-home menu-item-has-children menu-item-553 dropdown active"><a title="HOME" href="#home" data-toggle="dropdown" class="dropdown-toggle" aria-haspopup="true">
+                        <div class="main-a">ACCUEIL</div>
+                        <div class="nav-border"></div>&nbsp; </a>
+
+                </li>
+                <li id="menu-item-556" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-556"><a title="ABOUT" href="#about">
+                        <div class="main-a">A PROPOS</div>
+                        <div class="nav-border"></div>&nbsp; </a></li>
+                <li id="menu-item-565" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-565"><a title="PORTFOLIO" href="#service">
+                        <div class="main-a">Services</div>
+                        <div class="nav-border"></div>&nbsp; </a></li>
+                <li id="menu-item-565" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-565"><a title="PORTFOLIO" href="#team">
+                        <div class="main-a">NOTRE EQUIPE</div>
+                        <div class="nav-border"></div>&nbsp; </a></li>
+
+                </li>
+                <li id="menu-item-565" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-565"><a title="PORTFOLIO" href="#project">
+                        <div class="main-a">NOS PROJETS</div>
+                        <div class="nav-border"></div>&nbsp; </a></li>
+
+
+
+                <li id="menu-item-563" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-563"><a title="CONTACT" href="#contact">
+                        <div class="main-a">CONTACT</div>
+                        <div class="nav-border"></div>&nbsp; </a></li>
+                {% if app.user %}
+
+
+                            <!--<li><a href="#" data-toggle="modal" data-target="#changePassword" class="change-password">Changer mot de passe</a></li>
+-->
+                            <li id="menu-item-563" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-563"><a href="{{ path("fos_user_security_logout") }}">Se déconnecter</a></li>
+
+                {% else %}
+
+                    <li id="menu-item-563" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-563"><a title="Connection" href="#" data-toggle="modal" data-target="#connexion">
+                            <div class="main-a">Se connecter</div>
+                            <div class="nav-border"></div>&nbsp; </a></li>
+                {% endif %}
+
+
+
+
+            </ul>
+
+
+            <!-- Navigation -->
+
+        </div>
+
+        <div class="clear"></div>
+
+
+    </div>
+
+</header>
+<div id="connexion" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Connection</h4>
+            </div>
+            <div class="modal-body">
+                <div class="col-md-12 btn-group btn-group-justified hidden-xs hidden-sm social" role="group">
+                    <div class="facebook btn-group col-sm-6" role="group">
+                        <a class="facebook-btn btn btn-primary" href="/login/facebook">
+                            <span>Connecter avec Facebook</span>
+                        </a>
+                    </div>
+                    <div class="btn-group col-sm-6" role="group">
+                        <a class="btn btn-danger" href="/login/google">
+                            <span>Connecter avec Google</span>
+                        </a>
+                    </div>
+                </div>
+                <form action="/login_check" method="post">
+                    <div class="form-group">
+                        <input type="hidden" name="_csrf_token" value="Kk4KcJ-i6lPzu7pUx0wOja7L0g5uu9CI6uWJYDGVT4Q">
+                    </div>
+                    <div class="form-group">
+                        <label for="username">Login</label>
+                        <input type="text" id="username" name="_username" value="" required="required" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Mot de passe</label>
+                        <input type="password" id="password" name="_password" required="required" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <input type="checkbox" id="remember_me" name="_remember_me" value="on">
+                        <label for="remember_me">Se souvenir de moi!</label>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" id="_submit" name="_submit" value="Se connecter" class="form-control btn btn-warning">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+            </div>
+        </div>
+
+    </div>
+</div>

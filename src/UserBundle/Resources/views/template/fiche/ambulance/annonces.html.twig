@@ -1,0 +1,620 @@
+<section id="section-annonces" class="property-details padding">
+    {% if attributes.connected %}
+            <div class="pull-righ" style="    margin-right: 24px;">
+                <div data-step="4" data-intro="This is a tooltip!" class="pull-right margin-bott-40">
+                    <button type="button" class="theme-btn button11 btn-style-one pull-right" data-toggle="modal"
+                            data-target="#listOffres">Gérer cette section
+                    </button>
+                </div>
+            </div>
+    {% endif %}
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 bottom40">
+                <h2 class="text-uppercase">Nos <span class="color_red">équipements</span></h2>
+                <div class="line_1"></div>
+                <div class="line_2"></div>
+                <div class="line_3"></div>
+
+            </div>
+        </div>
+        <div class="row bottom30">
+            {% if mission.event is defined %}
+            {% set arrayEvent= mission.event %}
+
+
+            {% if( mission.event|length == 1) %}
+                <div class="col-md-4 col-sm-4 col-xs-12"></div>
+            {% endif %}
+            {% if ( mission.event|length == 2) %}
+                <div class="col-md-2 col-sm-2 col-xs-12"></div>
+            {% endif %}
+            {% for b in arrayEvent|sort|reverse %}
+
+                <div class="col-md-4 col-sm-4 col-xs-12 ">
+
+                    <div class="property_item bottom40">
+                        <div class="image image-content-offre"
+                             style="background-image:url('{{ asset('uploads/image/') }}{{ attributes.quoiqui.user.id }}/{{ attributes.quoiqui.id }}/event/{{ b.idOffre~'.jpg' }}')">
+                            <div class="price"><span class="tag" style="font-size: 26px;">
+                                                    </span></div>
+                            <div class="overlay">
+                                <div class="centered"><a class="link_arrow white_border voir-plus"
+                                                         data-toggle="modal" data-target="#Show_detail"
+                                                         href="#" data-qq="{{ attributes.quoiqui.id }}"
+                                                         data-idevent="{{ b.idOffre }}">Voir Plus </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="proerty_content">
+                            <div class="proerty_text" style="height: 145px">
+
+                                <h3>{{ b.categorie }}</h3>
+                                <p style="font-size: 20px;"><strong>
+
+                                    </strong></p>
+                                {#<span class="bottom10">Merrick Way, Miami, USA</span>#}
+                                {% if b.description is not empty %}
+                                    <p>{{ b.description|slice(0,40)|raw }}... </p>
+                                {% endif %}
+                            </div>
+                            <div class=" favroute-bottom clearfix">
+
+
+                                <ul class="text-center">
+                                    <li style="font-size: 19px;"
+                                        class="voir-plus"
+                                        data-qq="{{ attributes.quoiqui.id }}"
+                                        data-idevent="{{ b.idOffre }}" data-toggle="modal"
+                                        data-target="#Show_detail"><i class="fa fa-eye"
+                                                                      style=" margin-top: 14px; "
+                                                                      aria-hidden="true" about=""
+
+                                        ></i>Voir plus
+                                    </li>
+                                    {#<li><a href="#."><i class="icon-like"></i></a></li>#}
+                                </ul>
+
+
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+
+            {% endfor %}
+        </div>
+
+    </div>
+    {% endif %}
+
+
+    {% if not is_mobile() %}
+        <div class="paralax-icon">
+            <div class="particle elem1 anim-delay1"></div>
+            <div class="particle elem2 anim-delay5"></div>
+            <div class="particle elem3 anim-delay3"></div>
+            <div class="particle elem4 anim-delay8"></div>
+            <div class="particle elem5 anim-delay9"></div>
+            <div class="particle elem6 anim-delay2"></div>
+            <div class="particle elem7 anim-delay4"></div>
+            <div class="particle elem8 anim-delay3"></div>
+            <div class="particle elem9 anim-delay10"></div>
+            <div class="particle elem8 anim-delay11"></div>
+            <div class="particle elem6 anim-delay12"></div>
+            <div class="particle elem1 anim-delay14"></div>
+            <div class="particle elem13 anim-delay16"></div>
+            <div class="particle elem17 anim-delay18"></div>
+            <div class="particle elem2 anim-delay6"></div>
+            <div class="particle elem16 anim-delay9"></div>
+            <div class="particle elem8 anim-delay3"></div>
+            <div class="particle elem9 anim-delay10"></div>
+            <div class="particle elem18 anim-delay11"></div>
+            <div class="particle elem11 anim-delay12"></div>
+            <div class="particle elem12 anim-delay14"></div>
+            <div class="particle elem13 anim-delay16"></div>
+            <div class="particle elem14 anim-delay18"></div>
+            <div class="particle elem15 anim-delay6"></div>
+            <div class="particle elem16 anim-delay9"></div>
+            <div class="particle elem17 anim-delay7"></div>
+            <div class="particle elem18 anim-delay6"></div>
+            <div class="particle elem19 anim-delay3"></div>
+        </div>
+    {% endif %}
+</section>
+<div class="modal fade" id="listOffres" role="dialog">
+    <div class="modal-dialog ">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Liste des équipements</h4>
+
+            </div>
+            <div class="modal-body">
+                {#<div class="container">#}
+                    <table class=" dataTable table  " cellspacing="0" width="100%">
+                        <thead>
+                        <tr>
+                            <th >Image</th>
+                            <th >véhicules</th>
+
+                            <th >Modifier</th>
+                            <th >Supprimer</th>
+                        </tr>
+                        </thead>
+
+                        <tbody>
+                        {% if mission .event is defined %}
+                            {% set arrayEvent=mission .event %}
+                            {% for b in arrayEvent|sort|reverse %}
+
+                                <tr data-td="{{ b.idOffre }}">
+
+                                    <td align="center">
+
+                                        <img src="{{ asset('uploads/image/') }}{{ attributes.quoiqui.user.id }}/{{ attributes.quoiqui.id }}/event/{{ b.idOffre ~'.jpg' }}"
+                                             data-pin-nopin="true" style="  width:  74px;">
+
+                                    </td>
+                                    <td> {{ b.categorie }}</td>
+
+
+                                    <td align="center">
+
+                                        <a href="#" class=" btn btn-info a-btn-slide-text edit-offre"
+                                           data-serv="{{ b.idOffre }}"
+                                           data-id="{{ attributes.quoiqui.id }}" data-toggle="modal"
+                                           data-target="#editambulances">
+
+                                            <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                                            <span><strong>Modifier</strong></span>
+                                        </a>
+
+                                    </td>
+
+
+                                    <td align="center">
+
+                                        <a href="{{ path('module_spa_delate_events',{"idqq": attributes.quoiqui.id,"idevent": b.idOffre }) }}"
+                                           class=" btn btn-danger a-btn-slide-text service_suprim"
+                                           onclick="clickOffConfirmed = confirm('Vous voulez le  supprimer ?');">
+                                            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                            <span><strong>Supprimer</strong></span>
+                                        </a>
+                                    </td>
+
+                                </tr>
+                                {#{% endfor %}#}
+                            {% endfor %}
+                        {% endif %}
+                        </tbody>
+                    </table>
+                {#</div>#}
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addEvent">Ajouter un
+                    véhicule
+                </button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Fermer</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="addEvent" role="dialog">
+    <div class="modal-dialog ">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Ajouter un véhicule</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <form id="addequipement" method="POST" class=" fileuploader"
+                          action="{{ path('module_spa_add_offre',{"idqq":attributes.quoiqui.id}) }}"
+                          enctype="multipart/form-data">
+                        <div class="row">
+                            <input type="hidden" name="idOffre" value="{{ uniqueId() }}">
+
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <select class="selectpicker form-control" id="categories" name="categorie">
+                                        <option selected disabled> Selectionner un véhicule</option>
+                                        <option value="catégorie A">catégorie A</option>
+                                        <option value="catégorie B">catégorie B</option>
+                                        <option value="catégorie C">catégorie C</option>
+                                        <option value="catégorie D">catégorie D</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <select class="selectpicker form-control js-example-basic-multiple" id="souscategories"
+                                            name="souscategorie[]" multiple="multiple">
+
+                                        <option selected disabled class="catégorie A catégorie B">Equipement</option>
+                                        <option data-container-css-class="ppp" value="Chaise portoir 2 roues Kartsana S127"
+                                                class="catégorie A">Chaise portoir 2 roues Kartsana S127
+                                        </option>
+                                        <option value="Brancard Kartsana TGM241 Norme EN 1789" class="catégorie A">Brancard
+                                            Kartsana TGM241 Norme EN 1789
+                                        </option>
+                                        <option value="Attelles rigides / semi rigides Blue Splint (Le jeu de 5 avec sac de transport)"
+                                                class="catégorie A">Attelles rigides / semi rigides Blue Splint (Le jeu de 5
+                                            avec sac de transport)
+                                        </option>
+                                        <option value="Masque de poche de réanimation en étui rigide" class="catégorie A">
+                                            Masque de poche de réanimation en étui rigide
+                                        </option>
+                                        <option value="Collier cervical AMBU REDI-ACE réglable (1 collier adulte / 1 collier enfant)"
+                                                class="catégorie A">Collier cervical AMBU REDI-ACE réglable (1 collier
+                                            adulte / 1 collier enfant)
+                                        </option>
+                                        <option value="Aspirateur de mucosités manuel AMBU Res-Cue Pump"
+                                                class="catégorie A">Aspirateur de mucosités manuel AMBU Res-Cue Pump
+                                        </option>
+                                        <option value="Couverture anti-bactérienne étanche" class="catégorie A">Couverture
+                                            anti-bactérienne étanche
+                                        </option>
+                                        <option value="Insufflateur Bavu à usage unique" class="catégorie A">Insufflateur
+                                            Bavu à usage unique
+                                        </option>
+                                        <option value="Tensiomètre 4 Brassards Manopoire" class="catégorie A">Tensiomètre 4
+                                            Brassards Manopoire
+                                        </option>
+                                        <option value="Bassin de lit autoclavable" class="catégorie A">Bassin de lit
+                                            autoclavable
+                                        </option>
+                                        <option value="Urinal homme non autoclavable" class="catégorie A">Urinal homme non
+                                            autoclavable
+                                        </option>
+                                        <option value="Urinal femme autoclavable" class="catégorie A">Urinal femme
+                                            autoclavable
+                                        </option>
+                                        <option value="Haricot réniforme autoclavable" class="catégorie A"> Haricot
+                                            réniforme autoclavable
+                                        </option>
+                                        <option value="HMS Pack accouchement d'urgence" class="catégorie A">HMS Pack
+                                            accouchement d'urgence
+                                        </option>
+                                        <option value="Marteau brise-vitre et coupe ceinture" class="catégorie A">Marteau
+                                            brise-vitre et coupe ceinture
+                                        </option>
+                                        <option value="Trousse de secours complète Ambulance - VSL" class="catégorie A">
+                                            Trousse de secours complète Ambulance - VSL
+                                        </option>
+                                        <option value="Triangle + Gilet de sécurité" class="catégorie A">Triangle + Gilet de
+                                            sécurité
+                                        </option>
+                                        <option value="Extincteur à poudre 2 Kg" class="catégorie A">Extincteur à poudre 2
+                                            Kg
+                                        </option>
+
+
+                                        <option value="Matelas à depression 80 x 204 cm" class="catégorie B"> Matelas à
+                                            depression 80 x 204 cm
+                                        </option>
+                                        <option value="Civière cuillère Norme EN1865" class="catégorie B">Civière cuillère
+                                            Norme EN1865
+                                        </option>
+                                        <option value="Défibrillateur semi-automatique Skity (DSA)" class="catégorie B">
+                                            Défibrillateur semi-automatique Skity (DSA)
+                                        </option>
+                                        <option value="Oxymètre de pouls au doigt" class="catégorie B">Oxymètre de pouls au
+                                            doigt
+                                        </option>
+                                        <option value="Aspirateur de mucosités New Askir" class="catégorie B">Aspirateur de
+                                            mucosités New Askir
+                                        </option>
+                                        <option value="Thermomètre auriculaire et frontal infrarouge FAMILY SCAN 3"
+                                                class="catégorie B">Thermomètre auriculaire et frontal infrarouge FAMILY
+                                            SCAN 3
+                                        </option>
+                                        <option value="Lecteur de glycémie parlant VOX" class="catégorie B">Lecteur de
+                                            glycémie parlant VOX
+                                        </option>
+                                        <option value="Stylo lampe pupille" class="catégorie B">Stylo lampe pupille</option>
+                                        <option value="Stethoscope Adulte double pavillon Perfecto" class="catégorie B">
+                                            Stethoscope Adulte double pavillon Perfecto
+                                        </option>
+                                        <option value="Récupérateur de déchets DASRI 1000 ml" class="catégorie B">
+                                            Récupérateur de déchets DASRI 1000 ml
+                                        </option>
+                                        <option value="HMS Pack Brûlures" class="catégorie B">HMS Pack Brûlures</option>
+                                        <option value="HMS Pack Membre Sectionné" class="catégorie B">HMS Pack Membre
+                                            Sectionné
+                                        </option>
+
+
+                                    </select>
+                                </div>
+                                {#<div class=" form-group">#}
+                                {#<label class="col-md-12">Nom </label>#}
+                                {#<input type="text" placeholder="Entrer Nom du Service." required="required"#}
+                                {#class="form-control" name="ServSpa">#}
+                                {#</div>#}
+
+
+                                <div class="form-group">
+                                    <label class="col-md-12">Description</label>
+                                    <textarea placeholder="Entrer la description.." rows="3" onKeyUp="count_it()" id="long_texts"
+                                              class="form-control textarea "
+                                              name="description" required="required" maxlength="100"></textarea>
+                                    <span id="length" class="counter" style="color:red; "></span>
+                                </div>
+
+                                <div class=" form-group">
+                                    <label class="col-md-12">Choisissez une photo</label>
+                                    <input autocomplete="off" class="form-control "
+                                           name="file" type="file" required="required"
+                                           placeholder="choisissez_image" data-items="8"/>
+
+                                </div>
+
+                            </div>
+                        </div>
+                        {#<div class="col-md-6">#}
+                        {##}
+                        {#</div>#}
+
+
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Fermer</button>
+                <button type="submit" id="addequip" class=" btn btn-primary button-default" data-target="modifier"
+                        data-selector="addequipement">
+                    Enrigistrer
+                </button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<div class="modal fade" id="editambulances" role="dialog">
+    <div class="modal-dialog ">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Modifier l'équipement </h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <form id="editambulance" method="POST" class=" fileuploader"
+                          action="{{ path('module_spa_update_event',{"idqq":attributes.quoiqui.id}) }}"
+                          enctype="multipart/form-data">
+
+                        <div class="row">
+                        <input id="idEvent" type="hidden" name="idOffre" value="">
+
+                        <div class="col-md-12">
+
+                            <div class="form-group">
+                                <select class="selectpicker form-control" id="editcategories" name="categorie">
+                                    <option selected disabled>Type de Véhicule</option>
+                                    <option value="catégorie A">catégorie A</option>
+                                    <option value="catégorie B">catégorie B</option>
+                                    <option value="catégorie C">catégorie C</option>
+                                    <option value="catégorie D">catégorie D</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+
+                                <select id="sousCategoriesHidden" style="display: none;">
+                                    <option selected disabled>Equipement</option>
+                                    <option value="Chaise portoir 2 roues Kartsana S127" data-cat="catégorie A">Chaise
+                                        portoir 2 roues Kartsana S127
+                                    </option>
+                                    <option value="Brancard Kartsana TGM241 Norme EN 1789" data-cat="catégorie A">
+                                        Brancard Kartsana TGM241 Norme EN 1789
+                                    </option>
+                                    <option value="Attelles rigides / semi rigides Blue Splint (Le jeu de 5 avec sac de transport)"
+                                            data-cat="catégorie A">Attelles rigides / semi rigides Blue Splint (Le jeu
+                                        de 5 avec sac de transport)
+                                    </option>
+                                    <option value="Masque de poche de réanimation en étui rigide"
+                                            data-cat="catégorie A">Masque de poche de réanimation en étui rigide
+                                    </option>
+                                    <option value="Collier cervical AMBU REDI-ACE réglable (1 collier adulte / 1 collier enfant)"
+                                            data-cat="catégorie A">Collier cervical AMBU REDI-ACE réglable (1 collier
+                                        adulte / 1 collier enfant)
+                                    </option>
+                                    <option value="Aspirateur de mucosités manuel AMBU Res-Cue Pump"
+                                            data-cat="catégorie A">Aspirateur de mucosités manuel AMBU Res-Cue Pump
+                                    </option>
+                                    <option value="Couverture anti-bactérienne étanche" data-cat="catégorie A">
+                                        Couverture anti-bactérienne étanche
+                                    </option>
+                                    <option value="Insufflateur Bavu à usage unique" data-cat="catégorie A">Insufflateur
+                                        Bavu à usage unique
+                                    </option>
+                                    <option value="Tensiomètre 4 Brassards Manopoire" data-cat="catégorie A">Tensiomètre
+                                        4 Brassards Manopoire
+                                    </option>
+                                    <option value="Bassin de lit autoclavable" data-cat="catégorie A">Bassin de lit
+                                        autoclavable
+                                    </option>
+                                    <option value="Urinal homme non autoclavable" data-cat="catégorie A">Urinal homme
+                                        non autoclavable
+                                    </option>
+                                    <option value="Urinal femme autoclavable" data-cat="catégorie A">Urinal femme
+                                        autoclavable
+                                    </option>
+                                    <option value="Haricot réniforme autoclavable" data-cat="catégorie A"> Haricot
+                                        réniforme autoclavable
+                                    </option>
+                                    <option value="HMS Pack accouchement d'urgence" data-cat="catégorie A">HMS Pack
+                                        accouchement d'urgence
+                                    </option>
+                                    <option value="Marteau brise-vitre et coupe ceinture" data-cat="catégorie A">Marteau
+                                        brise-vitre et coupe ceinture
+                                    </option>
+                                    <option value="Trousse de secours complète Ambulance - VSL" data-cat="catégorie A">
+                                        Trousse de secours complète Ambulance - VSL
+                                    </option>
+                                    <option value="Triangle + Gilet de sécurité" data-cat="catégorie A">Triangle + Gilet
+                                        de sécurité
+                                    </option>
+                                    <option value="Extincteur à poudre 2 Kg" data-cat="catégorie A">Extincteur à poudre
+                                        2 Kg
+                                    </option>
+                                    <option value="Matelas à depression 80 x 204 cm" data-cat="catégorie B"> Matelas à
+                                        depression 80 x 204 cm
+                                    </option>
+                                    <option value="Civière cuillère Norme EN1865" data-cat="catégorie B">Civière
+                                        cuillère Norme EN1865
+                                    </option>
+                                    <option value="Défibrillateur semi-automatique Skity (DSA)" data-cat="catégorie B">
+                                        Défibrillateur semi-automatique Skity (DSA)
+                                    </option>
+                                    <option value="Oxymètre de pouls au doigt" data-cat="catégorie B">Oxymètre de pouls
+                                        au doigt
+                                    </option>
+                                    <option value="Aspirateur de mucosités New Askir" data-cat="catégorie B">Aspirateur
+                                        de mucosités New Askir
+                                    </option>
+                                    <option value="Thermomètre auriculaire et frontal infrarouge FAMILY SCAN 3"
+                                            data-cat="catégorie B">Thermomètre auriculaire et frontal infrarouge FAMILY
+                                        SCAN 3
+                                    </option>
+                                    <option value="Lecteur de glycémie parlant VOX" data-cat="catégorie B">Lecteur de
+                                        glycémie parlant VOX
+                                    </option>
+                                    <option value="Stylo lampe pupille" data-cat="catégorie B">Stylo lampe pupille
+                                    </option>
+                                    <option value="Stethoscope Adulte double pavillon Perfecto" data-cat="catégorie B">
+                                        Stethoscope Adulte double pavillon Perfecto
+                                    </option>
+                                    <option value="Récupérateur de déchets DASRI 1000 ml" data-cat="catégorie B">
+                                        Récupérateur de déchets DASRI 1000 ml
+                                    </option>
+                                    <option value="HMS Pack Brûlures" data-cat="catégorie B">HMS Pack Brûlures</option>
+                                    <option value="HMS Pack Membre Sectionné" data-cat="catégorie B">HMS Pack Membre
+                                        Sectionné
+                                    </option>
+
+                                </select>
+
+                                <select class="selectpicker form-control js-example-basic-multiple editequip"
+                                        id="editsouscategories" name="souscategorie[]" multiple="multiple">
+                                </select>
+
+                            </div>
+                            {#<div class=" form-group">#}
+                            {#<label class="col-md-12">Nom de promotion</label>#}
+                            {#<input id="offre" type="text" placeholder="Entrer Nom du l'offre." required="required"#}
+                            {#class="form-control" name="ServSpa">#}
+                            {#</div>#}
+
+                            <div class="form-group">
+                                <label class="col-md-12">Description</label>
+                                <textarea id="descr" placeholder="Entrer la description.." rows="3" onKeyUp="count_it()" maxlength="100"
+                                          class="form-control textarea   description-edit"
+                                          name="description" required="required"></textarea>
+                                <span id="lengths" class="counter" style="color:red; "></span>
+                            </div>
+
+
+                            <div class=" form-group">
+                                <label class="col-md-12">Choisissez une photo</label>
+                                <input autocomplete="off" class="form-control "
+                                       name="file" type="file"
+
+                                       placeholder="choisissez_image" data-items="8"/>
+
+                            </div>
+                        </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Fermer</button>
+                <button type="submit" id="editequipment" class="btn btn-primary button-default" data-target="modifier"
+                        data-selector="editambulance">
+                    Enrigistrer
+                </button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<div class="modal fade" id="Show_detail" role="dialog">
+    <div class="modal-dialog modal-md">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 id="equipment" class="  text-uppercase color_red G_titre"></h4>
+            </div>
+
+            <div class="modal-body">
+                <div id="news-section-1" style="padding-right: 15px;padding-left: 15px;margin-right: auto;margin-left: auto;">
+
+                    <div class="row">
+                        <div class="col-md-12">
+
+                            <input type="hidden" id="idImgambs" value="">
+                            <div class="row row-eq-height">
+
+                                <div class="col-md-4 ">
+                                    <img id="AmbsImg" src="" class="img-responsive" style="width: 100%">
+                                </div>
+
+                                <div class="col-md-8 ">
+                                    <h3 class="top16" style="margin-bottom: -10px;">Nos <span  class="color_red">  Pack Matériel</span></h3>
+
+                                    <ul id="myList">
+                                        <li></li>
+                                    </ul>
+                                    <h3 class="top16 top24" style="margin-bottom:9px;">Description <span class="color_red"> Détaillé</span></h3>
+                                    <p class="bottom30" id="ambdetails"></p>
+
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6 margintop34">
+                                    <a href="#" data-toggle="modal" data-target="#modalSectionRappeler"
+                                       class="col-md-12 col-xs-12 spacontact top10" ><i
+                                                class="fa fa-phone" aria-hidden="true" style="margin-right: 5px"></i>Demande
+                                        de rappel
+                                    </a>
+                                </div>
+                                <div class="col-md-6 margintop34">
+                                    <a href="tel:{{ attributes.quoiqui.phone }}"
+                                       class="col-md-12 col-xs-12 spacontact1 top10 "> Contacter
+                                        nous: {{ attributes.quoiqui.phone }}
+                                    </a>
+                                </div>
+
+                            </div>
+
+
+                        </div>
+                    </div>
+
+                </div>
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Fermer</button>
+
+            </div>
+        </div>
+
+    </div>
+</div>

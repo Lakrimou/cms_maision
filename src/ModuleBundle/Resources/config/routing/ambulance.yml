@@ -1,0 +1,5 @@
+
+module_ambulance_add_equipement:
+    path: /equipement/{idqq}
+    defaults: { _controller: ModuleBundle:Ambulance:addEquipement}
+    methods: [POST]

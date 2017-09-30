@@ -1,0 +1,166 @@
+{% if connected %}
+    <div class="modal fade" id="Ajouter_gallery" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">×</button>
+                    <h4 class="modal-title">Modifier les image de sider</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row norow">
+                        <div class="panel-body">
+
+                            <!-- Standar Form -->
+                            <h4>Select files from your computer</h4>
+                            <form id="upload_img_to_gallery" action="{{ path('uploadgallery',{'id_qq': qouiqui.id}) }}" method="post"
+                                  enctype="multipart/form-data" id="js-upload-form">
+                                <div class="form-inline">
+                                    <div class="form-group">
+                                        {#<input type="file" name="files[]" id="js-upload-files">#}
+                                        <div class="input-group image-preview">
+                                            <input placeholder="" type="text" class="form-control image-preview-filename" disabled="disabled">
+                                            <!-- don't give a name === doesn't send on POST/GET -->
+                                            <span class="input-group-btn">
+                                            <!-- image-preview-clear button -->
+                                                <!-- image-preview-input -->
+                                            <div class="btn btn-default image-preview-input"> <span class="glyphicon glyphicon-folder-open"></span> <span class="image-preview-input-title">Parcourir</span>
+                                                <input type="file" accept="image/png, image/jpeg, image/gif" name="files[]" id="js-upload-files">
+                                                <!-- rename it -->
+                                            </div>
+                                            <button type="submit" class="btn btn-labeled btn-default"> <span class="btn-label"><i class="glyphicon glyphicon-upload"></i> </span>Envoyer l'image</button>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label" for="time">Type de l'image</label>
+                                    <select id="time" name="TypeGallery" class="form-control">
+                                        <option value="Vehicules">Vehicules</option>
+                                        <option value="Equipement ">Vehicules</option>
+
+
+                                    </select>
+                                </div>
+                            </form>
+                            <!-- Upload Finished -->
+                            <div class="js-upload-finished">
+                                <h3>Galleries Images</h3>
+                                <div class="list-group">
+                                    {% for img in  img_gallery %}
+                                        {% set img2 = img|split('-') %}
+                                        <div class="sup-gal-{{ loop.index }}">
+                                            <div class="col-md-2">
+                                                <img style="width: 50px" src=" {{ asset('/uploads/image/') }}{{ iduser }}/{{ qouiqui.id }}/gallery/{{ img }}" alt=""></div>
+                                            <div class="col-md-10">
+                                                <a data-img={{ img }} data-sup=".sup-gal-{{ loop.index }}" data-link="{{ path('suppr_gallery_img',{'id_qq': qouiqui.id }) }}" class="list-group-item list-group-item-success DeleteIMG">
+                                                    <span class="badge alert-success pull-right">Supprimer</span>{{ img2[0] }}
+                                                </a>
+                                            </div>
+                                        </div>
+
+                                    {% endfor %}
+
+
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+                    <button type="submit" class="btn btn-default " data-target="modifier" data-selector="upload_img_to_gallery">
+                        enregistrer
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+{% endif %}
+<section id="gallery-section" class="gallery-section">
+    <div class="auto-container">
+        {% if connected %}
+            <button class="theme-btn btn-style-one pull-right" style="z-index:99" data-toggle="modal" data-target="#Ajouter_gallery">
+                ajouter des images Galleris
+            </button>
+        {% endif %}
+        <div class="sec-title">
+            <h2>Photo <span class="theme_color">Gallery</span></h2>
+            <div class="separator small-separator"></div>
+
+        </div>
+        <div class="row clearfix">
+            {% for img in img_gallery %}
+                {% if loop.index < 7 %}
+                    {% set img2 = img|split('-') %}
+                    <!--Default Gallery Item-->
+                    <div class="default-gallery-item col-md-4 col-sm-6 col-xs-12">
+                        <div class="inner-box">
+                            <div class="image-box">
+                                <img src="{{ asset('/uploads/image/') }}{{ iduser }}/{{ qouiqui.id }}/gallery/{{ img }}" alt="">
+                            </div>
+                            <!--Overlay Box-->
+                            <div class="overlay-box">
+                                <div class="overlay-inner">
+                                    <div class="content">
+                                        <h3><a href="gallery-single.html" title="{{ img2[0] }}">{{ img2[0] }}</a></h3>
+                                        <a href="{{ asset('/uploads/image/') }}{{ iduser }}/{{ qouiqui.id }}/gallery/{{ img }}" class="lightbox-image option-btn" title="{{ img2[0] }}" data-fancybox-group="example-gallery"><span class="fa fa-search"></span></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+                {% if loop.index > 6 %}
+                    {% set img2 = img|split('-') %}
+                    <!--Default Gallery Item-->
+                    <div class="default-gallery-item col-md-4 col-sm-6 col-xs-12 hidden">
+                        <div class="inner-box">
+                            <div class="image-box">
+                                <img src="{{ asset('/uploads/image/') }}{{ iduser }}/{{ qouiqui.id }}/gallery/{{ img }}" alt="">
+                            </div>
+                            <!--Overlay Box-->
+                            <div class="overlay-box">
+                                <div class="overlay-inner">
+                                    <div class="content">
+                                        <h3><a href="gallery-single.html" title="{{ img2[0] }}">{{ img2[0] }}</a></h3>
+                                        <a href="{{ asset('/uploads/image/') }}{{ iduser }}/{{ qouiqui.id }}/gallery/{{ img }}" class="lightbox-image option-btn" title="{{ img2[0] }}" data-fancybox-group="example-gallery"><span class="fa fa-search"></span></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+            {% endfor %}
+            <!--Default Gallery Item-->
+        </div>
+
+        <br>
+
+    </div>
+</section>
+<style>
+
+    .form-inline .input-group {
+        width: 100%;
+    }
+    .default-gallery-item .inner-box {
+        max-height: 150px;
+    }
+
+    .image-preview-input input[type=file] {
+        position: absolute;
+        top: 0;
+        right: 0;
+        margin: 0;
+        padding: 0;
+        font-size: 20px;
+        cursor: pointer;
+        opacity: 0;
+    }
+</style>

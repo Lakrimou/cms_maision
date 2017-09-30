@@ -1,0 +1,388 @@
+<script>
+    var lastID = '0000';
+    $('#modalGererAnnonces').on('click', '.btnEditAnnonce', function (e) {
+        var $idAnn = $(this).attr('data-id');
+        $url = $('#modif_ann').attr('action').replace('0000', $idAnn);
+        $url = $('#modif_ann').attr('action').replace(lastID, $idAnn);
+        $('#modif_ann').attr('action', $url);
+
+
+        $adresse = $(this).attr('data-adresse');
+        geoLat = $(this).attr('data-geoLat');
+        geoLong = $(this).attr('data-geoLong');
+        statu = $(this).attr('data-statu');
+        cuisineEquipee = $(this).attr('data-cuisineEquipee');
+        sallon = $(this).attr('data-sallon');
+        suits = $(this).attr('data-suits');
+        salleDeBain = $(this).attr('data-salleDeBain');
+        ascenseur = $(this).attr('data-ascenseur');
+        archive = $(this).attr('data-archive');
+        prix = $(this).attr('data-prix');
+        prefix = $(this).attr('data-prefix');
+        titre = $(this).attr('data-titre');
+        details = $(this).attr('data-details');
+        qouiqui = $(this).attr('data-qouiqui');
+        equipment = $(this).attr('data-equipment');
+
+
+        $('#modifierAnnonce  [name="adminbundle_immobiliair[titre]"]').val(titre);
+        $('#modifierAnnonce  [name="adminbundle_immobiliair[prix]"]').val(prix);
+        CKEDITOR.instances['editAnnonceDetails'].setData(details);
+
+        $('#modifierAnnonce [name="adminbundle_immobiliair[statu]"] option[value="' + statu + '"]').prop('selected', true);
+        $('#modifierAnnonce [name="adminbundle_immobiliair[suits]"] option[value="' + suits + '"]').prop('selected', true);
+        $('#modifierAnnonce [name="adminbundle_immobiliair[ascenseur]"] option[value="' + ascenseur + '"]').prop('selected', true);
+        $('#modifierAnnonce [name="adminbundle_immobiliair[cuisineEquipee]"] option[value="' + cuisineEquipee + '"]').prop('selected', true);
+        $('#modifierAnnonce [name="adminbundle_immobiliair[sallon]"] option[value="' + sallon + '"]').prop('selected', true);
+        $('#modifierAnnonce [name="adminbundle_immobiliair[salleDeBain]"] option[value="' + salleDeBain + '"]').prop('selected', true);
+
+
+        equipment = $.parseJSON(equipment);
+        $.each(equipment, function (k, v) {
+            $('#modifierAnnonce [name="adminbundle_immobiliair[equipment][]"] option[value="' + v + '"]').prop('selected', true);
+        })
+        lastID = $idAnn;
+    });
+
+
+    $(".carousel [data-slide='prev']").click(function () {
+        var idCarousel = $(this).attr('data-id-carousel');
+
+        console.log(idCarousel);
+        $(idCarousel).carousel('prev');
+    })
+
+    $(".carousel [data-slide='next']").click(function () {
+        var idCarousel = $(this).attr('data-id-carousel');
+        $(idCarousel).carousel('next');
+    });
+
+
+    /* $('.btn_fill').click(function () {
+     keyword = 'vid';
+     offre = 'vid';
+     propriete = 'vid';
+
+     keyword = $('#keyword').val();
+     offre = $('#offre').val();
+     //        propriete = $('#propriete').val();
+     propriete = 'Test';
+
+
+     rechercheAnnonceImmo(keyword, offre, propriete)
+
+
+     }) */
+
+
+    $("#submitFiltAnnonce").click(function () {
+
+        data = $('#filtriz').serialize();
+        $.post('{{ path('filtre_annonce') }}', data, function (data) {
+
+            objet = JSON.parse(data);
+
+            $(objet).each(function (k, v) {
+
+                srcImg = $('#annonce-item-' + v.id + ' img:first').attr('src');
+
+                console.log(srcImg);
+
+                Appanddiv = '<div class="col-md-4 col-sm-4 col-xs-12">' +
+                    '<div class="property_item heading_space ' + v.id + '" data-item=>' +
+                    '<div class="image">' +
+                    '<div class="center-cropped col-sm-4" style="background-image: url(' + srcImg + ');"></div>' +
+                    '<div class="overlay">' +
+                    '<div class="centered"><a class="link_arrow white_border" data-toggle="modal" data-target="#annonce' + v.id + '">Voir plus</a></div>' +
+                    '</div>' +
+                    '<div class="price"><span class="tag">' + v.statu[0].toUpperCase() + v.statu.substr(1) + '</span></div>' +
+                    '</div>' +
+                    '<div class="proerty_content">' +
+                    '<div class="proerty_text">' +
+                    '<h3><a data-toggle="modal" data-target="#annonce' + v.id + '">' + v.titre[0].toUpperCase() + v.titre.substr(1) + '</a></h3>' +
+                    '<p><strong>' + v.prix + 'DT</strong></p>' +
+                    '</div>' +
+                    '<div class="favroute clearfix">' +
+                    '<p class="pull-left" data-toggle="modal" data-target="#annonce' + v.id + '"><i class="fa fa-eye fa-2x" style="font-size: 17px;"></i> <strong style="font-size: 13px; margin-left: 2px; margin-top: -27px!important;">Voir plus</strong></p>' +
+                    '<ul class="pull-right">' +
+                    ' <li><a data-toggle="modal" data-target="#annonce' + v.id + '"><i class="fa fa-eye fa-2x" style="font-size: 24px;"></i></a></li>' +
+                    '<li><a href="#"><i class="icon-like"></i></a></li>' +
+                    '</ul>' +
+                    '</div>' +
+                    '</div>' +
+                    '</div>' +
+                    '</div>';
+
+                $('#list-anonce').html(Appanddiv);
+
+            });
+
+
+//            console.log(objet);
+
+        });
+
+    });
+
+    $(document).ready(function () {
+
+        $.post('{{ path('ListJson_annonce',{'id': qouiqui.id }) }}', function (data) {
+
+            data = to__OBJ(data);
+            $('#list-anonce').html("");
+            $(data).each(function (k, v) {
+                srcImg = $('#annonce-item-' + v.id + ' img:first').attr('src');
+                Appanddiv = '<div class="col-md-4 col-sm-4 col-xs-12">' +
+                    '<div class="property_item heading_space ' + v.id + '">' +
+
+                    '<div class="image">' +
+                    '<div class="center-cropped col-sm-4" style="background-image: url(' + srcImg + ');"></div>' +
+                    '<div class="overlay">' +
+                    '<div class="centered"><a class="link_arrow white_border" data-toggle="modal" data-target="#annonce' + v.id + '">Voir plus</a></div>' +
+                    '</div>' +
+                    '<div class="price"><span class="tag">' + v.statu[0].toUpperCase() + v.statu.substr(1) + '</span></div>' +
+                    '</div>' +
+                    '<div class="proerty_content">' +
+                    '<div class="proerty_text">' +
+                    '<h3><a data-toggle="modal" data-target="#annonce' + v.id + '">' + v.titre[0].toUpperCase() + v.titre.substr(1) + '</a></h3>' +
+                    '<p><strong>' + v.prix + 'DT</strong></p>' +
+                    '</div>' +
+                    '<div class="favroute clearfix">' +
+                    '<p class="pull-left" data-toggle="modal" data-target="#annonce' + v.id + '"><i class="fa fa-eye fa-2x" style="font-size: 17px;"></i> <strong style="font-size: 13px; margin-left: 2px; margin-top: -27px!important;">Voir plus</strong></p>' +
+                    '<ul class="pull-right">' +
+                    ' <li><a data-toggle="modal" data-target="#annonce' + v.id + '"><i class="fa fa-eye fa-2x" style="font-size: 24px;"></i></a></li>' +
+                    '<li><a href="#"><i class="icon-like"></i></a></li>' +
+                    '</ul>' +
+                    '</div>' +
+                    '</div>' +
+                    '</div>' +
+                    '</div>';
+
+
+                $('#list-anonce').append(Appanddiv);
+
+
+            });
+        });
+
+    });
+
+    nb = 1;
+    $('.load-more-annonce').click(function () {
+
+
+        id ={{ qouiqui.id }};
+        idp ={{ qouiqui.user.id }}
+
+
+            $.post('/module/immo/ListeJson/annonceLoadMore/' + nb + '/' + id, function (data) {
+
+                data = to__OBJ(data);
+
+                console.log(data)
+                if (data.length > 0) {
+                    $(data).each(function (k, v) {
+                        Appanddiv = '<div class="col-md-4 col-sm-4 col-xs-12">' +
+                            '<div class="property_item heading_space ' + v.id + '">' +
+
+                            '<div class="image">' +
+                            '<div class="center-cropped col-sm-4" style="background-image: url(' + srcImg + ');"></div>' +
+                            '<div class="overlay">' +
+                            '<div class="centered"><a class="link_arrow white_border" data-toggle="modal" data-target="#annonce' + v.id + '">Voir plus</a></div>' +
+                            '</div>' +
+                            '<div class="price"><span class="tag">' + v.statu[0].toUpperCase() + v.statu.substr(1) + '</span></div>' +
+                            '</div>' +
+                            '<div class="proerty_content">' +
+                            '<div class="proerty_text">' +
+                            '<h3><a data-toggle="modal" data-target="#annonce' + v.id + '">' + v.titre[0].toUpperCase() + v.titre.substr(1) + '</a></h3>' +
+                            '<p><strong>' + v.prix + 'DT</strong></p>' +
+                            '</div>' +
+                            '<div class="favroute clearfix">' +
+                            '<p class="pull-left" data-toggle="modal" data-target="#annonce' + v.id + '"><i class="fa fa-eye fa-2x" style="font-size: 17px;"></i> <strong style="font-size: 13px; margin-left: 2px; margin-top: -27px!important;">Voir plus</strong></p>' +
+                            '<ul class="pull-right">' +
+                            ' <li><a data-toggle="modal" data-target="#annonce' + v.id + '"><i class="fa fa-eye fa-2x" style="font-size: 24px;"></i></a></li>' +
+                            '<li><a href="#"><i class="icon-like"></i></a></li>' +
+                            '</ul>' +
+                            '</div>' +
+                            '</div>' +
+                            '</div>' +
+                            '</div>';
+
+                        $(Appanddiv).appendTo('#list-anonce').hide().fadeIn('slow');
+
+                    });
+                    nb += 1;
+                    var offset = $('.property_item :last').offset();
+                    $('html body').animate({scrollTop: offset.top - 600}, 1500);
+                }
+
+                if (data.length < 4) {
+
+//                    $('.load-more-annonce').hide();
+
+                }
+
+                $('.load-less-annonce').show();
+
+            });
+
+    });
+
+    $('.load-less-annonce').click(function () {
+
+        data = $('.property_item').parent();
+
+        for (i = (data.length - 1); i > (data.length - 4); i--) {
+            $(data[i]).animate({
+                opacity: 0,
+            }, 2000, function () {
+                $(this).remove();
+            });
+        }
+        nb = nb - 1;
+    });
+
+
+    function to__OBJ(data) {
+        if ((typeof data) == 'string') {
+            data = data.replace(/\\/g, '\\');
+            if ((typeof data) == 'string') {
+                data = data.replace(/(\r\n|\n|\r)/g, '<br/>').toString();
+                data = JSON.parse(data);
+            }
+            return data;
+        }
+    }
+
+
+    /*
+     function rechercheAnnonceImmo(keywocrd, offre, propriete) {
+     function aficher123() {
+
+
+     console.log(keywocrd, offre, propriete)
+     $(".property_item ").each(function (k, v) {
+
+
+     keylength = function keyTrue() {
+     console.log("key: " + $(".property_item .proerty_text :contains('" + keywocrd + "')").length)
+     return keylength = $(".property_item .proerty_text :contains('" + keywocrd + "')").length;
+     }
+
+     offrelength = function offreTrue() {
+     console.log("offre: " + $(".property_item  .image .tag:contains('" + offre + "')").length)
+     return offrelength = $(".property_item  .image .tag:contains('" + offre + "')").length;
+     }
+
+     proplength = function propTrue() {
+     console.log("prop : " + $(".property_item .proerty_text :contains('" + propriete + "')").length)
+     return proplength = $(".property_item  .proerty_text :contains('" + propriete + "')").length;
+     }
+
+     $.when(keylength()).then(offrelength()).then(proplength()).then(filtreAnnonce(v));
+     })
+
+
+     function filtreAnnonce(selector) {
+     console.log(proplength, offrelength, keylength)
+     console.log(proplength > 0 && offrelength > 0 && keylength > 0);
+     if (proplength > 0 && offrelength > 0 && keylength > 0) {
+     $(selector).show('fast');
+     }
+     }
+
+
+     }
+
+     x = function test() {
+     $('.property_item').hide('fast')
+     x = 'done';
+     return x
+     }
+     $.when(x()).then(aficher123())
+
+     }
+     */
+
+    //            ==========================================================
+
+
+    /*
+     function testkeywocrd() {
+     if (keywocrd && keywocrd.toString().length > 3){
+     $(".property_item :contains('"+keywocrd+"')").each(function () {
+     $(this).parent().show('slow');
+     });
+     console.log(keywocrd.length);
+     }
+     alert('test key')
+     }
+
+     console.log('affichage :'+ keywocrd ,offre ,propriete);
+
+
+     function testoffre() {
+     if (offre && offre.toString().length > 3){
+
+
+
+     switch (offre) {
+     case 'Vendre':
+     $(".property_item .image .tag:contains('Louer')").each(function () {
+     $(this).parent().parent().parent().hide('fast');
+     });
+     $(".property_item .image .tag:contains('Vendre')").each(function () {
+     $(this).parent().parent().parent().show('fast');
+     });
+     return true;
+     case 'Louer':
+     $(".property_item .image .tag:contains('Vendre')").each(function () {
+     $(this).parent().parent().parent().hide('fast');
+     });
+     $(".property_item .image .tag:contains('Louer')").each(function () {
+     $(this).parent().parent().parent().show('fast');
+     });
+     return true;
+     }
+
+
+
+
+
+     if ( propriete && propriete.toString().length > 3){
+     $(".property_item :contains('"+propriete+"')").each(function () {
+     $(this).parent().show('slow');
+     });
+     console.log('propriete');
+     }
+     //                $(".property_item .image .tag:contains('"+offre+"')").each(function () {
+     //                    $(this).parent().parent().parent().show('slow');
+     //                });
+     alert('test offre')
+     }
+     }
+
+     $.when( testkeywocrd() ).then(testoffre());
+
+     }
+
+
+
+     x = function test() {
+     $('.property_item').hide('fast')
+     x= 'done';
+     return x
+     }
+     $.when( x() ).then(aficher123())
+     }
+
+
+     function rechercheAvanceeAnnonceImmo(prix, Sallon, SalleDeBain, Cuisine) {
+
+     property_item
+     $(".sofien :contains('John')").css("text-decoration", "underline");
+
+     }
+     */
+
+</script>

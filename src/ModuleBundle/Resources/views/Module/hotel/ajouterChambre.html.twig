@@ -1,0 +1,131 @@
+<!--     modal d'ajout des chambre -->
+
+<!-- Large modal -->
+
+
+<div class="modal fade ajout-chambre-modal-lg" tabindex="-1" role="dialog"
+     aria-labelledby="myLargeModalLabel">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Ajouter une chambre</h4>
+            </div>
+            <div class="modal-body">
+
+                <div class="col-md-12">
+                    <div class="well-block">
+
+                        <form action="{{ path('hotel_index', {'id_qq': qouiqui.id}) }}"  method="POST"
+                              name="chambre-form" enctype="multipart/form-data" id="chambre-form">
+                            <!-- Form start -->
+                            <div class="row">
+
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="control-label" for="name">Type de chambre</label>
+                                        <select id="time" name="chambre[nombre]" class="form-control"
+                                                required>
+                                            <option value="Chambre simple">Chambre simple</option>
+                                            <option value="Chambre double">Chambre double</option>
+                                            <option value="Chambre triple">Chambre triple</option>
+                                            <option value="Chambre familiale">Chambre familiale</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="control-label" for="name">Prix</label>
+                                        <input type="number" name="chambre[prix]" class="form-control"
+                                                required/>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="control-label" for="name">Nombre de lits</label>
+                                        <select name="chambre[nombreLit]" class="form-control" required>
+                                            <option>1 Lit</option>
+                                            <option>2 Lits</option>
+                                            <option>3 Lits</option>
+                                            <option>4 LIts</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <!-- Text input-->
+
+                                <!-- Text input-->
+                                <!-- Text area -->
+                                <!-- Textarea -->
+                                <div class="form-group">
+                                    <label class="col-md-12 control-label"
+                                           for="keyinformation">Description</label>
+                                    <div class="col-md-12">
+                                        <textarea name="chambre[editor1]" class="ckeditor"></textarea>
+
+                                    </div>
+                                </div>
+                                <!-- Text area -->
+
+
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="control-label" for="appointmentfor">Les
+                                            services</label>
+                                        <select id="appointmentfor" name="chambre[chambreS][]"
+                                                class="select-services "
+                                                multiple="multiple" required style="width:100%">
+                                            <option value="Ordinateur">Ordinateur</option>
+                                            <option value="Superbe vue">Superbe vue</option>
+                                            <option value="WIFI">WIFI</option>
+                                            <option value="TV à écran plat">TV à écran plat</option>
+                                            <option value="Climatisation">Climatisation</option>
+                                            <option value="Insonoriser">Insonoriser</option>
+                                            <option value="Petit déjeuner inclus">Petit déjeuner
+                                                inclus
+                                            </option>
+                                            <option value="Service de chambre">Service de chambre
+                                            </option>
+                                            <option value="Ramassage de l'aéroport">Ramassage de
+                                                l'aéroport
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12 add-room ">
+                                    <div class="form-group">
+                                        <label class="btn-bs-file theme-btn btn-style-two">
+                                            Cliquer ici pour ajouter une photo
+                                            <input type="file" id="imgUpload"
+                                                   class="form-control inline-block uploadImage"
+                                                   name="chambre[image-chambre]" required/>
+                                        </label>
+                                        <img id="imagUp" src="#" alt="image upload" class="upImg"
+                                        />
+                                    </div>
+                                </div>
+                                <!-- Button -->
+
+                            </div>
+                            <button type="submit" class="theme-btn btn-style-two envoyerUpload"
+                                    id="ajouter-chambres" >
+                                Ajouter
+                            </button>
+                            <button type="button" class="theme-btn btn-style-one pull-right " data-dismiss="modal">Fermer
+                            </button>
+                        </form>
+                        <!-- form end -->
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--     modal d'ajout des chambre -->

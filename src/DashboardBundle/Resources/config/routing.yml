@@ -1,0 +1,43 @@
+dashboard_homepage:
+    path:     /
+    defaults: { _controller: DashboardBundle:DashbordProfile:index }
+dashboard_edit:
+    path:     /{id}/edit
+    defaults: { _controller: DashboardBundle:Default:edit }
+    methods:  [GET, POST]
+dashboard_ajout:
+    path:     /ajout
+    defaults: { _controller: DashboardBundle:Default:ajout }
+dashboard_liste:
+    path:     /liste
+    defaults: { _controller: DashboardBundle:Default:liste }
+geoupdate:
+      path:     /geoupdate
+      defaults: { _controller: DashboardBundle:Default:geoUpdate }
+dashboard_events:
+    resource: "@DashboardBundle/Resources/config/routing/events.yml"
+    prefix:   /events
+
+dashboard_profile_edit:
+    resource: "@DashboardBundle/Resources/config/routing/profile.yml"
+    prefix:   /profile
+
+dashboard_booking:
+    resource: "@DashboardBundle/Resources/config/routing/booking.yml"
+    prefix:   /booking
+
+dashboard_automobile:
+        resource: "@DashboardBundle/Resources/config/routing/automobile.yml"
+        prefix:   /{idQq}/automobile
+
+dashboard_get_slug:
+        path:     /slug
+        defaults: { _controller: DashboardBundle:Default:getslug }
+        methods: [GET,POST]
+
+dashboard_ca:
+        resource: "@DashboardBundle/Resources/config/routing/immobilier.yml"
+        prefix:   /{id}/maher
+
+
+

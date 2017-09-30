@@ -1,0 +1,173 @@
+
+
+{% if  connected %}
+    <div class="pull-right margin-bott" style="margin-right: 13px;margin-top: 6px;">
+
+
+
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#galleryModal"
+        >modifier
+
+        </button>
+    </div>
+{% endif %}
+ {%if img_gallery%}
+<section class="page-section sec_gallery" id="gallery">
+    <div class="container">
+        <div class="row" style="margin-right: 0;margin-left: 0;">
+
+        <h3 class="section-title bottom-line font-alt">Notre Gallerie</h3>
+        <div class="sep-lane-titre mt-50"><span><img src="{{ asset('module/spa/images/lines/img-line-0.png') }}"
+                                                     data-at2x="{{ asset('module/spa/images/lines/img-line-0@2x.png') }}"
+                                                     alt></span>
+        </div>
+
+
+        {% for img in img_gallery %}
+
+
+
+
+            <div class="col-xs-6 col-md-4 nomarge"  data-div="{{ img }}">
+                <div class=" remove-div events_details image-box" >
+
+
+                    <a href="/uploads/image/{{ iduser }}/{{ qouiqui.id}}/gallery/{{ img }}" class="lightbox mfp-image" >
+                        <div class="portfolio-media view view-first">
+
+                                <img src="/uploads/image/{{ iduser }}/{{ qouiqui.id}}/gallery/{{ img }}"  alt>
+                            <div class="mask">
+
+                            </div>
+
+                        </div>
+                    </a>
+
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+        <!-- work filter -->
+
+
+
+
+
+</div>
+    <div class="particle elem1 anim-delay1 "></div>
+    <div class="particle elem2 anim-delay5"></div>
+    <div class="particle elem3 anim-delay3"></div>
+    <div class="particle elem4 anim-delay8"></div>
+    <div class="particle elem5 anim-delay9"></div>
+    <div class="particle elem6 anim-delay2"></div>
+    <div class="particle elem7 anim-delay4"></div>
+    <div class="particle elem8 anim-delay3"></div>
+    <div class="particle elem9 anim-delay10"></div>
+    <div class="particle elem8 anim-delay11"></div>
+    <div class="particle elem6 anim-delay12"></div>
+    <div class="particle elem1 anim-delay14"></div>
+    <div class="particle elem13 anim-delay16"></div>
+    <div class="particle elem17 anim-delay18"></div>
+    <div class="particle elem2 anim-delay6"></div>
+    <div class="particle elem16 anim-delay9"></div>
+    <div class="particle elem8 anim-delay3"></div>
+    <div class="particle elem9 anim-delay10"></div>
+    <div class="particle elem18 anim-delay11"></div>
+    <div class="particle elem11 anim-delay12"></div>
+    <div class="particle elem12 anim-delay14"></div>
+    <div class="particle elem13 anim-delay16"></div>
+    <div class="particle elem14 anim-delay18"></div>
+    <div class="particle elem15 anim-delay6"></div>
+    <div class="particle elem16 anim-delay9"></div>
+    <div class="particle elem17 anim-delay7"></div>
+    <div class="particle elem18 anim-delay6"></div>
+    <div class="particle elem19 anim-delay3"></div>
+
+</section>
+ {% endif %}
+
+{#===========================gallery modal============================#}
+
+
+{########modaaaaaaaaaal#}
+<div class="modal fade" id="galleryModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title"></h4>
+            </div>
+            <div class="modal-body">
+
+                <div class="row norow">
+                    <form action="{{ path('module_spa_gallery',{'id_qq': qouiqui.id }) }}" class="dropzone" id="my-gallery"></form>
+                </div>
+                <div class="row norow">
+
+                            {% for img in img_gallery %}
+
+
+                    <div class="col-md-6 " data-div="{{ img }}">
+                        <div class="thumbnail">
+                            <!-- Single button -->
+                            <div class="btn-group pull-right " style="position: absolute;right: 20px;">
+                                <button type="button" class="btn btn-default dropdown-toggle"
+                                        data-toggle="dropdown"
+                                        aria-haspopup="true" aria-expanded="false">
+                                    <i class="fa fa-pencil" aria-hidden="true"></i> <span
+                                            class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu">
+
+                                    <li><a href="#" class="remove-gallery"
+                                           data-name-remove="{{ img }}"
+                                           data-id="{{ qouiqui.id }}">supprimer</a>
+                                    </li>
+                                </ul>
+                            </div>
+
+                                <img src="/uploads/image/{{ iduser }}/{{ qouiqui.id }}/gallery/{{ img }}">
+
+                        </div>
+                    </div>
+                    {% endfor %}
+
+                </div>
+
+                {#<input type="submit" value="ok">#}
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+
+            </div>
+            {#</form>#}
+
+
+        </div>
+    </div>
+</div>
+<style>
+@media(max-width:600px){
+    .nomarge{
+        margin-left: -31px;
+    }
+}
+    .remove-div.events_details.image-box {
+
+        width: 300px;
+        height: 200px;
+        overflow: hidden;
+        margin-bottom: 20px;
+    }
+
+    .remove-div.events_details.image-box img {
+        height: 200px!important;
+        max-width: initial!important;
+        max-height: initial!important;
+    }
+
+</style>

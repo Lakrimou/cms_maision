@@ -1,0 +1,76 @@
+
+
+
+<style>
+
+    /* titre*/
+
+    h2, .info-box li .icon, .sec-title h2 strong, .sec-title h2, .contact-section h2 {
+        color: {% if theme.color.titre is defined %}{{ theme.color.titre }};
+    {% endif %}
+    }
+
+    /*sous titre*/
+
+    h4 {
+        color: {% if theme.color.Soustitre is defined %}{{ theme.color.Soustitre }};
+    {% endif %}
+    }
+
+    /* boutton*/
+
+    .theme-btn btn-style-one, button, .theme-btn {
+
+        background: {% if theme.color.bouton is defined %}{{ theme.color.bouton }};
+    {% endif %}
+    }
+
+    .text, p {
+
+        color: {% if theme.color.Text is defined  %}{{ theme.color.Text }};
+    {% endif %}
+    }
+
+    /* background */
+
+    .header-style-one .logo:before, .btn-style-one, .theme_bg_color, .modal-header ,.btn-primary , div#ite{
+
+        background: {% if theme.color.bouton is defined %}{{ theme.color.bouton }};
+    {% endif %}
+
+    }
+
+    section#about {
+        {% if motif and (theme.color.background.motif.about is not empty) %}background-image: {{ theme.color.background.motif.about| join('","') | raw }}!important;{% endif %};
+
+    {% if theme.color.background.about is defined %} background: {{ theme.color.background.about }};
+    {% endif %};
+    }
+
+    section#Offres {
+        {% if theme.color.background.annone is defined %}background: {{ theme.color.background.annone }}{% endif %};
+
+        {% if motif and (theme.color.background.motif.annone is not empty) %}background-image: {{ theme.color.background.motif.annone| join('","') | raw }}!important;{% endif %}
+
+    }
+
+    section#portfolio {
+    {% if theme.color.background.gallery is defined %} background: {{ theme.color.background.gallery }};
+    {% endif %}
+
+    }
+
+    section#contact {
+    {% if theme.color.background.contact is defined %} background: {{ theme.color.background.contact }};
+    {% endif %}
+    }
+    {% if motif and (theme.color.background.motif.gallery is not empty) %}background-image:{{ theme.color.background.motif.gallery| join('","') | raw }}!important;{% endif %}
+    /*}*/
+
+
+    .modal-content {
+        border-color: {% if theme.color.Soustitre is defined %}{{ theme.color.Soustitre }};
+    {% endif %};
+    }
+
+</style>

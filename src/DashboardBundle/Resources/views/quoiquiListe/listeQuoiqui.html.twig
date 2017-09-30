@@ -1,0 +1,73 @@
+{% extends 'dashboardLayaout/dashboardLayout.html.twig' %}
+
+{% block body %}
+    <div class="col-sm-9 col-md-12">
+        <span class="titre-spain">Liste des Quoiqui!</span>
+        <table id="quoiquiUsers" class="display" cellspacing="0" width="100%">
+
+
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Adress</th>
+                <th>Téléphone</th>
+                <th>Catégorie</th>
+                <th>Module</th>
+                <th>Manipuler</th>
+                <th>Liste des évenement</th>
+                <th>Ajouter évenement</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for q in quoiqui %}
+                <tr>
+                    <td>{{ q.firstName }} {{ q.lastName }}</td>
+                    <td>{{ q.address1 }}</td>
+                    <td>{{ q.phone }}</td>
+                    {% for ng in q.ngns %}
+
+                        <td>
+                             {{ ng.category.libelle }}
+                        </td>
+
+                        {% if ng.category.isModule==1 %}
+                        <td>
+
+                            <a href="{{ path('dashboard_automobile_liste',{'idQq': q.id}) }}"
+                               class="btn btn-warning">Liste {{ ng.category.libelle }}</a>
+
+                            </td>
+                        {% else %}
+                            <td> </td>
+                        {% endif %}
+
+                        <td>
+                            <a href="{{ path('dashboard_edit', { 'id': ng.id }) }}" class="btn btn-success">Edit
+                                Quoiqui</a>
+                        </td>
+                    {% endfor %}
+                    <td>
+                        <a href="{{ path('dashboard_event_afficher', {'qq_id': q.id}) }}" class="btn btn-danger">Liste des évenements!</a>
+                    </td>
+                    <td>
+                        <a href="{{ path('dashboard_event_ajout', {'qq_id': q.id}) }}" class="btn btn-info">Ajouter évenements!</a>
+                    </td>
+
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+
+{% endblock %}
+    {% block javascripts %}
+        {{ parent() }}
+        <script>
+            $(document).ready(function () {
+                $('#quoiquiUsers').DataTable();
+            });
+        </script>
+    {% endblock %}

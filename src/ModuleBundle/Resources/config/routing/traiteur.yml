@@ -1,0 +1,10 @@
+traiteur_supp:
+    path: /{id}/supp/
+    defaults: { _controller: ModuleBundle:Traiteur:delete }
+    methods: GET
+traiteur_add:
+    path: /add_traiteur
+    defaults: { _controller: ModuleBundle:Traiteur:new }
+traiteur_modif:
+    path: /{id}/edit/
+    defaults: { _controller: ModuleBundle:Traiteur:edit }

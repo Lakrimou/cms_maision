@@ -1,0 +1,370 @@
+{% if  connected %}
+    <div class="pull-right margin-bott" style="margin-bottom: 6px;margin-right: 18px">
+        {% if  spaEvent(module) is not empty %}
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#event_list"
+        >Modifier
+
+        </button>
+        {% else %}
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#event_list"
+            >Ajouter event
+
+            </button>
+        {% endif %}
+    </div>
+{% endif %}
+ {% if spaEvent(module) %}
+<div class="sep-lane alt-3"><span></span></div>
+<section class="page-section  bg_sec_offre " id="event">
+    <div class="container align-center">
+
+
+        <h3 class="section-title bottom-line long font-alt"> Nos Offres</h3>
+        <div class="sep-lane-titre mt-50"><span><img src="{{ asset('module/spa/images/lines/img-line-0.png') }}"
+                                                     data-at2x="{{ asset('module/spa/images/lines/img-line-0@2x.png') }}"
+                                                     alt></span>
+        </div>
+        <div class="col-md-10 col-md-offset-1 mb-30">
+            <p></p>
+        </div>
+
+        <div class="row mb-30">
+
+
+
+                <!-- shop carousel -->
+
+                <div class="slider-1 dots-alt">
+
+                {% for mod in spaEvent(module) %}
+
+                        <div class="col-lg-3 col-md-6 mb-lg-30">
+                            <div class="gift-item hover-alt alt-3 font-alt">
+                                <div class="gift-wrapper">
+                                    <a href="#event">
+                                        <div class="gift-media">
+                                            <img src="uploads/image/{{ iduser }}/{{ qouiqui.id }}/event/{{ mod.id~'.jpg' }}"
+                                                 class="img-cercle-event"
+                                                 data-at2x=" {{ asset('module/spa/images/gifts/img-9@2x.jpg') }}" alt>
+                                            <div class="gift-inside">
+                                                <div class="gift-inside-1">
+                                                    {% if mod.prix %}
+                                                        <div class="gift-price prix_color">
+                                                            {{ mod.prix }}%
+                                                        </div>
+                                                    {% else %}
+                                                        <div class="gift-price">
+
+                                                        </div>
+                                                    {% endif %}
+                                                    <div class="gift-inside-title">
+
+                                                    </div>
+                                                    {#<div class="img-line">#}
+                                                    {#<img src=" {{ asset('module/spa/images/lines/img-line-26.png') }}"#}
+                                                    {#data-at2x="{{ asset('module/spa/images/lines/img-line-26.png') }}"#}
+                                                    {#alt>#}
+                                                    {#</div>#}
+                                                    <span style="font-size: 15px; font-weight: bold" class="prix_color">  {{ mod.nom }}</span>
+                                                </div>
+                                                <div class="gift-inside-2 btn_offre  ">
+
+                                                    {{ mod.data }}
+                                                </div>
+                                                <div class="gift-inside-2-white"></div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                {% endfor %}
+
+                </div>
+
+            <!-- /gift items -->
+
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+    <div class="particle elem1 anim-delay1 "></div>
+    <div class="particle elem2 anim-delay5"></div>
+    <div class="particle elem3 anim-delay3"></div>
+    <div class="particle elem4 anim-delay8"></div>
+    <div class="particle elem5 anim-delay9"></div>
+    <div class="particle elem6 anim-delay2"></div>
+    <div class="particle elem7 anim-delay4"></div>
+    <div class="particle elem8 anim-delay3"></div>
+    <div class="particle elem9 anim-delay10"></div>
+    <div class="particle elem8 anim-delay11"></div>
+    <div class="particle elem6 anim-delay12"></div>
+    <div class="particle elem1 anim-delay14"></div>
+    <div class="particle elem13 anim-delay16"></div>
+    <div class="particle elem17 anim-delay18"></div>
+    <div class="particle elem2 anim-delay6"></div>
+    <div class="particle elem16 anim-delay9"></div>
+    <div class="particle elem8 anim-delay3"></div>
+    <div class="particle elem9 anim-delay10"></div>
+    <div class="particle elem18 anim-delay11"></div>
+    <div class="particle elem11 anim-delay12"></div>
+    <div class="particle elem12 anim-delay14"></div>
+    <div class="particle elem13 anim-delay16"></div>
+    <div class="particle elem14 anim-delay18"></div>
+    <div class="particle elem15 anim-delay6"></div>
+    <div class="particle elem16 anim-delay9"></div>
+    <div class="particle elem17 anim-delay7"></div>
+    <div class="particle elem18 anim-delay6"></div>
+    <div class="particle elem19 anim-delay3"></div>
+</section>
+
+<div class="sep-lane alt-3"><span></span></div>
+
+ {% endif %}
+<div id="event_list" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="pull-right margin-bott">
+
+                    {#<a data-toggle="modal" href="#tallModal" class="btn btn-primary">Wide, Tall Content</a>#}
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal_event"
+                    >Ajouter Nouveau Offre
+                    </button>
+                </div>
+                {#<button type="button" class="close" data-dismiss="modal">&times;</button>#}
+                <h4 class="modal-title">Liste des offes</h4>
+            </div>
+
+            <div class="modal-body">
+                <table id="table_id_event" class="display">
+                    <thead>
+                    <tr >
+                        <th>Offre</th>
+                        <th>Delais</th>
+                        <th>Prix</th>
+                        <th>modifier</th>
+                        <th>supprimer</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for mod in module %}
+                        {% if mod.section== 'event' %}
+                            <tr data-div={{ mod.id }}>
+                                <td>{{ mod.nom }}</td>
+                                <td>{{ mod.data }}</td>
+                                <td>{{ mod.prix }}</td>
+                                <td><a href="#" data-serv="{{ mod.id }}" data-id="{{ qouiqui.id }}"
+                                       class="modifier_event btn btn-success" data-toggle="modal" data-target="#edit_event "><span class="glyphicon glyphicon-edit"></span></a></td>
+                                <td><a href='{{ mod.id }}' class="service_suprim_event btn btn-danger" data-id='{{ mod.id }}'
+                                       data-toggle="modal" data-toggle="modal"
+                                       data-target="#confirm-delete-event"><span class="glyphicon glyphicon-trash"></span></a></td>
+                            </tr>
+                        {% endif %}
+                    {% endfor %}
+                    {#<tr>#}
+                    {#<td>Row 2 Data 1</td>#}
+                    {#<td>Row 2 Data 2</td>#}
+                    {#</tr>#}
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+<div id="modal_event" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Ajouter Vos Offres</h4>
+            </div>
+            <div class="modal-body">
+                <form id="ajout_event" method="POST" action="{{ path('module_spa_ajout_event') }}"
+                      enctype="multipart/form-data">
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <h4>Entrer le nom de l'Offre</h4>
+                                <input type="text" name="event" class="form-control" required="required"
+                                       value="">
+
+                            </div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <h4>Entrer le porcentage de l'offre</h4>
+                                <input type="number" name="prix" class="form-control" required="required"
+                                       value="">
+
+                            </div>
+                        </div>
+
+                        {#<div class="col-md-6">#}
+                            {#<div class="form-group">#}
+                                {#<h4>Entrer le prix précédent</h4>#}
+                                {#<input type="number" name="ppprix[]" class="form-control" required="required"#}
+                                       {#value="">#}
+
+                            {#</div>#}
+                        {#</div>#}
+                        {#<div class="col-md-6">#}
+                            {#<div class="form-group">#}
+                                {#<h4>Entrer le Nouveau prix</h4>#}
+                                {#<input type="number" name="Nprix[]" class="form-control" required="required"#}
+                                       {#value="">#}
+
+                            {#</div>#}
+                        {#</div>#}
+                        <input type="hidden" name="qq_id" value="{{ qouiqui.id }}" required>
+
+
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <h4>Description</h4>
+                                <textarea class="form-control  " name="data" required="required"
+                                          name=""></textarea>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <h4>choisisez une photo</h4>
+                                <input autocomplete="off" class="form-control  "
+                                       name="file" type="file"
+                                       placeholder="choisissez_image" data-items="8"/>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </form>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+                <button type="submit" class="btn btn-primary " data-target="modifier" data-selector="ajout_event">
+                    Ajouter
+                </button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+{##modal modifier#}
+
+<div id="edit_event" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Modifier l'offre</h4>
+            </div>
+            <div class="modal-body">
+                <form id="edit_events" method="POST" action="{{ path('module_spa_modif_event') }}"
+                      enctype="multipart/form-data">
+                    <input type="hidden" name="qq_id" value="{{ qouiqui.id }}" required>
+                    <input id="idevent" type="hidden" name="eventID" value="" required>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+
+
+                                <h4>Entrer votre offre</h4>
+                                <input id="nomevent" type="text" name="event" class="form-control"
+                                       value="">
+
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <h4>Entrer le prix</h4>
+                                <input id="prixEvent" type="text" name="prix" class="form-control"
+                                       value="">
+
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <h4> Entrer(Occasion/Delais) de l'offre </h4>
+                                <textarea id="dataEvent" class="form-control event_txtarea " name="data"
+                                ></textarea>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <h4>choisisez une photo</h4>
+                                <input autocomplete="off" class="form-control  "
+                                       name="file" type="file"
+                                       placeholder="choisissez_image" data-items="8"/>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </form>
+
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+                <button type="submit" class="btn btn-primary " data-target="modifier" data-selector="edit_events">
+                    Modifier
+                </button>
+            </div>
+        </div>
+
+    </div>
+</div>
+</div>
+
+<div class="modal fade" id="confirm-delete-event" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+
+            <div class="modal-body">
+
+                {#<form id="supp_event" method="POST" action="{{ path('module_spa_delate_event') }}">#}
+                <input type="hidden" name="supprimer" value="" class="delate">
+                <input type="hidden" name="id_qq" value="{{ qouiqui.id }}" class="">
+
+                <p>Voulez vous supprimer cette offre ?</p>
+                <p class="debug-url"></p>
+                {#</form>#}
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Annuler</button>
+
+
+                <button type="submit"  data-qq="{{ qouiqui.id }} "class="btn btn-danger supprime_events " data-target="modifier"
+                        data-selector="sup_event">
+                    Supprimer
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

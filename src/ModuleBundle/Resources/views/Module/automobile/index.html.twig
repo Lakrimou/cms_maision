@@ -1,0 +1,1340 @@
+{% set connected = false %}
+{% if app.user %}
+    {% if app.user.id == qouiqui.user.id %}
+        {% set connected = true %}
+    {% endif %}
+{% endif %}
+
+{% set horaire = jsonDecod(qouiqui.opening) %}
+
+{% set  data = jsonDecod(qouiqui.data) %}
+
+{% set motif = false %}
+{% if  theme.color.background.motif is defined%}
+    {% set motif = true %}
+{% endif %}
+
+{% set animation = false %}
+{% if theme.color.background.animation is defined %}
+    {% set animation = true %}
+{% endif %}
+{% set annonce_slider = randomAnnonce(module) %}
+
+<!DOCTYPE HTML>
+<!--[if IE 7 ]>
+<html class="ie ie7 lte9 lte8 lte7" lang="en-US"><![endif]-->
+<!--[if IE 8]>
+<html class="ie ie8 lte9 lte8" lang="en-US">    <![endif]-->
+<!--[if IE 9]>
+<html class="ie ie9 lte9" lang="en-US"><![endif]-->
+
+<html class="noIE">
+
+<!-- Mirrored from templines.rocks/html/autoimage-paralax/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 20 Jun 2017 09:01:24 GMT -->
+<!-- Added by HTTrack -->
+<meta http-equiv="content-type" content="text/html;charset=UTF-8"/><!-- /Added by HTTrack -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Vente voiture</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="theme-color" content="#84db94">
+
+    <!-- Favorite Icons -->
+    <link rel="icon" href="{{ asset('module/Automobile/image/favicon/favicon-32x32.png') }}" type="image/x-icon"/>
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="{{ asset('module/Automobile/image/favicon/favicon-144x144.png') }}">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="{{ asset('module/Automobile/image/favicon/favicon-72x72.png') }}">
+    <link rel="apple-touch-icon-precomposed" href="{{ asset('module/Automobile/image/favicon/favicon-54x54.png') }}">
+    <!-- // Favorite Icons -->
+
+    <!-- FONT  -->
+    <link href='http://fonts.googleapis.com/css?family=Play:400,700&amp;subset=latin,greek-ext,greek,latin-ext,cyrillic,cyrillic-ext' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="{{ asset('module/Automobile/font/font-awesome/css/font-awesome.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('module/Automobile/font/icomoon/style.css') }}" type="text/css" media="screen"/>
+    <link rel="stylesheet" href="{{ asset('module/Automobile/font/simple/simple-line-icons.css') }}">
+    <link rel="stylesheet" href="{{ asset('module/Automobile/font/autoicon/css/fontello.css') }}">
+
+
+    <!--  /* Chrome hack: SVG is rendered more smooth in Windozze. 100% magic, uncomment if you need it. */
+    /* Note, that will break hinting! In other OS-es font will be not as sharp as it could be */  -->
+    <link rel="stylesheet" href="{{ asset('module/Automobile/font/play/stylesheet.css') }}">
+
+    <!-- // FONT -->
+    <script src="https://use.fontawesome.com/a3bbeb32d0.js"></script>
+    <link rel="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- CSS -->
+    <link rel="stylesheet" href="{{ asset('module/Automobile/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('module/Automobile/css/bootstrap-theme.css') }}">
+    <link rel="stylesheet" href="{{ asset('module/Automobile/css/animate.css') }}">
+    <link rel="stylesheet" href="{{ asset('module/Automobile/css/isotope.css') }}">
+    <link rel="stylesheet" href="{{ asset('module/Automobile/css/prettyphoto/default.css') }}">
+    <link rel="stylesheet" href="{{ asset('module/Automobile/css/mobilemenu.css') }}">
+    <link rel="stylesheet" href="{{ asset('module/Automobile/css/theme.css') }}">
+    <link rel="stylesheet" href="{{ asset('module/Automobile/css/hover-min.css') }}">
+    <link rel="stylesheet" href="{{ asset('module/Automobile/css/responsive.css') }}">
+    <link rel="stylesheet" href="{{ asset('module/Automobile/css/innerpage.css') }}">
+    <link rel="stylesheet" href="{{ asset('module/Automobile/css/flexslider.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('module/Automobile/css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('module/Automobile/css/bootstrap-colorpicker.css') }}">
+    <link rel="stylesheet" href="{{ asset('module/Automobile/css/bootstrap-colorpicker.css.map') }}">
+    <link rel="stylesheet" href="{{ asset('module/Automobile/css/bootstrap-colorpicker.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('module/Automobile/css/bootstrap-colorpicker.min.css.map') }}">
+    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="{{ asset('module/Automobile/js/jscolor.js') }}"></script>
+
+    <!--[if IE 8]>
+
+    <script src="{{asset('module/Automobile/js/respond.min.js') }}"></script>
+    <script src="{{asset('module/Automobile/js/selectivizr-min.js') }}"></script>
+
+
+    <script src="{{ asset('module/Automobile/js/PIE.min.js') }}"></script>
+    <![endif]-->
+
+    <script src="{{ asset('module/Automobile/js/jquery.min.js') }}"></script>
+    <script src="{{ asset('module/Automobile/js/modernizr.min.js') }}"></script>
+    <script defer src="{{ asset('module/Automobile/js/jquery.flexslider.js') }}"></script>
+    <script defer src="{{ asset('module/Automobile/js/bootstrap-colorpicker.js') }}"></script>
+    <script defer src="{{ asset('module/Automobile/js/bootstrap-colorpicker.min.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-formhelpers/2.3.0/js/bootstrap-formhelpers.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-formhelpers/2.3.0/css/bootstrap-formhelpers.css">
+    <link href="{{ asset('asset-back/css/dropzone.css') }}" type="text/css" rel="stylesheet"/>
+    <script src="{{ asset('asset-back/js/dropzone.min.js') }}"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="{{ asset('module/ecommerce/js/pnotify.custom.min.js') }}"></script>
+    <link rel="stylesheet" href="{{ asset('module/ecommerce/css/pnotify.custom.min.css') }}" id="theme-stylesheet">
+    <script src="//cdn.ckeditor.com/4.6.2/standard/ckeditor.js"></script>
+    <script src="http://rendro.github.io/easy-pie-chart/javascripts/jquery.easy-pie-chart.js"></script>
+    <link href="{{ asset('module/immobiliair/css/animation.css') }}" type="text/css" rel="stylesheet"/>
+</head>
+<body class="onepage sticky-header">
+<div id="loading-mask">
+    <div class="loading-img"><img alt="img" src="{{ asset('module/Automobile/image/preloader.gif') }}"/></div>
+</div>
+<div class="top-bar">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-7 col-md-7 col-sm-7 pull-left">
+                <p>Contactez nous: {{ qouiqui.phone }} &nbsp;&nbsp; |&nbsp;&nbsp; <a href="mailto:info@delicategem.com">{{ qouiqui.mail }}</a></p>
+            </div>
+            <div class="col-lg-5 col-md-5 col-sm-5 pull-right text-right">
+
+                {% set sociaux = jsonDecod(qouiqui.sociaux) %}
+
+                <div class="social"><a href="{{ sociaux['facebook'] }}"><i class="fa fa-facebook"></i></a> <a href="{{ sociaux['twitter'] }}"><i class="fa fa-twitter"></i></a> <a href="#"><i class="fa fa-html5"></i></a> <a href="#"><i class="fa fa-flickr"></i></a> <a href="#"><i class="fa fa-vk"></i></a></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<!-- PAGE HEADER -->
+{{ include('ModuleBundle:Module:automobile/header.html.twig') }}
+<!-- //PAGE HEADER -->
+
+<!-- HOME SLIDER -->
+{{ include('ModuleBundle:Module:automobile/slider.html.twig') }}
+<!-- // HOME SLIDER -->
+<!-- ABOUT SECTION-->
+
+
+{{ include('ModuleBundle:Module:automobile/about.html.twig') }}
+<!-- // ABOUT SECTION-->
+
+<!-- Offres SECTION -->
+
+{{ include('ModuleBundle:Module:automobile/offres.html.twig') }}
+
+
+<!-- // OFFRES SECTION -->
+
+
+{{ include('ModuleBundle:Module:automobile/latestOffers.html.twig') }}
+
+
+<!-- CONTACT US SECTION -->
+{{ include('ModuleBundle:Module:automobile/contact.html.twig') }}
+<!-- // CONTACT US SECTION -->
+
+<!--Map Section-->
+
+
+<!-- PAGE FOOTER -->
+<div class="section-footer">
+    <div class="container">
+        <footer class="page-footer">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12">
+                    <div class="copyright"> © 2017 Webmaster. All Rights Reserved.</div>
+                    <a class="go-top"><i class="fa fa-angle-double-up"></i></a></div>
+            </div>
+        </footer>
+    </div>
+</div>
+
+{% for module in module %}
+
+    <div class="modal fade" id="details{{ module.id}}" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-full" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                </div>
+                <div class="modal-body">
+                    {% set listImages= browseAutomobileOfferImage(iduser, qouiqui.id , module.id) %}
+                    <div class="row">
+                        <!-- MAIN CONTENT -->
+                        <div class="col-xs-12 col-sm-12 col-md-12">
+                            <div class="row">
+
+
+                                <div class="pb-left-column col-xs-12 col-sm-12 col-md-5 col-lg-5">
+
+                                    {#{% if listImages!=false %}#}
+
+                                        {#<div class="carousel slide media-carousel" id="media{{ module.id }}">#}
+
+                                            {#<div class="carousel-inner">#}
+
+                                                {#<div class="item  active">#}
+                                                    {#<div class="row">#}
+                                                        {#{% for image in listImages |slice(0,3) %}#}
+                                                            {#<div class="col-md-12">#}
+                                                                {#<a class="thumbnail" href="#"><img alt="img" class="img-responsive" src="{{ asset('/uploads/image/') }}{{ iduser }}/{{ qouiqui.id }}/Offres/{{ module.id }}/{{ image }}"></a>#}
+                                                            {#</div>#}
+                                                        {#{% endfor %}#}
+
+
+                                                    {#</div>#}
+                                                {#</div>#}
+                                                {#{% set sliceNumber= 3 %}#}
+                                                {#{% if (listImages|length)-3 >0 %}#}
+
+
+
+
+
+                                                    {#{% for item in 1..(((listImages|length)-3)//3) %}#}
+
+
+
+
+                                                        {#<div class="item">#}
+                                                            {#<div class="row">#}
+                                                                {#{% for image in (listImages|slice(sliceNumber,3)) %}#}
+                                                                    {#<div class="col-md-4">#}
+                                                                        {#<a class="thumbnail" href="#"><img alt="img" class="img-responsive" src="{{ asset('/uploads/image/') }}{{ iduser }}/{{ qouiqui.id }}/Offres/{{ module.id }}/{{ image }}"></a>#}
+                                                                    {#</div>#}
+
+                                                                {#{% endfor %}#}
+                                                            {#</div>#}
+                                                        {#</div>#}
+                                                        {#{% set sliceNumber =sliceNumber+3 %}#}
+
+                                                    {#{% endfor %}#}
+                                                {#{% endif %}#}
+
+
+                                            {#</div>#}
+                                            {#<a data-slide="prev" href="#media{{ module.id }}" class="left carousel-control">‹</a>#}
+                                            {#<a data-slide="next" href="#media{{ module.id }}" class="right carousel-control">›</a>#}
+                                        {#</div>#}
+                                    {#{% endif %}#}
+                                    <div id="carousel{{ loop.index }}" class="carousel slide" data-ride="carousel">
+                                    <div class="carousel-inner" role="listbox">
+
+                                        {% for image  in listImages %}
+                                            <div class="item {%  if loop.index < 2 %}active{%  endif %}">
+                                                <img class="d-block img-fluid" src="{{ asset('/uploads/image/') }}{{ iduser }}/{{ qouiqui.id }}/Offres/{{ module.id }}/{{ image }}" alt="First slide">
+                                            </div>
+                                        {% endfor %}
+
+                                    </div>
+                                    <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                        <span class="sr-only">Previous</span>
+                                    </a>
+                                    <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                        <span class="sr-only">Next</span>
+                                    </a>
+                                </div>
+
+                                </div>
+
+
+                                <div class="pb-center-column col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                    <h1 class="product-name">{{ module.model.mark.name }} {{ module.model.name }}</h1>
+                                    <div class="product-featured">
+                                        <ul>
+                                            <li>08/2014</li>
+                                            <li>{{ module.mileage }} KM</li>
+                                            <li>{{ module.energy }}</li>
+                                            <li>{{ module.kiloW }}kW</li>
+                                        </ul>
+                                    </div>
+                                    <div class="desc">
+                                        <p>{{ module.details }}</p>
+                                    </div>
+                                    <div class="offer_specification">
+                                        <table class="table-data-sheet">
+                                            <thead>
+                                            <tr>
+                                                <th>Puissance fiscale</th>
+                                                <th>Année-modèle</th>
+                                                <th>Boite</th>
+                                                <th>Portes</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr>
+                                                <td>{{ module.fiscalPower }} CH</td>
+                                                <td>{{ module.modelYear }}</td>
+                                                <td>{{ module.boite }}</td>
+                                                <td>{{ module.porte }} </td>
+                                            </tr>
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="pb-right-column col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                                    <!-- add to cart form-->
+                                    <div class="panel panel-default text-center">
+                                        <div class="panel-heading">
+                                            <h3> Options</h3>
+                                        </div>
+                                        <div class="panel-body">
+                                            <h3 class="panel-title price">{{ module.price }}DT</h3>
+                                        </div>
+                                        <ul class="list-group">
+                                            <li class="list-group-item"><a class="btn btn-main3 btn-primary btn-lg uppercase "><span>Applez nous :<strong>{{ qouiqui.phone }}</strong></span></a></li>
+                                            <li class="list-group-item"><a class="btn btn-main3 btn-primary btn-lg"><span  class="uppercase"  >email: <strong>{{ qouiqui.mail }}</strong></span></a></li>
+
+
+                                        </ul>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <!-- // MAIN CONTENT -->
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+
+
+                    <a type="button" class="btn btn-secondary"  href="#" data-toggle="modal" data-target="#Rappeler">Etre rappeler</a>
+                    <a type="button" class="btn btn-secondary reservation-form"  href="#" data-toggle="modal" data-target="#Demandervisite" data-ref='{{  module.reference}}'>Reserver un essais</a>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {#<div id="" class="modal fade" role="dialog">#}
+
+
+        {#<div class="modal-dialog" style=" width: 80%;">#}
+
+            {#<!-- Modal content-->#}
+            {#<div class="modal-content">#}
+                {#<div class="wrapper">#}
+
+                    {#<div class="container">#}
+                        {##}
+                    {#</div>#}
+
+
+                {#</div>#}
+
+                {#<div class="modal-footer">#}
+                    {#<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>#}
+                {#</div>#}
+            {#</div>#}
+
+        {#</div>#}
+    {#</div>#}
+{% endfor %}
+<div id="Rappeler" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Être rappelé</h4>
+            </div>
+            <div class="modal-body">
+                <div class="well">Vous avez une question ou un commentaire ?
+                    <br>Remplissez les informations suivantes et nous vous appeler dans les plus brefs délais.
+                </div>
+
+                <form id="rapeler" class="form-horizontal" method="post" action="{{ path('rapeler',{'qq_id':qouiqui.id}) }}" role="form">
+
+                    <div class="form-group">
+                        <label for="email" class="col-sm-2 control-label">Téléphone</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control bfh-phone" name="rapele[phone]" placeholder="Numéro de Téléphone" required data-format="+216 (dd) ddd-ddd">
+
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="name" class="col-sm-2 control-label">Nom</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="name" name="rapele[nom]" placeholder="Nom" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="name" class="col-sm-2 control-label">Prenom</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="name" name="rapele[prenom]" placeholder="Prénom" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="name" class="col-sm-2 control-label">Mail</label>
+                        <div class="col-sm-9">
+                            <textarea id="mail" name="rapele[mail]" class="form-control" placeholder="votre Mail" rows="3" required></textarea>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" >Fermer</button>
+                <button type="submit" class="btn btn-default " data-target="modifier" data-selector="rapeler">Envoyer</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+<div id="Demandervisite" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Reserver un essais</h4>
+            </div>
+            <div class="modal-body">
+                <div class="well">
+                    Remplissez les informations suivantes et nous vous appeler dans les plus brefs délais.
+                </div>
+
+                <form id="visite" action="{{ path('visite',{'qq_id': qouiqui.id }) }}" class="form-horizontal" method="post" role="form">
+                    <input  name ="visite[ref]"  id ="reference-modal"  hidden>
+                    <input hidden name ="visite[title]"  value="Demandais une réservation">
+                    <div class="form-group">
+                        <label for="email" class="col-sm-2 control-label">
+
+                            téléphone</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control bfh-phone" name="visite[phone]" placeholder="Numéro de Téléphone" required data-format="+216 (dd) ddd-ddd">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="name" class="col-sm-2 control-label">Nom</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="name" name="visite[nom]" placeholder="Nom" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="name" class="col-sm-2 control-label">Prenom</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="name" name="visite[prenom]" placeholder="Prénom" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="name" class="col-sm-2 control-label">Adresse</label>
+                        <div class="col-sm-9">
+                            <input id="message" type="mail" name="visite[mail]" class="form-control" placeholder="votre Mail" rows="3" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="name" class="col-sm-2 control-label">Date</label>
+                        <div class="col-sm-9">
+                            <div class="bfh-datepicker" data-name="visite[date]" data-close="false" data-required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="name" class="col-sm-2 control-label">heure</label>
+                        <div class="col-sm-9">
+                            <div class="bfh-timepicker" data-name="visite[time]" data-close="false" data-required></div>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+                <button type="submit" class="btn btn-default " data-target="modifier" data-selector="visite">Envoyer</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- // PAGE FOOTER -->
+
+<!-- Javascripts -->
+<script src="{{ asset('module/Automobile/js/bootstrap.min.js') }}"></script>
+<script src="{{ asset('module/Automobile/js/jquery.isotope.min.js') }}"></script>
+<script src="{{ asset('module/Automobile/js/jquery.prettyPhoto.min.js') }}"></script>
+<script src="{{ asset('module/Automobile/js/jflickrfeed.min.js') }}"></script>
+<script src="{{ asset('module/Automobile/js/sly.min.js') }}"></script>
+<script src="{{ asset('module/Automobile/js/package.min.js') }}"></script>
+<script src="{{ asset('module/Automobile/js/jquery.nav.js') }}"></script>
+<script src="{{ asset('module/Automobile/js/scripts.js') }}"></script>
+
+
+
+</body>
+
+<!-- Mirrored from templines.rocks/html/autoimage-paralax/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 20 Jun 2017 09:04:16 GMT -->
+</html>
+
+<script>
+    function textClignotant() {
+
+        var element = $(".button-clignote");
+//
+        var random = Math.round(Math.random() * 1);
+
+
+        switch (random) {
+            case 0:
+                for (i = 0; i < element.length; i++) {
+//                    element.style.backgroundColor = "#d2583e";
+                    element.css('backgroundColor', '{{ theme["Color"] }}');
+                }
+
+                break;
+
+            case 1:
+                for (i = 0; i < element.length; i++) {
+                    element.css('backgroundColor', 'black');
+                }
+                break;
+        }
+
+    }
+    $(document).ready(function () {
+        setInterval(textClignotant, 300)
+
+
+    });
+    function listModels(mark,modelid){
+        $.ajax({
+            url: '{{ path('list_models') }}',
+            data: {
+
+                'mark': mark,
+                'quoiqui': {{ qouiqui.id }}
+
+
+
+            },
+            type: "POST",
+            success: function (response) {
+                $("#"+modelid).html(response);
+
+
+            },
+            error: function (xhr, status, error) {
+                alert(xhr.responseText);
+            },
+
+
+        });
+
+    }
+</script>
+{#-------theme changer-------#}
+<script>
+
+    $('tog').click(function () {
+
+        left = $('.theme_changer').position().left;
+
+        if (left < 0) {
+            $('.theme_changer').css('transform', 'translate(0px)')
+        } else {
+            $('.theme_changer').css('transform', 'translate(-200px)')
+        }
+    })
+
+</script>
+<script>
+    jQuery(function () {
+        jQuery("#sortable").sortable();
+        jQuery("#sortable").disableSelection();
+    });
+</script>
+<script>
+    $('.remove').click(function () {
+
+
+        var r = confirm("Confirmation de Suppression image !");
+        if (r == true) {
+
+
+            var filetodelete = $(this).attr('data-name-remove');
+            var id = $(this).attr('data-id');
+            var div = $(this).attr('data-sup');
+
+            var data = {
+                id: id,
+                filetodelete: filetodelete
+            };
+
+
+            $.ajax({
+                url: '{{ path('module_spa_delate') }}',
+                data: data,
+                type: "POST",
+                success: function (data) {
+
+                    console.log(data);
+                    new PNotify({
+                        title: 'Succès!',
+                        text: 'votre image etait supprimer avec succès .',
+                        type: 'success'
+                    });
+
+                    $(div).hide('slow', function () {
+                        $(div).remove();
+                    });
+
+
+                }
+
+
+            });
+
+
+        } else {
+            console.log('false');
+        }
+
+
+    });
+
+
+</script>
+<style>
+    .error {
+        border: solid 2px #FF0000;
+    }
+</style>
+<script>
+    {% if connected %}
+//    CKEDITOR.replace('editor');
+    CKEDITOR.replaceClass = 'edit';
+    {% endif %}
+
+    function submit(id) {
+        return jQuery(id).submit()
+    }
+
+    function validateForm(id) {
+
+        if (jQuery(id + ' [required]').length > 0) {
+            valid = true;
+
+            jQuery(id + ' [required]').each(function () {
+                if ($(this).val() === '') {
+                    $(this).addClass("error");
+                    valid = false;
+                    return false;
+                } else {
+                    valid = true;
+                    $(this).removeClass("error");
+                }
+            });
+            if (valid == true)
+                return submit(id);
+            else
+                return false;
+        } else {
+            return submit(id);
+        }
+    }
+    ;
+    jQuery("[data-target='modifier']").click(function () {
+        var isValid = true;
+        id = $(this).attr("data-selector");
+        id = "#" + id;
+        validateForm(id);
+    });
+
+</script>
+
+{#**************************DROPZONE****************************#}
+<script>
+    var maxImageWidth = 800,
+        maxImageHeight = 800;
+    Dropzone.options.myDropzone = {
+        dictDefaultMessage: ' {{ 'dropzone'|trans }}',
+        addRemoveLinks: true,
+
+        acceptedFiles: ".png,.jpg,.gif,.jpeg",
+        clickable: true,
+        init: function () {
+
+
+            this.on("thumbnail", function (file) {
+                // Do the dimension checks you want to do
+                if (file.width <= maxImageWidth || file.height <= maxImageHeight) {
+                    file.rejectDimensions()
+                }
+                else {
+                    file.acceptDimensions();
+                }
+            });
+            this.on("error", function (file, message) {
+
+                return false;
+            });
+
+
+            thisDropzone = this;
+            this.on("removedfile", function (file) {
+
+                console.log(file.name),
+                    $.ajax({
+                        url: '{{ path('module_spa_delate') }}?filetodelete=' + file.name,
+                        data: {'filetodelete': file.name},
+                        type: "POST",
+                        success: function () {
+
+                        },
+                        error: function () {
+
+                        }
+                    });
+            });
+
+        },
+        accept: function (file, done) {
+            file.acceptDimensions = done;
+            file.rejectDimensions = function () {
+                done("Invalid dimension.");
+            };
+
+        }
+    };
+
+
+</script>
+{#-------theme changer-------#}
+<script>
+    $(document).ready(function () {
+
+        jQuery('canvas.bfh-colorpicker-palette').click(function () {
+
+            data_pour = $(this).parent().parent().attr('data-pour');
+
+            color = $('[data-pour=' + data_pour + '] input').val()
+
+            console.log(color);
+            console.log(data_pour);
+
+            color = color + '!important';
+
+
+            if (data_pour == 'titre') {
+                jQuery('h2').attr('style', 'color:' + color);
+            }
+            else if (data_pour == 'Soustitre') {
+                jQuery('h4').attr('style', 'color:' + color);
+            }
+            else if (data_pour == 'bouton') {
+                jQuery('.theme-btn btn-style-one,button,.theme-btn').attr('style', 'background:' + color);
+            }
+            else if (data_pour == 'text') {
+                jQuery('.text, li').attr('style', 'color:' + color);
+            }
+
+
+//
+//            jQuery('.header-style-one .logo:before, .btn-style-one, .theme_bg_color').attr('style', 'background:' + color);
+//            $('color').append("<style>.header-style-one .logo:before{background:" + color + "}</style>");
+//            jQuery('.btn-style-one:hover, .btn-style-two:hover, .header-style-one .info-box li .icon ,.sec-title h2 strong ,.theme_color').css("color", color);
+
+        })
+
+        $('[setbg_color]').click(function() {
+
+            bg_color = $(this).css('background-color');
+            bg_data_pour = $('#backgroundcolor').attr('data-pour');
+
+
+            console.log(bg_color,bg_data_pour);
+            if (bg_data_pour == 'about') {
+                bg_img = jQuery('#motif_about').val();
+                jQuery('section#about').attr('style', 'background-image:' + bg_img+'!important; background-color:'+bg_color+'!important');
+                $('#bgco_about').val(bg_color);
+            }
+            else if (bg_data_pour == 'Offres') {
+                bg_img = jQuery('#motif_Offres').val();
+                jQuery('section#Offres').attr('style', 'background-image:' + bg_img+'!important; background-color:'+bg_color+'!important');
+                $('#bgco_Offres').val(bg_color);
+            }
+            else if (bg_data_pour == 'portfolio') {
+                bg_img = jQuery('#motif_portfolio').val();
+                jQuery('section#portfolio').attr('style', 'background-image:' + bg_img+'!important; background-color:'+bg_color+'!important');
+                $('#bgco_portfolio').val(bg_color);
+            }
+            else if (bg_data_pour == 'contact') {
+                bg_img = jQuery('#motif_contact').val();
+                jQuery('section#contact').attr('style', 'background-image:' + bg_img+'!important; background-color:'+bg_color+'!important');
+                $('#bgco_contact').val(bg_color);
+            }
+
+
+        })
+
+        $('[set_m_bg_color]').click(function() {
+
+            bg_img = $(this).css('background-image');
+            bg_data_pour =$('#backgroundcolor').attr('data-pour');
+
+
+            if (bg_data_pour == 'about') {
+
+                background_color = jQuery('#bgco_about').val();
+                jQuery('section#about').attr('style', 'background-image:' + bg_img+'!important; background-color:'+background_color+'!important');
+                $('#motif_about').val(bg_img);
+            }
+            else if (bg_data_pour == 'Offres') {
+
+                background_color = jQuery('#bgco_Offres').val();
+                jQuery('section#Offres').attr('style', 'background-image:' + bg_img+'!important; background-color:'+background_color+'!important');
+                $('#motif_Offres').val(bg_img);
+
+            }
+            else if (bg_data_pour == 'portfolio') {
+                background_color = jQuery('#bgco_portfolio').val();
+                jQuery('section#portfolio').attr('style', 'background-image:' + bg_img+'!important; background-color:'+background_color+'!important');
+                $('#motif_portfolio').val(bg_img);
+            }
+            else if (bg_data_pour == 'contact') {
+                background_color = jQuery('#bgco_contact').val();
+                jQuery('section#contact').attr('style', 'background-image:' + bg_img+'!important; background-color:'+background_color+'!important');
+                $('#motif_contact').val(bg_img);
+            }
+
+        })
+
+
+
+
+    })
+
+    function chnageicon(iconlink , div_name ) {
+
+        for (var i = 1; i< 29 ; i++){
+
+            $(div_name+" .elem"+i).css('background-image','url(' + iconlink + ')')
+
+        }
+    }
+    $('[set_icon]').click(function () {
+
+
+        data_pour = $(this).parent().attr('data-pour');
+        section = $(this);
+        srcicon = section.find('img').attr('src')
+        if (data_pour == 'about') {
+            chnageicon(srcicon , 'section#about' );
+            $('#animation_about').val(srcicon);
+
+        }
+        else if (data_pour == 'Offres') {
+            chnageicon(srcicon , 'section#Offres' );
+            $('#animation_Offres').val(srcicon);
+        }
+        else if (data_pour == 'portfolio') {
+            chnageicon(srcicon , 'section#portfolio' );
+            $('#annimation_portfolio').val(srcicon);
+        }
+        else if (data_pour == 'contact') {
+            chnageicon(srcicon , 'section#contact' );
+            $('#annimation_contact').val(srcicon);
+        }
+
+    });
+
+    {% if theme.color.background.animation is defined %}
+
+    {% if theme.color.background.animation.about is not empty %}
+    $(document).ready(function () {
+
+        propoicon ='{{ theme.color.background.animation.about }}';
+        chnageicon(propoicon, 'section#about');
+
+    });
+    {% endif %}
+
+    {% if theme.color.background.animation.annone is not empty %}
+    $(document).ready(function () {
+
+        propoicon ='{{ theme.color.background.animation.annone }}';
+        chnageicon(propoicon,'section#Offres');
+
+    });
+    {% endif %}
+
+    {% if theme.color.background.animation.gallery is not empty %}
+    $(document).ready(function () {
+
+        propoicon ='{{ theme.color.background.animation.gallery }}';
+        chnageicon(propoicon, 'section#portfolio');
+
+    });
+    {% endif %}
+
+    {% if theme.color.background.animation.contact is not empty %}
+    $(document).ready(function () {
+
+        propoicon ='{{ theme.color.background.animation.contact }}';
+        chnageicon(propoicon, 'section#contact');
+
+    });
+    {% endif %}
+
+    {% endif %}
+
+
+
+</script>
+{#-------theme changer-------#}
+<script>
+
+
+    $(".carousel [data-slide='prev']").click(function () {
+
+        var idCarousel = $(this).parent().attr('id');
+        console.log(idCarousel);
+        $("#"+idCarousel).carousel('prev');
+    })
+
+    $(".carousel [data-slide='next']").click(function () {
+        var idCarousel = $(this).parent().attr('id');
+        $("#"+idCarousel).carousel('next');
+    })
+
+
+</script>
+<style>
+    @media (max-width: 768px) {
+
+        .home-slider {
+            display: none!important;
+        }
+
+    }
+    :root {
+        --base: {{ theme['Color'] }};
+    {% if  theme['Background'] is defined%}
+        --backgroundAbout: {{ theme['Background']['About'] }}
+        {% endif %}
+    }
+    .btn-primary {
+        background: var(--base);
+    }
+    .main-menu > li.current > a {
+        color: var(--base);
+    }
+    .main-menu > li > a:hover, .main-menu > .hover > a {
+        color: var(--base);
+    }
+    .active .auto8, .active .auto9, .active .auto10, .active .auto11 {
+        border: 1px solid var(--base) !important;
+        background:var(--base) !important;
+
+    }
+    .section-header .heading {
+        border-right: 6px solid var(--base);
+    }
+    .section-header .heading.heading-type2 {
+        border-bottom: 2px solid var(--base);
+        border-top: 2px solid var(--base);}
+    .btn-main2 {
+        border: 2px solid var(--base) !important;
+    }
+    .section-header .heading.heading-type2:after {
+        border-bottom: 1px solid var(--base);
+        border-top: 1px solid var(--base);}
+    .section-header .heading.heading-type2:before {
+        border-bottom: 1px solid var(--base);
+        border-top: 1px solid var(--base);}
+    .section-footer {
+        background: none repeat scroll 0 0 var(--base);}
+    .portfolio-navigation .slider-direction i {
+        color: var(--base);
+    }
+    .sidebar .widget-title {
+        border-right: 6px solid var(--base);
+    }
+    .btn-main {
+        border: 2px solid var(--base) !important;
+    }
+    .logo img{
+        max-height: 60px;
+    }
+    .flex-caption h3 {
+        color: #fff;
+        font-size: 82px;
+        line-height: 1;
+    }
+    .flex-caption p {
+        font-size: 30px;
+    }
+    .section {
+        padding-bottom: 20px;
+    }
+    .heading-wrap {
+        padding-bottom: 10px;
+    }
+    .wrapper{
+        background: initial;
+    }
+
+</style>
+{% include('@Module/Module/automobile/color.html.twig') %}
+<script>
+    $(document).on("click", ".reservation-form", function () {
+        var ref= $(this).data('ref');
+
+        $("#reference-modal").val(ref);
+
+    });
+</script>
+<script type='text/javascript'
+        src='https://maps.googleapis.com/maps/api/js?key=AIzaSyBabWKVmMpB5ZVqYN2H2ubUXTITp9k5fuc&v=3.20&#038;libraries=places&#038;language=fr&#038;ver=4.4.1'></script>
+<script>
+    function getLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition);
+        } else {
+//            alert("Geolocation is not supported by this browser.");
+        }
+    }
+
+    function showPosition(position) {
+//        $('#origin').val(position.coords.latitude + "," + position.coords.longitude);
+        geo = position.coords.latitude + "," + position.coords.longitude;
+        $('#origin').val(position.coords.latitude + "," + position.coords.longitude);
+        return geo;
+    }
+</script>
+<!--{#============map iteneraire==============#}-->
+<script>
+    var map;
+    var panel;
+    var initialize;
+    //    var calculate;
+    var direction;
+    style = [
+        {
+            "elementType": "geometry",
+            "stylers": [
+                {
+                    "color": "#f5f5f5"
+                }
+            ]
+        },
+        {
+            "elementType": "labels.icon",
+            "stylers": [
+                {
+                    "visibility": "off"
+                }
+            ]
+        },
+        {
+            "elementType": "labels.text.fill",
+            "stylers": [
+                {
+                    "color": "#616161"
+                }
+            ]
+        },
+        {
+            "elementType": "labels.text.stroke",
+            "stylers": [
+                {
+                    "color": "#f5f5f5"
+                }
+            ]
+        },
+        {
+            "featureType": "administrative.land_parcel",
+            "elementType": "labels.text.fill",
+            "stylers": [
+                {
+                    "color": "#bdbdbd"
+                }
+            ]
+        },
+        {
+            "featureType": "poi",
+            "elementType": "geometry",
+            "stylers": [
+                {
+                    "color": "#eeeeee"
+                }
+            ]
+        },
+        {
+            "featureType": "poi",
+            "elementType": "labels.text.fill",
+            "stylers": [
+                {
+                    "color": "#757575"
+                }
+            ]
+        },
+        {
+            "featureType": "poi.park",
+            "elementType": "geometry",
+            "stylers": [
+                {
+                    "color": "#e5e5e5"
+                }
+            ]
+        },
+        {
+            "featureType": "poi.park",
+            "elementType": "labels.text.fill",
+            "stylers": [
+                {
+                    "color": "#9e9e9e"
+                }
+            ]
+        },
+        {
+            "featureType": "road",
+            "elementType": "geometry",
+            "stylers": [
+                {
+                    "color": "#ffffff"
+                }
+            ]
+        },
+        {
+            "featureType": "road.arterial",
+            "elementType": "labels.text.fill",
+            "stylers": [
+                {
+                    "color": "#757575"
+                }
+            ]
+        },
+        {
+            "featureType": "road.highway",
+            "elementType": "geometry",
+            "stylers": [
+                {
+                    "color": "#dadada"
+                }
+            ]
+        },
+        {
+            "featureType": "road.highway",
+            "elementType": "labels.text.fill",
+            "stylers": [
+                {
+                    "color": "#616161"
+                }
+            ]
+        },
+        {
+            "featureType": "road.local",
+            "elementType": "labels.text.fill",
+            "stylers": [
+                {
+                    "color": "#9e9e9e"
+                }
+            ]
+        },
+        {
+            "featureType": "transit.line",
+            "elementType": "geometry",
+            "stylers": [
+                {
+                    "color": "#e5e5e5"
+                }
+            ]
+        },
+        {
+            "featureType": "transit.station",
+            "elementType": "geometry",
+            "stylers": [
+                {
+                    "color": "#eeeeee"
+                }
+            ]
+        },
+        {
+            "featureType": "water",
+            "elementType": "geometry",
+            "stylers": [
+                {
+                    "color": "#c9c9c9"
+                }
+            ]
+        },
+        {
+            "featureType": "water",
+            "elementType": "labels.text.fill",
+            "stylers": [
+                {
+                    "color": "#9e9e9e"
+                }
+            ]
+        }
+    ];
+
+    initialize = function () {
+
+        var latLng = new google.maps.LatLng({{ qouiqui.geoLat }},{{ qouiqui.geoLong }}); // Correspond au coordonnées de Lille
+
+        var myOptions = {
+            zoom: 11,
+            center: new google.maps.LatLng({{ qouiqui.geoLat }},{{ qouiqui.geoLong }}),
+            mapTypeId: google.maps.MapTypeId.TERRAIN, // Type de carte, différentes valeurs possible HYBRID, ROADMAP, SATELLITE, TERRAIN
+            maxZoom: 20,
+//            styles: style,
+            scrollwheel: false
+
+        };
+
+        map2 = new google.maps.Map(document.getElementById('map-container'), myOptions);
+        //map.setOptions({styles: style2});
+
+
+        panel = document.getElementById('panel');
+        var marker = new google.maps.Marker({
+            position: latLng,
+            map: map2,
+            icon: 'https://cdn0.iconfinder.com/data/icons/small-n-flat/24/678111-map-marker-32.png',
+            title: "Lille",
+        });
+
+        var contentMarker = [].join('');
+        var infoWindow = new google.maps.InfoWindow({
+            content: contentMarker,
+            position: latLng
+        });
+        google.maps.event.addListener(marker, 'click', function () {
+            infoWindow.open(map2, marker);
+        });
+        google.maps.event.addListener(infoWindow, 'domready', function () { // infoWindow est biensûr notre info-bulle
+            jQuery("#tabs").tabs();
+        });
+        direction = new google.maps.DirectionsRenderer({
+            map: map2,
+            panel: panel // Dom element pour afficher les instructions d'itinéraire
+        });
+    };
+    function calculate(origin) {
+        origin = origin; // Le point départ
+        destination = document.getElementById('destination').value; // Le point d'arrivé
+        console.log("origin : " + origin, "destination : " + destination);
+        if (origin && destination) {
+            var request = {
+                origin: origin,
+                destination: destination,
+                travelMode: google.maps.DirectionsTravelMode.DRIVING // Mode de conduite
+            }
+            var directionsService = new google.maps.DirectionsService(); // Service de calcul d'itinéraire
+            directionsService.route(request, function (response, status) { // Envoie de la requête pour calculer le parcours
+                if (status == google.maps.DirectionsStatus.OK) {
+                    direction.setDirections(response); // Trace l'itinéraire sur la carte et les différentes étapes du parcours
+                }
+            });
+        }
+        jQuery("#ite").show();
+    }
+    ;
+    initialize();
+    function geoLocate() {
+
+        if($('#origin').val().length !== 0){
+            calculate($('#origin').val())
+        }else{
+            ori =true;
+            if (navigator.geolocation && ori ) {
+                navigator.geolocation.getCurrentPosition(function (position) {
+                    var geolocation = {
+                        lat: position.coords.latitude,
+                        lng: position.coords.longitude
+                    };
+                    geo = position.coords.latitude + ',' + position.coords.longitude;
+                    $('#origin').val(position.coords.latitude + ',' + position.coords.longitude).show('slow', calculate(geo));
+                });
+            }
+        }
+
+        ;
+    }
+</script>
+
+<script type="text/javascript">
+
+
+    (function ($) {
+        "use strict";
+        // ITEM DETAIL PAGE MAP FUNCTION STARTED --------------------------------------------------------------------------------------------
+        $.pfitemdetailpagemap = function () {
+            $(function () {
+                var inputMyLocation = document.getElementById("origin");
+                $("#origin").bind("keypress", function (e) {
+                    if (e.keyCode == 13) {
+                        e.preventDefault();
+                        return false;
+                    }
+                });
+                var autocomplete = new google.maps.places.Autocomplete(inputMyLocation);
+                google.maps.event.addListener(autocomplete, "place_changed", function () {
+                    var place = autocomplete.getPlace();
+                    if (!place.geometry) {
+                        return;
+                    }
+                    console.log(place);
+                });
+
+            });
+        };
+        // LOAD MAP STARTED --------------------------------------------------------------------------------------------
+        $(function () {
+            $.pfitemdetailpagemap();
+            // End
+        });
+        // GET DIRECTION BUTTON PRESSED END --------------------------------------------------------------------------------------------
+
+    })(jQuery);
+    function geolocate() {
+
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function (position) {
+                var geolocation = {
+                    lat: position.coords.latitude,
+                    lng: position.coords.longitude
+                };
+                $('#originMobile').val(position.coords.latitude + ',' + position.coords.longitude).show('fast', calculateMobile);
+            });
+        }
+    }
+
+</script>

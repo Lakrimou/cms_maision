@@ -1,0 +1,463 @@
+<style>
+    .row.loading {
+        text-align: center;
+        height: 200px;
+        line-height: 200px;
+
+    }
+
+    #img1 {
+        max-width: 320px;
+        max-height: 180px;
+    }
+
+    .description {
+        padding-bottom: 15px;
+    }
+
+    #tab-info-loc {
+        margin-left: 10px;
+    }
+</style>
+{# SCRIPT liste des services data table#}
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+{# SCRIPT GET MARK AND MODEL RECURSIVE JSON#}
+<script>
+    $('select').select2();
+    {#Recherche voiture#}
+    $.get("{{ path('location_voiture_liste_mark') }}", {},
+        function (data, status) {
+            $.each($.parseJSON(data), function (index, value) {
+                $('#marque').append($('<option>', {
+
+                    text: value.name
+                }));
+            });
+        }
+    );
+
+    $('#marque').on('change', function () {
+        var selected = $('#marque option:selected').val();
+
+        $.post("{{ path('location_voiture_liste_model') }}", {id: selected},
+            function (data, status) {
+//                $('#modeles option').remove();
+                $.each($.parseJSON(data), function (index, value) {
+
+                    $('#modeles').append($('<option>', {
+
+                        text: value.name
+                    }));
+                });
+            }
+        )
+    })
+
+    {# Ajout voiture#}
+    $.get("{{ path('location_voiture_liste_mark') }}", {},
+        function (data, status) {
+            $.each($.parseJSON(data), function (index, value) {
+                $('#marqueAdd').append($('<option>', {
+                    text: value.name
+                }));
+            });
+        }
+    );
+
+    $('#marqueAdd').on('change', function () {
+        var selected = $('#marqueAdd option:selected').val();
+
+        $.post("{{ path('location_voiture_liste_model') }}", {id: selected},
+            function (data, status) {
+                $('#modelesAdd option').remove();
+                $.each($.parseJSON(data), function (index, value) {
+
+                    $('#modelesAdd').append($('<option>', {
+
+                        text: value.name
+                    }));
+                });
+            }
+        )
+    })
+</script>
+{#JavaScript Cookie v2.1.4#}
+<script>
+    (function (factory) {
+        var registeredInModuleLoader = false;
+        if (typeof define === 'function' && define.amd) {
+            define(factory);
+            registeredInModuleLoader = true;
+        }
+        if (typeof exports === 'object') {
+            module.exports = factory();
+            registeredInModuleLoader = true;
+        }
+        if (!registeredInModuleLoader) {
+            var OldCookies = window.Cookies;
+            var api = window.Cookies = factory();
+            api.noConflict = function () {
+                window.Cookies = OldCookies;
+                return api;
+            };
+        }
+    }(function () {
+        function extend() {
+            var i = 0;
+            var result = {};
+            for (; i < arguments.length; i++) {
+                var attributes = arguments[i];
+                for (var key in attributes) {
+                    result[key] = attributes[key];
+                }
+            }
+            return result;
+        }
+
+        function init(converter) {
+            function api(key, value, attributes) {
+                var result;
+                if (typeof document === 'undefined') {
+                    return;
+                }
+                // Write
+                if (arguments.length > 1) {
+                    attributes = extend({
+                        path: '/'
+                    }, api.defaults, attributes);
+
+                    if (typeof attributes.expires === 'number') {
+                        var expires = new Date();
+                        expires.setMilliseconds(expires.getMilliseconds() + attributes.expires * 864e+5);
+                        attributes.expires = expires;
+                    }
+                    // We're using "expires" because "max-age" is not supported by IE
+                    attributes.expires = attributes.expires ? attributes.expires.toUTCString() : '';
+
+                    try {
+                        result = JSON.stringify(value);
+                        if (/^[\{\[]/.test(result)) {
+                            value = result;
+                        }
+                    } catch (e) {
+                    }
+                    if (!converter.write) {
+                        value = encodeURIComponent(String(value))
+                            .replace(/%(23|24|26|2B|3A|3C|3E|3D|2F|3F|40|5B|5D|5E|60|7B|7D|7C)/g, decodeURIComponent);
+                    } else {
+                        value = converter.write(value, key);
+                    }
+                    key = encodeURIComponent(String(key));
+                    key = key.replace(/%(23|24|26|2B|5E|60|7C)/g, decodeURIComponent);
+                    key = key.replace(/[\(\)]/g, escape);
+
+                    var stringifiedAttributes = '';
+
+                    for (var attributeName in attributes) {
+                        if (!attributes[attributeName]) {
+                            continue;
+                        }
+                        stringifiedAttributes += '; ' + attributeName;
+                        if (attributes[attributeName] === true) {
+                            continue;
+                        }
+                        stringifiedAttributes += '=' + attributes[attributeName];
+                    }
+                    return (document.cookie = key + '=' + value + stringifiedAttributes);
+                }
+                // Read
+                if (!key) {
+                    result = {};
+                }
+                // To prevent the for loop in the first place assign an empty array
+                // in case there are no cookies at all. Also prevents odd result when
+                // calling "get()"
+                var cookies = document.cookie ? document.cookie.split('; ') : [];
+                var rdecode = /(%[0-9A-Z]{2})+/g;
+                var i = 0;
+                for (; i < cookies.length; i++) {
+                    var parts = cookies[i].split('=');
+                    var cookie = parts.slice(1).join('=');
+                    if (cookie.charAt(0) === '"') {
+                        cookie = cookie.slice(1, -1);
+                    }
+                    try {
+                        var name = parts[0].replace(rdecode, decodeURIComponent);
+                        cookie = converter.read ?
+                            converter.read(cookie, name) : converter(cookie, name) ||
+                            cookie.replace(rdecode, decodeURIComponent);
+                        if (this.json) {
+                            try {
+                                cookie = JSON.parse(cookie);
+                            } catch (e) {
+                            }
+                        }
+                        if (key === name) {
+                            result = cookie;
+                            break;
+                        }
+                        if (!key) {
+                            result[name] = cookie;
+                        }
+                    } catch (e) {
+                    }
+                }
+                return result;
+            }
+
+            api.set = api;
+            api.get = function (key) {
+                return api.call(api, key);
+            };
+            api.getJSON = function () {
+                return api.apply({
+                    json: true
+                }, [].slice.call(arguments));
+            };
+            api.defaults = {};
+            api.remove = function (key, attributes) {
+                api(key, '', extend(attributes, {
+                    expires: -1
+                }));
+            };
+            api.withConverter = init;
+            return api;
+        }
+
+        return init(function () {
+        });
+    }));
+</script>
+<script>
+    $(document).ready(function () {
+        if ($(window).width() < 500) {
+            $("#addCar").removeClass("pull-right");
+        }
+        {% if(app.user==null) %}
+        $('.modal-footer').on('click', '#reserve', function () {
+            dataTarget = $(this).attr('data-target');
+        });
+        {% endif %}
+        {% if(app.user==null) %}
+        $('#modalLogin1').on('click', '#seConnecter', function () {
+            Cookies.set('dataTarget', dataTarget);
+        });
+        {% endif %}
+
+        if (Cookies.get('dataTarget') != "undefined") {
+            {% if(app.user) %}
+            $(Cookies.get('dataTarget')).modal('show');
+            Cookies.remove('dataTarget');
+            {% endif %}
+
+        }
+    });
+</script>
+<script>
+
+    $("#searchform").on("submit", function (event) {
+
+        event.preventDefault();
+        $data = $(this).serializeObject();
+
+        page = 0;
+        console.log($data);
+        getNumberOfModules($data);
+        getObjects($data);
+    });
+    (function ($) {
+        $.fn.serializeObject = function () {
+
+            var self = this,
+                json = {},
+                push_counters = {},
+                patterns = {
+                    "validate": /^[a-zA-Z][a-zA-Z0-9_]*(?:\[(?:\d*|[a-zA-Z0-9_]+)\])*$/,
+                    "key": /[a-zA-Z0-9_]+|(?=\[\])/g,
+                    "push": /^$/,
+                    "fixed": /^\d+$/,
+                    "named": /^[a-zA-Z0-9_]+$/
+                };
+
+
+            this.build = function (base, key, value) {
+                base[key] = value;
+                return base;
+            };
+
+            this.push_counter = function (key) {
+                if (push_counters[key] === undefined) {
+                    push_counters[key] = 0;
+                }
+                return push_counters[key]++;
+            };
+            $.each($(this).serializeArray(), function () {
+                // skip invalid keys
+                if (!patterns.validate.test(this.name)) {
+                    return;
+                }
+                var k,
+                    keys = this.name.match(patterns.key),
+                    merge = this.value,
+                    reverse_key = this.name;
+
+                while ((k = keys.pop()) !== undefined) {
+
+                    // adjust reverse_key
+                    reverse_key = reverse_key.replace(new RegExp("\\[" + k + "\\]$"), '');
+
+                    // push
+                    if (k.match(patterns.push)) {
+                        merge = self.build([], self.push_counter(reverse_key), merge);
+                    }
+                    // fixed
+                    else if (k.match(patterns.fixed)) {
+                        merge = self.build([], k, merge);
+                    }
+                    // named
+                    else if (k.match(patterns.named)) {
+                        merge = self.build({}, k, merge);
+                    }
+                }
+                json = $.extend(true, json, merge);
+            });
+            return json;
+        };
+    })(jQuery);
+
+    $('.show-marque-detail').click(function () {
+        $('.marque').val($(this).attr('data-marque'));
+    });
+
+
+    $(".vehicule-marque").on('click', '.btn-reservation', function () {
+        $('#reserver').val($(this).attr('data-id'));
+    });
+
+    $('.edit-annonce').click(function () {
+        lien = $(this).attr('data-lien');
+        pic = "";
+        $.ajax({
+            url: lien,
+            method: 'post',
+            success: function (data) {
+                $('.loading').hide();
+                $('.after_loading').show();
+                voiture = JSON.parse(data);
+                disponibilite = voiture.disponibilite;
+                $('.edit-car-serie').val(voiture.serie);
+                $('.edit-car-model').val(voiture.model);
+                $('.edit-car-place').val(voiture.nbrPlace);
+                $('.edit-car-datee').val(disponibilite.substr(0,10));
+                $('.edit-car-timee').val(disponibilite.substr(11,disponibilite.length));
+                $('.edit-car-color').val(voiture.couleur);
+                $('.edit-car-port').val(voiture.porte);
+                $('.edit-car-energy').val(voiture.energy);
+                $('.edit-car-modela').val(voiture.modelYear);
+                $('.edit-car-kw').val(voiture.kilow);
+                $('.edit-car-fiscal').val(voiture.fiscalPower);
+                $('.edit-car-kilometer').val(voiture.mileage);
+                $('.edit-car-val1').val(voiture.petitvalises);
+                $('.edit-car-val2').val(voiture.grandvalises);
+                $('.edit-car-boite').val(voiture.boite);
+                $('.edit-car-cond').val(voiture.conducteur);
+                $('.edit-car-gps').val(voiture.gps);
+                $('.edit-car-air').val(voiture.air);
+                $('.edit-car-position').val((parseInt(voiture.position.id)));
+                $('.edit-car-etat').val(voiture.etat);
+                $('.edit-car-price').val(voiture.tarif);
+                $('.edit-car-marque').val(voiture.marque.id);
+                $('.edit-car-id').val(voiture.id);
+                CKEDITOR.instances['editeurr'].setData(voiture.description);
+                if (voiture.picture.length > 0) {
+                    for (p = 0; p < voiture.picture.length; p++) {
+                        pic += '<div class="col-md-4 col-xs-6 col-sm-4"><span class="notify-badge" data-lien="/module/location_voiture/annonce/delete/picture/' + produit.id + '/' + produit.photoArr[p] + '" >x</span><img src="/' + produit.picture[p] + '" alt="' + p + '" style="width:100%;"></div>';
+                    }
+                    $('.edit-car-picture').html(pic);
+                }
+
+            }
+        });
+    });
+
+    $(".edit-car-picture").on('click', '.notify-badge', function () {
+        pic = "";
+        lien = $(this).attr('data-lien');
+        $.confirm({
+            title: '<div style="color: cadetblue"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Confirm de suppression photo</div>',
+            content: '',
+            buttons: {
+                Confirmer: function () {
+                    $.ajax({
+                        url: lien,
+                        method: 'post',
+                        success: function (data) {
+                            var voiture = JSON.parse(data);
+                            $('.edit-car-serie').val(voiture.serie);
+                            $('.edit-car-model').val(voiture.model);
+                            $('.edit-car-place').val(voiture.nbrPlace);
+                            $('.edit-car-datee').val();
+                            $('.edit-car-timee').val();
+                            $('.edit-car-color').val(voiture.couleur);
+                            $('.edit-car-port').val(voiture.porte);
+                            $('.edit-car-energy').val(voiture.energy);
+                            $('.edit-car-modela').val(voiture.modelYear);
+                            $('.edit-car-kw').val(voiture.kilow);
+                            $('.edit-car-fiscal').val(voiture.fiscalPower);
+                            $('.edit-car-kilometer').val(voiture.mileage);
+                            $('.edit-car-val1').val(voiture.petitvalises);
+                            $('.edit-car-val2').val(voiture.grandvalises);
+                            $('.edit-car-boite').val(voiture.boite);
+                            $('.edit-car-cond').val(voiture.conducteur);
+                            $('.edit-car-gps').val(voiture.gps);
+                            $('.edit-car-air').val(voiture.air);
+                            $('.edit-car-position').val(voiture.position);
+                            $('.edit-car-etat').val(voiture.etat);
+                            $('.edit-car-price').val(voiture.tarif);
+                            $('.edit-car-marque').val(voiture.marque.id);
+                            $('.edit-car-id').val(voiture.id);
+                            CKEDITOR.instances['editeurr'].setData(voiture.description);
+                            if (voiture.picture.length > 0) {
+                                for (p = 0; p < voiture.picture.length; p++) {
+                                    pic += '<div class="col-md-4 col-xs-6 col-sm-4"><span class="notify-badge" data-lien="module/location_voiture/annonce/delete/picture/' + produit.id + '/' + produit.photoArr[p] + '" >x</span><img src="' + produit.photo[p] + '" alt="' + p + '" style="width:100%;"></div>';
+                                }
+                                $('.edit-car-picture').html(pic);
+                            }
+                        }
+                    });
+                },
+                Annuler: function () {
+                }
+            }
+        });
+    });
+
+    $('.deleteAuto').click(function () {
+        link = $(this).attr("data-lien");
+        id = $(this).attr("data-id");
+        $('.confirm-del-annonce').click(function () {
+            $.ajax({
+                url: link,
+                method: 'post',
+                success: function () {
+                    new PNotify("L'annonce à été supprimer");
+                    $('.vehicule-marque tr[data-voiture=' + id + ']').hide('slow');
+                }
+            });
+        });
+    });
+
+    $('.buttton-reserver').click(function () {
+        id = $(this).attr('data-id');
+        $('#reserver').val(id);
+    });
+    {% if app.session.flashbag.get('email') != null %}
+    $(document).ready(function () {
+        new PNotify({
+            title: 'Reservation',
+            text: 'Envoi de Demande succès attend votre confirmation par téléphone'
+        });
+    });
+    {% endif %}
+</script>

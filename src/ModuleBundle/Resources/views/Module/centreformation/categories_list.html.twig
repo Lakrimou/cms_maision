@@ -1,0 +1,100 @@
+{#{% set service=cfService(module) %}#}
+{#<section class="categories ">#}
+    {#<div class="category-items">#}
+        {#<h4 class="category-title">Our Categories</h4>#}
+        {#<div class="category-buttons">#}
+            {#<div class="category-button-prev"></div>#}
+            {#<div class="category-button-next"></div>#}
+        {#</div>#}
+        {#<div class="category-slider swiper-container">#}
+            {#<div class="swiper-wrapper">#}
+                {#{% for i, a in service %}#}
+                {#{% set services = jsonDecod(a.data) %}#}
+                {#<div class="category-item swiper-slide">#}
+
+                    {#<span class="icon flaticon-adobe-photoshop"></span>#}
+                    {#<a href="#">{{ services.ncour }}</a>#}
+
+                {#</div>#}
+                {#{% endfor %}#}
+
+
+            {#</div>#}
+        {#</div>#}
+    {#</div>#}
+{#</section>#}
+{#{% if  connected %}#}
+    {#<a data-toggle="modal" href="#categorie_list" class="button-default  button_admin ">Modifier</a>#}
+{#{% endif %}#}
+{#<section class="categories categories-three padding-120">#}
+    {#<div class="container">#}
+        {#<div class="category-items">#}
+            {#<div class="category-slider-three swiper-container">#}
+                {#<div class="swiper-wrapper">#}
+                    {#{% for i, a in service %}#}
+                    {#{% set services = jsonDecod(a.data) %}#}
+                    {#<div class="category-item swiper-slide">#}
+                        {#<span class="icon flaticon-adobe-photoshop"></span>#}
+                        {#<a href="#">Développement</a>#}
+                    {#</div><!-- partner-item -->#}
+                    {#<div class="category-item swiper-slide">#}
+                        {#<span class="icon flaticon-adobe-photoshop"></span>#}
+                        {#<a href="#">Web, Multimédia</a>#}
+                    {#</div><!-- partner-item -->#}
+                    {#<div class="category-item swiper-slide">#}
+                        {#<span class="icon flaticon-adobe-photoshop"></span>#}
+                        {#<a href="#">Réseau Et Sécurité</a>#}
+                    {#</div><!-- partner-item -->#}
+                    {#<div class="category-item swiper-slide">#}
+                        {#<span class="icon flaticon-adobe-photoshop"></span>#}
+                        {#<a href="#">Services Administratifs</a>#}
+                    {#</div><!-- partner-item -->#}
+                    {#{% endfor %}#}
+
+                {#</div><!-- swiper-wrapper -->#}
+
+                {#<div class="category-three-button-prev"></div>#}
+                {#<div class="category-three-button-next"></div>#}
+            {#</div><!-- swiper-container -->#}
+        {#</div><!-- category-items -->#}
+    {#</div><!-- container -->#}
+{#</section>#}
+
+{#<div class="modal fade " id="categorie_list" role="dialog">#}
+    {#<div class="modal-dialog">#}
+
+        {#<!-- Modal content-->#}
+        {#<div class="modal-content">#}
+            {#<div class="modal-header">#}
+                {#<button type="button" class="close" data-dismiss="modal">&times;</button>#}
+                {#<h4 class="modal-title">Qui Somme Nous</h4>#}
+            {#</div>#}
+            {#<div class="contianer">#}
+            {#<div class="modal-body row">#}
+
+                {#<div class="col-md-12">#}
+                {#<label class="col-md12">Domaine de Formation</label>#}
+                {#<div class="form-group ">#}
+
+                    {#<textarea placeholder="entrer Nom du Formation par Domaine" rows="3" class="form-control"#}
+                              {#name="globDetail"></textarea>#}
+                {#</div>#}
+
+                {#</div>#}
+            {#</div>#}
+        {#</div>#}
+            {#<div class="modal-footer">#}
+                {#<button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>#}
+            {#</div>#}
+        {#</div>#}
+
+    {#</div>#}
+{#</div>#}
+{#<style>#}
+    {#.categories {#}
+        {#-webkit-transform: translateY(-50px);#}
+        {#transform: translateY(13px);#}
+        {#margin-bottom: 54px;#}
+    {#}#}
+
+{#</style>#}

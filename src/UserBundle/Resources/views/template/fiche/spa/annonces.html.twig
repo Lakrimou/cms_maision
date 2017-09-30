@@ -1,0 +1,507 @@
+<section id="section-annonces" class="property-details padding">
+    {% if attributes.connected %}
+
+        <div class="pull-righ" style=" margin-right: 24px;">
+            <div data-step="4" data-intro="This is a tooltip!" class="pull-right margin-bott-40">
+                <button type="button" class="theme-btn button11 btn-style-one pull-right" data-toggle="modal"
+                        data-target="#listOffres">Gérer cette section
+                </button>
+            </div>
+        </div>
+
+    {% endif %}
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 bottom40">
+                <h2 class="text-uppercase">Nos <span class="color_red">Offres</span></h2>
+                <div class="line_1"></div>
+                <div class="line_2"></div>
+                <div class="line_3"></div>
+
+            </div>
+        </div>
+        <div class="row bottom30">
+            {% if Spaevent.event is defined %}
+            {% set arrayEvent=Spaevent .event %}
+            {% for b in arrayEvent|sort|reverse %}
+                {#{% if "now"|date('Y-m-d') <= b.start_offre|date('Y-m-d') %}#}
+                {% if(Spaevent .event|length == 1) %}
+                    <div class="col-md-4 col-sm-4 col-xs-12"></div>
+                {% endif %}
+                {% if (Spaevent .event|length == 2) %}
+                    <div class="col-md-2 col-sm-2 col-xs-12"></div>
+                {% endif %}
+                {#<div class="row" id="append-items">#}
+
+                <div class="col-md-4 col-sm-4 col-xs-12 ">
+
+                    <div class="property_item bottom40">
+                        <div class="image image-content-offre" style="background-image:url('{{ asset('uploads/image/') }}{{ attributes.quoiqui.user.id }}/{{ attributes.quoiqui.id }}/event/{{ b.idOffre~'.jpg' }}')">
+                            <div class="price"><span class="tag" style="font-size: 26px;">-{{ b.prec|round(0, 'floor') }}%</span></div>
+                            <div class="overlay">
+                                <div class="centered"><a class="link_arrow white_border voir-plus"
+                                                         data-toggle="modal" data-target="#detail_offre"
+                                                         href="#" data-qq="{{ attributes.quoiqui.id }}"
+                                                         data-idevent="{{ b.idOffre }}">Voir
+                                        Plus </a></div>
+                            </div>
+                        </div>
+                        <div class="proerty_content">
+                            <div class="proerty_text" style="height: 145px">
+
+                                <h3>{{ b.ServSpa }}</h3>
+                                <p style="font-size: 20px;"><strong>
+                                        <del style="color:red;">{{ b.prev_prix }} Dt</del> {{ b.prix }}Dt
+                                    </strong></p>
+
+                                {% if b.description is not empty %}
+                                    <p>{{ b.description|slice(0,40)|raw }}... </p>
+                                {% endif %}
+                            </div>
+                            <div class="favroute clearfix">
+                                <p class="pull-left" style="font-size: 20px;"><i class="icon-calendar2" style="font-size: 23px;"></i>{{ translateJourDate( b.start_offre) }}
+                                </p>
+
+                                <ul class="pull-right">
+                                    <li style="font-size: 19px;margin-right: 14px;"
+                                        class="voir-plus"
+                                        data-qq="{{ attributes.quoiqui.id }}"
+                                        data-idevent="{{ b.idOffre }}" data-toggle="modal"
+                                        data-target="#detail_offre"><i class="fa fa-eye"
+                                                                       style=" margin-top: 14px; margin-right: 10px;"
+                                                                       aria-hidden="true" about=""
+
+                                        ></i>Voir plus
+                                    </li>
+
+                                </ul>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {#{% endif %}#}
+            {% endfor %}
+
+
+        </div>
+
+    </div>
+    {% endif %}
+
+    {% if not is_mobile() %}
+        <div class="paralax-icon">
+            <div class="particle elem1 anim-delay1"></div>
+            <div class="particle elem2 anim-delay5"></div>
+            <div class="particle elem3 anim-delay3"></div>
+            <div class="particle elem4 anim-delay8"></div>
+            <div class="particle elem5 anim-delay9"></div>
+            <div class="particle elem6 anim-delay2"></div>
+            <div class="particle elem7 anim-delay4"></div>
+            <div class="particle elem8 anim-delay3"></div>
+            <div class="particle elem9 anim-delay10"></div>
+            <div class="particle elem8 anim-delay11"></div>
+            <div class="particle elem6 anim-delay12"></div>
+            <div class="particle elem1 anim-delay14"></div>
+            <div class="particle elem13 anim-delay16"></div>
+            <div class="particle elem17 anim-delay18"></div>
+            <div class="particle elem2 anim-delay6"></div>
+            <div class="particle elem16 anim-delay9"></div>
+            <div class="particle elem8 anim-delay3"></div>
+            <div class="particle elem9 anim-delay10"></div>
+            <div class="particle elem18 anim-delay11"></div>
+            <div class="particle elem11 anim-delay12"></div>
+            <div class="particle elem12 anim-delay14"></div>
+            <div class="particle elem13 anim-delay16"></div>
+            <div class="particle elem14 anim-delay18"></div>
+            <div class="particle elem15 anim-delay6"></div>
+            <div class="particle elem16 anim-delay9"></div>
+            <div class="particle elem17 anim-delay7"></div>
+            <div class="particle elem18 anim-delay6"></div>
+            <div class="particle elem19 anim-delay3"></div>
+        </div>
+    {% endif %}
+</section>
+
+<div class="modal fade" id="listOffres" role="dialog">
+    <div class="modal-dialog modal-md">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Liste des promotions</h4>
+
+            </div>
+            <div class="modal-body">
+
+                <table class=" table dataTable " cellspacing="0" width="100%">
+                    <thead>
+                    <tr>
+                        <th width="74">Image</th>
+                        <th>Offres</th>
+                        <th> AncienPrix</th>
+                        <th>Prix</th>
+                        <th>Pourcentage</th>
+                        <th>Modifier</th>
+                        <th>Supprimer</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    {% if Spaevent .event is defined %}
+                        {% set arrayEvent=Spaevent .event %}
+                        {% for b in arrayEvent|sort|reverse %}
+
+                            <tr data-td="{{ b.idOffre }}">
+
+                                <td align="center">
+
+                                    <img src="{{ asset('uploads/image/') }}{{ attributes.quoiqui.user.id }}/{{ attributes.quoiqui.id }}/event/{{ b.idOffre ~'.jpg' }}"
+                                         data-pin-nopin="true" style="  width:  74px;">
+
+                                </td>
+                                <td align="center"> {{ b.ServSpa }}</td>
+                                <td align="center">{{ b.prev_prix }}Dt</td>
+                                <td align="center">{{ b.prix }}Dt</td>
+                                <td align="center">-{{ b.prec|round(0,'floor') }}%</td>
+
+                                <td align="center">
+
+                                    <a href="#" class=" btn btn-info a-btn-slide-text edit-offre"
+                                       data-serv="{{ b.idOffre }}"
+                                       data-id="{{ attributes.quoiqui.id }}" data-toggle="modal"
+                                       data-target="#editSpaEvent">
+
+                                        <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                                        <span><strong>Modifier</strong></span>
+                                    </a>
+
+                                </td>
+
+
+                                <td align="center">
+
+                                    <a href="{{ path('module_spa_delate_events',{"idqq": attributes.quoiqui.id,"idevent":b.idOffre }) }}"
+                                       class=" btn btn-danger a-btn-slide-text service_suprim click-off"
+                                       onclick="clickOffConfirmed = confirm('Vous voulez le  supprimer ?');">
+                                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                        <span><strong>Supprimer</strong></span>
+                                    </a>
+                                </td>
+
+                            </tr>
+                            {#{% endfor %}#}
+                        {% endfor %}
+                    {% endif %}
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addEvent"
+                >Ajouter une promotion
+                </button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Fermer</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="addEvent" role="dialog">
+    <div class="modal-dialog modal-lg">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class=" modal-title">Ajouter une Promotion</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <form id="addeve" method="POST" class=" fileuploader"
+                          action="{{ path('module_spa_add_offre',{"idqq":attributes.quoiqui.id}) }}"
+                          enctype="multipart/form-data">
+
+                        <input type="hidden" name="idOffre" value="{{ uniqueId() }}">
+
+                        <div class="col-md-6">
+                            <div class=" form-group">
+                                <label class="col-md-12">Nom de promotion</label>
+                                <input type="text" placeholder="Entrer Nom du Service." required="required"
+                                       class="form-control" name="ServSpa">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class=" form-group">
+                                <label class="col-md-12">Date de promotion </label>
+                                <div class="form-group">
+                                    <div class="bfh-datepicker" data-name="start_offre"
+                                         data-min="today" data-format="y-m-d" aria-required="true"></div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class=" form-group">
+                                <label class="col-md-12">Ancien Prix</label>
+                                <input id="An_prix" type="number" placeholder="Entrer l'ancien  prix."
+                                       required="required"
+                                       class="form-control " name="prev_prix" value="">
+                            </div>
+
+
+                            <div class=" form-group">
+                                <label class="col-md-12"> Pourcentage de remise </label>
+                                <input id="remise" type="number" placeholder="Entrer le pourcentage de solde."
+                                       required="required"
+                                       class="form-control " name="prec" value="">
+                            </div>
+
+                            <div class=" form-group">
+                                <label class="col-md-12">Nouveau Prix</label>
+                                <input id="nv_prix" type="number" placeholder="Entrer le nouveaux prix."
+                                       required="required"
+                                       class="form-control" name="prix" value="">
+                            </div>
+
+
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-md-12">Description</label>
+                                <textarea placeholder="Entrer la description.." rows="5"
+                                          class="form-control textarea "
+                                          name="description" required="required"></textarea>
+                            </div>
+
+                            <div class=" form-group">
+                                <label class="col-md-12" style="margin-top: 10px;">Choisissez une photo</label>
+                                <input autocomplete="off" class="form-control "
+                                       name="file" type="file"
+
+                                       placeholder="choisissez_image" data-items="8"/>
+
+                            </div>
+                        </div>
+
+                        {#</div>#}
+
+
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Fermer</button>
+                <button type="submit" class=" btn btn-primary button-default" data-target="modifier"
+                        data-selector="addeve">
+                    Enrigistrer
+                </button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<div class="modal fade" id="editSpaEvent" role="dialog">
+    <div class="modal-dialog modal-lg">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class=" modal-title">Modifier la promotion</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <form id="editeve1" method="POST" class=" fileuploader"
+                          action="{{ path('module_spa_update_event',{"idqq":attributes.quoiqui.id}) }}"
+                          enctype="multipart/form-data">
+
+
+                        <input id="idEvent" type="hidden" name="idOffre" value="">
+
+                        <div class="col-md-6">
+                            <div class=" form-group">
+                                <label class="col-md-12">Nom de promotion</label>
+                                <input id="offre" type="text" placeholder="Entrer Nom de l'offre." required="required"
+                                       class="form-control" name="ServSpa">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class=" form-group">
+                                <label class="col-md-12">Date de promotion </label>
+                                <div class="form-group">
+                                    <div class="bfh-datepicker" id="date-start" data-name="start_offre"
+                                         data-min="today" data-format="y-m-d" aria-required="true"></div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class=" form-group">
+                                <label class="col-md-12">Ancien Prix</label>
+                                <input id="PrvPrix" type="number" placeholder="Entrer l'ancien  prix."
+                                       required="required"
+                                       class="form-control An_prix previousprix " name="prev_prix" value="">
+                            </div>
+
+                            <div class=" form-group">
+                                <label class="col-md-12">Pourcentage de remise(%)</label>
+                                <input id="Percentage" type="number" placeholder="Entrer le pourcentage de solde."
+                                       required="required"
+                                       class="form-control remise solde" name="prec" value="">
+                            </div>
+                            <div class=" form-group">
+                                <label class="col-md-12">Nouveau Prix</label>
+                                <input id="AcPrix" type="number" placeholder="Entrer le nouveaux prix."
+                                       required="required"
+                                       class="form-control nv_prix nprix  " name="prix" value="">
+                            </div>
+
+
+                        </div>
+                        <div class="col-md-6">
+
+                            <div class="form-group">
+                                <label class="col-md-12">Description</label>
+                                <textarea id="descr" placeholder="Entrer la description.." rows="5"
+                                          class="form-control textarea  description-edit "
+                                          name="description" required="required"></textarea>
+                            </div>
+
+                            <div class=" form-group">
+                                <label class="col-md-12" style="margin-top: 10px;">Choisissez une photo</label>
+                                <input autocomplete="off" class="form-control "
+                                       name="file" type="file"
+
+                                       placeholder="choisissez_image" data-items="8"/>
+
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Fermer</button>
+                <button type="submit" class="btn btn-primary button-default" data-target="modifier"
+                        data-selector="editeve1">
+                    Enrigistrer
+                </button>
+            </div>
+        </div>
+
+    </div>
+</div>
+<div id="detail_offre" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-md">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 id="evespa" class=" color_red G_titre"></h4>
+            </div>
+            <div class="modal-body">
+                <div id="news-section-1" style="padding-right: 15px;padding-left: 15px;margin-right: auto;margin-left: auto;">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="row row-eq-height">
+
+                                <input type="hidden" id="idImgEve" value="">
+                                <div class="col-md-6 ">
+                                    <img id="putImgEve" src="" class="img-responsive" style="width:100%;">
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="blog_info blog-thumbnail" style="box-shadow: 0px 1px 3px rgba(29, 28, 28, 0.35);">
+                                        <ul class="archieves">
+                                            <li style="text-align: center;">
+                                                <div class="col-md-12 padding_none blink_me  ">
+                                                    <span id="solde" class="font_span  " style="color:red;"></span>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="col-md-12 col-xs-12 padding_none center-text">
+                                                    <div class="col-md-6 col-xs-12">
+                                                        <span class="span_font_size">date de promotion</span>
+                                                    </div>
+                                                    <span class="span_font_size"></span>
+                                                    <div class="col-md-6 col-xs-12">
+                                                        <span id="dateOffre" style="font-size: 25px; color:red;"></span>
+                                                    </div>
+                                                </div>
+
+                                            </li>
+                                            <li>
+                                                <div class="col-md-12 col-xs-12 padding_none center-text">
+                                                    <div class="col-md-6 col-xs-12">
+                                                        <span class="span_font_size">Ancien Prix</span>
+                                                    </div>
+
+                                                    <div class="col-md-6 col-xs-12">
+                                                        <span id="ancienprix" style="font-size: 25px; color:red;"> </span>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="col-md-12 col-xs-12 padding_none center-text">
+                                                    <div class="col-md-6 col-xs-12">
+                                                        <span class="span_font_size">Nouveau Prix</span>
+                                                    </div>
+                                                    <div class="col-md-6 col-xs-12">
+                                                <span class=" " id="actprix" style="font-size: 25px; color:red;">
+                                                </span>
+                                                    </div>
+                                                </div>
+
+                                            </li>
+
+                                        </ul>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-xs-12 top40">
+                                    <h3 class=" " style="margin-bottom: 10px;">Description <span
+                                                class="color_red"> Détaillé</span></h3>
+                                    <p class="" id="Evedetail" style="margin-bottom: 10px;"></p>
+                                    <span id="link"></span>
+                                    <p id="savoirplus"></p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 ">
+                                    <a href="#" data-toggle="modal" data-target="#modalSectionRappeler"
+                                       class="col-md-12 col-xs-12 spacontact1 top10  margin-bottom-button"><i
+                                                class="fa fa-phone" aria-hidden="true" style="margin-right: 5px"></i>Demandede rappel
+                                    </a>
+                                </div>
+                                <div class="col-md-6 ">
+                                    {% if not is_mobile() %}
+                                        <a class="col-md-12 col-xs-12 spacontact2 top10  phonenumber"> Tél:{{ attributes.quoiqui.phone }}</a>
+                                        <a class="col-md-12 col-xs-12 spacontact2 top10 buttoncall-us"> Afficher le numéro</a>
+
+                                    {% endif %}
+                                    {% if is_mobile() %}
+                                        <a href="tel:{{ attributes.quoiqui.phone }}" class="col-md-12 col-xs-12 spacontact2 top10"> Contacter nous:{{ attributes.quoiqui.phone }}</a>
+                                    {% endif %}
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Fermer</button>
+            </div>
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,165 @@
+<?php
+
+namespace AdminBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Booking
+ *
+ * @ORM\Table(name="BOOKING", indexes={@ORM\Index(name="fk_BOOKING_EVENTS1_idx", columns={"EVENTS_id"}), @ORM\Index(name="fk_BOOKING_QOUIQUI1_idx", columns={"QOUIQUI_id"})})
+ * @ORM\Entity
+ */
+class Booking
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="bigint", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date", type="datetime", nullable=true)
+     */
+    private $date;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="statu", type="boolean", nullable=true)
+     */
+    private $statu;
+
+    /**
+     * @var \Events
+     *
+     * @ORM\ManyToOne(targetEntity="Events")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="EVENTS_id", referencedColumnName="id")
+     * })
+     */
+    private $events;
+
+    /**
+     * @var \Qouiqui
+     *
+     * @ORM\ManyToOne(targetEntity="Qouiqui")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="QOUIQUI_id", referencedColumnName="id")
+     * })
+     */
+    private $qouiqui;
+
+
+
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set date
+     *
+     * @param \DateTime $date
+     *
+     * @return Booking
+     */
+    public function setDate($date)
+    {
+        $this->date = $date;
+
+        return $this;
+    }
+
+    /**
+     * Get date
+     *
+     * @return \DateTime
+     */
+    public function getDate()
+    {
+        return $this->date;
+    }
+
+    /**
+     * Set statu
+     *
+     * @param boolean $statu
+     *
+     * @return Booking
+     */
+    public function setStatu($statu)
+    {
+        $this->statu = $statu;
+
+        return $this;
+    }
+
+    /**
+     * Get statu
+     *
+     * @return boolean
+     */
+    public function getStatu()
+    {
+        return $this->statu;
+    }
+
+    /**
+     * Set events
+     *
+     * @param \AdminBundle\Entity\Events $events
+     *
+     * @return Booking
+     */
+    public function setEvents(\AdminBundle\Entity\Events $events = null)
+    {
+        $this->events = $events;
+
+        return $this;
+    }
+
+    /**
+     * Get events
+     *
+     * @return \AdminBundle\Entity\Events
+     */
+    public function getEvents()
+    {
+        return $this->events;
+    }
+
+    /**
+     * Set qouiqui
+     *
+     * @param \AdminBundle\Entity\Qouiqui $qouiqui
+     *
+     * @return Booking
+     */
+    public function setQouiqui(\AdminBundle\Entity\Qouiqui $qouiqui = null)
+    {
+        $this->qouiqui = $qouiqui;
+
+        return $this;
+    }
+
+    /**
+     * Get qouiqui
+     *
+     * @return \AdminBundle\Entity\Qouiqui
+     */
+    public function getQouiqui()
+    {
+        return $this->qouiqui;
+    }
+}

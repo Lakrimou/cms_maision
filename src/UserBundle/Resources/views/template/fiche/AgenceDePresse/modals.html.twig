@@ -1,0 +1,244 @@
+{# modal liste des articles #}
+<div class="modal fade" id="liste" tabindex="-1" role="dialog" aria-labelledby="liste" aria-hidden="true">
+    <div class="modal-dialog" role="document" style="width: 90%;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="col-md-10 col-sm-4">
+                    <div class="col-xs-12 bottom40">
+                        <h2 class="text-uppercase">Nos <span class="color_red">articles</span></h2>
+                    </div>
+                </div>
+                <div class="col-md-2 col-sm-3">
+                    <button type="button" class="button11" data-toggle="modal" id="add_article">Nouveau article</button>
+                </div>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <table id="" class="dataTable" cellspacing="0" width="100%">
+                    <thead>
+                    <tr>
+                        <th>Numéro</th>
+                        <th>Titre</th>
+                        <th>Article</th>
+                        <th>Images</th>
+                        <th>Date de publication</th>
+                        <th>Modification</th>
+                        <th>Suppression</th>
+                    </tr>
+                    </thead>
+                    <tfoot>
+                    <tr>
+                        <th>Numéro</th>
+                        <th>Titre</th>
+                        <th>Article</th>
+                        <th>Images</th>
+                        <th>Date de publication</th>
+                        <th>Modification</th>
+                        <th>Suppression</th>
+                    </tr>
+                    </tfoot>
+                    <tbody>
+                    {% for article in articles %}
+                        <tr data-tr-voiture="{{ article.id }}">
+                            <td>{{ article.id }}</td>
+                            <td>{{ article.titre }}</td>
+                            <td>{{ article.desc }}</td>
+                            <td>
+                                {% if asset_exists('/uploads/image/'~quoiqui.user.id~'/'~quoiqui.id~'/presse/'~article.id~'.png') %}
+                                    {% set img =  '/uploads/image/'~quoiqui.user.id~'/'~quoiqui.id~'/presse/'~article.id~'.png' %}
+                                {% else %}
+                                    {% set img = '/uploads/image/'~quoiqui.user.id~'/'~quoiqui.id~'/presse/article.png' %}
+                                {% endif %}
+                                <img src="{{ img }}" class="img-responsive" style="max-height: 100px; max-width: 100px;"/>
+                            </td>
+                            <td>{{ article.datepub|date() }}</td>
+                            <td>
+                                <button type="button" class="btn btn-info btn-lg edit" data-link-edit="{{ path('agence_presse_id',{'id': article.id}) }}"><i class="fa fa-pencil-square" aria-hidden="true"></i></button>
+                            </td>
+                            <td>
+                                <button class="btn btn-danger deleteAuto" data-id="{{ article.id }}" data-link="{{ path('agence_presse_delete') }}"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="reset" class="service-details-btn btn-default btn-xs pull-right suite" data-dismiss="modal">Fermer</button>
+            </div>
+        </div>
+    </div>
+</div>
+{# modal ajout un nouveau article #}
+<div class="modal fade" id="add" role="dialog" aria-labelledby="ajout" aria-hidden="true">
+    <div class="modal-dialog modal-md" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="text-uppercase">Un nouveau <span class="color_red">article</span></h1>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="{{ path('agence_presse_add_article') }}" method="post" enctype="multipart/form-data">
+                    <input type="hidden" name="qouiqui_id" value="{{ quoiqui.id }}">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Photo de l'image :</label>
+                                    <input type="file" class="form-control" name="img" alt="">
+                                </div>
+                            </div>
+                            <div class="form-group col-md-12">
+                                <label>Titre :</label>
+                                <input type="text" class="form-control" id="titre" name="titre" placeholder="Exemples: Un nouveau City..." style="width: 100%">
+                            </div>
+                            <div class="form-group col-md-12">
+                                <label>Catégorie :</label>
+                                <select id="Categorie" name="Categorie" class="form-control" style="width: 100%">
+                                    <option selected value="">Choisissez Une Catégorie</option>
+                                    <option value="france">France</option>
+                                    <option value="monde">Monde</option>
+                                    <option value="société">Société</option>
+                                    <option value="sport">Sport</option>
+                                    <option value="culture">Culture</option>
+                                    <option value="environnement">Environnement</option>
+                                    <option value="autre">Autre...</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-12" id="autreCategorie"></div>
+                            <div class="form-group col-md-12">
+                                <label>Auteur :</label>
+                                <input type="text" class="form-control" id="auteur" name="auteur" placeholder="Exemples: Pierre-Henri Badel" style="width: 100%">
+                            </div>
+                            <div class="form-group col-md-12">
+                                <label>Statut :</label>
+                                <select id="statut" name="statut" class="form-control" style="width: 100%">
+                                    <option selected value="">Choisissez</option>
+                                    <option value="0">Archive</option>
+                                    <option value="1">Afficher</option>
+                                    <option value="2">Non afficher</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-12">
+                                <label>Description court :</label>
+                                <textarea placeholder="Entrer une description court" style="width: 100%"
+                                          class="form-control"
+                                          name="desc" required="required"></textarea>
+                            </div>
+                            <div class="form-group col-md-12">
+                                <label class="col-md-12">Article</label>
+                                <textarea placeholder="Entrer la description détaillée" style="width: 100%"
+                                          class="form-control textarea ckeditor"
+                                          name="detail" required="required"></textarea>
+                            </div>
+                        </div>
+                        <div class="col-md-8"></div>
+                        <div class="col-md-4 col-md-offset-9">
+                            <div class="form-group col-md-offset-2">
+                                <button type="reset" class="button11" data-dismiss="modal">Anuler</button>
+                                <button type="submit" class="button11" name="addArticle">Enregistrer</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            {#<div class="row"></div>#}
+            <div class="modal-footer">
+                <button type="reset" class="service-details-btn btn-default btn-xs pull-right suite" data-dismiss="modal">Fermer</button>
+            </div>
+        </div>
+    </div>
+</div>
+{#modal modfier article#}
+<div class="modal fade" id="edit" role="dialog" aria-labelledby="modifier" aria-hidden="true" style="margin-top: -70px;">
+    <div class="modal-dialog modal-md" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1>Modifier</h1>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="" method="post" enctype="multipart/form-data">
+                    <input type="hidden" name="qouiqui_id" value="{{ quoiqui.id }}">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Photo de l'image :</label>
+                                    <input type="file" class="form-control" name="img" alt="">
+                                </div>
+                            </div>
+                            <div class="form-group col-md-12">
+                                <label>Titre :</label>
+                                <input type="text" class="form-control" id="titre" name="titre" placeholder="Exemples: Un nouveau City..." style="width: 100%">
+                            </div>
+                            <div class="form-group col-md-12">
+                                <label>Catégorie :</label>
+                                <select id="Categorie" name="Categorie" class="form-control" style="width: 100%">
+                                    <option selected value="">Choisissez Une Catégorie</option>
+                                    <option value="france">France</option>
+                                    <option value="monde">Monde</option>
+                                    <option value="société">Société</option>
+                                    <option value="sport">Sport</option>
+                                    <option value="culture">Culture</option>
+                                    <option value="environnement">Environnement</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-12">
+                                <label class="col-md-12">Article</label>
+                                <textarea placeholder="Entrer la description.." style="width: 100%"
+                                          class="form-control textarea ckeditor"
+                                          name="detail" required="required"></textarea>
+                            </div>
+                        </div>
+                        <div class="col-md-8"></div>
+                        <div class="col-md-4 col-md-offset-9">
+                            <div class="form-group col-md-offset-2">
+                                <button type="reset" class="button11" data-dismiss="modal">Anuler</button>
+                                <button type="submit" class="button11" name="editArticle">Enregistrer</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            {#<div class="row"></div>#}
+            <div class="modal-footer">
+                <button type="reset" class="service-details-btn btn-default btn-xs pull-right suite" data-dismiss="modal">Fermer</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% for article in articles %}
+    {# modal lire article  #}
+    <div class="modal fade" id="modalPressLire{{ article.id }}" role="dialog" aria-labelledby="article" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1>{{ article.titre }}</h1>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <h2>Catégorie: {{ article.categorie }}, Date de publication: {{ article.datepub|date() }}, Auteur: {{ article.auteur }}</h2>
+                    {{ article.text|raw }}
+                    {#<div class="row">#}
+                        {#<div class="form-group col-md-offset-10" style="margin-bottom: -30px;">#}
+                            {#<button type="reset" class="button11" data-dismiss="modal"><span><i class="fa fa-facebook-official"> Partager</i></span></button>#}
+                            {#<button type="submit" class="button11" name="addArticle"><span><i class="fa fa-twitter-square"> Partager</i></span></button>#}
+                        {#</div>#}
+                    {#</div>#}
+                </div>
+                <div class="modal-footer">
+                    <button type="reset" class="service-details-btn btn-default btn-xs pull-right suite" data-dismiss="modal">Fermer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endfor %}

@@ -1,0 +1,142 @@
+{% set valuTitle="" %}
+                            {% set valuNumber="" %}
+ {% set data = jsonDecod(qouiqui.data) %}
+ {% if data!=null %}
+     {% if  data["titleLastOffers"] is defined %}
+         {% set valuTitle=data["titleLastOffers"] %}
+
+
+     {% endif %}
+     {% if  data["numberLastOffers"]  is defined %}
+         {% set valuNumber=data["numberLastOffers"] %}
+
+
+
+     {% endif %}
+ {% endif %}
+<section id="portfolio" class="section">
+    <div class="container">
+        <header class="section-header">
+            <div class="animated animation-done bounceInLeft" data-animation="bounceInLeft"><i class="autologo_avto"></i></div>
+            <div class="heading-wrap">
+                <h2 class="heading"><span>Offre Récente!</span></h2>
+            </div>
+            <p>{{valuTitle }}</p>
+        </header>
+    </div>
+    <div class="row text-center animated" data-animation="bounceInRight" id="last-offers">
+
+        <div class="portfolio-frame">
+            <div class="portfolio-slider sly-frame">
+                {% for module in module|slice(0,valuNumber) %}
+                    {% set listImages= browseAutomobileOfferImage(qouiqui.user.id, qouiqui.id , module.id) %}
+                    {% if listImages!=null %}
+                        <div class="portfolio-item filter-1">
+                            <div class="item-thumbnail"><a href="#"> <img style="height: 250px;" alt="img" src="{{ asset('uploads/image/') }}{{ qouiqui.user.id }}/{{ qouiqui.id }}/Offres/{{ module.id }}/{{ listImages[module.indexPrincipaleImage] }}"></a>
+                                <p class="car-title">{{ module.model.mark.name}}</p>
+                            </div>
+                            <div class="item-hover">
+                                <div class="details">
+                                    <div class="table">
+                                        <div class="vertical-center">
+                                            <div class="detail-item">
+                                                <ul>
+                                                    <li><i class="auto17"></i> <span>{{ module.mileage }}</span></li>
+                                                    <li><i class="auto18"></i> <span> {{ module.modelYear }}</span></li>
+                                                    <li><i class="auto19"></i> <span> {{ module.price }}</span></li>
+                                                </ul>
+                                            </div>
+                                            <a href="#" class="btn-default btn-main2" data-toggle="modal" data-target="#details{{ module.id }}">voir plus</a></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+
+
+            </div>
+
+        </div>
+        <div class="portfolio-navigation"><a class="btn btn-primary slider-direction prev-page" href="javascript:void(0);"><i class="icomoon-arrow-left2"></i></a> <a class="btn btn-primary slider-direction next-page" href="javascript:void(0);"><i class="icomoon-arrow-right2"></i></a>
+            <ul class="pages unstyled">
+            </ul>
+        </div>
+
+
+    </div>
+    <div class="row">
+        <div class="col-md-10"></div>
+        {% if app.user and app.user.id == qouiqui.user.id %}
+            <div class="col-md-2">
+                <a href="#" class="btn btn-default btn-main button-clignote " data-toggle="modal" data-target="#update-last-offers"> <span>Modifier </span></a>
+            </div>
+        {% endif %}
+
+    </div>
+
+
+</section>
+<div id="update-last-offers" class="modal fade" role="dialog">
+    <div class="modal-dialog" style=" width: 50%;">
+        <div class="modal-content">
+            <div class="wrapper">
+                <form id="update_last_offers" name="adminbundle_last_offers" action="{{ path('update_last_offers',{"id":qouiqui.id}) }}" method="post">
+
+                    <h2 class="text-center" id="title-form-latest-offer">Modifier </h2>
+
+
+
+                    <div class="form-group row">
+                        <div class="col-md-1">
+
+                        </div>
+                        <div class="col-md-3">
+                            <label class="control-label ">Titre</label>
+                        </div>
+                        <div class="col-sm-5">
+
+
+
+                            <input type="text" class="form-control" id="title_last_offers" name="titleLastOffers" value="{{ valuTitle }}">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-1">
+
+                        </div>
+                        <div class="col-md-3">
+                            <label class="control-label ">Nombre des offres à afficher</label>
+                        </div>
+                        <div class="col-sm-5">
+
+                            <input type="text" class="form-control" id="number_last_offers" name="numberOfLastOffers" value="{{ valuNumber }}">
+                        </div>
+                    </div>
+
+
+                    <div class="form-group row">
+
+                        <div class="col-md-8 ">
+
+
+                        </div>
+                        <div class="col-md-2 ">
+                            <input class="btn btn-main btn-primary btn-lg" type="submit" value="Enregistrer">
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+
+
+

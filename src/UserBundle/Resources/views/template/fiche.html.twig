@@ -1,0 +1,801 @@
+{% extends 'front.html.twig' %}
+{% block body %}
+
+    {% set titre = 'The Coffee Shop' %}
+    {% set adresse = '[Adresse adresse], [delegation] [code postal], [ville]' %}
+    {% set tel = '(+216) 71 234 567' %}
+    {% set fax = '(+216) 71 234 567' %}
+    {% set url = 'https://ween.tn' %}
+    {% set facebook = 'https://ween.tn' %}
+    {% set twitter = 'https://ween.tn' %}
+    {% set linkedin = 'https://ween.tn' %}
+    {% set google = 'https://ween.tn' %}
+    {% set youtube = 'https://ween.tn' %}
+    {% set instagram = 'https://ween.tn' %}
+    {% set apropos = 'This cafe is a completely unexpected jewel tucked in a corner of the largely seedy PVR complex. Chilled out ambience, great for conversations and small groups. Service is usually prompt, food takes a while but it&#8217;s worth the wait. Himalayas breakfast and the arancini are absolute must tries. Would gove it 5 stars except the cold beverages are terrible, unless you approve of the frappucino family. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium amet aperiam asperiores aut doloribus dolorum eligendi illo in ipsa libero nisi quisquam quo ratione reprehenderit repudiandae rerum, velit vero voluptatibus.' %}
+    {% set geomLat = '36.833020' %}
+    {% set geomLng = '10.196431' %}
+
+
+    <fiche class="listing-template-default single single-listing postid-942 wpb-js-composer js-comp-ver-4.11.2.1 vc_responsive" data-submitlink="http://studio.listingprowp.com/submit-listing/">
+
+
+        <div id="page" class="clearfix" data-mtoken="pk.eyJ1IjoiY3JpZGhlbHAiLCJhIjoiY2o0dHNoMnc3MGFnejMzazA0ZzE2Ym5mMCJ9.Lg2w2xGoU5ZsXXMDkvcT2A" data-mstyle="mapbox.streets-basic" data-sitelogo="http://studio.listingprowp.com/wp-content/themes/listingpro/assets/images/logo.png" data-site-url="http://studio.listingprowp.com/" data-ipapi="geo_ip_db">
+
+            <!--==================================Header Open=================================-->
+            <div class="pos-relative">
+                <div class="header-container  ">
+
+
+                    <!--================================full width with blue background====================================-->
+                    {{ include('@User/template/header.html.twig') }}
+                    <!--==================================Header Close=================================-->
+                    <!-- Listing Detail Popup -->
+
+                    <!-- dynamic invoice -->
+                    <div class="modal fade lp-modal-list" id="modal-invoice">
+                        <div class="modal-content">
+
+                            <div class="modal-body">
+                                Content is loading...
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
+                                <a href="#" class="lp-print-list btn-first-hover">Print</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- dynamic invoice -->
+
+
+                    <!-- Login Popup -->
+                    <div class="md-modal md-effect-3" id="modal-3">
+                        <div class="login-form-popup lp-border-radius-8">
+                            <div class="siginincontainer">
+                                <h1 class="text-center">Sign in</h1>
+                                <form id="login" class="form-horizontal margin-top-30" method="post">
+                                    <p class="status"></p>
+                                    <div class="form-group">
+                                        <label for="username">Username or Email Address *</label>
+                                        <input type="text" class="form-control" id="username" name="username"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="password">Password *</label>
+                                        <input type="password" class="form-control" id="password" name="password"/>
+                                    </div>
+                                    <div class="form-group">
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="checkbox pad-bottom-10">
+                                            <input id="check1" type="checkbox" name="remember" value="yes">
+                                            <label for="check1">Keep me signed in</label>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <input type="submit" value="Sign in" class="lp-secondary-btn width-full btn-first-hover"/>
+                                    </div>
+                                    <input type="hidden" id="security" name="security" value="9f8756cb45"/><input type="hidden" name="_wp_http_referer" value="/listing/the-coffee-shop/"/></form>
+                                <div class="pop-form-bottom">
+                                    <div class="bottom-links">
+                                        <a class="signUpClick">Not a member? Sign up</a>
+                                        <a class="forgetPasswordClick pull-right">Forgot Password</a>
+                                    </div>
+                                    <p class="margin-top-15">Connect with your Social Network</p>
+                                    <ul class="social-login list-style-none">
+                                        <li>
+                                            <a id="logingoogle" class="google flaticon-googleplus" href="http://studio.listingprowp.com/wp-login.php?loginGoogle=1" onclick="window.location = 'http://studio.listingprowp.com/wp-login.php?loginGoogle=1&redirect='+window.location.href; return false;">
+                                                <i class="fa fa-google-plus"></i>
+                                                <span>Google</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a id="loginfacebook" class="facebook flaticon-facebook" href="http://studio.listingprowp.com/wp-login.php?loginFacebook=1" onclick="window.location = 'http://studio.listingprowp.com/wp-login.php?loginFacebook=1&redirect='+window.location.href; return false;">
+                                                <i class="fa fa-facebook"></i>
+                                                <span>Facebook</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a id="logintwitter" class="twitter flaticon-twitter" href="http://studio.listingprowp.com/wp-login.php?loginTwitter=1" onclick="window.location = 'http://studio.listingprowp.com/wp-login.php?loginTwitter=1&redirect='+window.location.href; return false;">
+                                                <i class="fa fa-twitter"></i>
+                                                <span>Twitter</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <a class="md-close"><i class="fa fa-close"></i></a>
+                            </div>
+
+                            <div class="siginupcontainer">
+                                <h1 class="text-center">Sign Up</h1>
+                                <form id="register" class="form-horizontal margin-top-30" method="post">
+                                    <p class="status"></p>
+                                    <div class="form-group">
+                                        <label for="username">Username *</label>
+                                        <input type="text" class="form-control" id="username2" name="username"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="email">Email Address *</label>
+                                        <input type="email" class="form-control" id="email" name="email"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <p>Password will be e-mailed to you.</p>
+                                    </div>
+                                    <div class="form-group">
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="submit" value="Register" class="lp-secondary-btn width-full btn-first-hover"/>
+                                    </div>
+                                    <input type="hidden" id="security" name="security" value="fac3396f28"/><input type="hidden" name="_wp_http_referer" value="/listing/the-coffee-shop/"/></form>
+                                <div class="pop-form-bottom">
+                                    <div class="bottom-links">
+                                        <a class="signInClick">Already have an account? Sign in</a>
+                                        <a class="forgetPasswordClick pull-right">Forgot Password</a>
+                                    </div>
+                                    <p class="margin-top-15">Connect with your Social Network</p>
+                                    <ul class="social-login list-style-none">
+                                        <li>
+                                            <a id="logingoogle" class="google flaticon-googleplus" href="http://studio.listingprowp.com/wp-login.php?loginGoogle=1" onclick="window.location = 'http://studio.listingprowp.com/wp-login.php?loginGoogle=1&redirect='+window.location.href; return false;">
+                                                <i class="fa fa-google-plus"></i>
+                                                <span>Google</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a id="loginfacebook" class="facebook flaticon-facebook" href="http://studio.listingprowp.com/wp-login.php?loginFacebook=1" onclick="window.location = 'http://studio.listingprowp.com/wp-login.php?loginFacebook=1&redirect='+window.location.href; return false;">
+                                                <i class="fa fa-facebook"></i>
+                                                <span>Facebook</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a id="logintwitter" class="twitter flaticon-twitter" href="http://studio.listingprowp.com/wp-login.php?loginTwitter=1" onclick="window.location = 'http://studio.listingprowp.com/wp-login.php?loginTwitter=1&redirect='+window.location.href; return false;">
+                                                <i class="fa fa-twitter"></i>
+                                                <span>Twitter</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <a class="md-close"><i class="fa fa-close"></i></a>
+                            </div>
+                            <div class="forgetpasswordcontainer">
+                                <h1 class="text-center">Forgotten Password</h1>
+                                <form class="form-horizontal margin-top-30" id="lp_forget_pass_form" action="#" method="post">
+                                    <p class="status"></p>
+                                    <div class="form-group">
+                                        <label for="password">Email Address *</label>
+                                        <input type="email" name="user_login" class="form-control" id="email3"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="submit" name="submit" value="Get New Password" class="lp-secondary-btn width-full btn-first-hover"/>
+                                        <input type="hidden" id="security3" name="security3" value="48ca5eeb94"/><input type="hidden" name="_wp_http_referer" value="/listing/the-coffee-shop/"/></div>
+                                </form>
+                                <div class="pop-form-bottom">
+                                    <div class="bottom-links">
+                                        <a class="cancelClick">Cancel</a>
+                                    </div>
+                                </div>
+                                <a class="md-close"><i class="fa fa-close"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!-- ../Login Popup -->
+
+                    <!-- Popup Open -->
+                    <div class="md-modal md-effect-3 single-page-popup" id="modal-6">
+                        <div class="md-content cotnactowner-box">
+                            <h3></h3>
+                            <div class="">
+                                <form class="form-horizontal" method="post" id="contactowner">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" name="name" id="name" placeholder="Name:" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="email" class="form-control" name="email6" id="email6" placeholder="Email:" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <textarea class="form-control" rows="5" name="message1" id="message1" placeholder="Message:"></textarea>
+                                    </div>
+                                    <div class="form-group mr-bottom-0">
+                                        <input type="submit" value="Submit" class="lp-review-btn btn-second-hover">
+                                        <input type="hidden" name="authoremail" value="imranch33ma@gmail.com">
+                                        <input type="hidden" class="form-control" name="post_title" value="The Coffee Shop">
+                                        <input type="hidden" class="form-control" name="post_url" value="http://studio.listingprowp.com/listing/the-coffee-shop/">
+                                        <i class="fa fa-circle-o-notch fa-spin fa-2x formsubmitting"></i>
+                                        <span class="statuss"></span>
+                                    </div>
+                                </form>
+                                <a class="md-close"><i class="fa fa-close"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Popup Close -->
+                    <div class="md-modal md-effect-3" id="modal-4">
+                        <div class="md-content">
+                            <div id="map" class="singlebigpost"></div>
+                            <a class="md-close widget-map-click"><i class="fa fa-close"></i></a>
+                        </div>
+                    </div>
+                    <div class="md-modal md-effect-3" id="modal-5">
+                        <div class="md-content">
+                            <div id="mapp" class="singlebigpostfgf"></div>
+                            <a class="md-close widget-mapdfd-click"><i class="fa fa-close"></i></a>
+
+                        </div>
+                    </div>
+
+
+                    <!-- Modal Packages -->
+                    <div class="modal fade" id="modal-packages" role="dialog">
+                        <div class="modal-dialog">
+
+                            <!-- Modal content-->
+                            <div class="modal-content">
+                                <div class="modal-body">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        <h4 class="modal-title">Change Pricing Plan</h4>
+                                        <p>We recommend you to check details of Pricing Plans before changing. <a href="http://studio.listingprowp.com/pricing-plan/" target="_blank">Click Here</a>
+                                        </p>
+                                    </div>
+                                    <form name="select-plan-form" id="select-plan-form" method="post" class="select-plan-form"><label class="plan-options">
+                                            <div class="radio radio-danger"><input id="479" type="radio" name="plans-posts" value="479"><label for="479"></label></div>
+                                            Basic</label><label class="plan-options">
+                                            <div class="radio radio-danger"><input id="478" type="radio" name="plans-posts" value="478"><label for="478"></label></div>
+                                            Professional</label><input type="hidden" value="" name="listing-id" id="listing_id"><input type="submit" class="btn btn-default" value="Change" name="submit"></form>
+                                </div>
+                                <div class="modal-footer">
+                                    <div class="row">
+                                        <div class="col-md-9 col-sm-12 text-left">
+                                            <div class="lp-expire-update-status"></div>
+                                        </div>
+                                        <div class="col-md-3 col-sm-12 text-right">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="md-overlay"></div> <!-- Overlay for Popup -->
+                </div>
+                <!--==================================Header Close=================================-->
+
+                <!--================================== Search Close =================================-->
+
+                <!--================================== Search Close =================================-->
+            </div>
+
+            <!--==================================Section Open=================================-->
+            <section class="aliceblue listing-second-view">
+                <!--=======Galerry=====-->
+                <div class="pos-relative">
+                    <div class="spinner">
+                        <div class="double-bounce1"></div>
+                        <div class="double-bounce2"></div>
+                    </div>
+                    <div class="single-page-slider-container">
+                        <div class="row">
+                            <div class="">
+                                <div class="listing-slide img_6" data-images-num="6">
+
+                                    <div class="slide">
+                                        <a href="http://studio.listingprowp.com/wp-content/uploads/2017/03/a06f7affc0c3918ea8c3323bb3becfa9_1488351728.jpg" rel="prettyPhoto[gallery1]">
+                                            <img src="http://studio.listingprowp.com/wp-content/uploads/2017/03/a06f7affc0c3918ea8c3323bb3becfa9_1488351728-350x450.jpg" alt="post1"/>
+                                        </a>
+                                    </div>
+                                    <div class="slide">
+                                        <a href="http://studio.listingprowp.com/wp-content/uploads/2017/03/coffee1-2.jpg" rel="prettyPhoto[gallery1]">
+                                            <img src="http://studio.listingprowp.com/wp-content/uploads/2017/03/coffee1-2-350x450.jpg" alt="post1"/>
+                                        </a>
+                                    </div>
+                                    <div class="slide">
+                                        <a href="http://studio.listingprowp.com/wp-content/uploads/2017/03/e97005e6475209f33c587fcc437f0411_1488607889.jpg" rel="prettyPhoto[gallery1]">
+                                            <img src="http://studio.listingprowp.com/wp-content/uploads/2017/03/e97005e6475209f33c587fcc437f0411_1488607889-350x450.jpg" alt="post1"/>
+                                        </a>
+                                    </div>
+                                    <div class="slide">
+                                        <a href="http://studio.listingprowp.com/wp-content/uploads/2017/03/f6b4df9f3dad04231d0d5d9716525e5c_1489324465.jpg" rel="prettyPhoto[gallery1]">
+                                            <img src="http://studio.listingprowp.com/wp-content/uploads/2017/03/f6b4df9f3dad04231d0d5d9716525e5c_1489324465-350x450.jpg" alt="post1"/>
+                                        </a>
+                                    </div>
+                                    <div class="slide">
+                                        <a href="http://studio.listingprowp.com/wp-content/uploads/2017/03/pexels-photo-296888.jpeg" rel="prettyPhoto[gallery1]">
+                                            <img src="http://studio.listingprowp.com/wp-content/uploads/2017/03/pexels-photo-296888-350x450.jpeg" alt="post1"/>
+                                        </a>
+                                    </div>
+                                    <div class="slide">
+                                        <a href="http://studio.listingprowp.com/wp-content/uploads/2017/03/pexels-photo-302902.jpeg" rel="prettyPhoto[gallery1]">
+                                            <img src="http://studio.listingprowp.com/wp-content/uploads/2017/03/pexels-photo-302902-350x450.jpeg" alt="post1"/>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="post-meta-info">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-8 col-sm-8 col-xs-12">
+                                <div class="post-meta-left-box">
+                                    <h1>{{ titre }} </h1>
+                                    <p><i class="fa fa-map-marker" aria-hidden="true"></i> {{ adresse }}</p>
+                                    <ul class="breadcrumbs">
+                                        <li><i class="fa fa-phone" aria-hidden="true"></i> {{ tel }}</li>
+                                        <li><i class="fa fa-fax" aria-hidden="true"></i> {{ fax }}</li>
+                                        <li><i class="fa fa-globe" aria-hidden="true"></i> <a href="{{ url }}" target="_blank">{{ url }}</a></li>
+                                    </ul>
+                                    <ul class="list-style-none list-st-img-header">
+                                        <li class="lp-fb">
+                                            <a href="{{ facebook }}" class=" padding-left-0" target="_blank"><img src="https://cdn3.iconfinder.com/data/icons/capsocial-round/500/facebook-32.png" alt=""></a>
+                                        </li>
+                                        <li class="lp-tw">
+                                            <a href="{{ twitter }}" class="padding-left-0" target="_blank"><img src="https://cdn3.iconfinder.com/data/icons/capsocial-round/500/twitter-32.png" alt=""></a>
+                                        </li>
+                                        <li class="lp-li">
+                                            <a href="{{ linkedin }}" class="padding-left-0" target="_blank"><img src="https://cdn3.iconfinder.com/data/icons/capsocial-round/500/linkedin-32.png" alt=""></a>
+                                        </li>
+                                        <li class="lp-li">
+                                            <a href="{{ google }}" class="padding-left-0" target="_blank"><img src="https://cdn3.iconfinder.com/data/icons/capsocial-round/500/google-32.png" alt=""></a>
+                                        </li>
+                                        <li class="lp-li">
+                                            <a href="{{ youtube }}" class="padding-left-0" target="_blank"><img src="https://cdn3.iconfinder.com/data/icons/capsocial-round/500/youtube-32.png" alt=""></a>
+                                        </li>
+                                        <li class="lp-li">
+                                            <a href="{{ instagram }}" class="padding-left-0" target="_blank"><img src="https://cdn3.iconfinder.com/data/icons/capsocial-round/500/instagram2-128.png" alt=""></a>
+                                        </li>
+                                    </ul>
+
+
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-4 col-xs-12">
+                                <div class="post-meta-right-box text-right clearfix margin-top-20">
+                                    <ul class="post-stat">
+                                        <li id="fav-container">
+                                            <a class="email-address add-to-fav" data-post-type="detail" href="" data-post-id="942" data-success-text="Saved">
+                                                <i class="fa fa-bookmark-o"></i>
+                                                <span class="email-icon">Favoris</span>
+                                            </a>
+                                        </li>
+                                        <li class="reviews sbutton">
+                                            <a class="reviews-quantity">
+                                                <span class="reviews-stars"> <i class="fa fa-share-alt"></i> </span> Partager
+                                            </a>
+                                            <div class="md-overlay hide"></div>
+                                            <ul class="social-icons post-socials smenu">
+                                                <li>
+                                                    <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fstudio.listingprowp.com%2Flisting%2Fthe-coffee-shop%2F" target="_blank"><!-- Facebook icon by Icons8 -->
+                                                        <i class="fa fa-facebook"></i>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="https://plus.google.com/share?url=http%3A%2F%2Fstudio.listingprowp.com%2Flisting%2Fthe-coffee-shop%2F" target="_blank"><!-- Google Plus icon by Icons8 -->
+                                                        <i class="fa fa-google-plus"></i>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="https://twitter.com/intent/tweet?text=The%20Coffee%20Shop&amp;url=http%3A%2F%2Fstudio.listingprowp.com%2Flisting%2Fthe-coffee-shop%2F&amp;via=ListingPro" target="_blank"><!-- twitter icon by Icons8 -->
+                                                        <i class="fa fa-twitter"></i>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="http://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Fstudio.listingprowp.com%2Flisting%2Fthe-coffee-shop%2F" target="_blank"><!-- linkedin icon by Icons8 -->
+                                                        <i class="fa fa-linkedin"></i>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="https://pinterest.com/pin/create/button/?url=http%3A%2F%2Fstudio.listingprowp.com%2Flisting%2Fthe-coffee-shop%2F" target="_blank"><!-- pinterest icon by Icons8 -->
+                                                        <i class="fa fa-pinterest"></i>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="https://www.reddit.com/login?dest=https%3A%2F%2Fwww.reddit.com%2Fsubmit%3Ftitle%3DThe%20Coffee%20Shop%26url%3Dhttp%3A%2F%2Fstudio.listingprowp.com%2Flisting%2Fthe-coffee-shop%2F" target="_blank"><!-- reddit icon by Icons8 -->
+                                                        <i class="fa fa-reddit"></i>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="https://www.stumbleupon.com/submit?title=The%20Coffee%20Shop&url=http%3A%2F%2Fstudio.listingprowp.com%2Flisting%2Fthe-coffee-shop%2F" target="_blank"><!-- stumbleupon icon by Icons8 -->
+                                                        <i class="fa fa-stumbleupon"></i>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="https://del.icio.us/login?log=out&provider=sharethis&title=The%20Coffee%20Shop&url=http%3A%2F%2Fstudio.listingprowp.com%2Flisting%2Fthe-coffee-shop%2F&v=5" target="_blank"><!-- delicious icon by Icons8 -->
+                                                        <i class="fa fa-delicious"></i>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                    {#<div class="padding-top-30">#}
+                                    {#<span class="rating-section">#}
+                                    {#<span class="rate lp-rate-satisfactory">#}
+                                    {#3.0<sup>/ 5</sup></span><span><small>2</small><br>Ratings</span>#}
+                                    {#</span>#}
+                                    {#</div>#}
+                                    <a href="#reply-title" class="secondary-btn" id="clicktoreview"><i class="fa fa-star"></i>Review </a>
+                                    <a href="#reply-title" class="secondary-btn" id="clickToContact">Contactez-nous </a>
+                                    <a href="#reply-title" class="secondary-btn" id="clickToAller">Y aller </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="content-white-area">
+                    <div class="container single-inner-container single_listing">
+                        <div class="row">
+                            <div class="col-md-8 col-sm-8 col-xs-12">
+
+                                <!-- <img src="/assets/images/play-video.png" alt="">
+                                <div class="widget-video widget-box widget-bg-color lp-border-radius-5">
+
+                                                                            <iframe width="900" height="506" src="https://www.youtube.com/embed/oMxLKOv_3t0?feature=oembed" frameborder="0" allowfullscreen></iframe>																				</div> -->
+
+                                <div class="post-row">
+                                    <div class="post-detail-content">
+                                        <div class="post-head">
+                                            <h3>À propos</h3>
+                                        </div>
+                                        <div class="post-body">
+                                            <p> {{ apropos }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="post-row padding-top-20">
+                                    <!-- <div class="post-row-header clearfix margin-bottom-15"><h3>Features</h3></div> -->
+                                    <ul class="features list-style-none clearfix">
+
+                                        <li><a href="#" class="parimary-link label label-primary">#restaurant</a></li>
+                                        <li><a href="#" class="parimary-link">#food</a></li>
+                                        <li><a href="#" class="parimary-link">#chef</a></li>
+                                        <li><a href="#" class="parimary-link">#foodlover</a></li>
+                                        <li><a href="#" class="parimary-link">#goodtimes</a></li>
+                                        <li><a href="#" class="parimary-link">#goodtimes</a></li>
+                                        <li><a href="#" class="parimary-link">#instafood</a></li>
+                                        <li><a href="#" class="parimary-link">#food</a></li>
+                                        <li><a href="#" class="parimary-link">#café</a></li>
+                                        <li><a href="#" class="parimary-link">#foodlover</a></li>
+                                        <li><a href="#" class="parimary-link">#instafood</a></li>
+                                        <li><a href="#" class="parimary-link">#café</a></li>
+
+
+                                    </ul>
+                                </div>
+
+                                <div id="submitreview">
+
+                                    <h3 class="comment-reply-title">2 Reviews for The Coffee Shop</h3>
+                                    <div class="reviews-section">
+                                        <article class="review-post">
+                                            <figure>
+                                                <div class="review-thumbnail">
+                                                    <img src="http://1.gravatar.com/avatar/11fb7a26d18bf60640441d95ffb058de?s=94&#038;d=mm&#038;r=g" alt="">
+                                                </div>
+                                                <figcaption>
+                                                    <h4>ricordo</h4>
+                                                    <p><i class="fa fa-star"></i> 36 Reviews</p>
+                                                    <!--
+                                                    <a href="#" class="report"><i class="fa fa-flag" aria-hidden="true"></i></a>
+                                                    -->
+                                                </figcaption>
+                                            </figure>
+                                            <section class="details">
+                                                <div class="top-section">
+                                                    <h3>Visit the place is Enjoyable.</h3>
+                                                    <time>April 10, 2017 6:28 am</time>
+                                                    <div class="review-count">
+                                                        <div class="rating">
+                                                            <i class="fa fa-star lp-star-good"></i><i class="fa fa-star lp-star-satisfactory"></i><i class="fa fa-star lp-star-satisfactory"></i><i class="fa fa-star lp-star-bad"></i><i class="fa fa-star-o"></i></div>
+                                                        <span class="rate lp-rate-good">4<sup>/ 5</sup></span></div>
+                                                </div>
+                                                <div class="content-section">
+                                                    <p>
+                                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi aut consectetur deserunt dignissimos eaque eligendi expedita facere incidunt, laboriosam libero minima quae quaerat quod repellat repellendus repudiandae ut. Consequuntur, ratione?
+                                                    </p>
+
+
+                                                </div>
+                                            </section>
+
+                                            <!-- moin here ends-->
+                                        </article>
+                                        <article class="review-post">
+                                            <figure>
+                                                <div class="review-thumbnail">
+                                                    <img src="http://0.gravatar.com/avatar/ceb3b0ac8505f53c921d685e6b7039a2?s=94&#038;d=mm&#038;r=g" alt="">
+                                                </div>
+                                                <figcaption>
+                                                    <h4>kieth</h4>
+                                                    <p><i class="fa fa-star"></i> 37 Reviews</p>
+                                                    <!--
+                                                    <a href="#" class="report"><i class="fa fa-flag" aria-hidden="true"></i></a>
+                                                    -->
+                                                </figcaption>
+                                            </figure>
+                                            <section class="details">
+                                                <div class="top-section">
+                                                    <h3>Just reviewing for drinks</h3>
+                                                    <time>April 11, 2017 11:29 am</time>
+                                                    <div class="review-count">
+                                                        <div class="rating">
+                                                            <i class="fa fa-star lp-star-satisfactory"></i><i class="fa fa-star lp-star-bad"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i></div>
+                                                        <span class="rate lp-rate-satisfactory">2<sup>/ 5</sup></span></div>
+                                                </div>
+                                                <div class="content-section">
+                                                    <p>
+                                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci blanditiis delectus dolor dolorum itaque odio repellat? Alias assumenda blanditiis, cum distinctio dolores explicabo hic impedit itaque magnam quia reiciendis, unde.
+                                                    </p>
+
+
+                                                </div>
+                                            </section>
+
+                                            <!-- moin here ends-->
+                                        </article>
+                                    </div>
+                                </div>
+
+
+                                <div class="clearfix"></div>
+                                <div class="post-row padding-top-20">
+                                    <div class="post-detail-content">
+                                        <div class="post-head">
+                                            <h3>Contactez-nous</h3>
+                                        </div>
+                                        <div class="">
+                                            <div class=" business-contact">
+                                                <div class="contact-form quickform">
+
+
+                                                    <form class="form-horizontal" method="post" id="contactOwner">
+                                                        <div class="form-group">
+                                                            <input type="text" class="form-control" name="name7" id="name7" placeholder="Nom et prénom">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <input type="email" class="form-control" name="email7" id="email7" placeholder="Email">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <input type="text" class="form-control" name="phone" id="phone" placeholder="Télephone">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <input type="text" class="form-control" name="sujet" id="sujet" placeholder="Sujet">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <textarea class="form-control" rows="5" name="message7" id="message7" placeholder="Message"></textarea>
+                                                        </div>
+                                                        <div class="form-group">
+
+                                                        </div>
+                                                        <div class="form-group margin-bottom-0 pos-relative">
+                                                            <input type="submit" value="Envoyer" class="lp-review-btn btn-second-hover">
+                                                            <input type="hidden" value="942" name="post_id">
+                                                            <input type="hidden" value="imranch33ma@gmail.com" name="author_email">
+                                                            <input type="hidden" value="1" name="author_id">
+                                                            <i class="lp-search-icon fa fa-send"></i>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="col-md-4 col-sm-4 col-xs-12">
+                                <div class="sidebar-post">
+
+
+                                    <div class="widget-box map-area">
+                                        <div class="widget-bg-color post-author-box lp-border-radius-5">
+                                            <div class="widget-header margin-bottom-25 hideonmobile">
+                                                <ul class="post-stat">
+                                                    <li>
+                                                        <a class="md-trigger parimary-link singlebigmaptrigger" data-lat="{{ geomLat }}" data-lan="{{ geomLng }}" data-modal="modal-4">
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div class="widget-content ">
+                                                <div class="widget-map pos-relative">
+                                                    <div id="singlepostmap" class="singlemap" data-pinicon="http://studio.listingprowp.com/wp-content/themes/listingpro/assets/images/pins/pin.png"></div>
+
+
+                                                    <div class="get-directions">
+                                                        <a href="https://www.google.com/maps?daddr={{ geomLat }},{{ geomLng }}" target="_blank">
+																	<span class="phone-icon">
+																		<i class="fa fa-map-o"></i>
+																	</span>
+                                                            <span class="phone-number ">Itinéraire</span>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div><!-- ../widget-box  -->
+                                        <div class="listing-detail-infos margin-top-20 clearfix">
+                                            <ul class="list-style-none list-st-img clearfix">
+                                                <li>
+                                                    <a>
+                                                        <span class="cat-icon">
+                                                            <img class="icon icons8-mapMarkerGrey"
+                                                                 src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAC8UlEQVRoge1aS3HDMBA1BEMIhEAwhEAohEIIgx3tk8+FYAiGEAiBYAjpoZKyTmx9Ym2cQ9+MZ3qIpf2+/bhN849nEFFLQGeMOTMwArgwMDEwub8HtpYI6PaWdRFE1LK15IS+ZT/WEhEd9pZ/UQEAF2PMmYCO+v5IRK17DgBOxpiz885MoX2VAAYh0Eh9f8x+v++PbO2PNAARtZoyrwlxdda8bon52VnAVGKMTSCiVoTGWCPGnXfHoIy2Z2Q4aYSCVwbApea5T3C0+hdOClaT3jbGnGufHy7x7KRZB4joIELsUP2C4A1gqH74AwKbWfujcfiVgVsOqxBRy8zfDAwALu7dITdcnPdvDEybBZcAcMpNQgK6p4InHgCXnNAMlMz8VUOHpmnuYZWyKAGdqPKjqO4HACepYEoZQSz1wktQ7mlVCVlf/nqoRVZzLU0ybJxRbgyMW+UP8ALGWMTlhC+SUWr29SLmYZU8CYkeUyTDax4+52IMqKOIrx8RS+coWyqkz6cXRF5GCK0I9dZWhPr+WL1dCe16hAp9EcsJrZxEVkn2wDTM32u/EZU/ebE3TCzZA3nUpN+cOuKmxWuBgNHGU9SRetOjYJmotUU4zCq4X0rIiTIVgiUsmA2RnMlkfpj4lp4pJVzJfcUQCb+aJxJ+JeSoe2JgNMacc+YYUVzrd9rM/PW2Nr7QaEWQ3K85U88GOK2dl0pr/XiH87zq3B7Cy9qr1h2hg1Y0VtM0d69UpUWHQPNKy40ZfKHScH1Oe18NWhwviqn+gs5DTHnVqPit3vCYeaXCrla0QO/zhofcOm455y3bxZQANepKbjesChkSr7wvq7h63UhBroBK39UgjZchls5FiT+j23d93EkhWDYz8XdP8BhKBJPdwW4JvoZZiEX2umI/PH3s9/bUXvejQ+oRfP+o+bSoEMuH5H54dzzUhjCqijlc55OaBuRaiIBOfjfRmGNUIfMleGjPf9XYApEvNwaGj8+LNQiW+vzk/hT8Ak0IUQVkeTWPAAAAAElFTkSuQmCC"
+                                                                 alt="mapMarkerGrey">                                                                <!-- <i class="fa fa-map-marker"></i> -->
+                                                        </span>
+                                                        <span>{{ adresse }}</span>
+                                                    </a>
+                                                </li>
+                                                <li class="lp-listing-phone">
+                                                    <a data-lpID="942" href="tel:(303) 937-6880">
+                                                        <span class="cat-icon">
+                                                            <img class="icon icons8-phone"
+                                                                 src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAEbElEQVRoQ81a4XnUMAy1vEC7QekEwASUCWgnoEzQY4FE9gLQCWgnoJ2AMgF0AtoJgAUivpdPyefzJU6cC5fcv/Z8iZ71JD3JJpP4MPO5iJTGmFfGmCcicsx8k/rNUt9R14uZ+VhEPhljLuPviegtMz8sZXDfe3eAKIhv8IKI/LXWMjN/ZuaNgoNnXjPznzWB2QLCzDAeIOCRR2vtJTP/bAwuiuInEb00xtw55y5WCaQDxFm868z8QkR+AQARXTDz3VrA1B5RA3+oJ26ttZs+6hRFwUSEBPCHiE7XQjGKYuLee38+tMsNxUTk2nu/GVp/iO+pKIrPRHSlMbFDp56shliCB0GxVWQxKssSnH+Ra1BAsVVkMQAR7KxzrrOmpGixJoqBWtjREw3cpxw+a6ZbBcUA5IGI3kxNpyHFnHOnORsx51oAqdPpPhmooecUr84FBum3yUBPU3ZU0/fvqXE2GxA8KIiT7FTaaDAR+e69P5vLsNzn1JkqoNet935H8fY9VL2B9H2cm75zDR1a30gUiMSaHjk8DzZgUW/UdgfK9oaI3ovIKK9EAjKbkkM7nPt9CyQyDP1GK9+7HlqW5VdjDDrIUcBzDctdv1XNg5rw4Jx7m4iNUGtBAWcV0lwjx6yPG6vjqqpQ6Y+I6CM6wx7ROGrdGAPmWtPV6oIuoA36DVCsc7d1MIF1q1DAnUKxKIo7InpnjElSLGqyEPDJuJpr97ue0ztFqaoK/fmJiDjvPfcZURRFne2MMVgPMIsMJXqlOzOf6SAiSR0UxaqqIDwxlFgMTLIHiaiTipfFwQw2U0G8JHcbdUjpeLSEZwaBRNRJzrOgpJVmAAO6YWR0kJgZBIIgj3b7xjn3IVUsAzAHi5lRQBRMu9upYhmvPRTNRgNRAy9F5IsWwQ+pyXxEs9GeAZUx1cmtSVlAJoBBAkBxbVIzwHcWTVUKV8aYpjmDVML6UZP/bCATwISpGbIHCaA1TusVRrB93SUGiDiXSSaNSUAmgoFBUABGRNhae6uHSHVHqkcYmDnXB0lBDcOfg96ZDCQXTIdxbeKDDLLW4gxma9c1ziCBQE18er2zF5ApYEAljZsjEbnXyX+ynxnjnb2BxGBEZOO9v04p3SmZacg7swCJwRhjkkVzHznf553ZgDRgqqoCjyFRkHaRPmeXKLF38J5ZgfRUdaTb/9LTbx1t7OPmhN4KC+FO7Zjzne3cec6Hhs9S1YzUiZa5rh3eezfn+4Jx7ePs1IoNjYIT0h5xszfVwlNoqIX/DkTjpq0dmM6od5Ipeih96xkmjsvrAeFBgCgYaK6Watp4YXaWNXmJTqFxqaE+wD0YkGaHoXI1RZ/o/wAOonAU3cqyRBuBduLZWvuqSe8HBxJ4Z6MXDxqMqDvXfbK9444MPNF6cxEggXeQpnH0V6ti/cAzdyLyYK19hKdU6uO2UnPRZwsEfrcokAAQusLLqqrgpYZyO/GulxrOu2i4CiBR/cFsANdI0GjhIgOmnc/wkl656pQ8/wC3pFkyvejV7AAAAABJRU5ErkJggg=="
+                                                                 alt="phone">                                                                    <!-- <i class="fa fa-mobile"></i> -->
+                                                        </span>
+                                                        <span>{{ tel }}</span>
+                                                    </a>
+                                                </li>
+                                                <li class="lp-user-web">
+                                                    <a data-lpID="942" href="{{ url }}" target="_blank">
+															<span class="cat-icon">
+																<img class="icon icons8-globe"
+                                                                     src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAGhklEQVRoQ91ai3EUORBVywGciQATASYCmwiwIwAiwCSgkZTA4QgwERgiwERwJgJMBOcLwOqrp2rN9Wg134UqjqlyuXZ2Z9RP/brVei0yP+jy3h+llE6I6NgYg78j+dMj3OADM+P/nbX2i/f+7keYQPu8RIx/SUSvGkYvffUtM19Zaz/tA2oTEABg5s4YAwD5YuZ/iOgP9fmDtfYjM1/jHhGdp5TOiOjl2DPGmCsiClsArQLivT9k5j8rAMXgF7gPQNbaV977jzC46zrG/xBCHst7f5ZSgsEAjf+faoBy/633/n6pWxcDgQHM/N4YcygeAACP2fPeXwCggDj13t8WA2ogAuY4pXQDMEQEg98JTb3y2D0RvS4TMgdoEZCu6+CFCwHwRWY8B6nQ7FuhTz1wC0jxjKLdk0InAQRPnYjx70IIb/cCIlQCx0/F0Dx7+qVd133G98x8GWPMYKvvB9TS3znn3hHRG2PMTQjhuf4OXk4pwUOg4EfxzijVRj0iIGDkcYsyelbl+6MWp8c8Is8fppTuhGLntTe99z0FjTG3RPR8LG5GgaiZRvAOeK/4n70hs3XVcv8UEAGDBIHY2/FKHU/wTAjhvDVOE4hyOdKqt9Ze1jPhvQedPsMbMcacALYAwTPOOQQ2Av+ZThTKa2+IyEuMNim8A0SyU8796gI3EYAfykDOOXx+ycwhxpgH2QNIjhVm/hBjzGsTaMXMWHPweTBRWJNqGg6ASFwgAx0iLaKMSCldqAyCMZCtsEbkAYiozzhbgajMlyfMGHOmKwVmRqbEZAEcMig8iHH74B8AUbP8JcaYM5XMzikWLQxARI8rg7Fm3Jf6iZlzWj44OPiOlKpjBAY/PDzk54kIs3wstRnqMtRn/cXM3zFh1torTTfnHNafE+29/D5lLMqOb5KBjsfKBMkkoNXTMTrtc5+Zv8o61S+q+n2yziCDIaZ6NvRAlDd6nk7w/i+ZTeR+uBeVb6l6C5+Pau/JLJdqF8/dWmthMO6h/EEWvA0hPJuajJatpf7J3hCXT3Je4uhv/LbUT1ODzqVf/Wz5LRE9mqqzqmoi25uBOOewgnY171oGqrT7NcY44PXWYC/POedAmaey8OW9y9hVvFJqtQyk6zp4A1TYSWv1i1SBOEtBefdoiVK/2zmHUuRFMW4KiFom7kIIT0i7aQlVlPcm149ixBpqbX03gh5AconAzJ9ijEixk1dJf0u8t9YjG2wpHnxNpRyZW6EVj3MeX8LjDUBK2TNYxybipMT2JYAUw2bjQxLDLwOkxAlWflKBjhJ5MlOsneG1v1+b2ksGxToEIDmrzOXuLcG7Fsja32vgPZC5IP/Vv//9gPzvqeWcw5758c9Ip/twfsnirMql7zr9LspaKl0v+v2alV0ZtmgdGaTf32ZB3FAWrFpAV3oEaub1inLpvxLltykapewoAT9bpvxqZTx2nTHGo7JDLCL07B5DlQWzW9K1Wavrun4LPVcuNTdWra3j2Eq+th5aEyNLy6XRra7Qqwhus17RW1KIDyklSDxF2unFh0YXCyJDLz4wM4QHCBCQfrL4ABVlbgs9Kj4AiBbJRLps9vZEAYRWO7tf31ifYd+OvsioHNQSSpoCXS0oS1xAvoRoBzGtvzCDMstF2inqHxpAOwKdeh4SEt6Fd0KxrHUyTCRSPWTafnuhxPUBc3YkUyXzQzJFoxK9wl51LAogJNNaJGt5YEmMFDZAHCySaaWJAVAokmmrjbFIxC4DaPlS8bSpjq/Zv6jqYiBip5SgL+cJ05M0K2KrfXnpJKGtEKy16PENukUSK0iX9yGER2PxsMQjXddB8AO9xtoK2JujswV7lrUVapFBlG8UiDvBpwpIBOdejR7su7VwXuyQCYOUiqw2qvRMtt6k84oghIy/A0aJZDsy/xJqVW2MZutN9GCAgLiNzlmzjzjZ1cVAKSUUZuiwonXgY4yXmkZK5t/cDG15wzmHLlVuvMITotCvb4ZWxvYxIykRVPpp7WnpKeZMORYTdUwu6rPLgqlPLOBWf9yiFJItCo4dGCiU0QcG9LGQ+gTF3OK6GIiAAdXgnf48CQAxM1px53J/cGKhdYSjnKCA+m+MuZZDOb1ci/vW2oufcoRDz0jjuAW+Bn910zIDJKJ8JoWZ0baDsf1BnPoZAZCPhcx5YDO1Wi8GIPQVpWFa9xYX2YJKAesU+oVbAJRBVlFryjIBhaZpf/BsovVW6rKbfYzX9vwLJ4dMu+kNqhoAAAAASUVORK5CYII="
+                                                                     alt="globe">                                                                <!-- <i class="fa fa-globe"></i> -->
+															</span>
+                                                        <span>{{ url }}</span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                            <div class="widget-box widget-social">
+                                                <div class="widget-content clearfix">
+                                                    <ul class="list-style-none list-st-img">
+                                                        <li class="lp-fb">
+                                                            <a href="{{ facebook }} class=" padding-left-0" target="_blank"><img src="https://cdn3.iconfinder.com/data/icons/capsocial-round/500/facebook-32.png" alt=""></a>
+                                                        </li>
+                                                        <li class="lp-tw">
+                                                            <a href="{{ twitter }}" class="padding-left-0" target="_blank"><img src="https://cdn3.iconfinder.com/data/icons/capsocial-round/500/twitter-32.png" alt=""></a>
+                                                        </li>
+                                                        <li class="lp-li">
+                                                            <a href="{{ linkedin }}" class="padding-left-0" target="_blank"><img src="https://cdn3.iconfinder.com/data/icons/capsocial-round/500/linkedin-32.png" alt=""></a>
+                                                        </li>
+                                                        <li class="lp-li">
+                                                            <a href="{{ google }}" class="padding-left-0" target="_blank"><img src="https://cdn3.iconfinder.com/data/icons/capsocial-round/500/google-32.png" alt=""></a>
+                                                        </li>
+                                                        <li class="lp-li">
+                                                            <a href="{{ youtube }}" class="padding-left-0" target="_blank"><img src="https://cdn3.iconfinder.com/data/icons/capsocial-round/500/youtube-32.png" alt=""></a>
+                                                        </li>
+                                                        <li class="lp-li">
+                                                            <a href="{{ instagram }}" class="padding-left-0" target="_blank"><img src="https://cdn3.iconfinder.com/data/icons/capsocial-round/500/instagram2-128.png" alt=""></a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div><!-- ../widget-box  -->
+                                        </div>
+                                    </div>
+
+                                    <div class="widget-box">
+
+
+                                        <div class="open-hours">
+                                            <div class="post-head">
+                                                <h3>Horaires d'ouverture</h3>
+                                            </div>
+                                            <!-- <h2>Opening Hours</h2> -->
+                                            <div class="today-hrs pos-relative">
+                                                <ul class="hidding-timings">
+                                                    <li><strong>Lundi</strong><span>10:00 AM - 11:30 PM</span></li>
+                                                    <li><strong>Mardi</strong><span>10:00 AM - 11:30 PM</span></li>
+                                                    <li><strong>Merecredi</strong><span>10:00 AM - 11:30 PM</span></li>
+                                                    <li><strong>Jeudi</strong><span>10:00 AM - 11:30 PM</span></li>
+                                                    <li><strong>Vendredi</strong><span>10:00 AM - 11:30 PM</span></li>
+                                                    <li><strong>Samedi</strong><span>10:00 AM - 11:30 PM</span></li>
+                                                    <li><strong>Dimanche</strong><span>10:00 AM - 11:30 PM</span></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="widget-box">
+                                        <div class="review-form">
+                                            <div class="post-head">
+                                                <h3 id="reply-title" class="comment-reply-title">Évaluez-nous</h3>
+                                            </div>
+                                            <div class="post-content">
+                                                <form id="" name="rewies_form" action="" method="post" enctype="multipart/form-data">
+
+                                                    <div class="col-md-6 padding-left-0">
+                                                        <div class="form-group margin-bottom-40">
+                                                            <p class="padding-bottom-15 note">Votre note:</p>
+                                                            <div class="list-style-none form-review-stars">
+                                                                <input type="hidden" name="rating" class="rating-tooltip" data-filled="fa fa-star " data-empty="fa fa-star-o"/>
+                                                                <div class="review-emoticons">
+                                                                    <div class="review angry"><img class="icon icons8-angry"
+                                                                                                   src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAADbElEQVRoge1Zz0tUURh9iJWTqYONwpQ4zxln7lv6D5QtpI2LDBfhRmbRwsVE9gMCxR9UGC1KUCQIU1xpm8ZAHE1kUjRnnsGryKAQZuPGwiZFF0FxWtyZNz5n3sz7Oc9gPjibmXfvO+d+57vc+z2GKUQhClEIhmEYCKwdUV8L1skgeC4MngjgSTwBAeskCJ4bB8/5IbB2q/kyDHOItEiWg2JQQX7ryK9xlyhxFaQzggh5FQKBtSdWTyfxDELWONZc8ry3ATwXM568KCIO3ttgEnnOr9rn2uE3mLy3IY/kEzAoExBYu7m2yWInI2rCnIJVLELQRz7qa7GOvM56oNYxYp/XbyVtAnjObz35BCKkU70AS72vMwsJ++R528wBNTuSbPHOecwnOuvWbyPQY2/6JFdOADfKgBmZl+RCVOb3JS8w76FzXzuV+Zl1ElQuQM7/3ZXABUbEzkAVdlZ8mld7P8Lh2+h5ujDJebsr5Z4Pq8iAzPY555EI6B1yojXoxuNQPb6+9SomvjXvwdiCF+2v3WifYrHdXJyad7JWZpyKQka2o8PtCvFlHRO1aA260Rp0487zGpr+Z+dkPMwBE/SZsZ6z4rj2KRb7TUV0zuulWYSrEpBlB1ryiQI+t5WgY6IWvUNOhDvKUquYycc3y8X/95uKMPywSjquMdvqU+i3UBIvXRIrSdBWQkVmGuc/nXnMRQYYqMplvZgaC4Vzenm6Drh6MkXichFw3yFPPokRZ2pcIwM0F1Nr5awdFQe7RGdB8+5iEsbVZOD4nIOSiHL9ygXQS4z1pA9D7eXmeBylk9BwsTHKRn8jBJsvnFjpqcBSVzk+DTqwN6/yTKXGPkdExJS+5OdMHf68I5LfvgddWO4qRyhgk2DhVil255Sep0hccytS6ZVya7IGoYAN7x9VYjfkxt4bD76MVIuEIw/s+DHtwsFiPT4+dSAUsGG1r0KZAC2XGWkWctfCwWI9wvfK0lY6FLBhc9SZ9vyHJw5sv3Ip8r7uRrDSy83vZS82hqux2leBxbtnsDFcjV+zdXoK17guHW3kmr3THCEf9bUYQj7/IkgcZnWrzW8xmrDyaSJM6xflob0uERIhnTCkZ0riiJBOyz47USFaMkIES4kfDQisPZGVcdD7ROxQUcbED31Rrt+0jxiFKEQh/r/4B2YxCCnP/4ErAAAAAElFTkSuQmCC"
+                                                                                                   alt="angry"></div>
+                                                                    <div class="review cry"><img class="icon icons8-crying"
+                                                                                                 src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAACw0lEQVRoge1ZMWvbQBjVagip3bUx1SLfjSbQLUOh0NmdA8V7PXjJ0EwGg+nWoT/AxCW0hZKM3uLEg2OdMEegkEChJqQ2KR2MTUscKLwOUiw7km2dpLNa0AdvsXzSe/red9z3SVHiiCOOOBRFUcDVJPRMDgZ5C0YbYISDkYEFDoMcgtEqGM2Dq8mo+SqKMkV6QpbCM0xB+ejIn9KnJnEB0q4gfKVCwNWk9fYCEncRckpVueSZlgWj3fDJT0QMwLSsJPI0L+xz/8iHTF7LrpC8hZAyAa4m5dpmgZ3CqAk5BetZBA9GXs/koiMfsB5M64Sxzwe3kj8BjOajJ2+hTYriAiL1fsAsWPZZ8ba5BCI70j9SvP5tBPPYGz3paRjk0LsAD/6/2t+AUUnhaGcNRztrMCopXO1vLCXidx0YbQhkYP72OT7RoJdTqBcSrtDLKYxPtNDW2RAoZCw4OrRKD1AvJNDcXUfvYxo3xxpujjX0PqTR3F1HvZDA5ftHoa3zKWD+DvTj4DE6bx7itul8W7dNDf1P6VDXTSOYhTpPgOs94OxZVIXcFbFQw3GDnwcAAHx7HZEAgYOdNVmwF19WMInrPblE7zLtvFYVycDsOWik2wL+jOQK+PrKfM5In/1dpyXvAswmxl48/m4L+H0uV0Dvnf2sabuKNjczhXz+0hQx0uXXgGu2fTQ2DhsJYFij+PKC4uw5RWeL4mKb4tdnj+vdsi1in3siuqLk+2UKtknRok70yx7u4cg2GfgeRYqeSoe1+eTvMKwJZtRPMzObBe9t5cX2YvItav7HuwDCAw+CRZqbztZyAWzTM/nwpnTmIFfizuNGXs/kQiG/ehFkAFnTavkjRglv3iFC2rxoBeP1GSFtUkQoM1MyQJsUI/vsZArxkxHCIyV+P8DVpJWVKsx+ojtVlN3Jhz6dlqR9xIgjjjj+v/gLAT87Freiw9YAAAAASUVORK5CYII="
+                                                                                                 alt="crying"></div>
+                                                                    <div class="review sleeping"><img class="icon icons8-sleeping"
+                                                                                                      src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAACk0lEQVRoge1ZMWvbQBjV6mBcuVBCaFyrEPlu9E/oT/BP8A8wxEsypItDaOjWLpkyeCihLZQ6SzFkiBIXbOtMuaFDhgymhJQWDxqdQOB1kOo6tmPrpJPOBX3wJnPovfved77vO01LIokkktA0TQM3dNiFEnrkDRi1wAgHI44Hjh5pgNE6GC2DG7pqvpqmjZEekaXwDVdQWR35Dn3hEhcgPROExyoE3NC93QtJfIaQDjWiJc/MIhjtyyc/EuGAmcWIyNOysM+DoyyZvFmMkbwHSZkAN/RobTPHTjJqIpqC9S2ChyNvF0rqyIesB9c6Ms758FYKJoDRsnryHrqkKi5AqfdDZsGzT8zH5gKInEhLUrzBbQT32que9Dh6pOFfwBz///6cx7fXj3HbMqd+u22Z+PkxJ3XdGCyBDDx8fLZrj9CspNDayeD6fQ7DMxPDMxPXH3Jo7WTQrKTw491Taev+QaCQMefqcHNuwt7LollJzYS9l8XN+fQuB10XUMDiE+jqaB29/SxOt9I43Uqjt5/F1dH6Qi8HXQdGIcVCCtEXsZC1BIQnLeT/YudNFpaA9D3URTKwPPegv7Bpzb8At4lRT3ocos3NchVygMZG1Ea/Pj3D15cZXB6uYXBsYGht4K5NcNcmGFobGBwbuDxcA3uVjdY+EyL6fj/y/e2TB/+kJuF8eS6y+07gUaTorXTQyOPiYBWdXR3Wdhonmys42VyBtZ1GZ1fHxcEqBo282O4HaWbuZ0FlLRAeehCsrrmROKVzB7kxk7cLJSnk4xdBHEQ1rY5+xBjBzk+JiGxeFMN4/Z6QLqlCysyUOOiSqrJnJ1dIkIwQrpT4ZIAbupeVOtx+oj9WlP3RQ59Na5E9YiSRRBL/X/wB39ErAGSgONsAAAAASUVORK5CYII="
+                                                                                                      alt="sleeping"></div>
+                                                                    <div class="review smily"><img class="icon icons8-smily"
+                                                                                                   src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAC0klEQVRoge1ZMWgaURi+9cBBXIKTN2juYSk4FUtLTPYMDo4ODhlPEIouDga6uJXSQCAh2MGOQchQoYMHLuop3BoIwaVQKoQblOvWr8Odh5pE7z3feSncD9/i8Xvf9/7vPd7/nyAEEUQQQQiCIECXwhjsZzGUP0EjKjRZhyYbNnQM5RY00oBGCtClsN98BUFYIO2QJXANS1DBP/I9cmgRpyD9JGR9p0KgS2F79bYk/oSQHpG8Ja8lUtDImD95R4QBLZHyiDwpUPucHQXO5BOpHZK3wakS0KWwt7ZZYycee8KbDetahL4d+cF+1j/yW+4Hyzo8zvntrcQmQCMF/8nb6MslegG+en/LKtj22fGxuQE0J5KbzWt2k7j++Ab1k/eo5Q/QrKbx8OPVRiKseVQ2gnXtXUvipvEF5myK64szFI+PUDw+QiWXWUuGNQ8aAYZyy72ADf5vVtMwZ1MAwMPvXw6R4vERmtU09zwbKkUF1h+ftfwBri/OYM6m+P7t6xKRSi7DPY96I2PD1aGWP1h6OY0AljwGAetPoGY1/SyRyw9vuefNwc1CZjf57Cr+vHnNPc/GmMZC6qbVMLtJNKtpVHIZVHIZfFbeuT5GWfKoLnb2ZMHFn+4UDZoKvJx70BwDcupegNXE+E96EbTNzcu4Ss/B0Niw2ujv4Plnd5dR3F1GvbXPiogx7cvaiog/avzR76YaR1sR0SmHaFffYB5F0raUo3oEbUXE/dXjVb6/iqKtiBjVI3QCWJqZ5Sq43wuTVgxtRXREmGocphp3yLcVEZNWjMr7Ww+CaZub2/M9h+wqbs/36KzDbTbUI4c0ZZ+0YhjVI+iUQ+iUQxjVI7Qrb2Cwn+VCnlUEO2QDXk2rvR8xerDyj0R4Ni/awXh9SUhfLoHLzFQ20JdLvn12soSwVETWfSW+GtClsF2VBqx+YrywKcfOh74BOfXsI0YQQQTx/8U/NbsBR2GfRk4AAAAASUVORK5CYII="
+                                                                                                   alt="smily"></div>
+                                                                    <div class="review cool"><img class="icon icons8-cool"
+                                                                                                  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAADWklEQVRoge1ZX0hTURi/r0vKFVSDoC6U9x7EUEJQQWThJP80NpDwIR/uo8qEVWRCGEOI8GkIJSwfRAgkCJYmDEwbzkx3R1wIIlYPgx4iENvDIMiiXw+7Xba7P95zd+9uwT74ntw55/c73+/7PN93GaZmNatZzRiGYSCxdsQ5LxJ8ECKJQuQliHxadgkJPgyRLEAkAiTWbjVehmFyQCtgCTR7lpBgHfgd4swCpwBd1HmpqkQgsXb59ioEXoTIDmHNBS82tEAkKePBKyTSEBtaTAJPBGqd63fBYPANLVUEL7tBkYDE2s2VTRk5GZET5iSsZhJSZeDjnNc68BXmQ1Y6RtT5yqWkj4BIBOvBy77L++kJWKr9CqMgy6fKZfMQp6lI6uTNxBoxP9OJYaEXbVc8JX10pAerobaSIFZDbZr2mJ/pRCbWqF9GyD57lcXzM51lD1X7hL8b42Mu9A0OoG9wAONjLkzdvky1x9JsRz6BBB/WTkCl/9GRHqrDjXCXx62OYJQiAvnl0zvUTw0gPNeOvY0m7G00ITzXTr1+WOjVn8hQPR2CgS7K27taoP9r1/uo9ggGuiohkF+BMrFGqigUHk53Cd6h/sIkFgl0SwgiQXK5WbN23z69VHD4l7WLmtdvLrYWq2IpGglFi5XB5HJz2TLo8rjLltHNxdZDdZ9cbi71z0z7w06eLJQEsjTbgQl/N1weN1weN7xD/ZiedJY5PP8SpiediiRdHjcm/N1Ymu0oKpscX6CJwL/zDvrrcRLQTiDbxFgPOtdpmxszn9LJkAOfn5yhWKOjsTFLRvsrLCI+G6J3jpojHxWJFA2433GCgy2u7G8SD04g4rPh02OH1ttP6x5F0raUEZ8NEZ8NmbXzRf/+4dFpRHw2rN+qw683vLZ99TQz+VHQngvvH55CxGfD66l67K+w+LnN4WCLw7cXLN4FTyoEvz47q1n7FQ+CaZqbHzEO4v3jClC1r/mPYO/5Oe3SMWw2tEOcNFJKhhyI3T2GlzfqsH6zDtv36vEx5MD3Vxe0g49zXkPA6yWh3/k0zJpWmz9iNOHmC0iYNi+qwng9j8gu74chM1M+jV3eb9lnpywRPRHhJUuBqw0Sa5ejsoBsP5HKScqU8qEvTgKmfcSoWc1q9v/ZHwEdYUWl/1cUAAAAAElFTkSuQmCC"
+                                                                                                  alt="cool"></div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="clearfix"></div>
+                                                    <div class="form-group">
+                                                        <label for="u_mail">Email</label>
+                                                        <input type="email" placeholder="you@website.com" id="u_mail" class="form-control" name="u_mail"/>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="post_title">Titre</label>
+                                                        <input type="text" placeholder="Exemple: C'était une expérience formidable d'être là" id="post_title" class="form-control" name="post_title"/>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="post_description">Commentaire</label>
+                                                        <textarea placeholder="Exp: Une excellente revue couvre la nourriture, le service et l'ambiance. Vous avez des recommandations pour vos plats préférés et vos boissons, ou quelque chose que tout le monde devrait essayer ici? Incluez cela aussi! Et rappelez-vous" id="post_description" class="form-control" rows="6" name="post_description"></textarea>
+                                                        <p>Votre avis a recommandé d'avoir au moins 140 caractères</p>
+                                                    </div>
+                                                    <p class="form-submit">
+                                                        <input name="submit_review" type="submit" id="submit" class="lp-review-btn btn-second-hover" value="Envoyer ">
+
+
+                                                        <input type="hidden" name="comment_post_ID" value="942" id="comment_post_ID">
+                                                        <span class="review_status"></span>
+                                                        <img class="loadinerSearch" width="100px" src="http://studio.listingprowp.com/wp-content/themes/listingpro/assets/images/ajax-load.gif">
+                                                    </p>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!--==================================Section Close=================================-->
+
+
+            <!-- End Main -->
+        </div>
+
+
+    </fiche>
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+
+        $siteURL = jQuery('#page').data("site-url");
+        $pinicon = jQuery('#singlepostmap').data('pinicon');
+        if ($pinicon === "") {
+            $pinicon = $siteURL + "wp-content/themes/listingpro/assets/images/pins/pin.png";
+        }
+
+        $lat = jQuery('.singlebigmaptrigger').data("lat");
+        $lan = jQuery('.singlebigmaptrigger').data("lan");
+        "use strict";
+        if ($lan != '' && $lat != '') {
+            function init() {
+                var e = {zoom: 17, scrollwheel: !1, center: new google.maps.LatLng($lat, $lan), styles: [{featureType: "administrative", elementType: "labels.text.fill", stylers: [{color: "#444444"}]}, {featureType: "landscape", elementType: "all", stylers: [{color: "#f2f2f2"}]}, {featureType: "poi", elementType: "all", stylers: [{visibility: "off"}]}, {featureType: "road", elementType: "all", stylers: [{saturation: -100}, {lightness: 45}]}, {featureType: "road.highway", elementType: "all", stylers: [{visibility: "simplified"}]}, {featureType: "road.arterial", elementType: "labels.icon", stylers: [{visibility: "off"}]}, {featureType: "transit", elementType: "all", stylers: [{visibility: "off"}]}, {featureType: "water", elementType: "all", stylers: [{color: "#b7ecf0"}, {visibility: "on"}]}]}, l = document.getElementById("singlepostmap"), t = new google.maps.Map(l, e);
+                new google.maps.Marker({position: new google.maps.LatLng($lat, $lan), icon: "" + $pinicon + "", map: t, title: "Snazzy!"})
+            }
+
+            google.maps.event.addDomListener(window, "load", init);
+        }
+        //        console.clear();
+    </script>
+{% endblock %}

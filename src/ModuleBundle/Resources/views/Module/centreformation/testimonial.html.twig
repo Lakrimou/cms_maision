@@ -1,0 +1,159 @@
+
+
+<section class="testimonial" style="height: 241px;">
+    {% if  connected %}
+        <a data-toggle="modal" href="#section-ad" class="button-default pull-right  " style=" z-index: 99;position: relative;">Gérer cette section</a>
+
+    {% endif %}
+    {% if centreFormationAd(module) %}
+        <div class="overlay padding-120" style="height: 100%;">
+            <div class="testimonial-items">
+                <div class="testimonial-slider swiper-container" style=" overflow: initial;">
+                    <div class="swiper-wrapper">
+
+                        <div class="testimonial-item swiper-slide">
+                            {% if centreFormationAd(module) %}
+                                {% for a in centreFormationAd(module) %}
+                                    <p style="padding: 1px 15px; font-size: 23px;">{{ a.data|raw }}</p>
+                                {% endfor %}
+                            {% endif %}
+                            <a href="#contact" class="button-appeler" style=" margin-top: -37px;">Contactez Nous</a>
+
+                        </div><!-- testimonial-item -->
+
+
+                    </div><!-- swiper-wrapper -->
+
+                </div><!-- swiper-container -->
+            </div><!-- testimonial-items -->
+        </div><!-- overlay -->
+    {% else %}
+
+        <div class="overlay padding-120" style="height: 100%;">
+            <div class="testimonial-items">
+                <div class="testimonial-slider swiper-container">
+                    <div class="swiper-wrapper">
+
+                        <div class="testimonial-item swiper-slide">
+
+                            <p style="font-size: 27px" class="sec-pub"style="font-size: 27px">TAPEZ UN TEXTE ICI</p>
+
+                            <a href="#contact" class="button-appeler" style=" margin-top: -26px;">Contactez Nous</a>
+
+                        </div><!-- testimonial-item -->
+
+
+                    </div><!-- swiper-wrapper -->
+
+                </div><!-- swiper-container -->
+            </div><!-- testimonial-items -->
+        </div><!-- overlay -->
+    {% endif %}
+</section><!-- testimonial -->
+<style>
+
+    .button-appeler {
+        border: 2px;
+        display: inline-block;
+        text-decoration: none;
+        color: #f0f0f0;
+        font-size: 16px;
+        font-weight: 700;
+        /* background-color: #6c5ebf; */
+        border-radius: 2px;
+        padding: 11px 30px;
+        transition: .25s ease-out;
+        border-style: solid;
+        border-color: #6c5ebf;
+    }
+
+    {% set path =  asset('uploads/image/')~qouiqui.user.id ~'/'~ qouiqui.id ~'/sectionAd/photo.jpg' %}
+    {% if asset_exists(path) %}
+
+    .testimonial {
+        background-image: url({{  asset('uploads/image/')~qouiqui.user.id ~'/'~ qouiqui.id ~'/sectionAd/photo.jpg' }});
+        background-size: cover;
+        background-position: center;
+        overflow: hidden;
+    }
+
+    {#{% else %}#}
+    /*.testimonial {*/
+    /*background-image: url(../../images/background/testimonial-bg.jpg);*/
+    /*background-size: cover;*/
+    /*background-position: center;*/
+    /*overflow: hidden;*/
+    /*}*/
+
+    {% endif %}
+
+</style>
+
+<div class="modal fade " id="section-ad" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title"></h4>
+            </div>
+
+            <div class="modal-body row">
+                <form id="ajout_categ" method="POST"
+                      action="{{ path('module_centreformation_section_ad',{'idqq': qouiqui.id }) }}"
+                      enctype="multipart/form-data">
+
+                    {% if centreFormationAd(module) %}
+                        {% for a in centreFormationAd(module) %}
+
+                            <input type="hidden" name="secCat" class="reserver" value="{{ a.id }}">
+                            <div class="col-md-12">
+                                <label class="col-md12">Ajouter un texte</label>
+                                <div class="form-group ">
+
+                    <textarea placeholder="entrer Nom du Formation par Domaine" rows="3" class="form-control"
+                              name="ad">{{ a.data }}</textarea>
+                                </div>
+
+                                <div class="form-group">
+                                    <label> Choisissez un photo</label>
+                                    <input autocomplete="off" class="form-control "
+                                           name="file" type="file" required="required"
+                                           placeholder="choisissez_image" data-items="8"/>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        <input type="hidden" name="secCat" class="reserver">
+                        <div class="col-md-12">
+                            <label class="col-md12">Domaine de Formation</label>
+                            <div class="form-group ">
+
+                    <textarea placeholder="entrer Nom du Formation par Domaine" rows="3" class="form-control"
+                              name="ad"></textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <label> Choisissez un photo</label>
+                                <input autocomplete="off" class="form-control "
+                                       name="file" type="file" required="required"
+                                       placeholder="choisissez_image" data-items="8"/>
+                            </div>
+                        </div>
+                    {% endif %}
+
+                </form>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+                <button type="submit" class="btn btn-primary " data-target="modifier" data-selector="ajout_categ">
+                    Ajouter
+                </button>
+            </div>
+        </div>
+
+    </div>
+</div>
+

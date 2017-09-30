@@ -1,0 +1,72 @@
+<section id="image-text" class="padding-bottom-top-120">
+    <div class="container">
+        {% if connected %}
+            <div data-step="10" data-intro="Cela vous permet de gerer les text publicitair de votre fiche !" class="pull-right margin-bott-40">
+                <button type="button" class="theme-btn button11 btn-style-one pull-right" data-toggle="modal"
+                        data-target="#editbanner" style="position: relative; ">Modifier la Bannière
+                </button>
+            </div>
+        {% endif %}
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <div class="image-text-heading top30 bottom30">
+                    <h2 class="bottom40">{% if (theme is not empty) and (theme.banner.titre is defined) %}{{ theme.banner.titre }}
+                    {% else %}
+
+                        Titre de votre bannière publicitaire
+
+                        {% endif %}<br>
+                        <span>{% if (theme is not empty) and (theme.banner.text is defined) %}{{ theme.banner.text|raw }}
+
+                            {% else %}
+
+                                text de votre bannière publicitaire
+
+                            {% endif %}</span></h2>
+                    <a href="#section-contact" class="link_arrow white_border top10">Nous Contacter</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% if connected %}
+    <!-- Modal -->
+    <div id="editbanner" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-md">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Modifier votre bannière publicitaire</h4>
+                </div>
+                <div class="modal-body">
+                    <div class=" row">
+                        <form id="edit_banner" method="POST" action="{{ path('change_banner',{'qq_id': qouiqui.id}) }}">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="Grand text">Grand text</label>
+                                    <input type="text" name="banner[titre]" class="form-control"
+                                           value="{% if (theme is not empty) and (theme.banner.titre is defined) %}{{ theme.banner.titre }}{% endif %}">
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="Text Descriptive">Text Descriptive</label>
+                                    <textarea id="det" name="banner[text]" class="ckeditor" cols="30" rows="10">
+                                                {% if (theme is not empty) and (theme.banner.text is defined) %}{{ theme.banner.text }}{% endif %}
+                                  </textarea>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Annuler</button>
+                    <button type="submit" class="btn btn-primary " data-target="modifier" data-selector="edit_banner">
+                        enregistrer
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endif %}

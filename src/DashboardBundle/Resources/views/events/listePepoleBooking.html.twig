@@ -1,0 +1,48 @@
+{% extends 'dashboardLayaout/dashboardLayout.html.twig' %}
+{% block body %}
+    <div class="col-sm-9 col-md-12">
+        <span class="titre-spain">Liste des réservations</span>
+        <table id="quoiquiUsers" class="display" cellspacing="0" width="100%">
+            <thead>
+            <tr>
+                <th>Nom du client</th>
+                <th>Adress</th>
+                <th>E-mail</th>
+                <th>Téléphone</th>
+                <th>Nom de l'évenements</th>
+                <th>Confirmer/Annuler</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for b in booking %}
+                <tr>
+                    <td>{{ b.user.username }} {{ b.user.prenom }} </td>
+                    <td>{{ b.user.adress }}</td>
+                    <td>{{ b.user.email}}</td>
+                    <td>{{ b.user.phoneNumber  }}</td>
+                    <td>{{ b.events.eventName }}</td>
+                    <td>
+                        {% if b.statu == 0 %}
+                            <input type="button" class="btn btn-info" value="Confirmer"/>
+                        {% else %}
+                            <input type="button" class="btn btn-success" value="Confirmer"/>
+                        {% endif %}
+                    </td>
+                </tr>
+           {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        $(document).ready(function () {
+            $('#quoiquiUsers').DataTable();
+        });
+    </script>
+{% endblock %}

@@ -1,0 +1,886 @@
+<div class="vc_row wpb_row vc_row-fluid vc_custom_1448544673381">
+    <div class="wpb_column vc_column_container vc_col-sm-12">
+        <div class="vc_column-inner ">
+            <div class="wpb_wrapper">
+                <div class="car-listing-tabs-unit listing-cars-id-20589">
+                    <div class="car-listing-top-part">
+                        <div class="found-cars-cloned"></div>
+                        <div class="title">
+                            <!-- Trigger the modal with a button -->
+                            {% if app.user %}
+                                <button type="button" class="load-more-btn" data-toggle="modal" data-target="#listVoiture">Gérer cette section</button>
+                            {% endif %}
+                        </div>
+
+                        <div class="stm-listing-tabs">
+                            <ul class="heading-font" role="tablist">
+                                <li class=active>
+                                    <a href="#car-listing-category-new-cars" role="tab" data-toggle="tab">
+                                        Voitures neuves </a>
+                                </li>
+                                <li>
+                                    <a href="#car-listing-category-used-cars" role="tab" data-toggle="tab">
+                                        Véhicules d'occasion </a>
+                                </li>
+                                <li>
+                                    <a href="#car-listing-tab-search" role="tab" data-toggle="tab">
+                                        Rechercher l'inventaire </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="car-listing-main-part">
+                        <div class="tab-content">
+                            <div role="tabpanel" class="tab-pane active" id="car-listing-category-new-cars">
+                                <div class="found-cars-clone">
+                                    <div class="found-cars heading-font"><i class="stm-icon-car"></i>DISPONIBLE
+                                        <span class="blue-lt">13 VOITURES</span></div>
+                                </div>
+                                <div class="row row-4 car-listing-row" id="gallery_vehicule">
+
+                                    {% for module in module %}
+
+                                        <div class="col-md-3 col-sm-4 col-xs-12 col-xxs-12 stm-template-front-loop">
+                                            {% if asset_exists('/uploads/image/40/369/vehicule/'~module.id~'.png') %}
+                                                {% set img =  '/uploads/image/40/369/vehicule/'~module.id~'.png' %}
+                                            {% else %}
+                                                {% set img = '/uploads/image/40/369/vehicule/car.png' %}
+                                            {% endif %}
+
+                                            <div class="image">
+                                                <img width="255" height="135"
+                                                     src="{{ img }}"
+                                                     class="attachment-stm-img-255-135 size-stm-img-255-135"
+                                                     alt="
+                                                        {{ module.serie }}&nbsp;
+                                                        {% if(module.model) %}
+                                                        {{ module.model.mark.name }}&nbsp;
+                                                            {{ module.model.name }}
+                                                        {% endif %}"
+                                                     data-retina="http://motors.stylemixthemes.com/wp-content/uploads/2015/12/122-798x466.jpg"
+                                                     data-toggle="modal" data-target="#Modal_reservation"
+                                                     id="img{{ module.id }}"
+                                                />
+                                            </div>
+                                            <div class="listing-car-item-meta">
+                                                <div class="car-meta-top heading-font clearfix">
+                                                    <div class="price">
+                                                        <div class="normal-price">{{ module.prixJour }} DT</div>
+                                                    </div>
+                                                    <div class="car-title">
+                                                        {{ module.serie }}&nbsp;
+                                                        {% if(module.model) %}
+                                                            {{ module.model.mark.name }}&nbsp;
+                                                            {{ module.model.name }}
+                                                        {% endif %}
+                                                    </div>
+                                                </div>
+
+                                                <div class="car-meta-bottom">
+                                                    <span>{{ module.nbrPlace }} places</span>
+                                                    <span style="float: right">
+                                                                {% if module.statut == "reserves" %}
+                                                                    reservé
+                                                                {% endif %}
+                                                        {% if module.statut == "non_reserves" %}
+                                                            non reservé
+                                                        {% endif %}
+
+                                                            </span>
+                                                </div>
+
+                                            </div>
+                                            <!--</a>-->
+                                        </div>
+                                    {% endfor %}
+
+
+                                </div>
+
+
+                                <div class="row">
+                                    <div class="col-xs-12 text-center">
+                                        <div class="dp-in">
+                                            <a class="load-more-btn"
+                                               href="http://motors.stylemixthemes.com/inventory?condition=new-cars">
+                                                Show all </a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div role="tabpanel" class="tab-pane " id="car-listing-category-used-cars">
+                                <div class="found-cars-clone">
+                                    <div class="found-cars heading-font"><i class="stm-icon-car"></i>available
+                                        <span class="blue-lt">19 cars</span></div>
+                                </div>
+                                <div class="row row-4 car-listing-row">
+
+
+                                    <div class="col-md-3 col-sm-4 col-xs-12 col-xxs-12 stm-template-front-loop">
+                                        <a href="http://motors.stylemixthemes.com/listings/bmw-328i-perfect-condition"
+                                           class="rmv_txt_drctn xx">
+                                            <div class="image">
+                                                <img width="255" height="135"
+                                                     src="http://motors.stylemixthemes.com/wp-content/uploads/2015/12/1_3-255x135.jpg"
+                                                     class="attachment-stm-img-255-135 size-stm-img-255-135"
+                                                     alt="BMW 328i, Sport Line Body Kit"
+                                                     data-retina="http://motors.stylemixthemes.com/wp-content/uploads/2015/12/1_3-798x466.jpg"/>
+                                            </div>
+                                            <div class="listing-car-item-meta">
+                                                <div class="car-meta-top heading-font clearfix">
+                                                    <div class="price discounted-price">
+                                                        <div class="regular-price">$35 000</div>
+                                                        <div class="sale-price">$28 000</div>
+                                                    </div>
+                                                    <div class="car-title">
+                                                        BMW 328i, Sport Line Body Kit
+                                                    </div>
+                                                </div>
+
+                                                <div class="car-meta-bottom">
+                                                    <ul>
+
+
+                                                        <li>
+                                                            <i class="stm-icon-fuel"></i>
+
+                                                            <span>45/56</span>
+                                                        </li>
+
+
+                                                        <li>
+                                                            <i class="stm-icon-transmission_fill"></i>
+
+
+                                                            <span>Automatic</span>
+
+                                                        </li>
+
+                                                    </ul>
+                                                </div>
+
+                                            </div>
+                                        </a>
+                                    </div>
+
+                                    <div class="col-md-3 col-sm-4 col-xs-12 col-xxs-12 stm-template-front-loop">
+                                        <a href="http://motors.stylemixthemes.com/listings/toyota-tacoma-4wd-xse-navi-leather"
+                                           class="rmv_txt_drctn xx">
+                                            <div class="image">
+                                                <img width="255" height="135"
+                                                     src="http://motors.stylemixthemes.com/wp-content/uploads/2015/12/121-255x135.jpg"
+                                                     class="attachment-stm-img-255-135 size-stm-img-255-135"
+                                                     alt="Toyota Tacoma 4WD, XSE, Leather"
+                                                     data-retina="http://motors.stylemixthemes.com/wp-content/uploads/2015/12/121-798x466.jpg"/>
+                                            </div>
+                                            <div class="listing-car-item-meta">
+                                                <div class="car-meta-top heading-font clearfix">
+                                                    <div class="price discounted-price">
+                                                        <div class="regular-price">$32 000</div>
+                                                        <div class="sale-price">$28 000</div>
+                                                    </div>
+                                                    <div class="car-title">
+                                                        Toyota Tacoma 4WD, XSE, Leather
+                                                    </div>
+                                                </div>
+
+                                                <div class="car-meta-bottom">
+                                                    <ul>
+
+
+                                                        <li>
+                                                            <i class="stm-icon-fuel"></i>
+
+                                                            <span>45/56</span>
+                                                        </li>
+
+
+                                                        <li>
+                                                            <i class="stm-icon-transmission_fill"></i>
+
+
+                                                            <span>Manual</span>
+
+                                                        </li>
+
+                                                    </ul>
+                                                </div>
+
+                                            </div>
+                                        </a>
+                                    </div>
+
+                                    <div class="col-md-3 col-sm-4 col-xs-12 col-xxs-12 stm-template-front-loop">
+                                        <a href="http://motors.stylemixthemes.com/listings/toyota-rav4-se-perfect-condition"
+                                           class="rmv_txt_drctn xx">
+                                            <div class="image">
+                                                <img width="255" height="135"
+                                                     src="http://motors.stylemixthemes.com/wp-content/uploads/2015/12/218-255x135.jpg"
+                                                     class="attachment-stm-img-255-135 size-stm-img-255-135"
+                                                     alt="Toyota RAV4 SE, like New"
+                                                     data-retina="http://motors.stylemixthemes.com/wp-content/uploads/2015/12/218-798x466.jpg"/>
+                                            </div>
+                                            <div class="listing-car-item-meta">
+                                                <div class="car-meta-top heading-font clearfix">
+                                                    <div class="price">
+                                                        <div class="normal-price">Request</div>
+                                                    </div>
+                                                    <div class="car-title">
+                                                        Toyota RAV4 SE, like New
+                                                    </div>
+                                                </div>
+
+                                                <div class="car-meta-bottom">
+                                                    <ul>
+
+
+                                                        <li>
+                                                            <i class="stm-icon-fuel"></i>
+
+                                                            <span>45/56</span>
+                                                        </li>
+
+
+                                                        <li>
+                                                            <i class="stm-icon-transmission_fill"></i>
+
+
+                                                            <span>Automatic</span>
+
+                                                        </li>
+
+                                                    </ul>
+                                                </div>
+
+                                            </div>
+                                        </a>
+                                    </div>
+
+                                    <div class="col-md-3 col-sm-4 col-xs-12 col-xxs-12 stm-template-front-loop">
+                                        <a href="http://motors.stylemixthemes.com/listings/toyota-avalon-ltx-leather-sunroof-navigation"
+                                           class="rmv_txt_drctn xx">
+                                            <div class="image">
+                                                <img width="255" height="135"
+                                                     src="http://motors.stylemixthemes.com/wp-content/uploads/2015/12/516-255x135.jpg"
+                                                     class="attachment-stm-img-255-135 size-stm-img-255-135"
+                                                     alt="Toyota Avalon LTX, Leather, Sunroof"
+                                                     data-retina="http://motors.stylemixthemes.com/wp-content/uploads/2015/12/516-798x466.jpg"/>
+                                            </div>
+                                            <div class="listing-car-item-meta">
+                                                <div class="car-meta-top heading-font clearfix">
+                                                    <div class="price discounted-price">
+                                                        <div class="regular-price">$65 000</div>
+                                                        <div class="sale-price">$58 000</div>
+                                                    </div>
+                                                    <div class="car-title">
+                                                        Toyota Avalon LTX, Leather, Sunroof
+                                                    </div>
+                                                </div>
+
+                                                <div class="car-meta-bottom">
+                                                    <ul>
+
+
+                                                        <li>
+                                                            <i class="stm-icon-fuel"></i>
+
+                                                            <span>45/56</span>
+                                                        </li>
+
+
+                                                        <li>
+                                                            <i class="stm-icon-transmission_fill"></i>
+
+
+                                                            <span>Automatic</span>
+
+                                                        </li>
+
+                                                    </ul>
+                                                </div>
+
+                                            </div>
+                                        </a>
+                                    </div>
+
+                                    <div class="col-md-3 col-sm-4 col-xs-12 col-xxs-12 stm-template-front-loop">
+                                        <a href="http://motors.stylemixthemes.com/listings/tesla-model-x-perfect-condition"
+                                           class="rmv_txt_drctn xx">
+                                            <div class="image">
+                                                <img width="255" height="135"
+                                                     src="http://motors.stylemixthemes.com/wp-content/uploads/2015/12/tesla2-255x135.jpg"
+                                                     class="attachment-stm-img-255-135 size-stm-img-255-135"
+                                                     alt="Tesla Model X, Perfect condition"
+                                                     data-retina="http://motors.stylemixthemes.com/wp-content/uploads/2015/12/tesla2-798x466.jpg"/>
+                                            </div>
+                                            <div class="listing-car-item-meta">
+                                                <div class="car-meta-top heading-font clearfix">
+                                                    <div class="price">
+                                                        <div class="normal-price">$70 000</div>
+                                                    </div>
+                                                    <div class="car-title">
+                                                        Tesla Model X, Perfect condition
+                                                    </div>
+                                                </div>
+
+                                                <div class="car-meta-bottom">
+                                                    <ul>
+
+
+                                                        <li>
+                                                            <i class="stm-icon-fuel"></i>
+
+                                                            <span>45/56</span>
+                                                        </li>
+
+
+                                                        <li>
+                                                            <i class="stm-icon-transmission_fill"></i>
+
+
+                                                            <span>Automatic</span>
+
+                                                        </li>
+
+                                                    </ul>
+                                                </div>
+
+                                            </div>
+                                        </a>
+                                    </div>
+
+                                    <div class="col-md-3 col-sm-4 col-xs-12 col-xxs-12 stm-template-front-loop">
+                                        <a href="http://motors.stylemixthemes.com/listings/mazda-cx-5-sx-v6-perfect-condition"
+                                           class="rmv_txt_drctn xx">
+                                            <div class="image">
+                                                <img width="255" height="135"
+                                                     src="http://motors.stylemixthemes.com/wp-content/uploads/2015/12/Mazda_CX5_-255x135.jpg"
+                                                     class="attachment-stm-img-255-135 size-stm-img-255-135"
+                                                     alt="Mazda CX-5 SX, V6, ABS, Sunroof"
+                                                     data-retina="http://motors.stylemixthemes.com/wp-content/uploads/2015/12/Mazda_CX5_-798x466.jpg"/>
+                                            </div>
+                                            <div class="listing-car-item-meta">
+                                                <div class="car-meta-top heading-font clearfix">
+                                                    <div class="price">
+                                                        <div class="normal-price">$20 000</div>
+                                                    </div>
+                                                    <div class="car-title">
+                                                        Mazda CX-5 SX, V6, ABS, Sunroof
+                                                    </div>
+                                                </div>
+
+                                                <div class="car-meta-bottom">
+                                                    <ul>
+
+
+                                                        <li>
+                                                            <i class="stm-icon-fuel"></i>
+
+                                                            <span>45/56</span>
+                                                        </li>
+
+
+                                                        <li>
+                                                            <i class="stm-icon-transmission_fill"></i>
+
+
+                                                            <span>Automatic</span>
+
+                                                        </li>
+
+                                                    </ul>
+                                                </div>
+
+                                            </div>
+                                        </a>
+                                    </div>
+
+                                    <div class="col-md-3 col-sm-4 col-xs-12 col-xxs-12 stm-template-front-loop">
+                                        <a href="http://motors.stylemixthemes.com/listings/kia-sorento-4wd-perfect-condition"
+                                           class="rmv_txt_drctn xx">
+                                            <div class="image">
+                                                <img width="255" height="135"
+                                                     src="http://motors.stylemixthemes.com/wp-content/uploads/2015/12/115-255x135.jpg"
+                                                     class="attachment-stm-img-255-135 size-stm-img-255-135"
+                                                     alt="Kia Sorento 4WD, Good condition"
+                                                     data-retina="http://motors.stylemixthemes.com/wp-content/uploads/2015/12/115-798x466.jpg"/>
+                                            </div>
+                                            <div class="listing-car-item-meta">
+                                                <div class="car-meta-top heading-font clearfix">
+                                                    <div class="price">
+                                                        <div class="normal-price">$25 000</div>
+                                                    </div>
+                                                    <div class="car-title">
+                                                        Kia Sorento 4WD, Good condition
+                                                    </div>
+                                                </div>
+
+                                                <div class="car-meta-bottom">
+                                                    <ul>
+
+
+                                                        <li>
+                                                            <i class="stm-icon-fuel"></i>
+
+                                                            <span>45/56</span>
+                                                        </li>
+
+
+                                                        <li>
+                                                            <i class="stm-icon-transmission_fill"></i>
+
+
+                                                            <span>Automatic</span>
+
+                                                        </li>
+
+                                                    </ul>
+                                                </div>
+
+                                            </div>
+                                        </a>
+                                    </div>
+
+                                    <div class="col-md-3 col-sm-4 col-xs-12 col-xxs-12 stm-template-front-loop">
+                                        <a href="http://motors.stylemixthemes.com/listings/kia-rio-good-condition-navi"
+                                           class="rmv_txt_drctn xx">
+                                            <div class="image">
+                                                <img width="255" height="135"
+                                                     src="http://motors.stylemixthemes.com/wp-content/uploads/2015/12/213-255x135.jpg"
+                                                     class="attachment-stm-img-255-135 size-stm-img-255-135"
+                                                     alt="Kia Rio, Good Condition, Navi"
+                                                     data-retina="http://motors.stylemixthemes.com/wp-content/uploads/2015/12/213-798x466.jpg"/>
+                                            </div>
+                                            <div class="listing-car-item-meta">
+                                                <div class="car-meta-top heading-font clearfix">
+                                                    <div class="price">
+                                                        <div class="normal-price">$15 000</div>
+                                                    </div>
+                                                    <div class="car-title">
+                                                        Kia Rio, Good Condition, Navi
+                                                    </div>
+                                                </div>
+
+                                                <div class="car-meta-bottom">
+                                                    <ul>
+
+
+                                                        <li>
+                                                            <i class="stm-icon-fuel"></i>
+
+                                                            <span>45/56</span>
+                                                        </li>
+
+
+                                                        <li>
+                                                            <i class="stm-icon-transmission_fill"></i>
+
+
+                                                            <span>Manual</span>
+
+                                                        </li>
+
+                                                    </ul>
+                                                </div>
+
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-xs-12 text-center">
+                                        <div class="dp-in">
+                                            <a class="load-more-btn"
+                                               href="http://motors.stylemixthemes.com/inventory?condition=used-cars">
+                                                Show all </a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <!--Search tab-->
+                            <div role="tabpanel" class="tab-pane " id="car-listing-tab-search">
+                                <div class="found-cars-clone">
+                                    <div class="found-cars heading-font"><i class="stm-icon-car"></i>available
+                                        <span class="blue-lt">32 cars</span></div>
+                                </div>
+                                <div class="tab-search-title heading-font">
+                                    <i class="stm-icon-car_search"></i>
+                                    Search Inventory
+                                </div>
+                                <div class="filter stm-vc-ajax-filter">
+                                    <div class="row">
+                                        <form action="http://motors.stylemixthemes.com/inventory"
+                                              method="get">
+                                            <div class="col-md-3 col-sm-6">
+                                                <div class="form-group">
+                                                    <select name="body" class="form-control">
+                                                        <option value="">Select Body</option>
+                                                        <option
+                                                                value="limousine"
+                                                        >
+                                                            Compact
+                                                        </option>
+                                                        <option
+                                                                value="convertible"
+                                                        >
+                                                            Convertible
+                                                        </option>
+                                                        <option
+                                                                value="coupe"
+                                                        >
+                                                            Coupe
+                                                        </option>
+                                                        <option
+                                                                value="off-road"
+                                                        >
+                                                            Off-Road
+                                                        </option>
+                                                        <option
+                                                                value="other"
+                                                                disabled>
+                                                            Other
+                                                        </option>
+                                                        <option
+                                                                value="sedan"
+                                                        >
+                                                            Sedan
+                                                        </option>
+                                                        <option
+                                                                value="station-wagon"
+                                                        >
+                                                            Station Wagon
+                                                        </option>
+                                                        <option
+                                                                value="transporter"
+                                                                disabled>
+                                                            Transporter
+                                                        </option>
+                                                        <option
+                                                                value="van"
+                                                                disabled>
+                                                            Van
+                                                        </option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3 col-sm-6">
+                                                <div class="form-group">
+                                                    <select name="make" class="form-control">
+                                                        <option value="">Select Make</option>
+                                                        <option
+                                                                value="acura"
+                                                        >
+                                                            Acura
+                                                        </option>
+                                                        <option
+                                                                value="bmw"
+                                                        >
+                                                            BMW
+                                                        </option>
+                                                        <option
+                                                                value="chevrolet"
+                                                        >
+                                                            Chevrolet
+                                                        </option>
+                                                        <option
+                                                                value="ford"
+                                                        >
+                                                            Ford
+                                                        </option>
+                                                        <option
+                                                                value="honda"
+                                                        >
+                                                            Honda
+                                                        </option>
+                                                        <option
+                                                                value="hyundai"
+                                                        >
+                                                            Hyundai
+                                                        </option>
+                                                        <option
+                                                                value="kia"
+                                                        >
+                                                            Kia
+                                                        </option>
+                                                        <option
+                                                                value="mazda"
+                                                        >
+                                                            Mazda
+                                                        </option>
+                                                        <option
+                                                                value="mercedes-benz"
+                                                        >
+                                                            Mercedes-Benz
+                                                        </option>
+                                                        <option
+                                                                value="nissan"
+                                                        >
+                                                            Nissan
+                                                        </option>
+                                                        <option
+                                                                value="tesla"
+                                                        >
+                                                            Tesla
+                                                        </option>
+                                                        <option
+                                                                value="toyota"
+                                                        >
+                                                            Toyota
+                                                        </option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3 col-sm-6">
+                                                <div class="form-group">
+                                                    <select name="mileage" class="form-control">
+                                                        <option value="">Select Mileage</option>
+                                                        <option
+                                                                value="10000"
+                                                        >
+                                                            10000
+                                                        </option>
+                                                        <option
+                                                                value="15000"
+                                                        >
+                                                            15000
+                                                        </option>
+                                                        <option
+                                                                value="20000"
+                                                        >
+                                                            20000
+                                                        </option>
+                                                        <option
+                                                                value="25000"
+                                                        >
+                                                            25000
+                                                        </option>
+                                                        <option
+                                                                value="5000"
+                                                        >
+                                                            5000
+                                                        </option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3 col-sm-6">
+                                                <div class="form-group">
+                                                    <select name="ca-year" class="form-control">
+                                                        <option value="">Select Year</option>
+                                                        <option
+                                                                value="1967"
+                                                        >
+                                                            1967
+                                                        </option>
+                                                        <option
+                                                                value="1980"
+                                                                disabled>
+                                                            1980
+                                                        </option>
+                                                        <option
+                                                                value="1990"
+                                                        >
+                                                            1990
+                                                        </option>
+                                                        <option
+                                                                value="2000"
+                                                        >
+                                                            2000
+                                                        </option>
+                                                        <option
+                                                                value="2005"
+                                                        >
+                                                            2005
+                                                        </option>
+                                                        <option
+                                                                value="2010"
+                                                        >
+                                                            2010
+                                                        </option>
+                                                        <option
+                                                                value="2015"
+                                                        >
+                                                            2015
+                                                        </option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3 col-sm-6">
+                                                <div class="row">
+                                                    <div class="col-md-8 col-sm-12">
+                                                        <button type="submit" class="button icon-button"><i
+                                                                    class="stm-icon-search"></i>Search
+                                                        </button>
+                                                    </div>
+                                                    <div class="col-md-4 hidden-sm hidden-xs">
+                                                        <a href="" class="reset-all reset-styled"
+                                                           title="Reset search fields"><i
+                                                                    class="stm-icon-reset"></i></a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="search-call-to-action">
+                                        <div class="stm-call-to-action heading-font"
+                                             style="background-color:#fab637">
+                                            <div class="clearfix">
+                                                <div class="call-to-action-content pull-left">
+                                                    <div class="content">
+                                                        <i class="stm-icon-question"></i>
+                                                        Have a Questions? Call Today!
+                                                    </div>
+                                                </div>
+                                                <div class="call-to-action-right">
+                                                    <div class="call-to-action-meta">
+                                                        <div class="content">
+                                                            <i class="stm-icon-phone2"></i>
+                                                            888-694-5544
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{# modal liste des voitures#}
+<div class="modal fade" id="listVoiture" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document" style="    width: 90%;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#addVoiture" id="add">Ajout véhicules</button>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                {{ include('ModuleBundle:Module:locationvoiture/dataTableListVoiture.html.twig') }}
+
+            </div>
+        </div>
+    </div>
+</div>
+{# modal add  voiture#}
+<div class="modal fade" id="addVoiture" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document" style="width: 90%;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1>Une nouvelle voiture</h1>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="add_vehicule" action="{{ path('location_voiture_add_vehicule') }}" method="post" enctype="multipart/form-data">
+                    <input type="hidden" name="qouiqui_id" value="{{ qouiqui.id }}">
+                    <div class="form-group">
+                        <label>Série :</label>
+                        <input type="text" class="form-control" id="serie" name="serie" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Photo de l'image :</label>
+                        <input type="file" class="form-control" name="img" alt="example" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Mark :</label>
+                        <select id="marque" name="mark" class="form-control" required>
+                            <option selected value=""></option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Modele :</label>
+                        <select id="modeles" name="modele" class="form-control" required>
+                            <option selected value=""></option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Nombre de places :</label>
+                        <input type="number" class="form-control" id="nbr_place" name="nbr_place" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Prix par jour :</label>
+                        <input type="number" class="form-control" id="prix" name="prix" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Statut :</label><br/>
+                        <label><input type="radio" name="statut" value="reserves"> reservé </label><br/>
+                        <label><input type="radio" name="statut" value="non_reserves"> non reservé </label>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="reset" class="btn btn-secondary" data-dismiss="modal">Anuler</button>
+                        <button type="submit" class="btn btn-secondary " id="btn_add_vehicule" name="addVoiture">Enregistrer</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{# modal Edit  voiture#}
+<div class="modal fade" id="editVoiture" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document" style="width: 90%;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1>Modification</h1>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="edit_vehicule" action="{{ path('location_edit_voiture') }}" method="post" enctype="multipart/form-data">
+                    <input type="hidden" id="id1" value="" name="id">
+                    <input type="hidden" name="qouiqui_id" value="{{ qouiqui.id }}">
+                    <div class="form-group">
+                        <label>Série :</label>
+                        <input type="text" class="form-control" id="serie1" name="serie">
+                    </div>
+                    <div class="form-group">
+                        <label>Photo de l'image :</label>
+                        <p id="img"></p>
+                        <input type="file" class="form-control" name="img">
+                    </div>
+                    <div class="form-group">
+                        <label>Mark :</label>
+                        <select id="mark1" name="mark" class="form-control" required>
+
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Modele :</label>
+                        <select id="modeles1" name="modele" class="form-control" required>
+
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Nombre de places :</label>
+                        <input type="number" class="form-control" id="nbr_place1" name="nbr_place">
+                    </div>
+                    <div class="form-group">
+                        <label>Prix par jour :</label>
+                        <input type="number" class="form-control" id="prix1" name="prix">
+                    </div>
+                    <div class="form-group">
+                        <label>Statut :</label><br/>
+                        <label><input type="radio" name="statut" id="statut1" value="reserves"> reservé </label><br/>
+                        <label><input type="radio" name="statut" id="statut2" value="non_reserves"> non reservé </label>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="reset" class="btn btn-secondary" data-dismiss="modal">Anuler</button>
+                        <button type="submit" class="btn btn-secondary " id="btn_add_vehicule" name="addVoiture">Enregistrer</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,92 @@
+{% extends 'dashboardLayaout/dashboardLayout.html.twig' %}
+
+{% block body %}
+    <div class="col-sm-9 col-md-12">
+        <div class="col-md-12">
+            <div class="col-md-8">
+                <span class="titre-spain">{{ Automobile.qouiqui.firstName }} {{ Automobile.qouiqui.lastName }}</span>
+            </div>
+            <div class="col-md-4">
+                <a href="{{ path('dashboard_automobile_edit',{'idQq': Automobile.qouiqui.id, 'idAuto': Automobile.id}) }}" class="btn btn-danger">Modifier</a>
+                <a href="{{ path('dashboard_automobile_liste',{'idQq': Automobile.qouiqui.id}) }}" class="btn btn-info">Liste Automobiles!</a>
+            </div>
+        </div>
+        <hr>
+
+        {#==============Afficher Donner=============#}
+
+        <div class="row">
+            <div class="col-md-3 col-sm-12">
+                <img src="{{ asset('/uploads/automobile/'~ Automobile.id ~'/'~ Automobile.images) }}"/>
+            </div>
+            <div class="col-md-9">
+                {#<h3>Marque: {{ Automobile.mark }}</h3>#}
+
+                {#<h4>#}
+                {#Hidden Agenda#}
+                {#</h4>#}
+                <div class="col-md-7">
+                    <p>
+                        <strong>Details:</strong>
+                        {{ Automobile.details }}
+                    </p>
+                    <p>
+                        <strong>Autres:</strong>
+                        {{ Automobile.other }}
+                    </p>
+                    {#s#}
+                    <p>
+                        <a class="btn btn-primary" href="#" role="button">View details »</a>
+                    </p>
+                </div>
+                <div class="col-md-5">
+                    <ul class="list-group text-center">
+                        {% if Automobile.mark %}
+                            <li class="list-group-item">Marque: {{ Automobile.mark }}</li>
+                        {% endif %}
+                        {% if Automobile.model %}
+                            <li class="list-group-item">Model: {{ Automobile.model }}</li>
+                        {% endif %}
+                        {% if Automobile.modelYear|date('m/d/Y') %}
+                            <li class="list-group-item">Année-modèle: {{ Automobile.modelYear|date('m/d/Y') }}</li>
+                        {% endif %}
+                        {% if Automobile.mileage %}
+                            <li class="list-group-item">Kilométrage: {{ Automobile.mileage }}</li>
+                        {% endif %}
+                        {% if Automobile.energy== 0 %}
+                            <li class="list-group-item">Energie: Diesel</li>
+                        {% else %}
+                            <li class="list-group-item">Energie: Essance</li>
+                        {% endif %}
+                        {% if Automobile.fiscalPower %}
+                            <li class="list-group-item">Puissance fiscal: {{ Automobile.fiscalPower }}</li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div><!--/. col-md -->
+
+        </div><!--/row-->
+
+
+        <div class="row">
+            <div class="col-md-12">
+                <hr>
+                <div class="thumbnail-image">
+                    <img src="{{ asset('/uploads/automobile/'~ Automobile.id ~'/'~ Automobile.images) }}"/>
+                </div>
+            </div><!--/span-->
+        </div><!--/row-->
+        <hr>
+    </div>
+
+    {#==============Afficher Donner=============#}
+    </div>
+
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}

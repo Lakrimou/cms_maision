@@ -1,0 +1,1033 @@
+{% block javascripts %}
+
+
+    <script src=" https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.js"></script>
+    <script src="{{ asset('module/centre_frm/assets/js/timepicker.js') }}"></script>
+    <script src=" https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css">
+    <link rel="stylesheet" href="{{ asset('module/centre_frm/assets/css/timepicker.css') }}">
+    <script type="text/javascript">
+        $(function () {
+            $('#datetimepicker1').datetimepicker();
+        });
+    </script>
+    <script type="text/javascript">
+        $(function () {
+            $('#datetimepicker2').datetimepicker();
+        });
+    </script>
+
+    <script type="text/javascript">
+        $(function () {
+            $('#datetimepicker3').datetimepicker();
+        });
+    </script>
+    <script type="text/javascript">
+        $(function () {
+            $('#datetimepicker4').datetimepicker();
+        });
+    </script>
+    <script>
+
+        $('.remove_icon').click(function (e) {
+            $("#iconfrmserv").val('');
+        })
+
+
+    </script>
+    <script>
+
+        $('.modifier').click(function () {
+
+            var idqq = $(this).attr('data-id');
+            var idserv = $(this).attr('data-serv');
+            var data = {
+                idqq: idqq,
+                idserv: idserv,
+            };
+            $.ajax({
+                url: '{{ path('module_centreformation_edit_service') }}',
+                data: data,
+                type: "POST",
+                success: function (data) {
+                    var arr = [];
+                    json = JSON.stringify(eval('(' + data + ')')); //convert to json string
+                    arr = $.parseJSON(json);
+                    console.log(arr);
+                    $('#idsevice').val(idserv);
+                    $('#type').val(arr.ncour);
+                    CKEDITOR.instances['info'].setData(arr.desc);
+                    $('#titre_sec').val(arr.titre);
+                    $('#date-cour-start').val(arr.start_cour);
+                    $('#date-cour-end').val(arr.end_cour);
+                    console.log(arr);
+                    $('#price').val(arr.prix);
+                    $('#iconfrmserv').val(arr.serviceIcon);
+                    $('#date-cour-start').val(arr.start_cour);
+                    $('#date-cour-end').val(arr.end_cour);
+                    $('#Dure').val(arr.dure);
+                    $('#plus_detail').val(arr.detaille);
+                    $("#t1").val(arr.qouiqui.Lun.start);
+                    $("#t2").val(arr.qouiqui.Lun.end);
+                    $("#t3").val(arr.qouiqui.Mar.start);
+                    $("#t4").val(arr.qouiqui.Mar.end);
+                    $("#t5").val(arr.qouiqui.Mer.start);
+                    $("#t6").val(arr.qouiqui.Mer.end);
+                    $("#t7").val(arr.qouiqui.Jeu.start);
+                    $("#t8").val(arr.qouiqui.Jeu.end);
+                    $("#t9").val(arr.qouiqui.Ven.start);
+                    $("#t10").val(arr.qouiqui.Ven.end);
+                    $("#t11").val(arr.qouiqui.Sam.start);
+                    $("#t12").val(arr.qouiqui.Sam.end);
+                    $("#t13").val(arr.qouiqui.Dim.start);
+                    $("#t14").val(arr.qouiqui.Dim.end);
+
+                    if (arr.certif == 'on') {
+                        $('#certeficat').val('oui');
+
+                    }
+                    if (arr.certif == 'on') {
+
+                        $("#certaficat").prop('checked', true);
+                    }
+                    else {
+                        $("#certaficat").prop('checked', false);
+                    }
+                    $("#icon").val(arr.id_icon);
+                    if (arr.serviceIcon != '') {
+                        var imageicon = arr.serviceIcon;
+                        $('#update_icon').attr('src', imageicon);
+
+//                        $("#update_icon").append(" <i class= '" + arr.serviceIcon + "' aria-hidden='true' style='font-size: 35px;'></i>")
+                    }
+
+                }
+            });
+        });
+    </script>
+
+
+    <script>
+
+        $('.modifier-event').click(function () {
+            var idqq = $(this).attr('data-id');
+            var idevent = $(this).attr('data-event');
+            var data = {
+                idqq: idqq,
+                idevent: idevent,
+            };
+            $.ajax({
+                url: '{{ path('module_centreformation_get_event') }}',
+                data: data,
+                type: "POST",
+                success: function (data) {
+                    var arr = [];
+                    json = JSON.stringify(eval('(' + data + ')')); //convert to json string
+                    arr = $.parseJSON(json);
+                    console.log(arr);
+                    $("#text_event").val(arr.nom);
+                    CKEDITOR.instances['info_event'].setData(arr.desc);
+                    $(".dateD").val(arr.start);
+                    $(".dateE").val(arr.end);
+                    $("#event_sec").val(arr.titre);
+                    $("#ideventFrm").val(arr.idfrm);
+                }
+            });
+
+        });
+    </script>
+    <script>
+
+        $('#section-services').on('click', '.voir_detail', function () {
+            var idqq = $(this).attr('data-idqq');
+            var idserv = $(this).attr('data-idServ');
+            console.log(idqq, idserv);
+
+            var data = {
+                idqq: idqq,
+                idserv: idserv,
+            };
+            $.ajax({
+                url: '{{ path('module_centreformation_edit_service') }}',
+                data: data,
+                type: "POST",
+                success: function (data) {
+                    $('#idImg').val(idserv);
+                    var id = $('#idImg').val();
+                    var arr = [];
+                    json = JSON.stringify(eval('(' + data + ')')); //convert to json string
+                    arr = $.parseJSON(json);
+                    console.log(arr.qouiqui);
+                    $("#nom_frm").html(arr.ncour);
+
+                    $("#date_start").html(arr.start_cour + "-" + arr.end_cour);
+                    $("#nbHeure").html(arr.dure + " " + "heures");
+                    $("#prices").html(arr.prix + " " + 'DT');
+
+
+                    $('#lire_suite').html('');
+                    var length1 = (arr.desc).length;
+                    console.log(length1);
+                    if (length1 > 878) {
+                        var str = (arr.desc).substring(0, 883);
+                        console.log(str);
+                        $('#descrip').html(str);
+                        $('#link1').html("En savoir plus");
+                        $('#lire_suite').html((arr.desc).slice(884, length1));
+                    }
+                    else {
+                        $("#descrip").html(arr.desc);
+                    }
+                    $('#namefrm').val(arr.ncour);
+                    $('#setImg').attr('src', '{{ asset('uploads/image/') }}{{ iduser }}/{{ qouiqui.id }}/service/' + id + "." + "jpg");
+                    if (arr.certif == undefined) {
+                        $('#certif').html('non');
+                    }
+                    else {
+                        $('#certif').html('oui');
+
+                    }
+
+                }
+            });
+
+
+        });
+    </script>
+
+    <script>
+        nb = 1;
+        $("#load-more-service-frm").click(function () {
+
+            item = "";
+
+            id ={{ qouiqui.id }};
+            $.ajax({
+                url: '/module/spa/paginates/' + nb + '/' + id,
+                method: 'post',
+
+                success: function (data) {
+                    console.log(data);
+                    var service = JSON.parse(data);
+                    if (service.length > 0) {
+                        for (i = 0; i < service.length; i++) {
+                            console.log(service[i]['idfrm']);
+                            var start = service[i]['start_cour'];
+                            var end = service[i]['end_cour'];
+
+                            item += '<a href="#" data-toggle="modal" data-target="#voir_plus" data-idqq="' + id + '" class="voir_detail"data-idServ="' + service[i]['idfrm'] + '" class="lire_plus">\n' +
+                                '<div class=" col-md-4 col-sm-4 top40  item-id-' + service[i]['idfrm'] + ' item-scroll  col-custom" style="min-height: 380px;">\n' +
+                                '<div class="block-service margin15 pad15" style="background: white;">\n' +
+                                '<div class="row">\n' +
+                                '<div class="col-md-12 text-center">\n' +
+
+                                '<span class="icon-shortcode">\n' +
+
+
+                                '<img class="svg" width="80px" src="' + service[i]['serviceIcon'] + '" alt="" style="width:128px">\n' +
+                                '</span>\n' +
+                                '</div>\n' +
+                                '<h3 class="serviceTitle text-center pad15">' + service[i]['ncour'] +
+
+                                '</h3>\n' +
+                                '<div class="clearfix">\n' +
+                                '<div class="separator" style="width: 100px;border-bottom-width: 2px; ">' +
+                                '</div>\n' +
+                                '</div>\n' +
+                                '<div class="margin28">\n' +
+                                '<ul>\n' +
+                                '<li>\n' +
+                                '<i class="fa fa-calendar" aria-hidden="true" style="color: red;">\n' +
+                                '</i>\n' +
+                                '<span style="margin-left: 10px;">du ' + start + " à " + end +
+                                '</span>\n' +
+                                '</li>\n' +
+                                '<li>\n' +
+                                '<i class="fa fa-clock-o" aria-hidden="true" style="color: red;">\n' +
+                                '</i>\n' +
+                                '<span style="  margin-left: 10px;" id="dure">' + service[i]['dure'] + " heures" +
+                                '</span>\n' +
+                                '</li>\n' +
+                                '</ul>\n' +
+                                '</div>\n' +
+                                '</div>\n' +
+
+
+                                '<div class="row service pad15">\n' +
+                                '<a href="#" data-toggle="modal" data-target="#voir_plus"data-idqq="' + id + '" data-idServ="' + service[i]['idfrm'] + '"class="voir_detail btn-default btn-xs pull-right suite">En savoir plus\n' +
+                                '</a>\n' +
+                                '</div>\n' +
+                                '</div>\n' +
+                                '</div>\n' +
+                                '</a>'
+                        }
+
+                        if (service.length < 3) {
+                            $('#load-more-service-frm').hide();
+                        }
+                        nb += 1;
+                        $('#append-item-frm').append(item).fadeIn();
+                    }
+                    else {
+                        $('#load-more-service-frm').hide();
+                    }
+
+                    $('.load-less-service').show();
+                    var p = $(".item-scroll:last");
+                    var offset = p.offset();
+                    $('html body').animate({scrollTop: offset.top - 200}, 1500);
+                }
+                ,
+                error: function (xhr, status, error) {
+                    alert(xhr.responseText);
+                }
+                ,
+            });
+
+        })
+
+    </script>
+    <script>
+        $('.load-less-service').click(function () {
+            id ={{ qouiqui.id }};
+            idp ={{ qouiqui.user.id }};
+            idd = nb - 1;
+            $.ajax({
+                url: '/module/spa/moinspaginate/' + idd + '/' + id,
+                method: 'post',
+                success: function (data) {
+                    console.log(data);
+                    var service = JSON.parse(data);
+                    var p = $(".item-scroll:first");
+                    var offset = p.offset();
+                    $('html body').animate({scrollTop: offset.top - 250}, 1500);
+                    $('#load-more-service').show();
+                    for (i = 0; i < service.length; i++) {
+                        $(".item-id-" + service[i]['idfrm']).hide("slow", function () {
+                            setTimeout($(this).remove(), 1000);
+                        });
+                    }
+                    nb -= 1;
+                    verificationItem();
+                }
+            });
+        });
+        function verificationItem() {
+            nombre = 0;
+            $(".item-scroll").each(function () {
+                nombre++;
+            });
+            if (nombre <= 6) {
+                $('.load-less-service').hide();
+            }
+        }
+
+        verificationItem();
+    </script>
+    <script>
+        $("#link1").click(function () {
+            $("#link1").hide();
+            $("#lire_suite").show();
+        });
+    </script>
+    <script>
+        $("#link2").click(function () {
+            $("#link2").hide();
+            $("#lire_suite2").show();
+        });
+    </script>
+    <script>
+
+        $('.eventsDetail').click(function () {
+            var idqq = $(this).attr('data-qq');
+            var idevent = $(this).attr('data-idevent');
+            console.log(idqq, idevent);
+
+            var data = {
+                idqq: idqq,
+                idevent: idevent,
+
+            };
+            $.ajax({
+                url: '{{ path('module_centreformation_get_event') }}',
+                data: data,
+                type: "POST",
+                success: function (data) {
+
+                    var arr = [];
+                    json = JSON.stringify(eval('(' + data + ')')); //convert to json string
+                    arr = $.parseJSON(json);
+                    console.log(arr);
+                    $("#nom_event").html(arr.nom);
+                    var h1 = arr.start;
+                    h1 = h1.split(' ')[0];
+                    var h2 = arr.end;
+                    h2 = h2.split(' ')[0];
+                    var heure = h1 + "-" + h2;
+                    $('#Evestart').html(h1 + " - " + h2);
+                    $('#lire_suite2').html("");
+                    var length2 = (arr.desc).length;
+                    console.log(length2);
+                    if (length2 > 153) {
+                        var str = (arr.desc).slice(0, 143);
+                        console.log(str);
+                        $('#descripEve').html(str);
+                        $('#link2').html("En savoir plus");
+                        $('#lire_suite2').html((arr.desc).slice(143, length2));
+                    }
+                    else {
+                        $("#descripEve").html(arr.desc);
+                    }
+                    $("#nosEvent").val(arr.nom);
+
+                    $('#idImgEvent').val(idevent);
+                    var id = $('#idImgEvent').val();
+
+                    console.log(id + "." + 'jpg');
+                    $('#setImgEvent').attr('src', '{{ asset('uploads/image/') }}{{ iduser }}/{{ qouiqui.id }}/event/' + id + "." + "jpg");
+
+                }
+            });
+
+
+        });
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            $('.event_suprim').click(function () {
+                var id = $(this).attr('data-id');
+                $(".delate").val(id);
+
+
+            });
+        });
+        $(document).ready(function () {
+            $('.service_suprim').click(function () {
+                var id = $(this).attr('data-id');
+                $(".delate").val(id);
+
+
+            });
+        });
+
+
+    </script>
+
+
+    <script>
+        $('#section-services').on('click', '.voir_detail', function () {
+
+
+            var idqq = $(this).attr('data-idqq');
+            var idserv = $(this).attr('data-idServ');
+            var data = {
+                idqq: idqq,
+                idserv: idserv,
+            };
+
+            $.ajax({
+                url: '{{ path('module_centreformation_get_horaire') }}',
+                data: data,
+                type: "POST",
+                success: function (data) {
+//                    console.log(data);
+                    var tab = [];
+                    var arr = [];
+                    json = JSON.stringify(eval('(' + data + ')'));
+                    arr = $.parseJSON(json);
+                    console.log(arr);
+                    $('.getHoraire').html('');
+                    $.each(arr, function (key, value) {
+                        console.log(arr)
+                        if (value != undefined && value != '') {
+                            $('.getHoraire').append(value + ": " + key + "</br>")
+                            console.log('key' + key, 'value' + value);
+                        }
+                        else {
+                            console.log('aaaa');
+                        }
+
+
+                    });
+
+                }
+
+
+            });
+
+        });
+
+    </script>
+
+    <script>
+
+        $('.click-off').click(function () {
+            // escape here if the confirm is false;
+            if (!clickOffConfirmed) return false;
+            var btn = this;
+            setTimeout(function () {
+                $(btn).attr('disabled', 'disabled');
+            }, 1);
+            return true;
+        });
+
+    </script>
+
+    <script>
+
+        $('#classes').on('change', function () {
+            if ($(this).val() === "Autre") {
+                $("#otherClasses").show()
+            }
+            else {
+                $("#otherClasses").hide()
+            }
+        });
+    </script>
+
+
+    <script>
+        $(function () {
+            $('.input-group-addon.beautiful').each(function () {
+
+                var $widget = $(this),
+                    $input = $widget.find('input'),
+                    type = $input.attr('type');
+                settings = {
+                    checkbox: {
+                        on: {icon: 'fa fa-check-circle-o'},
+                        off: {icon: 'fa fa-circle-o'}
+                    },
+                    radio: {
+                        on: {icon: 'fa fa-dot-circle-o'},
+                        off: {icon: 'fa fa-circle-o'}
+                    }
+                };
+
+                $widget.prepend('<span class="' + settings[type].off.icon + '"></span>');
+
+                $widget.on('click', function () {
+                    $input.prop('checked', !$input.is(':checked'));
+                    updateDisplay();
+                });
+
+                function updateDisplay() {
+                    var isChecked = $input.is(':checked') ? 'on' : 'off';
+
+                    $widget.find('.fa').attr('class', settings[type][isChecked].icon);
+
+                    //Just for desplay
+                    isChecked = $input.is(':checked') ? 'checked' : 'not Checked';
+//                    $widget.closest('.input-group').find('input[type="text"]').val('Input is currently ' + isChecked)
+                }
+
+                updateDisplay();
+            });
+        });
+
+    </script>
+    <script type="text/javascript">
+
+        $('.timepick2').each(function () {
+            $(this).timepicker();
+
+        });
+
+
+    </script>
+
+{% endblock %}
+
+<style>
+
+    #news-section-1 .blog_info {
+        background: #f5f8fa;
+        min-height: 300px;
+        /* padding: 41px 35px 27px; */
+        width: 100%;
+    }
+
+    #news-section-1 .blog_info1 {
+        margin-bottom: 9px;
+        background: #f5f8fa;
+        min-height: 44px;
+        padding: 12px 8px 35px;
+        width: 100%;
+        box-shadow: 0px 1px 3px rgba(29, 28, 28, 0.35);
+
+    }
+
+    #news-section-1 .blog-thumbnail {
+        float: left;
+        margin-bottom: 30px;
+        max-width: 100%;
+    }
+
+    #news-section-1 .blog_info {
+        background: #f5f8fa;
+        min-height: 300px;
+        padding: 41px 9px 27px;
+        width: 96%;
+        box-shadow: 0px 1px 3px rgba(29, 28, 28, 0.35);
+    }
+
+    .image-content {
+        width: 710px;
+        height: 473px;
+        overflow: hidden;
+    }
+
+    .image-content img {
+        height: 100% !important;
+        width: auto;
+        position: relative;
+
+    }
+
+    .image-content-thumbs {
+        width: 300px;
+        height: 100px;
+        overflow: hidden;
+    }
+
+    .image-content-thumbs img {
+        height: 100%;
+        width: auto;
+        position: relative;
+
+    }
+
+    .image-content-event {
+        width: 100%;
+        height: 200px;
+        background-size: cover;
+        background-position: center;
+
+    }
+
+    #otherClasses {
+        display: none;
+    }
+
+    h2 {
+        margin: 0 !important;
+        font-weight: 700;
+    }
+
+    .intro .zelected {
+        font-weight: normal;
+        height: 40px;
+        padding-left: 15px;
+        padding-top: 9px;
+        color: #333;
+    }
+
+    #lire_suite {
+        display: none;
+    }
+
+    #lire_suite2 {
+        display: none;
+    }
+
+    .feature_box .description h4 {
+        height: 43px;
+    }
+
+    .G_titre {
+        /*font-weight: 300;*/
+        text-align: justify;
+        font-size: 35px;
+        line-height: 1.2;
+    }
+
+    @media (max-width: 425px) {
+        .horaire-xs {
+            float: left;
+            margin-left: 0;
+            margin-top: 5px;
+            margin-right: 20px;
+        }
+    }
+
+    @media (min-width: 992px) {
+        .horaire-xs {
+            float: right;
+        }
+    }
+
+    @media (max-width: 375px) {
+        .margtop5 {
+            float: right;
+            padding-right: 20px;
+            margin-top: 5px;
+        }
+    }
+
+    .titre_header {
+        font-weight: 300;
+
+        font-size: 23px;
+        line-height: normal;
+    }
+
+    .margin28 {
+        margin: 15px;
+    }
+
+    @media (max-width: 992px) {
+
+        h3 {
+            font-size: 15px !important;
+        }
+    }
+
+    .load-less-service {
+        display: none;
+    }
+
+    .spacontact {
+        background: #e96656;
+        font-size: 19px;
+        border: 1px solid #e96656;
+        padding: 10px;
+        border-radius: 4px;
+        color: #f5f5f5;
+        text-align: center;
+    }
+
+    .spacontact:hover {
+        background: #e96656;
+        /*font-size:19px;*/
+        border: 1px solid #e96656;
+        padding: 10px;
+        border-radius: 4px;
+        color: #f5f5f5;
+        text-align: center;
+    }
+
+    @media (max-width: 425px) {
+        .spacontact {
+            background: #e96656;
+            font-size: 14px;
+            border: 1px solid #e96656;
+            padding: 10px;
+            border-radius: 4px;
+            color: #f5f5f5;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+    }
+
+    .spacontact1 {
+        background: #E7AC44;
+        font-size: 19px;
+        border: 1px solid #E7AC44;
+        padding: 10px;
+        border-radius: 4px;
+        color: #f5f5f5;
+        text-align: center;
+    }
+
+    .spacontact1:hover {
+        background: #E7AC44;
+
+        border: 1px solid #E7AC44;
+        padding: 10px;
+        border-radius: 4px;
+        color: #f5f5f5;
+        text-align: center;
+    }
+
+    @media (max-width: 425px) {
+        .spacontact1 {
+            background: #E7AC44;
+            font-size: 14px;
+            border: 1px solid #E7AC44;
+            padding: 10px;
+            border-radius: 4px;
+            color: #f5f5f5;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+    }
+
+    .spacontact2 {
+        background: #20AA73;
+        font-size: 19px;
+        border: 1px solid #20AA73;
+        padding: 10px;
+        border-radius: 4px;
+        color: #f5f5f5;
+        text-align: center;
+    }
+
+    .spacontact2:hover {
+        background: #20AA73;
+        /*font-size: 19px;*/
+        border: 1px solid #20AA73;
+        padding: 10px;
+        border-radius: 4px;
+        color: #f5f5f5;
+        text-align: center;
+    }
+
+    @media (max-width: 425px) {
+        .spacontact2 {
+            background: #20AA73;
+            font-size: 14px;
+            border: 1px solid #20AA73;
+            padding: 10px;
+            border-radius: 4px;
+            color: #f5f5f5;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+    }
+
+    @media (max-width: 768px) {
+        #news-section-1 .blog_info {
+            margin-top: 15px;
+            background: #f5f8fa;
+            min-height: 300px;
+            padding: 41px 9px 27px;
+            width: 100%;
+            box-shadow: 0px 1px 3px rgba(29, 28, 28, 0.35);
+        }
+    }
+
+    @media (max-width: 768px) {
+        #news-section-1 .blog_info1 {
+            margin-top: 20px;
+            margin-bottom: 9px;
+            background: #f5f8fa;
+            min-height: 44px;
+            padding: 12px 8px 35px;
+            width: 100%;
+
+            box-shadow: 0px 1px 3px rgba(29, 28, 28, 0.35);
+        }
+    }
+
+    .modal-content > .close {
+        margin-top: -9px !important;
+        margin-right: -11px;
+        background: red;
+        border: solid 1px #de2525;
+        border-radius: 100%;
+        width: 26px;
+        height: 26px;
+        opacity: 1;
+        color: white;
+    }
+
+    @-webkit-keyframes clignote {
+        0% {
+            box-shadow: 0px 0px 10px #e5274b;
+        }
+        50% {
+            box-shadow: 0px 0px 0px #e5274b;
+        }
+        100% {
+            box-shadow: 0px 0px 10px #e5274b;
+        }
+    }
+
+    @media (min-width: 320px) and (max-width: 425px ) {
+        .margin-top-button {
+            margin-top: -11px;
+            margin-bottom: 17px;
+        }
+    }
+
+    @media (min-width: 426px) and (max-width: 786px) {
+        .margin-top-button {
+            margin-top: 5px;
+            margin-bottom: 0px;
+        }
+    }
+
+    @media (min-width: 992px) {
+        .bottom34 {
+            margin-bottom: 34px;
+        }
+    }
+
+    .blog_info .archieves li:last-child {
+        border-bottom: none;
+    }
+
+    .buttn {
+        text-transform: capitalize;
+        display: inline-block;
+        font-size: 20px;
+        text-decoration: none !important;
+        padding: 11px 25px;
+        line-height: 1;
+        overflow: hidden;
+        position: relative;
+        box-shadow: 0 1px 1px #ccc;
+        border-radius: 2px;
+        /*margin-bottom: 20px;*/
+    }
+
+    @media (max-width: 800px) {
+
+        #no-more-tables table,
+        #no-more-tables thead,
+        #no-more-tables tbody,
+        #no-more-tables th,
+        #no-more-tables td,
+        #no-more-tables tr {
+            display: block;
+        }
+
+        #no-more-tables thead tr {
+            position: absolute;
+            top: -9999px;
+            left: -9999px;
+        }
+
+        #no-more-tables tr {
+            border: 1px solid #ccc;
+        }
+
+        #no-more-tables td {
+
+            border: none;
+            border-bottom: 1px solid #eee;
+            position: relative;
+            padding-left: 50%;
+            white-space: normal;
+            text-align: left;
+        }
+
+        #no-more-tables td:before {
+            position: absolute;
+
+            top: 6px;
+            left: 6px;
+            width: 45%;
+            padding-right: 10px;
+            white-space: nowrap;
+            text-align: left;
+            font-weight: bold;
+        }
+
+        .bfh-timepicker-popover > .table tr:first-child {
+            display: inline-grid;
+
+        }
+
+        .bfh-timepicker-popover > .table tr:first-child > .hour {
+            margin-bottom: -27px;
+            margin-left: -61px;
+
+        }
+
+        .bfh-timepicker-popover > .table tr:last-child > .minute {
+            margin-top: -20px;
+            margin-left: -61px;
+
+        }
+
+        .bfh-timepicker-popover > table {
+            width: 138px;
+            margin: 0;
+        }
+
+        .bfh-timepicker > .open > .input-group > .form-control {
+            position: relative;
+            z-index: 2;
+            float: left;
+            width: 157%;
+            margin-bottom: 0;
+        }
+
+        #no-more-tables td:before {
+            content: attr(data-title);
+        }
+
+    }
+
+    @media (max-width: 768px) {
+
+        .buttn-width-xs {
+            width: 100% !important;
+        }
+    }
+
+    @media (max-width: 786px) {
+        .title-color {
+            color: #e96656;
+        }
+
+    }
+
+    @media (max-width: 768px) {
+        .modal-content > .close {
+            margin-top: 0px !important;
+        }
+    }
+
+    .image-content-cf-serv {
+        width: auto;
+        height: 200px;
+        background-size: cover;
+        background-position: center;
+    }
+
+    @media (max-width: 380px) {
+        .image-content-cf-serv {
+            width: auto;
+            height: 121px;
+            background-size: cover;
+            background-position: center;
+        }
+    }
+
+    @media (max-width: 380px) {
+        .margin28 {
+            margin: 5px;
+        }
+        .margin-top-button {
+            margin-top: -11px;
+            margin-bottom: 17px;
+        }
+    }
+
+    @media (min-width: 500px) and (max-width: 786px) {
+        .image-content-cf-serv {
+            width: auto;
+            height: 100px;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .margin15 {
+            margin: -1px;
+        }
+
+        .margin28 {
+            margin: 7px;
+
+        }
+
+        .block-service.margin15.pad15 {
+            min-height: 323px!important;
+        }
+    }
+    @media (max-width: 768px)
+    {
+        .modal-header .close {
+            margin-top: -17px !important;
+            margin-right: -16px !important;
+            border-radius: 0px 14px 0px 0px !important;
+            width: 30px !important;
+            height: 30px !important;
+        }
+    }
+
+</style>

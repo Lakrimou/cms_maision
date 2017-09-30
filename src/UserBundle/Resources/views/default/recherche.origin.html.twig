@@ -1,0 +1,383 @@
+{% extends 'front/layout_front.html.twig' %}
+
+{% block body %}
+
+    <body>
+
+    <div id="loader">
+        <div class="book">
+            <div class="book__page"></div>
+            <div class="book__page"></div>
+            <div class="book__page"></div>
+        </div>
+    </div>
+
+    {#=======================================header===========================================#}
+    {% include 'UserBundle::header.html.twig' %}
+    {#=======================================header===========================================#}
+
+
+    <!-- start search section-->
+    <div id="search-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <for  id="search-form">
+                        <div class="col-sm-9 col-md-10 nopadding">
+                            <div id="search-input">
+                                <div class="col-sm-3 nopadding">
+                                    <select id="search-location" class="form-control">
+                                        {% for v in villes %}
+                                            <option value="{{ v.id }}">{{ v.libelle }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                                <div class="col-sm-9 nopadding">
+                                    <div class="form-group">
+                                        <input id="search-data" class="form-control" name="info"
+                                               placeholder="What are you looking for?" required>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-3 col-md-2 text-right nopadding-right">
+                            <div id="search-button">
+                                <button onclick="filtre()" id="search"><i class="fa fa-search"></i>Search</button>
+                            </div>
+                        </div>
+                    </for>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end search section-->
+
+    <!-- start banner map-->
+    <div id="banner-map">
+        <div id="homemap"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div id="map-link">
+                        <button><i class="fa fa-angle-double-up"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end banner map-->
+
+    <!-- start main banner-->
+    <div id="main-banner">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 text-center">
+                    <div id="banner-link">
+                        <button><i class="fa fa-map-marker"></i></button>
+                    </div>
+                    <div id="main-banner-text">
+                        <h1>SEARCH PRODUCTS AND SERVICES</h1>
+                        <p>Listify helps you find out whats happening in your city, Let's explore.</p>
+                    </div>
+                    <div id="visited-categories">
+                        <h1>most visited categories</h1>
+                    </div>
+                    <div id="categories-box">
+                        <div class="categories-boxes">
+                            <a href="#">
+                                <img src="{{ asset('asset-front/images/home.png') }}" alt="home">
+                                <span>property</span>
+                            </a>
+                        </div>
+                        <div class="categories-boxes">
+                            <a href="#">
+                                <img src="{{ asset('asset-front/images/food.png') }}" alt="food">
+                                <span>food</span>
+                            </a>
+                        </div>
+                        <div class="categories-boxes">
+                            <a href="#">
+                                <img src="{{ asset('asset-front/images/movie.png') }}" alt="movie">
+                                <span>movie</span>
+                            </a>
+                        </div>
+                        <div class="categories-boxes">
+                            <a href="#">
+                                <img src="{{ asset('asset-front/images/automotive.png') }}" alt="automotive">
+                                <span>automotive</span>
+                            </a>
+                        </div>
+                        <div class="categories-boxes">
+                            <a href="#">
+                                <img src="{{ asset('asset-front/images/shopping.png') }}" alt="shopping">
+                                <span>shopping</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end main banner-->
+
+    <div class="clearfix"></div>
+
+    <!-- start recent listings -->
+    <div id="recent-listings">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 text-center">
+                    <div id="recent-listings-heading">
+                        <h1><span>results</span></h1>
+                    </div>
+                    <div class="listing-boxes">
+                        {% if qouiquis %}
+
+                            {% for qq in qouiquis %}
+
+
+
+                                <div class="col-sm-10">
+                                    <div class="listing-boxes-container">
+                                        <div class="col-sm-12 col-md-4 nopadding">
+                                            <div class="listing-boxes-image">
+                                                <img src="{{ asset('asset-front/images/listing-1.png') }}"
+                                                     alt="listing 1">
+                                                <h1><span>{% for ngns in qq.ngns %}{{ ngns.category.libelle }}{% endfor %}</span></h1>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12 col-md-8 nopadding">
+                                            <div class="listing-boxes-text">
+                                                <h2>
+                                                    <span>
+                                                  <i class="fa fa-star"></i>
+                                                  <i class="fa fa-star"></i>
+                                                  <i class="fa fa-star"></i>
+                                                  <i class="fa fa-star-half-empty"></i>
+                                                                    4.5
+                                                </span>
+                                                    {#//category#}
+                                                    {% set cat_details %}{% for ngns in qq.ngns %}{{ ngns.category.slug }}{% endfor %}{% endset %}
+                                                    {#//ville#}
+                                                    {% set ville_details %}{% for qville in qq.qvilles %}{{ qville.ville.libelle }}{% endfor %}{% endset %}
+
+                                                </h2>
+                                                <a href="http://{{ qq.slug }}.{{ app.request.server.get("SERVER_NAME") }}">
+                                               <h3>{{ qq.firstName }}</h3></a>
+                                                <p>{{ qq.lastName }}</p>
+                                                <p>{{ qq.address1 }} {{ qq.zipCode }}</p>
+                                                <p>{{ cat_details }}{{ ville_details }}</p>
+                                                <a href="#"><i class="fa fa-phone"></i>{{ qq.phone }}{{ ville_details }}</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            {% endfor %}
+
+
+
+                        {% endif %}
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end recent listings-->
+
+
+    {#=======================================footer===========================================#}
+    {% include 'UserBundle::footer.html.twig' %}
+    {#=======================================footer===========================================#}
+
+
+    {% block javascript %}
+        <!-- Scripts -->
+        <script src="{{ asset('asset-front/js/wow.min.js') }}"></script>
+        <script src="{{ asset('asset-front/js/jquery-1.11.1.min.js') }}"></script>
+        <script src="{{ asset('asset-front/js/bootstrap.min.js') }}"></script>
+        <script src="{{ asset('asset-front/js/waypoints.js') }}"></script>
+        <script src="{{ asset('asset-front/js/jquery.counterup.js') }}"></script>
+        <script src="{{ asset('asset-front/js/jquery.bxslider-rahisified.min.js') }}"></script>
+        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+        <script src="{{ asset('asset-front/js/custom.js') }}"></script>
+
+        <script>
+
+            /*************** show and hide map and banner ********************/
+            $(document).ready(function (e) {
+                $("#banner-map").hide();
+                $("#banner-link").click(function () {
+                    $("#main-banner,#banner-map").slideToggle("slow");
+                    initmap();
+                });
+                $("#map-link").click(function () {
+                    $("#main-banner,#banner-map").slideToggle("slow");
+                });
+            });
+
+            // home page map
+
+            function initmap() {
+                var map = new google.maps.Map(document.getElementById("homemap"), {
+                    zoom: 5,
+                    scrollwheel: false,
+                    center: new google.maps.LatLng(40.6700, -73.9400), // New York
+
+                    styles: [
+                        {
+                            "featureType": "administrative",
+                            "elementType": "labels.text.fill",
+                            "stylers": [
+                                {
+                                    "color": "#444444"
+                                }
+                            ]
+                        },
+                        {
+                            "featureType": "landscape",
+                            "elementType": "all",
+                            "stylers": [
+                                {
+                                    "color": "#f2f2f2"
+                                }
+                            ]
+                        },
+                        {
+                            "featureType": "poi",
+                            "elementType": "all",
+                            "stylers": [
+                                {
+                                    "visibility": "off"
+                                }
+                            ]
+                        },
+                        {
+                            "featureType": "road",
+                            "elementType": "all",
+                            "stylers": [
+                                {
+                                    "saturation": -100
+                                },
+                                {
+                                    "lightness": 45
+                                }
+                            ]
+                        },
+                        {
+                            "featureType": "road.highway",
+                            "elementType": "all",
+                            "stylers": [
+                                {
+                                    "visibility": "simplified"
+                                }
+                            ]
+                        },
+                        {
+                            "featureType": "road.arterial",
+                            "elementType": "labels.icon",
+                            "stylers": [
+                                {
+                                    "visibility": "off"
+                                }
+                            ]
+                        },
+                        {
+                            "featureType": "transit",
+                            "elementType": "all",
+                            "stylers": [
+                                {
+                                    "visibility": "off"
+                                }
+                            ]
+                        },
+                        {
+                            "featureType": "water",
+                            "elementType": "all",
+                            "stylers": [
+                                {
+                                    "color": "#ffbe00"
+                                },
+                                {
+                                    "visibility": "on"
+                                }
+                            ]
+                        }
+                    ]
+
+                });
+
+                setMarkers(map);
+            }
+
+            // Data for the markers consisting of a Country name, Item Name, Address for Item, a LatLng and a zIndex // for the order in which these markers should display on top of each other.
+            var item_location = [
+                {% if qouiquis %}
+                {% for qq in qouiquis %}
+
+                ['Result', '{{ qq.address1 }}',{{ qq.geoLat }},{{ qq.geolong }}, 4, 'map-icon1.png'],
+
+                {% endfor %}
+                {% endif %}
+
+
+
+
+            ];
+
+            function setMarkers(map) {
+                // Adds markers to the map.
+
+                // Marker sizes are expressed as a Size of X,Y where the origin of the image
+                // (0,0) is located in the top left of the image.
+
+                // Origins, anchor positions and coordinates of the marker increase in the X
+                // direction to the right and in the Y direction down.
+
+
+                // Shapes define the clickable region of the icon. The type defines an HTML
+                // <area> element 'poly' which traces out a polygon as a series of X,Y points.
+                // The final coordinate closes the poly by connecting to the first coordinate.
+                var shape = {
+                    coords: [1, 1, 1, 52, 50, 52, 50, 1],
+                    type: 'poly'
+                };
+                for (var i = 0; i < item_location.length; i++) {
+                    var item = item_location[i];
+                    var image = {
+                        url: 'images/' + item[6],
+
+                        size: new google.maps.Size(52, 53),
+
+                        origin: new google.maps.Point(0, 0),
+
+                        anchor: new google.maps.Point(0, 53)
+                    };
+                    var infoWindow = new google.maps.InfoWindow({
+                        content: item[0],
+                    });
+                    var marker = new google.maps.Marker({
+                        position: {lat: item[3], lng: item[4]},
+                        animation: google.maps.Animation.DROP,
+                        map: map,
+                        title: item[0],
+                        zIndex: item[5]
+                    });
+                    (function (marker, item) {
+                        google.maps.event.addListener(marker, "click", function (e) {
+                            //Wrap the content inside an HTML DIV in order to set height and width of InfoWindow.
+                            infoWindow.setContent("<div style = 'width:220px;min-height:40px' id='m-info-window'> <h6 class='info-window-hding'>" + item[1] + "</h6> <p class='info-window-desc'>" + item[2] + "</p> </div>");
+                            infoWindow.open(map, marker);
+                        });
+                    })(marker, item);
+                }
+            }
+
+        </script>
+
+    {% endblock %}
+
+    </body>
+{% endblock %}

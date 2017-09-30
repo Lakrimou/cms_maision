@@ -1,0 +1,160 @@
+{% if  connected %}
+    <div class="pull-right " style="top: 7px;
+    margin-right: 18px;     margin-bottom: 20px;">
+
+        {% if spaBook(module) is not empty  %}
+        <button type="button" class="btn btn-primary" data-toggle="modal" style="margin-right: 20px;"
+                data-target="#slider"
+        >modifier
+        </button>
+        {% else %}
+        <button type="button" class="btn btn-primary" data-toggle="modal" style="margin-right: 20px;"
+                data-target="#slider"
+        > Ajouter
+
+        </button>
+        {% endif %}
+    </div>
+{% endif %}
+
+
+<!-- Modal transparent -->
+
+
+<!-- Modal fullscreen -->
+
+
+<!-- Modal fullscreen -->
+
+{% if spaBook(module) is not empty  %}
+<section class="page-section" id="book">
+
+
+    <div class="monthly-offer">
+        <div class="page-overlay"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    {% if spaBook(module) %}
+                    {% for a in spaBook(module) %}
+
+                    <h3 style="text-align: center;font-size: 32px;">{{ a.data|raw }}</br></h3>
+                    {% endfor %}
+                    {% else %}
+                        <h3 style="text-align: center;font-size: 32px;">Tapez votre texte</h3>
+                    {% endif %}
+
+
+                    {#<p>{{ qouiqui.firstName }} vous a négocié un bon plan à bas prix chez nos centre.</p>#}
+                </div>
+                <div class="col-md-12 ">
+
+                    {% if app.user  %}
+                        <div class="text-center mt30">
+
+                            <a href="#" class="common-btn" data-toggle="modal" data-service=""
+                               data-target="#modal_booking">Réserver
+
+                            </a>
+                        </div>
+                    {#{% elseif  app.user  and  app.user.id ==iduser %}#}
+                        {#<div class="text-center mt30">#}
+
+                            {#<a href="#" class="common-btn " data-toggle="modal" data-service=""#}
+                               {#data-target="#">Réserver#}
+
+                            {#</a>#}
+                        {#</div>#}
+                        {% else %}
+                        <div class="text-center mt30">
+
+                            <a href="#" class="common-btn " data-toggle="modal" data-service=""
+                               data-target="#modal_connection">Réserver
+
+                            </a>
+                        </div>
+                    {% endif %}
+
+                </div>
+                <!--Signup Form -->
+
+            </div>
+        </div>
+    </div>
+    </div>
+</section>
+    <style>
+        {% set path =  asset('uploads/image/')~qouiqui.user.id ~'/'~ qouiqui.id ~'/booking/photo.jpg' %}
+        {% if asset_exists(path) %}
+        .monthly-offer {
+            margin: -124px 0 0 0;
+            padding: 111px 0;
+            background: url({{  asset('uploads/image/')~qouiqui.user.id ~'/'~ qouiqui.id ~'/booking/photo.jpg' }}) no-repeat center center;
+            background-size: cover;
+            position: relative;
+            color: #FFF;
+        }
+
+        {% endif %}
+
+    </style>
+{% endif %}
+<div id="slider" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title"></h4>
+            </div>
+            {#<div class="pull-right margin-bott">#}
+
+            {#<a data-toggle="modal" href="#tallModal" class="btn btn-primary">modifier</a>#}
+
+            {#</div>#}
+            <div class="modal-body">
+                <form id="reserv" method="POST"
+                      action="{{ path('module_spa_section-reservation',{'idqq':qouiqui.id}) }}"
+                      enctype="multipart/form-data">
+
+                    <h4> Tapez votre texte</h4>
+                    {% if spaBook(module) %}
+                        {% for a in spaBook(module) %}
+                            <textarea class="form-control data_reserv" name="data" > {{ a.data }}</textarea>
+
+                            <input type="hidden" name="secreserve" class=" form-control reserver" value='{{ a.id }}' >
+                            <h4> choisisez une photo</h4>
+                            <input autocomplete="off" class="form-control"
+                                   name="file" type="file"
+                                   placeholder="choisissez_image" data-items="8"/>
+                        {% endfor %}
+                        {% else %}
+                            <textarea class="form-control" name="data"> </textarea>
+
+                            <input type="hidden" name="secreserve" class="reserver" >
+                            <h4> choisisez une photo</h4>
+                            <input autocomplete="off" class="form-control"
+                                   name="file" type="file"
+                                   placeholder="choisissez_image" data-items="8"/>
+                    {%endif%}
+
+
+
+
+
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+                <button type="submit" class="btn btn-default add-sec-reserv " data-target="modifier" data-selector="reserv">
+                    Ajouter
+                </button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+

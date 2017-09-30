@@ -1,0 +1,68 @@
+{% if connected %}
+
+<script>
+    $(function () {
+        $("[data-toggle='popover' ]").popover();
+    });
+    $(document).on('click', 'button.tooltip_next', function () {
+        tag = $(this).data('tooltip');
+        console.log(tag)
+        $.when($('*').popover('hide')).then($(tag).popover('show'));
+    })
+
+
+</script>
+{% if (theme is not null) and (theme.color.background is defined)  and  (qouiqui.isview == 1) %}
+
+    {% set colorTab = theme.color.background %}
+
+    {% if   (colorTab.about is empty )or
+    (colorTab.services is empty )or
+    (colorTab.annonces is empty) or
+    (colorTab.gallerie is empty) or
+    (colorTab.contact is empty) or
+    (colorTab.animation.about is empty) or
+    (colorTab.animation.services is empty) or
+    (colorTab.animation.annonces is empty) or
+    (colorTab.animation.gallerie is empty) or
+    (colorTab.animation.contact is empty) or
+    (colorTab.motif.about is empty) or
+    (colorTab.motif.services is empty) or
+    (colorTab.motif.annonces is empty) or
+    (colorTab.motif.gallerie is empty) or
+    (colorTab.motif.contact is empty)
+    %}
+        <script>
+            $(document).ready(function () {
+                setTimeout(function () {
+                    $('tog').trigger('click')
+                }, 2000)
+                setTimeout(function () {
+                    $('#tooltip_slider').popover('show')
+                }, 4000)
+            })
+        </script>
+
+    {% endif %}
+
+
+
+{% elseif (theme.color is not defined) and (qouiqui.isview == 1) %}
+
+    <script>
+        $(document).ready(function () {
+            setTimeout(function () {
+                $('tog').trigger('click')
+            }, 2000)
+            setTimeout(function () {
+                $('#tooltip_slider').popover('show')
+            }, 4000)
+        })
+    </script>
+
+{% endif %}
+{% endif %}
+
+
+
+

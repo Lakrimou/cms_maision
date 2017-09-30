@@ -1,0 +1,630 @@
+<section id="section-services" class="we_are bg_light padding">
+    <div class="ooo">
+
+        <span class="o bg" data-toggle="tooltip" data-placement="left" title="Couleur d'arrière plan!"></span>
+        <span class="o mt" data-toggle="tooltip" data-placement="left" title="Motif d'arrière plan!"></span>
+        <span class="o an" data-toggle="tooltip" data-placement="left" title="Animation d'arrière plan!"></span>
+
+    </div>
+    <div class="container">
+        <a style="position: fixed;
+    top: 50%;
+    right: 0;
+    z-index: 1;" class="btn_fill_about btn btn-default reservation-form" href="#" data-toggle="modal" data-target="#Demandervisite">Demandez un rendez vous</a>
+        <div class="container">
+        {% if attributes.connected %}
+            <div class="shake pull-right margin-bott-40 numService">
+                <button type="button" class="theme-btn button11 btn-style-one pull-right" data-toggle="modal"
+                        data-target="#list-services">Gérer les services
+                </button>
+            </div>
+        {% endif %}
+        <div class="row">
+            <div class="col-md-12">
+                <h2 class="text-uppercase">Nos <span class="color_red">services</span></h2>
+                <div class="line_1"></div>
+                <div class="line_2"></div>
+                <div class="line_3"></div>
+            </div>
+        </div>
+        <div class="row">
+
+
+            {#{% for iconservice in DirAssetParcour(asset('uploads/image/iconService/'~attributes.category.slug|lower~'/SVG/')) %}#}
+            {#<img width="50px" height="50px" src="{{ asset('uploads/image/iconService/') }}{{ attributes.category.slug|lower~'/SVG/' }}{{ iconservice }}" alt="">#}
+            {#{% endfor %}#}
+
+            {% set theme = attributes.theme %}
+            {% if theme !=null %}
+
+
+                {% if theme["Service"] is defined and theme["Service"]|length>0 %}
+                    {% for key, service in theme["Service"] %}
+                        {% if (theme.Service|length == 1) %}
+                            <div class="col-md-4 col-sm-4 col-xs-12"></div>
+                        {% endif %}
+                        {% if (theme.Service|length == 2) and (loop.index == 1) %}
+                            <div class="col-md-2 col-sm-2 col-xs-12"></div>
+                        {% endif %}
+                        {% if loop.index < 7 %}
+                            <div class=" col-md-4 col-sm-4 top40 " style="min-height: 380px;">
+                                <div class="block-service margin15 pad15" style="background: white">
+                                    <div class="row">
+                                        <div class="col-md-12 text-center">
+                                    <span class="icon-shortcode">
+                            {% if service["serviceIcon"] is defined %}
+                                {% if 'fa ' in service["serviceIcon"] %}
+                                    <i class="{% if service["serviceIcon"] is defined %}{{ service["serviceIcon"] }}{% endif %}" aria-hidden="true"></i>
+                                    {% else %}
+                                    <img class="svg" width="80px" src='{{ service["serviceIcon"] }}' alt="">
+                                {% endif %}
+                            {% endif %}
+
+                                    </span>
+                                        </div>
+                                        <h3 class="serviceTitle text-center pad15">
+                                            {% if service["service"] is defined %}{{ service["service"] }}{% endif %}
+                                        </h3>
+                                        <div class="clearfix">
+                                            <div class="separator" style="width: 100px;border-bottom-width: 2px"></div>
+                                        </div>
+                                        <p class="service-text">
+                                            {% if service["description"] is defined %}{{ service["description"]|slice(0,50) }}..{% endif %}
+
+                                        </p>
+                                    </div>
+                                    <div class="row service pad15">
+                                        <a href="#" data-toggle="modal" class="service-details-btn btn-default btn-xs pull-right suite"
+                                           data-target="#service-details" data-module='{"service":"{% if service["service"] is defined %}{{ service["service"] }}{% endif %}","description":"{% if service["description"] is defined %}{{ service["description"]|raw }}{% endif %}"}'>Lire la suite</a>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                {% else %}
+                    {% for i in 1..3 %}
+                        <div class="block-service col-md-4 col-sm-4 top40" style="background: white;min-height: 380px;width: 360px;">
+                            <div class="row">
+                                <div class="col-md-12 text-center">
+                    <span class="icon-shortcode">
+                    <i class="fa fa-server" aria-hidden="true"></i>
+                    </span>
+                                </div>
+                                <h3 class="serviceTitle text-center pad15">
+                                    Services Demo Notaire
+                                </h3>
+                                <div class="clearfix">
+                                    <div class="separator" style="width: 100px;border-bottom-width: 2px"></div>
+                                </div>
+                                <p class="service-text">
+                                   Vous pouvez ajouter dans cette section la description de votre service.
+                                </p>
+                            </div>
+                            <div class="row service pad15">
+                                <a href="#" data-toggle="modal" class="service-details-btn btn-default btn-xs pull-right suite"
+                                   data-target="#service-details" data-module='{"service":"Services Notaire","description":"Vous pouvez ajouter dans cette section la description de votre service"}'>Lire la suite</a>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+
+            {% endif %}
+
+        </div>
+    </div>
+    <div class="paralax-icon">
+        <div class="particle elem1 anim-delay1"></div>
+        <div class="particle elem2 anim-delay5"></div>
+        <div class="particle elem3 anim-delay3"></div>
+        <div class="particle elem4 anim-delay8"></div>
+        <div class="particle elem5 anim-delay9"></div>
+        <div class="particle elem6 anim-delay2"></div>
+        <div class="particle elem7 anim-delay4"></div>
+        <div class="particle elem8 anim-delay3"></div>
+        <div class="particle elem9 anim-delay10"></div>
+        <div class="particle elem8 anim-delay11"></div>
+        <div class="particle elem6 anim-delay12"></div>
+        <div class="particle elem1 anim-delay14"></div>
+        <div class="particle elem13 anim-delay16"></div>
+        <div class="particle elem17 anim-delay18"></div>
+        <div class="particle elem2 anim-delay6"></div>
+        <div class="particle elem16 anim-delay9"></div>
+        <div class="particle elem8 anim-delay3"></div>
+        <div class="particle elem9 anim-delay10"></div>
+        <div class="particle elem18 anim-delay11"></div>
+        <div class="particle elem11 anim-delay12"></div>
+        <div class="particle elem12 anim-delay14"></div>
+        <div class="particle elem13 anim-delay16"></div>
+        <div class="particle elem14 anim-delay18"></div>
+        <div class="particle elem15 anim-delay6"></div>
+        <div class="particle elem16 anim-delay9"></div>
+        <div class="particle elem17 anim-delay7"></div>
+        <div class="particle elem18 anim-delay6"></div>
+        <div class="particle elem19 anim-delay3"></div>
+    </div>
+</section>
+
+{% if attributes.connected %}
+    <!-- Modal -->
+    <div class="modal fade" id="list-services" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-md" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">liste des services</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            {% if attributes.theme["Service"] is defined %}
+                                {% if theme!=null %}
+                                    <ul class="list-group">
+                                        {% for key,service in attributes.theme["Service"] %}
+                                            <li class="list-group-item">
+                                                {{ service["service"] }}
+                                                <span class="pull-right">
+                                        <button type="button" class="btn btn-warning form_update_service_global" data-toggle="modal" data-target="#update-service" data-service='{"service_update":"{% if service["service"] is defined %}{{ service["service"] }}{% endif %}","icon_update":"{% if service["serviceIcon"] is defined %}{{ service["serviceIcon"] }}{% endif %}","description_update":"{% if service["description"] is defined %}{{ service["description"] }}{% endif %}" }'
+                                                data-id="{{ key }}"
+                                                data-link='{{ path('update_service_global',{"serviceId":key,"themeId":attributes["themeId"]}) }}'>Modifier</button>
+                                        <a href="{{ path('delete_service_global',{"serviceId": key,"themeId":attributes["themeId"]}) }}" type="button" class="btn btn-danger">Supprimer</a>
+                                        </span>
+                                            </li>
+                                        {% endfor %}
+
+                                    </ul>
+                                {% endif %}
+                            {% else %}
+                                <div class="text-center">
+                                    <h3> Pas de service pour le moment !</h3>
+                                </div>
+                            {% endif %}
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-info form_add_service_global" data-toggle="modal"
+                            data-target="#add-service">Ajouter service
+                    </button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="update-service" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-md" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Modifier service</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+
+                        <div class="col-md-10 col-md-offset-1">
+
+                            <form method="post" id="update_service_form" action="" enctype="multipart/form-data">
+
+                                <h2 class="text-center" id="title-form-ajout">Modifier service</h2>
+
+                                <div class="form-group row element-form">
+                                    <div class="col-md-3">
+                                        <label class="control-label">Les Services</label>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <select class="form-control" id="servicess" name="service">
+                                            <option value="BUFFETS CHAUDS">BUFFETS CHAUDS</option>
+                                            <option value="BUFFETS FROIDS">BUFFETS FROIDS</option>
+                                            <option value="MÉCHOUI">MÉCHOUI</option>
+                                            <option value="Pause café">PAUSE CAFÉ</option>
+                                            <option value="SERVICE À TABLE PAR VOTRE TRAITEUR">SERVICE À TABLE PAR VOTRE TRAITEUR</option>
+                                            <option value="WALKING DINNERS / COCKTAILS">WALKING DINNERS / COCKTAILS</option>
+                                            <option value="" id="auto-remplire">Choisir autre Service</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group row element-form" id="title-service-mod">
+                                    <div class="col-md-3">
+                                        <label class="control-label">Nom</label>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <input type="text" id="service_update" name="service"
+                                               class="form-control name_service" placeholder="Ecrire le nom du service">
+                                    </div>
+                                </div>
+
+                                <div class="form-group row element-form">
+
+                                    <div class="col-md-3">
+                                        <label class="control-label">Description</label>
+                                    </div>
+
+                                    <div class="col-sm-9">
+
+                                         <textarea id="description_update" class="form-control" cols="60" name="description"
+                                                   rows="10" required></textarea>
+                                    </div>
+                                </div>
+                                <div class="form-group row element-form">
+                                    <div class="col-md-3">
+                                        <label class="control-label">Image de Service</label>
+                                    </div>
+                                    <div class="col-sm-9 DefaultIcon">
+
+                                        {% for iconservice in DirAssetParcour(asset('uploads/image/iconService/'~attributes.category.slug|lower~'/SVG/')) %}
+                                            <a href="#" onclick="javascript:;">
+                                                <img width="50px" height="50px" src="{{ asset('uploads/image/iconService/') }}{{ attributes.category.slug|lower~'/SVG/' }}{{ iconservice }}" alt="">
+                                            </a>
+                                        {% endfor %}
+
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-9 col-md-offset-3">
+
+                                        <input type="text" class="form-control icon-filtre2 name_service" placeholder="recherche Votre Image">
+                                        <input type="hidden" name="serviceIcon" class="form-control name_service" placeholder="recherche Votre Image" value="">
+                                        <button type="button" class="btn btn-primary btn-lg btn-block"><i class="fa fa-search" aria-hidden="true"></i></button>
+
+                                    </div>
+
+                                    <div class=" pull-right col-sm-9 icon_list icon_list-edit">
+                                        <span class="current-icon" style="font-size: 20px">
+                                            Votre Icon Actuelle <img width="50px" src="" alt="">
+                                            <i class="{% if service["serviceIcon"] is defined %}{{ service["serviceIcon"] }}{% endif %}" aria-hidden="true" style="font-size: 35px;"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-default " data-target="modifier" data-selector="update_service_form">Enregistrer</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="add-service" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title text-center">Ajout service</h4>
+                </div>
+                <div class="modal-body">
+                    <form id="ajout_service_global" action="#" method="post" enctype="multipart/form-data">
+
+
+
+                        <div class="form-group row element-form">
+
+
+                            <div class="col-sm-9">
+
+                                <input name="logo" id="logo_service" type="hidden" value="fa-home">
+
+                            </div>
+
+                        </div>
+                        <div class="form-group row element-form">
+                            <div class="col-md-3">
+                                <label class="control-label">Les Services</label>
+                            </div>
+                            <div class="col-sm-9">
+                                <select class="form-control" id="services" name="service">
+                                    <option value="Fiscalité">Fiscalité</option>
+                                    <option value="Mobilité internationale et gestion des ressources humaines">Mobilité internationale et gestion des ressources humaines</option>
+                                    <option value="Droit des ressources humaines">Droit des ressources humaines</option>
+                                    <option value="Centre d’Etudes Juridiques et Fiscales">Centre d’Etudes Juridiques et Fiscales</option>
+                                    <option value="" id="auto-remplire">Choisir autre Service</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row element-form" id="title-service-add">
+                            <div class="col-md-3">
+                                <label class="control-label">Nom</label>
+                            </div>
+                            <div class="col-sm-9">
+                                <input type="text" name="service" class="form-control name_service" placeholder="Ecrire le nom du service" id="name-add">
+                            </div>
+                        </div>
+
+                        <div class="form-group row element-form">
+
+                            <div class="col-md-3">
+                                <label class="control-label">Description</label>
+                            </div>
+
+                            <div class="col-sm-9">
+
+                                         <textarea class="form-control" cols="60" name="description"
+                                                   rows="10" placeholder="Ajoutez des details par rapport à ce service.." required></textarea>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group row element-form">
+                            <div class="col-md-3">
+                                <label class="control-label">Image de Service</label>
+                            </div>
+
+                            <div class="col-sm-9 DefaultIcon">
+
+                                {% for iconservice in DirAssetParcour(asset('uploads/image/iconService/'~attributes.category.slug|lower~'/SVG/')) %}
+                                    <a href="#" onclick="javascript:;">
+                                        <img width="50px" height="50px" src="{{ asset('uploads/image/iconService/') }}{{ attributes.category.slug|lower~'/SVG/' }}{{ iconservice }}" alt="">
+                                    </a>
+                                {% endfor %}
+
+                            </div>
+
+
+                        </div>
+                        <div class="row">
+                            <div class="col-md-9 col-md-offset-3">
+
+                                <input type="text" id="icon-filtre-2" class="icon-filtre form-control name_service" placeholder="recherche Votre Image">
+                                <input type="hidden" name="serviceIcon" class="form-control name_service" placeholder="recherche Votre Image">
+                                <button type="button" class="btn btn-primary btn-lg btn-block"><i class="fa fa-search" aria-hidden="true"></i></button>
+                            </div>
+
+                            <div class=" pull-right col-sm-9 icon_list">
+                                {{ include('@User/template/fontawesomeIcons.html.twig') }}
+                            </div>
+                        </div>
+
+
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Annuler</button>
+                    <button type="submit" class="btn btn-primary " data-target="modifier" data-selector="ajout_service_global">Enregistrer</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+{% endif %}
+<div class="modal fade" id="service-details" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Service Détails</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h3 class="text-uppercase  bottom20 top10"><span class="service-details-titre color_red">Description</span></h3>
+                        <p class="p-font-15 service-details-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras et dui vestibulum, bibendum purus sit amet, vulputate mauris. Ut adipiscing gravida tincidunt. Duis euismod placerat rhoncus. Phasellus mollis imperdiet placerat. Sed ac turpis nisl. Mauris at ante mauris. Aliquam posuere fermentum lorem, a aliquam mauris rutrum a. Curabitur sit amet pretium lectus, nec consequat orci.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">fermer</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="Demandervisite" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Fixer un rendez vous</h4>
+            </div>
+            <div class="modal-body">
+
+                <div class="well">
+                    Remplissez les informations suivantes et nous vous appeler dans les plus brefs délais.
+                </div>
+
+                <form id="visite" action="{{ path('visite',{'qq_id': attributes["quoiqui"].id }) }}" class="form-horizontal" method="post" role="form">
+                    <input  name ="visite[ref]"  id ="reference-modal"  hidden>
+                    <input hidden name ="visite[title]"  value="Demandais une visite">
+                    <div class="form-group" id="footer_visit">
+
+                    </div>
+                    <div class="form-group">
+                        <label for="email" class="col-sm-2 control-label">
+
+                            téléphone</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control bfh-phone" id="tel_visit" name="visite[phone]" placeholder="Numéro de Téléphone" required data-format="+216 (dd) ddd-ddd">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="name" class="col-sm-2 control-label">Nom</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="first_name_visit" name="visite[nom]" id="last_name_visit" placeholder="Nom" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="name" class="col-sm-2 control-label">Prenom</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="last_name_visit" name="visite[prenom]"  placeholder="Prénom" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="name" class="col-sm-2 control-label">Adresse</label>
+                        <div class="col-sm-9">
+                            <input id="mail_visit" type="mail" name="visite[mail]" class="form-control" id="mail_visit"  placeholder="votre Mail" rows="3" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="name" class="col-sm-2 control-label">Date</label>
+                        <div class="col-sm-9">
+                            <div class="bfh-datepicker" data-name="visite[date]" data-close="false" data-required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="name" class="col-sm-2 control-label">heure</label>
+                        <div class="col-sm-9">
+                            <div class="bfh-timepicker" data-name="visite[time]" data-close="false" data-required></div>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+            <div class="modal-footer" >
+
+                <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+                <button type="submit" class="btn btn-default " data-target="modifier" data-selector="visite">Envoyer</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+<div class="modal fade" id="modalLoginToVisit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+
+            <div class="modal-body">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <div class="login-form-popup lp-border-radius-8">
+                    <div class="siginincontainer">
+                        <h1 class="text-center">S'identifier</h1>
+                        <form id="login" class="form-horizontal margin-top-30" method="post" action="/login_check">
+                            <input type="hidden" name="_csrf_token" value="Kk4KcJ-i6lPzu7pUx0wOja7L0g5uu9CI6uWJYDGVT4Q"/>
+                            <p class="status"></p>
+                            <div class="form-group">
+                                <label for="username">Adresse email *</label>
+                                <input type="text" class="form-control" id="username" name="_username" required/>
+                            </div>
+                            <div class="form-group">
+                                <label for="password">Mot de passe *</label>
+                                <input type="password" class="form-control" id="password" name="_password" required/>
+                            </div>
+                            <div class="form-group">
+                            </div>
+                            <div class="form-group">
+                                <div class="checkbox pad-bottom-10">
+                                    <input id="check1" type="checkbox" name="_remember_me" value="on">
+                                    <label for="check1">Se souvenir de moi</label>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <input type="submit" value="Se connecter" id="connectToVisit"class="lp-secondary-btn width-full btn-first-hover"/>
+                            </div>
+                            <input type="hidden" id="security" name="security" value="9f8756cb45"/><input type="hidden" name="_wp_http_referer" value="/"/></form>
+                        <div class="pop-form-bottom">
+                            <div class="bottom-links">
+                                <a class="signUpClick">Nouveau sur Ween.tn? S'inscrire</a>
+                                <a class="forgetPasswordClick pull-right">Mot de passe oublié</a>
+                            </div>
+                            <p class="margin-top-15">Connectez-vous avec réseau social</p>
+                            <ul class="social-login list-style-none">
+                                <li>
+                                    <a id="logingoogle" class="google flaticon-googleplus" href="{{ path('hwi_oauth_connect') }}google">
+                                        <i class="fa fa-google-plus"></i>
+                                        <span>Google</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a id="loginfacebook" class="facebook flaticon-facebook" href="{{ path('hwi_oauth_connect') }}facebook">
+                                        <i class="fa fa-facebook"></i>
+                                        <span>Facebook</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a id="logintwitter" class="twitter flaticon-twitter" href="{{ path('hwi_oauth_connect') }}facebook">
+                                        <i class="fa fa-twitter"></i>
+                                        <span>Twitter</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <a class="md-close"><i class="fa fa-close"></i></a>
+                    </div>
+
+                    <div class="siginupcontainer">
+                        <h1 class="text-center">S'inscrire</h1>
+                        <form id="register" class="form-horizontal margin-top-30" method="post">
+                            <p class="status"></p>
+                            <div class="form-group">
+                                <label for="username">Nom et prénom *</label>
+                                <input type="text" class="form-control" id="username2" name="username"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Adresse email *</label>
+                                <input type="email" class="form-control" id="email" name="email"/>
+                            </div>
+                            <div class="form-group">
+                                <p>Le mot de passe vous sera envoyé par email.</p>
+                            </div>
+                            <div class="form-group">
+                            </div>
+                            <div class="form-group">
+                                <input type="submit" value="Enregistrer" class="lp-secondary-btn width-full btn-first-hover"/>
+                            </div>
+                            <input type="hidden" id="security" name="security" value="fac3396f28"/><input type="hidden" name="_wp_http_referer" value="/"/></form>
+                        <div class="pop-form-bottom">
+                            <div class="bottom-links">
+                                <a class="signInClick">Vous avez déjà un compte? Se connecter</a>
+                                <a class="forgetPasswordClick pull-right">Mot de passe oublié</a>
+                            </div>
+                            <p class="margin-top-15">Connectez-vous avec réseau social</p>
+                            <ul class="social-login list-style-none">
+                                <li>
+                                    <a id="logingoogle" class="google flaticon-googleplus" href="{{ path('hwi_oauth_connect') }}google">
+                                        <i class="fa fa-google-plus"></i>
+                                        <span>Google</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a id="loginfacebook" class="facebook flaticon-facebook" href="{{ path('hwi_oauth_connect') }}facebook">
+                                        <i class="fa fa-facebook"></i>
+                                        <span>Facebook</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a id="logintwitter" class="twitter flaticon-twitter" href="{{ path('hwi_oauth_connect') }}facebook">
+                                        <i class="fa fa-twitter"></i>
+                                        <span>Twitter</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <a class="md-close"><i class="fa fa-close"></i></a>
+                    </div>
+                    <div class="forgetpasswordcontainer">
+                        <h1 class="text-center">Mot de passe oublié</h1>
+                        <form class="form-horizontal margin-top-30" id="lp_forget_pass_form" action="#" method="post">
+                            <p class="status"></p>
+                            <div class="form-group">
+                                <label for="password">Adresse email *</label>
+                                <input type="email" name="user_login" class="form-control" id="email3"/>
+                            </div>
+                            <div class="form-group">
+                                <input type="submit" name="submit" value="Obtenir un nouveau mot de passe" class="lp-secondary-btn width-full btn-first-hover"/>
+                                <input type="hidden" id="security3" name="security3" value="48ca5eeb94"/><input type="hidden" name="_wp_http_referer" value="/"/></div>
+                        </form>
+                        <div class="pop-form-bottom">
+                            <div class="bottom-links"><a class="cancelClick">Annuler</a></div>
+                        </div>
+                        <a class="md-close"><i class="fa fa-close"></i></a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

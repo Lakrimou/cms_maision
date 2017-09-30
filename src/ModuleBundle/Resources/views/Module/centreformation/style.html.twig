@@ -1,0 +1,390 @@
+<style>
+
+    /* boutton*/
+
+    .button-default {
+
+        background: {% if theme.color.bouton is defined %}{{ theme.color.bouton }};
+    {% endif %}
+    }
+    {% if theme.color.bouton is defined %}
+    .button-appeler {
+        border: 2px;
+        display: inline-block;
+        text-decoration: none;
+        color: #f0f0f0;
+        font-size: 16px;
+        font-weight: 700;
+        /* background-color: #6c5ebf; */
+        border-radius: 2px;
+        padding: 11px 30px;
+        transition: .25s ease-out;
+        border-style: solid;
+        border-color:{{ theme.color.bouton }};
+    }
+
+    {% endif %}
+
+    /* titre*/
+    {#{% if theme.color.titre is defined %}#}
+    {#.section-header h3 {#}
+        {#color: {{ theme.color.titre }};#}
+
+    {#}#}
+
+    {#{% endif %}#}
+    {% if theme.color.titre is defined %}
+    .prop h3 {
+        color: {{ theme.color.titre }};
+
+    }
+    {% endif %}
+ {% if theme.color.SousTitreService is defined %}
+    .courses .course-item .content ul li span, .courses .course-item .content ul li a{
+        color: {{ theme.color.SousTitreService }};
+
+    }
+
+    {% endif %}
+
+    {% if theme.color.TitreService is defined %}
+    .courses .course-item .content h4 a{
+        color: {{ theme.color.TitreService }};
+
+    }
+
+    {% endif %}
+    {% if theme.color.TitreEvent is defined %}
+    .event .event-item .event-content h4{
+        color: {{ theme.color.TitreEvent }};
+
+    }
+
+    {% endif %}
+    {% if theme.color.SousTitreEvent is defined %}
+    .event .event-item .event-content ul li{
+        color: {{ theme.color.SousTitreEvent }};
+
+    }
+
+    {% endif %}
+    /* titre*/
+    {% if theme.color is defined %}
+    .home-contact .info-item h4 {
+        color: {{ theme.color.Soustitre }};
+    }
+
+    {% endif %}
+    {% if theme.color.Soustitre is defined %}
+    .prop h4 {
+        color: {{ theme.color.Soustitre }};
+    }
+
+    {% endif %}
+    {% if theme.color is defined %}
+    .home-contact .info-item {
+        color: {{ theme.color.icon }};
+    }
+    {% endif %}
+    {% if theme.color is defined %}
+    .section-header span:before{
+        content: "";
+        position: absolute;
+        width: 179px;
+        height: 1px;
+        background-color:{{ theme.color.icon }}!important;
+        top: -16px;
+    }
+    .section-header span:after {
+        left: -48px;
+        right: 0;
+        content: "";
+        position: absolute;
+        width: 73px;
+        height: 7px;
+        background-color:{{ theme.color.icon }}!important;
+        top: -19px
+    }
+    {% endif %}
+    {% if theme.color is defined %}
+    .about-contact,p {
+        color: {{ theme.color.Text }};
+    }
+
+    {% endif %}
+    section#propos {
+        {% if motif and (theme.color.background.motif.about is not empty) %} background-image: {{ theme.color.background.motif.about| join('","') | raw }} !important;
+    {% endif %};
+
+    {% if theme.color.background.about is defined %} background: {{ theme.color.background.about }};
+    {% endif %};
+    }
+
+    section#service {
+        {% if theme.color.background.service is defined %} background: {{ theme.color.background.service }}{% endif %};
+
+        {% if motif and (theme.color.background.motif.service is not empty) %} background-image: {{ theme.color.background.motif.service| join('","') | raw }} !important;
+    {% endif %}
+
+    }
+
+    section#event {
+        {% if theme.color.background.offre is defined %} background: {{ theme.color.background.offre }}{% endif %};
+
+        {% if motif and (theme.color.background.motif.annone is not empty) %} background-image: {{ theme.color.background.motif.annone| join('","') | raw }} !important;
+    {% endif %}
+
+    }
+
+    section#gallery {
+        {% if motif and (theme.color.background.motif.gallery is not empty) %} background-image: {{ theme.color.background.motif.gallery| join('","') | raw }} !important;
+    {% endif %}{% if theme.color.background.gallery is defined %} background: {{ theme.color.background.gallery }};
+    {% endif %}
+
+    }
+
+    section#formateur {
+        {% if theme.color.background.formateur is defined %} background: {{ theme.color.background.formateur }}{% endif %};
+
+        {% if motif and (theme.color.background.motif.formateur is not empty) %} background-image: {{ theme.color.background.motif.formateur| join('","') | raw }} !important;
+    {% endif %}
+
+    }
+
+    section#contact {
+    {% if theme.color.background.contact is defined %} background: {{ theme.color.background.contact }};
+    {% endif %}
+    }
+
+    /*}*/
+
+    .font i {
+        font-size: 20px;
+    }
+
+    .font {
+        font-size: 20px;
+    }
+
+
+
+    @media (max-width: 700px) {
+        .banner-slider{
+            display: none;
+
+        }
+
+    }
+
+
+    @media (max-width: 700px) {
+        .prop {
+            display: none;
+
+        }
+
+    }
+
+
+    @media (max-width: 700px) {
+        .button-slider {
+            position: absolute;
+            z-index: 99;
+            margin-top: 115px;
+        }
+
+    }
+    @media (max-width: 700px) {
+        .sec_propos {
+            display: none;
+
+        }
+
+    }
+    @media (max-width: 700px) {
+        .about-us {
+            display: none;
+
+        }
+
+    }
+    @media (max-width: 700px) {
+        .navbar-brand {
+            display: none;
+
+        }
+
+    }
+    @media (min-width: 701px) {
+        .navbar-brand-hidden {
+            display: none;
+
+        }
+
+    }
+    @media (max-width: 490px) {
+        .logo-marge-left {
+            display: block;
+
+        }
+
+    }
+
+    @media (min-width: 500px) {
+        .logo-marge-left {
+            display: none;
+
+        }
+
+    }
+    @media (min-width: 768px) {
+
+        .navbar-nav.navbar-right:last-child {
+            margin-right: -61px;
+        }
+    }
+
+     .eni{
+         pointer-events: none;
+         top:0;
+         left: 0;
+         position: absolute;
+         width:100%;
+         height:100%;
+         overflow: hidden!important;
+     }
+section{
+    position: relative;
+}
+
+
+
+
+    div#ite {
+        padding-top: 10px;
+        width: 361px;
+        min-height: 93px;
+        position: absolute;
+        z-index: 9999999;
+        top: 55px;
+        background: white;
+        /*overflow: hidden;*/
+        margin: auto;
+        /* left: 25%; */
+        top: 1px;
+        max-height: 499px;
+        overflow-y: scroll;
+    }
+    .logo-content{
+        width: 119px;
+        height: 94px;
+        overflow: hidden;
+        background: red;
+
+    }
+    .logo-content img {
+        height: 100%;
+        width: auto;
+        position: relative;
+    }
+
+    @media (min-width: 1024px) {
+        .prop {
+            margin-left: -96px;
+            text-align: center;
+            margin-top: 140px;
+        }
+    }
+
+    @media (max-width: 1440px) {
+        .prop {
+            margin-left: -96px;
+            text-align: center;
+            margin-top: 140px;
+        }
+    }
+
+    .padd {
+        padding-right: 12px;
+        padding-left: 13px;
+    }
+
+    .logo_details {
+        width: 319px;
+        height: auto;
+        overflow:hidden;
+
+        /*width: 100%;*/
+        /*overflow: hidden;*/
+        /*margin-bottom: 20px;*/
+
+
+    }
+
+    .logo_details img {
+        height: 100%;
+        width: 100%;
+        position:relative;
+        margin-top: 113px;
+        /*height: 115px !important;*/
+        /*width: 100%;*/
+    }
+
+    .prop h3 {
+        font-size: 36px;
+        color: #ffb400;
+        margin-bottom: 10px;
+    }
+
+    .prop h4 {
+        font-weight: 400;
+        font-style: italic;
+        font-size: 24px;
+        color: #6c5ebf;
+        margin-bottom: 15px;
+    }
+
+    @media (min-width: 1440px) {
+        .prop {
+
+            margin-left: -444px;
+            text-align: center;
+            margin-top: 140px;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .prop {
+
+            /*margin-left: -444px;*/
+            text-align: center;
+            margin-top: -21px;
+        }
+    }
+
+    @media (min-width: 768px) {
+        .prop {
+
+            /*margin-left: -444px;*/
+            text-align: center;
+            margin-top: 76px;
+        }
+    }
+
+
+    .section-header h3:after {
+        display: block;
+        content: url({{ asset('asset-front/images/separator.png') }});
+        margin-top: -20px;
+        transform: scale(1);
+    }
+
+    @media (min-width: 700px) {
+        .propos_resp {
+            display: none;
+
+        }
+
+    }
+
+</style>

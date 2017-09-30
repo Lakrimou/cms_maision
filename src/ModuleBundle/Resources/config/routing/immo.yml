@@ -1,0 +1,36 @@
+section1:
+     path: /section1
+     defaults: { _controller: ModuleBundle:Immobiliair:editbienvenus}
+     methods: [GET, POST]
+uploadslider:
+     path: /uploadslider/{qq_id}
+     defaults: { _controller: ModuleBundle:Immobiliair:uploadslider}
+     methods: [GET, POST]
+uploadgallery:
+     path: /uploadgallery/{id_qq}
+     defaults: { _controller: ModuleBundle:Default:uploadgallery}
+     methods: [GET, POST]
+suppr_gallery_img:
+     path: /image_suprime/{id_qq}
+     defaults: { _controller: ModuleBundle:Default:SupprimImGallery}
+     methods: [GET, POST]
+suppr_annonce:
+     path: /annon_suprime/{id}
+     defaults: { _controller: AdminBundle:Immobiliair:delete}
+     methods: [GET, POST]
+modifer_annonce:
+     path: /modif/annonce/{id}
+     defaults: { _controller: AdminBundle:Immobiliair:editimmo}
+     methods: [GET, POST]
+filtre_annonce:
+     path: /filtre/annonce/
+     defaults: { _controller: ModuleBundle:Immobiliair:filtreAnnonce}
+     methods: [GET, POST]
+ListJson_annonce:
+     path: /ListeJson/annonce/{id}
+     defaults: { _controller: ModuleBundle:Immobiliair:annonceJSON}
+     methods: [GET, POST]
+ListJson_LoadMore:
+     path: /ListeJson/annonceLoadMore/{nb}/{id_qq}
+     defaults: { _controller: ModuleBundle:Immobiliair:ficheAnnoncesPages}
+     methods: [GET, POST]

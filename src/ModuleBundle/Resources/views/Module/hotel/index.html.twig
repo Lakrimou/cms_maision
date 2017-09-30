@@ -1,0 +1,3380 @@
+{% extends 'hotelLayaout/hotelLayout.html.twig' %}
+
+{% block body %}
+
+
+    {#==============================Changer les couleur=============================#}
+    {% include 'ModuleBundle:Module/hotel:changeColorHotel.html.twig' %}
+    {#==============================Changer les couleur=============================#}
+
+    <div class="page-wrapper">
+        <!-- Preloader -->
+        <div class="preloader"></div>
+        <!-- Main Header-->
+        <header class="main-header">
+            <!-- Main Box -->
+            <div class="main-box">
+                <div class="auto-container">
+                    <div class="outer-container clearfix">
+                        <!--Logo Box-->
+                        <div class="logo-box">
+                            <div class="logo logo-style">
+                                <a href="#">
+                                    <h1>{{ qouiqui.firstName }}</h1>
+                                </a>
+                            </div>
+                        </div>
+
+                        <!--Nav Outer-->
+                        <div class="nav-outer clearfix">
+                            <!-- Main Menu -->
+                            <nav class="main-menu">
+                                <div class="navbar-header">
+                                    <!-- Toggle Button -->
+                                    <button type="button" class="navbar-toggle" data-toggle="collapse"
+                                            data-target=".navbar-collapse">
+                                        <span class="icon-bar"></span>
+                                        <span class="icon-bar"></span>
+                                        <span class="icon-bar"></span>
+                                    </button>
+                                </div>
+                                <div class="col-md-12 contact-nav navigation-bar is-visible" data-nav-status="toggle">
+                                    <div class="col-md-5">
+                                        <strong><i class="fa fa-map-marker"
+                                                   aria-hidden="true"> {{ qouiqui.address1 }}</i></strong>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <strong><i class="fa fa-volume-control-phone"
+                                                   aria-hidden="true"> {{ qouiqui.phone }}</i></strong>
+                                    </div>
+                                    {#<div class="col-md-3">#}
+                                    {#<strong><i class="fa fa-envelope"#}
+                                    {#aria-hidden="true"> {{ qouiqui.mail }}</i></strong>#}
+                                    {#</div>#}
+                                    {% if connected %}
+                                        <div class="col-md-4">
+                                            <a href="{{ path('fos_user_security_logout') }}"><strong
+                                                        class="login-color"><i class="fa fa-address-book">
+                                                        Se Déconnecter</i></strong>
+                                            </a>
+                                        </div>
+                                    {% elseif app.user %}
+                                        <div class="col-md-4">
+                                            {#<a><strong class="login-color"><i class="fa fa-address-book">#}
+                                            {#Bienvenue {{ app.user }}</i></strong>#}
+
+                                            {#</a>#}
+                                            <a href="{{ path('fos_user_security_logout') }}"><strong
+                                                        class="login-color"><i class="fa fa-address-book">
+                                                        Se Déconnecter</i></strong>
+                                            </a>
+                                        </div>
+                                    {% else %}
+                                        <div class="col-md-3">
+                                            <a><strong class="login-color"><i class="fa fa-address-book"
+                                                                              data-toggle="modal"
+                                                                              data-target="#myModalAuthentification">
+                                                        S'authentifier</i></strong>
+                                            </a>
+                                        </div>
+                                    {% endif %}
+
+
+                                </div>
+
+                                <div class="navbar-collapse collapse clearfix">
+                                    <ul class="navigation clearfix">
+                                        <li class="current dropdown"><a href="#">Accueil</a>
+                                        </li>
+                                        <li><a href="#apropos">À propos</a></li>
+                                        <li><a href="#services">Services</a>
+                                        </li>
+                                        <li class=""><a href="#chambres">Chambres</a>
+                                        </li>
+
+                                        <li><a href="#gallery">Galerie</a></li>
+                                        <li><a href="#events">Evenements</a>
+                                        </li>
+                                        <li><a href="#Contactez-nous">Contactez-nous</a></li>
+                                        {% if connected %}
+                                            <li>
+                                                <a href="#myModal-Booking" data-toggle="modal"
+                                                   data-target="#myModal-Booking" class="tableau-b">Tableau de bord</a>
+                                            </li>
+                                        {% endif %}
+                                    </ul>
+                                </div>
+
+
+                            </nav>
+                            <!-- Main Menu End-->
+
+                        </div><!--Nav Outer End-->
+
+                        <!-- Hidden Nav Toggler -->
+                        <div class="nav-toggler">
+                            <button class="hidden-bar-opener"><span class="icon fa fa-bars"></span></button>
+                        </div><!-- / Hidden Nav Toggler -->
+
+                    </div>
+                </div>
+            </div>
+
+        </header>
+        {% if connected %}
+
+            <div id="gallery-form-place" class="empty-place button-slider">
+                <a data-toggle="modal" href="#gallery-modal" class="btn-gallery-form">
+                    <i class="fa fa-plus-circle fa-4x"> Modifier images</i><br>
+
+                </a>
+                {% include 'ModuleBundle:Module/hotel:slidreDropZone.html.twig' %}
+                <script>
+                   console.log('dsds')
+                </script>
+            </div>
+        {% endif %}
+        <!--End Main Header -->
+
+        <!-- Hidden Navigation Bar -->
+        <section class="hidden-bar right-align">
+
+            <div class="hidden-bar-closer">
+                <button class="btn"><i class="fa fa-close"></i></button>
+            </div>
+
+            <!-- Hidden Bar Wrapper -->
+            <div class="hidden-bar-wrapper">
+
+                <!-- .logo -->
+                <div class="logo logo-style">
+                    <h1 align="center"><a href="#">{{ qouiqui.firstName }}</a></h1>
+                </div><!-- /.logo -->
+
+
+                <!-- .Side-menu -->
+                <div class="side-menu">
+
+                    <!-- .navigation -->
+                    <ul class="navigation clearfix">
+                        <li class="current"><a href="#">Acueil</a>
+                        </li>
+                        <li><a href="#apropos">À propos</a></li>
+                        <li><a href="#services">Services</a>
+                        </li>
+                        <li><a href="#chambres">Chambres</a>
+                        </li>
+                        {% if connected %}
+                            <li><a href="#myModal-Booking" data-toggle="modal"
+                                   data-target="#myModal-Booking">Tableau de bord</a>
+                            </li>
+                        {% endif %}
+                        <li><a href="#gallery">Galerie</a></li>
+                        <li><a href="#events">Evenements</a>
+                        </li>
+                        <li><a href="#Contactez-nous">Contactez-nous</a></li>
+                        {% if connected %}
+                            <li>
+                                <a href="{{ path('fos_user_security_logout') }}"><i class="fa fa-address-book" data-toggle="modal"
+                                                                                    data-target="#myModalAuthentification"> Se Déconnecter</i>
+                                </a>
+                            </li>
+                        {% elseif app.user %}
+                            <li>
+                                <a href="{{ path('fos_user_security_logout') }}"><i class="fa fa-address-book" data-toggle="modal"
+                                                                                    data-target="#myModalAuthentification"> Se Déconnecter</i>
+                                </a>
+                                {#<a href="{{ path('fos_user_security_logout') }}"><strong#}
+                                {#class="login-color"><i class="fa fa-address-book">#}
+                                {#Se Déconnecter</i></strong>#}
+                                {#</a>#}
+                            </li>
+                        {% else %}
+                            <li>
+                                <a><i class="fa fa-address-book" data-toggle="modal"
+                                      data-target="#myModalAuthentification"> S'authentifier</i>
+                                </a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </div>
+                <!-- /.Side-menu -->
+                {% for ap in module %}
+                    {% if ap.about is not null %}
+                        <div class="social-icons">
+                            <ul>
+                                {% if ap.about.fb %}
+                                    <li><a href="{{ ap.about.fb }}" target="_blank"><span
+                                                    class="fa fa-facebook-official"></span></a></li>
+                                {% endif %}
+                                {% if ap.about.gp %}
+                                    <li><a href="{{ ap.about.gp }}" target="_blank"><span
+                                                    class="fa fa-google-plus-official"></span></a></li>
+                                {% endif %}
+                                {% if ap.about.tw %}
+                                    <li><a href="{{ ap.about.tw }}" target="_blank"><span
+                                                    class="fa fa-twitter"></span></a></li>
+                                {% endif %}
+                            </ul>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+
+            </div><!-- / Hidden Bar Wrapper -->
+        </section>
+        <!-- / Hidden Bar -->
+
+        <!--Main Slider-->
+
+        <section class="main-slider" data-start-height="850" data-slide-overlay="yes">
+
+
+            <div class="tp-banner-container">
+
+
+                <div class="tp-banner">
+                    {% if slider %}
+                        <ul>
+                            {% for img in slider %}
+
+                                <li data-transition="fade" data-slotamount="1" data-masterspeed="1000"
+                                    data-thumb="/uploads/image/{{ iduser }}/{{ qouiqui.id }}/slider/{{ img }}"
+                                    data-saveperformance="off"
+                                    data-title="Awesome Title Here">
+
+                                    <img src="/uploads/image/{{ iduser }}/{{ qouiqui.id }}/slider/{{ img }}" alt=""
+                                         data-bgposition="center top"
+                                         data-bgfit="cover" data-bgrepeat="no-repeat">
+                                    <div class="tp-caption sfr sfb tp-resizeme"
+                                         data-x="center" data-hoffset="0"
+                                         data-y="center" data-voffset="0"
+                                         data-speed="1500"
+                                         data-start="500"
+                                         data-easing="easeOutExpo"
+                                         data-splitin="none"
+                                         data-splitout="none"
+                                         data-elementdelay="0.01"
+                                         data-endelementdelay="0.3"
+                                         data-endspeed="1200"
+                                         data-endeasing="Power4.easeIn">
+                                        <div class="text"><strong>E-mail: {{ qouiqui.mail }}
+                                            </strong></div>
+                                    </div>
+
+                                    <div class="tp-caption sfl sfb tp-resizeme strong-slidre"
+                                         data-x="center" data-hoffset="0"
+                                         data-y="center" data-voffset="60"
+                                         data-speed="1500"
+                                         data-start="500"
+                                         data-easing="easeOutExpo"
+                                         data-splitin="none"
+                                         data-splitout="none"
+                                         data-elementdelay="0.01"
+                                         data-endelementdelay="0.3"
+                                         data-endspeed="1200"
+                                         data-endeasing="Power4.easeIn">
+                                        <strong>Téléphone: | {{ qouiqui.phone }}</strong>>
+
+                                    </div>
+
+                                    <div class="tp-caption sfl sfb tp-resizeme"
+                                         data-x="center" data-hoffset="0"
+                                         data-y="center" data-voffset="150"
+                                         data-speed="1500"
+                                         data-start="500"
+                                         data-easing="easeOutExpo"
+                                         data-splitin="none"
+                                         data-splitout="none"
+                                         data-elementdelay="0.01"
+                                         data-endelementdelay="0.3"
+                                         data-endspeed="1200"
+                                         data-endeasing="Power4.easeIn">
+                                        <a href="#Contactez-nous" class="theme-btn btn-style-one">Contacter-nous</a>
+                                        <a href="#chambres" class="theme-btn btn-style-one">Réserver</a>
+                                    </div>
+
+                                </li>
+
+
+                            {% endfor %}
+
+                        </ul>
+                    {% else %}
+                        <ul>
+
+                            <li data-transition="fade" data-slotamount="1" data-masterspeed="1000"
+                                data-thumb="module/Hotel/images/main-slider/image-1.jpg" data-saveperformance="off"
+                                data-title="Awesome Title Here">
+
+                                <img src="{{ asset('module/Hotel/images/main-slider/image-1.jpg') }}" alt=""
+                                     data-bgposition="center top"
+                                     data-bgfit="cover" data-bgrepeat="no-repeat">
+                                <div class="tp-caption sfr sfb tp-resizeme"
+                                     data-x="center" data-hoffset="0"
+                                     data-y="center" data-voffset="0"
+                                     data-speed="1500"
+                                     data-start="500"
+                                     data-easing="easeOutExpo"
+                                     data-splitin="none"
+                                     data-splitout="none"
+                                     data-elementdelay="0.01"
+                                     data-endelementdelay="0.3"
+                                     data-endspeed="1200"
+                                     data-endeasing="Power4.easeIn">
+                                    <div class="text"><strong>E-mail: {{ qouiqui.mail }}
+                                        </strong></div>
+                                </div>
+
+                                <div class="tp-caption sfl sfb tp-resizeme strong-slidre"
+                                     data-x="center" data-hoffset="0"
+                                     data-y="center" data-voffset="60"
+                                     data-speed="1500"
+                                     data-start="500"
+                                     data-easing="easeOutExpo"
+                                     data-splitin="none"
+                                     data-splitout="none"
+                                     data-elementdelay="0.01"
+                                     data-endelementdelay="0.3"
+                                     data-endspeed="1200"
+                                     data-endeasing="Power4.easeIn">
+                                    <strong>Téléphone: | {{ qouiqui.phone }}</strong>>
+
+                                </div>
+
+                                <div class="tp-caption sfl sfb tp-resizeme"
+                                     data-x="center" data-hoffset="0"
+                                     data-y="center" data-voffset="150"
+                                     data-speed="1500"
+                                     data-start="500"
+                                     data-easing="easeOutExpo"
+                                     data-splitin="none"
+                                     data-splitout="none"
+                                     data-elementdelay="0.01"
+                                     data-endelementdelay="0.3"
+                                     data-endspeed="1200"
+                                     data-endeasing="Power4.easeIn">
+                                    <a href="#Contactez-nous" class="theme-btn btn-style-one">Contacter-nous</a>
+                                    <a href="#chambres" class="theme-btn btn-style-one">Réserver</a>
+                                </div>
+
+                            </li>
+
+                            <li data-transition="fade" data-slotamount="1" data-masterspeed="1000"
+                                data-thumb="{{ asset('module/Hotel/images/main-slider/image-2.jpg') }}"
+                                data-saveperformance="off"
+                                data-title="Awesome Title Here">
+                                <img src="{{ asset('module/Hotel/images/main-slider/image-2.jpg') }}" alt=""
+                                     data-bgposition="center top"
+                                     data-bgfit="cover" data-bgrepeat="no-repeat">
+
+                                <div class="tp-caption sfb sfb tp-resizeme"
+                                     data-x="center" data-hoffset="15"
+                                     data-y="center" data-voffset="30"
+                                     data-speed="1500"
+                                     data-start="500"
+                                     data-easing="easeOutExpo"
+                                     data-splitin="none"
+                                     data-splitout="none"
+                                     data-elementdelay="0.01"
+                                     data-endelementdelay="0.3"
+                                     data-endspeed="1200"
+                                     data-endeasing="Power4.easeIn">
+
+
+                                </div>
+
+
+                            </li>
+
+                            <li data-transition="zoomin" data-slotamount="1" data-masterspeed="1000"
+                                data-thumb="{{ asset('module/Hotel/images/main-slider/image-2.jpg') }}"
+                                data-saveperformance="off"
+                                data-title="Awesome Title Here">
+                                <img src="{{ asset('module/Hotel/images/main-slider/image-2.jpg') }}" alt=""
+                                     data-bgposition="center top"
+                                     data-bgfit="cover" data-bgrepeat="no-repeat">
+
+                                <div class="tp-caption sfb sfb tp-resizeme"
+                                     data-x="center" data-hoffset="0"
+                                     data-y="center" data-voffset="30"
+                                     data-speed="1500"
+                                     data-start="500"
+                                     data-easing="easeOutExpo"
+                                     data-splitin="none"
+                                     data-splitout="none"
+                                     data-elementdelay="0.01"
+                                     data-endelementdelay="0.3"
+                                     data-endspeed="1200"
+                                     data-endeasing="Power4.easeIn">
+
+
+                                </div>
+
+
+                            </li>
+
+                        </ul>
+                    {% endif %}
+
+                    <div class="tp-bannertimer"></div>
+                </div>
+            </div>
+
+        </section>
+        <!--End Main Slider-->
+        <!-- information responsive -->
+        <section class="information-section hidden">
+
+            <!--    <div class="col-md-12 contact-nav">
+             <div class="col-md-4">
+                 <strong><i class="fa fa-map-marker" aria-hidden="true"> adress</i></strong>
+             </div>
+             <div class="col-md-4">
+                 <strong><i class="fa fa-volume-control-phone" aria-hidden="true"> +216 71 000 000</i></strong>
+             </div>
+             <div class="col-md-4">
+                 <strong><i class="fa fa-envelope" aria-hidden="true"> hotel@hotel.tn</i></strong>
+             </div>
+
+
+            </div>  -->
+            <div style="height: 75px">
+
+            </div>
+            {#<div class="container">#}
+            {#<div class="row">#}
+            {#<div class="col-sm-12 well">#}
+            {#<div class="well col-sm-12">#}
+            {#<div class="col-sm-12">#}
+            {#<div class="col-xs-6">#}
+            {#<h3><i class="fa fa-home fa-1x"></i> Adresse</h3>#}
+            {#<p>{{ qouiqui.address1 }}</p>#}
+            {#<br/>#}
+            {#<br/>#}
+            {#</div>#}
+            {#<div class="col-xs-6">#}
+            {#<h3><i class="fa fa-envelope fa-1x"></i> E-Mail</h3>#}
+            {#<p>{{ qouiqui.mail }}</p>#}
+            {#<br/>#}
+            {#<br/>#}
+            {#</div>#}
+            {#</div>#}
+
+            {#<div class="col-sm-12">#}
+            {#<div class="col-xs-6">#}
+            {#<h3><i class="fa fa-user fa-1x"></i> Télephone</h3>#}
+            {#<p>{{ qouiqui.phone }}</p>#}
+            {#<br/>#}
+            {#<br/>#}
+            {#</div>#}
+            {#<div class="col-sm-6">#}
+            {#<h3 style="line-height:20%;"><i class="fa fa-yelp fa-1x"></i> Description:</h3>#}
+            {#<br/>#}
+            {#<p>{{ qouiqui.details }}</p>#}
+            {#</div>#}
+            {#</div>#}
+
+
+            {#</div>#}
+            {#</div>#}
+            {#</div>#}
+            {#</div>#}
+
+
+        </section>
+
+        <!-- map section -->
+        {#<section class="online-book-section style-two maptwo hidden">#}
+
+
+        {#<div id="map"></div>#}
+        {#{% include 'ModuleBundle:Module/hotel:iteneraireHotel.html.twig' %}#}
+
+
+        {#</section>#}
+        <!--/.hotel-maps-section-->
+
+        <!-- information responsive -->
+        <!--Book Section-->
+        <section class="book-section">
+            <div class="auto-container">
+
+                <div class="row clearfix">
+
+                    <!--Title Column-->
+                    <div class="title-column col-lg-2 col-md-12 col-sm-12 col-xs-12">
+                        <div class="bg-layer"></div>
+                        <!--Inner Box-->
+                        <div class="inner-box">
+                            <h2>Réserver</h2>
+                            <div class="text">Meilleur prix</div>
+                            <!--Arrow Box-->
+                            <div class="arrow-box"><span class="icon fa fa-angle-right"></span></div>
+                        </div>
+                    </div>
+
+                    <!--Form Column-->
+                    <div class="form-column col-lg-10 col-md-12 col-sm-12 col-xs-12">
+                        <div class="inner-box">
+                            <form method="post" action="#">
+                                <div class="clearfix">
+                                    <div class="column col-md-9 col-sm-12 col-xs-12">
+                                        <div class="clearfix">
+
+                                            <div class="form-group col-md-3 col-sm-6 col-xs-12">
+                                                <div class="group-inner">
+                                                    <label>Type du chambre</label>
+                                                    <select>
+                                                        <option>Chambre simple</option>
+                                                        <option>Chambre double</option>
+                                                        <option>Chambre triple/option>
+                                                        <option>Chambre familiale</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group col-md-3 col-sm-6 col-xs-12">
+                                                <div class="group-inner">
+                                                    <label>Début</label>
+                                                    <input type="text" name="date" class="datepicker" value=""
+                                                           placeholder="Select Date" required>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group col-md-3 col-sm-12 col-xs-12">
+                                                <div class="group-inner">
+                                                    <label>Fin</label>
+                                                    <input type="text" name="text" class="datepicker" value=""
+                                                           placeholder="Select Date" required>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group col-md-3 col-sm-12 col-xs-12">
+                                                <div class="group-inner">
+                                                    <label><br></label>
+                                                    <a class="apply" href="#"><input type="button" value="Réserver"></a>
+                                                    {#<div class="text">   <a class="apply" href="#"><input type="button" value="Réserver"></a></div>#}
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                    <!--Avalability Column-->
+                                    <div class="avalability-column col-md-3 col-sm-12 col-xs-12">
+                                        {#<button type="submit">#}
+                                        {#<span class="big-txt">Check Availabilty</span>#}
+                                        {#<span class="small-text">Offer going on</span>#}
+                                        {#</button>#}
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+
+
+            </div>
+        </section>
+        <!--End Book Section-->
+
+        <!-- map section -->
+        <section class="online-book-section style-two mapOne">
+
+            <div id="map"></div>
+            {#=========================Mobile informations maps====================================#}
+            {#<div id="iteMobile" style="display: none">#}
+            {#<div class="col-md-12 align-center">#}
+            {#<div class="col-md-12">#}
+            {#<form class="form-inline">#}
+
+            {#<div class="col-md-8 no-padding">#}
+            {#<div class="input-group first-ch">#}
+            {#<div class="btn btn-cta-primary" onclick="javascript:geolocate()"#}
+            {#data-toggle="tooltip" data-placement="bottom" title="Détecter ma position">#}
+            {#<input type="button" class="theme-btn btn-style-two color-change btn-function"#}
+            {#value="Y allez">#}
+            {#</div>#}
+            {#<input type="hidden" name="origin" id="origin" placeholder="Indiquez un lieu"#}
+            {#class="form-control map-input" size="0" autocomplete="off" hidden>#}
+            {#</div>#}
+            {#</div>#}
+            {#<div class="col-md-4 no-padding">#}
+            {#<a onclick="calculate();"></a>#}
+            {#<input type="hidden" value="{{ qouiqui.geoLat }},{{ qouiqui.geoLong }}"#}
+            {#name="destination" id="destination">#}
+
+            {#</div>#}
+
+            {#</form>#}
+            {#<div id="panel"></div>#}
+            {#</div>#}
+            {#</div>#}
+            {#</div>#}
+            {#=========================Mobile informations maps====================================#}
+            <div id="ite">
+                <div class="col-md-12 align-center">
+                    <div class="col-md-12">
+                        <div class="yallez-ite" style="  text-align: center;font-size: 20px; color:#ff3d54">
+
+                            <strong>Y aller</strong>
+                        </div>
+                        <form class="form-inline">
+
+                            <div class="col-md-8 no-padding desktop-map">
+                                <div class="input-group first-ch">
+                                    <div class="input-group-addon btn btn-cta-primary" onclick="javascript:geolocate()"
+                                         data-toggle="tooltip" data-placement="bottom" title="Détecter ma position"><i
+                                                class="fa fa-location-arrow" aria-hidden="true"></i></div>
+                                    <input type="text" name="origin" id="origin" placeholder="Indiquez un lieu"
+                                           class="form-control map-input" size="0" autocomplete="off">
+                                </div>
+                            </div>
+                            <div class="col-md-8 no-padding mobile-map" style="display: none">
+                                <div class="input-group first-ch">
+                                    <div class="btn btn-cta-primary" onclick="javascript:geolocate()"
+                                         data-toggle="tooltip" data-placement="bottom" title="Détecter ma position">
+                                        <input type="button" class="theme-btn btn-style-two color-change btn-function"
+                                               value="Y allez">
+                                    </div>
+                                    <input type="hidden" name="origin" id="origin" placeholder="Indiquez un lieu"
+                                           class="form-control map-input" size="0" autocomplete="off" hidden>
+                                </div>
+                            </div>
+                            <div class="col-md-4 no-padding">
+                                <a class="theme-btn btn-style-two calcul-it" style="cursor:pointer;padding: 7px;"
+                                   onclick="calculate();">Itinéraire</a>
+                                <input type="hidden" value="{{ qouiqui.geoLat }},{{ qouiqui.geoLong }}"
+                                       name="destination" id="destination">
+
+                            </div>
+
+                        </form>
+                        <div id="panel"></div>
+                    </div>
+                </div>
+            </div>
+            {#==================================Adress Mobile=================================#}
+            <div class="col-sm-12 adress-responsive hidden">
+                <div class=" col-xs-12">
+                    <div class="col-xs-12">
+                        <br>
+                        <div class="col-xs-6">
+                            <h3><i class="fa fa-user fa-1x"></i> Télephone</h3>
+                            <p><a href="tel:{{ qouiqui.phone }}">{{ qouiqui.phone }}</a></p>
+                        </div>
+                        <div class="col-xs-6 btn-style-one-speciale">
+                            <a href="#Contactez-nous" class="btn btn-danger">Contacter-nous</a>
+                        </div>
+                        {#<div class="col-xs-6">#}
+                        {#<h3><i class="fa fa-envelope fa-1x"></i> E-Mail</h3>#}
+                        {#<p>{{ qouiqui.mail }}</p>#}
+                        {#</div>#}
+                        {#<div class="col-sm-6">#}
+                        {#<h3 style="line-height:20%;"><i class="fa fa-yelp fa-1x"></i> Description:</h3>#}
+                        {#<br/>#}
+                        {#<p>{{ qouiqui.details }}</p>#}
+                        {#</div>#}
+                    </div>
+                    <div class="col-xs-6">
+                        <div class="col-xs-12">
+                            <h3><i class="fa fa-home fa-1x"></i> Adresse </h3>
+                            <p>{{ qouiqui.address1 }}</p>
+                        </div>
+
+                    </div>
+                    {% for ap in module %}
+                        {% if ap.about is not null %}
+                            <div class="social-icons col-xs-6">
+                                <ul>
+                                    {% if ap.about.fb %}
+                                        <li><a href="{{ ap.about.fb }}" target="_blank"><span
+                                                        class="fa fa-facebook-official"></span></a></li>
+                                    {% endif %}
+                                    {% if ap.about.gp %}
+                                        <li><a href="{{ ap.about.gp }}" target="_blank"><span
+                                                        class="fa fa-google-plus-official"></span></a></li>
+                                    {% endif %}
+                                    {% if ap.about.tw %}
+                                        <li><a href="{{ ap.about.tw }}" target="_blank"><span
+                                                        class="fa fa-twitter"></span></a></li>
+                                    {% endif %}
+                                </ul>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+
+
+                </div>
+
+            </div>
+
+
+        </section>
+        <!--/.hotel-maps-section-->
+        {#=========================Les horaires=============================#}
+        <section class="horaires-section" id="horaires">
+            <br>
+            <div class="container">
+                <div class="row">
+                    {% if connected %}
+                        <input type="submit" value="Ajouter votre Horaires" class="theme-btn btn-style-ajout"
+                               data-toggle="modal"
+                               data-target="#ajouterhorires"/>
+                    {% endif %}
+                    {% for hor in module %}
+                        {% if hor.horaires is not null %}
+                            <div class="col-md-12">
+                                <div class="panel panel-primary panel-change-color">
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title" align="center">Les Horaires</h3>
+                                        {% if connected %}<input type="button" class="btn btn-success btn-block" value="Modifier horaires" data-title="Edit" data-toggle="modal" data-target="#edithorires">{% endif %}
+                                        <div class="pull-right">
+							<span class="clickable filter" data-toggle="tooltip" title="Toggle table filter"
+                                  data-container="body">
+							</span>
+                                        </div>
+                                    </div>
+                                    <table class="table table-hover" id="dev-table">
+                                        <thead>
+                                        <tr>
+                                            <th></th>
+
+                                            <th>Le matin</th>
+                                            <th>L'aprés-midi</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+
+                                            <td><strong>Lundi à Vendredi</strong></td>
+
+                                            <td>{% if hor.horaires.week1.start is defined %}
+                                                    {{ hor.horaires.week1.start }} à {{ hor.horaires.week1.end }}
+                                                {% endif %}</td>
+                                            <td>{% if hor.horaires.week2.start is defined %}
+                                                {{ hor.horaires.week2.start }} à {{ hor.horaires.week2.end }}
+                                                {% endif %}</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Samedi</strong></td>
+                                            {% if hor.horaires.weekendsamedi.start is defined %}
+                                            <td>{{ hor.horaires.weekendsamedi.start }} à {{ hor.horaires.weekendsamedi.end }}</td>
+                                            {% endif %}
+                                            <td></td>
+
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Dimanche</strong></td>
+                                            <td>Fermer</td>
+                                            <td>
+                                                {% if hor.horaires.weekendsamedi.start is defined %}
+                                                {{ hor.horaires.weekenddimanche.start }} à {{ hor.horaires.weekenddimanche.end }}
+                                                {% endif %}
+                                            </td>
+                                            <td></td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+            {% include 'ModuleBundle:Module/hotel:horairesHotel.html.twig' %}
+            {% include 'ModuleBundle:Module/hotel:ajouterHoraires.html.twig' %}
+
+            <div class="particle elem1 anim-delay1"></div>
+            <div class="particle elem2 anim-delay5"></div>
+            <div class="particle elem3 anim-delay3"></div>
+            <div class="particle elem4 anim-delay8"></div>
+            <div class="particle elem5 anim-delay9"></div>
+            <div class="particle elem6 anim-delay2"></div>
+            <div class="particle elem7 anim-delay4"></div>
+            <div class="particle elem8 anim-delay3"></div>
+            <div class="particle elem9 anim-delay10"></div>
+            <div class="particle elem8 anim-delay11"></div>
+            <div class="particle elem6 anim-delay12"></div>
+            <div class="particle elem1 anim-delay14"></div>
+            <div class="particle elem13 anim-delay16"></div>
+            <div class="particle elem17 anim-delay18"></div>
+            <div class="particle elem2 anim-delay6"></div>
+            <div class="particle elem16 anim-delay9"></div>
+            <div class="particle elem8 anim-delay3"></div>
+            <div class="particle elem9 anim-delay10"></div>
+            <div class="particle elem18 anim-delay11"></div>
+            <div class="particle elem11 anim-delay12"></div>
+            <div class="particle elem12 anim-delay14"></div>
+            <div class="particle elem13 anim-delay16"></div>
+            <div class="particle elem14 anim-delay18"></div>
+            <div class="particle elem15 anim-delay6"></div>
+            <div class="particle elem16 anim-delay9"></div>
+            <div class="particle elem17 anim-delay7"></div>
+            <div class="particle elem18 anim-delay6"></div>
+            <div class="particle elem19 anim-delay3"></div>
+        </section>
+        {#=========================Les horaires=============================#}
+        <!--About Section-->
+        <section class="about-section" id="apropos">
+            <div class="bg-left-icon"></div>
+            <div class="auto-container">
+                <div class="row clearfix">
+                    <!--Content Column-->
+                    <div class="content-column col-md-6 col-sm-12 col-xs-12 ">
+                        <div class="inner-box">
+                            <!--Sec Title-->
+                            <div class="sec-title">
+                                <h2>A propos</h2>
+                            </div>
+                            {% if connected %}
+                                        <input type="submit" value="Ajouter votre à propos" class="theme-btn btn-style-ajout"
+                                               data-toggle="modal"
+                                               data-target=".ajout-apropos"/>
+                            {% endif %}
+                            {% include 'ModuleBundle:Module/hotel:ajouterApropos.html.twig' %}
+
+                            <br>
+                            <br>
+                            {% for ap in module %}
+                                {% if ap.about is not null %}
+                                    <div class="text">
+                                        {{ ap.about.apropos_details|raw }}
+                                    </div>
+
+
+                                    <!--Time Cloud-->
+                                    <ul class="time-cloud apropos">
+                                        {% if ap.about.fb %}
+                                            <li><a href="{{ ap.about.fb }}" target="_blank"><span
+                                                            class="fa fa-facebook-official"></span></a></li>
+                                        {% endif %}
+                                        {% if ap.about.gp %}
+                                            <li><a href="{{ ap.about.gp }}" target="_blank"><span
+                                                            class="fa fa-google-plus-official"></span></a></li>
+                                        {% endif %}
+                                        {% if ap.about.tw %}
+                                            <li><a href="{{ ap.about.tw }}" target="_blank"><span
+                                                            class="fa fa-twitter"></span></a></li>
+                                        {% endif %}
+                                        {% if connected %}
+                                            <input type="submit" class="theme-btn btn-style-two"
+                                                   data-title="Edit"
+                                                   data-toggle="modal"
+                                                   data-target="#edit_apropos{{ loop.index }}" {{ ap.id }}
+                                                   value="Modifier à propos">
+                                        {% endif %}
+                                    </ul>
+
+                                {% endif %}
+
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                    <!--Images apropos-->
+                    {% for ap in module %}
+                    {% if ap.about is not null %}
+                    <div class="images-column col-md-6 col-sm-12 col-xs-12 ">
+                        <div class="inner-box">
+                            <div class="row clearfix">
+                                <div class="column col-md-12 col-sm-12 col-xs-12">
+                                    <figure class="image-box col-xs-12"><img
+                                                src="{{ asset('uploads/image/' ~ qouiqui.user.id ~'/' ~ qouiqui.id ~ '/apropos/'~ ap.about.image_apropos ) }}"
+                                                alt=""/></a>
+                                    </figure>
+
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+                {% include 'ModuleBundle:Module/hotel:editApropos.html.twig' %}
+
+
+                <div class="particle elem1 anim-delay1"></div>
+                <div class="particle elem2 anim-delay5"></div>
+                <div class="particle elem3 anim-delay3"></div>
+                <div class="particle elem4 anim-delay8"></div>
+                <div class="particle elem5 anim-delay9"></div>
+                <div class="particle elem6 anim-delay2"></div>
+                <div class="particle elem7 anim-delay4"></div>
+                <div class="particle elem8 anim-delay3"></div>
+                <div class="particle elem9 anim-delay10"></div>
+                <div class="particle elem8 anim-delay11"></div>
+                <div class="particle elem6 anim-delay12"></div>
+                <div class="particle elem1 anim-delay14"></div>
+                <div class="particle elem13 anim-delay16"></div>
+                <div class="particle elem17 anim-delay18"></div>
+                <div class="particle elem2 anim-delay6"></div>
+                <div class="particle elem16 anim-delay9"></div>
+                <div class="particle elem8 anim-delay3"></div>
+                <div class="particle elem9 anim-delay10"></div>
+                <div class="particle elem18 anim-delay11"></div>
+                <div class="particle elem11 anim-delay12"></div>
+                <div class="particle elem12 anim-delay14"></div>
+                <div class="particle elem13 anim-delay16"></div>
+                <div class="particle elem14 anim-delay18"></div>
+                <div class="particle elem15 anim-delay6"></div>
+                <div class="particle elem16 anim-delay9"></div>
+                <div class="particle elem17 anim-delay7"></div>
+                <div class="particle elem18 anim-delay6"></div>
+                <div class="particle elem19 anim-delay3"></div>
+            </div>
+        </section>
+        <!--End About Section-->
+
+        <!--Rooms Section-->
+        <section class="rooms-section"
+                 style="background-image:url({{ asset('module/Hotel/images/background/1.jpg') }})" id="chambres">
+            <div class="auto-container">
+
+                <!-- bouton pour ajouter une chambre -->
+                {% if connected %}
+                    <div class="sec-title-one add-room">
+                        <input type="submit" value="Ajouter Chambre" class="theme-btn btn-style-ajout"
+                               data-toggle="modal"
+                               data-target=".ajout-chambre-modal-lg"/>
+                    </div>
+                {% endif %}
+                {#=====================================Modifier chambre==================================#}
+                {% include 'ModuleBundle:Module/hotel:editChambre.html.twig' %}
+                {#=====================================Modifier chambre==================================#}
+                <!-- bouton pour ajouter une chambre -->
+
+                <!--     modal d'ajout des chambre -->
+
+                <!-- Large modal -->
+
+                {% include 'ModuleBundle:Module/hotel:ajouterChambre.html.twig' %}
+                {#=============================DeleteChambre=======================#}
+                {% include 'ModuleBundle:Module/hotel:confirmerDeleteChambre.html.twig' %}
+                {#=============================DeleteChambre=======================#}
+
+                <!--     modal d'ajout des chambre -->
+
+                <div class="sec-title-one">
+
+                    <h2>Chambres d'hôtel</h2>
+                    <div class="text"><br>
+                    </div>
+                    {% if connected %}
+                        <a class="chambres-booking theme-btn btn-style-five" href="#chambres-booking" data-toggle="modal"
+                           data-target="#myModal-Booking">Gérer les chambres</a>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="four-item-carousel">
+
+                <!--Room Box-->
+                {% for ch in module %}
+                    {% if ch.descriptionRoom is not null %}
+                        <div class="room-box size-img">
+                            <div class="inner-box">
+                                <div class="image-box">
+                                    <a href="#" data-toggle="modal"
+                                       data-target="#details_chambres{{ ch.id }}"><img
+                                                src="{{ asset('uploads/image/' ~ qouiqui.user.id ~'/' ~ qouiqui.id ~ '/chambres/'~ ch.descriptionRoom.image_chambre ) }}"
+                                                alt="img"
+                                                class="box-radius"></a>
+
+                                </div>
+                                <!--Lower Content-->
+                                <div class="lower-content">
+                                    <!--Rating-->
+                                    <div class="rating">
+                                        <span class="fa fa-star"></span>
+                                        <span class="fa fa-star"></span>
+                                        <span class="fa fa-star"></span>
+                                        <span class="fa fa-star"></span>
+                                        <span class="fa fa-star"></span>
+                                    </div>
+
+                                    <h3 class="info-ch"><a href="#" data-toggle="modal"
+                                                           data-target="#details_chambres{{ ch.id }}">Plus
+                                            d'information</a></h3>
+                                    <h3 class="type-ch">{{ ch.descriptionRoom.nombre }} / {{ ch.descriptionRoom.nombreLit }}</h3>
+                                    {% if app.user %}
+                                        <div class="price clearfix">{{ ch.descriptionRoom.prix }} DT
+                                            <a href="#" data-toggle="modal" data-target="#modal_booking{{ ch.id }}" data-idChambre="{{ ch.id }}" class="modalreservation">
+                                                Réserver maintenant
+                                            </a>
+                                        </div>
+                                    {% else %}
+                                        <div class="price clearfix">{{ ch.descriptionRoom.prix }} DT
+                                            <a href="#" data-toggle="modal" data-target="#modal_connection">Réserver
+                                                maintenant</a></div>
+
+                                    {% endif %}
+
+                                </div>
+
+                            </div>
+
+                        </div>
+                    {% endif %}
+                {% endfor %}
+
+
+            </div>
+        </section>
+        {% include 'ModuleBundle:Module/hotel:detailsChambres.html.twig' %}
+        {% include 'ModuleBundle:Module/hotel:connectionHotelReservation.html.twig' %}
+        {% include 'ModuleBundle:Module/hotel:bookingChambreHotel.html.twig' %}
+        <!--End Rooms Section-->
+
+        <!--Services Section-->
+        <section class="services-section"
+                 style="background-image:url({{ asset('module/Hotel/images/resource/services-bg.png') }})"
+                 id="services">
+            <div class="auto-container">
+                <div class="row clearfix">
+                    <!--Column-->
+                    <div class="title-column col-md-12 col-sm-12 col-xs-12">
+                        <div class="inner-box">
+                            <!--Sec Title-->
+                            <div class="sec-title">
+
+                                <h2>Notre service</h2>
+                            </div>
+                            {% if connected %}
+
+                                <input type="submit" value="Ajouter Service" class="theme-btn btn-style-ajout"
+                                       data-toggle="modal" data-target=".ajout-services-modal-lg">
+                                {% include 'ModuleBundle:Module/hotel:ajouterServices.html.twig' %}
+                            {% endif %}
+                            <div class="text">
+                                {#{% for service in services %}#}
+                                {#<p>{{ random(service) }}</p>#}
+                                {#{% endfor %}#}
+                            </div>
+                            {% if connected %}
+                                <a class="see-services theme-btn btn-style-five" href="#services-booking"
+                                   data-toggle="modal"
+                                   data-target="#myModal-Booking" id="service-book">Gérer les services</a>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <!--Content Column-->
+
+                    {% include 'ModuleBundle:Module/hotel:serviceHotel.html.twig' %}
+                    {% include 'ModuleBundle:Module/hotel:editService.html.twig' %}
+                    {% include 'ModuleBundle:Module/hotel:confirmerDeleteServices.html.twig' %}
+
+                </div>
+            </div>
+
+
+            <!--Modal ajouter service-->
+
+            <!--Modal ajouter service-->
+
+            <div class="particle elem1 anim-delay1"></div>
+            <div class="particle elem2 anim-delay5"></div>
+            <div class="particle elem3 anim-delay3"></div>
+            <div class="particle elem4 anim-delay8"></div>
+            <div class="particle elem5 anim-delay9"></div>
+            <div class="particle elem6 anim-delay2"></div>
+            <div class="particle elem7 anim-delay4"></div>
+            <div class="particle elem8 anim-delay3"></div>
+            <div class="particle elem9 anim-delay10"></div>
+            <div class="particle elem8 anim-delay11"></div>
+            <div class="particle elem6 anim-delay12"></div>
+            <div class="particle elem1 anim-delay14"></div>
+            <div class="particle elem13 anim-delay16"></div>
+            <div class="particle elem17 anim-delay18"></div>
+            <div class="particle elem2 anim-delay6"></div>
+            <div class="particle elem16 anim-delay9"></div>
+            <div class="particle elem8 anim-delay3"></div>
+            <div class="particle elem9 anim-delay10"></div>
+            <div class="particle elem18 anim-delay11"></div>
+            <div class="particle elem11 anim-delay12"></div>
+            <div class="particle elem12 anim-delay14"></div>
+            <div class="particle elem13 anim-delay16"></div>
+            <div class="particle elem14 anim-delay18"></div>
+            <div class="particle elem15 anim-delay6"></div>
+            <div class="particle elem16 anim-delay9"></div>
+            <div class="particle elem17 anim-delay7"></div>
+            <div class="particle elem18 anim-delay6"></div>
+            <div class="particle elem19 anim-delay3"></div>
+        </section>
+        <!--End Services Section-->
+
+        <!--Our Gallery Section-->
+        <section class="our-gallery" id="gallery"
+                 style="background-image:url(/module/Hotel/images/background/image.jpg)">
+            <!--Outer Box-->
+            <div class="outer-box clearfix">
+
+
+                <!--Right Column-->
+                <div class="column right-column">
+                    <div class="content-box col-md-12">
+
+
+                        <div class="sec-title-two">
+                            <h2>Notre Galerie</h2>
+                            {#<h3>TEMPS DOUX</h3>#}
+                            <p class="text"></p>
+                        </div>
+                        <!-- bouton pour ajouter une photo au galerie -->
+                        {% if connected %}
+                            <input type="button" value="Ajouter Des photo au galerie" class="theme-btn btn-style-ajout"
+                                   data-toggle="modal" data-target="#galleryModal"/>
+                            <!-- bouton pour ajouter une photo -->
+                        {% endif %}
+                    </div>
+
+                </div>
+
+                <!--     modal d'ajout des photos au galerie -->
+
+                <!-- modal ajout des photos -->
+                {% include 'ModuleBundle:Module/hotel:galerieHotelModal.html.twig' %}
+                <!-- modal ajout des photos -->
+
+                <!--Left Column-->
+                <div class="column left-column">
+                    <!--Three Item Carousel-->
+                    <div class="three-item-carousel">
+                        <!--Gallery Item Two-->
+                        {% if img_gallery %}
+                            {% for img in img_gallery %}
+                                <div class="gallery-item-two">
+                                    <div class="inner-box">
+                                        <figure class="image-box gallery-img">
+                                            <img src="/uploads/image/{{ iduser }}/{{ qouiqui.id }}/gallery/{{ img }}"
+                                                 alt>
+                                            <!--Overlay Box-->
+                                            <div class="overlay-box">
+                                                <div class="inner">
+                                                    <div class="content">
+                                                        <div class="border-box"></div>
+                                                        <h3>Afficher<br>l'image</h3>
+                                                        <div class="plus-icon"><a class="lightbox-image"
+                                                                                  data-fancybox-group="gallery-one"
+                                                                                  href="/uploads/image/{{ iduser }}/{{ qouiqui.id }}/gallery/{{ img }}">
+                                                                <span><i class="fa fa-plus"
+                                                                         aria-hidden="true"></i></span></a></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </figure>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+
+                        <!--Gallery Item Two-->
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+        <!--End Our Gallery Section-->
+
+        <!--Event Section-->
+        {% include 'ModuleBundle:Module/hotel:eventsHotel.html.twig' %}
+        <!--End Event Section-->
+
+        <!-- modal ajout des des evenements -->
+        {% include 'ModuleBundle:Module/hotel:ajouterEvenements.html.twig' %}
+        {% include 'ModuleBundle:Module/hotel:editEvents.html.twig' %}
+        {% include 'ModuleBundle:Module/hotel:confirmerDeleteEvents.html.twig' %}
+        <!--     modal d'ajout des evenements -->
+
+        <!--Feedback-->
+        {#<section class="feedback-section">#}
+        {#<div class="outer-box clearfix">#}
+
+        {#<!--Left Column-->#}
+        {#<div class="column left-column">#}
+        {#<div class="content-box">#}
+        {#<div class="sec-title-two">#}
+        {#<h2>Commentaires du client</h2>#}
+        {#<h3>TÉMOIGNAGES</h3>#}
+        {#</div>#}
+        {#<div class="text">Lorem Ipsum is simply dummy text of the printing and Lorem Ipsum has been the#}
+        {#great#}
+        {#font.#}
+        {#</div>#}
+
+        {#<ul class="thumbs-carousel">#}
+        {#<li><img src="{{ asset('module/Hotel/images/resource/feedback-thumb-1.jpg') }}" alt=""></li>#}
+        {#<li><img src="{{ asset('module/Hotel/images/resource/feedback-thumb-2.jpg') }}" alt=""></li>#}
+        {#<li><img src="{{ asset('module/Hotel/images/resource/feedback-thumb-3.jpg') }}" alt=""></li>#}
+        {#<li><img src="{{ asset('module/Hotel/images/resource/feedback-thumb-4.jpg') }}" alt=""></li>#}
+        {#<li><img src="{{ asset('module/Hotel/images/resource/feedback-thumb-1.jpg') }}" alt=""></li>#}
+        {#<li><img src="{{ asset('module/Hotel/images/resource/feedback-thumb-2.jpg') }}" alt=""></li>#}
+        {#</ul>#}
+
+        {#</div>#}
+        {#</div>#}
+
+        {#<!--right Column-->#}
+        {#<div class="column right-column clearfix">#}
+        {#<!--Feedback Detail-->#}
+        {#<div class="feedback-detail">#}
+
+        {#<div class="carousel-outer wow fadeInLeft">#}
+
+        {#<!--Image Carousel-->#}
+        {#<div class="content-carousel">#}
+
+        {#<div class="info-column">#}
+        {#<div class="content">#}
+        {#<div class="text">#}
+        {#<p>Lorem Ipsum is simply dummy tex the printing and typesetting industry.#}
+        {#Lorem#}
+        {#Ipsum has been the industry's standard dummy text ever since the#}
+        {#1500s</p>#}
+        {#<p>when an unknown printer took a galley of type and scrambled it to make a#}
+        {#type#}
+        {#specimen book.</p>#}
+        {#<h4>Julia rose</h4>#}
+        {#</div>#}
+        {#</div>#}
+        {#</div>#}
+
+        {#<div class="info-column">#}
+        {#<div class="content">#}
+        {#<div class="text">#}
+        {#<p>Lorem Ipsum is simply dummy tex the printing and typesetting industry.#}
+        {#Lorem#}
+        {#Ipsum has been the industry's standard dummy text ever since the#}
+        {#1500s</p>#}
+        {#<p>when an unknown printer took a galley of type and scrambled it to make a#}
+        {#type#}
+        {#specimen book.</p>#}
+        {#<h4>Julia rose</h4>#}
+        {#</div>#}
+        {#</div>#}
+        {#</div>#}
+
+        {#<div class="info-column">#}
+        {#<div class="content">#}
+        {#<div class="text">#}
+        {#<p>Lorem Ipsum is simply dummy tex the printing and typesetting industry.#}
+        {#Lorem#}
+        {#Ipsum has been the industry's standard dummy text ever since the#}
+        {#1500s</p>#}
+        {#<p>when an unknown printer took a galley of type and scrambled it to make a#}
+        {#type#}
+        {#specimen book.</p>#}
+        {#<h4>Julia rose</h4>#}
+        {#</div>#}
+        {#</div>#}
+        {#</div>#}
+
+
+        {#<div class="info-column">#}
+        {#<div class="content">#}
+        {#<div class="text">#}
+        {#<p>Lorem Ipsum is simply dummy tex the printing and typesetting industry.#}
+        {#Lorem#}
+        {#Ipsum has been the industry's standard dummy text ever since the#}
+        {#1500s</p>#}
+        {#<p>when an unknown printer took a galley of type and scrambled it to make a#}
+        {#type#}
+        {#specimen book.</p>#}
+        {#<h4>Julia rose</h4>#}
+        {#</div>#}
+        {#</div>#}
+        {#</div>#}
+
+        {#<div class="info-column">#}
+        {#<div class="content">#}
+        {#<div class="text">#}
+        {#<p>Lorem Ipsum is simply dummy tex the printing and typesetting industry.#}
+        {#Lorem#}
+        {#Ipsum has been the industry's standard dummy text ever since the#}
+        {#1500s</p>#}
+        {#<p>when an unknown printer took a galley of type and scrambled it to make a#}
+        {#type#}
+        {#specimen book.</p>#}
+        {#<h4>Julia rose</h4>#}
+        {#</div>#}
+        {#</div>#}
+        {#</div>#}
+
+        {#<div class="info-column">#}
+        {#<div class="content">#}
+        {#<div class="text">#}
+        {#<p>Lorem Ipsum is simply dummy tex the printing and typesetting industry.#}
+        {#Lorem#}
+        {#Ipsum has been the industry's standard dummy text ever since the#}
+        {#1500s</p>#}
+        {#<p>when an unknown printer took a galley of type and scrambled it to make a#}
+        {#type#}
+        {#specimen book.</p>#}
+        {#<h4>Julia rose</h4>#}
+        {#</div>#}
+        {#</div>#}
+        {#</div>#}
+
+
+        {#</div>#}
+
+        {#</div>#}
+
+        {#</div>#}
+
+        {#</div>#}
+
+        {#</div>#}
+        {#</section>#}
+        <!--End Feedback-->
+
+        <!--News Section-->
+        {% include 'ModuleBundle:Module/hotel:actualitesHotel.html.twig' %}
+        {% include 'ModuleBundle:Module/hotel:editActualites.html.twig' %}
+        {% include 'ModuleBundle:Module/hotel:confirmerDeleteActualites.html.twig' %}
+        <!--End News Block-->
+
+        <!--NewsLetter-->
+        <section class="contact-us-section"
+                 style="background-image:url({{ asset('module/Hotel/images/background/weenHotel.jpg') }})"
+                 id="Contactez-nous">
+            <div class="container">
+                <div class="row">
+
+                    <form id="contact-form1" method="post"
+                          action="{{ path('module_hotel_contactezNous', {'id_qq': qouiqui.id}) }}" role="form">
+
+                        <div class="messages"></div>
+
+                        <div class="controls">
+                            <Stong class="text-contact">Contactez-nous</Stong>
+                            <br><br>
+                            <div class="row">
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="form_name">Nom *</label>
+                                        <input type="text" name="name" class="form-control width-inputs"
+                                               placeholder="SVP entrer votre nom *" required="required"
+                                               data-error="Firstname is required.">
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="form_lastname">Prénom *</label>
+                                        <input type="text" name="surname" class="form-control width-inputs"
+                                               placeholder="SVP entrer votre prénom *" required="required"
+                                               data-error="Lastname is required.">
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="form_email">Email *</label>
+                                        <input type="email" name="email" class="form-control width-inputs"
+                                               placeholder="SVP entrer vote mail *" required="required"
+                                               data-error="Valid email is required.">
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="form_phone">Objet</label>
+                                        <input type="text" name="objet" class="form-control width-inputs"
+                                               placeholder="Objet" required="required">
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="form_message">Message *</label>
+                                        <textarea name="message" class="form-control"
+                                                  placeholder="Votre message*" rows="8" required="required"
+                                                  data-error="Please,leave us a message."></textarea>
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <input type="submit" class="theme-btn btn-style-two" value="Envoyer">
+                                </div>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </section>
+        <!--End NewsLetter-->
+
+        {#==========================================modal reservation=====================================#}
+        {% include 'ModuleBundle:Module/hotel:reservationHotel.html.twig' %}
+        {#==========================================modal reservation=====================================#}
+        {#==========================================S'authentifier/S'inscrire=====================================#}
+
+        <div class="container">
+            <!-- Trigger the modal with a button -->
+            {#=========================Modal d'authentification=====================#}
+            <div id="myModalAuthentification" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">S'authentifier</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="col-md-12 btn-group btn-group-justified hidden-xs hidden-sm social" role="group">
+                                <div class="facebook btn-group" role="group">
+                                    <a class="facebook-btn btn btn-primary" href="/login/facebook">
+                                        <span>Connecter avec Facebook</span>
+                                    </a>
+                                </div>
+                                <div class="btn-group" role="group">
+                                    <a class="btn btn-danger" href="/login/google">
+                                        <span>Connecter avec Google</span>
+                                    </a>
+                                </div>
+                            </div>
+                            <form action="/login_check" method="post">
+                                <div class="form-group">
+                                    <input type="hidden" name="_csrf_token" value="Kk4KcJ-i6lPzu7pUx0wOja7L0g5uu9CI6uWJYDGVT4Q">
+                                </div>
+                                <div class="form-group">
+                                    <label for="username">Nom d'utilisateur</label>
+                                    <input type="text" id="username" name="_username" value="" required="required" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label for="password">Mot de passe</label>
+                                    <input type="password" id="password" name="_password" required="required" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <input type="checkbox" id="remember_me" name="_remember_me" value="on">
+                                    <label for="remember_me">Se souvenir de moi!</label>
+                                </div>
+                                <div class="form-group">
+                                    <input type="submit" id="_submit" name="_submit" value="Se connecter" class="form-control btn btn-warning">
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            {#=========================Modal d'authentification=====================#}
+            <!-- Modal -->
+
+        </div>
+
+        {#==========================================S'authentifier/S'inscrire=====================================#}
+
+        <!--Main Footer-->
+        {% include 'ModuleBundle:Module/hotel:footerHotel.html.twig' %}
+        <!--End Main Footer-->
+
+    </div>
+
+{% endblock %}
+
+
+    {% block stylesheets %}
+        {{ parent() }}
+        <style>
+            .fixed-header .main-box .logo-box, .main-header .main-box .logo-box {
+                margin-top: 15px;
+            }
+
+            @media (max-width: 767px) {
+                .fixed-header .main-box .logo-box, .main-header .main-box .logo-box {
+                    margin: auto;
+                }
+            }
+
+            .adress-caractere {
+                font-weight: 400;
+                font-size: 24px;
+                text-transform: capitalize;
+                font-family: 'Hind', sans-serif;
+                position: relative;
+                color: #132e45;
+                line-height: 26px;
+            }
+
+            .textareaServices textarea {
+                border: 1px solid black;
+            }
+
+            .modal-footer {
+                border-top: none !important;
+            }
+
+            .edit-chambre-modal-lg, .edit-services-modal-lg, .modifier-events-modal-lg, .edit-actualités-modal-lg {
+                z-index: 1500 !important;
+            }
+
+            .logo-style {
+                position: relative;
+                font-size: 48px;
+                font-weight: 400;
+                color: #ff3d54;
+                line-height: 1em;
+                z-index: 9;
+                /*padding-left: 32px;*/
+                text-transform: capitalize;
+                font-family: 'Playball', cursive;
+            }
+
+            /*=========================actualites=======================*/
+
+            .divider {
+                width: 100%;
+                margin: 20px auto 15px;
+                position: relative;
+                height: 1px;
+                -webkit-backface-visibility: hidden;
+                -webkit-transform: translateZ(0) scale(1, 1);
+            }
+
+            .divider::after {
+                height: 1px;
+                background: #e8e8e8;
+                background: -moz-linear-gradient(left, transparent 0, rgba(0, 0, 0, 0.09) 35%, rgba(0, 0, 0, 0.09) 70%, transparent 100%);
+                background: -webkit-gradient(linear, left top, right top, color-stop(0, transparent), color-stop(35%, rgba(0, 0, 0, 0.09)), color-stop(70%, rgba(0, 0, 0, 0.09)), color-stop(100%, transparent));
+                background: -webkit-linear-gradient(left, transparent 0, rgba(0, 0, 0, 0.09) 35%, rgba(0, 0, 0, 0.09) 70%, transparent 100%);
+                background: -o-linear-gradient(left, transparent 0, rgba(0, 0, 0, 0.09) 35%, rgba(0, 0, 0, 0.09) 70%, transparent 100%);
+                background: -ms-linear-gradient(left, transparent 0, rgba(0, 0, 0, 0.09) 35%, rgba(0, 0, 0, 0.09) 70%, transparent 100%);
+                background: linear-gradient(to right, transparent 0, rgba(0, 0, 0, 0.09) 35%, rgba(0, 0, 0, 0.09) 70%, transparent 100%);
+                position: absolute;
+                bottom: -1px;
+                content: "";
+                width: 100%;
+                left: 0;
+            }
+
+            .actualites .shadow, .shadow-narrow {
+                position: relative;
+                background-color: #fff;
+            }
+
+            .service-block {
+                margin-bottom: 30px;
+                border-radius: 3px;
+                border: 1px solid #f1f1f1;
+                padding-top: 30px;
+                padding-bottom: 30px;
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+
+            .shadow-narrow::before, .shadow::before {
+                position: absolute;
+                left: 0;
+                height: 60%;
+                bottom: 0;
+                width: 100%;
+                content: "";
+                background-color: #fff;
+                z-index: 2;
+            }
+
+            .shadow-narrow::after, .shadow::after {
+                content: "";
+                position: absolute;
+                height: 50%;
+                width: 96%;
+                left: 50%;
+                bottom: 2px;
+                margin-left: -48%;
+                -webkit-box-shadow: 0 5px 7px #999;
+                box-shadow: 0 5px 7px #999;
+                z-index: 1;
+                border-radius: 10%;
+                -webkit-transition: all .3s ease-in-out;
+                -o-transition: all .3s ease-in-out;
+                transition: all .3s ease-in-out;
+            }
+
+            .shadow-narrow:hover::after, .shadow:hover::after {
+                bottom: 10px;
+            }
+
+            .actualites .icon.bg-df {
+                background-color: #09afdf;
+                color: #ffffff;
+            }
+
+            .actualites .service-block .icon {
+                margin-bottom: 10px;
+            }
+
+            .actualites .icon {
+                display: inline-block;
+                text-align: center;
+                background-color: rgba(255, 255, 255, 0.85);
+                color: #000;
+                font-size: 24px;
+                width: 60px;
+                height: 60px;
+                line-height: 58px;
+                transition: all .2s ease-in-out;
+                border-radius: 0;
+                transform: rotate(45deg);
+                border: 1px solid transparent;
+            }
+
+            .shadow *, .shadow-narrow * {
+                position: relative;
+                z-index: 3;
+            }
+
+            .service-block p {
+                clear: both;
+                margin-bottom: 15px;
+            }
+
+            .actualites .icon i {
+                position: relative;
+                z-index: 1;
+                transform: rotate(-45deg);
+            }
+
+            .service-css {
+                max-width: 220px;
+            }
+
+            /*=========================actualites=======================*/
+            /*====================================Css Slidre services ===============================*/
+            /* carousel */
+            #quote-carousel {
+                padding: 0 10px 30px 10px;
+                margin-top: 30px;
+            }
+
+            /* Control buttons  */
+            #quote-carousel .carousel-control {
+                background: none;
+                color: #222;
+                font-size: 2.3em;
+                text-shadow: none;
+                margin-top: 30px;
+            }
+
+            /* Changes the position of the indicators */
+            #quote-carousel .carousel-indicators {
+                right: 50%;
+                top: auto;
+                bottom: 0px;
+                margin-right: -19px;
+            }
+
+            /* Changes the color of the indicators */
+            #quote-carousel .carousel-indicators li {
+                background: #c0c0c0;
+            }
+
+            #quote-carousel .carousel-indicators .active {
+                background: #333333;
+            }
+
+            .sec-title, .services-section .title-column {
+                margin-bottom: 0px !important;
+            }
+
+            .about-section {
+                padding: 0px !important;
+            }
+
+            .services-section {
+                padding: 20px 0px 50px 0px !important;
+            }
+
+            /* End carousel */
+
+            .item blockquote {
+                border-left: none;
+                margin: 0;
+            }
+
+            .item blockquote img {
+                margin-bottom: 10px;
+            }
+
+            .btn-style-ajout {
+                z-index: 10 !important;
+            }
+
+            /* Small devices (tablets, 768px and up) */
+            @media (min-width: 768px) {
+                #quote-carousel {
+                    margin-bottom: 0;
+                    padding: 0 40px 30px 40px;
+                }
+
+            }
+
+            /* Small devices (tablets, up to 768px) */
+            @media (max-width: 768px) {
+
+                /* Make the indicators larger for easier clicking with fingers/thumb on mobile */
+                #quote-carousel .carousel-indicators {
+                    bottom: -20px !important;
+                }
+
+                #quote-carousel .carousel-indicators li {
+                    display: inline-block;
+                    margin: 0px 5px;
+                    width: 15px;
+                    height: 15px;
+                }
+
+                #quote-carousel .carousel-indicators li.active {
+                    margin: 0px 5px;
+                    width: 20px;
+                    height: 20px;
+                }
+            }
+
+            /*====================================Css Slidre services ===============================*/
+            .color-name .name-strong {
+                color: #ff3d54;
+                position: relative;
+                top: 0px;
+                font-size: 40px;
+                font-weight: 400;
+                z-index: 2;
+                text-transform: capitalize;
+                font-family: 'Playball', cursive;
+            }
+
+            .affiche_services .carousel-control .fa {
+                color: #ff3d54;
+            }
+
+            .affiche_services .carousel-inner {
+                margin-right: 10%;
+                margin-left: 10%;
+                width: 80% !important;
+            }
+
+            .events_details .date {
+                width: 85px !important;
+            }
+
+            @media (min-width: 768px) {
+                .img_apropos .image-box {
+                    width: 500px !important;
+                }
+            }
+
+            .apropos li {
+                margin-right: 22px !important;
+            }
+
+            /*====================iteniraire==============*/
+            div#ite {
+                padding-top: 10px;
+                width: 361px;
+                min-height: 93px;
+                position: absolute;
+                z-index: 99;
+                top: 55px;
+                background: #ffbe00;
+                overflow: hidden;
+                margin: auto;
+                /* left: 25%; */
+                top: 1px;
+                max-height: 499px;
+                /*margin-top: 1014px;*/
+                overflow-y: auto;
+            }
+
+            @media (max-width: 768px) {
+                .mapOne #ite .desktop-map {
+                    display: none !important;
+                }
+            }
+
+            @media (max-width: 768px) {
+                .mapOne #ite .mobile-map {
+                    display: block !important;
+                }
+            }
+
+            @media (max-width: 768px) {
+                .mapOne #ite .mobile-map .btn-style-two {
+                    padding: 10px 10px !important;
+                }
+            }
+
+            @media (max-width: 768px) {
+                .mapOne #ite {
+                    min-height: 0px;
+                    padding-top: 0px;
+                    width: 100%;
+                    z-index: 9999;
+                    background: rgba(0, 0, 0, 0.52);
+                    overflow: hidden;
+                    margin: auto;
+                    left: 0% !important;
+                    top: 1px;
+                    max-height: 499px;
+                    overflow-y: auto;
+                }
+            }
+
+            @media (max-width: 768px) {
+                .mapOne #ite .calcul-it, .mapOne #ite .yallez-ite {
+                    display: none !important;
+                }
+            }
+
+            .main-box, #details_chambres {
+                z-index: 9999999999999;
+            }
+
+            #gallery-form-place {
+                position: absolute;
+                margin-top: 333px;
+                z-index: 1051;
+            }
+
+            .iamge_left .inner-box {
+                padding-left: 0px !important;
+            }
+
+            .f-logo a {
+                position: relative;
+                font-size: 48px;
+                font-weight: 400;
+                color: #ff3d54;
+                line-height: 1em;
+                z-index: 9;
+                padding-left: 32px;
+                text-transform: capitalize;
+                font-family: 'Playball', cursive;
+            }
+
+            .main-footer .links-widget .list li a, .address-widget ul li, .main-footer .social-links a {
+                color: #ffffff;
+            }
+
+            .main-footer .about-widget .textfooter p {
+                font-size: 17px;
+                color: #ffffff !important;
+            }
+
+            .widget-content {
+                margin-left: 15px;
+            }
+
+            .book-section {
+                display: none;
+            }
+
+            @media (max-width: 768px) {
+                .book-section {
+                    display: none;
+                }
+            }
+
+            @media (max-width: 768px) {
+                #gallery-form-place {
+                    display: none;
+                }
+            }
+
+            @media (max-width: 768px) {
+                .adress-responsive {
+                    display: block !important;
+                    min-height: 93px;
+                    position: inherit;
+                    z-index: 99;
+                    background: rgb(255, 61, 84);
+                    overflow: hidden;
+                    /*display: block !important;*/
+                    /*width: 100%;*/
+                    /*min-height: 93px;*/
+                    /*position: absolute;*/
+                    /*z-index: 99;*/
+                    /*background: rgba(0, 0, 0, 0.58);*/
+                    /*overflow: hidden;*/
+                    /*margin: auto;*/
+                    /*left: 0% !important;*/
+                    /*top: 386px;*/
+                    /*max-height: 499px;*/
+
+                }
+            }
+
+            @media (max-width: 768px) {
+                .adress-responsive h3 {
+                    font-size: 15px;
+                    color: #fff;
+
+                }
+            }
+
+            @media (max-width: 768px) {
+                .adress-responsive p, .adress-responsive p a {
+                    font-size: 17px;
+                    color: #fff;
+
+                }
+            }
+
+            @media (max-width: 768px) {
+                .adress-responsive ul, .adress-responsive li {
+                    list-style: none;
+                    padding: 0px;
+                    display: inline-block;
+                    margin-left: 10px;
+                }
+            }
+
+            @media (max-width: 768px) {
+                .adress-responsive span {
+                    color: white;
+                    font-size: 34px;
+                }
+            }
+
+            /*@media (max-width: 768px) {*/
+            /*.chambres-booking, .see-services, .events-modal, .actualites-booking {*/
+            /*display: none;*/
+            /*}*/
+            /*}*/
+
+            /*@media (max-width: 768px) {*/
+            /*div#iteMobile .btn-style-two {*/
+            /*display: block;*/
+            /*text-align: center;*/
+            /*}*/
+            /*}*/
+
+            /*@media (max-width: 768px) {*/
+            /*div#iteMobile {*/
+            /*display: block !important;*/
+            /*position: absolute;*/
+            /*z-index: 999;*/
+            /*!*background: #ffbe00;*!*/
+            /*!*background: rgba(0, 0, 0, 0.52);*!*/
+            /*overflow: hidden;*/
+            /*margin: auto;*/
+            /*left: 0% !important;*/
+            /*top: 1px;*/
+            /*max-height: 499px;*/
+            /*!* margin-top: 1014px; *!*/
+            /*}*/
+
+            /*}*/
+
+            .mapOne {
+                position: relative;
+                border-bottom: 5px solid #acff7e;
+            }
+
+            .gallery-img img {
+                height: 435px;
+                width: 317px;
+            }
+
+            .event-section, .news-section {
+
+                padding: 0px !important;
+            }
+
+            /*itenirare*/
+            @media (max-width: 768px) {
+                .adp table {
+                    color: #ffffff !important;
+                }
+
+                .adp-placemark td {
+                    color: #000 !important;
+                }
+            }
+
+            .news-section .title-box .see-events, .event-section .title-box a {
+                margin-top: 0px !important;
+            }
+
+            .news-section {
+                margin-top: -40px !important;
+            }
+
+            .news-section .title-box {
+                margin-bottom: 5px !important;
+            }
+
+            .navbar-collapse .tableau-b {
+                color: #ffd600 !important;
+            }
+
+            .single-room.list .room-info .room-structure {
+                color: #ff3d54;
+            }
+
+            .display-model-delete {
+                z-index: 9999999;
+            }
+
+            .room-box .inner-box .lower-content .type-ch {
+                position: relative;
+                font-size: 16px;
+                color: #263e5b;
+                font-weight: 700;
+                text-transform: uppercase;
+                font-family: 'Montserrat', sans-serif;
+            }
+
+            .room-box .inner-box .lower-content .info-ch a {
+                position: relative;
+                font-size: 13px;
+                color: #263e5b;
+                font-weight: 700;
+                text-transform: uppercase;
+                font-family: 'Montserrat', sans-serif;
+            }
+
+            .resev-ht {
+                position: relative;
+                font-size: 26px;
+                color: #263e5b;
+                font-weight: 700;
+                text-transform: uppercase;
+                font-family: 'Montserrat', sans-serif;
+            }
+
+            #contact-form1 {
+                color: white;
+                font-size: 30px;
+            }
+
+            .titre-color {
+                color: #ff3d54;
+            }
+
+            #contact-form1 .width-inputs {
+                height: 45px !important;
+            }
+
+            .text-contact {
+                font-size: 70px;
+                text-transform: uppercase;
+                line-height: 26px;
+                font-weight: 700;
+            }
+
+            @media (max-width: 768px) {
+                .text-contact {
+                    font-size: 35px;
+                    text-transform: uppercase;
+                    line-height: 26px;
+                    font-weight: 700;
+                }
+            }
+
+            .events-reserv strong {
+                color: #ff3d54;
+            }
+
+            .hidden-bar.right-align.visible-sidebar {
+                z-index: 999999999999999999999999999;
+            }
+
+            .panel-change-color {
+
+                border-color: #ff3d54;
+            }
+
+            .panel-change-color .panel-heading {
+                background-color: #ff3d54;
+                border-color: #ff3d54;
+            }
+
+            .about-section .content-column {
+                margin-bottom: 0px !important;
+            }
+
+            .post-style-one .inner-box .content-box .title .date {
+                position: relative !important;
+                left: 0px;
+                top: 0px;
+                color: #ff3d54;
+                font-size: 30px;
+                font-weight: inherit !important;
+                width: 62px;
+                line-height: 23px;
+                text-transform: uppercase;
+                padding-right: 15px;
+                border-right: none !important;
+            }
+
+            .main-menu .navigation li .active a {
+                color: #ff3d54 !important;
+                opacity: 1 !important;
+                border-bottom: 1px solid #ff3d54 !important;
+            }
+
+            /*====================SlideActualités=================*/
+
+            .panel-heading a:after {
+                font-family: 'fontawesome';
+                content: "\f07d";
+                float: right;
+                color: #fff;
+            }
+
+            /*.panel-heading {*/
+            /*cursor: pointer;*/
+            /*cursor: hand;*/
+            /*}*/
+
+            .panel-default {
+                border-color: #ff3d54;
+            }
+
+            .panel-default.panel-heading {
+                color: #ff3d54 !important;
+            }
+
+            .panel-default > .panel-heading {
+                color: #fff;
+                background-color: #ff3d54;
+                border-color: #d07b7b;
+            }
+
+            .panel-body {
+                padding: 0px !important;
+            }
+
+            /*====================SlideActualités=================*/
+            .events_details .image-box {
+                width: 100%;
+                height: 300px;
+                overflow: hidden;
+            }
+
+            .events_details .image-box img {
+                height: 100%;
+                width: auto !important;
+            }
+
+            .events_details .title {
+                padding-left: 0px !important;
+            }
+
+            .rooms-section .image-box {
+                width: 100%;
+                height: 300px;
+                overflow: hidden;
+            }
+
+            .rooms-section .image-box img {
+                height: 100%;
+                width: auto !important;
+            }
+
+            .fa-events-icons-failed {
+                overflow-x: hidden;
+            }
+
+            .description_details {
+                width: 90%;
+            }
+
+            .panel-heading .panel-title {
+                font-size: 30px;
+            }
+
+            .btn-style-five {
+                position: relative;
+                padding: 10px 23px;
+                line-height: 26px;
+                background: #5cb85c;
+                font-size: 14px;
+                color: #ffffff;
+                text-transform: uppercase;
+                border: 2px solid #ff3d54;
+            }
+
+            .btn-style-one-speciale .btn-danger {
+                color: #fff;
+                background-color: rgb(1, 114, 255);
+                border-color: #ffffff;
+            }
+
+            .nav-up {
+                top: -40px;
+            }
+
+            .is-hidden {
+                opacity: 0;
+                -webkit-transform: translate(0, -60px);
+                -webkit-transition: -webkit-transform .2s, background .3s, color .3s, opacity 0 .3s;
+                /*margin-top: -42px;*/
+            }
+
+            .is-visible {
+                opacity: 1;
+                -webkit-transform: translate(0, 0);
+                -webkit-transition: -webkit-transform .2s, background .3s, color .3s;
+                padding-top: 10px;
+            }
+
+            .about-section .content-column .inner-box .time-cloud {
+                margin-top: 0px !important;
+            }
+
+            /*====================vibration liste=============*/
+            nav li:hover {
+                animation: shake 0.82s cubic-bezier(.36, .07, .19, .97) both;
+                transform: translate3d(0, 0, 0);
+                backface-visibility: hidden;
+                perspective: 1000px;
+            }
+
+            @keyframes shake {
+                10%, 90% {
+                    transform: translate3d(-1px, 0, 0);
+                }
+
+                20%, 80% {
+                    transform: translate3d(2px, 0, 0);
+                }
+
+                30%, 50%, 70% {
+                    transform: translate3d(-4px, 0, 0);
+                }
+
+                40%, 60% {
+                    transform: translate3d(4px, 0, 0);
+                }
+            }
+
+            /*====================vibration liste=============*/
+            .main-header .main-box .logo-box {
+                padding: 0px !important;
+            }
+
+            #myModal-Booking {
+                z-index: 1052 !important;
+            }
+
+            .close {
+                margin-top: -15px !important;
+            }
+
+            @media (max-width: 768px) {
+                .tog {
+                    display: none !important;
+                }
+            }
+
+            @media (max-width: 768px) {
+                body {
+                    overflow-x: hidden !important;
+                }
+
+            }
+
+            .logo-style a {
+                color: #ff3d54;
+            }
+
+            .main-header.fixed-header .logo-style {
+                margin-top: 42px;
+            }
+
+            #myModalAuthentification {
+                z-index: 999999;
+            }
+
+            .bookch, .bookEvents, .modalSlider, #edithorires, .chambreDetails, .ajout-chambre-modal-lg,
+            .ajout-services-modal-lg, #galleryModal, .ajout-events-modal-lg,
+            .ajout-actualités-modal-lg, .ajout-apropos-modal-lg, #ajouterhorires,.ajout-apropos {
+                z-index: 1053;
+            }
+
+            #backgroundcolor .over_y {
+                overflow-y: auto;
+                height: 60px;
+            }
+
+            .formPos::-webkit-scrollbar-track {
+                -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+                border-radius: 10px;
+                background-color: #F5F5F5;
+            }
+
+            .formPos::-webkit-scrollbar {
+                width: 12px;
+                background-color: #ffbe00;
+            }
+
+            .formPos::-webkit-scrollbar-thumb {
+                border-radius: 10px;
+                -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
+                background-color: #555;
+            }
+
+            .select2-dropdown {
+                z-index: 9001;
+            }
+
+        </style>
+
+
+    {% endblock %}
+
+
+    {% block javascripts %}
+        {{ parent() }}
+        <script type="text/javascript">
+            $(".select-services").select2({
+                dropdownAutoWidth: true
+            })
+        </script>
+        {#=======================Upload image chambre===========================#}
+        <script>
+            $("#imagUp, #imagUpGalerie, #imagUpEvents,  .imageUplo").hide();
+
+            function readURL(input) {
+
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader()
+
+                    reader.onload = function (e) {
+                        $('#imagUp, #imagUpGalerie, #imagUpEvents, .imageUplo').attr('src', e.target.result)
+                    }
+
+                    reader.readAsDataURL(input.files[0])
+                    $("#imagUp, #imagUpGalerie, #imagUpEvents, .imageUplo").after().show()
+                }
+            }
+
+
+            $("#imgUpload, #imgUploadGalerie, #imgUploadEvents, .imageUps").change(function () {
+                readURL(this)
+            })
+        </script>
+        {#=======================Upload image chambre===========================#}
+
+        {#=========================Test size and type of picture=============================#}
+
+        <script>
+            $('.uploadImage').change(function () {
+
+                var ext = this.value.match(/\.(.+)$/)[1];
+                if (ext == 'jpg' || ext == 'jpeg' || ext == 'png' || ext == 'gif') {
+
+                    $('.envoyerUpload').attr('disabled', false);
+                } else {
+                    $(".upImg").hide();
+                    $('.uploadImage').after('<br><span class="errorSize" style="color:black;">Type D\'image non valide!(SVP entrer fichier de type["jpg", "png", "jpeg", "gif"])</span>');
+                    $('.errorSize').fadeOut(10000);
+                    $('.envoyerUpload').attr('disabled', true);
+                }
+            });
+        </script>
+
+        <script>
+            jQuery('.datatable').DataTable({
+                responsive: true,
+                "columns": [
+                    {"width": "40%"},
+                    {"width": "40%"},
+                    {"width": "20%"}
+                ],
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/French.json"
+                },
+
+            });
+        </script>
+        {#==========================Datatable============================================#}
+
+        {#================================Slidre service=================================#}
+        <script>
+            // When the DOM is ready, run this function
+            $(document).ready(function () {
+                //Set the carousel options
+                $('#quote-carousel').carousel({
+                    pause: true,
+                    interval: 4000,
+                });
+            });
+        </script>
+        {#================================Slidre service=================================#}
+
+
+        {#=======================================DropZone=========================#}
+        <script>
+
+            var maxImageWidth = 800,
+                maxImageHeight = 800;
+            Dropzone.options.myDropzone = {
+                dictDefaultMessage: ' {{ 'Cliquer ici pour ajouter une photo'|trans }}',
+                addRemoveLinks: true,
+
+                acceptedFiles: ".png,.jpg,.gif,.jpeg",
+                clickable: true,
+                init: function () {
+
+
+                    this.on("thumbnail", function (file) {
+                        // Do the dimension checks you want to do
+                        if (file.width <= maxImageWidth || file.height <= maxImageHeight) {
+                            file.rejectDimensions()
+                        }
+                        else {
+                            file.acceptDimensions();
+                        }
+                    });
+                    this.on("error", function (file, message) {
+
+                        return false;
+                    });
+
+
+                    thisDropzone = this;
+                    this.on("removedfile", function (file) {
+
+                        console.log(file.name),
+                            $.ajax({
+                                url: '{{ path('module_hotel_delate', {'id_qq': qouiqui.id}) }}?filetodelete=' + file.name,
+                                data: {'filetodelete': file.name},
+                                type: "POST",
+                                success: function () {
+
+                                },
+                                error: function () {
+                                    console.log('erreur!')
+                                }
+                            });
+                    });
+
+                },
+                accept: function (file, done) {
+                    file.acceptDimensions = done;
+                    file.rejectDimensions = function () {
+                        done("Invalid dimension.");
+                    };
+
+                }
+            };
+
+
+        </script>
+        <script>
+            $('.remove').click(function () {
+
+                var filetodelete = $(this).attr('data-name-remove');
+                var id = $(this).attr('data-id');
+
+                var data = {
+                    id: id,
+                    filetodelete: filetodelete
+                };
+
+                $.ajax({
+                    url: '{{ path('module_hotel_delate',{'id_qq': qouiqui.id}) }}',
+                    data: data,
+                    type: "POST",
+                    success: function (data) {
+
+                        $('[data-div="' + filetodelete + '"]').fadeOut();
+
+                    }
+
+
+                });
+            });
+        </script>
+        {#=======================================DropZone=========================#}
+        {#===================organiser les image========================#}
+        <script>
+            $(function () {
+                $("#sortable").sortable();
+                $("#sortable").disableSelection();
+            });
+        </script>
+        {#===================organiser les image========================#}
+
+        {#=================================Galery===========================#}
+        <script>
+            $('.remove-gallery').click(function () {
+
+                var filetodelete = $(this).attr('data-name-remove');
+                var id = $(this).attr('data-id');
+
+                var data = {
+                    id: id,
+                    filetodelete: filetodelete
+                };
+
+                $.ajax({
+                    url: '{{ path('module_hotel_delate_gallery', {'id_qq':qouiqui.id}) }}',
+                    data: data,
+                    type: "POST",
+                    success: function (data) {
+
+                        $('[data-div="' + filetodelete + '"]').fadeOut();
+
+                    }
+
+
+                });
+            });
+        </script>
+
+
+        <script>
+
+
+            Dropzone.options.myGallery = {
+                dictDefaultMessage: ' {{ 'Cliquer ici pour ajouter une photo'|trans }}',
+                addRemoveLinks: true,
+
+                acceptedFiles: ".png,.jpg,.gif,.jpeg",
+                clickable: true,
+                init: function () {
+
+
+                    this.on("error", function (file, message) {
+
+                        return false;
+                    });
+
+
+                    thisDropzone = this;
+                    this.on("removedfile", function (file) {
+
+                        console.log(file.name),
+                            $.ajax({
+                                url: '{{ path('module_hotel_gallery', {'id_qq':qouiqui.id}) }}?filetodelete=' + file.name,
+                                data: {'filetodelete': file.name},
+                                type: "POST",
+                                success: function () {
+
+                                },
+                                error: function () {
+
+                                }
+                            });
+                    });
+
+                },
+
+            };
+
+
+        </script>
+        {#=================================Galery===========================#}
+
+        {#=====================================Color backrounfd Calcul Iteneraire================#}
+        <script>
+            $(function () {
+                $('.btn-function').click(function () {
+//                    $('#iteMobile').css('background', 'rgba(0, 0, 0, 0.52)');
+                    $('.color-change').css('background', '#fff');
+                });
+            });
+
+        </script>
+
+        {#=====================================Color backrounfd Calcul Iteneraire================#}
+        {#===================Slide Actualitées========================#}
+        <script>
+            $(document).ready(function (ev) {
+                $('#custom_carousel').on('slide.bs.carousel', function (evt) {
+                    $('#custom_carousel .controls li.active').removeClass('active');
+                    $('#custom_carousel .controls li:eq(' + $(evt.relatedTarget).index() + ')').addClass('active');
+                })
+            });
+        </script>
+        {#===================Slide Actualitées========================#}
+        {#============================ChambreListe Select2==============================#}
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $(".chambreListe").select2();
+            });
+        </script>
+        <script>
+            $('.chambreListe').change(function () {
+                var prix = $('.chambreListe option:selected').attr('data-prix');
+                $('.prix').html(prix);
+                console.log(prix);
+            });
+        </script>
+        <script>
+            $(document).ready(function () {
+                $(".chambreListe").select2({width: 'resolve'});
+            });
+        </script>
+        {#============================ChambreListe==============================#}
+        {#========================Show modal booking==============#}
+
+        <script>
+            $('.modalreservation').click(function () {
+                var idChambre = $(this).attr('data-idChambre');
+                $('.chambreListe').val(idChambre).trigger('change');
+                $('.chambreListe').val('value');
+            });
+        </script>
+        {#========================Show modal booking==============#}
+
+
+        <script>
+            $(document).ready(function () {
+
+                /** ===========================================
+                 Hide / show the master navigation menu (Information)
+                 ============================================ */
+
+                    // console.log('Window Height is: ' + $(window).height());
+                    // console.log('Document Height is: ' + $(document).height());
+
+                var previousScroll = 0;
+
+                $(window).scroll(function () {
+
+                    var currentScroll = $(this).scrollTop();
+
+                    /*
+                     If the current scroll position is greater than 0 (the top) AND the current scroll position is less than the document height minus the window height (the bottom) run the navigation if/else statement.
+                     */
+                    if (currentScroll > 0 && currentScroll < $(document).height() - $(window).height()) {
+                        /*
+                         If the current scroll is greater than the previous scroll (i.e we're scrolling down the page), hide the nav.
+                         */
+                        if (currentScroll > previousScroll) {
+                            window.setTimeout(hideNav, 300);
+                            /*
+                             Else we are scrolling up (i.e the previous scroll is greater than the current scroll), so show the nav.
+                             */
+                        } else {
+                            window.setTimeout(showNav, 300);
+                        }
+                        /*
+                         Set the previous scroll value equal to the current scroll.
+                         */
+                        previousScroll = currentScroll;
+                    }
+
+                });
+
+                function hideNav() {
+                    $("[data-nav-status='toggle']").removeClass("is-visible").addClass("is-hidden");
+                }
+
+                function showNav() {
+                    $("[data-nav-status='toggle']").removeClass("is-hidden").addClass("is-visible");
+                }
+
+            });
+        </script>
+
+        {#-------theme changer-------#}
+        <script>
+            $(document).ready(function () {
+
+                jQuery('canvas.bfh-colorpicker-palette').click(function () {
+
+                    data_pour = $(this).parent().parent().attr('data-pour');
+
+                    color = $('[data-pour=' + data_pour + '] input').val()
+
+                    console.log(color);
+                    console.log(data_pour);
+
+                    color = color + '!important';
+
+                    if (data_pour == 'menu') {
+                        jQuery('.main-menu .navigation > li > a').attr('style', 'color:' + color);
+                    }
+                    if (data_pour == 'logo') {
+                        jQuery('.logo-style a').attr('style', 'color:' + color);
+                    }
+                    if (data_pour == 'info') {
+                        jQuery('.contact-nav strong, .login-color').attr('style', 'color:' + color);
+                    }
+                    if (data_pour == 'horairesActualites') {
+                        jQuery('.panel-change-color .panel-heading, .panel-default > .panel-heading ').attr('style', 'background-color:' + color);
+                    }
+                    if (data_pour == 'blanc') {
+                        jQuery('.panel-change-color .panel-heading, .panel-default > .panel-heading, .sec-title-one h2, .sec-title-two h2 ').attr('style', 'color:' + color);
+                    }
+                    if (data_pour == 'chambres') {
+                        jQuery('.room-box .inner-box .lower-content .info-ch a, .room-box .inner-box .lower-content .type-ch, .room-box .inner-box .lower-content .price,.room-box .inner-box .lower-content .price a, .room-box .inner-box .lower-content .rating span ').attr('style', 'color:' + color);
+                    }
+
+                    if (data_pour == 'titre') {
+                        jQuery('h2').attr('style', 'color:' + color);
+                    }
+                    else if (data_pour == 'Soustitre') {
+                        jQuery('h4').attr('style', 'color:' + color);
+                    }
+                    else if (data_pour == 'bouton') {
+                        jQuery('.main-slider .theme-btn, .event-section .btn-style-two,.contact-us-section .btn-style-two').attr('style', 'background:' + color);
+                    }
+                    else if (data_pour == 'Text') {
+                        jQuery('.about-section .content-column .inner-box .text, .news-section p, .services-section p, .post-style-one .inner-box .content-box .text').attr('style', 'color:' + color);
+                    }
+                    else if (data_pour == 'background-propo') {
+                        jQuery('#apropos').attr('style', 'background:' + color);
+                    }
+                    else if (data_pour == 'background-service') {
+                        jQuery('#services,.about-section, #services').attr('style', 'background:' + color);
+                    }
+                    else if (data_pour == 'background-annonce') {
+                        jQuery('#events,.property-details').attr('style', 'background:' + color);
+                    }
+                    else if (data_pour == 'background-gallery') {
+                        jQuery('.news-section').attr('style', 'background:' + color);
+                    }
+                    else if (data_pour == 'background-horaires') {
+                        jQuery('#horaires').attr('style', 'background:' + color);
+                    }
+                    else if (data_pour == 'background-footer') {
+                        jQuery('.main-footer').attr('style', 'background-color:' + color);
+                    }
+
+
+//
+//            jQuery('.header-style-one .logo:before, .btn-style-one, .theme_bg_color').attr('style', 'background:' + color);
+//            $('color').append("<style>.header-style-one .logo:before{background:" + color + "}</style>");
+//            jQuery('.btn-style-one:hover, .btn-style-two:hover, .header-style-one .info-box li .icon ,.sec-title h2 strong ,.theme_color').css("color", color);
+
+                });
+                $('[setbg_color]').click(function () {
+
+                    bg_color = $(this).css('background-color');
+                    bg_data_pour = $('#backgroundcolor').attr('data-pour');
+
+                    console.log(bg_color, bg_data_pour);
+                    if (bg_data_pour == 'background-horaires') {
+                        jQuery('#horaires').attr('style', 'background:' + bg_color);
+                        $('.background.horaire input').val(bg_color);
+
+                        console.log('bg :' + bg_color);
+                        console.log('datapour :' + bg_data_pour);
+
+
+                    }
+                    if (bg_data_pour == 'background-propo') {
+                        jQuery('#apropos').attr('style', 'background:' + bg_color);
+                        $('.background.about input').val(bg_color);
+
+                    }
+                    else if (bg_data_pour == 'background-service') {
+                        jQuery('#services').attr('style', 'background:' + bg_color);
+                        $('.background.service input').val(bg_color);
+                    }
+                    else if (bg_data_pour == 'background-annonce') {
+                        jQuery('#events').attr('style', 'background:' + bg_color);
+                        $('.background.annonce input').val(bg_color);
+                    }
+                    else if (bg_data_pour == 'background-gallery') {
+                        jQuery('.news-section').attr('style', 'background:' + bg_color);
+                        $('.background.gallery input').val(bg_color);
+                    }
+                    else if (bg_data_pour == 'background-footer') {
+                        jQuery('.main-footer').attr('style', 'background:' + bg_color);
+                        $('.background.footer input').val(bg_color);
+                    }
+
+                });
+
+            });
+        </script>
+
+        {#-------theme changer-------#}
+        <script>
+
+            $('tog').click(function () {
+
+                left = $('.theme_changer').position().left;
+
+                if (left < 0) {
+                    $('.theme_changer').css('transform', 'translate(0px)')
+                } else {
+                    $('.theme_changer').css('transform', 'translate(-462px)')
+                }
+            })
+
+        </script>
+        {#-------END theme changer-------#
+
+        {#==================Section show hide===================#}
+        <script>
+            // ================== on views===================
+
+
+            $.fn.isOnScreen = function () {
+
+                var win = $(window);
+
+                var viewport = {
+                    top: win.scrollTop(),
+                    left: win.scrollLeft()
+                };
+                viewport.right = viewport.left + win.width();
+                viewport.bottom = viewport.top + win.height();
+
+                var bounds = this.offset();
+                bounds.right = bounds.left + this.outerWidth();
+                bounds.bottom = bounds.top + this.outerHeight();
+
+                return (!(viewport.right < bounds.left || viewport.left > bounds.right || viewport.bottom < bounds.top || viewport.top > bounds.bottom));
+            }
+
+            $(document).ready(function () {
+                if ($('.main-slider').isOnScreen()) {
+                    $('.act_color').hide();
+                    $('.act_color1').hide();
+                    $('.grand_titre_color1').hide();
+                    $('.grand_titre_color').hide();
+                    $('.titre_color1').hide();
+                    $('.titre_color').hide();
+                    $('.sous_titre_color1').hide();
+                    $('.sous_titre_color').hide();
+                    $('.texte_color1').hide();
+                    $('.texte_color').hide();
+                    $('.background.horaire').hide()
+                    $('.chambre_color1').hide()
+                    $('.chambre_color').hide()
+                    $('.menu_color1').show();
+                    $('.menu_color').show();
+                    $('.logo_color1').show();
+                    $('.logo_color').show();
+                    $('.info_color1').show();
+                    $('.info_color').show();
+                    $('.background.about').hide()
+                    $('.background.annonce').hide()
+                    $('.background.service').hide()
+                    $('.background.gallery').hide()
+                    $('.background.footer').hide()
+                }
+
+                else if ($('#horaires').isOnScreen()) {
+                    $('.background.horaire').show()
+                    $('.act_color').show();
+                    $('.act_color1').show();
+                    $('.grand_titre_color1').show();
+                    $('.grand_titre_color').show();
+                    $('.titre_color1').show();
+                    $('.titre_color').show();
+                    $('.sous_titre_color1').show();
+                    $('.sous_titre_color').show();
+                    $('.texte_color1').show();
+                    $('.texte_color').show();
+                    $('.chambre_color1').hide()
+                    $('.chambre_color').hide()
+                    $('.menu_color1').hide();
+                    $('.menu_color').hide();
+                    $('.logo_color1').hide();
+                    $('.logo_color').hide();
+                    $('.info_color1').hide();
+                    $('.info_color').hide();
+                    $('.background.about').hide()
+                    $('.background.annonce').hide()
+                    $('.background.service').hide()
+                    $('.background.gallery').hide()
+                    $('.background.footer').hide()
+                    $('.motif-container').attr('data-pour', 'background-horaires');
+                    $('#backgroundcolor').attr('data-pour', 'background-horaires');
+                }
+                else if ($('#apropos').isOnScreen()) {
+                    $('.act_color').show();
+                    $('.act_color1').show();
+                    $('.grand_titre_color1').show();
+                    $('.grand_titre_color').show();
+                    $('.titre_color1').show();
+                    $('.titre_color').show();
+                    $('.sous_titre_color1').show();
+                    $('.sous_titre_color').show();
+                    $('.texte_color1').show();
+                    $('.texte_color').show();
+                    $('.chambre_color1').hide()
+                    $('.chambre_color').hide()
+                    $('.menu_color1').hide();
+                    $('.menu_color').hide();
+                    $('.logo_color1').hide();
+                    $('.logo_color').hide();
+                    $('.info_color1').hide();
+                    $('.info_color').hide();
+                    $('.background.about').show()
+                    $('.background.annonce').hide()
+                    $('.background.horaire').hide()
+                    $('.background.service').hide()
+                    $('.background.gallery').hide()
+                    $('.background.footer').hide()
+                    $('.motif-container').attr('data-pour', 'background-propo');
+                    $('#backgroundcolor').attr('data-pour', 'background-propo');
+
+                }
+                else if ($('#chambres').isOnScreen()) {
+                    $('.act_color').show();
+                    $('.act_color1').show();
+                    $('.grand_titre_color1').show();
+                    $('.grand_titre_color').show();
+                    $('.titre_color1').show();
+                    $('.titre_color').show();
+                    $('.sous_titre_color1').show();
+                    $('.sous_titre_color').show();
+                    $('.texte_color1').show();
+                    $('.texte_color').show();
+                    $('.chambre_color1').show()
+                    $('.chambre_color').show()
+                    $('.menu_color1').hide();
+                    $('.menu_color').hide();
+                    $('.logo_color1').hide();
+                    $('.logo_color').hide();
+                    $('.info_color1').hide();
+                    $('.info_color').hide();
+                    $('.background.about').hide()
+                    $('.background.annonce').hide()
+                    $('.background.horaire').hide()
+                    $('.background.service').hide()
+                    $('.background.gallery').hide()
+                    $('.background.footer').hide()
+                }
+                else if ($('#services').isOnScreen()) {
+                    $('.act_color').show();
+                    $('.act_color1').show();
+                    $('.grand_titre_color1').show();
+                    $('.grand_titre_color').show();
+                    $('.titre_color1').show();
+                    $('.titre_color').show();
+                    $('.sous_titre_color1').show();
+                    $('.sous_titre_color').show();
+                    $('.texte_color1').show();
+                    $('.texte_color').show();
+                    $('.chambre_color1').hide()
+                    $('.chambre_color').hide()
+                    $('.menu_color1').hide();
+                    $('.menu_color').hide();
+                    $('.logo_color1').hide();
+                    $('.logo_color').hide();
+                    $('.info_color1').hide();
+                    $('.info_color').hide();
+                    $('.background.about').hide()
+                    $('.background.annonce').hide()
+                    $('.background.horaire').hide()
+                    $('.background.service').show()
+                    $('.background.gallery').hide()
+                    $('.background.footer').hide()
+                    $('.motif-container').attr('data-pour', 'background-service');
+                    $('#backgroundcolor').attr('data-pour', 'background-service');
+                }
+                else if ($('#events').isOnScreen()) {
+                    $('.act_color').show();
+                    $('.act_color1').show();
+                    $('.grand_titre_color1').show();
+                    $('.grand_titre_color').show();
+                    $('.titre_color1').show();
+                    $('.titre_color').show();
+                    $('.sous_titre_color1').show();
+                    $('.sous_titre_color').show();
+                    $('.texte_color1').show();
+                    $('.texte_color').show();
+                    $('.chambre_color1').hide()
+                    $('.chambre_color').hide()
+                    $('.menu_color1').hide();
+                    $('.menu_color').hide();
+                    $('.logo_color1').hide();
+                    $('.logo_color').hide();
+                    $('.info_color1').hide();
+                    $('.info_color').hide();
+                    $('.background.about').hide()
+                    $('.background.annonce').show()
+                    $('.background.horaire').hide()
+                    $('.background.service').hide()
+                    $('.background.gallery').hide()
+                    $('.background.footer').hide()
+                    $('.motif-container').attr('data-pour', 'background-annonce');
+                    $('#backgroundcolor').attr('data-pour', 'background-annonce');
+                }
+                else if ($('.news-section').isOnScreen()) {
+                    $('.act_color').show();
+                    $('.act_color1').show();
+                    $('.grand_titre_color1').show();
+                    $('.grand_titre_color').show();
+                    $('.titre_color1').show();
+                    $('.titre_color').show();
+                    $('.sous_titre_color1').show();
+                    $('.sous_titre_color').show();
+                    $('.texte_color1').show();
+                    $('.texte_color').show();
+                    $('.chambre_color1').hide()
+                    $('.chambre_color').hide()
+                    $('.menu_color1').hide();
+                    $('.menu_color').hide();
+                    $('.logo_color1').hide();
+                    $('.logo_color').hide();
+                    $('.info_color1').hide();
+                    $('.info_color').hide();
+                    $('.background.about').hide()
+                    $('.background.annonce').hide()
+                    $('.background.horaire').hide()
+                    $('.background.service').hide()
+                    $('.background.gallery').show()
+                    $('.background.footer').hide()
+                    $('.motif-container').attr('data-pour', 'background-gallery');
+                    $('#backgroundcolor').attr('data-pour', 'background-gallery');
+                }
+                $(window).scroll(function () {
+
+                    if ($('.main-slider').isOnScreen()) {
+                        $('.act_color').hide();
+                        $('.act_color1').hide();
+                        $('.grand_titre_color1').hide();
+                        $('.grand_titre_color').hide();
+                        $('.titre_color1').hide();
+                        $('.titre_color').hide();
+                        $('.sous_titre_color1').hide();
+                        $('.sous_titre_color').hide();
+                        $('.texte_color1').hide();
+                        $('.texte_color').hide();
+                        $('.background.horaire').hide()
+                        $('.chambre_color1').hide()
+                        $('.chambre_color').hide()
+                        $('.menu_color1').show();
+                        $('.menu_color').show();
+                        $('.logo_color1').show();
+                        $('.logo_color').show();
+                        $('.info_color1').show();
+                        $('.info_color').show();
+                        $('.background.about').hide()
+                        $('.background.annonce').hide()
+                        $('.background.service').hide()
+                        $('.background.gallery').hide()
+                        $('.background.footer').hide()
+                    }
+
+                    else if ($('#horaires').isOnScreen()) {
+                        $('.background.horaire').show()
+                        $('.act_color').show();
+                        $('.act_color1').show();
+                        $('.grand_titre_color1').show();
+                        $('.grand_titre_color').show();
+                        $('.titre_color1').show();
+                        $('.titre_color').show();
+                        $('.sous_titre_color1').show();
+                        $('.sous_titre_color').show();
+                        $('.texte_color1').show();
+                        $('.texte_color').show();
+                        $('.chambre_color1').hide()
+                        $('.chambre_color').hide()
+                        $('.menu_color1').hide();
+                        $('.menu_color').hide();
+                        $('.logo_color1').hide();
+                        $('.logo_color').hide();
+                        $('.info_color1').hide();
+                        $('.info_color').hide();
+                        $('.background.about').hide()
+                        $('.background.annonce').hide()
+                        $('.background.service').hide()
+                        $('.background.gallery').hide()
+                        $('.background.footer').hide()
+                        $('.motif-container').attr('data-pour', 'background-horaires');
+                        $('#backgroundcolor').attr('data-pour', 'background-horaires');
+                    }
+                    else if ($('#apropos').isOnScreen()) {
+                        $('.act_color').show();
+                        $('.act_color1').show();
+                        $('.grand_titre_color1').show();
+                        $('.grand_titre_color').show();
+                        $('.titre_color1').show();
+                        $('.titre_color').show();
+                        $('.sous_titre_color1').show();
+                        $('.sous_titre_color').show();
+                        $('.texte_color1').show();
+                        $('.texte_color').show();
+                        $('.chambre_color1').hide()
+                        $('.chambre_color').hide()
+                        $('.menu_color1').hide();
+                        $('.menu_color').hide();
+                        $('.logo_color1').hide();
+                        $('.logo_color').hide();
+                        $('.info_color1').hide();
+                        $('.info_color').hide();
+                        $('.background.about').show()
+                        $('.background.annonce').hide()
+                        $('.background.horaire').hide()
+                        $('.background.service').hide()
+                        $('.background.gallery').hide()
+                        $('.background.footer').hide()
+                        $('.motif-container').attr('data-pour', 'background-propo');
+                        $('#backgroundcolor').attr('data-pour', 'background-propo');
+
+                    }
+                    else if ($('#chambres').isOnScreen()) {
+                        $('.act_color').show();
+                        $('.act_color1').show();
+                        $('.grand_titre_color1').show();
+                        $('.grand_titre_color').show();
+                        $('.titre_color1').show();
+                        $('.titre_color').show();
+                        $('.sous_titre_color1').show();
+                        $('.sous_titre_color').show();
+                        $('.texte_color1').show();
+                        $('.texte_color').show();
+                        $('.chambre_color1').show()
+                        $('.chambre_color').show()
+                        $('.menu_color1').hide();
+                        $('.menu_color').hide();
+                        $('.logo_color1').hide();
+                        $('.logo_color').hide();
+                        $('.info_color1').hide();
+                        $('.info_color').hide();
+                        $('.background.about').hide()
+                        $('.background.annonce').hide()
+                        $('.background.horaire').hide()
+                        $('.background.service').hide()
+                        $('.background.gallery').hide()
+                        $('.background.footer').hide()
+                    }
+                    else if ($('#services').isOnScreen()) {
+                        $('.act_color').show();
+                        $('.act_color1').show();
+                        $('.grand_titre_color1').show();
+                        $('.grand_titre_color').show();
+                        $('.titre_color1').show();
+                        $('.titre_color').show();
+                        $('.sous_titre_color1').show();
+                        $('.sous_titre_color').show();
+                        $('.texte_color1').show();
+                        $('.texte_color').show();
+                        $('.chambre_color1').hide()
+                        $('.chambre_color').hide()
+                        $('.menu_color1').hide();
+                        $('.menu_color').hide();
+                        $('.logo_color1').hide();
+                        $('.logo_color').hide();
+                        $('.info_color1').hide();
+                        $('.info_color').hide();
+                        $('.background.about').hide()
+                        $('.background.annonce').hide()
+                        $('.background.horaire').hide()
+                        $('.background.service').show()
+                        $('.background.gallery').hide()
+                        $('.background.footer').hide()
+                        $('.motif-container').attr('data-pour', 'background-service');
+                        $('#backgroundcolor').attr('data-pour', 'background-service');
+                    }
+                    else if ($('#events').isOnScreen()) {
+                        $('.act_color').show();
+                        $('.act_color1').show();
+                        $('.grand_titre_color1').show();
+                        $('.grand_titre_color').show();
+                        $('.titre_color1').show();
+                        $('.titre_color').show();
+                        $('.sous_titre_color1').show();
+                        $('.sous_titre_color').show();
+                        $('.texte_color1').show();
+                        $('.texte_color').show();
+                        $('.chambre_color1').hide()
+                        $('.chambre_color').hide()
+                        $('.menu_color1').hide();
+                        $('.menu_color').hide();
+                        $('.logo_color1').hide();
+                        $('.logo_color').hide();
+                        $('.info_color1').hide();
+                        $('.info_color').hide();
+                        $('.background.about').hide()
+                        $('.background.annonce').show()
+                        $('.background.horaire').hide()
+                        $('.background.service').hide()
+                        $('.background.gallery').hide()
+                        $('.background.footer').hide()
+                        $('.motif-container').attr('data-pour', 'background-annonce');
+                        $('#backgroundcolor').attr('data-pour', 'background-annonce');
+                    }
+                    else if ($('.news-section').isOnScreen()) {
+                        $('.act_color').show();
+                        $('.act_color1').show();
+                        $('.grand_titre_color1').show();
+                        $('.grand_titre_color').show();
+                        $('.titre_color1').show();
+                        $('.titre_color').show();
+                        $('.sous_titre_color1').show();
+                        $('.sous_titre_color').show();
+                        $('.texte_color1').show();
+                        $('.texte_color').show();
+                        $('.chambre_color1').hide()
+                        $('.chambre_color').hide()
+                        $('.menu_color1').hide();
+                        $('.menu_color').hide();
+                        $('.logo_color1').hide();
+                        $('.logo_color').hide();
+                        $('.info_color1').hide();
+                        $('.info_color').hide();
+                        $('.background.about').hide()
+                        $('.background.annonce').hide()
+                        $('.background.horaire').hide()
+                        $('.background.service').hide()
+                        $('.background.gallery').show()
+                        $('.background.footer').hide()
+                        $('.motif-container').attr('data-pour', 'background-gallery');
+                        $('#backgroundcolor').attr('data-pour', 'background-gallery');
+                    }
+                    else if ($('.main-footer').isOnScreen()) {
+                        $('.act_color').show();
+                        $('.act_color1').show();
+                        $('.grand_titre_color1').show();
+                        $('.grand_titre_color').show();
+                        $('.titre_color1').show();
+                        $('.titre_color').show();
+                        $('.sous_titre_color1').show();
+                        $('.sous_titre_color').show();
+                        $('.texte_color1').show();
+                        $('.texte_color').show();
+                        $('.chambre_color1').hide()
+                        $('.chambre_color').hide()
+                        $('.menu_color1').hide();
+                        $('.menu_color').hide();
+                        $('.logo_color1').hide();
+                        $('.logo_color').hide();
+                        $('.info_color1').hide();
+                        $('.info_color').hide();
+                        $('.background.about').hide()
+                        $('.background.annonce').hide()
+                        $('.background.horaire').hide()
+                        $('.background.service').hide()
+                        $('.background.gallery').hide()
+                        $('.background.footer').show()
+                        $('.motif-container').attr('data-pour', 'background-footer');
+                        $('#backgroundcolor').attr('data-pour', 'background-footer');
+                    }
+
+
+                });
+            });
+
+        </script>
+        {#==================Section show hide===================#}
+
+        {#-------------------------annimation background--------------------------------#}
+        <script>
+
+
+            function chnageicon(iconlink, div_name) {
+
+                for (var i = 1; i < 29; i++) {
+
+                    $(div_name + " .elem" + i).css('background-image', 'url(' + iconlink + ')')
+
+                }
+            }
+            $('[set_icon]').click(function () {
+
+                data_pour = $(this).parent().attr('data-pour');
+                section = $(this);
+                srcicon = section.find('img').attr('src')
+
+                if (data_pour == 'background-horaires') {
+                    chnageicon(srcicon, '#horaires');
+                    $('#animation_horaires').val(srcicon);
+                }
+                else if (data_pour == 'background-propo') {
+                    chnageicon(srcicon, '#apropos');
+                    $('#animation_about').val(srcicon);
+                }
+                else if (data_pour == 'background-service') {
+                    chnageicon(srcicon, '.services-section');
+                    $('#annimation_service').val(srcicon);
+                }
+                else if (data_pour == 'background-annonce') {
+                    chnageicon(srcicon, '#events');
+                    $('#animation_annonce').val(srcicon);
+                }
+                else if (data_pour == 'background-gallery') {
+                    chnageicon(srcicon, '.news-section');
+                    $('#annimation_gallery').val(srcicon);
+                }
+                else if (data_pour == 'background-gallery') {
+                    chnageicon(srcicon, '.main-footer');
+                    $('#annimation_footer').val(srcicon);
+                    console.log($('#annimation_footer').val(srcicon))
+                }
+
+            });
+
+            {% if theme.color.background.animation is defined %}
+
+            {% if theme.color.background.animation.horaires is not empty %}
+            $(document).ready(function () {
+
+                propoicon = '{{ theme.color.background.animation.horaires }}';
+                chnageicon(propoicon, '#horaires');
+
+            });
+            {% endif %}
+
+            {% if theme.color.background.animation.about is not empty %}
+            $(document).ready(function () {
+
+                propoicon = '{{ theme.color.background.animation.about }}';
+                chnageicon(propoicon, '#apropos');
+
+            });
+            {% endif %}
+
+            {% if theme.color.background.animation.annone is not empty %}
+            $(document).ready(function () {
+
+                propoicon = '{{ theme.color.background.animation.annone }}';
+                chnageicon(propoicon, '.services-section');
+
+            });
+            {% endif %}
+            {% if theme.color.background.animation.annone is not empty %}
+            $(document).ready(function () {
+
+                propoicon = '{{ theme.color.background.animation.annone }}';
+                chnageicon(propoicon, '#events');
+
+            });
+            {% endif %}
+
+            {% if theme.color.background.animation.gallery is not empty %}
+            $(document).ready(function () {
+
+                propoicon = '{{ theme.color.background.animation.gallery }}';
+                chnageicon(propoicon, '.news-section');
+
+            });
+            {% endif %}
+
+            {% if theme.color.background.animation.footer is not empty %}
+            $(document).ready(function () {
+
+                propoicon = '{{ theme.color.background.animation.footer }}';
+                chnageicon(propoicon, '.main-footer');
+
+            });
+            {% endif %}
+
+            {% endif %}
+
+
+        </script>
+        {#------------------------- end annimation background--------------------------------#}
+
+    {% endblock %}

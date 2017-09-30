@@ -1,0 +1,58 @@
+project_new:
+     path:   /addProject/{id}
+     defaults: { _controller: "ModuleBundle:Architecture:addProject" }
+     methods:  [GET, POST]
+delete-project:
+    path:   /deleteProject/{id}
+    defaults: { _controller: "ModuleBundle:Architecture:deleteProject" }
+    methods:  [GET, POST]
+update_project:
+     path:   /updateProject/{id}
+     defaults: { _controller: "ModuleBundle:Architecture:updateProject" }
+     methods:  [GET, POST]
+delete_image_project:
+    path:   /deleteImage
+    defaults: { _controller: "ModuleBundle:Architecture:deleteImage" }
+    methods:  [GET, POST]
+change_principal_image_project:
+    path:   /changePrincipalImage/Project
+    defaults: { _controller: "ModuleBundle:Architecture:changePrincipaleImage" }
+    methods:  [GET, POST]
+member_new:
+    path:   /addMember/Team/{id}
+    defaults: { _controller: "ModuleBundle:Architecture:addMemberTeam" }
+    methods:  [GET, POST]
+list_members:
+    path:   /listMembersTeam
+    defaults: { _controller: "ModuleBundle:Architecture:listMembersTeam" }
+    methods:  [GET, POST]
+delete_member:
+    path:   /deleteMemberTeam/{id}/{quoiqui}
+    defaults: { _controller: "ModuleBundle:Architecture:deleteMembersTeam" }
+    methods:  [GET, POST]
+
+update_member:
+    path:   /updateMemberTeam/{id}/{quoiqui}
+    defaults: { _controller: "ModuleBundle:Architecture:updateMembersTeam" }
+    methods:  [GET, POST]
+
+delete_image_member:
+     path:   /deleteImageMember
+     defaults: { _controller: "ModuleBundle:Architecture:deleteImageMember" }
+     methods:  [GET, POST]
+service_new:
+    path:   /newService/{id}
+    defaults: { _controller: "ModuleBundle:Architecture:addService" }
+    methods:  [GET, POST]
+delete_service:
+    path:   /deleteService/{serviceId}/{quoiquiId}
+    defaults: { _controller: "ModuleBundle:Architecture:deleteService" }
+    methods:  [GET, POST]
+update_service:
+    path:   /updateService/{serviceId}/{quoiquiId}
+    defaults: { _controller: "ModuleBundle:Architecture:updateService" }
+    methods:  [GET, POST]
+delete_image_service:
+      path:   /deleteImageService
+      defaults: { _controller: "ModuleBundle:Architecture:deleteImageService" }
+      methods:  [GET, POST]

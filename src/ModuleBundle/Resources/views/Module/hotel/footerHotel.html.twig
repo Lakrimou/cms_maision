@@ -1,0 +1,141 @@
+<section class="footer-sec">
+    <footer class="main-footer">
+        <div class="container-fluid">
+
+            <!--Widgets Section-->
+            <div class="widgets-section">
+                <div class="row clearfix">
+                    <!--Big Column-->
+                    <div class="big-column col-md-12 col-sm-12 col-xs-12">
+                        <div class="row clearfix">
+
+                            <!--Footer Column-->
+                            <div class="footer-column col-md-6 col-sm-6 col-xs-12">
+                                <div class="footer-widget about-widget">
+                                    <div class="footer-logo f-logo">
+                                        <a href="#">{{ qouiqui.firstName }}</a>
+                                    </div>
+                                    <div class="widget-content">
+                                        {% for ab in module %}
+                                            {% if ab.about is not null %}
+                                                <div class="textfooter">
+                                                    {{ ab.about.apropos_details|raw }}
+                                                </div>
+                                                <div class="social-links">
+                                                    <a href="{{ ab.about.fb }}" target="_blank"><span class="fa fa-facebook-official"></span></a>
+                                                    <a href="{{ ab.about.gp }}" target="_blank"><span class="fa fa-google-plus-official"></span></a>
+                                                    <a href="{{ ab.about.tw }}" target="_blank"><span class="fa fa-twitter"></span></a>
+                                                </div>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!--Footer Column-->
+                            <div class="footer-column col-md-3 col-sm-6 col-xs-12">
+                                <div class="footer-widget links-widget">
+                                    <h2>LIENS RAPIDES</h2>
+                                    <div class="widget-content">
+                                        <ul class="list">
+                                            <ul class="navigation clearfix">
+                                                <li class="current dropdown"><a href="#">Accueil</a>
+                                                </li>
+                                                {#<li><a href="#apropos">À propos</a></li>#}
+                                                <li class=""><a href="#chambres">Chambres</a>
+                                                </li>
+                                                <li><a href="#services">Services</a>
+                                                </li>
+                                                {#</li>#}
+                                                {#<li><a href="#gallery">Galerie</a></li>#}
+                                                <li><a href="#events">Evenements</a>
+                                                </li>
+                                                <li><a href="#Contactez-nous">Contactez-nous</a></li>
+                                            </ul>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="footer-column col-md-3 col-sm-6 col-xs-12">
+                                <div class="footer-widget address-widget">
+                                    <h2>Notre adresse</h2>
+                                    <div class="widget-content">
+                                        <ul>
+                                            <li>{{ qouiqui.address1 }}</li>
+                                            <li>{{ qouiqui.phone }}</li>
+                                            <li>{{ qouiqui.mail }}</li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!--Big Column-->
+                    {#<div class="big-column col-md-6 col-sm-12 col-xs-12">#}
+                    {#<div class="row clearfix">#}
+
+                    {#<!--Footer Column-->#}
+                    {#<div class="footer-column col-md-6 col-sm-6 col-xs-12">#}
+                    {#<div class="footer-widget address-widget">#}
+                    {#<h2>Notre adress</h2>#}
+                    {#<div class="widget-content">#}
+                    {#<ul>#}
+                    {#<li>60 Grant Ave. Central New<br>Road 0708, UK</li>#}
+                    {#<li>(880) 1723801729</li>#}
+                    {#<li>satektravel@gmail.com</li>#}
+                    {#<li>9:00pm - 5:00pm<br>Sunday Closed</li>#}
+                    {#</ul>#}
+                    {#</div>#}
+                    {#</div>#}
+
+                    {#</div>#}
+
+                    {#</div>#}
+                    {#</div>#}
+
+                </div>
+            </div>
+
+        </div>
+
+        <!--Footer Bottom-->
+        <div class="footer-bottom">
+            <div class="auto-container">
+                <div class="copyright-text">Copyright {{ qouiqui.firstName }} &copy; 2017</div>
+            </div>
+        </div>
+    </footer>
+
+    <div class="particle elem1 anim-delay1"></div>
+    <div class="particle elem2 anim-delay5"></div>
+    <div class="particle elem3 anim-delay3"></div>
+    <div class="particle elem4 anim-delay8"></div>
+    <div class="particle elem5 anim-delay9"></div>
+    <div class="particle elem6 anim-delay2"></div>
+    <div class="particle elem7 anim-delay4"></div>
+    <div class="particle elem8 anim-delay3"></div>
+    <div class="particle elem9 anim-delay10"></div>
+    <div class="particle elem8 anim-delay11"></div>
+    <div class="particle elem6 anim-delay12"></div>
+    <div class="particle elem1 anim-delay14"></div>
+    <div class="particle elem13 anim-delay16"></div>
+    <div class="particle elem17 anim-delay18"></div>
+    <div class="particle elem2 anim-delay6"></div>
+    <div class="particle elem16 anim-delay9"></div>
+    <div class="particle elem8 anim-delay3"></div>
+    <div class="particle elem9 anim-delay10"></div>
+    <div class="particle elem18 anim-delay11"></div>
+    <div class="particle elem11 anim-delay12"></div>
+    <div class="particle elem12 anim-delay14"></div>
+    <div class="particle elem13 anim-delay16"></div>
+    <div class="particle elem14 anim-delay18"></div>
+    <div class="particle elem15 anim-delay6"></div>
+    <div class="particle elem16 anim-delay9"></div>
+    <div class="particle elem17 anim-delay7"></div>
+    <div class="particle elem18 anim-delay6"></div>
+    <div class="particle elem19 anim-delay3"></div>
+</section>

@@ -1,0 +1,56 @@
+{% extends 'dashboardLayaout/dashboardLayout.html.twig' %}
+
+{% block body %}
+    <div class="col-sm-9 col-md-12">
+        <h1>Ajouter Une voiture</h1>
+
+        {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <input type="submit" value="Ajouter Une voiture" id="envoyer" class="btn btn-success"/>
+        {{ form_end(form) }}
+
+        <ul>
+            {#<li>#}
+                {#<a href="{{ path('dashboard_car_liste') }}">Back to the list</a>#}
+            {#</li>#}
+        </ul>
+    </div>
+{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    {#=========================Test size and type of picture=============================#}
+
+    <script>
+        $('#adminbundle_automobile_images').change(function () {
+
+            var ext = this.value.match(/\.(.+)$/)[1];
+            if (ext == 'jpg' || ext == 'jpeg' || ext == 'png' || ext == 'gif') {
+
+//                $('#envoyer').attr('disabled', false);
+                $('#envoyer').attr('disabled', false);
+                //$('.errorSize').fadeOut();
+            } else {
+
+                $('#adminbundle_automobile_images').after('<span class="errorSize" style="color:red;">Type non valide!(SVP entrer fichier de type["jpg", "png", "jpeg", "gif"])</span>');
+                $('.errorSize').fadeOut(10000);
+                $('#envoyer').attr('disabled', true);
+            }
+        });
+    </script>
+    <script>
+        $('#adminbundle_automobile_details').change(function () {
+        var imgEmpty= $('#adminbundle_automobile_images').val();
+        if(imgEmpty==''){
+            $('#adminbundle_automobile_images').after('<span class="errorSize" style="color:red; font-size: 25px">l\'image ne doit pas etre vide!"</span>');
+            $('.errorSize').fadeOut(10000);
+            $('#envoyer').attr('disabled', true);
+        }
+            return false;
+        });
+    </script>
+
+{% endblock %}

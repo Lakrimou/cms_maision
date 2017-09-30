@@ -1,0 +1,4 @@
+dashboard_car_ajout_tt:
+    path:     /
+    defaults: { _controller: DashboardBundle:Car:new }
+    methods:  [GET, POST]

@@ -1,0 +1,83 @@
+user_homepage:
+    path:     /
+    defaults: { _controller: UserBundle:Default:index }
+    methods:  [GET, POST]
+
+user_reviwes:
+    path:     /rev
+    defaults: { _controller: UserBundle:Default:rev }
+
+fb_connection:
+    path:     /fblogin
+    defaults: { _controller: UserBundle:Default:FBlogin }
+
+user_recherche:
+    resource: "@UserBundle/Resources/config/routing/recherche.yml"
+    prefix:   /recherche
+
+user_details:
+    resource: "@UserBundle/Resources/config/routing/details.yml"
+    prefix:   /details
+
+#==========================ProfileUser=================#
+
+user_profile:
+    path:     /dashboard/user/
+    defaults: { _controller: UserBundle:ProfileUser:index }
+    methods:  [GET, POST]
+
+#========================== Template test =================#
+
+template_test:
+    path:     /tpl/
+    defaults: { _controller: UserBundle:Template:index }
+
+template_test_contact:
+    path:     /tpl/contact
+    defaults: { _controller: UserBundle:Template:contact }
+
+template_test_fiche:
+    path:     /tpl/fiche/
+    defaults: { _controller: UserBundle:Template:fiche }
+
+template_test_recherche:
+    path:     /tpl/recherche
+    defaults: { _controller: UserBundle:Template:recherche }
+
+
+template_get_all_ville:
+    path:     /tpl/all-ville
+    defaults: { _controller: UserBundle:Template:getAllVille }
+    methods:  [POST]
+
+template_get_all_delegation:
+    path:     /tpl/all-delegation
+    defaults: { _controller: UserBundle:Template:getAllDelegation }
+    methods:  [POST]
+
+template_etre_rappeler:
+    path:     /etre-rappeler/
+    defaults: { _controller: UserBundle:Default:etreRappeler }
+
+template_get_all_category:
+    path:     /all-category/
+    defaults: { _controller: UserBundle:Default:getAllCategory }
+    methods:  [POST]
+
+module_architecture_common_template:
+    resource: "@UserBundle/Resources/config/routing/architecture.yml"
+    prefix:   /architectureGlobal
+
+template_add_new_listing:
+    path:     /add-new-listing/
+    defaults: { _controller: UserBundle:Template:addNewListing }
+    methods:  [POST]
+
+template_test_slug_qq:
+    path:     /test-exist-slug/
+    defaults: { _controller: UserBundle:Template:getslug }
+    methods:  [POST, GET]
+test_word:
+    path:     /word/
+    defaults: { _controller: UserBundle:Default:testword }
+    methods:  [POST,GET]

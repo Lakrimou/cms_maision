@@ -1,0 +1,24 @@
+autoEcole_annonce_add:
+    path:     /annonce/add
+    defaults: { _controller: "ModuleBundle:AutoEcole:addAnnonces" }
+autoEcole_annonce_show:
+    path:     /annonce/show/{id}/{idq}
+    defaults: { _controller: "ModuleBundle:AutoEcole:showAnnonces" }
+autoEcole_annonce_remove:
+    path:     /annonce/delete/{id}
+    defaults: { _controller: "ModuleBundle:AutoEcole:deleteAnnonces" }
+autoEcole_annonce_edit:
+    path:     /annonce/edit/{id}
+    defaults: { _controller: "ModuleBundle:AutoEcole:editAnnonces" }
+autoEcole_annonce_update:
+    path:     /annonce/update
+    defaults: { _controller: "ModuleBundle:AutoEcole:updateAnnonces" }
+autoEcole_annonce_reserver:
+    path:     /annonce/reserver
+    defaults: { _controller: "ModuleBundle:AutoEcole:reserverAnnonces" }
+autoEcole_annonce_page:
+    path:     /annonce/{page}/{id}
+    defaults: { _controller: "ModuleBundle:AutoEcole:ficheAnnoncesPages" }
+autoEcole_annonce_page_delete:
+    path:     /annonce/delete/{page}/{id}
+    defaults: { _controller: "ModuleBundle:AutoEcole:ficheAnnoncesPagesDelete" }

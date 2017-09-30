@@ -1,0 +1,822 @@
+<style>
+
+
+    .image-content-event {
+        width: auto;
+        height: 200px;
+        background-size: cover;
+        background-position: center;
+
+    }
+
+    .btn-bottom {
+        position: absolute;
+        bottom:50px;
+        margin: 0 auto;
+        margin-left: 20px;
+    }
+
+
+</style>
+
+{% set event = cfEvent(module) %}
+{% if  connected %}
+    <a data-toggle="modal" href="#event_list" class="button-default pull-right  button_admin ">Gérer cette section</a>
+{% endif %}
+
+<section class="event section-bg padding-120" id="event" >
+    {% if  cfEvent(module) is not empty %}
+    <div class="container">
+        <div class="section-header ">
+
+
+            <h3> Nos Evenements</h3>
+
+            {#<span><img src="http://alishafique.net/html/edulearn/images/hdg-01.png" alt=""></span>#}
+        </div>
+        <div class="event-items">
+            <div class="row">
+                {% for a, c in  event %}
+                {% set events = jsonDecod(c.data) %}
+
+                {#{% set data = jsonDecod(c.description)%}#}
+
+                <div class="col-md-4 col-sm-6 col-xs-12" data-id-remove="{{ c.id }}">
+                    <div class="event-item">
+                        <div class="event-image  image-content-event"
+                             style="background-image:url('{{ asset('uploads/image/') }}{{ iduser }}/{{ qouiqui.id }}/event/{{ c.id~'.jpg' }}')">
+
+                            <div class="date">
+                                <span>{{ events.start|date("d") }}</span>
+                                <p>{{ events.start|date("M") }}</p>
+                            </div>
+                        </div>
+                        <div class="event-content" style="height: 252px;">
+                            <h4 style="text-align:center;font-size:17px">{{ events.nom }}</h4>
+                            <ul>
+
+                                <li><span><i class="fa fa-clock-o"
+                                             aria-hidden="true"></i></span>{{ events.start|date("H:i:s") }}
+                                    -{{ events.end|date("H:i:s") }}</li>
+
+                                {% if events.adr is defined and  events.adr is not empty  %}
+                                <li><span><i class="fa fa-home" aria-hidden="true"></i></span>{{ events.adr }}</li>
+                                {% else %}
+                                <li><span><i class="fa fa-home" aria-hidden="true"></i></span>{{ qouiqui.address1 }}</li>
+                                {% endif %}
+                            </ul>
+                            <p>{{ events.desc[:50] }}.</p>
+
+                            <div class="btn-bottom">
+
+                                <a data-toggle="modal" data-target="#modal-plus-event" href="#"
+
+                                   class="button-default current_modal_event" data-id="{{ c.id }}"
+                                   data-qq="{{ qouiqui.id }}">Voir plus</a>
+
+
+                                <a data-toggle="modal" data-target="#inscription-event" href="#"
+                                   class="button-default current_modal_iscription-event" data-id="{{ c.id }}"
+                                   data-qq="{{ qouiqui.id }}">Réserver</a>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+
+
+        </div><!-- row -->
+    </div><!-- event items -->
+
+{% else %}
+    <div class="container">
+        <div class="section-header">
+
+
+            <h3>Nos Evenements</h3>
+            <span><img src="http://alishafique.net/html/edulearn/images/hdg-01.png" alt=""></span>
+        </div>
+        <div class="event-items">
+            <div class="row">
+                <div class="col-md-4 col-sm-6 col-xs-12">
+                    <div class="event-item">
+                        <div class="event-image">
+                            <img src="{{ asset('module/centre_frm/images/event/event_02.jpg') }}" alt="event image"
+                                 class="img-responsive">
+                            <div class="date">
+                                <span>24</span>
+                                <p>March</p>
+                            </div>
+                        </div>
+                        <div class="event-content">
+                            <h4>Study Fastivel Event 2018</h4>
+                            <ul>
+                                <li><span><i class="fa fa-clock-o" aria-hidden="true"></i></span>08:00 am - 10:00 am
+                                </li>
+                                <li><span><i class="fa fa-home" aria-hidden="true"></i></span>218 New Elephant Road
+                                    Dhaka
+                                </li>
+                            </ul>
+                            <p>Dratcaly novate fuly rarched an plication awesome theme education that plication creative
+                                theme education.</p>
+                            <a href="event-single.html" class="button-default">Join Now</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6 col-xs-12">
+                    <div class="event-item">
+                        <div class="event-image">
+                            <img src="{{ asset('module/centre_frm/images/event/event_03.jpg') }}" alt="event image"
+                                 class="img-responsive">
+                            <div class="date">
+                                <span>24</span>
+                                <p>March</p>
+                            </div>
+                        </div>
+                        <div class="event-content">
+                            <h4>Study Fastivel Event 2018</h4>
+                            <ul>
+                                <li><span><i class="fa fa-clock-o" aria-hidden="true"></i></span>08:00 am - 10:00 am
+                                </li>
+                                <li><span><i class="fa fa-home" aria-hidden="true"></i></span>218 New Elephant Road
+                                    Dhaka
+                                </li>
+                            </ul>
+                            <p>Dratcaly novate fuly rarched an plication awesome theme education that plication creative
+                                theme education.</p>
+                            <a href="event-single.html" class="button-default">Join Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="eni">
+        <div class="particle elem1 anim-delay1"></div>
+        <div class="particle elem2 anim-delay5"></div>
+        <div class="particle elem3 anim-delay3"></div>
+        <div class="particle elem4 anim-delay8"></div>
+        <div class="particle elem5 anim-delay9"></div>
+        <div class="particle elem6 anim-delay2"></div>
+        <div class="particle elem7 anim-delay4"></div>
+        <div class="particle elem8 anim-delay3"></div>
+        <div class="particle elem9 anim-delay10"></div>
+        <div class="particle elem8 anim-delay11"></div>
+        <div class="particle elem6 anim-delay12"></div>
+        <div class="particle elem1 anim-delay14"></div>
+        <div class="particle elem13 anim-delay16"></div>
+        <div class="particle elem17 anim-delay18"></div>
+        <div class="particle elem2 anim-delay6"></div>
+        <div class="particle elem16 anim-delay9"></div>
+        <div class="particle elem8 anim-delay3"></div>
+        <div class="particle elem9 anim-delay10"></div>
+        <div class="particle elem18 anim-delay11"></div>
+        <div class="particle elem11 anim-delay12"></div>
+        <div class="particle elem12 anim-delay14"></div>
+        <div class="particle elem13 anim-delay16"></div>
+        <div class="particle elem14 anim-delay18"></div>
+        <div class="particle elem15 anim-delay6"></div>
+        <div class="particle elem16 anim-delay9"></div>
+        <div class="particle elem17 anim-delay7"></div>
+        <div class="particle elem18 anim-delay6"></div>
+        <div class="particle elem19 anim-delay3"></div>
+    </div>
+    {% endif %}
+</section><!-- event blog -->
+
+    <div id="event_list" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-lg">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="pull-right margin-bott">
+
+                        {#<a data-toggle="modal" href="#tallModal" class="btn btn-primary">Wide, Tall Content</a>#}
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal_event"
+                        >Ajouter Nouveau Evenement
+                        </button>
+                    </div>
+                    {#<button type="button" class="close" data-dismiss="modal">&times;</button>#}
+                    <h4 class="modal-title">Liste des Evenements</h4>
+                </div>
+
+                <div class="modal-body">
+                    <div class=" row shop-cart padding-120">
+
+                        <div class="shop-table table-responsive">
+                            <table>
+                                <thead>
+                                <tr>
+                                    <th colspan="2" class="title">Evenement</th>
+                                    <th lass="start">Date debut</th>
+                                    <th class="end">Date fin</th>
+                                    <th class="adr">Addresse</th>
+                                    {#<th class="descr">Description</th>#}
+
+                                    <th class="edit-cart">Modifier</th>
+                                    <th class="remove-cart">Supprimer</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for a, c in  event %}
+
+                                    {% set events = jsonDecod(c.data) %}
+
+                                    <tr data-tr={{ c.id }}>
+                                        <td colspan="2" class="product-thumbnail">
+                                            <div class="image">
+                                                <a href=#"><img
+                                                            src="{{ asset('uploads/image/') }}{{ iduser }}/{{ qouiqui.id }}/event/{{ c.id~'.jpg' }}"
+                                                            style=" max-width: 40%;"
+                                                            alt="product image"
+                                                            class="img-responsive"></a>
+                                            </div>
+                                            <div class="content">
+                                                <h4><a href="#">{{ events.nom }}</a></h4>
+                                            </div>
+                                        </td>
+                                        <td class="start"><span>{{ events.start }}</span></td>
+                                        <td class="end"><span>{{ events.end }}</span></td>
+                                        <td class="adr"><span>{{ events.adr }}</span></td>
+
+                                        {#<td class="descr">#}
+                                        {#{{ events.desc }}#}
+                                        {#</td>#}
+
+                                        <td class="edite-cart"><a data-toggle="modal" data-target="#edit_event "
+                                                                  href="#" class="modifier_event" data-serv="{{ c.id }}"
+                                                                  data-id="{{ qouiqui.id }}">
+
+                                                <span><i class="fa fa-pencil" aria-hidden="true"></i></span>
+                                            </a>
+
+                                        </td>
+                                        <td class="remove-cart"><a data-toggle="modal"
+                                                                   data-target="#confirm-delete-event" href="#"
+                                                                   class="service_suprim_event"
+                                                                   data-id='{{ c.id }}'>
+                                                <span><i class="fa fa-times" aria-hidden="true"></i></span></a>
+                                        </td>
+                                    </tr>
+
+                                {% endfor %}
+
+                                </tbody>
+                            </table>
+                        </div>
+
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <div id="modal_event" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Ajouter Vos Offres</h4>
+                </div>
+                <div class=" modal-body">
+                    <form id="ajout_event" method="POST" action="{{ path('module_centreformation_ajout_event') }}"
+                          enctype="multipart/form-data">
+
+
+                        <div class="row">
+                            <input type="hidden" name="qq_id" value="{{ qouiqui.id }}" required>
+                            <div class="col-sm-6 form-group">
+                                <label>First Name</label>
+                                <input type="text" placeholder="Enter Nom de l'événement  ici.." class="form-control"
+                                       name="nom">
+                            </div>
+
+                        </div>
+                        <div class="form-group">
+                            <label>Description</label>
+                            <textarea placeholder="Enterer  un petit texte.." rows="3" class="form-control"
+                                      name="desc"></textarea>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-6 form-group">
+                                <label>Date début </label>
+                                <div class="form-group">
+                                    <div class='input-group date' id='datetimepicker6'>
+                                        <input type='text' class="form-control" name="start"/>
+                                        <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-calendar"></span>
+                </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 form-group">
+                                <label>Date fin</label>
+                                <div class="form-group">
+                                    <div class='input-group date' id='datetimepicker7'>
+                                        <input type='text' class="form-control" name="end"/>
+                                        <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-calendar"></span>
+                </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label> Address</label>
+                            <input type="text" placeholder="Entrer l'Address ici.." class="form-control" name="adr">
+                        </div>
+                        <div class="form-group">
+                            <label> Choisissez un photo</label>
+                            <input autocomplete="off" class="form-control "
+                                   name="file" type="file" required="required"
+                                   placeholder="choisissez_image" data-items="8"/>
+                        </div>
+
+
+                    </form>
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+                    <button type="submit" class="btn btn-primary " data-target="modifier" data-selector="ajout_event">
+                        Ajouter
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div id="edit_event" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Modifier l'évenement</h4>
+                </div>
+                <div class="modal-body">
+                    <form id="edit_events" method="POST"
+                          action="{{ path('module_centreformation_modif_event',{'idqq':qouiqui.id}) }}"
+                          enctype="multipart/form-data">
+                        <input type="hidden" name="qq_id" value="{{ qouiqui.id }}" required>
+                        <input id="idevent" type="hidden" name="eventID" value="" required>
+
+
+                        <div class="row">
+
+                            <div class="col-sm-6 form-group">
+                                <label>Nom</label>
+                                <input type="text" id="name" placeholder="Enter Nom de l'événement  ici.."
+                                       class="form-control" name="nom">
+                            </div>
+
+                        </div>
+                        <div class="form-group">
+                            <label>Description</label>
+                            <textarea id="info1" placeholder="Enterer  un petit texte.." rows="3" class="form-control"
+                                      name="desc"></textarea>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-6 form-group">
+                                <label>Date début </label>
+                                <div class="form-group">
+                                    <div class='input-group  date' id='datetimepicker6'>
+                                        <input type='text' class="form-control date6" name="start"/>
+                                        <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-calendar"></span>
+                </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 form-group">
+                                <label>Date fin</label>
+                                <div class="form-group">
+                                    <div class='input-group  date' id='datetimepicker7'>
+                                        <input type='text' class="form-control date7" name="end"/>
+                                        <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-calendar"></span>
+                </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label> Address</label>
+                            <input id="adr1" type="text" placeholder="Entrer l'Address ici.." class="form-control"
+                                   name="adr">
+                        </div>
+
+                        <div class="form-group">
+                            <label> Choisissez un photo</label>
+                            <input autocomplete="off" class="form-control "
+                                   name="file" type="file" required="required"
+                                   placeholder="choisissez_image" data-items="8"/>
+                        </div>
+
+                    </form>
+
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+                    <button type="submit" class="btn btn-primary " data-target="modifier" data-selector="edit_events">
+                        Modifier
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <div class="modal fade" id="confirm-delete-event" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+
+                <div class="modal-body">
+
+                    {#<form id="supp_event" method="POST" action="{{ path('module_spa_delate_event') }}">#}
+                    <input type="text" name="supprimer" value="" class="delate">
+                    <input type="text" name="id_qq" value="{{ qouiqui.id }}" class="">
+
+                    <p>Voulez vous supprimer ce evenement ?</p>
+                    <p class="debug-url"></p>
+                    {#</form>#}
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Annuler</button>
+
+
+                    <button type="submit" data-qq="{{ qouiqui.id }} " class="btn btn-danger supprime_events "
+                            data-target="modifier"
+                            data-selector="sup_event">
+                        Supprimer
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modal-plus-event" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog ">
+            <div class="modal-content">
+                {#<div class="modal-header">#}
+                {#<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>#}
+                {#<h4 class="modal-title">modal-lg</h4>#}
+                {#</div>#}
+                <div class="modal-body">
+                    <div class=" padding-120">
+
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <div class="event-single-item">
+                                    <div class="event-image event_detail image-box2">
+                                        <input type="hidden" class="id_img">
+                                        <img id="id2" src="" alt="event image" class="img-responsive">
+                                    </div>
+                                    <div class="event-content">
+                                        <h3 id="event_name"></h3>
+                                        <ul class="post-meta">
+                                            <li><i class="fa fa-clock-o" aria-hidden="true"
+                                                   style="margin-right: 5px"></i><span id="time"> </span></li>
+                                            <li><i class="fa fa-home" aria-hidden="true"
+                                                   style="margin-right: 5px"></i><span id="adrs"> </span></li>
+                                        </ul>
+
+                                        <div class="event-counter">
+                                            <div id="clockdiv">
+
+
+                                                <button class="button-default btn-lg" data-toggle="modal"
+                                                        data-target="#inscription-event">Réserver
+                                                    cette formation
+                                                </button>
+                                            </div>
+                                        </div><!-- event-counter -->
+
+                                        <h4>Description</h4>
+                                        <p id="detail1"></p>
+
+
+                                    </div>
+
+
+                                </div>
+
+
+                            </div>
+
+                        </div><!-- row -->
+
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    {% if not app.user %}
+
+        <div class="modal fade" id="inscription-event" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+
+
+                    <div class="modal-body">
+
+                        {#<h4>The Course Description:</h4>#}
+                        {#<p id="more"></p>#}
+
+
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <div class="events-single-item">
+
+
+                                    <div class="event-image ">
+
+                                    </div>
+                                    <div class="" style="font-size: 40px;margin-left:20px">
+                                        <h3 id="cour" style="display: inline; font-size: 18px;"></h3>
+
+                                    </div>
+
+                                    <div class="event-counter">
+
+                                    </div>
+
+
+                                </div>
+
+
+                                <div class=" banner-details">
+                                    <div class="container">
+
+                                        <div class="banner-content">
+
+
+                                            <form action="{{ path('module_centreformation_booking') }}" method="POST">
+
+                                                <div class="row">
+                                                    <input type="hidden" id="nos-event" name="events">
+                                                    <input type="hidden" name="qqid" value="{{ qouiqui.id }}">
+                                                    {% if app.user %}
+                                                        <input type="hidden" name="qq_user"
+                                                               value="{{ app.user.id }}">
+                                                    {% endif %}
+                                                    <div class="col-md-6 ">
+                                                        <input type="text" name="name"
+                                                               placeholder="Nomé&prénom*">
+                                                    </div>
+                                                    <div class="col-md-6 ">
+                                                        <input type="text" name="email" placeholder="Email*">
+                                                    </div>
+                                                    <div class="col-md-6 ">
+                                                        <input type="text" name="tel" placeholder="Téléphone*">
+                                                    </div>
+                                                    {#<div class="col-md-6 ">#}
+                                                    {#<input type="date" name="birth"#}
+                                                    {#placeholder="Date Naissance">#}
+                                                    {#</div>#}
+                                                    <div class="col-md-6 ">
+                                                        <input type="number" name="age" placeholder="Votre age">
+                                                    </div>
+                                                    <div class="col-md-6 ">
+                                                        <input type="text" name="ville" placeholder="Ville*">
+                                                    </div>
+                                                    <div class="col-md-6 ">
+                                                        <input type="text" name="adr" placeholder="Adresse*">
+                                                    </div>
+                                                    <div class="col-md-12 ">
+                                                        <select name="etude" id="niveau-etude">
+                                                            <option>Niveau d'étude*</option>
+                                                            <option value="Baccalauréat">Baccalauréat
+                                                            </option>
+                                                            <option value="Licence">Licence
+                                                            </option>
+                                                            <option value="Ingénierie">Ingénierie
+                                                            </option>
+                                                            <option value="Mastére">Mastére
+                                                            </option>
+                                                            <option value="autre">autre
+                                                            </option>
+
+
+                                                            </option>
+                                                        </select>
+
+                                                    </div>
+                                                    <div class="col-md-12 ">
+                                                        <input type="text" name="autres" id="otherType"
+                                                               placeholder="entrer votre niveau d'étude">
+                                                    </div>
+
+
+                                                </div>
+
+                                                <button class="envoie send">Envoyer</button>
+                                            </form>
+                                        </div><!-- banner-content -->
+                                    </div><!-- container -->
+                                </div>
+
+                            </div>
+
+                        </div><!-- row -->
+
+
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% elseif app.user.id  %}
+        <div class="modal fade" id="inscription-event" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+
+
+                    <div class="modal-body">
+
+                        {#<h4>The Course Description:</h4>#}
+                        {#<p id="more"></p>#}
+
+
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <div class="events-single-item">
+
+
+                                    <div class="event-image ">
+
+                                    </div>
+                                    <div class="" style="font-size: 40px;margin-left:20px">
+                                        <h3 id="cour" style="display: inline;    font-size: 18px;"></h3>
+
+                                    </div>
+
+                                    <div class="event-counter">
+
+                                    </div>
+
+
+                                </div>
+
+
+                                <div class=" banner-details">
+                                    <div class="container">
+
+                                        <div class="banner-content">
+
+                                            <form action="{{ path('module_centreformation_booking') }}" method="POST">
+
+                                                <div class="row">
+                                                    <input type="hidden" id="nos-event" name="events">
+                                                    <input type="hidden" name="qqid" value="{{ qouiqui.id }}">
+                                                    {% if app.user %}
+                                                        <input type="hidden" name="qq_user"
+                                                               value="{{ app.user.id }}">
+                                                    {% endif %}
+                                                    <div class="col-md-6 ">
+                                                        <input type="text" name="name"
+                                                               value="{{ app.user.prenom }}">
+                                                    </div>
+                                                    <div class="col-md-6 ">
+                                                        <input type="email" name="email" value="{{ app.user.email }}">
+                                                    </div>
+                                                    <div class="col-md-6 ">
+                                                        <input type="number" name="tel"
+                                                               value="{{ app.user.phoneNumber }}">
+                                                    </div>
+                                                    <div class="col-md-6 ">
+                                                        <input type="number" name="age" placeholder="Votre age*">
+                                                    </div>
+                                                    {#<div class="col-md-6 ">#}
+                                                    {#<input type="date" name="birth"#}
+                                                    {#placeholder="Date Naissance">#}
+                                                    {#</div>#}
+                                                    <div class="col-md-6 ">
+                                                        <input type="text" name="ville" placeholder="Ville*">
+                                                    </div>
+                                                    <div class="col-md-6 ">
+                                                        <input type="text" name="adr" value="{{ app.user.adress }}">
+                                                    </div>
+                                                    <div class="col-md-12 ">
+                                                        <select name="etude" id="niveau-etude">
+                                                            <option>Niveau d'étude*</option>
+                                                            <option value="Baccalauréat">Baccalauréat
+                                                            </option>
+                                                            <option value="Licence">Licence
+                                                            </option>
+                                                            <option value="Ingénierie">Ingénierie
+                                                            </option>
+                                                            <option value="Mastére">Mastére
+                                                            </option>
+                                                            <option value="autre">autre
+                                                            </option>
+
+
+                                                            </option>
+                                                        </select>
+
+                                                    </div>
+                                                    <div class="col-md-12 ">
+                                                        <input type="text" name="autres" id="otherType"
+                                                               placeholder="entrer votre niveau d'étude">
+                                                    </div>
+
+
+                                                </div>
+
+                                                <button class="envoie send">Envoyer</button>
+                                            </form>
+                                            {#<form id="insecrir" method="post"#}
+                                            {#action="{{ path('module_centreformation_booking') }}">#}
+
+                                            {#<div class="row">#}
+                                            {#<input type="hidden" id="frm" name="frmat">#}
+                                            {#<input type="hidden" name="qqid" value="{{ qouiqui.id }}">#}
+                                            {#{% if app.user %}#}
+                                            {#<input type="hidden" name="qq_user"#}
+                                            {#value="{{ app.user.id }}">#}
+                                            {#{% endif %}#}
+
+                                            {#<div class="col-md-12 ">#}
+                                            {#<select name="etude">#}
+                                            {#<option>--Niveau d'étude--</option>#}
+                                            {#<option value="Baccalauréat">Baccalauréat#}
+                                            {#</option>#}
+                                            {#<option value="Licence">Licence#}
+                                            {#</option>#}
+                                            {#<option value="Ingénierie">Ingénierie#}
+                                            {#</option>#}
+                                            {#<option value="Mastére">Mastére#}
+                                            {#</option>#}
+                                            {#<option value="autre">autre#}
+                                            {#</option>#}
+
+
+                                            {#</option>#}
+                                            {#</select>#}
+
+                                            {#</div>#}
+
+
+                                            {#</div>#}
+
+                                            {#<button class="envoie send">Envoyer</button>#}
+                                            {#</form>#}
+                                        </div><!-- banner-content -->
+                                    </div><!-- container -->
+                                </div>
+
+                            </div>
+
+                        </div><!-- row -->
+
+
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    {% endif %}

@@ -1,0 +1,67 @@
+{% set connected = false %}
+{% if app.user %}
+    {% if app.user.id == qouiqui.user.id %}
+        {% set connected = true %}
+    {% endif %}
+{% endif %}
+
+{% set horaire = jsonDecod(qouiqui.opening) %}
+{% set sociaux = jsonDecod(qouiqui.sociaux) %}
+<!DOCTYPE html>
+<html>
+<!--
+Header start
+============================== -->
+{{ include('@Module/Module/restaurant/header.html.twig') }}
+<!-- header close -->
+<body>
+<h2>
+    <!--
+        information section start
+        ============================== -->
+    {{ include('@Module/Module/restaurant/information.html.twig') }}
+    <!-- information section close -->
+
+
+
+<!--
+menu start
+============================== -->
+    {{ include('@Module/Module/restaurant/menu.html.twig') }}
+<!-- menu close -->
+<!--
+Slider start
+============================== -->
+    {{ include('@Module/Module/restaurant/slider.html.twig') }}
+<!-- slider close -->
+<!--
+about-us start
+============================== -->
+    {{ include('@Module/Module/restaurant/about.html.twig') }}
+<!-- #call-to-action close -->
+<!--
+blog start
+============================ -->
+    {{ include('@Module/Module/restaurant/blog.html.twig') }}
+<!-- #blog close -->
+<!--
+price start
+============================ -->
+    {{ include('@Module/Module/restaurant/price.html.twig') }}
+<!-- #price close -->
+<!--
+subscribe start
+============================ -->
+<!-- #subscribe close -->
+<!--
+CONTACT US  start
+============================= -->
+    {{ include('@Module/Module/restaurant/contact.html.twig') }}
+<!-- #contact-us close -->
+<!--
+footer  start
+============================= -->
+    {{ include('@Module/Module/restaurant/footer.html.twig') }}
+    <!-- #footer close -->
+</body>
+</html>

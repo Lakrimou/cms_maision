@@ -1,0 +1,126 @@
+<section class="home-contact padding-120" id="contact" style="padding: 27px 0px 90px;">
+    <div class="container">
+        <div class="section-header">
+            <h3>Contactez Nous</h3>
+
+            {#<span><img src="http://alishafique.net/html/edulearn/images/hdg-01.png" alt=""></span>#}
+
+        </div>
+        <div class="col-md-6 col-sm-12 col-xs-12">
+            <div class="contact-info">
+                <div class="info-item">
+                    <span class="icon flaticon-placeholder-outline"></span>
+                    <h4>Addresse:</h4>
+                    <p>{{ qouiqui.address1 }} </p>
+                </div>
+                <div class="info-item">
+                    <span class="icon flaticon-message"></span>
+                    <h4>Email:</h4>
+                    <p>{{ qouiqui.mail }}</p>
+                </div>
+                <div style="clear: both;"></div>
+                <div class="info-item">
+                    <span class="icon flaticon-phone-call"></span>
+                    <h4>Téléphone</h4>
+                    <p> {{ qouiqui.phone }}<br> </p>
+                </div>
+                <div class="info-item">
+                    <span class="icon flaticon-fax"></span>
+                    <h4>Fax:</h4>
+                    <p>{{ qouiqui.phone2 }} <br> </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-12 col-xs-12">
+            <form class="contact-form" action="{{ path('module_centreformation_contactezNous',{'id_qq': qouiqui.id }) }}"
+                  method="POST">
+
+                <div class="col-md-4 col-sm-12 col-xs-12">
+                    <input type="text" name="name" placeholder="Nom & prénom" class="contact-input" style="width: 100%">
+                </div>
+                <div class="col-md-4 col-sm-12 col-xs-12">
+                    <input type="text" name="tel" placeholder=" Téléphone" class="contact-input" style="width: 100%">
+                </div>
+                <div class="col-md-4 col-sm-12 col-xs-12">
+                    <input type="email" name="email" placeholder=" Email" class="contact-input" style="width: 100%">
+                </div>
+                <div class="col-md-12 col-sm-12 col-xs-12" >
+                    <textarea rows="5"  name="message"class="contact-input" style="width: 100%">Ecrire un message</textarea>
+                </div>
+                <input type="submit" name="submit" value="Envoyer" class="contact-button pull-right" style="margin-bottom:20px">
+            </form>
+            {#<div id="map-container" class="home-map"></div>#}
+
+
+
+
+        </div>
+    </div><!-- container -->
+    <div class="map" style="position: relative;">
+    <div id="map-container" class="home-map"></div>
+    <div id="ite">
+
+        <div class="col-md-12 align-center">
+            <div class="col-md-12">
+                <div style="    text-align: center;font-size: 20px; ">
+
+                    Y aller
+                </div>
+                <form class="form-inline">
+
+                    <div class="no-padding hidden">
+                        <div class="input-group first-ch">
+
+                            <input  type="hidden" name="origin" id="origin" placeholder="Indiquez un lieu"
+                                    class="form-control map-input" size="0" autocomplete="on">
+                        </div>
+                    </div>
+                    <div class="col-md-8 no-padding col-sm-offset-2">
+
+
+                        <a class="btn btn-primary btn-block btn-sm" style="cursor:pointer;padding: 7px;"
+                           onclick="geoLocate();">Itinéraire</a>
+
+
+                        <input type="hidden" value="{{ qouiqui.geoLat }},{{ qouiqui.geoLong }}" name="destination" id="destination">
+
+                    </div>
+
+                </form>
+                <div id="panel"></div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <div class="eni">
+        <div class="particle elem1 anim-delay1"></div>
+        <div class="particle elem2 anim-delay5"></div>
+        <div class="particle elem3 anim-delay3"></div>
+        <div class="particle elem4 anim-delay8"></div>
+        <div class="particle elem5 anim-delay9"></div>
+        <div class="particle elem6 anim-delay2"></div>
+        <div class="particle elem7 anim-delay4"></div>
+        <div class="particle elem8 anim-delay3"></div>
+        <div class="particle elem9 anim-delay10"></div>
+        <div class="particle elem8 anim-delay11"></div>
+        <div class="particle elem6 anim-delay12"></div>
+        <div class="particle elem1 anim-delay14"></div>
+        <div class="particle elem13 anim-delay16"></div>
+        <div class="particle elem17 anim-delay18"></div>
+        <div class="particle elem2 anim-delay6"></div>
+        <div class="particle elem16 anim-delay9"></div>
+        <div class="particle elem8 anim-delay3"></div>
+        <div class="particle elem9 anim-delay10"></div>
+        <div class="particle elem18 anim-delay11"></div>
+        <div class="particle elem11 anim-delay12"></div>
+        <div class="particle elem12 anim-delay14"></div>
+        <div class="particle elem13 anim-delay16"></div>
+        <div class="particle elem14 anim-delay18"></div>
+        <div class="particle elem15 anim-delay6"></div>
+        <div class="particle elem16 anim-delay9"></div>
+        <div class="particle elem17 anim-delay7"></div>
+        <div class="particle elem18 anim-delay6"></div>
+        <div class="particle elem19 anim-delay3"></div>
+    </div>
+</section>

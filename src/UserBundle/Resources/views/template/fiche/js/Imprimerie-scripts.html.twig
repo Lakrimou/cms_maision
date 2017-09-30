@@ -1,0 +1,333 @@
+<style>
+    #datetimepicker4{z-index:1151 !important;}
+    /*div#reserver .modal-footer
+    {
+        border: none;
+    }*/
+    .feature_box .description h4 {
+        height: 43px;
+    }
+
+    #otherServices {
+        display: none;
+    }
+
+    #autreServices {
+        display: none;
+    }
+
+    input.error {
+        border: 2px solid red;
+    }
+
+    .image-content-offre {
+        width: 100%;
+        height: 200px;
+        background-size: cover;
+        background-position: center;
+    }
+    .G_titre {
+        font-weight: 300;
+        text-align: justify;
+        font-size: 35px;
+        line-height: 1.2;
+    }
+    .btn_bottom{
+        /*position: absolute;*/
+        bottom: 65px;
+        margin: 0 auto;
+        margin-left: 199px;
+    }
+    .pargraphe{
+
+        margin: 15px 5px 21px;
+        text-align: center;
+
+    }
+    .block-service-border{
+        border: 10px solid;
+        border-raduis: 20px;
+        box-shadow: 2px 2px 2px 2px #000000;
+    }
+    @media screen and (min-width: 767px) and (max-width: 992px){
+        .block-service-border a.suite{
+            padding: 5px;
+            font-size: 18px;
+        }
+
+
+    }
+</style>
+
+<script>
+    //        $('#listOffres').modal('show');
+
+
+    $('.edit-offre').click(function () {
+
+
+        var idqq = $(this).attr('data-id');
+        var idserv = $(this).attr('data-serv');
+
+
+        var data = {
+            idqq: idqq,
+            idserv: idserv,
+
+        };
+//            console.log(data);
+
+        $.ajax({
+            url: '{{ path('imprimerie_get_json_offre') }}',
+            data: data,
+            type: "POST",
+            success: function (data) {
+
+                var arr = [];
+                json = JSON.stringify(eval('(' + data + ')')); //convert to json string
+                arr = $.parseJSON(json);
+                console.log(arr);
+
+                $("#idEvent").val(arr.idOffre);
+
+                $(".description-edit").val(arr.description);
+
+                $("#editcategories [value='" + arr.categorie + "']").prop("selected", true);
+
+                /*jQuery('#editsouscategories option').remove();
+                var dg = new Array();
+                var test = [];
+                jQuery('#sousCategoriesHidden option').each(function () {
+                    var test = ' '+arr.souscategorie[0];
+                    if (test == $(this).text()) {
+                        var dgOne = new Array();
+                        dgOne.push(arr.souscategorie[0]);
+                        dgOne.push(arr.souscategorie[0]);
+                        dg.push(dgOne);
+                        return false;
+
+                    }
+                });
+                console.log(dg);
+
+
+                jQuery.each(dg, function (ke, item) {
+
+
+                    jQuery('#editsouscategories').append('<option value="' + item[0] + '" data-cat="' + arr.souscategorie[0] + '">' + item[0] + '</option>');
+                    $("#editsouscategories [value='" + arr.souscategorie[0] + "']").prop("selected", true);
+                });
+
+                jQuery('#editsouscategories').select2();
+
+
+                jQuery('#editcategories').on('change', function (e) {
+                    var dg1 = new Array();
+                    jQuery('#sousCategoriesHidden option').each(function () {
+                        var test = ' '+arr.souscategorie[0];
+                        if (test == $(this).text()) {
+                            var dgOne1 = new Array();
+                            dgOne1.push(this.value);
+                            dgOne1.push(this.text);
+                            dg1.push(dgOne1);
+                        }
+                    });
+
+                    jQuery.each(dg1, function (ke, item) {
+
+                        jQuery('#editsouscategories').append('<option value="' + item[0] + '" data-cat="' +  arr.souscategorie[0] + '">' + item[0] + '</option>');
+                        $("#editsouscategories [value='" + arr.souscategorie[0] + "']").prop("selected", true);
+                    });
+
+                    /!*jQuery.each(arr.souscategorie[0], function (ke, item) {
+                        $("#editsouscategories [value='" + item + "']").prop("selected", true);
+                    });*!/
+
+                    jQuery('#editsouscategories').select2();
+                });*/
+
+            }
+
+
+        });
+
+    });
+
+</script>
+
+
+<script>
+
+    $('#serviceselect').on('change', function () {
+
+        if ($(this).val() == "autre") {
+
+            $("#otherServices").show();
+            console.log($(this).val());
+
+        }
+        /*else if($(this).val()=='Estimer le cout de votre course'){
+            console.log('jai cliquer sur estimation du cout');
+            $('form#addmissionss').append("<div class='form-group'><label for='priceMetre' class='control-label'>Prix du Kilomètre (Dinar TND)</label><input type='number' name='priceMetre' id='priceMetre' class='form-control'></div>");
+        }*/
+        else {
+            $("#otherServices").hide();
+        }
+    });
+
+
+</script>
+
+
+
+<script>
+
+    myList = [];
+
+    $("#serviceselect option ").each(function () {
+
+        myList.push($(this).val())
+
+    });
+
+    var typingTimer;
+    var doneTypingInterval = 1000;
+    typingTimer = setTimeout(function () {
+        $('#otherServices').keyup(function () {
+            var autre = $('#otherServices').val();
+            $.each(myList, function (index, value) {
+                if (($('#otherServices').val()) === value.toLowerCase()) {
+                    $('.errormsg').html(" ce service  existe  déjà");
+                    $('#otherServices').css('border', 'solid 2px red');
+                    $("#addServices").attr('disabled', 'disabled');
+                }
+                else if ($('#otherServices').val() == '') {
+
+                    var styles = {
+                        border: "1px solid #e3e3e3",
+                    };
+                    $('#otherServices').css(styles);
+                    $('.errormsg').html("");
+                    $("#addServices").prop('disabled', false);
+                }
+
+
+            });
+        });
+    }, doneTypingInterval);
+    $('form#addServicess').submit(function (e) {
+
+
+        if ($('#otherServices').val()) {
+            var autre = $('#otherServices').val();
+            $('select').prepend('<option  value=  "' + autre + '" >' + $('#otherServices').val() + '</option>');
+
+            $("#serviceselect [value='" + autre + "']").attr("selected", "selected");
+            $("#otherServices").val('');
+            $("#otherServices").hide();
+        }
+
+        var item = $('#serviceselect option:selected').val();
+        if (item === 'autre') {
+            e.preventDefault();
+            alert('ajouter un  service ou bien choisir un autre de la liste');
+        }
+
+
+    });
+
+</script>
+
+
+{#script pour celst chained#}
+{# select2#}
+<script type="text/javascript">
+    $(".js-example-basic-multiple").select2({
+        width: '100%'
+    });
+</script>
+{# select2#}
+
+<script>
+    $.fn.test = function() {
+        return this.each(function(){
+            var new_id = 5;
+            $(this).attr('id',   this.id + '_' + new_id);
+            $(this).attr('name', this.name + '_' + new_id);
+            $(this).attr('value', 'test');
+        });
+    };
+
+    $('.voir-plus').click(function () {
+
+
+        var idqq = $(this).attr('data-qq');
+        var idserv = $(this).attr('data-idevent');
+
+
+        var data = {
+            idqq: idqq,
+            idserv: idserv,
+
+        };
+
+        console.log(data);
+        $.ajax({
+            url: '{{ path('imprimerie_get_json_offre') }}',
+            data: data,
+            type: "POST",
+            success: function (data) {
+
+                var arr = [];
+                json = JSON.stringify(eval('(' + data + ')')); //convert to json string
+                arr = $.parseJSON(json);
+                console.log(arr);
+                $("#equipment").html(arr.categorie);
+                $("#ambdetails").html(arr.description);
+                $("#idImgambs").val(idserv);
+                var id = $('#idImgambs').val();
+                console.log(arr.souscategorie)
+                console.log(id + "." + 'jpg');
+                $('ul#myList').empty();
+                $('#AmbsImg').attr('src', '{{ asset('uploads/image/') }}{{ iduser }}/{{ qouiqui.id }}/event/' + id + "." + "jpg");
+                $.each(arr.souscategorie, function (index, value) {
+
+                    var content = '<li><span style="Font-Weight: Bold;font-size: 34px;margin-right: 5px;">' + "." + '</span>' + value + "</li>";
+                    $('ul#myList').append(content);
+                });
+            }
+        });
+    });
+</script>
+
+<script>
+    $('div.loading').hide();
+    $('div.success').hide();
+    $('#getDevis').click(function(){
+        $('div.loading').show()
+        var nomPrenom = $('#nomPrenom').val();
+        var societe = $('#societe').val();
+        var telephone = $('#telephone').val();
+        var email = $('#email').val();
+        var adresse = $('#adresse').val();
+        var type = $('#type').val();
+        var nbrCopie = $('#nbrCopie').val();
+        var formaDoc = $('#formaDoc').val();
+        var typeImpress = $('#typeImpress').val();
+        var typePapier = $('#typePapier').val();
+        /*distance;
+        duration;*/
+        console.log('afficher adrDep');
+        console.log("je clique sur demande de devis");
+        $.ajax({
+            url:'{{ path('imprimerie_demande_devis') }}',
+            data: {nomPrenom: nomPrenom, societe: societe, telephone: telephone, email: email, adresse: adresse, type: type, nbrCopie: nbrCopie, formaDoc: formaDoc, typeImpress: typeImpress, typePapier: typePapier },
+            dataType: "json",
+            success: function (reponse) {
+                console.log(reponse);
+                $('div.loading').hide();
+                $('div.success').show();
+            }
+        })
+    });
+</script>

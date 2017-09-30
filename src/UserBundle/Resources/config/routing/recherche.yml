@@ -1,0 +1,4 @@
+recherche_result:
+    path:     /
+    defaults: { _controller: UserBundle:Search:filtre }
+    methods:  [GET]

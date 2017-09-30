@@ -1,0 +1,92 @@
+
+<!-- Modal -->
+{% if  connected %}
+    {% for hor in module %}
+        {% if hor.horaires is not null %}
+            <div id="edithorires" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Modifier les horaires</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div role="tabpanel">
+                                <!-- Nav tabs -->
+                                <!-- Tab panes -->
+                                <div class="tab-content">
+                                    <form id="edit_info" method="POST" action="{{ path('hotel_modifierHoraires', {'id_qq': qouiqui.id, 'id_ho': hor.id}) }}" >
+
+                                        <div class="col-md-12">
+                                            <h4>Horaire</h4>
+                                            <div class="col-md-6 nopadd">
+                                                <h5>Le matin</h5>
+                                                <div class="bfh-timepicker" data-mode="24h" data-time="08:00" data-name="horaires[week1][start]">
+                                                </div>
+                                                <h5>à</h5>
+                                                <div class="bfh-timepicker" data-mode="24h" data-time="12:00" data-name="horaires[week1][end]">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6 nopadd">
+                                                <h5>L'aprés-midi</h5>
+                                                <div class="bfh-timepicker" data-mode="24h" data-time="13:00" data-name="horaires[week2][start]">
+                                                </div>
+                                                <h5>à</h5>
+                                                <div class="bfh-timepicker" data-mode="24h" data-time="17:00" data-name="horaires[week2][end]">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6 nopadd">
+                                                <div class="checkbox checkbox-primary">
+                                                    <input id="checkbox2" type="checkbox" name="horaires[weekendsamedi][open]" value="true">
+                                                    <label for="checkbox2">
+                                                        Le samedi de
+                                                    </label>
+                                                </div>
+
+                                                <div class="bfh-timepicker" data-mode="12h" data-time="08:00" data-name="horaires[weekendsamedi][start]">
+                                                </div>
+                                                <h5>à</h5>
+                                                <div class="bfh-timepicker" data-mode="12h" data-time="13:00" data-name="horaires[weekendsamedi][end]">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6 nopadd">
+                                                <div class="checkbox checkbox-primary">
+                                                    <input id="checkbox3" name="horaires[weekenddimanche][open]" value="true" type="checkbox">
+                                                    <label for="checkbox3">
+                                                        Le dimanche de
+                                                    </label>
+                                                </div>
+
+                                                <div class="bfh-timepicker" data-mode="12h" data-time="" data-name="horaires[weekenddimanche][start]">
+                                                </div>
+                                                <h5>à</h5>
+                                                <div class="bfh-timepicker" data-mode="12h" data-time="" data-name="horaires[weekenddimanche][end]">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <du class="col-md-12">
+                                            <br>
+                                            <br>
+                                        </du>
+                                        <div class="modal-footer">
+
+                                            <input type="submit" class="btn btn-default " data-target="modifier" data-selector="edit_info" value=" Enregistrer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+    {% endfor %}
+{% endif %}

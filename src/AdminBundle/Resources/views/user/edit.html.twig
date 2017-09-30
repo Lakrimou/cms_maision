@@ -1,0 +1,45 @@
+{% extends 'back/layout_admin.html.twig' %}
+{% block contant %}
+<div id="page-content">
+    <div class="panel">
+<h1 style="padding:0 30px;">Edit Profile</h1>
+
+        <hr>
+        <div class="row padding90">
+            {{ form_start(form) }}
+            <!-- left column -->
+            <div class="col-md-3">
+                <div class="text-center">
+                    <div class="crop">
+                    <img src="{{ asset('uploads/users/') }}{{ user.image }}.jpg" class="avatar" alt="avatar">
+                    </div>
+                    <h6>Upload a different photo...</h6>
+
+                    {{  form_widget(form.image,{'attr' : {'class' : 'form-control'}}) }}
+                </div>
+            </div>
+
+            <!-- edit form column -->
+            <div class="col-md-9 personal-info">
+                {% if  edit %}
+                <div class="alert alert-info alert-dismissable">
+                    <a class="panel-close close" data-dismiss="alert">×</a>
+                    <i class="fa fa-coffee"></i>
+                    votre <strong>modification</strong> a bien été prise en compte
+                </div>
+                {% endif %}
+                <h3>Personal info</h3>
+                <div class="col-md-9">
+
+                    {{ form_widget(form) }}
+
+                    <input type="submit" value="enregistrer la modification" class="pull-right   btn btn-primary btn-rounded"/>
+                </div>
+            </div>
+            {{ form_end(form) }}
+        </div>
+</div>
+</div>
+    <!--===================================================-->
+    <!--End page content-->
+{% endblock %}

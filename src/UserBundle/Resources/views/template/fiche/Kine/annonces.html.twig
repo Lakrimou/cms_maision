@@ -1,0 +1,404 @@
+<section id="section-annonces" class="property-details padding">
+    {% if attributes.connected %}
+            <div class="pull-righ" style="    margin-right: 24px;">
+                <div data-step="4" data-intro="This is a tooltip!" class="pull-right margin-bott-40">
+                    <button type="button" class="theme-btn button11 btn-style-one pull-right" data-toggle="modal"
+                            data-target="#listOffres">Gérer cette section
+                    </button>
+                </div>
+            </div>
+    {% endif %}
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 bottom40">
+                <h2 class="text-uppercase">Nos <span class="color_red">équipements</span></h2>
+                <div class="line_1"></div>
+                <div class="line_2"></div>
+                <div class="line_3"></div>
+
+            </div>
+        </div>
+
+        <div class="row bottom30">
+            {% if Spaevent.event is defined %}
+            {% set arrayEvent=Spaevent.event %}
+            {% for b in arrayEvent|sort|reverse %}
+                {% if(Spaevent .event|length == 1) %}
+                    <div class="col-md-4 col-sm-4 col-xs-12"></div>
+                {% endif %}
+                {% if (Spaevent .event|length == 2) %}
+                    <div class="col-md-2 col-sm-2 col-xs-12"></div>
+                {% endif %}
+                <div class="col-md-4 col-sm-4 col-xs-12 ">
+
+                    <div class="property_item bottom40">
+                        <div class="image image-content-offre" style="background-image:url('{{ asset('uploads/image/') }}{{ attributes.quoiqui.user.id }}/{{ attributes.quoiqui.id }}/event/{{ b.idOffre~'.jpg' }}')">
+                            <div class="overlay">
+                                <div class="centered"><a class="link_arrow white_border ShowEquipement"
+                                                         data-toggle="modal" data-target="#Show_equipement"
+                                                         href="#" data-qq="{{ attributes.quoiqui.id }}"
+                                                         data-idevent="{{ b.idOffre }}">Voir Plus </a></div>
+                            </div>
+                        </div>
+                        <div class="proerty_content">
+                            <div class="proerty_text" style="height: 145px">
+
+                                <h3>{{ b.ServSpa }}</h3>
+
+
+                                {% if b.description is not empty %}
+                                    <p>{{ b.description|slice(0,40)|raw }}... </p>
+                                {% endif %}
+                            </div>
+                            <div class="favroute-bottom clearfix">
+
+
+                                <ul class="text-center">
+                                    <li style="font-size: 19px"
+                                        class="ShowEquipement"
+                                        data-qq="{{ attributes.quoiqui.id }}"
+                                        data-idevent="{{ b.idOffre }}" data-toggle="modal"
+                                        data-target="#Show_equipement"><i class="fa fa-eye"
+                                                                          style=" margin-top: 14px;"
+                                                                          aria-hidden="true" about=""
+
+                                        ></i>Voir plus
+                                    </li>
+
+                                </ul>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            {% endfor %}
+
+
+            {#</div>#}
+        </div>
+        {#<div class="pull-right margin-bott-40">#}
+        {#<span id="load-more-service">Voir plus</span>#}
+
+
+        {#<span id="load-more-event">Voir plus</span>#}
+
+        {#<span class="load-less-service">Masquer</span>#}
+        {#</div>#}
+    </div>
+    {% endif %}
+
+
+    {% if not is_mobile() %}
+        <div class="paralax-icon">
+            <div class="particle elem1 anim-delay1"></div>
+            <div class="particle elem2 anim-delay5"></div>
+            <div class="particle elem3 anim-delay3"></div>
+            <div class="particle elem4 anim-delay8"></div>
+            <div class="particle elem5 anim-delay9"></div>
+            <div class="particle elem6 anim-delay2"></div>
+            <div class="particle elem7 anim-delay4"></div>
+            <div class="particle elem8 anim-delay3"></div>
+            <div class="particle elem9 anim-delay10"></div>
+            <div class="particle elem8 anim-delay11"></div>
+            <div class="particle elem6 anim-delay12"></div>
+            <div class="particle elem1 anim-delay14"></div>
+            <div class="particle elem13 anim-delay16"></div>
+            <div class="particle elem17 anim-delay18"></div>
+            <div class="particle elem2 anim-delay6"></div>
+            <div class="particle elem16 anim-delay9"></div>
+            <div class="particle elem8 anim-delay3"></div>
+            <div class="particle elem9 anim-delay10"></div>
+            <div class="particle elem18 anim-delay11"></div>
+            <div class="particle elem11 anim-delay12"></div>
+            <div class="particle elem12 anim-delay14"></div>
+            <div class="particle elem13 anim-delay16"></div>
+            <div class="particle elem14 anim-delay18"></div>
+            <div class="particle elem15 anim-delay6"></div>
+            <div class="particle elem16 anim-delay9"></div>
+            <div class="particle elem17 anim-delay7"></div>
+            <div class="particle elem18 anim-delay6"></div>
+            <div class="particle elem19 anim-delay3"></div>
+        </div>
+    {% endif %}
+</section>
+<div class="modal fade" id="listOffres" role="dialog">
+    <div class="modal-dialog modal-md">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Liste des équipements</h4>
+
+            </div>
+            <div class="modal-body">
+
+                <table class=" dataTable table " cellspacing="0" width="100%">
+                    <thead>
+                    <tr>
+                        <th width="74">Image</th>
+                        <th width="100">Equipement</th>
+                        <th width="100">Modifier</th>
+                        <th width="100">Supprimer</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    {% if Spaevent.event is defined %}
+                        {% set arrayEvent=Spaevent.event %}
+                        {% for b in arrayEvent|sort|reverse %}
+
+                            <tr data-td="{{ b.idOffre }}">
+
+                                <td align="center">
+
+                                    <img src="{{ asset('uploads/image/') }}{{ attributes.quoiqui.user.id }}/{{ attributes.quoiqui.id }}/event/{{ b.idOffre ~'.jpg' }}"
+                                         data-pin-nopin="true" style="width: 74px;">
+
+                                </td>
+                                <td align="center"> {{ b.ServSpa }}</td>
+
+
+                                <td align="center">
+
+                                    <a href="#" class=" btn btn-info a-btn-slide-text edit-offre"
+                                       data-serv="{{ b.idOffre }}"
+                                       data-id="{{ attributes.quoiqui.id }}" data-toggle="modal"
+                                       data-target="#editSpaEvent">
+
+                                        <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                                        <span><strong>Modifier</strong></span>
+                                    </a>
+
+                                </td>
+
+
+                                <td align="center">
+
+                                    <a href="{{ path('module_spa_delate_events',{"idqq": attributes.quoiqui.id,"idevent":b.idOffre }) }}"
+                                       class=" btn btn-danger a-btn-slide-text service_suprim click-off"
+                                       onclick="clickOffConfirmed = confirm('Vous voulez le  supprimer ?');">
+                                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                        <span><strong>Supprimer</strong></span>
+                                    </a>
+                                </td>
+
+                            </tr>
+                            {#{% endfor %}#}
+                        {% endfor %}
+                    {% endif %}
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addEvent"
+                >Ajouter un  nouveau équipement
+                </button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Fermer</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="addEvent" role="dialog">
+    <div class="modal-dialog modal-md">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title ">Ajouter un nouveau equipement</h4>
+            </div>
+            <div class="modal-body">
+                <form id="addevent" method="POST" class=" fileuploader"
+                      action="{{ path('module_spa_add_offre',{"idqq":attributes.quoiqui.id}) }}"
+                      enctype="multipart/form-data">
+
+                    <input type="hidden" name="idOffre" value="{{ uniqueId() }}">
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <label>Sélectionner un équipement</label>
+                            <div class="form-group ">
+                                <select class="selectpicker form-control Equipementselect" id="equipementselect" name="ServSpa">
+                                    <option disabled selected>Sélectionner un équipement....</option>
+
+                                    <option value="autre" style="font-weight: 700;font-size: 20px;">Ajouter nouveau équipement</option>
+
+                                    {% for k,a in  filterListequipementKine(attributes) %}
+                                        <option value='{{ k }}'>{{ k }}</option>
+                                    {% endfor %}
+
+                                </select>
+
+                            </div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <div class="form-group ">
+                                <input type="text" name="autres" id="otherequipement" class="form-control"
+                                       placeholder="ajoutre autre service">
+                                <span class="errormsg" style="color:red;"></span>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <label>Description</label>
+                            <br>
+                            <div class="form-group ">
+                                <textarea placeholder="Entrer la description.." rows="9" class="form-control textarea  " name="description" required="required"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <div class=" form-group">
+                                {#<label class="col-md-12">Choisissez une photo</label>#}
+                                <input autocomplete="off" class="form-control " name="file" type="file" placeholder="choisissez_image" data-items="8"/>
+                            </div>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger " data-dismiss="modal">Fermer</button>
+                <button type="submit" id="addequi" class=" btn btn-primary button-default " data-target="modifier"
+                        data-selector="addevent">
+                    Enrigistrer
+                </button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="modal fade" id="editSpaEvent" role="dialog">
+    <div class="modal-dialog modal-md">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Modifier l'équipement</h4>
+            </div>
+            <div class="modal-body">
+                <form id="updateEquip" method="POST" class=" fileuploader"
+                      action="{{ path('module_spa_update_event',{"idqq":attributes.quoiqui.id}) }}"
+                      enctype="multipart/form-data">
+                    <input id="idEvent" type="hidden" class="form-control" name="idOffre">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <label>Sélectionner un équipement</label>
+                            <div class="form-group">
+                                <select class="selectpicker form-control selectOption" id="equipementselect-edit" name="ServSpa">
+                                    {% for k,a in  filterListequipementKine(attributes) %}
+                                        <option value='{{ k }}'>{{ k }}</option>
+                                    {% endfor %}
+                                </select>
+
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                        <div class="form-group ">
+
+                            <span class="errormsg" style="color:red;"></span>
+                        </div>
+
+                        </div>
+                        <div class="col-md-12">
+                        <div class="form-group">
+                            <label class="col-md-12">Description</label>
+                            <textarea id="details" placeholder="Entrer la description.." rows="8"
+                                      class="form-control textarea description-edit "
+                                      name="description" required="required"></textarea>
+                        </div>
+                        </div>
+
+                        <div class="col-md-12">
+                        <div class=" form-group">
+                            {#<label class="col-md-12">Choisissez une photo</label>#}
+                            <input autocomplete="off" class="form-control "
+                                   name="file" type="file"
+                                   placeholder="choisissez_image" data-items="8"/>
+                        </div>
+
+
+                    </div>
+                    </div>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Fermer</button>
+                <button type="submit" id="editServices" class=" submit btn btn-primary button-default"
+                        data-target="modifier"
+                        data-selector="updateEquip">
+                    Enrigistrer
+                </button>
+            </div>
+        </div>
+
+    </div>
+</div>
+<div id="Show_equipement" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-md">
+
+        <!-- Modal content-->
+        <div class="modal-content"><div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 id="equipement" class="   text-uppercase color_red G_titre"></h4>
+
+            </div>
+
+            <div class="modal-body ">
+                <div id="news-section-1">
+                    <div class="row">
+
+                        <div class="col-md-12">
+
+                            <input type="hidden" id="idImgequipm" value="">
+                            <div class=" image-content2 " id="picture" style=" margin-right: 69px; margin-bottom: 34px;" >
+
+                            </div>
+
+                                <div >
+                                    <h3  style=" margin-bottom: 14px;">Description <span
+                                                class="color_red"> Détaillé</span></h3>
+                                    <p class="bottom30 " id="equipdetail" style="text-align: justify;text-align-last: auto;"></p>
+                                    <span id="link1"></span>
+                                    <p id="lire_suite"></p>
+
+                                </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Fermer</button>
+
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+<select class="selectpicker form-control " id="equipementfrombase" name="mission" style="display: none;">
+    <option disabled selected>Sélectionner un service....</option>
+
+
+    {% if Spaevent.event is defined %}
+
+        {% for s in Spaevent.event %}
+            <option value='{{ s.ServSpa }}'
+                    class=''>{{ s.ServSpa }}</option>
+
+        {% endfor %}
+
+    {% endif %}
+</select>

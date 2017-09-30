@@ -1,0 +1,44 @@
+depannage_service_add:
+    path:     /service/add
+    defaults: { _controller: "ModuleBundle:DepannageVehicule:addService" }
+depannage_service_show:
+    path:     /service/show/{id}/{pos}
+    defaults: { _controller: "ModuleBundle:DepannageVehicule:showService" }
+depannage_service_remove:
+    path:     /service/delete/{id}/{pos}
+    defaults: { _controller: "ModuleBundle:DepannageVehicule:deleteService" }
+depannage_service_edit:
+    path:     /service/edit/{id}/{pos}
+    defaults: { _controller: "ModuleBundle:DepannageVehicule:editService" }
+depannage_service_update:
+    path:     /service/update/{id}
+    defaults: { _controller: "ModuleBundle:DepannageVehicule:updateService" }
+
+
+depannage_annonce_add:
+    path:     /annonce/add
+    defaults: { _controller: "ModuleBundle:DepannageVehicule:addAnnonces" }
+depannage_annonce_show:
+    path:     /annonce/show/{id}/{idq}
+    defaults: { _controller: "ModuleBundle:DepannageVehicule:showAnnonces" }
+depannage_annonce_remove:
+    path:     /annonce/delete/{id}
+    defaults: { _controller: "ModuleBundle:DepannageVehicule:deleteAnnonces" }
+depannage_annonce_edit:
+    path:     /annonce/edit/{id}
+    defaults: { _controller: "ModuleBundle:DepannageVehicule:editAnnonces" }
+depannage_annonce_update:
+    path:     /annonce/update
+    defaults: { _controller: "ModuleBundle:DepannageVehicule:updateAnnonces" }
+depannage_annonce_appel:
+    path:     /annonce/appel
+    defaults: { _controller: "ModuleBundle:DepannageVehicule:appelAdd" }
+depannage_annonce_remove_picture:
+    path:     /annonce/delete/picture/{id}/{pic}
+    defaults: { _controller: "ModuleBundle:DepannageVehicule:deletePictureAnnonces" }
+depannage_annonce_page:
+    path:     /annonce/{page}/{id}
+    defaults: { _controller: "ModuleBundle:DepannageVehicule:ficheAnnoncesPages" }
+depannage_annonce_page_delete:
+    path:     /annonce/delete/{page}/{id}
+    defaults: { _controller: "ModuleBundle:DepannageVehicule:ficheAnnoncesPagesDelete" }

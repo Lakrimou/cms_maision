@@ -1,0 +1,757 @@
+{% if connected %}
+
+    <div class="theme_changer">
+        <tog data-step="1" data-intro="Ici vous pouvez changer les couleurs de votre theme!" style="float: right;margin-right:-50px;">
+            <i class="fa fa-cog" style="padding: 15px" aria-hidden="true"></i>
+        </tog>
+        <button id="tooltip_slider" getdata-toggle="popover" data-placement="top" data-html="true" title="" data-content="Vous pouvez changer vos IMAGES d'accueil en cliquant sur ce boutton  <br><button data-tooltip='#tooltip_font' type='button' class='btn btn-primary btn-xs pull-right tooltip_next'>suivant</button>"
+                type="button" class="theme-btn btn-style-one blue btn-success" data-toggle="modal" data-target="#gallery-modal">
+            Modifier les IMAGES <br> .... DE LA PAGE ....
+        </button>
+
+        <form id="change_color_form" action="{{ path('change_color',{'qq_id': qouiqui.id }) }}" method="POST">
+
+
+            <h5><b class="theme_color">Pèrsonnaliser votre theme</b></h5>
+
+            <h6>Pèrsonnaliser votre font</h6>
+            <div id="tooltip_font" getdata-toggle="popover" data-placement="right" data-html="true" title="" data-content="Vous pouvez changer votre font EN CLIQUANT sur ce champ<br><button data-tooltip='#tooltip_titre' type='button' class='btn btn-primary btn-xs pull-right tooltip_next'>suivant</button>">
+                <div data-name="color[font]" class="bfh-selectbox bfh-googlefonts" {% if  theme.color.font|default %}data-font="{{ theme.color.font }}" {% else %}data-font="Roboto"{% endif %}>
+                </div>
+            </div>
+            <h6>Couleur des Titres</h6>
+            <div id="tooltip_titre" getdata-toggle="popover" data-placement="right" data-html="true" title="" data-content="Vous pouvez changer les couleurs des 'titres' EN CLIQUANT sur ce champ<br><button data-tooltip='#tooltip_sous-titre' type='button' class='btn btn-primary btn-xs pull-right tooltip_next'>suivant</button>"
+                 class="bfh-colorpicker" data-pour="titre" data-name="color[titre]" data-color="{% if theme.color.titre is defined %} {{ theme.color.titre }}{% endif %}"></div>
+            <h6>Couleur des Sous-titres</h6>
+            <div id="tooltip_sous-titre" getdata-toggle="popover" data-placement="right" data-html="true" title="" data-content="Vous pouvez changer les couleurs des 'Sous-titres' EN CLIQUANT sur ce champ<br><button data-tooltip='#tooltip_bouton' type='button' class='btn btn-primary btn-xs pull-right tooltip_next'>suivant</button>"
+                 class="bfh-colorpicker" data-pour="Soustitre" data-name="color[Soustitre]" data-color="{% if theme.color.Soustitre is defined %}{{ theme.color.Soustitre }}{% endif %}"></div>
+            <h6>Couleur des boutons</h6>
+            <div id="tooltip_bouton" getdata-toggle="popover" data-placement="right" data-html="true" title="" data-content="Vous pouvez changer les couleurs des 'boutons' EN CLIQUANT sur ce champ<br><button data-tooltip='#tooltip_text' type='button' class='btn btn-primary btn-xs pull-right tooltip_next'>suivant</button>"
+                 class="bfh-colorpicker" data-pour="bouton" data-name="color[bouton]" data-color="{% if theme.color.bouton is defined %}{{ theme.color.bouton }}{% endif %}"></div>
+            <h6>Couleur des Texts</h6>
+            <div id="tooltip_text" getdata-toggle="popover" data-placement="right" data-html="true" title="" data-content="Vous pouvez changer les couleurs des 'Textes' EN CLIQUANT sur ce champ<br><button data-tooltip='#tooltip_bg_color' type='button' class='btn btn-primary btn-xs pull-right tooltip_next'>suivant</button>"
+                 class="bfh-colorpicker" data-pour="Text" data-name="color[Text]" data-color="{% if theme.color.Text is defined %}{{ theme.color.Text }}{% endif %}"></div>
+            <div class="background sectionName">
+                <h6>Couleur d'arrière plan <br><span id="sectionName"></span></h6>
+            </div>
+
+            <input type="hidden" id="bgco_about" data-pour="background-about" name="color[background][about]" value="{% if theme.color.background is defined %}{{ theme.color.background.about }}{% endif %}">
+            <input type="hidden" id="bgco_services" data-pour="background-services" name="color[background][services]" value="{% if theme.color.background.services is defined %}{{ theme.color.background.services }}{% endif %}">
+            <input type="hidden" id="bgco_annonces" data-pour="background-annonces" name="color[background][annonces]" value="{% if theme.color.background.annonces is defined %}{{ theme.color.background.annonces }}{% endif %}">
+            <input type="hidden" id="bgco_gallerie" data-pour="background-gallerie" name="color[background][gallerie]" value="{% if theme.color.background.gallerie is defined %}{{ theme.color.background.gallerie }}{% endif %}">
+            <input type="hidden" id="bgco_contact" data-pour="background-contact" name="color[background][contact]" value="{% if theme.color.background.contact is defined %}{{ theme.color.background.contact }}{% endif %}">
+
+            {#-------------------input motif anime------------------#}
+            <input type="hidden" name="color[background][animation][about]" id="animation_about" {% if animation and (theme.color.background.animation.about is defined) %} value="{{ theme.color.background.animation.about }}" {% endif %}>
+            <input type="hidden" name="color[background][animation][services]" id="animation_services" {% if animation and (theme.color.background.animation.services is defined) %} value="{{ theme.color.background.animation.services }}" {% endif %} >
+            <input type="hidden" name="color[background][animation][annonces]" id="annimation_annonces" {% if animation and (theme.color.background.animation.annonces is defined) %} value="{{ theme.color.background.animation.annonces }}" {% endif %}>
+            <input type="hidden" name="color[background][animation][gallerie]" id="annimation_gallerie" {% if animation and (theme.color.background.animation.gallerie is defined) %} value="{{ theme.color.background.animation.gallerie }}" {% endif %}>
+            <input type="hidden" name="color[background][animation][contact]" id="annimation_contact" {% if animation and (theme.color.background.animation.contact is defined) %} value="{{ theme.color.background.animation.contact }}" {% endif %}>
+            {#-------------------input motif------------------------#}
+            <input type="hidden" name="color[background][motif][about]" id="motif_about" {% if motif and (theme.color.background.motif.about is not empty) %} value="{{ theme.color.background.motif.about }}" {% endif %}>
+            <input type="hidden" name="color[background][motif][services]" id="motif_services" {% if motif and (theme.color.background.motif.services is defined ) %} value="{{ theme.color.background.motif.services }}" {% endif %} >
+            <input type="hidden" name="color[background][motif][annonces]" id="motif_annonces" {% if motif and (theme.color.background.motif.annonces is defined) %} value="{{ theme.color.background.motif.annonces }}" {% endif %}>
+            <input type="hidden" name="color[background][motif][gallerie]" id="motif_gallerie" {% if motif and (theme.color.background.motif.gallerie is defined) %} value="{{ theme.color.background.motif.gallerie }}" {% endif %}>
+            <input type="hidden" name="color[background][motif][contact]" id="motif_contact" {% if motif and (theme.color.background.motif.contact is defined) %} value="{{ theme.color.background.motif.contact }}" {% endif %}>
+
+
+            <div class="panel-group" id="accordion">
+                <div class="panel panel-default">
+                    <div id="tooltip_bg_color" getdata-toggle="popover" data-placement="right" data-html="true" title="" data-content="Vous pouvez changer les couleurs ' d'arrière plan ' en cliquant sur ce bouton <br><button data-tooltip='#tooltip_bg_motif' type='button' class='btn btn-primary btn-xs pull-right tooltip_next'>suivant</button>"
+                         class="panel-heading">
+                        <h4 class="panel-title">
+                            <h6 data-toggle="collapse" data-parent="#accordion" href="#backgroundcolor">Couleur d'arrière plan</h6>
+                        </h4>
+                    </div>
+                    <div id="backgroundcolor" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <div setbg_color style="margin: 1px;border: 1px dashed grey ;width: 30px;height: 30px;float: left;background: #fff"></div>
+                            <div setbg_color style="margin: 1px;border: 1px dashed grey ;width: 30px;height: 30px;float: left;background: #293364"></div>
+                            <div setbg_color style="margin: 1px;border: 1px dashed grey ;width: 30px;height: 30px;float: left;background: #1a4a72"></div>
+                            <div setbg_color style="margin: 1px;border: 1px dashed grey ;width: 30px;height: 30px;float: left;background: rgba(18, 159, 210, 0.77)"></div>
+                            <div setbg_color style="margin: 1px;border: 1px dashed grey ;width: 30px;height: 30px;float: left;background: #e0ca85"></div>
+                            <div setbg_color style="margin: 1px;border: 1px dashed grey ;width: 30px;height: 30px;float: left;background: rgba(236, 208, 120, 0.61)"></div>
+                            <div setbg_color style="margin: 1px;border: 1px dashed grey ;width: 30px;height: 30px;float: left;background: rgb(196, 166, 72)"></div>
+                            <div setbg_color style="margin: 1px;border: 1px dashed grey ;width: 30px;height: 30px;float: left;background: #76c08a"></div>
+                            <div setbg_color style="margin: 1px;border: 1px dashed grey ;width: 30px;height: 30px;float: left;background: rgba(216, 193, 122, 0.47)"></div>
+                            <div setbg_color style="margin: 1px;border: 1px dashed grey ;width: 30px;height: 30px;float: left;background: rgba(178, 137, 27, 0.83)"></div>
+                            <div setbg_color style="margin: 1px;border: 1px dashed grey ;width: 30px;height: 30px;float: left;background: #89c436"></div>
+                            <div setbg_color style="margin: 1px;border: 1px dashed grey ;width: 30px;height: 30px;float: left;background: #75b6ce"></div>
+                            <div setbg_color style="margin: 1px;border: 1px dashed grey ;width: 30px;height: 30px;float: left;background: #D5AD70"></div>
+                            <div setbg_color style="margin: 1px;border: 1px dashed grey ;width: 30px;height: 30px;float: left;background: #c4733d"></div>
+                            <div setbg_color style="margin: 1px;border: 1px dashed grey ;width: 30px;height: 30px;float: left;background: #d1b501"></div>
+                            <div setbg_color style="margin: 1px;border: 1px dashed grey ;width: 30px;height: 30px;float: left;background: rgba(173,122,48,0.75)"></div>
+                            <div setbg_color style="margin: 1px;border: 1px dashed grey ;width: 30px;height: 30px;float: left;background: #eb42ff"></div>
+                            <div setbg_color style="margin: 1px;border: 1px dashed grey ;width: 30px;height: 30px;float: left;background: #fd3f9c"></div>
+                            <div setbg_color style="margin: 1px;border: 1px dashed grey ;width: 30px;height: 30px;float: left;background: rgba(125, 60, 243, 0.7)"></div>
+                            <div setbg_color style="margin: 1px;border: 1px dashed grey ;width: 30px;height: 30px;float: left;background: #ff8dae"></div>
+                            <div setbg_color style="margin: 1px;border: 1px dashed grey ;width: 30px;height: 30px;float: left;background: #f7f8fa"></div>
+                            <div setbg_color style="margin: 1px;border: 1px dashed grey ;width: 30px;height: 30px;float: left;background: rgba(216, 159, 245, 0.09)"></div>
+                            <div setbg_color style="margin: 1px;border: 1px dashed grey ;width: 30px;height: 30px;float: left;background: rgba(128, 128, 128, 0.09)"></div>
+                            <div setbg_color style="margin: 1px;border: 1px dashed grey ;width: 30px;height: 30px;float: left;background: #f0f7f2"></div>
+                            <div setbg_color style="margin: 1px;border: 1px dashed grey ;width: 30px;height: 30px;float: left;background: rgba(216, 159, 245, 0.31)"></div>
+                            <div setbg_color style="margin: 1px;border: 1px dashed grey ;width: 30px;height: 30px;float: left;background: rgba(245, 159, 230, 0.21)"></div>
+                            <div setbg_color style="margin: 1px;border: 1px dashed grey ;width: 30px;height: 30px;float: left;background: rgba(128, 128, 128, 0.05)"></div>
+                            <div setbg_color style="margin: 1px;border: 1px dashed grey ;width: 30px;height: 30px;float: left;background: rgba(128, 128, 128, 0.2)"></div>
+                            <div setbg_color style="margin: 1px;border: 1px dashed grey ;width: 30px;height: 30px;float: left;background: #eedddd"></div>
+                            <div setbg_color style="margin: 1px;border: 1px dashed grey ;width: 30px;height: 30px;float: left;background: #eae2ef"></div>
+                            <div setbg_color style="margin: 1px;border: 1px dashed grey ;width: 30px;height: 30px;float: left;background: #e1ddec"></div>
+                            <div setbg_color style="margin: 1px;border: 1px dashed grey ;width: 30px;height: 30px;float: left;background: #e2deeb"></div>
+                            <div setbg_color style="margin: 1px;border: 1px dashed grey ;width: 30px;height: 30px;float: left;background: #dfe2e5"></div>
+                            <div setbg_color style="margin: 1px;border: 1px dashed grey ;width: 30px;height: 30px;float: left;background: #7892a9"></div>
+                            <div setbg_color style="margin: 1px;border: 1px dashed grey ;width: 30px;height: 30px;float: left;background: #e9e2e2"></div>
+                            <div setbg_color style="margin: 1px;border: 1px dashed grey ;width: 30px;height: 30px;float: left;background: #c17f7e"></div>
+                            <div setbg_color style="margin: 1px;border: 1px dashed grey ;width: 30px;height: 30px;float: left;background: #bcdbc4"></div>
+                            <div setbg_color style="margin: 1px;border: 1px dashed grey ;width: 30px;height: 30px;float: left;background: #e8a6c9"></div>
+                            <div setbg_color style="margin: 1px;border: 1px dashed grey ;width: 30px;height: 30px;float: left;background: #ffa07a"></div>
+
+                        </div>
+                    </div>
+                </div>
+                <div id="tooltip_bg_motif" getdata-toggle="popover" data-placement="right" data-html="true" title="" data-content="Vous pouvez changer les couleurs 'Motif d'arrière plan' en cliquant sur ce bouton<br><button data-tooltip='#tooltip_motif' type='button' class='btn btn-primary btn-xs pull-right tooltip_next'>suivant</button>"
+                     class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <h6 data-toggle="collapse" data-parent="#accordion" href="#background-img">Motif d'arrière plan</h6>
+                        </h4>
+                    </div>
+                    <div id="background-img" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            {% for m in patternImage() %}
+                                <div set_m_bg_color style="margin: 1px;border: 1px dashed grey ;width: 30px;height: 30px;float: left;background-image: url('{{ asset('module/spa/patterns/'~m) }}');"></div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                <div id="tooltip_motif" getdata-toggle="popover" data-placement="right" data-html="true" title="" data-content="Vous pouvez changer les couleurs 'Animation d'arrière plan' en cliquant sur ce bouton<br><button data-tooltip='#fin' type='button' class='btn btn-primary btn-xs pull-right tooltip_next'>suivant</button>"
+                     class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <h6 data-toggle="collapse" data-parent="#accordion" href="#backgropundmotif">Animation d'arrière plan</h6>
+                        </h4>
+                    </div>
+                    <div id="backgropundmotif" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <div data-pour="" class="motif-container">
+
+                                <div set_icon style="width: 30px;height: 30px;float: left">
+                                    <img style="width:100%" src="" alt="">
+                                </div>
+                                <div set_icon style="width: 30px;height: 30px;float: left">
+                                    <img style="width:100%" src="{{ asset('uploads/image/icon/1.png') }}" alt="">
+                                </div>
+                                <div set_icon style="width: 30px;height: 30px;float: left">
+                                    <img style="width:100%" src="{{ asset('uploads/image/icon/3.png') }}" alt="">
+                                </div>
+                                <div set_icon style="width: 30px;height: 30px;float: left">
+                                    <img style="width:100%" src="{{ asset('uploads/image/icon/4.png') }}" alt="">
+                                </div>
+                                <div set_icon style="width: 30px;height: 30px;float: left">
+                                    <img style="width:100%" src="{{ asset('uploads/image/icon/5.png') }}" alt="">
+                                </div>
+                                <div set_icon style="width: 30px;height: 30px;float: left">
+                                    <img style="width:100%" src="{{ asset('uploads/image/icon/6.png') }}" alt="">
+                                </div>
+                                <div set_icon style="width: 30px;height: 30px;float: left">
+                                    <img style="width:100%" src="{{ asset('uploads/image/icon/7.png') }}" alt="">
+                                </div>
+                                <div set_icon style="width: 30px;height: 30px;float: left">
+                                    <img style="width:100%" src="{{ asset('uploads/image/icon/8.png') }}" alt="">
+                                </div>
+                                <div set_icon style="width: 30px;height: 30px;float: left">
+                                    <img style="width:100%" src="{{ asset('uploads/image/icon/9.png') }}" alt="">
+                                </div>
+                                <div set_icon style="width: 30px;height: 30px;float: left">
+                                    <img style="width:100%" src="{{ asset('uploads/image/icon/10.png') }}" alt="">
+                                </div>
+                                <div set_icon style="width: 30px;height: 30px;float: left">
+                                    <img style="width:100%" src="{{ asset('uploads/image/icon/11.png') }}" alt="">
+                                </div>
+                                <div set_icon style="width: 30px;height: 30px;float: left">
+                                    <img style="width:100%" src="{{ asset('uploads/image/icon/12.png') }}" alt="">
+                                </div>
+
+                                <div set_icon style="width: 30px;height: 30px;float: left">
+                                    <img style="width:100%" src="{{ asset('uploads/image/icon/14.png') }}" alt="">
+                                </div>
+                                <div set_icon style="width: 30px;height: 30px;float: left">
+                                    <img style="width:100%" src="{{ asset('uploads/image/icon/15.png') }}" alt="">
+                                </div>
+                                <div set_icon style="width: 30px;height: 30px;float: left">
+                                    <img style="width:100%" src="{{ asset('uploads/image/icon/16.png') }}" alt="">
+                                </div>
+                                <div set_icon style="width: 30px;height: 30px;float: left">
+                                    <img style="width:100%" src="{{ asset('uploads/image/icon/17.png') }}" alt="">
+                                </div>
+                                <div set_icon style="width: 30px;height: 30px;float: left">
+                                    <img style="width:100%" src="{{ asset('uploads/image/icon/18.png') }}" alt="">
+                                </div>
+                                <div set_icon style="width: 30px;height: 30px;float: left">
+                                    <img style="width:100%" src="{{ asset('uploads/image/icon/19.png') }}" alt="">
+                                </div>
+                                <div set_icon style="width: 30px;height: 30px;float: left">
+                                    <img style="width:100%" src="{{ asset('uploads/image/icon/20.png') }}" alt="">
+                                </div>
+                                <div set_icon style="width: 30px;height: 30px;float: left">
+                                    <img style="width:100%" src="{{ asset('uploads/image/icon/21.png') }}" alt="">
+                                </div>
+                                <div set_icon style="width: 30px;height: 30px;float: left">
+                                    <img style="width:100%" src="{{ asset('uploads/image/icon/22.png') }}" alt="">
+                                </div>
+                                <div set_icon style="width: 30px;height: 30px;float: left">
+                                    <img style="width:100%" src="{{ asset('uploads/image/icon/23.png') }}" alt="">
+                                </div>
+                                <div set_icon style="width: 30px;height: 30px;float: left">
+                                    <img style="width:100%" src="{{ asset('uploads/image/icon/24.png') }}" alt="">
+                                </div>
+                                <div set_icon style="width: 30px;height: 30px;float: left">
+                                    <img style="width:100%" src="{{ asset('uploads/image/icon/25.png') }}" alt="">
+                                </div>
+                                <div set_icon style="width: 30px;height: 30px;float: left">
+                                    <img style="width:100%" src="{{ asset('uploads/image/icon/26.png') }}" alt="">
+                                </div>
+                                <div set_icon style="width: 30px;height: 30px;float: left">
+                                    <img style="width:100%" src="{{ asset('uploads/image/icon/27.png') }}" alt="">
+                                </div>
+                                <div set_icon style="width: 30px;height: 30px;float: left">
+                                    <img style="width:100%" src="{{ asset('uploads/image/icon/28.png') }}" alt="">
+                                </div>
+                                <div set_icon style="width: 30px;height: 30px;float: left">
+                                    <img style="width:100%" src="{{ asset('uploads/image/icon/29.png') }}" alt="">
+                                </div>
+                                <div set_icon style="width: 30px;height: 30px;float: left">
+                                    <img style="width:100%" src="{{ asset('uploads/image/icon/30.png') }}" alt="">
+                                </div>
+                                <div set_icon style="width: 30px;height: 30px;float: left">
+                                    <img style="width:100%" src="{{ asset('uploads/image/icon/31.png') }}" alt="">
+                                </div>
+                                <div set_icon style="width: 30px;height: 30px;float: left">
+                                    <img style="width:100%" src="{{ asset('uploads/image/icon/32.png') }}" alt="">
+                                </div>
+                                <div set_icon style="width: 30px;height: 30px;float: left">
+                                    <img style="width:100%" src="{{ asset('uploads/image/icon/34.png') }}" alt="">
+                                </div>
+                                <div set_icon style="width: 30px;height: 30px;float: left">
+                                    <img style="width:100%" src="{{ asset('uploads/image/icon/35.png') }}" alt="">
+                                </div>
+                                <div set_icon style="width: 30px;height: 30px;float: left">
+                                    <img style="width:100%" src="{{ asset('uploads/image/icon/36.png') }}" alt="">
+                                </div>
+
+                                <div set_icon style="width: 30px;height: 30px;float: left">
+                                    <img style="width:100%" src="{{ asset('uploads/image/icon/icone-avocat.png') }}" alt="">
+                                </div>
+                                <div set_icon style="width: 30px;height: 30px;float: left">
+                                    <img style="width:100%" src="{{ asset('uploads/image/icon/integrators-1.png') }}" alt="">
+                                </div>
+                                <div set_icon style="width: 30px;height: 30px;float: left">
+                                    <img style="width:100%" src="{{ asset('uploads/image/icon/key.png') }}" alt="">
+                                </div>
+                                <div set_icon style="width: 30px;height: 30px;float: left">
+                                    <img style="width:100%" src="{{ asset('uploads/image/icon/nutrition-icon.png') }}" alt="">
+                                </div>
+                                <div set_icon style="width: 30px;height: 30px;float: left">
+                                    <img style="width:100%" src="{{ asset('uploads/image/icon/payment-cards.png') }}" alt="">
+                                </div>
+                                <div set_icon style="width: 30px;height: 30px;float: left">
+                                    <img style="width:100%" src="{{ asset('uploads/image/icon/pic.png') }}" alt="">
+                                </div>
+                                <div set_icon style="width: 30px;height: 30px;float: left">
+                                    <img style="width:100%" src="{{ asset('uploads/image/icon/plane.png') }}" alt="">
+                                </div>
+                                <div set_icon style="width: 30px;height: 30px;float: left">
+                                    <img style="width:100%" src="{{ asset('uploads/image/icon/poop.png') }}" alt="">
+                                </div>
+                                <div set_icon style="width: 30px;height: 30px;float: left">
+                                    <img style="width:100%" src="{{ asset('uploads/image/icon/presentation-grisf.png') }}" alt="">
+                                </div>
+                                <div set_icon style="width: 30px;height: 30px;float: left">
+                                    <img style="width:100%" src="{{ asset('uploads/image/icon/Shipping.png') }}" alt="">
+                                </div>
+                                <div set_icon style="width: 30px;height: 30px;float: left">
+                                    <img style="width:100%" src="{{ asset('uploads/image/icon/star.png') }}" alt="">
+                                </div>
+                                <div set_icon style="width: 30px;height: 30px;float: left">
+                                    <img style="width:100%" src="{{ asset('uploads/image/icon/star2.png') }}" alt="">
+                                </div>
+                                <div set_icon style="width: 30px;height: 30px;float: left">
+                                    <img style="width:100%" src="{{ asset('uploads/image/icon/star3.png') }}" alt="">
+                                </div>
+                                <div set_icon style="width: 30px;height: 30px;float: left">
+                                    <img style="width:100%" src="{{ asset('uploads/image/icon/symbole.png') }}" alt="">
+                                </div>
+                                <div set_icon style="width: 30px;height: 30px;float: left">
+                                    <img style="width:100%" src="{{ asset('uploads/image/icon/symbole3.png') }}" alt="">
+                                </div>
+                                <div set_icon style="width: 30px;height: 30px;float: left">
+                                    <img style="width:100%" src="{{ asset('uploads/image/icon/tree.png') }}" alt="">
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <input id="fin" getdata-toggle="popover" data-placement="right" data-html="true" title="" data-content='CLIQUER SUR TERMINER POUR ENREGISTRER ET faire  apparaitre PUBLIQUEMENT VOS CHANGEMENTS<br><button data-tooltip="#tooltip_bg_img" type="button" class="btn btn-primary btn-xs pull-right tooltip_next">terminer</button>'
+                   type="submit" class="btn btn-primary " style="z-index: 97; margin: 0 auto; margin-top: 5px" value="Enregistrer les couleurs">
+        </form>
+    </div>
+    <style>
+
+        div#background-img {
+            max-height: 150px;
+            overflow: auto;
+        }
+
+        div#backgroundcolor {
+            max-height: 150px;
+            overflow: auto;
+        }
+
+        .theme_changer .panel-group {
+            margin: 5px 0;
+        }
+
+        .bfh-colorpicker {
+            position: relative;
+            background: white;
+            /* padding: 1px; */
+            border: 1px solid #908d8d;
+            border-radius: 4px;
+        }
+
+        .theme_changer .panel-default > .panel-heading {
+            background: #f7f7f7;
+        }
+
+        .theme_changer h6 {
+            font-style: normal;
+            margin: 5px 0;
+        }
+
+        tog {
+            background: #e6d6d6;
+        }
+
+        tog .fa.fa-cog {
+            background: none;
+            -webkit-animation-name: clignote;
+            -webkit-animation-duration: 3s;
+            -webkit-animation-iteration-count: infinite;
+        }
+
+        @-webkit-keyframes clignote {
+
+            0% {
+                transform: scale(1) rotate(120deg);
+            }
+            50% {
+                transform: scale(1.6) rotate(240deg);
+            }
+            100% {
+                transform: scale(1) rotate(360deg);
+            }
+        }
+
+        @-webkit-keyframes color-change {
+            0% {
+                color: red;
+            }
+            50% {
+                color: blue;
+            }
+            100% {
+                color: red;
+            }
+        }
+
+        .motif-container {
+
+            overflow: auto;
+            height: 60px;
+
+        }
+
+        .theme_changer {
+            top: 15%;
+            position: fixed;
+            width: 200px;
+            background: #e6d6d6;
+            z-index: 999 !important;
+            padding: 10px;
+            transform: translate(-200px);
+            transition: all 2s;
+        }
+
+        .bfh-colorpicker-popover {
+            position: relative !important;
+        }
+
+        .bfh-selectbox .bfh-selectbox-options ul {
+            width: 178px !important;
+        }
+    </style>
+
+
+    <div class="modal fade" id="gallery-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">×</button>
+                    <h4 class="modal-title">Modifier les images de page d'accueil</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            {#<div class="alert alert-info alert-dismissable page-alert">L'image doit être entre <b>"1000px et 2000px"</b> et au format <b>" jpg "</b></div>#}
+                            {#<form action="{{ path('uploadslider',{'qq_id': qouiqui.id }) }}" class="dropzone" id="myDropzone"></form>#}
+
+
+                            <div class="content-plug-crop">
+                                <div class="crop-loading">
+                                    <i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>
+
+                                </div>
+                                <p id="crop-info-success">L'image à été enregistré avec succès</p>
+                                <p id="crop-info">L'image doit être supérieur à "<strong>1000px</strong>" et au format "<strong>jpg ou png</strong>"</p>
+                                <img id="myImageCrop" src="https://ween.tn/uploads/image/79/407/gallery/ween-59b26608bd6c9~thumbs.jpg" height="150px" width="100%" style="display: none;">
+                            </div>
+
+
+                            <div class="docs-buttons">
+
+
+                                <label class="btn btn-primary btn-upload booster-shak" for="image" title="Upload image file">
+                                    <input type="file" name="image" id="image" class="sr-only" accept=".jpg,.jpeg,.png" onchange="readURL(this);"/>
+                                    Importer une image
+                                </label>
+
+
+                                <div class="corp-edit pull-right">
+                                    <button class="btn btn-success pull-right booster-shak" id="btn-slider-upload"><strong>Envoyer</strong></button>
+
+                                    <div class="btn-group pull-right">
+                                        <button type="button" class="btn btn-default scaleX" data-method="scaleX" data-option="1" title="Flip Horizontal">
+                                            <span class="docs-tooltip" data-toggle="tooltip" title="" data-original-title="cropper.scaleX(-1)" aria-describedby="tooltip379348">
+                                              <span class="fa fa-arrows-h"></span>
+                                            </span>
+                                        </button>
+                                        <button type="button" class="btn btn-default scaleY " data-method="scaleY" data-option="-1" title="Flip Vertical">
+                                        <span class="docs-tooltip" data-toggle="tooltip" title="" data-original-title="cropper.scaleY(-1)">
+                                          <span class="fa fa-arrows-v"></span>
+                                        </span>
+                                        </button>
+
+
+                                        <button type="button" class="btn btn-default method-zoom" data-method="zoom" data-option="0.1" title="Zoom In">
+                                            <span class="docs-tooltip" data-toggle="tooltip" title="" data-original-title="cropper.zoom(0.1)" aria-describedby="tooltip474355">
+                                              <span class="fa fa-search-plus"></span>
+                                            </span>
+                                        </button>
+                                        <button type="button" class="btn btn-default method-zoom" data-method="zoom" data-option="-0.1" title="Zoom Out">
+                                            <span class="docs-tooltip" data-toggle="tooltip" title="" data-original-title="cropper.zoom(-0.1)">
+                                                <span class="fa fa-search-minus"></span>
+                                            </span>
+                                        </button>
+                                        <button type="button" class="btn btn-default method-reset" data-method="reset" title="Reset">
+                                            <span class="docs-tooltip" data-toggle="tooltip" title="" data-original-title="cropper.reset()" aria-describedby="tooltip266726">
+                                              <span class="fa fa-refresh"></span>
+                                            </span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                        {% if slider is not empty %}
+
+                            <div class="col-md-6">
+                                <div class="alert alert-info alert-dismissable page-alert"><b>Glisser</b> les images pour les organiser dans la page d'accueil !</div>
+                                <div class="row norow">
+                                    <form id="orderimg" action="{{ path('module_spa_tmp_folder',{'qq_id': qouiqui.id } ) }}" method="post" enctype="multipart/form-data">
+
+                                        <ul id="sortable">
+                                            {% for img in slider %}
+
+                                                <div id="sup{{ loop.index }}" class="col-md-6 " data-div="{{ img }}">
+                                                    <div class="thumbnail" style="height: 105px;">
+                                                        <!-- Single button -->
+                                                        <div class="btn-group pull-right " style="position: absolute;right: 20px;">
+                                                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                <i class="fa fa-pencil" aria-hidden="true"></i> <span class="caret"></span>
+                                                            </button>
+                                                            <ul class="dropdown-menu">
+                                                                <li>
+                                                                    <a href="#" class="remove" data-name-remove="{{ img }}" data-sup="#sup{{ loop.index }}" data-id="{{ qouiqui.id }}">supprimer</a>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                        <li class="ui-state-default">
+                                                            <input type="text" class="hidden" name="{{ loop.index }}" value="{{ img }}">
+                                                            <img style="width:100%;max-height: 170px;" src="/uploads/image/{{ iduser }}/{{ qouiqui.id }}/slider/{{ img }}">
+                                                        </li>
+
+
+                                                    </div>
+                                                </div>
+                                            {% endfor %}
+
+                                        </ul>
+                                    </form>
+
+                                </div>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Annuler</button>
+                    <button type="submit" class="btn btn-primary " data-target="modifier" data-selector="orderimg">Enregistrer</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+{% endif %}
+
+{% if not is_mobile() %}
+    <section id="section-accueil" class="rev_slider_wrapper">
+        <div id="rev_slider_3" class="rev_slider" data-version="5.0">
+            <ul>
+
+                <!-- SLIDE  -->
+                {% if slider is not empty %}
+
+
+                    {% for slide in slider %}
+
+                        <li data-transition="zoomout">
+                            <img src="{{ asset('uploads/image/') }}/{{ qouiqui.user.id }}/{{ qouiqui.id }}/slider/{{ slide }}" alt="" data-bgposition="center center" data-bgfit="cover" class="rev-slidebg">
+                            <div class="tp-caption tp-resizeme"
+                                 data-x="['center','center','center','center']" data-hoffset="['15','15','0','0']"
+                                 data-y="['240','200','140','140']" data-voffset="['0','0','0','0']"
+                                 data-responsive_offset="on"
+                                 data-visibility="['on','on','on','on']"
+                                 data-transform_idle="o:1;"
+                                 data-transform_in="z:0;rX:0;rY:0;rZ:0;sX:0.9;sY:0.9;skX:0;skY:0;opacity:0;s:1500;e:Power3.easeInOut;"
+                                 data-transform_out="y:[100%];s:1000;e:Power2.easeInOut;s:1000;e:Power2.easeInOut;"
+                                 data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;"
+                                 data-start="800">
+                                {#<h2 class="border_heading p-white"> We Complete Your Dreams </h2>#}
+                            </div>
+                            <div class="tp-caption tp-resizeme"
+                                 data-x="['center','center','center','center']" data-hoffset="['15','15','0','0']"
+                                 data-y="['330','290','230','230']" data-voffset="['0','0','0','0']"
+                                 data-responsive_offset="on"
+                                 data-visibility="['on','on','on','off']"
+                                 data-transform_idle="o:1;"
+                                 data-transform_in="z:0;rX:0;rY:0;rZ:0;sX:0.9;sY:0.9;skX:0;skY:0;opacity:0;s:1500;e:Power3.easeInOut;"
+                                 data-transform_out="y:[100%];s:1000;e:Power2.easeInOut;s:1000;e:Power2.easeInOut;"
+                                 data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;"
+                                 data-start="800">
+                                {#<p class="p-white text-center">Mauris accumsan eros eget libero posuere vulputate. Etiam elit elit, elementum sed#}
+                                {#<br> varius at, adipiscing vitae est. Sed nec felis pellentesque</p>#}
+                            </div>
+                            <div class="tp-caption tp-resizeme"
+                                 data-x="['center','center','center','center']" data-hoffset="['15','15','0','0']"
+                                 data-y="['390','350','290','240']" data-voffset="['0','0','0','0']"
+                                 data-responsive_offset="on"
+                                 data-visibility="['on','on','on','on']"
+                                 data-transform_idle="o:1;"
+                                 data-transform_in="z:0;rX:0;rY:0;rZ:0;sX:0.9;sY:0.9;skX:0;skY:0;opacity:0;s:1500;e:Power3.easeInOut;"
+                                 data-transform_out="y:[100%];s:1000;e:Power2.easeInOut;s:1000;e:Power2.easeInOut;"
+                                 data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;"
+                                 data-start="800">
+                                {#<a href="#." class="btn_fill">Read More</a>#}
+                            </div>
+                        </li>
+                    {% endfor %}
+
+                {% else %}
+                    {% for image in DirAssetParcour(asset('uploads/image/slider/'~category.slug|lower~'/')) %}
+                        <li data-transition="zoomout">
+                            <img src="{{ asset('uploads/image/slider/'~category.slug|lower~'/') }}{{ image }}" alt="" data-bgposition="center center" data-bgfit="cover" class="rev-slidebg">
+                            <div class="tp-caption tp-resizeme"
+                                 data-x="['center','center','center','center']" data-hoffset="['15','15','0','0']"
+                                 data-y="['240','200','140','140']" data-voffset="['0','0','0','0']"
+                                 data-responsive_offset="on"
+                                 data-visibility="['on','on','on','on']"
+                                 data-transform_idle="o:1;"
+                                 data-transform_in="z:0;rX:0;rY:0;rZ:0;sX:0.9;sY:0.9;skX:0;skY:0;opacity:0;s:1500;e:Power3.easeInOut;"
+                                 data-transform_out="y:[100%];s:1000;e:Power2.easeInOut;s:1000;e:Power2.easeInOut;"
+                                 data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;"
+                                 data-start="800">
+                                {#<h2 class="border_heading p-white"> We Complete Your Dreams </h2>#}
+                            </div>
+                        </li>
+                    {% endfor %}
+                {% endif %}
+
+
+
+
+
+                {#{% for slide in slider %}#}
+                {#{% if annonce_slider is defined%}#}
+                {#{%  set one_annonce_slider = random(annonce_slider) %}#}
+
+                {#<li>#}
+                {#<img src="{{ asset('uploads/image/') }}/{{ qouiqui.user.id }}/{{ qouiqui.id }}/slider/{{ slide }}" alt="img"/>#}
+
+                {#{{ render(controller(#}
+                {#'ModuleBundle:Automobile:getText',#}
+                {#{ 'id': qouiqui.id }#}
+                {#)) }}#}
+                {#<div class="flex-caption">#}
+                {#<h3>{% if one_annonce_slider.model.mark is not null %}#}
+                {#{{ one_annonce_slider.model.mark.name }}#}
+                {#{% endif %}#}
+                {#{% if one_annonce_slider.model.name is not null %}#}
+                {#{{ one_annonce_slider.model.name }}#}
+                {#{% endif %} A vendre</h3>#}
+                {#<p>{% if one_annonce_slider.price is  not null %}#}
+                {#{{ one_annonce_slider.price }}#}
+                {#<sup>DT</sup>{% else %}UNE OFFRE À NE PAS RATER{% endif %} </p>#}
+                {#<a href="#Offres" class="btn btn-main btn-primary btn-lg uppercase" ><span>Voir offres</span></a> </div>#}
+
+                {#</li>#}
+                {#{% else %}#}
+                {#<div class="flex-ca   ption">#}
+                {#<p>#}
+                {#bienvenue sur vente voiture</p>#}
+                {#</div>#}
+                {#{% endif  %}#}
+                {#{% endfor %}#}
+                {##}
+                {##}
+
+
+            </ul>
+        </div>
+    </section>
+{% endif %}
+<style>
+
+    .domain {
+        background-color: rgba(240, 241, 239, 0.24);
+        /*border: 2px solid #E1E4DF;*/
+        border-radius: 6px;
+        margin-top: 32px;
+    }
+
+    .separatorDomain {
+        height: 0;
+        border-bottom: 3px solid #55a89b;
+        margin: 35px auto;
+        padding: 0;
+        width: 100px;
+    }
+
+    .domain .font50, .domain h5 {
+        color: white;
+    }
+
+    .font50 {
+        font-size: 50px;
+    }
+
+    .center {
+        align-items: center;
+        text-align: center;
+    }
+
+    .pad50 {
+        padding: 50px;
+    }
+
+    .domainSearch {
+        height: 40px;
+        border-radius: 0;
+        margin-left: -2px;
+    }
+
+    .domainResult .result {
+        background-color: #f1fafc;
+        border: 1px solid #59d2ef;
+        border-radius: 3px;
+        padding: 16px 0;
+    }
+
+    .domainResult {
+        margin-top: 15px;
+        padding: 15px 0;
+    }
+
+    #inputDomain::-webkit-input-placeholder {
+
+        animation: typing 3.5s steps(40, end),
+        blink-caret .75s step-end infinite;
+    }
+
+    /* The typing effect */
+    @keyframes typing {
+        from {
+            width: 0
+        }
+        to {
+            width: 100%
+        }
+    }
+
+    /* The typewriter cursor effect */
+    @keyframes blink-caret {
+        from, to {
+            border-color: transparent
+        }
+        50% {
+            border-color: orange;
+        }
+    }
+</style>
+
+{% if connected %}
+
+    <section id="Domaine" class="greenDegrad nopadd">
+        <div class="WorldMap" c style="background-image: url({{ asset('tpl/fiche/images/map.png') }})">
+        </div>
+        <div class="container">
+            <div class="pad50 col-md-12 center domain">
+        <span class="font50 center">
+        Réservez votre nom de domaine !!
+        </span>
+                <div class="separatorDomain"></div>
+                <h5 class="margin15">Tapez votre nom de domaine</h5>
+                <div class="col-md-6 nopadd col-md-offset-2">
+                    <input type="text" id="inputDomain" class="form-control" placeholder="Exemple.com">
+                </div>
+                <div class="col-md-2 nopadd ">
+                    <button type="button" class="btn btn-primary domainSearch btn-block">Recherche</button>
+                </div>
+                <div class="clearfix"></div>
+                <div class="col-md-8 col-md-offset-2 domainResult">
+                    <div class="resultfound result" style="display:none">
+                        <div class="row">
+                            <div class="domainTofind col-md-4">
+                                domain
+                            </div>
+                            <div class="col-md-4 disponible">
+                                disponible
+                            </div>
+                            <div class="col-md-4">
+                                <input type="" class="btn btn-primary " disabled='disabled' value="commander!"></input>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </section>
+{% endif %}

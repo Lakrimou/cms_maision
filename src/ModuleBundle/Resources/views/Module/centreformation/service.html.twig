@@ -1,0 +1,1313 @@
+
+    <section class="courses padding-120" id="service" >
+        {% if  connected %}
+            <a data-toggle="modal" href="#service-modal" class="button-default pull-right button_admin  ">Gérer cette
+                section</a>
+        {% endif %}
+    <div class="container">
+        <div class="section-header" >
+
+            <h3> Nos Formations</h3>
+
+            {#<span><img src="http://alishafique.net/html/edulearn/images/hdg-01.png" alt=""></span>#}
+
+        </div>
+        {% if  cfService(module) is not empty %}
+        <div class="row">
+            {% for i, a in service %}
+                {% set services = jsonDecod(a.data) %}
+
+
+
+
+
+                <div class="col-md-4 col-sm-6 col-xs-12">
+                    <div class="course-item  ">
+                        <div class=" image image-content2"
+                             style="background-image:url('{{ asset('uploads/image/') }}{{ iduser }}/{{ qouiqui.id }}/service/{{ a.id~'.jpg' }}')">
+                            {% if services.dure is defined and services.dure is not empty %}
+                                <span style="padding-right: 15px;padding-left: 10px;">{{ services.prix }}
+                                    <sup>dt</sup></span>
+                            {% else %}
+                                {% if services.prix is not empty %}
+                                <span{{ services.prix }}><sup>dt</sup></span>
+                            {% endif %}
+                            {% endif %}
+                        </div>
+
+                        <div class="content height-content">
+                            <h4 style="text-align: center;font-size: 14px;height:  25px;"><a href="#"
+                                                             >{{ services.ncour }}</a>
+                            </h4>
+                            <ul>
+                                <li><span><i class="fa fa-clock-o" aria-hidden="true"></i></span> <a
+                                            href="#">{{ services.dure }}heures</a></li>
+                                <li>|</li>
+                                <li><span><i class="fa fa-calendar" aria-hidden="true"></i> Date debut</span> <a
+                                            href="#"> {{ services.start|date('d-M-y') }}
+                                        jusqu'à {{ services.end|date('d-M-y') }}
+                                    </a></li>
+
+
+                            </ul>
+                            <p> {{ services.desc[:30]|raw }} <a data-toggle="modal" data-target="#modal-detail" href="#"
+                                                            class=" current_modal" data-id="{{ a.id }}"
+                                                            data-qq="{{ qouiqui.id }}">...Voir plus </a>
+
+                            </p>
+                            <div class="bottom">
+
+
+                                <a data-toggle="modal" data-target="#inscription" href="#"
+                                   style="margin-left: 83px;"
+                                   class="button-default col-md-5 current_modal_iscription" data-id="{{ a.id }}"
+                                   data-qq="{{ qouiqui.id }}">Réserver</a>
+
+                            </div>
+                            {#<div class="courses-button">#}
+
+                            {#</div>#}
+
+
+                        </div><!-- content -->
+
+                    </div><!-- course item -->
+                </div>
+            {% endfor %}
+
+        </div><!-- row -->
+        {% else %}
+
+        <div class="row">
+            <div class="col-md-4 col-sm-6 col-xs-12">
+                <div class="course-item">
+                    <div class="image">
+                        <img src="{{ asset('module/centre_frm/images/courses/course_01.jpg') }}" alt="course image"
+                             class="img-responsive">
+                        <span><sup>$</sup>200</span>
+                    </div>
+                    <div class="content">
+                        <h4><a href="course-single.html">Uficiently Dsenate Colabor</a></h4>
+                        <ul>
+                            <li><span><i class="fa fa-user" aria-hidden="true"></i></span> <a href="#">Robot
+                                    Smith</a></li>
+                            <li>|</li>
+                            <li><span><i class="fa fa-calendar" aria-hidden="true"></i></span> <a href="#">24 April
+                                    2017 </a></li>
+                        </ul>
+                        <p>Aolaboraively eenable vira niche markets Compelngly evsculate funcnal mndshare through
+                            forand goaloriented</p>
+
+                    </div><!-- content -->
+                </div><!-- course item -->
+            </div>
+            <div class="col-md-4 col-sm-6 col-xs-12">
+                <div class="course-item">
+                    <div class="image">
+                        <img src="{{ asset('module/centre_frm/images/courses/course_02.jpg') }}" alt="course image"
+                             class="img-responsive">
+                        <span>Free</span>
+                    </div>
+                    <div class="content">
+                        <h4><a href="course-single.html">Awesome Solutions a Study</a></h4>
+                        <ul>
+                            <li><span><i class="fa fa-user" aria-hidden="true"></i></span> <a href="#">Robot
+                                    Smith</a></li>
+                            <li>|</li>
+                            <li><span><i class="fa fa-calendar" aria-hidden="true"></i></span> <a href="#">24 April
+                                    2017 </a></li>
+                        </ul>
+                        <p>Aolaboraively eenable vira niche markets Compelngly evsculate funcnal mndshare through
+                            forand goaloriented</p>
+
+                    </div><!-- content -->
+                </div><!-- course item -->
+            </div>
+            <div class="col-md-4 col-sm-6 col-xs-12">
+                <div class="course-item">
+                    <div class="image">
+                        <img src="{{ asset('module/centre_frm/images/courses/course_03.jpg') }}" alt="course image"
+                             class="img-responsive">
+                        <span><sup>$</sup>550</span>
+                    </div>
+                    <div class="content">
+                        <h4><a href="course-single.html">Disenatre Are Colaborative</a></h4>
+                        <ul>
+                            <li><span><i class="fa fa-user" aria-hidden="true"></i></span> <a href="#">Robot
+                                    Smith</a></li>
+                            <li>|</li>
+                            <li><span><i class="fa fa-calendar" aria-hidden="true"></i></span> <a href="#">24 April
+                                    2017 </a></li>
+                        </ul>
+                        <p>Aolaboraively eenable vira niche markets Compelngly evsculate funcnal mndshare through
+                            forand goaloriented</p>
+
+                    </div><!-- content -->
+                </div><!-- course item -->
+            </div>
+            <div class="col-md-4 col-sm-6 col-xs-12">
+                <div class="course-item">
+                    <div class="image">
+                        <img src="{{ asset('module/centre_frm/images/courses/course_04.jpg') }}" alt="course image"
+                             class="img-responsive">
+                        <span><sup>$</sup>500</span>
+                    </div>
+                    <div class="content">
+                        <h4><a href="course-single.html">Uficiently Dsenate Colabor</a></h4>
+                        <ul>
+                            <li><span><i class="fa fa-user" aria-hidden="true"></i></span> <a href="#">Robot
+                                    Smith</a></li>
+                            <li>|</li>
+                            <li><span><i class="fa fa-calendar" aria-hidden="true"></i></span> <a href="#">24 April
+                                    2017 </a></li>
+                        </ul>
+                        <p>Aolaboraively eenable vira niche markets Compelngly evsculate funcnal mndshare through
+                            forand goaloriented</p>
+
+                    </div><!-- content -->
+                </div><!-- course item -->
+            </div>
+            <div class="col-md-4 col-sm-6 col-xs-12">
+                <div class="course-item">
+                    <div class="image">
+                        <img src="{{ asset('module/centre_frm/images/courses/course_05.jpg') }}" alt="course image"
+                             class="img-responsive">
+                        <span><sup>$</sup>250</span>
+                    </div>
+                    <div class="content">
+                        <h4><a href="course-single.html">Awesome Solutions a Study</a></h4>
+                        <ul>
+                            <li><span><i class="fa fa-user" aria-hidden="true"></i></span> <a href="#">Robot
+                                    Smith</a></li>
+                            <li>|</li>
+                            <li><span><i class="fa fa-calendar" aria-hidden="true"></i></span> <a href="#">24 April
+                                    2017 </a></li>
+                        </ul>
+                        <p>Aolaboraively eenable vira niche markets Compelngly evsculate funcnal mndshare through
+                            forand goaloriented</p>
+
+                    </div><!-- content -->
+                </div><!-- course item -->
+            </div>
+            <div class="col-md-4 col-sm-6 col-xs-12">
+                <div class="course-item">
+                    <div class="image">
+                        <img src="{{ asset('module/centre_frm/images/courses/course_06.jpg') }}" alt="course image"
+                             class="img-responsive">
+                        <span><sup>$</sup>700</span>
+                    </div>
+                    <div class="content">
+                        <h4><a href="course-single.html">Disenatre Are Colaborative</a></h4>
+                        <ul>
+                            <li><span><i class="fa fa-user" aria-hidden="true"></i></span> <a href="#">Robot
+                                    Smith</a></li>
+                            <li>|</li>
+                            <li><span><i class="fa fa-calendar" aria-hidden="true"></i></span> <a href="#">24 April
+                                    2017 </a></li>
+                        </ul>
+                        <p>Aolaboraively eenable vira niche markets Compelngly evsculate funcnal mndshare through
+                            forand goaloriented</p>
+
+                    </div><!-- content -->
+                </div><!-- course item -->
+            </div>
+            <div class="courses-button">
+                <a href="courses.html" class="button-default">View All Courses</a>
+            </div>
+        </div><!-- row -->
+
+        {% endif %}
+    </div><!-- container -->
+
+
+
+
+
+
+
+
+
+
+    <div class="eni">
+        <div class="particle elem1 anim-delay1"></div>
+        <div class="particle elem2 anim-delay5"></div>
+        <div class="particle elem3 anim-delay3"></div>
+        <div class="particle elem4 anim-delay8"></div>
+        <div class="particle elem5 anim-delay9"></div>
+        <div class="particle elem6 anim-delay2"></div>
+        <div class="particle elem7 anim-delay4"></div>
+        <div class="particle elem8 anim-delay3"></div>
+        <div class="particle elem9 anim-delay10"></div>
+        <div class="particle elem8 anim-delay11"></div>
+        <div class="particle elem6 anim-delay12"></div>
+        <div class="particle elem1 anim-delay14"></div>
+        <div class="particle elem13 anim-delay16"></div>
+        <div class="particle elem17 anim-delay18"></div>
+        <div class="particle elem2 anim-delay6"></div>
+        <div class="particle elem16 anim-delay9"></div>
+        <div class="particle elem8 anim-delay3"></div>
+        <div class="particle elem9 anim-delay10"></div>
+        <div class="particle elem18 anim-delay11"></div>
+        <div class="particle elem11 anim-delay12"></div>
+        <div class="particle elem12 anim-delay14"></div>
+        <div class="particle elem13 anim-delay16"></div>
+        <div class="particle elem14 anim-delay18"></div>
+        <div class="particle elem15 anim-delay6"></div>
+        <div class="particle elem16 anim-delay9"></div>
+        <div class="particle elem17 anim-delay7"></div>
+        <div class="particle elem18 anim-delay6"></div>
+        <div class="particle elem19 anim-delay3"></div>
+    </div>
+
+    </section>
+
+<div id="service-modal" class=" modal  fade" role="dialog">
+    <div class="modal-dialog modal-lg  ">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="pull-right margin-bott">
+
+                    {#<a data-toggle="modal" href="#tallModal" class="btn btn-primary">Wide, Tall Content</a>#}
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal_service"
+                    >Ajouter Nouveau Cour
+                    </button>
+                </div>
+                {#<button type="button" class="close" data-dismiss="modal">&times;</button>#}
+                <h4 class="modal-title">Liste des services</h4>
+            </div>
+
+
+            <div class="modal-body row">
+                <div class="shop-cart padding-120">
+
+                    <div class="shop-table table-responsive" >
+                        <table>
+                            <thead>
+                            <tr>
+                                <th colspan="2" class="title">Formation</th>
+                                {#<th>Formateur</th>#}
+                                <th class="start_cour">Date début</th>
+                                <th class="end_cour">Date fin</th>
+                                <th class="dure"> Durée</th>
+                                {#<th class="descr">Description</th>#}
+                                <th class="cart">Prix</th>
+
+                                <th class="edit-cart">Modifier</th>
+                                <th class="remove-cart">Supprimer</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for i, a in service %}
+                                {% set services = jsonDecod(a.data) %}
+                                <tr data-div={{ a.id }}>
+                                    <td colspan="2" class="product-thumbnail">
+                                        <div class="image">
+                                            <a href=#"><img
+                                                        src="{{ asset('uploads/image/') }}{{ iduser }}/{{ qouiqui.id }}/service/{{ a.id~'.jpg' }}"
+                                                        style=" max-width: 40%;"
+                                                        alt="product image"
+                                                        class="img-responsive"></a>
+                                        </div>
+                                        <div class="content">
+                                            <h4><a href="shop-page.html">{{ services.ncour }}</a></h4>
+                                        </div>
+                                    </td>
+                                    {#<td><span>{{ services.trainer }}</span></td>#}
+                                    <td class="start_cour"><span> {{ services.start|date('d-M-y') }}</span></td>
+                                    <td class="end_cour"><span>{{ services.end|date('d-M-y') }}</span></td>
+                                    <td class="dure"><span>{{ services.dure }}</span></td>
+                                    {#<td class="descr">#}
+                                    {#{{ services.desc[:9] }}...#}
+                                    {#</td>#}
+                                    <td class="cart"><span>{{ services.prix }}</span></td>
+                                    <td class="edite-cart"><a href="#" class="modifier" data-serv="{{ a.id }}"
+                                                              data-id="{{ qouiqui.id }}" data-toggle="modal"data-target="#edit_service">
+
+                                            <span><i class="fa fa-pencil" aria-hidden="true"></i></span>
+                                        </a>
+
+                                    </td>
+                                    <td class="remove-cart"><a href="#" class="service_suprim"
+                                                               data-id='{{ a.id }}' data-toggle="modal"
+                                                               data-toggle="modal"
+                                                               data-target="#confirm-delete">
+                                            <span><i class="fa fa-times" aria-hidden="true"></i></span></a>
+                                    </td>
+                                </tr>
+
+                            {% endfor %}
+
+                            </tbody>
+                        </table>
+                    </div>
+
+
+                </div><!-- shop-cart -->
+
+
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div id="modal_service" class="modal  fade" role="dialog">
+    <div class="modal-dialog modal-lg ">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Ajouter une Formation</h4>
+            </div>
+            <div class="modal-body row">
+                <form id="ajout_services" method="POST" action="{{ path('module_centreformation_service') }}"
+                      enctype="multipart/form-data">
+
+
+                    {#<div class="row">#}
+                    <div class="col-md-12">
+                        <div class="col-md-6">
+                            <input type="hidden" name="qq_id" value="{{ qouiqui.id }}">
+                            <div class=" form-group">
+                                <label class="col-md-12">Nom du Formation</label>
+                                <input type="text" placeholder="Entrer First Nom du cour.." class=" form-control"
+                                       name="ncour">
+                            </div>
+
+
+                            <div class="form-group">
+                                <label class="col-md-12">Description</label>
+                                <textarea placeholder="Entrer description.." rows="3" class="form-control"
+                                          name="desc"></textarea>
+                            </div>
+
+
+                            <div class="col-sm-6 form-group">
+                                <label class="col-md-12">Prix</label>
+                                <input type="text" placeholder="Entrer le prix.." class="form-control" name="prix">
+                            </div>
+                            <div class="col-sm-6 form-group">
+                                <label class="col-md-12">Durée </label>
+                                <input type="number" placeholder="Entrer nombre des jours.." class="form-control"
+                                       name="dure">
+
+                            </div>
+
+
+                            <div class="col-sm-6 form-group">
+                                <label class="col-md-12">Date début </label>
+                                <div class="form-group">
+                                    <div class='input-group date' id='datetimepicker4'>
+                                        <input type='text' class="form-control" name="start-cour"/>
+                                        <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-calendar"></span>
+                </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 form-group">
+                                <label class="col-md-12">Date fin</label>
+                                <div class="form-group">
+                                    <div class='input-group date' id='datetimepicker5'>
+                                        <input type='text' class="form-control" name="end-cour"/>
+                                        <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-calendar"></span>
+                </span>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="col-sm-12 form-group">
+                                <label class="col-md-12">Choisissez une photo</label>
+                                <input autocomplete="off" class="form-control "
+                                       name="file" type="file" required="required"
+                                       placeholder="choisissez_image" data-items="8"/>
+
+                            </div>
+                            <div class="checkbox col-md-12 ">
+                                <label>
+                                    <input type="checkbox" name="certif"> Certeficat
+                                </label>
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-6 ">
+                            <label class="col-md-12">Les horaires</label>
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th>Jours</th>
+                                    <th>du</th>
+                                    <th>à</th>
+
+                                </tr>
+                                </thead>
+                                <tr class="day-monday" data-open="9:00" data-close="17:00">
+                                    <th>Lundi</th>
+                                    <td>
+                                        <div class="bfh-timepicker" data-mode="12h" data-time="0"
+                                             data-name="qouiqui[Lun][start]">
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="bfh-timepicker" data-mode="12h" data-time="0"
+                                             data-name="qouiqui[Lun][end]">
+                                        </div>
+                                    </td>
+
+                                </tr>
+                                <tr class="day-tuesday" data-open="9:00" data-close="20:00">
+                                    <th>Mardi</th>
+                                    <td>
+                                        <div class="bfh-timepicker" data-mode="12h" data-time="0"
+                                             data-name="qouiqui[Mar][start]">
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="bfh-timepicker" data-mode="12h" data-time="0"
+                                             data-name="qouiqui[Mar][end]">
+                                        </div>
+                                    </td>
+
+                                </tr>
+                                <tr class="day-wednesday" data-open="9:00" data-close="17:00">
+                                    <th>Merecredi</th>
+                                    <td>
+                                        <div class="bfh-timepicker" data-mode="12h" data-time="0"
+                                             data-name="qouiqui[Mer][start]">
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="bfh-timepicker" data-mode="12h" data-time="0"
+                                             data-name="qouiqui[Mer][end]">
+                                        </div>
+                                    </td>
+
+                                </tr>
+                                <tr class="day-thursday" data-open="9:00" data-close="17:00">
+                                    <th>Jeudi</th>
+                                    <td>
+                                        <div class="bfh-timepicker" data-mode="12h" data-time="0"
+                                             data-name="qouiqui[Jeu][start]">
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="bfh-timepicker" data-mode="12h" data-time="0"
+                                             data-name="qouiqui[Jeu][end]">
+                                        </div>
+                                    </td>
+
+                                </tr>
+                                <tr class="day-friday" data-open="9:00" data-close="17:00">
+                                    <th>Vendredi</th>
+                                    <td>
+                                        <div class="bfh-timepicker" data-mode="12h" data-time="0"
+                                             data-name="qouiqui[Ven][start]">
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="bfh-timepicker" data-mode="12h" data-time="0"
+                                             data-name="qouiqui[Ven][end]">
+                                        </div>
+                                    </td>
+
+                                </tr>
+                                <tr class="day-saturday" data-open="9:00" data-close="17:00">
+                                    <th>Samedi</th>
+                                    <td>
+                                        <div class="bfh-timepicker" data-mode="12h" data-time="0"
+                                             data-name="qouiqui[Sam][start]">
+                                        </div>
+
+                                    </td>
+                                    <td>
+                                        <div class="bfh-timepicker" data-mode="12h" data-time="0"
+                                             data-name="qouiqui[Sam][end]">
+                                        </div>
+                                    </td>
+
+                                </tr>
+                                <tr class="day-sunday" data-open="9:00" data-close="17:00">
+                                    <th>Dimanche</th>
+                                    <td>
+                                        <div class="bfh-timepicker" data-mode="12h" data-time="0"
+                                             data-name="qouiqui[Dim][start]">
+                                        </div>
+
+                                    </td>
+                                    <td>
+                                        <div class="bfh-timepicker" data-mode="12h" data-time="0"
+                                             data-name="qouiqui[Dim][end]">
+                                        </div>
+                                    </td>
+
+                                </tr>
+                            </table>
+
+
+                        </div>
+                    </div>
+                    {#</div>#}
+
+
+                </form>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="button-annuler" data-dismiss="modal">Annuler</button>
+                <button type="submit" class="button-default " data-target="modifier" data-selector="ajout_services">
+                    Ajouter
+                </button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div id="edit_service" class="modal  fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Modifier Vos service</h4>
+            </div>
+            <div class="modal-body row">
+                <form id="editt" method="POST" action="{{ path('module_centreformation_modif_service') }}"
+                      enctype="multipart/form-data">
+
+
+                    <input type="hidden" name="qq_id" value="{{ qouiqui.id }}">
+                    <input id="idsevice" type="hidden" name="serviceID" value="" required>
+
+
+                    <div class="col-md-12">
+                        <div class="col-md-6">
+                            <input type="hidden" name="qq_id" value="{{ qouiqui.id }}">
+                            <div class=" form-group">
+                                <label class="col-md-12">Nom du Formation</label>
+                                <input id="type" type="text" placeholder="Entrer First Nom du cour.."
+                                       class="form-control" name="ncour">
+                            </div>
+
+
+                            <div class="form-group">
+                                <label class="col-md-12">Description</label>
+                                <textarea id="info" placeholder="Entrer description.." rows="3" class="form-control"
+                                          name="desc"></textarea>
+                            </div>
+
+
+                            <div class="col-sm-12 form-group">
+                                <label class="col-md-12">Prix</label>
+                                <input type="text" id="price" placeholder="Entrer le prix.." class="form-control"
+                                       name="prix">
+                            </div>
+
+                            <div class="col-sm-12 form-group">
+                                <label class="col-md-12">Durée </label>
+
+                                <input id="Dure" type="number" placeholder="Entrer nombre des jours.."
+                                       class="form-control"
+                                       name="dure">
+
+                            </div>
+
+                            <div class="col-sm-6 form-group">
+                                <label class="col-md-12">Date début </label>
+                                <div class="form-group">
+                                    <div class='input-group date' id='datetimepicker4'>
+                                        <input id="date-cour-start" type='text' class="form-control" name="start"/>
+                                        <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-calendar"></span>
+                </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 form-group">
+                                <label class="col-md-12">Date fin</label>
+                                <div class="form-group">
+                                    <div class='input-group date' id='datetimepicker5'>
+                                        <input id="date-cour-end" type='text' class="form-control" name="end"/>
+                                        <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-calendar"></span>
+                </span>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="col-sm-12form-group">
+                                <label class="col-md-12">Choisissez un photo</label>
+                                <input autocomplete="off" class="form-control "
+                                       name="file" type="file" required="required"
+                                       placeholder="choisissez_image" data-items="8"/>
+
+                            </div>
+
+                            <div class="checkbox col-md-12 ">
+                                <label>
+                                    <input id="certaficat" type="checkbox" name="certif" id="certeficat"> Certeficat
+                                </label>
+                            </div>
+
+
+                        </div>
+
+                        <div class="col-md-6">
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th>Jours</th>
+                                    <th>du</th>
+                                    <th>à</th>
+
+                                </tr>
+                                </thead>
+                                <tr class="day-monday" data-open="9:00" data-close="17:00">
+                                    <th>Lundi</th>
+                                    <td>
+                                        <div id="t1" class="bfh-timepicker" data-mode="12h" data-time="0"
+                                             data-name="qouiqui[Lun][start]">
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div id="t2" class="bfh-timepicker" data-mode="12h" data-time="0"
+                                             data-name="qouiqui[Lun][end]">
+                                        </div>
+                                    </td>
+
+                                </tr>
+                                <tr class="day-tuesday" data-open="9:00" data-close="20:00">
+                                    <th>Mardi</th>
+                                    <td>
+                                        <div id="t3" class="bfh-timepicker" data-mode="12h" data-time="0"
+                                             data-name="qouiqui[Mar][start]">
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div id="t4" class="bfh-timepicker" data-mode="12h" data-time="0"
+                                             data-name="qouiqui[Mar][end]">
+                                        </div>
+                                    </td>
+
+                                </tr>
+                                <tr class="day-wednesday" data-open="9:00" data-close="17:00">
+                                    <th>Merecredi</th>
+                                    <td>
+                                        <div id="t5" class="bfh-timepicker" data-mode="12h" data-time="0"
+                                             data-name="qouiqui[Mer][start]">
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div id="t6" class="bfh-timepicker" data-mode="12h" data-time="0"
+                                             data-name="qouiqui[Mer][end]">
+                                        </div>
+                                    </td>
+
+                                </tr>
+                                <tr class="day-thursday" data-open="9:00" data-close="17:00">
+                                    <th>Jeudi</th>
+                                    <td>
+                                        <div id="t7" class="bfh-timepicker" data-mode="12h" data-time="0"
+                                             data-name="qouiqui[Jeu][start]">
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div id="t8" class="bfh-timepicker" data-mode="12h" data-time="0"
+                                             data-name="qouiqui[Jeu][end]">
+                                        </div>
+                                    </td>
+
+                                </tr>
+                                <tr class="day-friday" data-open="9:00" data-close="17:00">
+                                    <th>Vendredi</th>
+                                    <td>
+                                        <div id="t9" class="bfh-timepicker" data-mode="12h" data-time="0"
+                                             data-name="qouiqui[Ven][start]">
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div id="t10" class="bfh-timepicker" data-mode="12h" data-time="0"
+                                             data-name="qouiqui[Ven][end]">
+                                        </div>
+                                    </td>
+
+                                </tr>
+                                <tr class="day-saturday" data-open="9:00" data-close="17:00">
+                                    <th>Samedi</th>
+                                    <td>
+                                        <div id="t11" class="bfh-timepicker" data-mode="12h" data-time="0"
+                                             data-name="qouiqui[Sam][start]">
+                                        </div>
+
+                                    </td>
+                                    <td>
+                                        <div id="t12" class="bfh-timepicker" data-mode="12h" data-time="0"
+                                             data-name="qouiqui[Sam][end]">
+                                        </div>
+                                    </td>
+
+                                </tr>
+                                <tr class="day-sunday" data-open="9:00" data-close="17:00">
+                                    <th>Dimanche</th>
+                                    <td>
+                                        <div id="t13" class="bfh-timepicker" data-mode="12h" data-time="0"
+                                             data-name="qouiqui[Dim][start]">
+                                        </div>
+
+                                    </td>
+                                    <td>
+                                        <div id="t14" class="bfh-timepicker" data-mode="12h" data-time="0"
+                                             data-name="qouiqui[Dim][end]">
+                                        </div>
+                                    </td>
+
+                                </tr>
+                            </table>
+
+                        </div>
+                    </div>
+
+                </form>
+
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="button-annuler" data-dismiss="modal">Annuler</button>
+                <button type="submit" class="button-default" data-target="modifier" data-selector="editt">
+                    Modifier
+                </button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+<div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+
+            <div class="modal-body">
+
+
+                <input type="hidden" name="supprimer" value="" class="delate">
+                <input type="hidden" name="id_qq" value="{{ qouiqui.id }}" class="">
+
+                <p>Voulez vous supprimer ce cour ?</p>
+                <p class="debug-url"></p>
+
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Annuler</button>
+
+
+                <button type="submit" data-qq="{{ qouiqui.id }}" class="btn btn-danger supprime "
+                        data-target="modifier" data-selector="supprim_service">
+                    Supprimer
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="modal-detail" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg ">
+        <div class="modal-content">
+
+            <div class="modal-body">
+                <div class="row">
+
+                    <div class="col-md-12">
+                        <div class="col-md-6 col-sm-12 col-xs-12">
+                            <div class="event-content">
+                                <h3 id="titre_cour" style="font-size: 20px;margin-bottom: 20px;"></h3>
+                            </div>
+                            <div class="event-single-item">
+
+
+                                <div class="event-image services_details image-box1">
+                                    <input type="hidden" class="idcour" name="idimg">
+                                    <img id="id1" src="" class="img-responsive">
+                                </div>
+                                <div class="event-content">
+
+
+                                    <!-- event-counter -->
+
+                                    <h4>Description</h4>
+                                    <p id="more">
+                                    </p>
+
+                                </div>
+
+
+                            </div>
+
+
+                        </div>
+                        <div class="col-md-6 col-sm-12 col-xs-12">
+
+                            <div class="sidebar" style="padding: 18px">
+
+                                <div class="sidebar-item">
+                                    <div class="sidebar-title">
+
+
+                                    </div>
+
+                                    <ul class="sidebar-categories">
+                                        <li><a href="#"><i class="fa fa-calendar" aria-hidden="true"></i> Date
+                                                Debut<span
+                                                        class="date-debut"></span></a></li>
+                                        <li><a href="#"><i class="fa fa-clock-o" aria-hidden="true"></i> Durée<span
+                                                        class="duree"></span></a></li>
+
+
+                                        <li><a href="#"><i class="fa fa-home" aria-hidden="true"></i> Lieu<span
+                                                        class="lieu">tunis</span></a></li>
+
+
+                                        <li><a href="#"><i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                                                Prix <span class="prix1">08</span></a></li>
+
+                                        <li><a href="#"><i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                                                certaficat<span id="certif"></span></a></li>
+                                        <li><a href="#"><i class="fa fa-hourglass" aria-hidden="true"></i>
+                                                Les horaires <span class="horaire"></span></a></li>
+
+                                    </ul>
+                                </div>
+
+                            </div><!-- sidebar -->
+                            <button class="button-default btn-lg"
+                                    style="margin-bottom:15px;width: 100%;margin-top:18px;"
+                                    data-toggle="modal" data-target="#inscription">Réserver cette formation
+                            </button>
+
+                            <button class="button-default btn-lg"
+                                    style="margin-bottom:15px;width: 100%;margin-top:18px;"
+                                    data-target="#">Contacter NOUS: <i class="fa fa-phone"
+                                                                       aria-hidden="true"></i>{{ qouiqui.phone }}
+                            </button>
+                        </div>
+                    </div><!-- row -->
+
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+{% if not app.user %}
+
+    <div class="modal fade" id="inscription" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+
+                <div class="modal-body">
+
+                    {#<h4>The Course Description:</h4>#}
+                    {#<p id="more"></p>#}
+
+
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="events-single-item">
+
+
+                                <div class="event-image ">
+
+                                </div>
+                                <div class="" style="font-size: 40px;margin-left:20px">
+                                    <h3 id="cour" style=" font-size: 18px;"></h3>
+
+                                </div>
+
+                                <div class="event-counter">
+
+                                </div>
+
+
+                            </div>
+
+
+                            <div class=" banner-details">
+                                <div class="container">
+
+                                    <div class="banner-content">
+
+
+                                        <form id="myform" action="{{ path('module_centreformation_booking') }}"
+                                              method="POST">
+
+                                            <div class="row">
+                                                <input type="hidden" id="frm" name="frmat">
+                                                <input type="hidden" name="qqid" value="{{ qouiqui.id }}">
+                                                {% if app.user %}
+                                                    <input type="hidden" name="qq_user"
+                                                           value="{{ app.user.id }}">
+                                                {% endif %}
+                                                <div class="col-md-6 ">
+                                                    <input type="text" name="name"
+                                                           placeholder="Nomé&prénom"required="required">
+                                                </div>
+                                                <div class="col-md-6 ">
+                                                    <input type="text" name="email" placeholder="Email*"required="required">
+                                                </div>
+                                                <div class="col-md-6 ">
+                                                    <input type="text" name="tel" placeholder="Téléphone*" id="tele"required="required">
+                                                </div>
+                                                {#<div class="col-md-6 ">#}
+                                                {#<input type="date" name="birth"#}
+                                                {#placeholder="Date Naissance">#}
+                                                {#</div>#}
+                                                <div class="col-md-6 ">
+                                                    <input type="number" name="age" placeholder="Votre age" id="age"required="required">
+
+                                                </div>
+                                                <div class="col-md-6 ">
+                                                    <input type="text" name="ville" placeholder="Ville*" id="ville"required="required">
+                                                </div>
+                                                <div class="col-md-6 ">
+                                                    <input type="text" name="adr" placeholder="Adresse*" id="addresse"required="required">
+                                                </div>
+                                                <div class="col-md-12 ">
+                                                    <select name="etude" id="niveau-etude">
+                                                        <option>Niveau d'étude*</option>
+                                                        <option value="Baccalauréat">Baccalauréat
+                                                        </option>
+                                                        <option value="Licence">Licence
+                                                        </option>
+                                                        <option value="Ingénierie">Ingénierie
+                                                        </option>
+                                                        <option value="Mastére">Mastére
+                                                        </option>
+                                                        <option value="autre">autre
+                                                        </option>
+
+
+
+                                                    </select>
+
+                                                </div>
+                                                <div class="col-md-12 ">
+                                                    <input type="text" name="autres" id="otherType"
+                                                           placeholder="entrer votre niveau d'étude">
+                                                </div>
+
+                                            </div>
+
+                                            <button class="envoie send-reservation">Envoyer</button>
+                                        </form>
+                                    </div><!-- banner-content -->
+                                </div><!-- container -->
+                            </div>
+
+                        </div>
+
+                    </div><!-- row -->
+
+
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+{% elseif app.user.id  %}
+    <div class="modal fade" id="inscription" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+
+                <div class="modal-body">
+
+                    {#<h4>The Course Description:</h4>#}
+                    {#<p id="more"></p>#}
+
+
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="events-single-item">
+
+
+                                <div class="event-image ">
+
+                                </div>
+                                <div class="" style="font-size: 40px;margin-left:20px">
+                                    <h3 id="cour" style="display: inline;    font-size: 18px;"></h3>
+
+                                </div>
+
+                                <div class="event-counter">
+
+                                </div>
+
+
+                            </div>
+
+
+                            <div class=" banner-details">
+                                <div class="container">
+
+                                    <div class="banner-content">
+
+                                        <form id="myform" action="{{ path('module_centreformation_booking') }}"
+                                              method="POST">
+
+                                            <div class="row">
+                                                <input type="hidden" id="frm" name="frmat">
+                                                <input type="hidden" name="qqid" value="{{ qouiqui.id }}">
+                                                {% if app.user %}
+                                                    <input type="hidden" name="qq_user"
+                                                           value="{{ app.user.id }}">
+                                                {% endif %}
+                                                <div class="col-md-6 ">
+                                                    <input type="text" name="name"
+                                                           value="{{ app.user.prenom }}">
+                                                </div>
+                                                <div class="col-md-6 ">
+                                                    <input type="email" name="email" value="{{ app.user.email }}"required="required">
+                                                </div>
+                                                <div class="col-md-6 ">
+                                                    <input type="text" name="tel" value="{{ app.user.phoneNumber }}"required="required">
+                                                </div>
+                                                <div class="col-md-6 ">
+                                                    <input type="number" name="age" placeholder="Votre age" id="age"required="required">
+
+                                                </div>
+                                                {#<div class="col-md-6 ">#}
+                                                {#<input type="date" name="birth"#}
+                                                {#placeholder="Date Naissance">#}
+                                                {#</div>#}
+                                                <div class="col-md-6 ">
+                                                    <input type="text" name="ville" placeholder="Ville*" id="ville"required="required">
+                                                </div>
+                                                <div class="col-md-6 ">
+                                                    <input type="text" name="adr" value="{{ app.user.adress }}"
+                                                           id="addresse"required="required">
+                                                </div>
+                                                <div class="col-md-12 ">
+                                                    <select name="etude" id="niveau-etude">
+                                                        <option>Niveau d'étude*</option>
+                                                        <option value="Baccalauréat">Baccalauréat
+                                                        </option>
+                                                        <option value="Licence">Licence
+                                                        </option>
+                                                        <option value="Ingénierie">Ingénierie
+                                                        </option>
+                                                        <option value="Mastére">Mastére
+                                                        </option>
+                                                        <option value="autre">autre
+                                                        </option>
+
+
+
+                                                    </select>
+
+                                                </div>
+                                                <div class="col-md-12 ">
+                                                    <input type="text" name="autres" id="otherType"
+                                                           placeholder="entrer votre niveau d'étude">
+                                                </div>
+
+                                            </div>
+
+                                            <button class="envoie send-reservation">Envoyer</button>
+                                        </form>
+
+
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div><!-- row -->
+
+
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endif %}
+<style>
+    .content ul li {
+        text-decoration: none;
+        color: #6c5ebf;
+        -webkit-transition: .25s ease-out;
+        transition: .25s ease-out;
+    }
+
+    .sidebar .sidebar-categories li span {
+        float: right;
+        height: 30px;
+        /* width: 30px; */
+        /*text-align: center;*/
+        background-color: #fff;
+        border-radius: 100%;
+        display: inline-block;
+        line-height: 30px;
+        -webkit-transition: .25s ease-out;
+        transition: .25s ease-out;
+    }
+
+    .button-annuler {
+        display: inline-block;
+        text-decoration: none;
+        color: #fff;
+        font-size: 16px;
+        font-weight: 700;
+        background-color: #ffb400;
+        border-radius: 2px;
+        padding: 11px 30px;
+        transition: .25s ease-out;
+    }
+
+    .post-meta li {
+        list-style: none;
+        display: inline-block;
+        color: #696969;
+        margin-right: 0px;
+    }
+
+    .height-content {
+        height: auto;
+    }
+
+    .sidebar .sidebar-item {
+        margin-bottom: 68px;
+    }
+
+    .banner-details {
+
+        background-size: cover;
+        background-position: center;
+        position: relative;
+        /*padding: 150px 0px;*/
+    }
+
+    .banner-details .banner-content {
+        /*float: right;*/
+        max-width: 520px;
+        background-color: #fff;
+        padding: 30px 40px 40px;
+        -webkit-box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, .1);
+        box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, .1);
+    }
+
+    .banner-details .banner-content h3 {
+        color: #ffb400;
+        font-size: 36px;
+        margin-bottom: 25px;
+        line-height: 1;
+    }
+
+    .banner-details .banner-content input {
+        width: 100%;
+        padding: 14px 15px;
+        margin-bottom: 10px;
+        border: 1px solid #f0f0f0;
+        background-color: #f8f8f8;
+        outline: none;
+    }
+
+    .banner-details .banner-content input:focus {
+        background-color: #fff;
+        border: 1px solid #ffb400;
+    }
+
+    .banner-details .banner-content select {
+        width: 100%;
+        padding: 14px 0px;
+        margin-bottom: 10px;
+        border: 1px solid #f0f0f0;
+        background-color: #f8f8f8;
+        outline: none;
+    }
+
+    .banner-details .banner-content select:nth-child(4), .banner-details .banner-content select:nth-child(6) {
+        float: right;
+    }
+
+    .banner-details .banner-content select:focus {
+        background-color: #fff;
+        border: 1px solid #ffb400;
+    }
+
+    .banner-details .banner-content button {
+        width: 100%;
+        padding: 17px 15px;
+        margin-top: 20px;
+        background-color: #ffb400;
+        color: #fff;
+        -webkit-transition: .25s ease-out;
+        transition: .25s ease-out;
+    }
+
+    .banner-details .banner-content button:hover, .banner-details .banner-content button:focus {
+        background-color: #6c5ebf;
+    }
+
+    .events-single-item .event-content .post-meta li {
+        list-style: none;
+        display: inline-block;
+        color: #6c5ebf;
+    }
+
+    .image-content2 {
+        width: auto;
+        height: 200px;
+        background-size: cover;
+        background-position: center;
+
+    }
+
+    #otherType {
+        display: none;
+    }
+
+    .bottom{
+        overflow: hidden;
+        padding-top: 15px;
+
+        /*position: absolute;*/
+        /*bottom:50px;*/
+        /*margin: 0 auto;*/
+        /*margin-left: 20px;*/
+    }
+</style>

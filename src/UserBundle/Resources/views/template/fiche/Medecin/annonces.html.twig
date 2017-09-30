@@ -1,0 +1,862 @@
+<style>
+    .information-title {
+        font-size: 20px;
+        border-color: #e0e0e0 !important;
+        border-bottom-width: 1px;
+        border-bottom-style: solid;
+        margin-top: 50px;
+    }
+
+    .pf_pageh_title_inner:after {
+        content: " ";
+        border-bottom-style: solid;
+        border-bottom-width: 2px;
+        border-bottom-color: rgba(255, 0, 0, 0.7);
+        display: block;
+        padding-bottom: 15px;
+        width: 75px;
+        margin-bottom: -2px;
+    }
+
+    .pfdetailitem-subelement .pf-ftitle, .pf-itempage-ohours .pf-ftitle {
+        float: left;
+        width: 30%;
+        font-weight: bold;
+    }
+
+    .pfdetailitem-subelement.opening {
+        margin: 0 0 5px 0;
+        padding: 0 0 5px 0;
+    }
+
+    .clearfix:before, .clearfix:after {
+        content: ".";
+        display: block;
+        clear: both;
+        visibility: hidden;
+        line-height: 0;
+        height: 0;
+    }
+
+    .pfdetailitem-subelement .pfdetail-ftext, .pf-itempage-ohours .pfdetail-ftext {
+        float: left;
+        width: 70%;
+        text-align: right;
+    }
+
+    .pfdetailitem-subelement {
+        border-bottom: 1px #e0e0e0 dashed;
+    }
+
+    .pf-itempage-details {
+        margin-top: 30px;
+    }
+
+    .glyphicon-asterisk {
+        font-size: 12px;
+        font-weight: 100;
+        color: #ffc107;
+        margin: 0px 8px;
+    }
+
+    .glyphicon-chevron-right {
+        font-size: 12px;
+        font-weight: 100;
+        color: red;
+        margin: 0px 5px;
+    }
+
+    .widget_pfitem_recent_entries ul li img {
+        float: left;
+        margin-right: 10px;
+        width: 40px;
+        height: 40px;
+        border-radius: 2px;
+    }
+
+    .widget_pfitem_recent_entries ul li img:hover {
+        opacity: 0.8;
+        border: none;
+    }
+
+    .widget_pfitem_recent_entries ul li {
+        margin-bottom: 7px;
+        vertical-align: top;
+        text-align: left;
+        padding: 10px;
+        border: 1px #e0e0e0 dashed;
+        transition-duration: 1s;
+    }
+
+    .widget_pfitem_recent_entries ul li:hover {
+        border: 1px solid #e0e0e0;
+        box-shadow: 2px 2px 2px 2px rgba(255, 0, 0, 0.4);
+    }
+
+    .pfwidgetinner img, .pfwidgetinner select {
+        max-width: 100%;
+    }
+
+    .widget_pfitem_recent_entries .pf-widget-itemlist li {
+        padding: 7px;
+        margin-bottom: 10px;
+        border-radius: 2px;
+    }
+
+    .pfwidgetinner li {
+        color: darkslategray !important;
+    }
+
+    .widget_pfitem_recent_entries .pf-widget-itemlist li .pf-recent-items-title {
+        font-weight: 500;
+    }
+
+    .nom-pharmacie {
+        font-size: 12px;
+    }
+
+    .pf-recent-items-address {
+        font-size: 10px;
+    }
+
+    .edit-information {
+        font-size: 30px;
+        color: rgba(255, 0, 0, 0.7);
+        cursor: pointer;
+        margin-top: 3px;
+    }
+
+    .material-switch > input[type="checkbox"] {
+        display: none;
+    }
+
+    .material-switch > label {
+        cursor: pointer;
+        height: 0px;
+        position: relative;
+        width: 40px;
+    }
+
+    .material-switch > label::before {
+        background: rgb(0, 0, 0);
+        box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.5);
+        border-radius: 8px;
+        content: '';
+        height: 16px;
+        margin-top: -8px;
+        position: absolute;
+        opacity: 0.3;
+        transition: all 0.4s ease-in-out;
+        width: 40px;
+    }
+
+    .material-switch > label::after {
+        background: rgb(255, 255, 255);
+        border-radius: 16px;
+        box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
+        content: '';
+        height: 24px;
+        left: -4px;
+        margin-top: -8px;
+        position: absolute;
+        top: -4px;
+        transition: all 0.3s ease-in-out;
+        width: 24px;
+    }
+
+    .material-switch > input[type="checkbox"]:checked + label::before {
+        background: inherit;
+        opacity: 0.5;
+    }
+
+    .material-switch > input[type="checkbox"]:checked + label::after {
+        background: inherit;
+        left: 20px;
+    }
+
+    .titre-emploi {
+        font-size: 20px;
+        font-weight: 700;
+        text-align: center;
+        color: #b6492c;
+    }
+
+    .jour-horaire {
+        font-size: 18px;
+        font-weight: 500;
+        color: #b85a4d;
+        font-family: Acme !important;
+    }
+
+    .date-time-picker {
+        background: red;
+        color: #fff;
+    }
+    .title-annonce-detail{
+        font-size: 27px;
+        font-weight: 500;
+        color: #671f1f;
+    }
+    .diplome-title{
+        width: 100% !important;
+    }
+    .valide-btn{
+        margin-top: 15px;
+        padding: 10px 20px;
+    }
+    .bfh-timepicker .input-group-addon{
+        background: #e86464;
+        color: white;
+    }
+
+    @media (max-width:767px) {
+        .jour-horaire{
+            margin: 1px;
+        }
+        .pfdetailitem-subelement .pf-ftitle, .pf-itempage-ohours .pf-ftitle {
+            width: 20%;
+        }
+        .pfdetailitem-subelement .pfdetail-ftext, .pf-itempage-ohours .pfdetail-ftext {
+            width: 80%;
+        }
+        .bfh-timepicker-toggle {
+            margin-bottom: 5px;
+        }
+        .title-annonce-detail {
+            font-size: 20px;
+            font-weight: 500;
+            color: #671f1f;
+        }
+    }
+    @media (max-width: 550px) {
+        .col-custom {
+            width: 100%;
+        }
+
+        .col-xs-offset-5 {
+            margin-left: 38%;
+        }
+    }
+
+    @media (max-width: 400px) {
+        .col-xs-offset-5 {
+            margin-left: 36%;
+        }
+    }
+
+    @media (max-width: 350px) {
+        .col-xs-offset-5 {
+            margin-left: 32%;
+        }
+    }
+
+</style>
+<link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/css/bootstrap-multiselect.css"/>
+<section id="section-annonces" class="padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h2 class="text-uppercase">Information <span class="color_red">Personnel </span></h2>
+                <div class="line_1"></div>
+                <div class="line_2"></div>
+                <div class="line_3"></div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 col-xs-12">
+                <div class="information-title">
+                    <div class="pf_pageh_title_inner title-annonce-detail">
+                        Qualification professionnelle
+                        <span class="edit-information pull-right">
+                            {% if app.user == attributes.quoiqui.user %}
+                            <span class="glyphicon glyphicon-cog" id="edit-professionnelle"
+                                  data-target="#edit-professionnell" data-toggle="modal"
+                                  data-lien="{{ path('medecin_professional_show',{'id':attributes.quoiqui.id}) }}"></span>
+                            </span>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class=" pf-itempage-details">
+                    <div class="pfdetailitem-subelement opening pf-onlyitem clearfix">
+                        <span class="pf-ftitle">Spécialités </span>
+                        <span class="pfdetail-ftext">{% if pro != null %} {{ pro.specialite }} {% endif %}</span>
+
+                    </div>
+                    <div class="pfdetailitem-subelement opening pf-onlyitem clearfix">
+                        <span class="pf-ftitle diplome-title">Diplômes et formations </span>
+                        {% if pro != null %}</br> {{ pro.description|raw }}{% endif %}</p>
+                    </div>
+                    <div class="pfdetailitem-subelement opening pf-onlyitem clearfix">
+                        <span class="pf-ftitle">Langues parlées </span>
+                        <span class="pfdetail-ftext">{% if pro != null %}{% for p in pro.langue %}{{ p }}</br>{% endfor %} {% endif %}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-xs-12">
+                <div class="information-title">
+                    <div class="pf_pageh_title_inner title-annonce-detail">
+                        Horaire d'ouverture
+                        {% if app.user == attributes.quoiqui.user %}
+                        <span class="edit-information pull-right">
+                            <span class="glyphicon glyphicon-cog" id="edit-horaire"
+                                  data-target="{% if etat == false %}#edit-horaire-deux{% else %}#edit-horaire-un{% endif %}"
+                                  data-toggle="modal"
+                                  data-lien="{{ path('medecin_schedule_show',{'id':attributes.quoiqui.id}) }}"></span>
+                            </span>
+                        {% endif %}
+                    </div>
+                </div>
+                {% if app.user == attributes.quoiqui.user %}
+                <br>
+                <div class="pfdetailitem-subelement opening pf-onlyitem clearfix" id="sceance"
+                     data-enabled="{{ etat }}">
+                    <span class="pf-ftitle">Séance unique </span>
+                    <div class="material-switch pull-right">
+                        <input id="someSwitchOptionDanger" name="someSwitchOption001" type="checkbox"
+                               {% if etat == true %}checked{% endif %}/>
+                        <label for="someSwitchOptionDanger" class="label-danger"></label>
+                    </div>
+                </div>
+                {% endif %}
+                <br>
+                <div class="pf-itempage-details">
+                    <div class="pfdetailitem-subelement opening pf-onlyitem clearfix">
+                        <span class="pf-ftitle">Lundi </span>
+                        <span class="pfdetail-ftext">{% if horaire != null %} {{ horaire.0.Lundi.debutS1 }}{% else %} 9h00{% endif %}<i
+                                    class="glyphicon glyphicon-chevron-right"></i>{% if horaire != null %}{{ horaire.0.Lundi.finS1 }}{% else %} 13h00{% endif %}
+                            {% if etat == 0 %}<i class="glyphicon glyphicon-asterisk"></i>{% endif %}{% if horaire != null and horaire.0.Lundi.debutS2 != null %}{{ horaire.0.Lundi.debutS2 }}{% endif %}
+                            {% if etat == 0 %}<i class="glyphicon glyphicon-chevron-right"></i>{% endif %}{% if horaire != null and horaire.0.Lundi.finS2 != null%}{{ horaire.0.Lundi.finS2 }}{% endif %}
+                    </div>
+                    <div class="pfdetailitem-subelement opening pf-onlyitem clearfix">
+                        <span class="pf-ftitle">Mardi </span>
+                        <span class="pfdetail-ftext"> {% if horaire != null %}{{ horaire.1.Mardi.debutS1 }}{% else %} 9h00{% endif %}<i
+                                    class="glyphicon glyphicon-chevron-right"></i>{% if horaire != null %}{{ horaire.1.Mardi.finS1 }}{% else %} 13h00{% endif %}
+                            {% if etat == 0 %}<i class="glyphicon glyphicon-asterisk"></i>{% endif %}{% if horaire != null and horaire.1.Mardi.debutS2 != null%}{{ horaire.1.Mardi.debutS2 }}{% endif %}
+                            {% if etat == 0 %}<i class="glyphicon glyphicon-chevron-right"></i>{% endif %}{% if horaire != null and horaire.1.Mardi.finS2 != null %}{{ horaire.1.Mardi.finS2 }}{% endif %}
+                    </div>
+                    <div class="pfdetailitem-subelement opening pf-onlyitem clearfix">
+                        <span class="pf-ftitle">Mercredi </span>
+                        <span class="pfdetail-ftext">{% if horaire != null %} {{ horaire.2.Mercredi.debutS1 }}{% else %} 9h00{% endif %}<i
+                                    class="glyphicon glyphicon-chevron-right"></i>{% if horaire != null %}{{ horaire.2.Mercredi.finS1 }}{% else %} 13h00{% endif %}
+                            {% if etat == 0 %}<i class="glyphicon glyphicon-asterisk"></i>{% endif %}{% if horaire != null and horaire.2.Mercredi.debutS2 != null %}{{ horaire.2.Mercredi.debutS2 }}{% endif %}
+                            {% if etat == 0 %}<i class="glyphicon glyphicon-chevron-right"></i>{% endif %}{% if horaire != null and horaire.2.Mercredi.finS2 != null%}{{ horaire.2.Mercredi.finS2 }}{% endif %}
+                    </div>
+                    <div class="pfdetailitem-subelement opening pf-onlyitem clearfix">
+                        <span class="pf-ftitle">Jeudi </span>
+                        <span class="pfdetail-ftext">{% if horaire != null %} {{ horaire.3.Jeudi.debutS1 }}{% else %} 9h00{% endif %}<i
+                                    class="glyphicon glyphicon-chevron-right"></i>{% if horaire != null %}{{ horaire.3.Jeudi.finS1 }}{% else %} 13h00{% endif %}
+                            {% if etat == 0 %}<i class="glyphicon glyphicon-asterisk"></i>{% endif %}{% if horaire != null and horaire.3.Jeudi.debutS2 != null%}{{ horaire.3.Jeudi.debutS2 }}{% endif %}
+                            {% if etat == 0 %}<i class="glyphicon glyphicon-chevron-right"></i>{% endif %}{% if horaire != null and horaire.3.Jeudi.finS2 != null%}{{ horaire.3.Jeudi.finS2 }}{% endif %}
+                    </div>
+                    <div class="pfdetailitem-subelement opening pf-onlyitem clearfix">
+                        <span class="pf-ftitle">Vendredi </span>
+                        <span class="pfdetail-ftext">{% if horaire != null %} {{ horaire.4.Vendredi.debutS1 }}{% else %} 9h00{% endif %}<i
+                                    class="glyphicon glyphicon-chevron-right"></i>{% if horaire != null %}{{ horaire.4.Vendredi.finS1 }}{% else %} 13h00{% endif %}
+                            {% if etat == 0 %}<i class="glyphicon glyphicon-asterisk"></i>{% endif %}{% if horaire != null and horaire.4.Vendredi.debutS2 != null %}{{ horaire.4.Vendredi.debutS2 }}{% endif %}
+                            {% if etat == 0 %}<i class="glyphicon glyphicon-chevron-right"></i>{% endif %}{% if horaire != null and horaire.4.Vendredi.debutS2 != null %}{{ horaire.4.Vendredi.finS2 }}{% endif %}
+                    </div>
+                    <div class="pfdetailitem-subelement opening pf-onlyitem clearfix">
+                        <span class="pf-ftitle">Samedi </span>
+                        <span class="pfdetail-ftext">{% if horaire != null %} {{ horaire.5.Samedi.debutS1 }}{% else %} 9h00{% endif %}<i class="glyphicon glyphicon-chevron-right"></i>{% if horaire != null %}{{ horaire.5.Samedi.finS1 }}{% else %} 13h00{% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 col-xs-12">
+                <div class="information-title">
+                    <div class="pf_pageh_title_inner title-annonce-detail"> Information pratiques
+                        {% if app.user == attributes.quoiqui.user %}
+                        <span class="edit-information pull-right">
+                            <span class="glyphicon glyphicon-cog" id="edit-pratique-config" data-target="#edit-pratique" data-toggle="modal" data-lien="{{ path('medecin_pratique_show',{'id':attributes.quoiqui.id}) }}"></span>
+                        </span>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="pf-itempage-details">
+                    <div class="pfdetailitem-subelement opening pf-onlyitem clearfix">
+                        <span class="pf-ftitle">Modes de règlement  </span>
+                        <span class="pfdetail-ftext">{% if pratique != null %}{% for m in pratique.mode %}{{ m }}{% if(loop.index< pratique.mode |length) %} , {% endif %}{% endfor %} {% endif %}</span>
+                    </div>
+                    <div class="pfdetailitem-subelement opening pf-onlyitem clearfix">
+                        <span class="pf-ftitle">Assurance maladie </span>
+                        <span class="pfdetail-ftext">{% if pratique != null %}{{ pratique.assurance }}{% endif %}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% if app.user != null and app.user == attributes.quoiqui.user %}
+    <!-- ajouter des information professionnelle de docteur -->
+    <div id="edit-professionnell" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Qualification professionnelle</h4>
+                </div>
+                <div class="modal-body">
+                    <form action="{{ path('medecin_professional_add') }}" method="post">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <label>Spécialités</label>
+                            </div>
+                            <div class="col-md-10">
+                                <div class="inner-addon left-addon">
+                                    <div class="bfh-selectbox specialite" data-name="specialite" data-value="0"
+                                         data-filter="true">
+                                        <div data-value="Allergologie">Allergologie</div>
+                                        <div data-value="Andrologie">Andrologie</div>
+                                        <div data-value="Anesthésiologie">Anesthésiologie</div>
+                                        <div data-value="Cardiologie">Cardiologie</div>
+                                        <div data-value="Chirurgie">Chirurgie</div>
+                                        <div data-value="Chirurgie cardiaque">Chirurgie cardiaque</div>
+                                        <div data-value="Chirurgie esthétique, plastique et reconstructive">Chirurgie
+                                            esthétique, plastique et reconstructive
+                                        </div>
+                                        <div data-value="Chirurgie générale"> Chirurgie générale</div>
+                                        <div data-value="Chirurgie maxillo-faciale">Chirurgie maxillo-faciale</div>
+                                        <div data-value="Chirurgie pédiatrique"> Chirurgie pédiatrique</div>
+                                        <div data-value="Chirurgie thoracique">Chirurgie thoracique</div>
+                                        <div data-value="Chirurgie vasculaire">Chirurgie vasculaire</div>
+                                        <div data-value="Neurochirurgie">Neurochirurgie</div>
+                                        <div data-value="Dermatologie">Dermatologie</div>
+                                        <div data-value="Endocrinologie">Endocrinologie</div>
+                                        <div data-value="Gastro-entérologi">Gastro-entérologie</div>
+                                        <div data-value="Gériatrie">Gériatrie</div>
+                                        <div data-value="Gynécologie">Gynécologie</div>
+                                        <div data-value="Hématologie">Hématologie</div>
+                                        <div data-value="Hépatologie">Hépatologie</div>
+                                        <div data-value="Infectiologie">Infectiologie</div>
+                                        <div data-value="Médecine aiguë">Médecine aiguë</div>
+                                        <div data-value="Médecine du travail">Médecine du travail</div>
+                                        <div data-value="Médecine générale">Médecine générale</div>
+                                        <div data-value="Médecine interne">Médecine interne</div>
+                                        <div data-value="Médecine nucléaire">Médecine nucléaire</div>
+                                        <div data-value="Médecine palliative">Médecine palliative</div>
+                                        <div data-value="Médecine physique">Médecine physique</div>
+                                        <div data-value="Médecine préventive">Médecine préventive</div>
+                                        <div data-value="Néonatologie">Néonatologie</div>
+                                        <div data-value="Néphrologie">Néphrologie</div>
+                                        <div data-value="Neurologie">Neurologie</div>
+                                        <div data-value="Odontologie">Odontologie</div>
+                                        <div data-value="Oncologie">Oncologie</div>
+                                        <div data-value="Obstétrique">Obstétrique</div>
+                                        <div data-value="Ophtalmologie">Ophtalmologie</div>
+                                        <div data-value="Orthopédie">Orthopédie</div>
+                                        <div data-value="Oto-rhino-laryngologie">Oto-rhino-laryngologie</div>
+                                        <div data-value="Pédiatrie">Pédiatrie</div>
+                                        <div data-value="Pneumologie">Pneumologie</div>
+                                        <div data-value="Psychiatrie">Psychiatrie</div>
+                                        <div data-value="Radiologie">Radiologie</div>
+                                        <div data-value="Radiothérapie">Radiothérapie</div>
+                                        <div data-value="Rhumatologie">Rhumatologie</div>
+                                        <div data-value="Urologie">Urologie</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-2">
+                                <label>Diplômes</label>
+                            </div>
+                            <div class="col-md-10">
+                                <div class="inner-addon left-addon">
+                                    <textarea cols="80" class="ckeditor form-annonce-desc" id="editeur" name="editeur"
+                                              rows="10" required="required"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-2">
+                                <label>Langues</label>
+                            </div>
+                            <div class="col-md-10">
+                                <div class="inner-addon left-addon">
+                                    <select class="form-control bfh-selectbox langue" multiple name="langue[]" style="margin-top: 10px;">
+                                        <option -value="Arabe">Arabe</option>
+                                        <option value="Français">Français</option>
+                                        <option value="Anglais">Anglais</option>
+                                        <option value="Allmande">Allmande</option>
+                                        <option value="Italien">Italien</option>
+                                        <option value="Espagnol">Espagnol</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-2 col-xs-offset-5">
+                                <input type="submit" class="btn btn-danger valide-btn" value="Enregistrer"/>
+                            </div>
+                        </div>
+                        <input type="hidden" value="{{ attributes.quoiqui.id }}" name="id"/>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ajouter des informations de systeme horaire de docteur -->
+    <div id="edit-horaire-deux" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-md">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">
+                        <center>Horaire d'ouverture</center>
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <form action="{{ path('medecin_schedule_add') }}" method="post">
+                        <div class="row hidden-title" style="margin-bottom: 25px;">
+                            <div class="col-md-3">
+                                <span class="titre-emploi"><center>Jour</center></span>
+                            </div>
+                            <div class="col-md-4">
+                                <span class="titre-emploi"><center>Premiére Scéance</center></span>
+                            </div>
+                            <div class="col-md-4 col-md-offset-1">
+                                <span class="titre-emploi"><center>Deuxiéeme Scéance</center></span>
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <span class="jour-horaire"><center>Lundi</center></span>
+                            </div>
+                            <div class="col-md-2 col-xs-6">
+                                <div class="bfh-timepicker" data-name="deb1Lundi" data-min="07:00"
+                                    {% if horaire != null %} data-time="{{ horaire.0.Lundi.debutS1 }}" {% else %} data-time="08:00" {% endif %}
+                                     data-max="14:00"></div>
+                            </div>
+                            <div class="col-md-2 col-xs-6">
+                                <div class="bfh-timepicker" data-name="fin1Lundi" data-min="12:00"
+                                     {% if horaire != null %} data-time="{{ horaire.0.Lundi.finS1 }}" {% else %} data-time="12:00" {% endif %}
+                                     data-max="14:00"></div>
+                            </div>
+                            <div class="col-md-2 col-md-offset-1 col-xs-6">
+                                <div class="bfh-timepicker" data-name="deb2Lundi" data-min="13:00"
+                                        {% if horaire == null or horaire.0.Lundi.debutS2 == null %} data-time="13:00" {% else %} data-time="{{ horaire.0.Lundi.debutS2 }}" {% endif %}
+                                     data-max="15:00"></div>
+                            </div>
+                            <div class="col-md-2 col-xs-6">
+                                <div class="bfh-timepicker" data-name="fin2Lundi" data-min="17:00"
+                                        {% if horaire == null or horaire.0.Lundi.finS2 == null%} data-time="17:00" {% else %} data-time="{{ horaire.0.Lundi.finS2 }}" {% endif %}
+                                     data-max="19:00"></div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <span class="jour-horaire"><center>Mardi</center></span>
+                            </div>
+                            <div class="col-md-2 col-xs-6">
+                                <div class="bfh-timepicker" data-name="deb1Mardi" data-min="07:00"
+                                        {% if horaire != null %} data-time="{{ horaire.1.Mardi.debutS1 }}"{% else %} data-time="08:00" {% endif %}
+                                     data-max="14:00"></div>
+                            </div>
+                            <div class="col-md-2 col-xs-6">
+                                <div class="bfh-timepicker" data-name="fin1Mardi" data-min="12:00"
+                                     {% if horaire != null %} data-time="{{ horaire.1.Mardi.finS1 }}" {% else %} data-time="12:00" {% endif %}
+                                     data-max="14:00"></div>
+                            </div>
+                            <div class="col-md-2 col-md-offset-1 col-xs-6">
+                                <div class="bfh-timepicker" data-name="deb2Mardi" data-min="12:00"
+                                        {% if horaire == null or horaire.1.Mardi.finS2 == null%} data-time="12:00" {% else %} data-time="{{ horaire.1.Mardi.debutS2 }}" {% endif %}
+                                     data-max="15:00"></div>
+                            </div>
+                            <div class="col-md-2 col-xs-6">
+                                <div class="bfh-timepicker" data-name="fin2Mardi" data-min="17:00"
+                                        {% if horaire == null or horaire.1.Mardi.finS2 == null%} data-time="17:00" {% else %} data-time="{{ horaire.1.Mardi.finS2 }}" {% endif %}
+                                     data-max="19:00"></div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <span class="jour-horaire"><center>Mercredi</center></span>
+                            </div>
+                            <div class="col-md-2 col-xs-6">
+                                <div class="bfh-timepicker" data-name="deb1Mercredi" data-min="07:00"
+                                     {% if horaire != null %}data-time="{{ horaire.2.Mercredi.debutS1 }}"{% else %} data-time="08:00" {% endif %}
+                                     data-max="14:00"></div>
+                            </div>
+                            <div class="col-md-2 col-xs-6">
+                                <div class="bfh-timepicker" data-name="fin1Mercredi" data-min="12:00"
+                                     {% if horaire != null %}ata-time="{{ horaire.2.Mercredi.finS1 }}"{% else %} data-time="12:00" {% endif %}
+                                     data-max="14:00"></div>
+                            </div>
+                            <div class="col-md-2 col-md-offset-1 col-xs-6">
+                                <div class="bfh-timepicker" data-name="deb2Mercredi" data-min="13:00"
+                                        {% if horaire == null or horaire.2.Mercredi.debutS2 == null%} data-time="13:00" {% else %}data-time="{{ horaire.2.Mercredi.debutS2 }}" {% endif %}
+                                     data-max="15:00"></div>
+                            </div>
+                            <div class="col-md-2 col-xs-6">
+                                <div class="bfh-timepicker" data-name="fin2Mercredi" data-min="17:00"
+                                        {% if horaire == null or horaire.2.Mercredi.finS2 == null%} data-time="17:00" {% else %}data-time="{{ horaire.2.Mercredi.finS2 }}" {% endif %}
+                                     data-max="19:00"></div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <span class="jour-horaire"><center>Jeudi</center></span>
+                            </div>
+                            <div class="col-md-2 col-xs-6">
+                                <div class="bfh-timepicker" data-name="deb1Jeudi" data-min="07:00"
+                                     {% if horaire != null %}data-time="{{ horaire.3.Jeudi.debutS1 }}" {% else %} data-time="08:00" {% endif %}
+                                     data-max="14:00"></div>
+                            </div>
+                            <div class="col-md-2 col-xs-6">
+                                <div class="bfh-timepicker" data-name="fin1Jeudi" data-min="12:00"
+                                        {% if horaire != null %} data-time="{{ horaire.3.Jeudi.finS1 }}" {% else %} data-time="12:00" {% endif %}
+                                     data-max="14:00"></div>
+                            </div>
+                            <div class="col-md-2 col-md-offset-1 col-xs-6">
+                                <div class="bfh-timepicker" data-name="deb2Jeudi" data-min="13:00"
+                                        {% if horaire == null or horaire.3.Jeudi.debutS2 == null%} data-time="13:00" {% else %} data-time="{{ horaire.3.Jeudi.debutS2 }}" {% endif %}
+                                     data-max="15:00"></div>
+                            </div>
+                            <div class="col-md-2 col-xs-6">
+                                <div class="bfh-timepicker" data-name="fin2Jeudi" data-min="17:00"
+                                        {% if horaire == null or horaire.3.Jeudi.finS2 == null%} data-time="17:00" {% else %} data-time="{{ horaire.3.Jeudi.finS2 }}" {% endif %}
+                                     data-max="19:00"></div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <span class="jour-horaire"><center>Vendredi</center></span>
+                            </div>
+                            <div class="col-md-2 col-xs-6">
+                                <div class="bfh-timepicker" data-name="deb1Vendredi" data-min="07:00"
+                                     {% if horaire != null %}data-time="{{ horaire.4.Vendredi.debutS1 }}" {% else %} data-time="08:00" {% endif %}
+                                     data-max="14:00"></div>
+                            </div>
+                            <div class="col-md-2 col-xs-6">
+                                <div class="bfh-timepicker" data-name="fin1Vendredi" data-min="12:00"
+                                     {% if horaire != null %}data-time="{{ horaire.4.Vendredi.finS1 }}" {% else %} data-time="12:00" {% endif %}
+                                     data-max="14:00"></div>
+                            </div>
+                            <div class="col-md-2 col-md-offset-1 col-xs-6">
+                                <div class="bfh-timepicker" data-name="deb2Vendredi" data-min="13:00"
+                                        {% if horaire == null or horaire.4.Vendredi.debutS2 == null%} data-time="13:00" {% else %} data-time="{{ horaire.4.Vendredi.debutS2 }}" {% endif %}
+                                     data-max="15:00"></div>
+                            </div>
+                            <div class="col-md-2 col-xs-6">
+                                <div class="bfh-timepicker" data-name="fin2Vendredi" data-min="17:00"
+                                        {% if horaire == null or horaire.4.Vendredi.finS2 == null%} data-time="17:00" {% else %} data-time="{{ horaire.4.Vendredi.finS2 }}" {% endif %}
+                                     data-max="19:00"></div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <span class="jour-horaire"><center>Samdi</center></span>
+                            </div>
+                            <div class="col-md-2 col-xs-6">
+                                <div class="bfh-timepicker" data-name="deb1Samedi" data-min="07:00"
+                                        {% if horaire != null %} data-time="{{ horaire.5.Samedi.debutS1 }}" {% else %} data-time="08:00" {% endif %}
+                                     data-max="14:00"></div>
+                            </div>
+                            <div class="col-md-2 col-xs-6">
+                                <div class="bfh-timepicker" data-name="fin1Samedi" data-min="12:00"
+                                        {% if horaire != null %} data-time="{{ horaire.5.Samedi.finS1 }}" {% else %} data-time="12:00" {% endif %}
+                                     data-max="14:00"></div>
+                            </div>
+                        </div>
+                        <input type="hidden" value="{{ attributes.quoiqui.id }}" name="id"/>
+                        <input name="etat" value="0" type="hidden"/>
+                        <div class="row">
+                            <div class="col-xs-2 col-xs-offset-5">
+                                <input type="submit" class="btn btn-danger valide-btn" value="Enregistrer"/>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="edit-horaire-un" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">
+                        <center>Horaire d'ouverture</center>
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <form action="{{ path('medecin_schedule_add') }}" method="post">
+                        <div class="row hidden-title" style="margin-bottom: 25px;">
+                            <div class="col-md-3 col-xs-2">
+                                <span class="titre-emploi titre-jour"><center>Jour</center></span>
+                            </div>
+                            <div class="col-md-9 col-xs-10">
+                                <span class="titre-emploi"><center>Scéance Unique</center></span>
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <span class="jour-horaire"><center>Lundi</center></span>
+                            </div>
+                            <div class="col-md-4 col-xs-6">
+                                <div class="bfh-timepicker" data-name="deb1Lundi" data-min="07:00"
+                                        {% if horaire != null %} data-time="{{ horaire.0.Lundi.debutS1 }}" {% else %} data-time="08:00" {% endif %}
+                                     data-max="11:00"></div>
+                            </div>
+                            <div class="col-md-4 col-md-offset-1 col-xs-6">
+                                <div class="bfh-timepicker" data-name="fin1Lundi" data-min="12:00"
+                                        {% if horaire != null %} data-time="{{ horaire.0.Lundi.finS1 }}" {% else %} data-time="15:00" {% endif %}
+                                     data-max="19:00"></div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <span class="jour-horaire"><center>Mardi</center></span>
+                            </div>
+                            <div class="col-md-4 col-xs-6">
+                                <div class="bfh-timepicker" data-name="deb1Mardi" data-min="07:00"
+                                        {% if horaire != null %} data-time="{{ horaire.1.Mardi.debutS1 }}"{% else %} data-time="08:00" {% endif %}
+                                     data-max="11:00"></div>
+                            </div>
+                            <div class="col-md-4 col-md-offset-1 col-xs-6">
+                                <div class="bfh-timepicker" data-name="fin1Mardi" data-min="12:00"
+                                        {% if horaire != null %} data-time="{{ horaire.1.Mardi.finS1 }}"{% else %} data-time="15:00" {% endif %}
+                                     data-max="19:00"></div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <span class="jour-horaire"><center>Mercredi</center></span>
+                            </div>
+                            <div class="col-md-4 col-xs-6">
+                                <div class="bfh-timepicker" data-name="deb1Mercredi" data-min="07:00"
+                                        {% if horaire != null %} data-time="{{ horaire.2.Mercredi.debutS1 }}"{% else %} data-time="08:00" {% endif %}
+                                     data-max="11:00"></div>
+                            </div>
+                            <div class="col-md-4 col-md-offset-1 col-xs-6">
+                                <div class="bfh-timepicker" data-name="fin1Mercredi" data-min="12:00"
+                                        {% if horaire != null %}  data-time="{{ horaire.2.Mercredi.finS1 }}"{% else %} data-time="15:00" {% endif %}
+                                     data-max="19:00"></div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <span class="jour-horaire"><center>Jeudi</center></span>
+                            </div>
+                            <div class="col-md-4 col-xs-6">
+                                <div class="bfh-timepicker" data-name="deb1Jeudi" data-min="07:00"
+                                        {% if horaire != null %}    data-time="{{ horaire.3.Jeudi.debutS1 }}"{% else %} data-time="08:00" {% endif %}
+                                     data-max="11:00"></div>
+                            </div>
+                            <div class="col-md-4 col-md-offset-1 col-xs-6">
+                                <div class="bfh-timepicker" data-name="fin1Jeudi" data-min="12:00"
+                                        {% if horaire != null %}   data-time="{{ horaire.3.Jeudi.finS1 }}"{% else %} data-time="15:00" {% endif %}
+                                     data-max="19:00"></div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <span class="jour-horaire"><center>Vendredi</center></span>
+                            </div>
+                            <div class="col-md-4 col-xs-6">
+                                <div class="bfh-timepicker" data-name="deb1Vendredi" data-min="07:00"
+                                     {% if horaire != null %} data-time="{{ horaire.4.Vendredi.debutS1 }}"{% else %} data-time="08:00" {% endif %}
+                                     data-max="11:00"></div>
+                            </div>
+                            <div class="col-md-4 col-md-offset-1 col-xs-6">
+                                <div class="bfh-timepicker" data-name="fin1Vendredi" data-min="12:00"
+                                        {% if horaire != null %} data-time="{{ horaire.4.Vendredi.finS1 }}" {% else %} data-time="15:00" {% endif %}
+                                     data-max="19:00"></div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <span class="jour-horaire"><center>Samdi</center></span>
+                            </div>
+                            <div class="col-md-4 col-xs-6">
+                                <div class="bfh-timepicker" data-name="deb1Samedi" data-min="07:00"
+                                        {% if horaire != null %}  data-time="{{ horaire.5.Samedi.debutS1 }}"{% else %} data-time="08:00" {% endif %}
+                                     data-max="11:00"></div>
+                            </div>
+                            <div class="col-md-4 col-md-offset-1 col-xs-6">
+                                <div class="bfh-timepicker" data-name="fin1Samedi" data-min="12:00"
+                                        {% if horaire != null %} data-time="{{ horaire.5.Samedi.finS1 }}"{% else %} data-time="14:00" {% endif %}
+                                     data-max="19:00"></div>
+                            </div>
+                        </div>
+                        <input type="hidden" value="{{ attributes.quoiqui.id }}" name="id"/>
+                        <input name="etat" value="1" type="hidden"/>
+                        <div class="row">
+                            <div class="col-xs-2 col-xs-offset-5">
+                                <input type="submit" class="btn btn-danger valide-btn" value="Enregistrer"/>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ajouter des information pratique de docteur -->
+    <div id="edit-pratique" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Information pratiques</h4>
+                </div>
+                <div class="modal-body">
+                    <form action="{{ path('medecin_pratique_add') }}" method="post">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label>Modes de règlement</label>
+                            </div>
+                            <div class="col-md-9">
+                                <div class="inner-addon left-addon">
+                                    <select name="mode[]" multiple class="form-control mode">
+                                        <option value="Espèces">Espèces</option>
+                                        <option value="Cheque">Cheque</option>
+                                        <option value="Carte Bancaire">Carte Bancaire</option>
+                                        <option value="Virement">Virement</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label>Assurance maladie</label>
+                            </div>
+                            <div class="col-md-9">
+                                <div class="inner-addon left-addon">
+                                    <div class="bfh-selectbox assurance" data-name="assurance" data-value="0"
+                                         data-filter="true">
+                                        <div data-value="0">Selectionner Type d'assurance</div>
+                                        <div data-value="CNAM">CNAM</div>
+                                        <div data-value="GAT">GAT</div>
+                                        <div data-value="SAHATY">SAHATY</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-xs-2 col-xs-offset-5">
+                                <input type="submit" class="btn btn-danger valide-btn" value="Enregistrer"/>
+                            </div>
+                        </div>
+                        <input type="hidden" value="{{ attributes.quoiqui.id }}" name="id"/>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endif %}
+
+<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/js/bootstrap-multiselect.min.js"></script>

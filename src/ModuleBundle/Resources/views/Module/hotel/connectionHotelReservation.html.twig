@@ -1,0 +1,128 @@
+{#=============================connection modal============================#}
+
+<div id="modal_connection" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">S'authentifier/S'inscrire</h4>
+            </div>
+            <div class="modal-body">
+                <div role="tabpanel">
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li role="presentation" class="active"><a href="#es_admin" aria-controls="es_admin" role="tab"
+                                                                  data-toggle="tab">S'authentifier</a>
+                        </li>
+                        <li role="presentation"><a href="#es_client" aria-controls="es_client" role="tab"
+                                                   data-toggle="tab">S'inscrire</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane active" id="es_admin">
+                            <div class="col-md-12 btn-group btn-group-justified hidden-xs hidden-sm social" role="group">
+                                <div class="facebook btn-group" role="group">
+                                    <a class="facebook-btn btn btn-primary" href="/login/facebook">
+                                        <span>Connecter avec Facebook</span>
+                                    </a>
+                                </div>
+                                <div class="btn-group" role="group">
+                                    <a class="btn btn-danger" href="/login/google">
+                                        <span>Connecter avec Google</span>
+                                    </a>
+                                </div>
+                            </div>
+                            <form action="/login_check" method="post">
+                                <div class="form-group">
+                                    <input type="hidden" name="_csrf_token" value="Kk4KcJ-i6lPzu7pUx0wOja7L0g5uu9CI6uWJYDGVT4Q">
+                                </div>
+                                <div class="form-group">
+                                    <label for="username">Nom d'utilisateur</label>
+                                    <input type="text" id="username" name="_username" value="" required="required" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label for="password">Mot de passe</label>
+                                    <input type="password" id="password" name="_password" required="required" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <input type="checkbox" id="remember_me" name="_remember_me" value="on">
+                                    <label for="remember_me">Se souvenir de moi!</label>
+                                </div>
+                                <div class="form-group">
+                                    <input type="submit" id="_submit" name="_submit" value="Se connecter" class="form-control btn btn-warning">
+                                </div>
+                            </form>
+                        </div>
+                        <div role="tabpanel" class="tab-pane" id="es_client">
+                            <strong><br>Nouveau sur {{ qouiqui.firstName }}? Insecrivez-vous!  <br></strong>
+
+                            <form name="fos_user_registration_form" method="post" action="/register/"
+                                  class="fos_user_registration_register">
+                                <div id="fos_user_registration_form">
+
+                                    <div class="form-group"><label class="control-label required"
+                                                                   for="fos_user_registration_form_email">E-mail</label><input
+                                                type="email" id="fos_user_registration_form_email"
+                                                name="fos_user_registration_form[email]" required="required"
+                                                class="form-control"></div>
+                                    <div class="form-group"><label class="control-label required"
+                                                                   for="fos_user_registration_form_username">Nom </label><input
+                                                type="text" id="fos_user_registration_form_username"
+                                                name="fos_user_registration_form[username]" required="required"
+                                                maxlength="180" pattern=".{2,}" class="form-control"></div>
+                                    <div class="form-group"><label class="control-label required"
+                                                                   for="fos_user_registration_form_prenom">
+                                            Prénom</label><input type="text" id="fos_user_registration_form_prenom"
+                                                                 name="fos_user_registration_form[prenom]"
+                                                                 required="required" maxlength="255"
+                                                                 class="form-control"></div>
+                                    <div class="form-group"><label class="control-label required"
+                                                                   for="fos_user_registration_form_phone_number">téléphonne</label><input
+                                                type="text" id="fos_user_registration_form_phone_number"
+                                                name="fos_user_registration_form[phone_number]" required="required"
+                                                class="form-control"></div>
+
+                                    <div class="form-group"><label class="control-label required"
+                                                                   for="fos_user_registration_form_adress">Adresse</label><input
+                                                type="text" id="fos_user_registration_form_adress"
+                                                name="fos_user_registration_form[adress]" required="required"
+                                                maxlength="1024" class="form-control"></div>
+                                    <div class="form-group"><label class="control-label required"
+                                                                   for="fos_user_registration_form_plainPassword_first">Entrer
+                                            le mot de passe</label><input type="password"
+                                                                          id="fos_user_registration_form_plainPassword_first"
+                                                                          name="fos_user_registration_form[plainPassword][first]"
+                                                                          required="required" class="form-control">
+                                    </div>
+                                    <div class="form-group"><label class="control-label required"
+                                                                   for="fos_user_registration_form_plainPassword_second">Confirmer
+                                            le mot de passe</label><input type="password"
+                                                                          id="fos_user_registration_form_plainPassword_second"
+                                                                          name="fos_user_registration_form[plainPassword][second]"
+                                                                          required="required" class="form-control">
+                                    </div>
+                                    {#<input type="text" id="fos_user_registration_form__token" name="fos_user_registration_form[_token]" value="">#}
+
+                                </div>
+
+
+                                <div>
+                                    <input type="submit" id="envoyer" value="S'inscrire"
+                                           class="form-control btn btn-warning">
+                                </div>
+
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+{#===========================end connection modal============================#}

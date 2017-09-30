@@ -1,0 +1,435 @@
+{% set tab= ['#d33ba0','#1dc454','#2c6fd1','#44a0d0','#e7b52a','#199c9a','#eb42ff','#fd3f9c','#ff8dae','#d1b501','#ffa07a','#e8a6c9'] %}
+{% set array= ['fa fa-graduation-cap','fa fa-fw fa-4x fa-user-md','fa fa-language','fa fa-leaf','icons-img fa fa-database',
+'fa fa-paint-brush','fa fa-television','fa fa-music','fa fa-wordpress','fa fa-picture-o','fa fa-camera','fa fa-code','fa fa-briefcase','fa fa-heartbeat',
+'fa fa-desktop','fa fa-globe','fa fa-building-o','fa fa-line-chart','fa fa-bar-chart'
+
+
+
+
+] %}
+{#style="margin-top: 40px;"#}
+{#style="height: auto;margin-top:30px;margin-right: 0px;"#}
+<section class="achievements  padding-120"  id="acheivment">
+    {% if  connected %}
+        <a data-toggle="modal" href="#categorie_list" class="button-default pull-right button_admin1  ">Gérer cette
+            section</a>
+    {% endif %}
+    <div class="section-header" >
+        <h3>Nos Domaines  de Formation</h3>
+
+        {#<span><img src="http://alishafique.net/html/edulearn/images/hdg-01.png" alt=""></span>#}
+    </div>
+    <div class="overlay " style="height:100%;">
+        <div class="container">
+            {% if centreFormationcategorie(module) is not empty %}
+
+                <div class="carousel slide " data-ride="carousel" data-type="multi" data-interval="3000" id="myCarousel"
+                    >
+                    <div class="carousel-inner" style="margin-bottom: 96px;">
+                        {% for v  in catego %}
+
+
+
+
+
+                            {% if loop.index==1 %}
+                                <div class="item active">
+                                    <div class="col-md-3 col-sm-6 col-xs-12">
+
+                                        <div class="item">
+                                            <div class="course_subject_wrap ct_bg_2" style="height: 199px;">
+                                                {% for i, a in categories %} {% set s = jsonDecod(a.data) %}
+                                                    <i style="font-size: 40px; color:#ffffff"
+                                                       class="{{ array[s.id_icon] }}" aria-hidden="true"></i>
+                                                {% endfor %}
+                                                <div class="course_subject_des">
+                                                    <p style="color:white;"><span
+                                                                style="font-weight: 700;font-family: Montserrat;font-size: 17px;">{{ v }}</span>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            {% endif %}
+
+                            {% if loop.index>1 %}
+                                <div class="item">
+                                    <div class="col-md-3 col-sm-6 col-xs-12">
+                                        <div class="course_subject_wrap ct_bg_2" style="height: 199px;">
+
+                                            {% for i, a in categories %} {% set s = jsonDecod(a.data) %}
+                                                <i style="font-size: 40px; color:#ffffff" class="{{ array[s.id_icon] }}"
+                                                   aria-hidden="true"></i>
+                                            {% endfor %}
+
+
+                                            <div class="course_subject_des">
+                                                <p style="color:white;font-size: 19px;"><span
+                                                            style="font-weight: 700;font-family: Montserrat;font-size: 17px;">{{ v }}</span>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+
+
+                    </div>
+                    <a class="left carousel-control" href="#myCarousel" data-slide="prev"><i
+                                class="glyphicon glyphicon-chevron-left"></i></a>
+                    <a class="right carousel-control" href="#myCarousel" data-slide="next"><i
+                                class="glyphicon glyphicon-chevron-right"></i></a>
+                </div>
+            {% else %}
+                <div class="carousel slide " data-ride="carousel" data-type="multi" data-interval="3000"
+                     id="myCarousel">
+                    <div class="carousel-inner" style="margin-bottom: 96px;">
+
+
+                        <div class="item active">
+                            <div class="col-md-3 col-sm-6 col-xs-12">
+
+                                <div class="item">
+                                    <div class="course_subject_wrap ct_bg_2" style="height: 199px;">
+                                        <span class="icon flaticon-adobe-photoshop"></span>
+                                        <div class="course_subject_des">
+                                            <p style="color:white;"><span>categorie1</span></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="item">
+                            <div class="col-md-3 col-sm-6 col-xs-12">
+                                <div class="course_subject_wrap ct_bg_2" style="height: 199px;">
+                                    <span class="icon flaticon-adobe-photoshop"></span>
+                                    <div class="course_subject_des">
+                                        <p style="color:white;font-size: 19px;"><span>categorie2</span></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="item">
+                            <div class="col-md-3 col-sm-6 col-xs-12">
+                                <div class="course_subject_wrap ct_bg_2" style="height: 199px;">
+                                    <span class="icon flaticon-adobe-photoshop"></span>
+                                    <div class="course_subject_des">
+                                        <p style="color:white;font-size: 19px;"><span>categorie3</span></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="col-md-3 col-sm-6 col-xs-12">
+                                <div class="course_subject_wrap ct_bg_2" style="height: 199px;">
+                                    <span class="icon flaticon-adobe-photoshop"></span>
+                                    <div class="course_subject_des">
+                                        <p style="color:white;font-size: 19px;"><span>categorie4</span></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <a class="left carousel-control" href="#myCarousel" data-slide="prev"><i
+                                class="glyphicon glyphicon-chevron-left"></i></a>
+                    <a class="right carousel-control" href="#myCarousel" data-slide="next"><i
+                                class="glyphicon glyphicon-chevron-right"></i></a>
+                </div>
+            {% endif %}
+
+
+        </div>
+    </div>
+</section>
+
+<style>
+
+
+    .categories {
+        -webkit-transform: translateY(-50px);
+        transform: translateY(13px);
+        margin-bottom: 54px;
+    }
+
+    {% set path =  asset('uploads/image/')~qouiqui.user.id ~'/'~ qouiqui.id ~'/categories/photo.jpg' %}
+    {% if asset_exists(path) %}
+
+    .achievements {
+        background-image: url({{  asset('uploads/image/')~qouiqui.user.id ~'/'~ qouiqui.id ~'/categories/photo.jpg' }});
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+    }
+
+    {% else %}
+    .achievements {
+        background-image: url('http://alishafique.net/html/edulearn/images/cources-cat-bg.jpg');
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+    }
+
+    {% endif %}
+
+    .achievements .overlay {
+        background-color: rgba(0, 0, 0, 0);
+    }
+
+    .button_admin1 {
+        /*position: relative;*/
+        /*margin-top: -21px;*/
+    }
+
+    .carousel-control {
+        width: 4%;
+    }
+
+    .carousel-control.left, .carousel-control.right {
+        margin-left: 15px;
+        background-image: none;
+    }
+
+    @media (max-width: 767px) {
+        .carousel-inner .active.left {
+            left: -100%;
+        }
+
+        .carousel-inner .next {
+            left: 100%;
+        }
+
+        .carousel-inner .prev {
+            left: -100%;
+        }
+
+        .active > div {
+            display: none;
+        }
+
+        .active > div:first-child {
+            display: block;
+        }
+
+    }
+
+    @media (min-width: 767px) and (max-width: 992px ) {
+        .carousel-inner .active.left {
+            left: -50%;
+        }
+
+        .carousel-inner .next {
+            left: 50%;
+        }
+
+        .carousel-inner .prev {
+            left: -50%;
+        }
+
+        .active > div {
+            display: none;
+        }
+
+        .active > div:first-child {
+            display: block;
+        }
+
+        .active > div:first-child + div {
+            display: block;
+        }
+    }
+
+    @media (min-width: 992px ) {
+        .carousel-inner .active.left {
+            left: -25%;
+        }
+
+        .carousel-inner .next {
+            left: 25%;
+        }
+
+        .carousel-inner .prev {
+            left: -25%;
+        }
+    }
+
+    .carousel slide .item {
+        margin: 0px 10px;
+        float: left;
+        width: 90%;
+    }
+
+    .course_subject_wrap {
+        float: left;
+        width: 100%;
+        position: relative;
+        text-align: center;
+        padding: 54px 20px;
+    }
+
+    .ct_bg_2 {
+        background-color: {{ random(tab) }};
+    }
+
+    .owl-carousel .owl-item {
+        position: relative;
+        min-height: 1px;
+        float: left;
+        -webkit-backface-visibility: hidden;
+        -webkit-tap-highlight-color: transparent;
+        -webkit-touch-callout: none;
+    }
+</style>
+
+
+<div class="modal fade " id="categorie_list" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Formation par objectif</h4>
+            </div>
+
+            <div class="modal-body row">
+                <form id="ajout" method="POST"
+                      action="{{ path('module_centreformation_ajout_categorie',{'idqq': qouiqui.id }) }}"
+                      enctype="multipart/form-data">
+
+
+                    <div class="col-md-12">
+                        <label class="col-md12">Domaine de Formation</label>
+
+                        <input type="hidden" name="idcatego"{% for i, a in categories %} value="{{ a.id }}"{% endfor %} >
+                        {% for i, a in categories %} {% set s = jsonDecod(a.data) %}
+                        <input type="text" class="form-control" name="categorie"
+                               id="tokenfield-typeahead" value="{{ s.categorie }}"
+                        />
+                    </div>
+
+                        <input type="hidden" id="cb{{ s.id_icon }}" name="id_icon"
+                               value="{{ s.id_icon }}"/>
+                    {% endfor %}
+
+
+                    <div class="col-md-12 col-sm-12">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion"
+                                                           href="#collapseOne"> Choisissez une image<span
+                                                class="caret"></span></a></h4>
+                            </div>
+
+                            <div id="collapseOne" class="panel-collapse collapse in">
+                                <ul class="list-group">
+                                    {% for a in array %}
+                                        <div style="margin: 1px;border: 1px dashed grey ;width: 47px;height: 39px;float: left;">
+
+                                            <li style=" display: inline-block;"><input type="checkbox" id="cb{{ loop.index-1 }}" name="id_icon"
+                                                       value="{{ loop.index-1 }}"/>
+                                                <label   for="cb{{ loop.index-1 }}" class="fonts"> <a hre="#"> <i
+                                                                style="font-size: 20px;  " class="{{ a }}"></i></a>
+                                                </label>
+                                            </li>
+                                        </div>
+
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                    <div class="col-md-12 col-sm-12">
+                        <div class="form-group ">
+                            <label class="col-md-12 col-sm-12"> Choisissez une photo</label>
+                            <input autocomplete="off" class="form-control "
+                                   name="file" type="file" required="required"
+                                   placeholder="choisissez_image" data-items="8"/>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+                <button type="submit" class="btn btn-primary " data-target="modifier" data-selector="ajout">
+                    Ajouter
+                </button>
+            </div>
+        </div>
+
+    </div>
+</div>
+<style>
+    ul {
+        list-style-type: none;
+    }
+
+
+
+    input[type="checkbox"][id^="cb"] {
+        display: none;
+    }
+
+    label {
+        border: 1px solid #fff;
+        padding:  5px 16px 5px 10px;
+        display: block;
+        position: relative;
+        /*margin: 10px;*/
+        cursor: pointer;
+    }
+
+    label:before {
+        background-color: white;
+        color: white;
+        content: " ";
+        display: block;
+        border-radius: 50%;
+        border: 1px solid grey;
+        position: absolute;
+        top: -5px;
+        left: -5px;
+        width: 25px;
+        height: 25px;
+        text-align: center;
+        line-height: 28px;
+        transition-duration: 0.4s;
+        transform: scale(0);
+    }
+
+    label a {
+        height: 100px;
+        width: 100px;
+        transition-duration: 0.2s;
+        transform-origin: 50% 50%;
+    }
+
+    :checked + label {
+        border-color: #ddd;
+    }
+
+    :checked + label:before {
+        content: "✓";
+        background-color: grey;
+        transform: scale(1);
+    }
+
+    :checked + label a {
+        transform: scale(0.9);
+        box-shadow: 0 0 5px #333;
+        z-index: -1;
+    }
+</style>

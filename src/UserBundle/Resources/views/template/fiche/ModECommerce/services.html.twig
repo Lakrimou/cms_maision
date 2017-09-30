@@ -1,0 +1,252 @@
+<style>
+    label, .valide-btn {
+        margin-top: 10px !important;
+    }
+
+    .input-form {
+        margin-top: 10px !important;
+    }
+
+    textarea {
+        margin-top: 5px;
+    }
+
+    .feature_box {
+        height: 210px !important;
+    }
+
+    .desc-height-service {
+        height: 98px;
+    }
+</style>
+<!--===== WHAT WE DO =====-->
+<section id="section-services" class="we_are bg_light padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h2 class="text-uppercase">Nos <span class="color_red">services </span></h2>
+                <div class="line_1"></div>
+                <div class="line_2"></div>
+                <div class="line_3"></div>
+            </div>
+        </div>
+        <!--===== #/WHAT WE DO =====-->
+        <!-- modal detail service -->
+
+        {% if app.user != null and app.user == attributes.quoiqui.user %}
+            <!-- Gestion des services -->
+            <div class="pull-right">
+                <button data-step="3" data-intro="Gestion des services" type="button" class="btn btn-danger pull-right"
+                        data-toggle="modal"
+                        data-target="#addService"><span class="modal-service-add">Ajouter un Service</span>
+                </button>
+            </div>
+            <table class="table table-responsive table-hover table-striped dataTable" style="width: 100%;">
+                <thead>
+                <tr>
+                    <th style="border:none;border-top-left-radius:5px;">Nom</th>
+                    <th style="border:none">Description</th>
+                    <th style="border:none;border-top-right-radius:5px;" class="text-center">Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for s in service %}
+                    <tr data-serv="{{ loop.index }}">
+                        <td>{{ s.title }}</td>
+                        <td>{{ s.description[:100]|raw }}</td>
+                        <td>
+                            <div class="btn-group pull-right">
+                                <button type="button" class="btn btn-default icon-style-modifier"
+                                        data-toggle="modal" data-target="#edit-service" data-id="{{ attributes.quoiqui.id }}"
+                                        data-pos="{{ s.pos }}"
+                                        data-lien="{{ path('ecommerce_service_edit',{'id':attributes.quoiqui.id,'pos':s.pos}) }}">
+                                    Modifier
+                                </button>
+                                <button type="button" class="btn btn-danger icon-style-supprimer"
+                                        data-toggle="modal" data-target="#del-service" data-nom="{{ s.title }}"
+                                        data-id="{{ attributes.quoiqui.id }}" data-pos="{{ s.pos }}"
+                                        data-lien="{{ path('ecommerce_service_remove',{'id':attributes.quoiqui.id,'pos':s.pos}) }}"
+                                        data-loop="{{ loop.index }}">Supprimer
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+
+            <!-- modal d'ajout service -->
+            <div id="addService" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Ajouter un Service</h4>
+                        </div>
+                        <div class="modal-body">
+                            <form action="{{ path('ecommerce_service_add') }}" method="post">
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <label>Titre</label>
+                                    </div>
+                                    <div class="col-md-10">
+                                        <div class="inner-addon left-addon">
+                                            <input type="text" class="form-control" name="title" required="required"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <label>Description</label>
+                                    </div>
+                                    <div class="col-md-10">
+                                        <div class="inner-addon left-addon">
+                                            <textarea class="form-control" name="description" required="required"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2 col-md-offset-5">
+                                        <input type="submit" class="btn btn-danger valide-btn" value="Enregistrer"/>
+                                    </div>
+                                </div>
+                                <input type="hidden" value="{{ attributes.quoiqui.id }}" name="id"/>
+                            </form>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <!--modal de suppression un service -->
+            <div class="modal fade" role="dialog" id="del-service">
+                <div class="modal-dialog">
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Supprimer un Service</h4>
+                        </div>
+                        <div class="modal-body">
+                            <center>Confirmer votre suppression de Service <span class="nomSpan"></span></center>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-success confirm-del">Oui</button>
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Non</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <!--modal de modifier un service -->
+            <div class="modal fade" role="dialog" id="edit-service">
+                <div class="modal-dialog">
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Modifier le Service <span class="modal-service-update"></span></h4>
+                        </div>
+                        <div class="modal-body">
+                            <form id="editService" action="{{ path('ecommerce_service_update',{'id':attributes.quoiqui.id}) }}"
+                                  method="post">
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <label>Titre</label>
+                                    </div>
+                                    <div class="col-md-10">
+                                        <div class="inner-addon left-addon">
+                                            <input type="text" class="form-control modif-title" name="title"
+                                                   required="required"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <label>Description</label>
+                                    </div>
+                                    <div class="col-md-10">
+                                        <div class="inner-addon left-addon">
+                                    <textarea class="form-control modif-description" name="description"
+                                              required="required"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2 col-md-offset-5">
+                                        <input type="submit" class="btn btn-danger valide-btn" value="Modifier"/>
+                                    </div>
+                                </div>
+                                <input type="hidden" value="" name="id" class="id"/>
+                                <input type="hidden" value="" name="p" class="position"/>
+                            </form>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        {% else %}
+            <div class="row">
+                {% if nbr == 1 %}
+                    <div class="col-md-4"></div>
+                {% elseif nbr == 2 %}
+                    <div class="col-md-2"></div>
+                {% endif %}
+                {% for s in service %}
+                    <div class="service-item" data-service="{{ loop.index }}">
+                        <div class="col-md-4 col-sm-4 top40">
+                            <div class="feature_box equal-height">
+                                <span class="icon"><img src="{{ asset('tpl/images/service-ween-icon.png') }}" alt=""></span>
+                                <div class="description">
+                                    <h4>{{ s.title }}</h4>
+                                    <p class="desc-height-service">{{ s.description|length > 120 ?  s.description|slice(0, 120) ~ '...' :  s.description }} </p>
+                                    <a href="" class="btn-default btn-xs pull-right suite detail-service-show"
+                                       data-toggle="modal"
+                                       data-target="#showService" data-id="{{ attributes.quoiqui.id }}"
+                                       data-pos="{{ s.pos }}"
+                                       data-lien="{{ path('ecommerce_service_show',{'id': attributes.quoiqui.id ,'pos':s.pos}) }}"
+                                       data-mod="{{ path('ecommerce_service_edit',{'id':attributes.quoiqui.id,'pos':s.pos}) }}"
+                                       data-sup="{{ path('ecommerce_service_remove',{'id':attributes.quoiqui.id,'pos':s.pos}) }}"
+                                       data-services="{{ loop.index }}">Lire la suite</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+
+            </div>
+        {% endif %}
+    </div>
+    <div class="paralax-icon">
+        <div class="particle elem1 anim-delay1"></div>
+        <div class="particle elem2 anim-delay5"></div>
+        <div class="particle elem3 anim-delay3"></div>
+        <div class="particle elem4 anim-delay8"></div>
+        <div class="particle elem5 anim-delay9"></div>
+        <div class="particle elem6 anim-delay2"></div>
+        <div class="particle elem7 anim-delay4"></div>
+        <div class="particle elem8 anim-delay3"></div>
+        <div class="particle elem9 anim-delay10"></div>
+        <div class="particle elem8 anim-delay11"></div>
+        <div class="particle elem6 anim-delay12"></div>
+        <div class="particle elem1 anim-delay14"></div>
+        <div class="particle elem13 anim-delay16"></div>
+        <div class="particle elem17 anim-delay18"></div>
+        <div class="particle elem2 anim-delay6"></div>
+        <div class="particle elem16 anim-delay9"></div>
+        <div class="particle elem8 anim-delay3"></div>
+        <div class="particle elem9 anim-delay10"></div>
+        <div class="particle elem18 anim-delay11"></div>
+        <div class="particle elem11 anim-delay12"></div>
+        <div class="particle elem12 anim-delay14"></div>
+        <div class="particle elem13 anim-delay16"></div>
+        <div class="particle elem14 anim-delay18"></div>
+        <div class="particle elem15 anim-delay6"></div>
+        <div class="particle elem16 anim-delay9"></div>
+        <div class="particle elem17 anim-delay7"></div>
+        <div class="particle elem18 anim-delay6"></div>
+        <div class="particle elem19 anim-delay3"></div>
+    </div>
+</section>

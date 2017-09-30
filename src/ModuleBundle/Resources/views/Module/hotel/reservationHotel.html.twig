@@ -1,0 +1,360 @@
+<div class="container-fluid " id="modal-booking">
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="myModal-Booking" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="margin-top: -15px;"><span
+                                aria-hidden="true"
+                                id="close-modal">X</span>
+                    </button>
+                    <h4 class="modal-title">TABLEAU DE BORD</h4>
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a data-toggle="tab" href="#chambres-booking"
+                                              id="chambres-bookin">Chambres</a></li>
+                        <li><a data-toggle="tab" href="#evenements-booking" id="event-nav">Evenements</a></li>
+                        <li><a data-toggle="tab" href="#services-booking" id="services-bo">Services</a></li>
+                        <li><a data-toggle="tab" href="#actualites-booking" id="">Actualités</a></li>
+                    </ul>
+                </div>
+                <div class="modal-body">
+                    <div class="tab-content">
+                        <div class="tab-pane fade in active" id="chambres-booking">
+
+
+                            <!--Single Room-->
+                            {#==========================Liste Chambre=====================#}
+
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <h2 class="text-center">Liste des chambres</h2>
+                                </div>
+
+                                <div class="row">
+
+                                    <div class="col-md-12">
+
+
+                                        <table id="datatable" class="table table-striped table-bordered datatable" cellspacing="0"
+                                               width="100%">
+                                            <thead>
+                                            <tr>
+
+                                                <th>Image</th>
+                                                <th>description</th>
+                                                <th>Action</th>
+
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            {% for h in module %}
+                                                {% if h.descriptionRoom is not null %}
+                                                    <tr>
+                                                        {% if h.descriptionRoom.image_chambre %}
+                                                            <td>
+                                                                <img src="{{ asset('uploads/image/' ~ qouiqui.user.id ~'/' ~ qouiqui.id ~ '/chambres/'~ h.descriptionRoom.image_chambre ) }}"
+                                                                     alt="img"
+                                                                     class="box-radius">
+                                                            </td>
+                                                        {% endif %}
+                                                        <td>
+
+                                                            <strong>Type de chambre</strong><br>
+                                                            {% if h.descriptionRoom.nombre %} {{ h.descriptionRoom.nombre }}{% endif %}
+                                                            <br>
+                                                            <strong>Prix/Nombre de Lits</strong><br>
+                                                            {% if h.descriptionRoom.prix %}{{ h.descriptionRoom.prix }} DT {% endif %}
+                                                            /
+                                                            {% if h.descriptionRoom.nombreLit %}{{ h.descriptionRoom.nombreLit }}{% endif %}
+                                                            <br>
+                                                            <strong>Services</strong><br>
+                                                            {% for ch in h.descriptionRoom.chambreS %}
+                                                                {% if ch %}
+                                                                    <li><i class="fa fa-cogs"></i> {{ ch }}</li>
+                                                                    <br>{% endif %}
+                                                            {% endfor %}
+                                                            <strong>Details</strong><br>
+                                                            {% if h.descriptionRoom.editor1 %}{{ h.descriptionRoom.editor1|raw }}{% else %}
+                                                            {% endif %}
+                                                        </td>
+                                                        <td>
+                                                            <p data-placement="top" data-toggle="tooltip" title="Edit">
+                                                                <button class="btn btn-primary btn-xs" data-title="Edit"
+                                                                        data-toggle="modal"
+                                                                        data-target="#edit-chambre{{ loop.index }}" {{ h.id }}><span
+                                                                            class="glyphicon glyphicon-pencil"></span>
+                                                                </button>
+                                                            </p>
+                                                            <p data-placement="top" data-toggle="tooltip"
+                                                               title="Delete">
+                                                                <button type="button" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#confirm-delete-chambre{{ loop.index }}" id="{{ h.id }}">
+                                                                    <span class="glyphicon glyphicon-trash"></span>
+                                                                </button>
+
+                                                            </p>
+                                                        </td>
+                                                    </tr>
+                                                {% endif %}
+                                            {% endfor %}
+                                            </tbody>
+                                        </table>
+
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        {#==========================Liste Chambre=====================#}
+                        <!-- evenements booking -->
+                        <div id="evenements-booking" class="tab-pane fade">
+
+                            <!--Event Section-->
+                            <section class="event-section bg-white">
+
+                                {#==========================Liste Evenements=====================#}
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <h2 class="text-center">Liste des évenements</h2>
+                                    </div>
+
+                                    <div class="row">
+
+                                        <div class="col-md-12">
+
+
+                                            <table id="datatable" class="table table-striped table-bordered datatable"
+                                                   cellspacing="0"
+                                                   width="100%">
+                                                <thead>
+                                                <tr>
+
+                                                    <th>Image</th>
+                                                    <th>description</th>
+                                                    <th>Action</th>
+
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                {% for ev in module %}
+                                                    {% if ev.descriptionEvents is not null %}
+                                                        <tr>
+                                                            {% if ev.descriptionEvents.eventsImage %}
+                                                                <td>
+                                                                    <img src="{{ asset('uploads/image/' ~ qouiqui.user.id ~'/' ~ qouiqui.id ~ '/events/'~ ev.descriptionEvents.eventsImage ) }}"
+                                                                         alt=""/>
+                                                                </td>
+                                                            {% endif %}
+                                                            <td>
+                                                                <strong>{{ ev.descriptionEvents.nameEvents }}</strong>
+                                                                <br>
+                                                                <strong>Date</strong><br>
+                                                                {% if ev.descriptionEvents.dateEvents %}{{ ev.descriptionEvents.dateEvents }} {% endif %}
+                                                                <br>
+                                                                <strong>Details</strong><br>
+                                                                {% if ev.descriptionEvents.eventsDetails %}{{ ev.descriptionEvents.eventsDetails|raw }}{% else %}
+                                                                {% endif %}
+                                                            </td>
+                                                            <td>
+                                                                <p data-placement="top" data-toggle="tooltip"
+                                                                   title="Edit">
+                                                                    <button class="btn btn-primary btn-xs"
+                                                                            data-title="Edit"
+                                                                            data-toggle="modal"
+                                                                            data-target="#modifier-events{{ loop.index }}" {{ ev.id }}><span
+                                                                                class="glyphicon glyphicon-pencil"></span>
+                                                                    </button>
+                                                                </p>
+                                                                <p data-placement="top" data-toggle="tooltip"
+                                                                   title="Delete">
+                                                                    <button type="button" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#confirmDeleteEvents{{ loop.index }}" id="{{ ev.id }}"
+                                                                    >
+                                                                        <span class="glyphicon glyphicon-trash"></span>
+                                                                    </button>
+                                                                </p>
+                                                            </td>
+                                                        </tr>
+                                                    {% endif %}
+                                                {% endfor %}
+                                                </tbody>
+                                            </table>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                                {#==========================Liste Evnements=====================#}
+                            </section>
+                            <!--End Event Section-->
+
+
+                        </div>
+                        <!-- evenements booking -->
+
+                        <div id="services-booking" class="tab-pane fade">
+                            <!--Page Title-->
+
+                            <!--End Page Title-->
+                            <!-- ==============================Hotel services===================================== -->
+
+                            <!--Wellness Spa-->
+                            <section class="wellness-spa">
+
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <h2 class="text-center">Liste des évenements</h2>
+                                    </div>
+
+                                    <div class="row">
+
+                                        <div class="col-md-12">
+
+
+                                            <table id="datatable" class="table table-striped table-bordered datatable"
+                                                   cellspacing="0"
+                                                   width="100%">
+                                                <thead>
+                                                <tr>
+
+                                                    <th>Image</th>
+                                                    <th>description</th>
+                                                    <th>Action</th>
+
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                {% for hS in module %}
+                                                    {% if hS.descriptionServices is not null %}
+                                                        <tr>
+                                                            {% if hS.descriptionServices.imageService %}
+                                                                <td>
+                                                                    <img src="{{ asset('uploads/image/' ~ qouiqui.user.id ~'/' ~ qouiqui.id ~ '/services/'~ hS.descriptionServices.imageService ) }}"
+                                                                         alt=""/>
+                                                                </td>
+                                                            {% endif %}
+                                                            <td>
+                                                                <strong>{{ hS.descriptionServices.nameService }}</strong>
+                                                                <br>
+                                                                <strong>Details</strong><br>
+                                                                {% if hS.descriptionServices.servicesDetails %}{{ hS.descriptionServices.servicesDetails|raw }}{% else %}
+                                                                {% endif %}
+                                                            </td>
+                                                            <td>
+                                                                <p data-placement="top" data-toggle="tooltip"
+                                                                   title="Edit">
+                                                                    <button class="btn btn-primary btn-xs"
+                                                                            data-title="Edit"
+                                                                            data-toggle="modal"
+                                                                            data-target="#edit-service{{ loop.index }}" {{ hS.id }}><span
+                                                                                class="glyphicon glyphicon-pencil"></span>
+                                                                    </button>
+                                                                </p>
+                                                                <p data-placement="top" data-toggle="tooltip"
+                                                                   title="Delete">
+                                                                    <button type="button" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#confirm-delete-services{{ loop.index }}" id="{{ hS.id }}"
+                                                                    >
+                                                                        <span class="glyphicon glyphicon-trash"></span>
+                                                                    </button>
+                                                                </p>
+                                                            </td>
+                                                        </tr>
+                                                    {% endif %}
+                                                {% endfor %}
+                                                </tbody>
+                                            </table>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </section>
+                            <!--End Wellness Spa-->
+
+                        </div>
+                        <!-- ==============================FIN Service===================================== -->
+                        <!-- ==============================Begin Actualités===================================== -->
+                        <div id="actualites-booking" class="tab-pane fade">
+
+                            <section class="actualites">
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <h2 class="text-center">Liste des actualités</h2>
+                                    </div>
+
+                                    <div class="row">
+
+                                        <div class="col-md-12">
+
+
+                                            <table id="datatable" class="table table-striped table-bordered datatable"
+                                                   cellspacing="0"
+                                                   width="100%">
+                                                <thead>
+                                                <tr>
+
+                                                    <th>Image</th>
+                                                    <th>description</th>
+                                                    <th>Action</th>
+
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                {% for ac in module %}
+                                                    {% if ac.descriptionNews is not null %}
+                                                        <tr>
+                                                            {% if ac.descriptionNews.image_actualites %}
+                                                                <td>
+                                                                    <img src="{{ asset('uploads/image/' ~ qouiqui.user.id ~'/' ~ qouiqui.id ~ '/actualites/'~ ac.descriptionNews.image_actualites ) }}"
+                                                                         alt=""/>
+                                                                </td>
+                                                            {% endif %}
+                                                            <td>
+                                                                <strong>{{ ac.descriptionNews.titre_actualites }}</strong>
+                                                                <br>
+                                                                <i class="fa fa-calendar"> {{ ac.descriptionNews.date_actualites }}</i>
+                                                                <strong>Details</strong><br>
+                                                                {% if ac.descriptionNews.actualitesDetails %}{{ ac.descriptionNews.actualitesDetails|raw }}{% else %}
+                                                                {% endif %}
+                                                            </td>
+                                                            <td>
+                                                                <p data-placement="top" data-toggle="tooltip"
+                                                                   title="Edit">
+                                                                    <button class="btn btn-primary btn-xs"
+                                                                            data-title="Edit"
+                                                                            data-toggle="modal"
+                                                                            data-target="#modifier-actualites{{ loop.index }}" {{ ac.id }}><span
+                                                                                class="glyphicon glyphicon-pencil"></span>
+                                                                    </button>
+                                                                </p>
+                                                                <p data-placement="top" data-toggle="tooltip"
+                                                                   title="Delete">
+                                                                    <button type="button" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#confirm-delete-actualites{{ loop.index }}" id="{{ ac.id }}">
+                                                                        <span class="glyphicon glyphicon-trash"></span>
+                                                                    </button>
+                                                                </p>
+                                                            </td>
+                                                        </tr>
+                                                    {% endif %}
+                                                {% endfor %}
+                                                </tbody>
+                                            </table>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer close-btn-style-one">
+                    <button type="button" class="theme-btn btn-style-one" data-dismiss="modal">Fermer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- modal reservation !-->

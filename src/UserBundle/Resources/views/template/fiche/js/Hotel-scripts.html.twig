@@ -1,0 +1,43 @@
+<script>
+    //        $('#modalAjoutChambre').modal('show');
+    //    $('#modalEditChambre').modal('show');
+
+    $('#modalGererAnnonces').on('click', '.btnEditAnnonce', function (e) {
+
+        $('#formModfChambre').attr('action', $(this).attr('data-url'));
+
+
+        $data = $(this).attr('data-annonce');
+        $data = JSON.parse($data);
+
+        $.each($data.chambreS, function (k, v) {
+            $('#appointmentforEdit option[value="' + v + '"]').prop('selected', true);
+        });
+        $("#appointmentforEdit").select2({
+            tags: true
+        })
+
+
+        $('#timeEdit option[value="' + $data.nombre + '"]').prop('selected', true);
+        $('#nbLitEdit option[value="' + $data.nombreLit + '"]').prop('selected', true);
+        $('#prixEdit').val($data.prix);
+        CKEDITOR.instances['descriptionEdit'].setData($data.editor1);
+
+        $('#modalEditChambre').modal('show');
+
+    });
+
+
+    $('.btn-reservation').on('click', function () {
+        $('#modal_booking').modal('show');
+        var data = JSON.parse($(this).attr('data-chambre'));
+        console.log(data, data.prix);
+
+        $('#bookingType').html(data.type);
+        $('#bookingPrix').html(data.prix);
+
+    });
+
+    $("#AjouterChambre").modal('show');
+
+</script>

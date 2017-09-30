@@ -1,0 +1,21 @@
+{% extends 'dashboardLayaout/dashboardLayout.html.twig' %}
+
+{% block body %}
+
+    <div class="col-sm-9 col-md-12">
+
+        {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <input type="submit" value="Modifier" class="btn btn-warning"/>
+        <a href="{{ path('dashboard_homepage') }}" class="btn btn-success">Retour</a>
+        {{ form_end(form) }}
+    </div>
+
+
+{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}

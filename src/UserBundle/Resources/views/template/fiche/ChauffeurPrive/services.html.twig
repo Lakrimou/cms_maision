@@ -1,0 +1,1103 @@
+{% set tab=['#a1ad25','#964425','#798722','#f6bf00'] %}
+<section id="section-services" class="we_are bg_light padding">
+
+
+    <a herf="" data-toggle="modal" data-target="#etre_appeler" style="position: fixed;top: 50%;right:0;font-size: 20px;
+    z-index: 1;" class="btn_fill_about btn btn-default pull-right">Être rappelé</a>
+
+    {% if attributes.connected %}
+        <div class="row">
+            <div class="pull-righ" style="    margin-right: 24px;">
+                <div data-step="3" data-intro="This is a tooltip!" class="pull-right margin-bott-40">
+                    <button type="button" class="theme-btn button11 btn-style-one pull-right" data-toggle="modal"
+                            data-target="#listMissions">Gérer cette section
+                    </button>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+    <div class="container">
+
+        <div class="row">
+            <div class="col-md-10">
+                <h2 class="text-uppercase">Nos <span class="color_red">services</span></h2>
+                <div class="line_1"></div>
+                <div class="line_2"></div>
+                <div class="line_3"></div>
+            </div>
+
+
+        </div>
+        {% if mission.service is defined %}
+        {% set arraymission=mission.service %}
+
+        <div class="row">
+            {% for b in arraymission|sort|reverse %}
+
+            {% if (arraymission|length == 1) %}
+                <div class="col-md-4 col-sm-4 col-xs-12"></div>
+            {% endif %}
+            {% if (arraymission|length == 2) and (loop.index == 1) %}
+                <div class="col-md-2 col-sm-2 col-xs-12"></div>
+            {% endif %}
+
+
+            <div class=" col-md-4 col-sm-4 top40 " style="min-height: 380px;">
+                <div class="block-service block-service-border margin15 pad15" style="background: white;height: 325px;border: 10px solid; border-radius: 20px; box-shadow: 2px 2px 2px 2px #000000;">
+                    <div class="row">
+                        <div class="col-md-12 text-center">
+                                    <span class="icon-shortcode">
+                                    <i class=" fa fa-car" aria-hidden="true"></i>
+                                    </span>
+                        </div>
+                        <h3 class="serviceTitle text-center pad15" style="font-size: 21px">
+                            {%  if b.mission is defined %}{{ b.mission }}<br>{%  endif %}
+                        </h3>
+                        <div class="clearfix">
+                            <div class="separator" style="width: 100px;border-bottom-width: 2px; "></div>
+                        </div>
+                        <div class="pargraphe">
+                            {%  if b.detail is defined %}{{  b.detail|slice(0,40)|raw }}..{%  endif %}
+
+                        </div>
+                    </div>
+
+                    <div class="text-center ">
+                        <a data-toggle="modal" data-target="#lireplus" id="savoirPlus" data-idqq="{{ attributes.quoiqui.id }}"
+                           data-idServ="{{ b.idserv }}"
+                           class="btn-default btn-lg  suite  top20  lire_plus" style="cursor: pointer;">En
+                            savoir plus</a>
+                    </div>
+                </div>
+            </div></div>
+        {% endfor %}
+    </div>
+
+    {% endif %}
+    </div>
+
+</section>
+
+
+{#<div id="map" style="width: 100% ; height: 400px">#}
+
+</div>
+{#{{ dump(filterListServiceAmbu(attributes)) }}#}
+<div class="modal fade" id="listMissions" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Liste des Missions</h4>
+            </div>
+            <div class="modal-body">
+                <table class="table dataTable table-striped table-bordered " cellspacing="0" width="100%">
+                    <thead>
+                    <tr>
+                        {#<th>Image</th>#}
+                        <th>Les attributions</th>
+
+
+                        <th>Modifier</th>
+                        <th>Supprimer</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    {% if mission.service is defined %}
+                        {% set arraymission=mission.service %}
+                        {% for b in arraymission|sort|reverse %}
+                            {#{% for b in a %}#}
+
+                            <tr data-td="{{ b.idserv }}">
+
+
+                                <td>{{ b.mission }}</td>
+
+
+                                <td>
+
+                                    <a href="#" class=" btn btn-info a-btn-slide-text edit_huissier"
+                                       data-serv="{{ b.idserv }}"
+                                       data-id="{{ attributes.quoiqui.id }}" data-toggle="modal"
+                                       data-target="#editMission">
+
+                                        <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                                        <span><strong>Modifier</strong></span>
+                                    </a>
+
+                                </td>
+
+
+                                <td>
+
+                                    <a href="{{ path('module_spa_supprim_services',{"idqq": attributes.quoiqui.id,"idserv":b.idserv }) }}"
+                                       class=" btn btn-danger a-btn-slide-text service_suprim"
+                                       onclick="clickOffConfirmed = confirm('Vous voulez le  supprimer ?');">
+                                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                        <span><strong>Supprimer</strong></span>
+                                    </a>
+                                </td>
+
+                            </tr>
+                            {#{% endfor %}#}
+                        {% endfor %}
+                    {% endif %}
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Fermer</button>
+                <button type="button" class="btn btn-primary addmissions" data-toggle="modal" data-target="#addMission"
+                >Ajouter Nouveau mission
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="addMission" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <h4 class="modal-title">Ajouter nouveau service</h4>
+            </div>
+            <div class="modal-body">
+                <form id="addmissionss" method="POST"
+                      action="{{ path('chauffeur_add_service',{"idqq":attributes.quoiqui.id}) }}"
+                      enctype="multipart/form-data">
+
+                    <input type="hidden" name="idserv" value="{{ uniqueId() }}">
+                    <div class="form-group">
+                        <label for="serviceselect" class="control-label">Service disponibles</label>
+                        <select class="selectpicker form-control selectOption" id="serviceselect" name="mission"
+                                required="required">
+                            <option disabled selected>Sélectionner un service....</option>
+                            <option value="autre" style=" font-weight: bold;  font-weight: 900;">Ajouter nouveau
+                                service
+                            </option>
+                            <option value="Estimer le cout de votre course">Estimer le cout de votre course</option>
+                            <option value="Planifier la date votre course">Planifier la date votre course</option>
+
+                            {#{% for k,a in  filterListServiceAmbu(attributes) %}
+                                <option value='{{ k }}'>{{ k }}</option>
+                            {% endfor %}#}
+                        </select>
+                    </div>
+                    <div class="form-group ">
+                        <input type="text" name="autres" id="otherServices" class=" form-control otherSelected"
+                               placeholder="ajoutre autre service">
+                        <span id="idError" class="errormsg" style="color:red;"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-12">Description</label>
+                        <textarea placeholder="Entrer la description.." rows="3"
+                                  class="form-control textarea ckeditor"
+                                  name="detail" required="required"></textarea>
+                    </div>
+                    <div class="col-sm-12 form-group">
+                        <label class="col-md-12">Choisissez une photo</label>
+                        <input autocomplete="off" class="form-control "
+                               name="file" type="file" required="required"
+                               placeholder="choisissez_image" data-items="8"/>
+
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Fermer</button>
+                <button type="submit" id="addServices" class=" btn btn-primary " data-target="modifier"
+                        data-selector="addmissionss">
+                    Enregistrer
+                </button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="modal fade" id="editMission" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <h4 class="modal-title">Modifier votre service</h4>
+            </div>
+            <div class="modal-body">
+                <form id="Editmission" method="POST"
+                      action="{{ path('module_spa_update_service',{"idqq":attributes.quoiqui.id}) }}"
+                      enctype="multipart/form-data">
+
+                    <div class=" form-group">
+                        <input id="idambus" type="hidden" class="form-control" name="idserv" value="">
+                        {#<label class="col-md-12">Mission</label>#}
+                        {#<input id="ambul" type="text" placeholder="Entrer Nom du Mission." required="required"#}
+                        {#class="form-control" name="mission">#}
+                    </div>
+                    <div class="form-group">
+                        <label for="serviceselect-edit" class="control-label">Services disponibles</label>
+                        <select class="selectpicker form-control selectOption" id="serviceselect-edit" name="mission">
+                            <option disabled selected>Sélectionner un service....</option>
+                            <option value="Estimer le cout de votre course">Estimer le cout de votre course</option>
+                            <option value="Planifier la date votre course">Planifier la date votre course</option>
+                            <option value="autre" style=" font-weight: bold;  font-weight: 900;">Ajouter nouveau
+                                service
+                            </option>
+                            {# {% for k,a in  filterListServiceAmbu(attributes) %}
+                                 <option value='{{ k }}'>{{ k }}</option>
+                             {% endfor %}#}
+                        </select>
+                    </div>
+                    <div class="form-group ">
+                        <label for="autreServices" class="control-label">Taper pour modifier le service</label>
+                        <input type="text" name="autres" id="autreServices" class=" form-control otherSelected"
+                               placeholder="ajoutre autre service">
+                        <span id="msg_error" style="color:red;"></span>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-12">Description</label>
+                        <textarea id="detail_ambu" placeholder="Entrer la description.." rows="3"
+                                  class="form-control textarea ckeditor"
+                                  name="detail" required="required"></textarea>
+                    </div>
+
+                    <div class="col-sm-12 form-group">
+                        <label class="col-md-12">Choisissez une photo</label>
+                        <input autocomplete="off" class="form-control "
+                               name="file" type="file"
+                               placeholder="choisissez_image" data-items="8"/>
+
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Fermer</button>
+                <button type="submit" id="updateserv" class=" btn btn-primary" data-target="modifier"
+                        data-selector="Editmission">
+                    Enregistrer
+                </button>
+            </div>
+        </div>
+
+    </div>
+</div>
+<div class="modal fade" id="lireplus" role="dialog">
+    <div class="modal-dialog modal-md">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            {#<div class="modal-header">#}
+            <button type="button" class="close" data-dismiss="modal"
+                    style="margin-top: 15px; ;margin-right:32px;">&times;</button>
+
+            {#</div>#}
+            {#<div id="header" class="modal-header " style="text-align: center;font-size: 27px;color: {{ random(tab) }}">#}
+            {#<button type="button" class="close" data-dismiss="modal">&times;</button>#}
+
+            {#</div>#}
+            <div class="modal-body">
+                <div id="news-section-1">
+
+                    <div class="row">
+                        <div style="text-align: center">
+                            <span id="servamb" class="service-details-titre color_red G_titre"></span>
+                            {#<h3 class="text-uppercase" id="servamb"></h3>#}
+                        </div>
+                        <div class="col-md-12 col-md-offset-5 col-xs-12 col-xs-offset-3">
+
+
+                            <div class="line_1" style="width:180px;"></div>
+                            <div class="line_2"></div>
+                            <div class="line_3"></div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+
+                            <div class="col-md-6">
+
+                                <input type="hidden" id="idImgamb" value="">
+                                <div class="col-md-12 ">
+                                    <img id="AmbImg" src="" class="img-responsive" style="width: 100%">
+                                    {#<img src="http://logicsforest.com/ideahomes_demo_files/images/property-d-1-1.jpg" class="img-responsive" alt=""/>#}
+                                </div>
+
+
+                            </div>
+                            <div class="col-md-6 buttonsModal">
+
+                                <div class="col-xs-12 top40">
+                                    <h3 class="text-uppercase bottom30">Description <span
+                                                class="color_red"> Détaillé</span></h3>
+                                    <p class="bottom30" id="ambdetail"></p>
+                                    {#<span id="link1"></span>#}
+                                    {#<p id="lire_suite"></p>#}
+
+                                </div>
+                                <button data-toggle="modal" data-target="#modalSectionRappeler" style="font-size: 22px;"
+                                        class="col-md-12 col-xs-12 top10 btn btn-danger">
+                                    <i class="fa fa-phone"aria-hidden="true" style="margin-right: 10px;"></i>Demande de rappel
+                                </button>
+                                <a href="tel:{{ attributes.quoiqui.phone }}" style="font-size: 22px;"
+                                   class="col-md-12 col-xs-12 top10 btn btn-success"> Contacter Nous:  <i
+                                            class="fa fa-phone"
+                                            aria-hidden="true"></i> {{ attributes.quoiqui.phone }}
+                                </a>
+                                <button data-toggle="modal" data-target="#reserver" id ="planifier" style="font-size: 22px;"
+                                        class="col-md-12 col-xs-12 top10 btn btn-primary">
+                                    <i class="fa fa-calendar"aria-hidden="true" style="margin-right: 10px;"></i>Planifier la date de votre course
+                                </button>
+
+
+                            </div>
+
+
+                        </div>
+                    </div>
+
+                </div>
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Fermer</button>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="modal fade" id="reserver" role="dialog">
+    <div class="modal-dialog modal-lg">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Réservation</h4>
+            </div>
+            <div class="modal-body">
+                {% if app.user==null %}
+                    <div class="text-center" style="padding: 15px;">
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalLogin1">S'identifier</button>
+
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalLogin1">S'inscrire</button>
+                    </div>
+                {% endif %}
+                <div class="container-fluid">
+                    <form action="#" class="form-horizonatal">
+                        {% if app.user==null %}
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="username" class="control-label">Nom d'utilisateur</label>
+                                    <input type="text" name="username" id="username" class="form-control" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="email" class="control-label">Email</label>
+                                    <input type="email" class="form-control" required id="email">
+                                </div>
+                                <div class="form-group">
+                                    <label for="telephone" class="control-label">Téléphone</label>
+                                    <input type="tel" class="form-control" id="telephone" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="datetimepicker4" class="control-label">Date de réservation</label>
+                                    <input type='text' class="form-control" id='datetimepicker4' name="dateRerv"  />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="adrDep" class="control-label">Départ</label>
+                                    <input type="text" class="form-control" id="adrDep" value="">
+                                    <input type="button" value="recherche sur la carte" class="btn btn-lg"  onclick="rechercher('adrDep',true)">
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label">Transport</label>
+                                    {# onchange="calcRoute();"  #}
+                                    <select id="mode" class="form-control" onchange="calcRoute();">
+                                        <option value="DRIVING">voiture</option>
+                                        {#<option value="WALKING">marche</option>
+                                        <option value="BICYCLING">vélo</option>#}
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="adrArr" class="control-label">arrivée: </label>
+                                    <input type="text" id="adrArr" value="" class="form-control">
+                                    <input type="button" class="btn btn-lg" value="recherche sur la carte" onclick="rechercher('adrArr',false)">
+                                </div>
+                            </div>
+                            <div class="row" style="padding: 10px;">
+                                <div class="col-lg-8 col-md-8">
+                                    <div id="divMap" style="width: 100%; height: 400px;">
+
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-4" id="divRoute" style="height: 400px; overflow: auto;"></div>
+                            </div>
+                            <div class="loading text-center">
+                                <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+                                <span class="sr-only">Loading...</span>
+                            </div>
+                            <div class="text-center success">
+                                <i class="fa fa-check-circle-o fa-3x" aria-hidden="true"></i>
+                                <p>Vous serez contacter très prochainement</p>
+                            </div>
+                        {% else %}
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="datetimepicker4" class="control-label">Date de réservation</label>
+                                    <input type='text' class="form-control" id='datetimepicker4' name="dateRerv"  />
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="adrDep" class="control-label">Départ</label>
+                                    <input type="text" class="form-control" id="adrDep" value="">
+                                    <input type="button" value="recherche sur la carte" class="btn btn-lg"  onclick="rechercher('adrDep',true)">
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label">Transport</label>
+                                    {# onchange="calcRoute();"  #}
+                                    <select id="mode" class="form-control" onchange="calcRoute();">
+                                        <option value="DRIVING">voiture</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="adrArr" class="control-label">arrivée: </label>
+                                    <input type="text" id="adrArr" value="" class="form-control">
+                                    <input type="button" class="btn btn-lg" value="recherche sur la carte" onclick="rechercher('adrArr',false)">
+                                </div>
+                                {% if app.user != null %}
+                                    <input type="hidden" class="form-control" id="nom" name="username" value="{{ app.user.username }}">
+                                    <input type="hidden" class="form-control" id="email" name="email" value="{{ app.user.email }}">
+                                    {% if app.user.phoneNumber is defined %}
+                                        <input type="hidden" class="form-control" id="telephone" name="telephone" value="{{ app.user.phoneNumber }}">
+                                    {% endif %}
+                                {% endif %}
+                            </div>
+                            <div style="padding: 10px;">
+                                <div class="col-lg-8 col-md-8">
+                                    <div id="divMap" style="width: 100%; height: 400px;">
+
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-4" id="divRoute" style="height: 400px; overflow: auto;"></div>
+                            </div>
+                            <div class="loading text-center">
+                                <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+                                <span class="sr-only">Loading...</span>
+                            </div>
+                            <div class="text-center success">
+                                <i class="fa fa-check-circle-o fa-3x" aria-hidden="true"></i>
+                            </div>
+                        {% endif %}
+                    </form>
+                </div>
+
+                <div class="modal-footer" id="footer_rappeler">
+                    <button type="button" class="btn btn-primary " id="reservationn">Reserver</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Fermer</button>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div></div>
+
+
+<div class="modal fade" id="etre_appeler" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Être rappelé</h4>
+            </div>
+            <div class="modal-body">
+                <div class="well">Vous avez une question ou un commentaire ?
+                    <br>Remplissez les informations suivantes et nous vous appeler dans les plus brefs délais.
+                </div>
+
+                <form id="rapeler" class="form-horizontal" method="post"
+                      action="{{ path('rapeler',{'qq_id':attributes.quoiqui.id}) }}" role="form">
+                    <div class="form-group">
+                        <label for="email" class="col-sm-2 control-label">Téléphone</label>
+                        <div class="col-sm-9">
+                            <input id="tel" type="text" class="form-control bfh-phone" name="rapele[phone]"
+                                   placeholder="Numéro de Téléphone" required data-format="+216 (dd) ddd-ddd">
+
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="name" class="col-sm-2 control-label">Nom</label>
+                        <div class="col-sm-9">
+                            <input id="name" type="text" class="form-control" id="name" name="rapele[nom]"
+                                   placeholder="Nom" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="name" class="col-sm-2 control-label">Prénom</label>
+                        <div class="col-sm-9">
+                            <input id="prenom" type="text" class="form-control" id="name" name="rapele[prenom]"
+                                   placeholder="Prénom" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="name" class="col-sm-2 control-label">Email</label>
+                        <div class="col-sm-9">
+                            <input type="email" id="email" name="rapele[mail]" class="form-control"
+                                   placeholder="votre Mail" rows="3" required/>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer" id="footer_rappeler">
+
+                {#<button id="btn_insecrire" type="submit" class="btn btn-warning " data-toggle="modal" data-target="#ModalEtreApeler" data-selector="s'ident">S'identifier/s'insecrire</button>#}
+                <button type="submit" class="btn btn-primary " data-target="modifier" data-selector="rapeler">Envoyer
+                </button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Fermer</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<div class="modal fade" id="ModalEtreApeler" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+
+            <div class="modal-body">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                <div class="login-form-popup lp-border-radius-8">
+                    <div class="siginincontainer">
+                        <h1 class="text-center">S'identifier</h1>
+                        <form id="login" class="form-horizontal margin-top-30" method="post" action="/login_check">
+                            <input type="hidden" name="_csrf_token"
+                                   value="Kk4KcJ-i6lPzu7pUx0wOja7L0g5uu9CI6uWJYDGVT4Q"/>
+                            <p class="status"></p>
+                            <div class="form-group">
+                                <label for="username">Adresse email *</label>
+                                <input type="text" class="form-control" id="username" name="_username" required/>
+                            </div>
+                            <div class="form-group">
+                                <label for="password">Mot de passe *</label>
+                                <input type="password" class="form-control" id="password" name="_password" required/>
+                            </div>
+                            <div class="form-group">
+                            </div>
+                            <div class="form-group">
+                                <div class="checkbox pad-bottom-10">
+                                    <input id="check1" type="checkbox" name="_remember_me" value="on">
+                                    <label for="check1">Se souvenir de moi</label>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <input type="submit" value="Se connecter" id="rappeler"
+                                       class="lp-secondary-btn width-full btn-first-hover"/>
+                            </div>
+                            <input type="hidden" id="security" name="security" value="9f8756cb45"/><input type="hidden"
+                                                                                                          name="_wp_http_referer"
+                                                                                                          value="/"/>
+                        </form>
+                        <div class="pop-form-bottom">
+                            <div class="bottom-links">
+                                <a class="signUpClick">Nouveau sur Ween.tn? S'inscrire</a>
+                                <a class="forgetPasswordClick pull-right">Mot de passe oublié</a>
+                            </div>
+                            <p class="margin-top-15">Connectez-vous avec réseau social</p>
+                            <ul class="social-login list-style-none">
+                                <li>
+                                    <a id="logingoogle" class="google flaticon-googleplus"
+                                       href="{{ path('hwi_oauth_connect') }}google">
+                                        <i class="fa fa-google-plus"></i>
+                                        <span>Google</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a id="loginfacebook" class="facebook flaticon-facebook"
+                                       href="{{ path('hwi_oauth_connect') }}facebook">
+                                        <i class="fa fa-facebook"></i>
+                                        <span>Facebook</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a id="logintwitter" class="twitter flaticon-twitter"
+                                       href="{{ path('hwi_oauth_connect') }}facebook">
+                                        <i class="fa fa-twitter"></i>
+                                        <span>Twitter</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <a class="md-close"><i class="fa fa-close"></i></a>
+                    </div>
+
+                    <div class="siginupcontainer">
+                        <h1 class="text-center">S'inscrire</h1>
+                        <form id="register" class="form-horizontal margin-top-30" method="post">
+                            <p class="status"></p>
+                            <div class="form-group">
+                                <label for="username">Nom et prénom *</label>
+                                <input type="text" class="form-control" id="username2" name="username"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Adresse email *</label>
+                                <input type="email" class="form-control" id="email" name="email"/>
+                            </div>
+                            <div class="form-group">
+                                <p>Le mot de passe vous sera envoyé par email.</p>
+                            </div>
+                            <div class="form-group">
+                            </div>
+                            <div class="form-group">
+                                <input type="submit" value="Enregistrer"
+                                       class="lp-secondary-btn width-full btn-first-hover"/>
+                            </div>
+                            <input type="hidden" id="security" name="security" value="fac3396f28"/><input type="hidden"
+                                                                                                          name="_wp_http_referer"
+                                                                                                          value="/"/>
+                        </form>
+                        <div class="pop-form-bottom">
+                            <div class="bottom-links">
+                                <a class="signInClick">Vous avez déjà un compte? Se connecter</a>
+                                <a class="forgetPasswordClick pull-right">Mot de passe oublié</a>
+                            </div>
+                            <p class="margin-top-15">Connectez-vous avec réseau social</p>
+                            <ul class="social-login list-style-none">
+                                <li>
+                                    <a id="logingoogle" class="google flaticon-googleplus"
+                                       href="{{ path('hwi_oauth_connect') }}google">
+                                        <i class="fa fa-google-plus"></i>
+                                        <span>Google</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a id="loginfacebook" class="facebook flaticon-facebook"
+                                       href="{{ path('hwi_oauth_connect') }}facebook">
+                                        <i class="fa fa-facebook"></i>
+                                        <span>Facebook</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a id="logintwitter" class="twitter flaticon-twitter"
+                                       href="{{ path('hwi_oauth_connect') }}facebook">
+                                        <i class="fa fa-twitter"></i>
+                                        <span>Twitter</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <a class="md-close"><i class="fa fa-close"></i></a>
+                    </div>
+                    <div class="forgetpasswordcontainer">
+                        <h1 class="text-center">Mot de passe oublié</h1>
+                        <form class="form-horizontal margin-top-30" id="lp_forget_pass_form" action="#" method="post">
+                            <p class="status"></p>
+                            <div class="form-group">
+                                <label for="password">Adresse email *</label>
+                                <input type="email" name="user_login" class="form-control" id="email3"/>
+                            </div>
+                            <div class="form-group">
+                                <input type="submit" name="submit" value="Obtenir un nouveau mot de passe"
+                                       class="lp-secondary-btn width-full btn-first-hover"/>
+                                <input type="hidden" id="security3" name="security3" value="48ca5eeb94"/><input
+                                        type="hidden" name="_wp_http_referer" value="/"/></div>
+                        </form>
+                        <div class="pop-form-bottom">
+                            <div class="bottom-links"><a class="cancelClick">Annuler</a></div>
+                        </div>
+                        <a class="md-close"><i class="fa fa-close"></i></a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<select class="selectpicker form-control selectOption" id="service_enrolled" name="mission" style="display: none">
+
+    <option disabled selected>Sélectionner un service....</option>
+
+
+    {% if mission.service is defined %}
+
+        {% for s in mission.service %}
+            <option value='{{ s.mission }}'
+                    class=''>{{ s.mission }}</option>
+
+        {% endfor %}
+
+    {% endif %}
+</select>
+
+
+<div class="modal fade" id="estimer" role="dialog">
+    <div class="modal-dialog modal-lg">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title"><i class="fa fa-money" aria-hidden="true"></i> Estimation du cout de votre course</h4>
+            </div>
+            <div class="modal-body">
+                {% if app.user==null %}
+                    <div class="text-center" style="padding: 15px;">
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalLogin1">S'identifier</button>
+
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalLogin1">S'inscrire</button>
+                    </div>
+                {% endif %}
+                <div class="container-fluid">
+                    {% if app.user==null %}
+                        <form action="#" class="form-horizonatal">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="username" class="control-label">Nom d'utilisateur</label>
+                                    <input type="text" name="username" id="username" class="form-control" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="email" class="control-label">Email</label>
+                                    <input type="email" class="form-control" required id="email">
+                                </div>
+                                <div class="form-group">
+                                    <label for="telephone" class="control-label">Téléphone</label>
+                                    <input type="tel" class="form-control" id="telephone" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="adrDepp" class="control-label">Départ</label>
+                                    <input type="text" class="form-control" id="adrDepp" value="">
+                                    <input type="button" value="recherche sur la carte" class="btn btn-lg"  onclick="rechercherr('adrDepp',true)">
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label">Transport</label>
+                                    {# onchange="calcRoute();"  #}
+                                    <select id="modee" class="form-control" onchange="calcRoute();">
+                                        <option value="DRIVING">voiture</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="adrArrr" class="control-label">arrivée: </label>
+                                    <input type="text" id="adrArrr" value="" class="form-control">
+                                    <input type="button" class="btn btn-lg" value="recherche sur la carte" onclick="rechercherr('adrArrr',false)">
+                                </div>
+                            </div>
+                            {% if mission.service is defined %}
+                                {% set arraymission=mission.service %}
+                                {% for b in arraymission|sort|reverse %}
+                                    {% if b.vehicule is defined %}
+                                        <div class="form-group">
+                                           {# {{ dump(b) }}#}
+                                            <label for="voiture" class="control-label">Voitures disponibles</label>
+                                            <select name="voiture" id="voiture" class="form-control">
+                                                {% set compteur = 0 %}
+                                                {% set compteurPrice = 0 %}
+                                                {% for voiture in b.vehicule %}
+                                                    {% if b.carPrice is defined %}
+                                                        {% for price in b.carPrice %}
+                                                            {% if loop.index0 == compteur %}
+                                                                {% if b.currency is defined %}
+                                                                    {% for currence in b.currency %}
+                                                                        {% if loop.index0 == compteur %}
+                                                                            <option value="{{ voiture }}" data-price="{{ price }}" data-currency="{{ currence }}">{{ voiture }}</option>
+                                                                        {% endif %}
+                                                                    {% endfor %}
+                                                                {% endif %}
+                                                            {% endif %}
+                                                            {% set compteurPrice = compteurPrice + 1 %}
+                                                        {% endfor %}
+                                                    {% endif %}
+                                                    {% set compteur =  compteur + 1 %}
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                    {% endif %}
+                                    {% if b.priceMetre is defined %}
+                                        <input type="hidden" name="{{ b.priceMetre }}" id="priceMetre" class="priceMetre">
+                                    {% endif %}
+                                {% endfor %}
+                            {% endif %}
+                            <div class="row" style="padding: 10px;">
+                                <div class="col-lg-8 col-md-8">
+                                    <div id="divMapp" style="width: 100%; height: 400px;">
+
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-4" id="divRoutee" style="height: 400px; overflow: auto;"></div>
+                            </div>
+                            <div class="loading text-center">
+                                <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+                                <span class="sr-only">Loading...</span>
+                            </div>
+                            <div class="text-center success" style="height: 200px; padding: 15px; font-size: 25px;">
+                                <i class="fa fa-check-circle-o fa-3x" aria-hidden="true"></i>
+                            </div>
+                        </form>
+                    {% else %}
+                        <form action="#" class="form-inline">
+                            <div class="col-md-12">
+
+                                <div class="form-group">
+                                    <label for="adrDepp" class="control-label">Départ</label>
+                                    <input type="text" class="form-control" id="adrDepp" value="">
+                                    <input type="button" value="recherche sur la carte" class="btn btn-lg"  onclick="rechercherr('adrDepp',true)">
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label">Transport</label>
+                                    {# onchange="calcRoute();"  #}
+                                    <select id="modee" class="form-control" onchange="calcRoute();">
+                                        <option value="DRIVING">voiture</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="adrArrr" class="control-label">arrivée: </label>
+                                    <input type="text" id="adrArrr" value="" class="form-control">
+                                    <input type="button" class="btn btn-lg" value="recherche sur la carte" onclick="rechercherr('adrArrr',false)">
+                                </div>
+                                {% set position = 0 %}
+                                {% if mission.service is defined %}
+                                    {% set arraymission=mission.service %}
+                                    {% for b in arraymission|sort|reverse %}
+                                        {% if b.vehicule is defined %}
+                                            <div class="form-group">
+                                               {# {{ dump(b) }}#}
+                                                <label for="voiture" class="control-label">Voitures disponibles</label>
+                                                <select name="voiture" id="voiture" class="form-control">
+                                                    {% set compteur = 0 %}
+                                                    {% set compteurPrice = 0 %}
+                                                    {% for voiture in b.vehicule %}
+                                                        {% if b.carPrice is defined %}
+                                                            {% for price in b.carPrice %}
+                                                                {% if loop.index0 == compteur %}
+                                                                    {% if b.currency is defined %}
+                                                                        {% for currence in b.currency %}
+                                                                            {% if loop.index0 == compteur %}
+                                                                                <option value="{{ voiture }}" data-price="{{ price }}" data-currency="{{ currence }}">{{ voiture }}</option>
+                                                                            {% endif %}
+                                                                        {% endfor %}
+                                                                    {% endif %}
+                                                                {% endif %}
+                                                                {% set compteurPrice = compteurPrice + 1 %}
+                                                            {% endfor %}
+                                                        {% endif %}
+                                                        {% set compteur =  compteur + 1 %}
+                                                    {% endfor %}
+                                                </select>
+                                            </div>
+                                        {% endif %}
+                                        {#{% if b.currency is defined %}
+                                            {% for currence in b.carPrice %}
+                                                {% if loop.index0 == position %}
+                                                    <div class="form-group">
+                                                        <label for="currence" class="control-label">Currency</label>
+                                                        <input type="text" class="form-control" value="{{ currence }}">
+                                                    </div>
+                                                {% endif %}
+                                            {% endfor %}
+                                        {% endif %}#}
+                                        {% if b.priceMetre is defined %}
+                                            <input type="hidden" name="priceMetre" value="{{ b.priceMetre }}" id="priceMetre" class="priceMetre">
+                                        {% endif %}
+                                    {% endfor %}
+                                {% endif %}
+
+                                {% if app.user != null %}
+                                    <input type="hidden" class="form-control" id="nomm" name="username" value="{{ app.user.username }}">
+                                    <input type="hidden" class="form-control" id="emaill" name="email" value="{{ app.user.email }}">
+                                    {% if app.user.phoneNumber is defined %}
+                                        <input type="hidden" class="form-control" id="telephonee" name="telephone" value="{{ app.user.phoneNumber }}">
+                                    {% endif %}
+                                {% endif %}
+                            </div>
+                            <div style="padding: 10px;">
+                                <div class="col-lg-8 col-md-8">
+                                    <div id="divMapp" style="width: 100%; height: 400px;">
+
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-4" id="divRoutee" style="height: 400px; overflow: auto;"></div>
+                            </div>
+                            <div class="loading text-center">
+                                <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+                                <span class="sr-only">Loading...</span>
+                            </div>
+                            <div class="text-center success" style="height: 200px; padding: 15px; font-size: 25px;">
+                                <i class="fa fa-check-circle-o fa-3x" aria-hidden="true"></i>
+                            </div>
+                        </form>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="modal-footer" id="footer_rappeler" style="margin-top: 50px;">
+                <button type="button" class="btn btn-primary " id="estimationn">Estimer</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Fermer</button>
+
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+
+
+<div class="modal fade" id="modalLogin1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+
+            <div class="modal-body">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <div class="login-form-popup lp-border-radius-8">
+                    <div class="siginincontainer">
+                        <h1 class="text-center">S'identifier</h1>
+                        <form id="login" class="form-horizontal margin-top-30" method="post" action="/login_check">
+                            <input type="hidden" name="_csrf_token" value="Kk4KcJ-i6lPzu7pUx0wOja7L0g5uu9CI6uWJYDGVT4Q"/>
+                            <p class="status"></p>
+                            <div class="form-group">
+                                <label for="username">Adresse email *</label>
+                                <input type="text" class="form-control" id="username" name="_username" required/>
+                            </div>
+                            <div class="form-group">
+                                <label for="password">Mot de passe *</label>
+                                <input type="password" class="form-control" id="password" name="_password" required/>
+                            </div>
+                            <div class="form-group">
+                            </div>
+                            <div class="form-group">
+                                <div class="checkbox pad-bottom-10">
+                                    <input id="check1" type="checkbox" name="_remember_me" value="on">
+                                    <label for="check1">Se souvenir de moi</label>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <input type="submit" value="Se connecter" class="lp-secondary-btn width-full btn-first-hover" id="seConnecter"/>
+                            </div>
+                            <input type="hidden" id="security" name="security" value="9f8756cb45"/><input type="hidden" name="_wp_http_referer" value="/"/></form>
+                        <div class="pop-form-bottom">
+                            <div class="bottom-links">
+                                <a class="signUpClick">Nouveau sur Ween.tn? S'inscrire</a>
+                                <a class="forgetPasswordClick pull-right">Mot de passe oublié</a>
+                            </div>
+                            <p class="margin-top-15">Connectez-vous avec réseau social</p>
+                            <ul class="social-login list-style-none">
+                                <li>
+                                    <a id="logingoogle" class="google flaticon-googleplus" href="{{ path('hwi_oauth_connect') }}google">
+                                        <i class="fa fa-google-plus"></i>
+                                        <span>Google</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a id="loginfacebook" class="facebook flaticon-facebook" href="{{ path('hwi_oauth_connect') }}facebook">
+                                        <i class="fa fa-facebook"></i>
+                                        <span>Facebook</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a id="logintwitter" class="twitter flaticon-twitter" href="{{ path('hwi_oauth_connect') }}facebook">
+                                        <i class="fa fa-twitter"></i>
+                                        <span>Twitter</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <a class="md-close"><i class="fa fa-close"></i></a>
+                    </div>
+
+                    <div class="siginupcontainer">
+                        <h1 class="text-center">S'inscrire</h1>
+                        <form id="register" class="form-horizontal margin-top-30" method="post">
+                            <p class="status"></p>
+                            <div class="form-group">
+                                <label for="username">Nom et prénom *</label>
+                                <input type="text" class="form-control" id="username2" name="username"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Adresse email *</label>
+                                <input type="email" class="form-control" id="email" name="email"/>
+                            </div>
+                            <div class="form-group">
+                                <p>Le mot de passe vous sera envoyé par email.</p>
+                            </div>
+                            <div class="form-group">
+                            </div>
+                            <div class="form-group">
+                                <input type="submit" value="Enregistrer" class="lp-secondary-btn width-full btn-first-hover"/>
+                            </div>
+                            <input type="hidden" id="security" name="security" value="fac3396f28"/><input type="hidden" name="_wp_http_referer" value="/"/></form>
+                        <div class="pop-form-bottom">
+                            <div class="bottom-links">
+                                <a class="signInClick">Vous avez déjà un compte? Se connecter</a>
+                                <a class="forgetPasswordClick pull-right">Mot de passe oublié</a>
+                            </div>
+                            <p class="margin-top-15">Connectez-vous avec réseau social</p>
+                            <ul class="social-login list-style-none">
+                                <li>
+                                    <a id="logingoogle" class="google flaticon-googleplus" href="{{ path('hwi_oauth_connect') }}google">
+                                        <i class="fa fa-google-plus"></i>
+                                        <span>Google</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a id="loginfacebook" class="facebook flaticon-facebook" href="{{ path('hwi_oauth_connect') }}facebook">
+                                        <i class="fa fa-facebook"></i>
+                                        <span>Facebook</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a id="logintwitter" class="twitter flaticon-twitter" href="{{ path('hwi_oauth_connect') }}facebook">
+                                        <i class="fa fa-twitter"></i>
+                                        <span>Twitter</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <a class="md-close"><i class="fa fa-close"></i></a>
+                    </div>
+                    <div class="forgetpasswordcontainer">
+                        <h1 class="text-center">Mot de passe oublié</h1>
+                        <form class="form-horizontal margin-top-30" id="lp_forget_pass_form" action="#" method="post">
+                            <p class="status"></p>
+                            <div class="form-group">
+                                <label for="password">Adresse email *</label>
+                                <input type="email" name="user_login" class="form-control" id="email3"/>
+                            </div>
+                            <div class="form-group">
+                                <input type="submit" name="submit" value="Obtenir un nouveau mot de passe" class="lp-secondary-btn width-full btn-first-hover"/>
+                                <input type="hidden" id="security3" name="security3" value="48ca5eeb94"/><input type="hidden" name="_wp_http_referer" value="/"/></div>
+                        </form>
+                        <div class="pop-form-bottom">
+                            <div class="bottom-links"><a class="cancelClick">Annuler</a></div>
+                        </div>
+                        <a class="md-close"><i class="fa fa-close"></i></a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+</div>

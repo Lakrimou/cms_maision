@@ -1,0 +1,139 @@
+
+hotel_ajouter_New:
+    path:     /AjouterH/{id_qq}/
+    defaults: { _controller: "ModuleBundle:Hotel:AddNewHotell" }
+    methods:  [GET, POST]
+
+module_hotel_contactezNous:
+     path: /contactezNous/{id_qq}/
+     defaults: { _controller: ModuleBundle:Default:contactezNous}
+     methods: [GET, POST]
+
+
+##========================Chambres=========================#
+#hotel_index:
+#    path:     /{id_qq}
+#    defaults: { _controller: "ModuleBundle:Hotel:ajouterChambre" }
+#    methods:  [GET, POST]
+#
+#hotel_edit:
+#    path:     /{id_qq}/edit/{id_ch}
+#    defaults: { _controller: "ModuleBundle:Hotel:edit" }
+#    methods:  [GET, POST]
+#
+#hotel_supprimerChambre:
+#    path:     /{id_qq}/supprimerChambre/{id_ch}
+#    defaults: { _controller: "ModuleBundle:Hotel:supprimerChambre" }
+#    methods:  [GET, POST]
+##========================Services=========================#
+#hotel_ajouterService:
+#    path:     /{id_qq}/service
+#    defaults: { _controller: "ModuleBundle:Hotel:ajouterService" }
+#    methods:  [GET, POST]
+#
+#hotel_editService:
+#    path:     /{id_qq}/editservice/{id_ch}
+#    defaults: { _controller: "ModuleBundle:Hotel:editService" }
+#    methods:  [GET, POST]
+#
+#hotel_supprimerService:
+#    path:     /{id_qq}/supprimerService/{id_ch}
+#    defaults: { _controller: "ModuleBundle:Hotel:supprimerService" }
+#    methods:  [GET, POST]
+##========================Events=========================#
+#hotel_ajouterEvents:
+#    path:     /{id_qq}/ajouterEvents
+#    defaults: { _controller: "ModuleBundle:Hotel:ajouterEvents" }
+#    methods:  [GET, POST]
+#
+#hotel_editEvents:
+#    path:     /{id_qq}/editEvents/{id_ev}
+#    defaults: { _controller: "ModuleBundle:Hotel:editEvents" }
+#    methods:  [GET, POST]
+#
+#hotel_supprimerEvents:
+#    path:     /{id_qq}/supprimerEvents/{id_ev}
+#    defaults: { _controller: "ModuleBundle:Hotel:supprimerEvents" }
+#    methods:  [GET, POST]
+##========================Actualités=========================#
+#hotel_ajouterActualites:
+#    path:     /{id_qq}/ajouterActualites
+#    defaults: { _controller: "ModuleBundle:Hotel:ajouterActualites" }
+#    methods:  [GET, POST]
+#
+#hotel_editActualites:
+#    path:     /{id_qq}/editActualites/{id_ac}
+#    defaults: { _controller: "ModuleBundle:Hotel:editActualites" }
+#    methods:  [GET, POST]
+#
+#hotel_supprimerActualites:
+#    path:     /{id_qq}/supprimerActualites/{id_ac}
+#    defaults: { _controller: "ModuleBundle:Hotel:supprimerActualites" }
+#    methods:  [GET, POST]
+##========================Apropos=========================#
+#hotel_ajouterApropos:
+#    path:     /{id_qq}/ajouterApropos
+#    defaults: { _controller: "ModuleBundle:Hotel:ajouterApropos" }
+#    methods:  [GET, POST]
+#
+#hotel_editApropos:
+#    path:     /{id_qq}/editApropos/{id_ap}
+#    defaults: { _controller: "ModuleBundle:Hotel:editApropos" }
+#    methods:  [GET, POST]
+#
+#hotel_supprimerApropos:
+#    path:     /{id_qq}/supprimerApropos/{id_ap}
+#    defaults: { _controller: "ModuleBundle:Hotel:supprimerApropos" }
+#    methods:  [GET, POST]
+##========================Slider=========================#
+#module_hotel_upload:
+#     path: /{id_qq}/upload
+#     defaults: { _controller: ModuleBundle:Hotel:storeFolder}
+#     methods: [GET, POST]
+#module_hotel_delate:
+#     path: /{id_qq}/delate
+#     defaults: { _controller: ModuleBundle:Hotel:DeleteFile}
+#     methods: [GET, POST]
+#module_hotel_tmp_folder:
+#     path: /tmp/{qq_id}
+#     defaults: { _controller: ModuleBundle:Hotel:tmpfolder}
+#     methods: [GET, POST]
+#
+##========================Galery=========================#
+#module_hotel_delate_gallery:
+#     path: /{id_qq}/delate_gallery
+#     defaults: { _controller: ModuleBundle:Hotel:DeleteFileFromGallery}
+#     methods: [GET, POST]
+#module_hotel_gallery:
+#     path: /gallery/{id_qq}
+#     defaults: { _controller: ModuleBundle:Hotel:gallery}
+#     methods: [GET, POST]
+##========================Booking Room=========================#
+#module_hotel_booking:
+#     path: /booking/{id_qq}/{id_ch}
+#     defaults: { _controller: ModuleBundle:Hotel:booking}
+#     methods: [GET, POST]
+#
+##========================Booking Events=========================#
+#module_hotel_booking_events:
+#     path: /bookingEvents/{id_qq}/{id_ev}
+#     defaults: { _controller: ModuleBundle:Hotel:bookingEvents}
+#     methods: [GET, POST]
+##========================Contactez Nous=========================#
+
+##========================Horaires=========================#
+#hotel_ajouterHoraires:
+#    path:     /{id_qq}/ajouterHoraires
+#    defaults: { _controller: "ModuleBundle:Hotel:ajouterHoraires" }
+#    methods:  [GET, POST]
+#
+#hotel_modifierHoraires:
+#    path:     /{id_qq}/modifierHoraires/{id_ho}/
+#    defaults: { _controller: "ModuleBundle:Hotel:modifierHoraires" }
+#    methods:  [GET, POST]
+#
+##======================deleteColor=========================#
+#hoel_deleteColor:
+#    path:     /{id_qq}/deleteColor
+#    defaults: { _controller: "ModuleBundle:Hotel:deleteColor"}
+#    methods:  [GET, POST]

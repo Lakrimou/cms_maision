@@ -1,0 +1,422 @@
+<section id="propo">
+
+        <div class="auto-container">
+            <div class="row clearfix" id="abt">
+
+                <div class="column col-md-5 col-sm-12 col-xs-12">
+                    <figure class="image logo">
+                        {% set path =  asset('uploads/image/')~qouiqui.user.id ~'/'~ qouiqui.id ~'/avatar/avatar.jpg' %}
+                        {% if asset_exists(path) %}
+                            <img src="{{ asset('uploads/image/') }}{{ qouiqui.user.id }}/{{ qouiqui.id }}/avatar/avatar.jpg" alt="">
+                        {% else %}
+                            <div class="hidden-sm hidden-xs" style="width:300px;height:300px;margin: 0 auto;">
+                                <h1 style="text-transform: uppercase;
+                                    font-family: 'Lobster', cursive;
+                                    margin: 0 auto;
+                                   margin-top: 200px;
+                                    white-space:normal;
+                                    text-align: center;">
+                                    {{ qouiqui.firstName }}
+                                </h1>
+                            </div>
+                        {% endif %}
+                    </figure>
+                </div>
+
+                <div class="column col-md-7 col-sm-12 col-xs-12">
+                    <!--Bordered Title-->
+                    <div class="bordered-title hidden-sm hidden-xs" style="margin-top: 15px">
+                        <h2 class="theme_color">A PROPOS DE L'AGENCE</h2>
+
+                    </div>
+
+                    {% set sociaux = jsonDecod(qouiqui.sociaux) %}
+                    {% if  connected %}
+                        <div class="row">
+                            <div class="pull-right shake-little shake-constant shake-constant--hover  margin-bott-40">
+                                <button type="button" class="theme-btn btn-style-one blue" data-toggle="modal"
+                                        data-target="#editpropo">modifier les information
+                                </button>
+
+                            </div>
+                        </div>
+
+                    {% endif %}
+
+
+                    <div class="desc-text hidden-sm hidden-xs">
+                        <p>{{ qouiqui.details| raw }}</p>
+                    </div>
+
+                    <!--Info Box-->
+                    <div class="info-box row norow">
+                        <div class="col-md-6">
+                            <ul class="clearfix">
+                                <li class="address">
+                                    <div class="icon"><span class="flaticon-location74"></span></div>
+                                    <h4>ADDRESS</h4>
+                                    <div class="infoitem">
+
+                                        {{ qouiqui.address1 }} <br>{{ qouiqui.adress2 }}
+                                    </div>
+                                </li>
+                                <li class="contact-info">
+                                    <div class="icon"><span class="flaticon-telephone51"></span></div>
+                                    <h4>PHONE</h4>
+                                    <div class="infoitem">
+
+                                        {{ qouiqui.phone }} / {{ qouiqui.phone2 }}
+                                    </div>
+                                </li>
+                                <li class="contact-info">
+                                    <div class="icon"><i class="fa fa-clock-o" aria-hidden="true"></i></div>
+                                    <h4>Horaire</h4>
+                                    <div class="infoitem">
+                                        {% if horaire != null %}
+                                            Ouvert de {{ horaire.week1.start }} à {{ horaire.week1.end }}<br>
+                                            ouvert de {{ horaire.week2.start }} à {{ horaire.week2.end }}<br>
+
+                                            Samedi  {% if horaire.weekendsamedi.open is defined %} du {{ horaire.weekendsamedi.start }} à {{ horaire.weekendsamedi.end }} {% else %}Fermé{% endif %}<br>
+                                            Dimanche{% if horaire.weekenddimanche.open is defined %} du {{ horaire.weekenddimanche.start }} à {{ horaire.weekenddimanche.end }}{% else %} Fermé {% endif %}
+                                        {% else %}
+                                            Pas D'horaire
+                                        {% endif %}
+                                    </div>
+
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <ul class="clearfix">
+                                <li class="address">
+                                    <div class="icon"><span class="flaticon-configure"></span></div>
+                                    <h4>Activité</h4>
+                                    <div class="infoitem">
+
+                                        {{ category.libelle }}
+                                    </div>
+                                </li>
+                                <li class="contact-info">
+                                    <div class="icon"><span class="flaticon-email2"></span></div>
+                                    <h4>Email</h4>
+                                    <div class="infoitem">
+
+                                        {{ qouiqui.mail|slice(0, 4) }}***@*****.com
+                                    </div>
+                                </li>
+                                <li class="contact-info">
+                                    <div class="icon"><span class="flaticon-house113"></span></div>
+                                    <h4>Website</h4>
+                                    <div class="infoitem">
+
+                                        {{ qouiqui.website }}
+                                    </div>
+                                </li>
+
+                            </ul>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="col-md-6 pull-right">
+                            <a href="#contact-section" class="theme-btn btn-style-one">Contactez Nous</a>
+                            <a href="http://maps.google.com?q={{ qouiqui.geoLat }},{{ qouiqui.geoLong }}" class="theme-btn btn-style-one">Y aller</a>
+
+                            <div class="col-md-12 hidden-lg hidden-sm hidden-md pad-top imggoogle" style="padding-left:0">
+                                <a target="_blanck" href="http://maps.google.com?q={{ qouiqui.geoLat }},{{ qouiqui.geoLong }}">
+                                    <img src="https://maps.googleapis.com/maps/api/staticmap?zoom=17&size=600x300&maptype=roadmap
+                                            &markers=color:blue%7C
+                                            label:webmaster-media%7C{{ qouiqui.geoLat }},{{ qouiqui.geoLong }}
+                                            &key=AIzaSyBTdMydc9PUE0gPkcgjRZXOuFPXc5BUSrg">
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 rs" style="display: -webkit-box;">
+                            <a href="{% if sociaux.facebook is defined %}{{ sociaux['facebook'] }} {% endif %}" target="_blank"><span class="fa fa-facebook-f"></span></a>
+                            <a href="{% if sociaux.twitter is defined %}{{ sociaux['twitter'] }}{% endif %}" target="_blank"><span class="fa fa-twitter"></span></a>
+                            <a href="{% if sociaux.linkedin is defined %}{{ sociaux['linkedin'] }}{% endif %}" target="_blank"><span class="fa fa-linkedin"></span></a>
+                            <a href="{% if sociaux.google is defined %}{{ sociaux['google'] }}{% endif %}" target="_blank"><span class="fa fa-google-plus"></span></a>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+        <div class="particle elem1 anim-delay1"></div>
+        <div class="particle elem2 anim-delay5"></div>
+        <div class="particle elem3 anim-delay3"></div>
+        <div class="particle elem4 anim-delay8"></div>
+        <div class="particle elem5 anim-delay9"></div>
+        <div class="particle elem6 anim-delay2"></div>
+        <div class="particle elem7 anim-delay4"></div>
+        <div class="particle elem8 anim-delay3"></div>
+        <div class="particle elem9 anim-delay10"></div>
+        <div class="particle elem8 anim-delay11"></div>
+        <div class="particle elem6 anim-delay12"></div>
+        <div class="particle elem1 anim-delay14"></div>
+        <div class="particle elem13 anim-delay16"></div>
+        <div class="particle elem17 anim-delay18"></div>
+        <div class="particle elem2 anim-delay6"></div>
+        <div class="particle elem16 anim-delay9"></div>
+        <div class="particle elem8 anim-delay3"></div>
+        <div class="particle elem9 anim-delay10"></div>
+        <div class="particle elem18 anim-delay11"></div>
+        <div class="particle elem11 anim-delay12"></div>
+        <div class="particle elem12 anim-delay14"></div>
+        <div class="particle elem13 anim-delay16"></div>
+        <div class="particle elem14 anim-delay18"></div>
+        <div class="particle elem15 anim-delay6"></div>
+        <div class="particle elem16 anim-delay9"></div>
+        <div class="particle elem17 anim-delay7"></div>
+        <div class="particle elem18 anim-delay6"></div>
+        <div class="particle elem19 anim-delay3"></div>
+
+</section>
+<style>
+    #animation {
+        width: 100%;
+        height: 100%;
+    }
+    .rs a {
+        font-size: 35px;
+        margin-left: 9px;
+        padding-top: 5px;
+        display: inline-table;
+    }
+
+    .ui-pnotify.ui-pnotify-fade-normal.ui-pnotify-mobile-able.ui-pnotify-move.ui-pnotify-in.ui-pnotify-fade-in {
+        z-index: 1051;
+        background: white;
+    }
+    figure.image.logo{
+    margin: initial!important;
+    }
+    figure.image.logo img{
+        padding-top:120px;
+        width: 300px;
+        height: auto;
+        margin: 0 auto;
+    }
+    .desc-text{
+font-size: 15px;
+    }
+    #abt{
+        padding-top:30px;
+    }
+    .info-box.row.norow .icon {
+        width: 50px;
+        float: left;
+        font-size: 30px;
+    }
+    .info-box.row.norow{
+
+        padding: 15px;
+
+
+    }
+    .infoitem {
+        margin-left: 50px;
+    }
+
+</style>
+<!-- Modal -->
+{% if  connected %}
+    <div id="editpropo" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Modifier les information</h4>
+                </div>
+                <div class="modal-body">
+                    <div role="tabpanel">
+                        <!-- Nav tabs -->
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li role="presentation" class="active"><a href="#uploadTab" aria-controls="uploadTab" role="tab"
+                                                                      data-toggle="tab">mise a jour votre info</a>
+                            </li>
+                            <li role="presentation"><a href="#browseTab" aria-controls="browseTab" role="tab"
+                                                       data-toggle="tab">modifier le logo</a>
+                            </li>
+                        </ul>
+                        <!-- Tab panes -->
+                        <div class="tab-content">
+                            <div role="tabpanel" class="tab-pane active" id="uploadTab">
+                                <form id="edit_info" method="POST" action="{{ path('module_propo') }}">
+
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <h4>Description</h4>
+                                            <textarea id="det" name="editor" value="">{{ qouiqui.details }}</textarea>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <h4>Address</h4>
+                                            <input type="text" name="qouiqui[address1]" class="form-control"
+                                                   value=" {{ qouiqui.address1 }}">
+                                            <input type="text" name="qouiqui[id]" class="hidden" value="{{ qouiqui.id }}">
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <h4>Address additionelle</h4>
+                                            <input type="text" name="qouiqui[address2]" class="form-control"
+                                                   value="{{ qouiqui.adress2 }}">
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <h4>Numéro du télephone </h4>
+                                            <input type="text" name="qouiqui[phone]" class="form-control"
+                                                   value="{{ qouiqui.phone }}">
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <h4>Deuxieme Numéro </h4>
+                                            <input type="text" name="qouiqui[phone2]" class="form-control"
+                                                   value="{{ qouiqui.phone2 }}">
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <h4>Address email </h4>
+                                            <input type="text" name="qouiqui[mail]" class="form-control"
+                                                   value="{{ qouiqui.mail }}">
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <h4>Site Web </h4>
+                                            <input type="text" name="qouiqui[website]" class="form-control"
+                                                   value="{{ qouiqui.website }}">
+                                        </div>
+
+                                        <div class="col-md-12">
+                                            <h4>Horaire</h4>
+                                            <div class="col-md-6 nopadd">
+                                                <h5>Ouvert Matin de</h5>
+                                                <input type="text" name="qouiqui[opening]" class="form-control"  value="{{ qouiqui.opening }}">
+                                                <div class="bfh-timepicker" data-mode="12h" data-time="08:00" data-name="qouiqui[opening][week1][start]">
+                                                </div>
+                                                <h5>à</h5>
+                                                <div class="bfh-timepicker" data-mode="12h" data-time="18:00" data-name="qouiqui[opening][week1][end]">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6 nopadd">
+                                                <h5>Ouvert Après-midi de</h5>
+                                                <input type="text" name="qouiqui[opening]" class="form-control"  value="{{ qouiqui.opening }}">
+                                                <div class="bfh-timepicker" data-mode="12h" data-time="13:00" data-name="qouiqui[opening][week2][start]">
+                                                </div>
+                                                <h5>à</h5>
+                                                <div class="bfh-timepicker" data-mode="12h" data-time="14:00" data-name="qouiqui[opening][week2][end]">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6 nopadd">
+                                                <div class="checkbox checkbox-primary">
+                                                    <input id="checkbox2" type="checkbox" name="qouiqui[opening][weekendsamedi][open]" value="true">
+                                                    <label for="checkbox2">
+                                                        Samedi de
+                                                    </label>
+                                            </div>
+                                                <input type="text" name="qouiqui[opening]" class="form-control"  value="{{ qouiqui.opening }}">
+
+                                                <div class="bfh-timepicker" data-mode="12h" data-time="13:00" data-name="qouiqui[opening][weekendsamedi][start]">
+                                                </div>
+                                                <h5>à</h5>
+                                                <div class="bfh-timepicker" data-mode="12h" data-time="14:00" data-name="qouiqui[opening][weekendsamedi][end]">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6 nopadd">
+                                                <div class="checkbox checkbox-primary">
+                                                    <input id="checkbox3" name="qouiqui[opening][weekenddimanche][open]" value="true" type="checkbox">
+                                                    <label for="checkbox3">
+                                                        Dimanche de
+                                                    </label>
+                                                </div>
+                                                <input type="text" name="qouiqui[opening]" class="form-control"  value="{{ qouiqui.opening }}">
+
+                                                <div class="bfh-timepicker" data-mode="12h" data-time="13:00" data-name="qouiqui[opening][weekenddimanche][start]">
+                                                </div>
+                                                <h5>à</h5>
+                                                <div class="bfh-timepicker" data-mode="12h" data-time="14:00" data-name="qouiqui[opening][weekenddimanche][end]">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <hr class="clear-fix">
+                                        <div class="col-md-12">
+                                            <h4>Facebook </h4>
+                                            <input type="text" name="qouiqui[rs][facebook]" class="form-control"
+                                                   value="{% if sociaux.facebook is defined %}{{ sociaux['facebook'] }} {% endif %}">
+                                        </div>
+                                        <div class="col-md-12">
+                                            <h4>twitter </h4>
+                                            <input type="text" name="qouiqui[rs][twitter]" class="form-control"
+                                                   value="{% if sociaux.twitter is defined %}{{ sociaux.twitter }}{% endif %}">
+                                        </div>
+                                        <div class="col-md-12">
+                                            <h4>Google Plus </h4>
+                                            <input type="text" name="qouiqui[rs][google]" class="form-control"
+                                                   value="{% if sociaux.google is defined %}{{ sociaux.google }}{% endif %}">
+                                        </div>
+                                        <div class="col-md-12">
+                                            <h4>linkedin</h4>
+                                            <input type="text" name="qouiqui[rs][linkedin]" class="form-control"
+                                                   value="{% if sociaux.linkedin is defined %}{{ sociaux.linkedin }}{% endif %}">
+                                        </div>
+
+                                        <div class="col-md-12">
+                                            <h4>Mots Clé</h4>
+                                            <input name="tags" type="text" class="form-control" id="tokenfield" value="{% if data.tags is defined %} {{ data.tags }} {% endif %}" />
+                                        </div>
+
+
+
+                                    </div>
+                                </form>
+
+                            </div>
+                            <div role="tabpanel" class="tab-pane" id="browseTab">
+
+                                <div class="centered">
+                                    {% if asset_exists(path) %}
+                                        <form action="{{ path('supp_avatar',{'qq_id': qouiqui.id}) }}" id="suplogo" method="POST" >
+
+                                            <input  type="submit" value="Supprimer le logo" class="sup-logo theme-btn btn-style-one blue marg40" name="submit"><br>
+                                            <div style="margin: 0 auto;display: grid">
+                                            <img class="logologo" src="{{ asset('uploads/image/') }}{{ qouiqui.user.id }}/{{ qouiqui.id }}/avatar/avatar.jpg" alt="">
+                                            </div>
+
+                                        </form>
+
+                                    {% else %}
+                                        <h4 class="marg40"> pas de logo !</h4>
+                                    {% endif %}
+                                    <br>
+                                    <form action="{{ path('change_avatar',{ 'qq_id': qouiqui.id }) }}" method="POST" accept="image/gif, image/jpeg, image/png" enctype="multipart/form-data">
+                                        choisir votre logo
+                                        <input class="btn-default" type="file" name="fileToUpload" id="fileToUpload"><br>
+                                        <input type="submit" value="envoyer l'image" class="theme-btn btn-style-one blue" name="submit">
+                                    </form>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+                    <button type="submit" class="btn btn-default " data-target="modifier" data-selector="edit_info">
+                        enregistrer
+                    </button>
+                </div>
+
+
+            </div>
+
+        </div>
+    </div>
+{% endif %}

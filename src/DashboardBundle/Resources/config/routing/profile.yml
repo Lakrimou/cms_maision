@@ -1,0 +1,4 @@
+dashboard_profile_user_edit:
+    path:     /user/edit
+    defaults: { _controller: DashboardBundle:DashbordProfile:edit }
+    methods:  [GET, POST]

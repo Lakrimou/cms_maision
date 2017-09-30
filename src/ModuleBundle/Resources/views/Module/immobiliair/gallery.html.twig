@@ -1,0 +1,171 @@
+{% if connected %}
+    <div class="modal fade" id="Ajouter_gallery" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">×</button>
+                    <h4 class="modal-title">Modifier les image de sider</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row norow">
+
+
+                        <div class="panel-body">
+
+                            <!-- Standar Form -->
+                            <h4>Sélectionner les image depuis votre ordinateur</h4>
+                            <form id="upload_img_to_gallery" action="{{ path('uploadgallery',{'id_qq': qouiqui.id}) }}" method="post"
+                                  enctype="multipart/form-data" id="js-upload-form">
+                                <div class="form-inline">
+                                    <div class="form-group">
+                                        <input type="file" name="files[]" id="js-upload-files">
+                                    </div>
+                                    <button type="submit" class="btn btn-sm btn-primary" id="js-upload-submit">Envoi l'image
+                                    </button>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label" for="time">Type de l'image</label>
+                                    <select id="time" name="TypeGallery" class="form-control">
+                                        <option value="villa">Villa</option>
+                                        <option value="appartement">Appartement</option>
+                                        <option value="loft">loft</option>
+
+                                    </select>
+                                </div>
+                            </form>
+                            <!-- Upload Finished -->
+                            <div class="js-upload-finished">
+                                <h3>Galleries Images</h3>
+                                <div class="list-group">
+                                    {% for img in  img_gallery %}
+                                        {% set img2 = img|split('-') %}
+                                        <div class="sup-gal-{{ loop.index }}">
+                                            <div class="col-md-2">
+                                                <img style="width: 50px" src=" {{ asset('/uploads/image/') }}{{ iduser }}/{{ qouiqui.id }}/gallery/{{ img }}" alt=""></div>
+                                            <div class="col-md-10">
+                                                <a   class="list-group-item list-group-item-success">
+                                                    <span class="badge alert-success pull-right DeleteIMG" data-img="{{ img }}" data-sup=".sup-gal-{{ loop.index }}" data-link="{{ path('suppr_gallery_img',{'id_qq': qouiqui.id }) }}">Supprimer</span>{{ img2[0] }}
+                                                </a>
+                                            </div>
+                                        </div>
+
+                                    {% endfor %}
+
+
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+                    <button type="submit" class="btn btn-default " data-target="modifier" data-selector="upload_img_to_gallery">
+                        enregistrer
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+{% endif %}
+
+<div id="section-gallery">
+    <section class="gallery-section full-width" id="section-gallery">
+
+        <div class="auto-container">
+            {% if connected %}
+                <button class="theme-btn btn-style-one pull-right" data-toggle="modal" data-target="#Ajouter_gallery">
+                    ajouter des images Galleris
+                </button>
+            {% endif %}
+            <!--Section Title-->
+            <div class="sec-title">
+                <h2 class="theme_color">Photo Galerie</h2>
+                <div class="separator small-separator"></div>
+                <div class="text"><p></p></div>
+            </div>
+
+            <!--Filter-->
+            <div class="filters">
+                <ul class="filter-tabs clearfix anim-3-all">
+                    <li class="filter" data-role="button" data-filter="all">Tous</li>
+                    <li class="filter" data-role="button" data-filter=".villa">Villa</li>
+                    <li class="filter" data-role="button" data-filter=".appart">Appartement</li>
+                    <li class="filter" data-role="button" data-filter=".loft">Loft</li>
+                </ul>
+            </div>
+
+        </div>
+
+        <div class="images-container">
+            <div class="filter-list clearfix">
+
+                <!--Image Box-->
+                {% for img in img_gallery %}
+                    {% set img2 = img|split('-') %}
+                    <div class="image-box mix mix_all living-room kitchen {{ img2[0] }}">
+                        <div class="inner-box">
+                            <figure class="image"><a
+                                        href="{{ asset('/uploads/image/') }}{{ iduser }}/{{ qouiqui.id }}/gallery/{{ img }}"
+                                        class="lightbox-image"><img
+                                            src="{{ asset('/uploads/image/') }}{{ iduser }}/{{ qouiqui.id }}/gallery/{{ img }}"
+                                            alt=""></a>
+                            </figure>
+                            <a href="{{ asset('/uploads/image/') }}{{ iduser }}/{{ qouiqui.id }}/gallery/{{ img }}"
+                               class="zoom-btn lightbox-image"><span
+                                        class="icon flaticon-add30"></span></a>
+                        </div>
+                    </div>
+                {% endfor %}
+
+                <div class="image-box mix mix_all bedroom living-room kitchen">
+                    <div class="inner-box">
+                        <figure class="image"><a href="{{ asset('module/immobiliair/images/gallery/8.jpg') }}"
+                                                 class="lightbox-image"><img
+                                        src="{{ asset('module/immobiliair/images/gallery/8.jpg') }}" alt=""></a>
+                        </figure>
+                        <a href="{{ asset('module/immobiliair/images/gallery/8.jpg') }}"
+                           class="zoom-btn lightbox-image"><span
+                                    class="icon flaticon-add30"></span></a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+    </section>
+    <div class="particle elem1 anim-delay1"></div>
+    <div class="particle elem6 anim-delay2"></div>
+    <div class="particle elem3 anim-delay3"></div>
+    <div class="particle elem7 anim-delay4"></div>
+    <div class="particle elem2 anim-delay5"></div>
+    <div class="particle elem4 anim-delay8"></div>
+    <div class="particle elem5 anim-delay9"></div>
+    <div class="particle elem8 anim-delay3"></div>
+    <div class="particle elem9 anim-delay10"></div>
+    <div class="particle elem8 anim-delay11"></div>
+    <div class="particle elem6 anim-delay12"></div>
+    <div class="particle elem1 anim-delay14"></div>
+    <div class="particle elem13 anim-delay16"></div>
+    <div class="particle elem17 anim-delay18"></div>
+    <div class="particle elem2 anim-delay6"></div>
+    <div class="particle elem16 anim-delay9"></div>
+    <div class="particle elem8 anim-delay3"></div>
+    <div class="particle elem9 anim-delay10"></div>
+    <div class="particle elem18 anim-delay11"></div>
+    <div class="particle elem11 anim-delay12"></div>
+    <div class="particle elem12 anim-delay14"></div>
+    <div class="particle elem13 anim-delay16"></div>
+    <div class="particle elem14 anim-delay18"></div>
+    <div class="particle elem15 anim-delay6"></div>
+    <div class="particle elem16 anim-delay9"></div>
+    <div class="particle elem17 anim-delay7"></div>
+    <div class="particle elem18 anim-delay6"></div>
+    <div class="particle elem19 anim-delay3"></div>
+</div>

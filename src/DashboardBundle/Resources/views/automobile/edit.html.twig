@@ -1,0 +1,48 @@
+{% extends 'dashboardLayaout/dashboardLayout.html.twig' %}
+
+{% block body %}
+    <div class="col-sm-9 col-md-12">
+        <span class="titre-spain">Modifier Automobile!</span>
+    {{ form_start(edit_form) }}
+        {{ form_widget(edit_form) }}
+        <input type="submit" value="Modifier" id="envoyer" class="btn btn-success"/>
+    {{ form_end(edit_form) }}
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Supprimer" class="btn btn-danger"/>
+            <a href="{{ path('dashboard_automobile_liste',{'idQq': Automobile.qouiqui.id}) }}" class="btn btn-info">liste des automobiles</a>
+            {{ form_end(delete_form) }}
+
+
+
+
+
+    </div>
+
+
+{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    {#=========================Test size and type of picture=============================#}
+
+    <script>
+        $('#adminbundle_automobile_images').change(function () {
+
+            var ext = this.value.match(/\.(.+)$/)[1];
+            if (ext == 'jpg' || ext == 'jpeg' || ext == 'png' || ext == 'gif') {
+
+//                $('#envoyer').attr('disabled', false);
+                $('#envoyer').attr('disabled', false);
+                //$('.errorSize').fadeOut();
+            } else {
+
+                $('#adminbundle_automobile_images').after('<span class="errorSize" style="color:red;">Type non valide!(SVP entrer fichier de type["jpg", "png", "jpeg", "gif"])</span>');
+                $('.errorSize').fadeOut(10000);
+                $('#envoyer').attr('disabled', true);
+            }
+        });
+    </script>
+{% endblock %}

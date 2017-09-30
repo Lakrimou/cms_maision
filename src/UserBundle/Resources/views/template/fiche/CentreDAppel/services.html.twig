@@ -1,0 +1,825 @@
+<section id="section-services" class="we_are bg_light padding">
+    {#<a href="http://teleperformance.ween.tn/tpl/fiche/images/property-listing-2.jpg" download>aaaaaaaaaaaa</a>#}
+
+    {% if attributes.connected %}
+
+            <div class="pull-righ" style="    margin-right: 24px;">
+                <div data-step="3" data-intro="This is a tooltip!" class="pull-right margin-bott-40">
+                    <button type="button" class="theme-btn button11 btn-style-one pull-right" data-toggle="modal"
+                            data-target="#listService">Gérer cette section
+                    </button>
+                </div>
+            </div>
+
+    {% endif %}
+
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h2 class="text-uppercase">Nos <span class="color_red">offres d'emploi </span></h2>
+                <div class="line_1"></div>
+                <div class="line_2"></div>
+                <div class="line_3"></div>
+            </div>
+        </div>
+        {% if Spaservice.service is defined %}
+        {% set nb=Spaservice.service|length %}
+        {% set arrayServ=Spaservice.service %}
+        <div class="row" id="append-item">
+
+
+            {% for a in   arrayServ|sort|reverse %}
+                {% set image= asset('uploads/image/')~attributes.quoiqui.user.id~"/"~ attributes.quoiqui.id ~"/service/"~ a.idserv ~'.jpg' %}
+                {% if (arrayServ|length == 1) %}
+                    <div class="col-md-4 col-sm-4 col-xs-12 "></div>
+                {% endif %}
+                {% if (arrayServ|length == 2) and (loop.index == 1) %}
+                    <div class="col-md-2 col-sm-2 col-xs-12"></div>
+                {% endif %}
+
+                <a href="#" data-toggle="modal" data-target="#Show_more" data-idqq="{{ attributes.quoiqui.id }}"
+                   data-idServ="{{ a.idserv }}" class="lire_plus" data-class="lire_plus">
+                    <div class=" col-md-4 col-sm-4 top40   item-id-{{ a.idserv }}  item-scroll col-custom" style="min-height: 380px;">
+                        <div class="block-service margin15 pad15" style="background: white;">
+                            <div class="row">
+                                <div class="col-md-12 text-center">
+                                    {% if   image is defined %}
+                                        <div class=" image-content-cf-serv " style="margin-bottom: 20px;background-image: Url('{{ asset('uploads/image/') }}{{ attributes.quoiqui.user.id }}/{{ attributes.quoiqui.id }}/service/{{ a.idserv ~'.jpg' }}')"></div>
+                                    {% elseif image is not defined %}
+                                        <span class="icon-shortcode">
+                                        {#{% if a["serviceIcon"]is defined %}#}
+                                            {% if 'fa ' in a["serviceIcon"] %}
+                                                <i class="{% if a["serviceIcon"] is defined %}{{ a["serviceIcon"] }}{% endif %}"
+                                                   aria-hidden="true"></i>
+                                        {% else %}
+                                                <img class="svg" width="80px" src='{{ a["serviceIcon"] }}' alt="">
+                                            {% endif %}
+                                    </span>
+                                    {% endif %}
+                                </div>
+
+                                <h3 class="serviceTitle text-center pad15">
+                                    {% if a.ServSpa is defined %}{{ a.ServSpa }}{% endif %}
+                                </h3>
+                                <div class="clearfix">
+                                    <div class="separator" style="width: 100px;border-bottom-width: 2px; "></div>
+                                </div>
+                                <p class="service-text">
+                                    {% if a.detail is defined %}{{ a.detail|slice(0,60)|raw }}..{% endif %}
+
+                                </p>
+                                {% if is_mobile() %}
+                                    <div class="row service pad15">
+                                        <a data-toggle="modal" data-target="#Show_more" data-idqq="{{ attributes.quoiqui.id }}"
+                                           data-idServ="{{ a.idserv }}"
+                                           class="lire_plus  btn-default btn-xs pull-right suite">En Savoir plus</a>
+                                    </div>
+                                {% endif %}
+                            </div>
+                            {% if not is_mobile() %}
+                                <div class="row service pad15">
+                                    <a data-toggle="modal" data-target="#Show_more" data-idqq="{{ attributes.quoiqui.id }}"
+                                       data-idServ="{{ a.idserv }}"
+                                       class="lire_plus  btn-default btn-xs pull-right suite">En Savoir plus</a>
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </a>
+
+
+            {% endfor %}
+
+
+        </div>
+
+
+    </div>
+    {% endif %}
+    {% if not is_mobile() %}
+        <div class="paralax-icon">
+            <div class="particle elem1 anim-delay1"></div>
+            <div class="particle elem2 anim-delay5"></div>
+            <div class="particle elem3 anim-delay3"></div>
+            <div class="particle elem4 anim-delay8"></div>
+            <div class="particle elem5 anim-delay9"></div>
+            <div class="particle elem6 anim-delay2"></div>
+            <div class="particle elem7 anim-delay4"></div>
+            <div class="particle elem8 anim-delay3"></div>
+            <div class="particle elem9 anim-delay10"></div>
+            <div class="particle elem8 anim-delay11"></div>
+            <div class="particle elem6 anim-delay12"></div>
+            <div class="particle elem1 anim-delay14"></div>
+            <div class="particle elem13 anim-delay16"></div>
+            <div class="particle elem17 anim-delay18"></div>
+            <div class="particle elem2 anim-delay6"></div>
+            <div class="particle elem16 anim-delay9"></div>
+            <div class="particle elem8 anim-delay3"></div>
+            <div class="particle elem9 anim-delay10"></div>
+            <div class="particle elem18 anim-delay11"></div>
+            <div class="particle elem11 anim-delay12"></div>
+            <div class="particle elem12 anim-delay14"></div>
+            <div class="particle elem13 anim-delay16"></div>
+            <div class="particle elem14 anim-delay18"></div>
+            <div class="particle elem15 anim-delay6"></div>
+            <div class="particle elem16 anim-delay9"></div>
+            <div class="particle elem17 anim-delay7"></div>
+            <div class="particle elem18 anim-delay6"></div>
+            <div class="particle elem19 anim-delay3"></div>
+        </div>
+    {% endif %}
+</section>
+
+<div class="modal fade" id="listService" role="dialog">
+    <div class="modal-dialog modal-md">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title ">Liste des services</h4>
+            </div>
+            <div class="modal-body">
+                <table class="table  dataTable" cellspacing="0" width="100%">
+                    <thead>
+                    <tr>
+                        <th width="74">Image</th>
+                        <th width="100">service</th>
+
+                        <th width="100">Modifier</th>
+                        <th width="100">Supprimer</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    {% if Spaservice.service is defined %}
+                        {% set arrayServ=Spaservice.service %}
+                        {% for b in arrayServ|sort|reverse %}
+
+                            <tr data-td="{{ b.idserv }}">
+
+                                <td align="center">
+
+                                    <img src="{{ asset('uploads/image/') }}{{ attributes.quoiqui.user.id }}/{{ attributes.quoiqui.id }}/service/{{ b.idserv ~'.jpg' }}"
+                                         data-pin-nopin="true" style="  width:  74px;">
+
+                                </td>
+                                <td align="center">{{ b.ServSpa }}</td>
+
+                                <td align="center">
+
+                                    <a href="#" class=" btn btn-info a-btn-slide-text edit" data-serv="{{ b.idserv }}"
+                                       data-id="{{ attributes.quoiqui.id }}" data-toggle="modal"
+                                       data-target="#editSpa">
+
+                                        <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                                        <span><strong>Modifier</strong></span>
+                                    </a>
+
+                                </td>
+
+
+                                <td align="center">
+
+                                    <a href="{{ path('module_spa_supprim_services',{"idqq": attributes.quoiqui.id,"idserv":b.idserv }) }}"
+                                       class=" btn btn-danger a-btn-slide-text service_suprim click-off"
+                                       onclick="clickOffConfirmed = confirm('Vous voulez le  supprimer ?');">
+                                        <span class="glyphicon glyphicon-remove " aria-hidden="true"></span>
+                                        <span><strong>Supprimer</strong></span>
+                                    </a>
+                                </td>
+
+                            </tr>
+
+                        {% endfor %}
+                    {% endif %}
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary spa-service" data-toggle="modal" data-target="#addService">
+                    Ajouter un service
+                </button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Fermer</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="addService" role="dialog">
+    <div class="modal-dialog modal-lg">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title titre_header">Ajouter un offre</h4>
+            </div>
+            <div class="modal-body">
+                <form id="addserv" method="POST" class=" fileuploader"
+                      action="{{ path('module_spa_add_service',{"idqq":attributes.quoiqui.id}) }}"
+                      enctype="multipart/form-data">
+
+                    <input type="hidden" name="idserv" value="{{ uniqueId() }}">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-md-12">Choisissez un offre</label>
+                                <select class="selectpicker form-control" id="serviceselect" name="ServSpa">
+
+                                    {% for servieListe in attributes.servieListe %}
+                                        <option value="{{ servieListe }}">{{ servieListe }}</option>
+
+                                    {% endfor %}
+                                    <option value="autre" style="font-weight: 700;font-size: 20px;">Choisir autre offre</option>
+                                </select>
+
+                            </div>
+                            <div class="form-group ">
+                                <input type="text" name="autres" id="otherServices" class="form-control"
+                                       placeholder="ajoutre autre service">
+                                <span class="errormsg" style="color:red;"></span>
+                            </div>
+
+                            <div class="form-group  ">
+                                <label class="col-md-12">Description</label>
+
+                                <textarea placeholder="Entrer la description.."
+                                          class="form-control textarea   " row="10"
+                                          name="detail" required="required"></textarea>
+                            </div>
+
+
+                            <div class="panel panel-info">
+                                <div class="panel-heading form-group">
+                                    <label class="panel-title ">Compétece requises</label>
+                                </div>
+                                <div class="panel-body">
+                                    <div class="form-group multiple-form-group input-group">
+
+
+                                        <input type="text" name="tab1[skills][]" class="form-control">
+
+                                        <span class="input-group-btn">
+                                            <button type="button" class="btn btn-success btn-add" style="    padding-right: 20px;">+</button>
+                                        </span>
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+
+                            <div class="panel panel-info">
+                                <div class="panel-heading form-group">
+                                    <label class="panel-title ">Qualités requises</label>
+                                </div>
+                                <div class="panel-body">
+                                    <div class="form-group multiple-form-group input-group">
+
+
+                                        <input type="text" name="tab2[qualite][]" class="form-control">
+
+                                        <span class="input-group-btn">
+                                            <button type="button" class="btn btn-success btn-add" style="    padding-right: 20px;">+</button>
+                                        </span>
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+
+                            <div class="panel panel-info">
+                                <div class="panel-heading form-group">
+                                    <label class="panel-title ">Nous vous garantissons</label>
+                                </div>
+                                <div class="panel-body">
+                                    <div class="form-group multiple-form-group input-group">
+
+
+                                        <input type="text" name="tab3[avantage][]" class="form-control">
+
+                                        <span class="input-group-btn">
+                                            <button type="button" class="btn btn-success btn-add" style="    padding-right: 20px;">+</button>
+                                        </span>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+
+                            <div class="form-group  ">
+                                <div class="col-md-12">
+                                    <label class="control-label">Choisissez une image pour le service choisie</label>
+                                </div>
+
+                                <div class="col-sm-9 DefaultIcon">
+
+                                    {% for iconservice in DirAssetParcour(asset('uploads/image/iconService/'~attributes.category.slug|lower~'/SVG/')) %}
+                                        <a href="#" onclick="javascript:;">
+                                            <img width="50px" height="50px"
+                                                 src="{{ asset('uploads/image/iconService/') }}{{ attributes.category.slug|lower~'/SVG/' }}{{ iconservice }}"
+                                                 alt="">
+                                        </a>
+                                    {% endfor %}
+
+                                </div>
+
+
+                            </div>
+
+
+                            <input type="text" id="icon-filtre-2" class="icon-filtre form-control name_service"
+                                   placeholder="recherche Votre Image">
+                            <input type="hidden" name="serviceIcon" class="form-control name_service"
+                                   placeholder="recherche Votre Image">
+                            <button type="button" class="btn btn-primary btn-lg btn-block"><i class="fa fa-search"
+                                                                                              aria-hidden="true"></i>
+                            </button>
+
+
+                            <div class=" pull-right  icon_list">
+                                {{ include('@User/template/fontawesomeIcons.html.twig') }}
+                            </div>
+
+                            <div class=" form-group" style="margin-top: 23px;">
+                                <div class="col-md-12">
+                                    <label>choisissez une image</label>
+                                </div>
+                                <input autocomplete="off" class="form-control "
+                                       name="file" type="file"
+                                       placeholder="choisissez_image" data-items="8"/>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger " data-dismiss="modal">Fermer</button>
+                <button type="submit" id="addServices" class=" btn btn-primary button-default " data-target="modifier"
+                        data-selector="addserv">
+                    Enrigistrer
+                </button>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="modal fade" id="editSpa" role="dialog">
+    <div class="modal-dialog modal-md">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title titre_header">Modifier l'offre</h4>
+            </div>
+            <div class="modal-body">
+                <form id="updateserv" method="POST" class=" fileuploader"
+                      action="{{ path('module_spa_update_service',{"idqq":attributes.quoiqui.id}) }}"
+                      enctype="multipart/form-data">
+
+                    <input id="idservs" type="hidden" class="form-control" name="idserv">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-md-12">Choisissez un service</label>
+                                <select class="selectpicker form-control selectOption" id="serviceselect-edit"
+                                        name="ServSpa">
+                                    {% for servieListe in attributes.servieListe %}
+                                        <option value="{{ servieListe }}">{{ servieListe }}</option>
+
+                                    {% endfor %}
+                                    <option value="autre" style="font-weight: 700;font-size: 20px;">Choisir autre offre</option>
+                                </select>
+
+                            </div>
+                            <div class="form-group ">
+                                <input type="text" name="autres" id="other" class=" form-control otherSelected"
+                                       placeholder="Ajouter autre service">
+                                <span class="errormsg" style="color:red;"></span>
+                            </div>
+
+
+                            <div class="form-group">
+                                <label class="col-md-12">Description</label>
+                                <textarea id="details" placeholder="Entrer la description.." rows="8"
+                                          class="form-control textarea SpaDetail  "
+                                          name="detail" required="required"></textarea>
+                            </div>
+
+
+                            <div id="div-panel1">
+
+                            </div>
+                            <div id="div-panel2">
+
+                            </div>
+                            <div id="div-panel3">
+
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <label class="control-label"> Modifier l'image de service</label>
+                                </div>
+
+                                <div class="col-sm-9 DefaultIcon">
+
+                                    {% for iconservice in DirAssetParcour(asset('uploads/image/iconService/'~attributes.category.slug|lower~'/SVG/')) %}
+                                        <a href="#" onclick="javascript:;">
+                                            <img width="50px" height="50px"
+                                                 src="{{ asset('uploads/image/iconService/') }}{{ attributes.category.slug|lower~'/SVG/' }}{{ iconservice }}"
+                                                 alt="">
+                                        </a>
+                                    {% endfor %}
+
+                                </div>
+
+
+                            </div>
+
+
+                            <input type="text" id="icon-filtre-2" class="icon-filtre form-control name_service"
+                                   placeholder="recherche Votre Image">
+                            <input id="serviceicon" type="hidden" name="serviceIcon" class="form-control name_service"
+                                   placeholder="recherche Votre Image">
+                            <button type="button" class="btn btn-primary btn-lg btn-block"><i class="fa fa-search"
+                                                                                              aria-hidden="true"></i>
+                            </button>
+
+                            <div class=" pull-right col-sm-9 ">
+                                {{ include('@User/template/fontawesomeIcons.html.twig') }}
+                            </div>
+
+                            <div class=" form-group">
+                                <div class="col-md-12">
+                                    <label>choisissez une image</label>
+                                </div>
+                                <input autocomplete="off" class="form-control "
+                                       name="file" type="file"
+                                       placeholder="choisissez_image" data-items="8"/>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Fermer</button>
+                <button type="submit" id="editServices" class=" submit btn btn-primary button-default"
+                        data-target="modifier"
+                        data-selector="updateserv">
+                    Enrigistrer
+                </button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div id="Show_more" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-md">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 id="servspa" class=" color_red G_titre"></h4>
+
+            </div>
+
+            <div class="modal-body ">
+                <div id="news-section-1">
+
+                    {#<div class="row">#}
+                        {#<div style="text-align: center">#}
+                            {#<span id="servspa" class="service-details-titre color_red G_titre"></span>#}
+                        {#</div>#}
+                        {#<div class="col-md-12 text-center">#}
+                            {#<p><span class="line_1" style="display: inline-block; margin-bottom: -5px;"></span></p>#}
+                            {#<p><span class="line_2" style="display: inline-block;"></span></p>#}
+                            {#<p><span class="line_3" style="display: inline-block;"></span></p>#}
+                        {#</div>#}
+                    {#</div>#}
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="row row-eq-height">
+
+
+                                <input type="hidden" id="idImgSpa" value="">
+                                <div class="col-md-6">
+                                    <img id="putImg" src="" class="img-responsive" style="width: 100%">
+                                </div>
+                                <div class="col-md-6 ">
+
+
+                                    <div id="proposalAccordion" class="panel-group">
+                                        <div class="panel panel-default margetop">
+                                            <div class="panel-heading">
+                                                <h4 class="panel-title">
+                                                    <a data-toggle="collapse" data-parent="#proposalAccordion" href="#collapse1"><span class="glyphicon glyphicon-plus"></span>
+                                                        <span>Mission</span></a>
+                                                </h4>
+
+                                            </div>
+                                            <div id="collapse1" class="panel-collapse collapse in fixheight">
+                                                <div class="panel-body">
+                                                    <p class="bottom30" id="Spadetail"></p>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading">
+                                                <h4 class="panel-title">
+                                                    <a data-toggle="collapse" data-parent="#proposalAccordion" href="#collapse2"><span class="glyphicon glyphicon-plus"></span>
+                                                        <span>Compétence requise</span>
+                                                    </a>
+                                                </h4>
+
+                                            </div>
+                                            <div id="collapse2" class="panel-collapse collapse  fixheight">
+                                                <div class="panel-body">
+                                                    <ul id="competence" style="margin-top: -25px">
+
+                                                    </ul>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading">
+                                                <h4 class="panel-title">
+                                                    <a data-toggle="collapse" data-parent="#proposalAccordion" href="#collapse3"><span class="glyphicon glyphicon-plus"></span><span> Qualité requise</span></a>
+                                                </h4>
+
+                                            </div>
+                                            <div id="collapse3" class="panel-collapse collapse fixheight">
+                                                <div class="panel-body">
+                                                    <ul id="qualite" style="margin-top: -25px">
+
+                                                    </ul>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading">
+                                                <h4 class="panel-title">
+                                                    <a data-toggle="collapse" data-parent="#proposalAccordion" href="#collapse4"><span class="glyphicon glyphicon-plus"></span> <span>Salaire et avantage</span> </a>
+                                                </h4>
+
+                                            </div>
+                                            <div id="collapse4" class="panel-collapse collapse fixheight">
+                                                <div class="panel-body">
+                                                    <ul id="avantage" style="margin-top: -25px">
+
+                                                    </ul>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+                <div class="row  ">
+                    <div class="col-md-6  ">
+                        <a href="#" data-toggle="modal" data-target="#candidature"
+
+                           class="col-md-12 col-xs-12 spacontact2 xs-marge-top text-uppercase postulez data" data-offre=""> postulez à cette offre d'emploi
+                        </a>
+                    </div>
+                    <div class="col-md-6  ">
+                        {% if not is_mobile() %}
+                            <a class="col-md-12 col-xs-12 spacontact1 xs-marge text-uppercase  phonenumber ">Tél:{{ attributes.quoiqui.phone }}</a>
+                            <a id="buttoncall-us" class="col-md-12 col-xs-12 spacontact1 xs-marge text-uppercase  buttoncall-us "> Afficher le numéro</a>
+                        {% endif %}
+                        {% if is_mobile() %}
+                        <a href="tel:{{ attributes.quoiqui.phone }}" id="button.call-us"class="col-md-12 col-xs-12 spacontact1 xs-marge text-uppercase  "> Contacter nous: {{ attributes.quoiqui.phone }}
+                        </a>
+                        {% endif %}
+                    </div>
+
+                </div>
+
+                {#<div class="row">#}
+                {#<div class="col-md-6 col-md-offset-6 ">#}
+                {#<div class="panel panel-default phonenumber" style=" margin-top: 7px;#}
+                {#">#}
+                {#<div class="panel-body" style="font-size: 25px">Tél:{{ attributes.quoiqui.phone }}</div>#}
+                {#</div>#}
+                {#</div>#}
+                {#</div>#}
+            </div>
+
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Fermer</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+<div id="candidature" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-md">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+            <div class="modal-body  ">
+                <div class="row">
+                    <div style="text-align: center">
+                        <span class="service-details-titre color_red G_titre "> Postulez votre candidature</span>
+                    </div>
+                    <div class="col-md-12 text-center">
+                        <p><span class="line_1" style="display: inline-block; margin-bottom: -5px;"></span></p>
+                        <p><span class="line_2" style="display: inline-block;"></span></p>
+                        <p><span class="line_3" style="display: inline-block;"></span></p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+
+
+                        <form action="{{ path('module_module_centredapel',{'idqq':attributes.quoiqui.id }) }}"
+                              method="POST" enctype="multipart/form-data">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <select class="selectpicker form-control" id="serviceselect-depot" name="ServSpa">
+
+
+                                            {#<option value="TELECONSEILLER H/F">TELECONSEILLER H/F</option>#}
+                                            {#<option value="SUPERVISEUR H/F">SUPERVISEUR H/F</option>#}
+                                            {#<option value="TELEVENDEUR H/F">TELEVENDEUR H/F</option>#}
+                                            {#<option value="NOS OFFRES D’EMPLOI">NOS OFFRES D’EMPLOI</option>#}
+                                            {% for s in Spaservice.service %}
+                                                <option value='{{ s.ServSpa }}' class=''>{{ s.ServSpa }}</option>
+                                            {% endfor %}
+
+
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group ">
+                                        <label class="radio-inline check">
+                                            <input type="radio" name="mr">Mr
+                                        </label>
+                                        <label class="radio-inline check">
+                                            <input type="radio" name="mlle">Mlle
+                                        </label>
+                                        <label class="radio-inline check">
+                                            <input type="radio" name="mm">Mm
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <div class="single-query">
+                                        <div class="form-group  ">
+                                            <input type="text" name="nom(*)" class="keyword-input form-control" required="required" placeholder="nom">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <div class="single-query">
+                                        <div class="form-group">
+                                            <input type="text" name="prenom" class=" form-control keyword-input"
+                                                   placeholder="prénom(*)" value=""
+                                                   required="required">
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6 col-sm-6">
+                                    <div class="single-query">
+                                        <input type="number" name="tel" class=" form-control keyword-input"
+                                               placeholder="Tel(*)" value=""
+                                               required="required">
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <div class="single-query">
+                                        <input type="email" name="email" class=" form-control keyword-input"
+                                               placeholder="Email(*)" value=""
+                                               required="required">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <div class="single-query">
+                                        <div class="form-group">
+                                            <input type="text" name="adr" class=" form-control keyword-input"
+                                                   placeholder="Adresse(*)"
+                                                   required="required">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <div class="single-query">
+                                        <div class="form-group">
+                                            <input type="text" name="codepostal" class=" form-control keyword-input"
+                                                   placeholder="Code Postal(*)"
+                                                   required="required">
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <div class=" form-group">
+                                        <label> Joignez votre CV (formats acceptés : pdf, doc, docx)*</label>
+
+                                        <input autocomplete="off" class=" form-control  " id="centre-appel-cv"
+                                               name="file" type="file" placeholder="Joindre votre CV*" data-items="8"/>
+
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <div class=" form-group">
+
+                                        <label> Joignez une LM (formats acceptés : pdf, doc, docx)*</label>
+
+                                        <input autocomplete="off" class=" form-control " id="centre-appel-lettre-motivation"
+                                               name="file" type="file" placeholder="Joindre votre LM*" data-items="8"/>
+
+                                    </div>
+
+
+                                </div>
+                            </div>
+
+                            <div class="row">
+
+
+                                <div class="col-md-12 text-center  ">
+                                    <button type="submit" class=" btn btn-warning buttn">
+                                        Envoyer
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">Fermer</button>
+
+
+                            </div>
+                        </form>
+
+
+                    </div>
+                </div>
+
+
+            </div>
+
+        </div>
+    </div>
+
+</div>
+<select class="selectpicker form-control " id="service-from-base" name="mission" style="display: none;">
+    <option disabled selected>Sélectionner un service....</option>
+
+
+    {% if Spaservice.service is defined %}
+
+        {% for s in Spaservice.service %}
+            <option value='{{ s.ServSpa }}'
+                    class=''>{{ s.ServSpa }}</option>
+
+        {% endfor %}
+
+    {% endif %}
+</select>
+

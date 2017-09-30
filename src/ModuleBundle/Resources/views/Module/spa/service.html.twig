@@ -1,0 +1,338 @@
+{% if  connected %}
+    <div class="pull-right margin-bott" style="    margin-bottom: 6px;margin-right: 13px">
+        {% if spaService(module) is not empty %}
+
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#service_list"
+            >modifier
+
+            </button>
+        {% else %}
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#service_list"
+            >Ajouter des services
+
+            </button>
+        {% endif %}
+    </div>
+
+
+
+{% endif %}
+{% if spaService(module) is not empty %}
+
+    <div class="sep-lane alt-3"><span></span></div>
+
+
+    <section class="page-section   serv " id="service">
+
+        <div class="container ">
+
+            <div class="row ">
+            <h3 class="section-title bottom-line font-alt">Nos Services</h3>
+
+                <div class="sep-lane-titre mt-50"><span><img src="{{ asset('module/spa/images/lines/img-line-0.png') }}"
+                                                             data-at2x="{{ asset('module/spa/images/lines/img-line-0@2x.png') }}"
+                                                             alt></span>
+                </div>
+
+
+                <div class="row mt-30 " >
+
+                    <!-- shop carousel -->
+
+                    <div class="slider-1 dots-alt">
+                        {#------------------modifer by sofien------------------#}
+                        <!-- shop carousel item -->
+
+                        {% for a in spaService(module) %}
+                            <div class="services-wrap hiden">
+                                {#<div class="circle">#}
+                                {#<img src="uploads/image/{{ iduser }}/{{ qouiqui.id }}/service/{{a.id~'.jpg' }}"  >#}
+                                {#</div>#}
+                                <div class="center-cropped"
+                                     style="background-image: url('{{ asset('uploads/image/') }}{{ iduser }}/{{ qouiqui.id }}/service/{{ a.id~'.jpg' }}');">
+                                </div>
+                                <h3 class="titre_serv" {% if theme.Couleur.titre_serv is defined %} style="color: {{ theme.Couleur.titre_serv }} " {% endif %}>{{ a.nom }}</h3>
+                                <p>{{ a.data|raw }}
+                                </p>
+                                {#------------------modifer by sofien------------------#}
+                            </div>
+                        {% endfor %}
+
+
+                        <!-- /shop carousel -->
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="particle elem1 anim-delay1 "></div>
+        <div class="particle elem2 anim-delay5"></div>
+        <div class="particle elem3 anim-delay3"></div>
+        <div class="particle elem4 anim-delay8"></div>
+        <div class="particle elem5 anim-delay9"></div>
+        <div class="particle elem6 anim-delay2"></div>
+        <div class="particle elem7 anim-delay4"></div>
+        <div class="particle elem8 anim-delay3"></div>
+        <div class="particle elem9 anim-delay10"></div>
+        <div class="particle elem8 anim-delay11"></div>
+        <div class="particle elem6 anim-delay12"></div>
+        <div class="particle elem1 anim-delay14"></div>
+        <div class="particle elem13 anim-delay16"></div>
+        <div class="particle elem17 anim-delay18"></div>
+        <div class="particle elem2 anim-delay6"></div>
+        <div class="particle elem16 anim-delay9"></div>
+        <div class="particle elem8 anim-delay3"></div>
+        <div class="particle elem9 anim-delay10"></div>
+        <div class="particle elem18 anim-delay11"></div>
+        <div class="particle elem11 anim-delay12"></div>
+        <div class="particle elem12 anim-delay14"></div>
+        <div class="particle elem13 anim-delay16"></div>
+        <div class="particle elem14 anim-delay18"></div>
+        <div class="particle elem15 anim-delay6"></div>
+        <div class="particle elem16 anim-delay9"></div>
+        <div class="particle elem17 anim-delay7"></div>
+        <div class="particle elem18 anim-delay6"></div>
+        <div class="particle elem19 anim-delay3"></div>
+    </section>
+
+
+
+
+
+    <div class="sep-lane alt-3"><span></span></div>
+{% endif %}
+
+{#########modaaaaaaaaaal #}
+<div id="service_list" class=" modal  fade" role="dialog">
+    <div class="modal-dialog ">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="pull-right margin-bott">
+
+                    {#<a data-toggle="modal" href="#tallModal" class="btn btn-primary">Wide, Tall Content</a>#}
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal_service"
+                    >Ajouter Nouveau Service
+                    </button>
+                </div>
+                {#<button type="button" class="close" data-dismiss="modal">&times;</button>#}
+                <h4 class="modal-title">Liste des services</h4>
+            </div>
+
+
+            <div class="modal-body">
+                <table id="table_id" class="display">
+                    <thead>
+                    <tr>
+                        <th>Designation</th>
+                        <th>Modifier</th>
+                        <th>Supprimer</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for mod in module %}
+                        {% if mod.section== 'service' %}
+                            <tr data-div={{ mod.id }}>
+                                <td style="font-size: 22px;">{{ mod.nom }}</td>
+                                <td><a href="#" data-serv="{{ mod.id }}" data-id="{{ qouiqui.id }}"
+                                       class="modifier btn btn-success" data-toggle="modal"
+                                       data-target="#edit_service"><span
+                                                class="glyphicon glyphicon-edit"></span></a></td>
+                                <td><a href='{{ mod.id }}' class="service_suprim btn btn-danger "
+                                       data-id='{{ mod.id }}' data-toggle="modal" data-toggle="modal"
+                                       data-target="#confirm-delete"><span class="glyphicon glyphicon-trash"></span></a>
+                                </td>
+                            </tr>
+                        {% endif %}
+                    {% endfor %}
+                    {#<tr>#}
+                    {#<td>Row 2 Data 1</td>#}
+                    {#<td>Row 2 Data 2</td>#}
+                    {#</tr>#}
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div id="modal_service" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Ajouter Vos service</h4>
+            </div>
+            <div class="modal-body">
+                <form id="ajout_services" method="POST" action="{{ path('module_spa_ajout_service') }}"
+                      enctype="multipart/form-data">
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <h4>Entrer le nom de votre Service</h4>
+                                <input type="text" name="service" class="form-control"
+                                       value="" required="required">
+
+                            </div>
+                        </div>
+                        <input type="hidden" name="qq_id" value="{{ qouiqui.id }}">
+
+
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <h4>Description sur le service</h4>
+                                <textarea class="form-control edit-service " name="desc"
+                                           required="required"></textarea>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <h4>choisisez une photo</h4>
+                                <input autocomplete="off" class="form-control "
+                                       name="file" type="file"required="required"
+                                       placeholder="choisissez_image" data-items="8"/>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </form>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+                <button type="submit" class="btn btn- " data-target="modifier" data-selector="ajout_services">
+                    Ajouter
+                </button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+{##modal modifier#}
+
+<div id="edit_service" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Modifier Vos service</h4>
+            </div>
+            <div class="modal-body">
+                <form id="editt" method="POST" action="{{ path('module_spa_modif_service') }}"
+                      enctype="multipart/form-data">
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+
+                                <div id="modal-serv" class="panel-body"></div>
+                                <h4>Entrer votre Service</h4>
+                                <input id="type" type="text" name="service" class="form-control" value=""
+                                       value="">
+
+                            </div>
+                        </div>
+                        <input type="hidden" name="qq_id" value="{{ qouiqui.id }}" required>
+                        <input id="idsevice" type="hidden" name="serviceID" value="" required>
+
+
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <h4>Description</h4>
+                                <textarea id="textarea" class="form-control  " name="desc"
+                                          name=""></textarea>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <h4>choisisez une photo</h4>
+                                <input autocomplete="off" class="form-control  "
+                                       name="file" type="file"
+                                       placeholder="choisissez_image" data-items="8"/>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </form>
+
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+                <button type="submit" class="btn btn-primary " data-target="modifier" data-selector="editt">
+                    Modifier
+                </button>
+            </div>
+        </div>
+
+    </div>
+</div>
+</div>
+
+
+{###modal  boite dialog#}
+
+<div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+
+
+            <div class="modal-body">
+
+
+                <input type="hidden" name="supprimer" value="" class="delate">
+                <input type="hidden" name="id_qq" value="{{ qouiqui.id }}" class="">
+
+                <p>Voulez vous supprimer ce service ?</p>
+                <p class="debug-url"></p>
+
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Annuler</button>
+
+
+                <button type="submit" data-qq="{{ qouiqui.id }}" class="btn btn-danger supprime "
+                        data-target="modifier" data-selector="supprim_service">
+                    Supprimer
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{#------------------added by sofien------------------#}
+<style>
+    .center-cropped {
+        width: 250px;
+        height: 250px;
+        border-radius: 50%;
+        overflow: hidden;
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        margin: 0 auto;
+        margin-top: -78px;
+    }
+</style>
+{#------------------added by sofien------------------#}

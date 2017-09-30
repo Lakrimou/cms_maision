@@ -1,0 +1,29 @@
+dashboard_automobile_liste:
+    path:     /
+    defaults: { _controller: DashboardBundle:Automobile:index }
+    methods:  [GET, POST]
+
+dashboard_automobile_ajout:
+    path:     /ajouter
+    defaults: { _controller: DashboardBundle:Automobile:new }
+    methods:  [GET, POST]
+
+dashboard_automobile_afficher:
+    path:     /{idAuto}/afficher
+    defaults: { _controller: DashboardBundle:Automobile:show }
+    methods:  [GET, POST]
+
+dashboard_automobile_edit:
+    path:     /{idAuto}/modifier
+    defaults: { _controller: DashboardBundle:Automobile:edit }
+    methods:  [GET, POST]
+
+dashboard_automobile_supprimer:
+    path:     /supprimer
+    defaults: { _controller: DashboardBundle:Automobile:delete }
+    methods:  [GET, POST, DELETE]
+
+dashboard_automobile_archiver:
+    path:     /{idAuto}/{stat}/archiver
+    defaults: { _controller: DashboardBundle:Automobile:archive }
+    methods:  [GET, POST]

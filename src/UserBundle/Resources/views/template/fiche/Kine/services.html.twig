@@ -1,0 +1,804 @@
+<!--===== WHAT WE DO =====-->
+<section id="section-services" class="we_are bg_light padding">
+    <div class="floating-button a"><a data-toggle="modal" data-target="#inscription">Prendre un Rendez-Vous</a></div>
+    {#<a herf="" data-toggle="modal" data-target="#inscription" style="position: fixed;top: 50%;right:0;font-size: 20px;#}
+    {#z-index: 1;" class="btn_fill_about btn btn-default pull-right">Prendre Rendez-Vous</a>#}
+    {% if attributes.connected %}
+            <div class="pull-righ" style="    margin-right: 24px;">
+                <div data-step="3" data-intro="This is a tooltip!" class="pull-right margin-bott-40">
+                    <button type="button" class="theme-btn button11 btn-style-one pull-right" data-toggle="modal"
+                            data-target="#listService">Gérer cette section
+                    </button>
+                </div>
+            </div>
+    {% endif %}
+
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h2 class="text-uppercase">Nos <span class="color_red">services </span></h2>
+                <div class="line_1"></div>
+                <div class="line_2"></div>
+                <div class="line_3"></div>
+            </div>
+        </div>
+        {% if Spaservice.service is defined %}
+        {% set nb=Spaservice.service|length %}
+        {% set arrayServ=Spaservice.service %}
+        <div class="row" id="append-item">
+
+
+            {% for a in   arrayServ[:3] %}
+                {% set image= asset('uploads/image/')~attributes.quoiqui.user.id~"/"~ attributes.quoiqui.id ~"/service/"~ a.idserv ~'.jpg' %}
+
+                {% if (arrayServ|length == 1) %}
+                    <div class="col-md-4 col-sm-4 col-xs-12 item-scroll"></div>
+                {% endif %}
+                {% if (arrayServ|length == 2) and (loop.index == 1) %}
+                    <div class="col-md-2 col-sm-2 col-xs-12"></div>
+                {% endif %}
+
+                <a href="#" data-toggle="modal" data-target="#Show_more" data-idqq="{{ attributes.quoiqui.id }}"
+                   data-idServ="{{ a.idserv }}" class="lire_plus " data-class="lire_plus">
+                    <div class=" col-md-4 col-sm-4 top40 item-id-{{ a.idserv }}  item-scroll col-custom " style="min-height: 380px;">
+                        <div class="block-service margin15 pad15" style="background: white;">
+                            <div class="row">
+                                <div class="col-md-12 text-center">
+                                    {% if   image is defined %}
+                                    <div class=" image-content-cf-serv " style="margin-bottom: 20px;background-image: Url('{{ asset('uploads/image/') }}{{ attributes.quoiqui.user.id }}/{{ attributes.quoiqui.id }}/service/{{ a.idserv ~'.jpg' }}')"></div>
+                                    {% elseif image is not defined %}
+                                    <span class="icon-shortcode">
+                            {#{% if a["serviceIcon"]is defined %}#}
+                                {% if 'fa ' in a["serviceIcon"] %}
+                                    <i class="{% if a["serviceIcon"] is defined %}{{ a["serviceIcon"] }}{% endif %}"
+                                       aria-hidden="true"></i>
+                                    {% else %}
+                                    <img class="svg" width="80px" src='{{ a["serviceIcon"] }}' alt="">
+                                {% endif %}
+
+                                        <i class="fa fa-medkit" aria-hidden="true"></i>
+                                    </span>
+                                    {% endif %}
+                                </div>
+
+                                <h3 class="serviceTitle text-center pad15">
+                                    {% if a.ServSpa is defined %}{{ a.ServSpa }}{% endif %}
+                                </h3>
+                                <div class="clearfix">
+                                    <div class="separator" style="width: 100px;border-bottom-width: 2px; "></div>
+                                </div>
+                                <p class="service-text">
+                                    {% if a.detail is defined %}{{ a.detail|slice(0,60)|raw }}..{% endif %}
+
+                                </p>
+                                {% if is_mobile() %}
+                                    <div class="row service pad15">
+                                        <a data-toggle="modal" data-target="#Show_more" data-idqq="{{ attributes.quoiqui.id }}"
+                                           data-idServ="{{ a.idserv }}"
+                                           class="lire_plus  btn-default btn-xs pull-right suite"
+                                        >En savoir plus</a>
+                                    </div>
+                                {% endif %}
+                            </div>
+                            {% if not is_mobile() %}
+
+                            <div class="row service pad15">
+                                <a data-toggle="modal" data-target="#Show_more" data-idqq="{{ attributes.quoiqui.id }}"
+                                   data-idServ="{{ a.idserv }}"
+                                   class="lire_plus  btn-default btn-xs pull-right suite"
+                                >En savoir plus</a>
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </a>
+
+
+            {% endfor %}
+
+
+        </div>
+
+
+        <div class="pull-left margin-bott-40">
+            {% if nb>3 %}
+                <span id="load-more-service" class="theme-btn button11 btn-style-one pull-left">Voir plus</span>
+            {% endif %}
+            <span class="load-less-service theme-btn button11 btn-style-one pull-left">Voir moins</span>
+        </div>
+
+    </div>
+    {% endif %}
+    {% if not is_mobile() %}
+        <div class="paralax-icon">
+            <div class="particle elem1 anim-delay1"></div>
+            <div class="particle elem2 anim-delay5"></div>
+            <div class="particle elem3 anim-delay3"></div>
+            <div class="particle elem4 anim-delay8"></div>
+            <div class="particle elem5 anim-delay9"></div>
+            <div class="particle elem6 anim-delay2"></div>
+            <div class="particle elem7 anim-delay4"></div>
+            <div class="particle elem8 anim-delay3"></div>
+            <div class="particle elem9 anim-delay10"></div>
+            <div class="particle elem8 anim-delay11"></div>
+            <div class="particle elem6 anim-delay12"></div>
+            <div class="particle elem1 anim-delay14"></div>
+            <div class="particle elem13 anim-delay16"></div>
+            <div class="particle elem17 anim-delay18"></div>
+            <div class="particle elem2 anim-delay6"></div>
+            <div class="particle elem16 anim-delay9"></div>
+            <div class="particle elem8 anim-delay3"></div>
+            <div class="particle elem9 anim-delay10"></div>
+            <div class="particle elem18 anim-delay11"></div>
+            <div class="particle elem11 anim-delay12"></div>
+            <div class="particle elem12 anim-delay14"></div>
+            <div class="particle elem13 anim-delay16"></div>
+            <div class="particle elem14 anim-delay18"></div>
+            <div class="particle elem15 anim-delay6"></div>
+            <div class="particle elem16 anim-delay9"></div>
+            <div class="particle elem17 anim-delay7"></div>
+            <div class="particle elem18 anim-delay6"></div>
+            <div class="particle elem19 anim-delay3"></div>
+        </div>
+    {% endif %}
+</section>
+<!--===== #/WHAT WE DO =====-->
+
+
+<div class="modal fade" id="listService" role="dialog">
+    <div class="modal-dialog modal-md">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title ">Liste des services</h4>
+            </div>
+            <div class="modal-body">
+                <table class="table  dataTable  " cellspacing="0"
+                       width="100%">
+                    <thead>
+                    <tr>
+                        <th width="74">Image</th>
+                        <th width="100">service</th>
+                        <th width="100">Modifier</th>
+                        <th width="100">Supprimer</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    {% if Spaservice.service is defined %}
+                        {% set arrayServ=Spaservice.service %}
+                        {% for b in arrayServ|sort|reverse %}
+
+                            <tr data-td="{{ b.idserv }}">
+
+                                <td align="center">
+                                    <img src="{{ asset('uploads/image/') }}{{ attributes.quoiqui.user.id }}/{{ attributes.quoiqui.id }}/service/{{ b.idserv ~'.jpg' }}" data-pin-nopin="true" style="width:74px;">
+                                </td>
+                                <td>{{ b.ServSpa }}</td>
+
+                                <td align="center">
+
+                                    <a href="#" class=" btn btn-info a-btn-slide-text edit" data-serv="{{ b.idserv }}" data-id="{{ attributes.quoiqui.id }}" data-toggle="modal" data-target="#editSpa">
+
+                                        <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                                        <span><strong>Modifier</strong></span>
+                                    </a>
+
+                                </td>
+
+
+                                <td align="center">
+
+                                    <a href="{{ path('module_spa_supprim_services',{"idqq": attributes.quoiqui.id,"idserv":b.idserv }) }}"
+                                       class=" btn btn-danger a-btn-slide-text service_suprim click-off"
+                                       onclick="clickOffConfirmed = confirm('Vous voulez le  supprimer ?');">
+                                        <span class="glyphicon glyphicon-remove " aria-hidden="true"></span>
+                                        <span><strong>Supprimer</strong></span>
+                                    </a>
+                                </td>
+
+                            </tr>
+
+                        {% endfor %}
+                    {% endif %}
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary spa-service" data-toggle="modal" data-target="#addService">
+                    Ajouter un nouveau service
+                </button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Fermer</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="addService" role="dialog">
+    <div class="modal-dialog modal-md">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title ">Ajouter un nouveau service</h4>
+            </div>
+            <div class="modal-body">
+                <form id="addserv" method="POST" class=" fileuploader"
+                      action="{{ path('module_spa_add_service',{"idqq":attributes.quoiqui.id}) }}"
+                      enctype="multipart/form-data">
+
+                    <input type="hidden" name="idserv" value="{{ uniqueId() }}">
+
+                    <div class="row">
+                        <div class=" col-md-12">
+                            <label>Sélectionner un service</label>
+                            <div class="form-group ">
+                                <select class="selectpicker form-control" id="serviceselect" name="ServSpa">
+                                    {#<option disabled selected>Sélectionner un service....</option>#}
+
+                                    <option value="autre" style="font-weight: 700;font-size: 20px;">Ajouter nouveau
+                                        service
+                                    </option>
+
+                                    {% for k,a in  filterListServiceKine(attributes) %}
+                                        <option value='{{ k }}'>{{ k }}</option>
+                                    {% endfor %}
+
+
+                                </select>
+
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group ">
+                                <input type="text" name="autres" id="otherServices" class="form-control"
+                                       placeholder="ajoutre autre service">
+                                <span class="errormsg" style="color:red;"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <label>Description</label>
+                            <div class="form-group  ">
+
+                        <textarea placeholder="Entrer la description.." rows="9"
+                                  class="form-control textarea  "
+                                  name="detail" required="required"></textarea>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class=" form-group">
+                                {#<label class="col-md-12">Choisissez une photo</label>#}
+                                <input autocomplete="off" class="form-control "
+                                       name="file" type="file"
+
+                                       placeholder="choisissez_image" data-items="8"/>
+
+                            </div>
+                        </div>
+                    </div>
+                    {#<div class="col-md-6">#}
+                    {#<div class="form-group row element-form">#}
+                    {#<div class="col-md-12">#}
+                    {#<label class="control-label">Choisissez une image pour le service choisie</label>#}
+                    {#</div>#}
+
+                    {#<div class="col-sm-9 DefaultIcon">#}
+
+                    {#{% for iconservice in DirAssetParcour(asset('uploads/image/iconService/'~attributes.category.slug|lower~'/SVG/')) %}#}
+                    {#<a href="#" onclick="javascript:;">#}
+                    {#<img width="50px" height="50px"#}
+                    {#src="{{ asset('uploads/image/iconService/') }}{{ attributes.category.slug|lower~'/SVG/' }}{{ iconservice }}"#}
+                    {#alt="">#}
+                    {#</a>#}
+                    {#{% endfor %}#}
+
+                    {#</div>#}
+
+
+                    {#</div>#}
+                    {#<div class="row">#}
+                    {#<div class="col-md-9 col-md-offset-3">#}
+
+                    {#<input type="text" id="icon-filtre-2" class="icon-filtre form-control name_service"#}
+                    {#placeholder="recherche Votre Image">#}
+                    {#<input type="hidden" name="serviceIcon" class="form-control name_service"#}
+                    {#placeholder="recherche Votre Image">#}
+                    {#<button type="button" class="btn btn-primary btn-lg btn-block"><i class="fa fa-search"#}
+                    {#aria-hidden="true"></i>#}
+                    {#</button>#}
+                    {#</div>#}
+
+                    {#<div class=" pull-right col-sm-9 icon_list">#}
+                    {#{{ include('@User/template/fontawesomeIcons.html.twig') }}#}
+                    {#</div>#}
+                    {#</div>#}
+                    {#</div>#}
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger " data-dismiss="modal">Fermer</button>
+                <button type="submit" id="addServices" class=" btn btn-primary button-default " data-target="modifier"
+                        data-selector="addserv">
+                    Enrigistrer
+                </button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="modal fade" id="editSpa" role="dialog">
+    <div class="modal-dialog modal-md">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Modifier le service</h4>
+            </div>
+            <div class="modal-body">
+                <form id="updateserv" method="POST" class=" fileuploader"
+                      action="{{ path('module_spa_update_service',{"idqq":attributes.quoiqui.id}) }}"
+                      enctype="multipart/form-data">
+                    <div class="row">
+                        <input id="idservs" type="hidden" class="form-control" name="idserv">
+                        <div class="col-md-6">
+
+                            <div class="form-group">
+                                <select class="selectpicker form-control selectOption" id="serviceselect-edit"
+                                        name="ServSpa">
+
+                                    <option disabled selected>Sélectionner service*</option>
+
+                                    {% for k,a in  filterListServiceKine(attributes) %}
+                                        <option value='{{ k }}'>{{ k }}</option>
+                                    {% endfor %}
+
+
+                                </select>
+
+                            </div>
+                            <div class="form-group ">
+                                <input type="text" name="autres" id="otherServices" class=" form-control otherSelected"
+                                       placeholder="Ajouter autre service">
+                                <span class="errormsg" style="color:red;"></span>
+                            </div>
+
+
+                            {#<div class=" form-group">#}
+                            {#<label class="col-md-12">Prix</label>#}
+                            {#<input id="price" type="number" placeholder="Entrer le prix." required="required"#}
+                            {#class="form-control desc1" name="spaprix">#}
+                            {#</div>#}
+
+
+                            <div class="form-group">
+                                <label class="col-md-12">Description</label>
+                                <textarea id="details" placeholder="Entrer la description.." rows="8"
+                                          class="form-control textarea SpaDetail "
+                                          name="detail" required="required"></textarea>
+                            </div>
+
+
+                            <div class=" form-group">
+                                {#<label class="col-md-12">Choisissez une photo</label>#}
+                                <input autocomplete="off" class="form-control "
+                                       name="file" type="file"
+                                       placeholder="choisissez_image" data-items="8"/>
+                            </div>
+
+
+                        </div>
+                        {#<div class="col-md-6">#}
+
+
+                        {#<div class="form-group row element-form">#}
+                        {#<div class="col-md-12">#}
+                        {#<label class="control-label"> Modifier l'image de service</label>#}
+                        {#</div>#}
+
+                        {#<div class="col-sm-9 DefaultIcon">#}
+
+                        {#{% for iconservice in DirAssetParcour(asset('uploads/image/iconService/'~attributes.category.slug|lower~'/SVG/')) %}#}
+                        {#<a href="#" onclick="javascript:;">#}
+                        {#<img width="50px" height="50px"#}
+                        {#src="{{ asset('uploads/image/iconService/') }}{{ attributes.category.slug|lower~'/SVG/' }}{{ iconservice }}"#}
+                        {#alt="">#}
+                        {#</a>#}
+                        {#{% endfor %}#}
+
+                        {#</div>#}
+
+
+                        {#</div>#}
+                        {#<div class="row">#}
+
+
+                        {#<input type="text" id="icon-filtre-2" class="icon-filtre form-control name_service"#}
+                        {#placeholder="recherche Votre Image">#}
+                        {#<input id="serviceicon" type="hidden" name="serviceIcon" class="form-control name_service"#}
+                        {#placeholder="recherche Votre Image">#}
+                        {#<button type="button" class="btn btn-primary btn-lg btn-block"><i class="fa fa-search"#}
+                        {#aria-hidden="true"></i>#}
+                        {#</button>#}
+
+                        {#<div class=" pull-right col-sm-9 ">#}
+                        {#{{ include('@User/template/fontawesomeIcons.html.twig') }}#}
+                        {#</div>#}
+                        {#</div>#}
+
+
+                        {#</div>#}
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Fermer</button>
+                <button type="submit" id="editServices" class=" submit btn btn-primary button-default"
+                        data-target="modifier"
+                        data-selector="updateserv">
+                    Enrigistrer
+                </button>
+            </div>
+        </div>
+
+    </div>
+</div>
+<div id="Show_more" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-md">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 id="servspa" class=" text-uppercase  color_red G_titre"></h4>
+            </div>
+
+            <div class="modal-body ">
+                <div id="news-section-1" style="padding-right: 15px;padding-left: 15px;margin-right: auto;margin-left: auto;">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <input type="hidden" id="idImgSpa" value="">
+                            <div class="row row-eq-height">
+                                <div class="col-md-6 ">
+                                    <img id="putImg" src="" class="img-responsive" style="width: 100%">
+                                </div>
+                                <div class="col-md-6 ">
+                                    <div class="blog_info blog-thumbnail" style="box-shadow: 0px 1px 3px rgba(29, 28, 28, 0.35);">
+                                        <ul class="archieves">
+                                            <li>
+                                                <div class="col-md-12 col-xs-12 padding_none center-text">
+                                                    <div class="col-md-6 col-xs-12">
+                                                        <i class="fa fa-envelope" aria-hidden="true"></i>
+                                                    </div>
+                                                    <span class="span_font_size"></span>
+                                                    <div class="col-md-6 col-xs-12">
+                                                        <span><a class="margin115" href="mailto:{{ attributes.quoiqui.mail }}" style="  margin: -115px;"> {{ attributes.quoiqui.mail }}</a></span>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="col-md-12 col-xs-12 padding_none center-text">
+                                                    <div class="col-md-6 col-xs-12">
+                                                        <i class="fa fa-phone" aria-hidden="true"></i>
+                                                    </div>
+                                                    <span class="span_font_size"></span>
+                                                    <div class="col-md-6 col-xs-12">
+                                                        <span><a class="margin115" href="tel:{{ attributes.quoiqui.phone }}" style="  margin: -115px;">  +216 {{ attributes.quoiqui.phone }} </a> </span>
+                                                    </div>
+                                                </div>
+
+                                            </li>
+                                            <li>
+                                                <div class="col-md-12 col-xs-12 padding_none center-text">
+                                                    <div class="col-md-6 col-xs-12">
+                                                        <i class="fa fa-home  " aria-hidden="true"></i>
+                                                    </div>
+
+                                                    <span class="span_font_size"></span>
+                                                    <div class="col-md-6 col-xs-12">
+                                                <span class=" ">{% if attributes.quoiqui.address1 is not empty %} <a href="#" class="margin115">{{ attributes.quoiqui.address1 }}</a>
+                                                    {% endif %}
+                                                </span>
+                                                    </div>
+                                                </div>
+
+                                            </li>
+
+                                        </ul>
+                                    </div>
+
+
+                                </div>
+                            </div>
+
+                            <div class="row">
+
+                                <div class="col-xs-12">
+                                    <h3 class="  color_red  top40" style="margin-bottom: 19px;">Description Détaillé</h3>
+                                    <p class="bottom30" id="Spadetail" style="text-align: justify;text-align-last: auto;"></p>
+                                    <span id="link1"></span>
+                                    <p id="lire_suite" style="text-align: justify;text-align-last: auto;"></p>
+
+                                </div>
+                            </div>
+
+
+
+                            <div class="row">
+
+                                <div class="col-md-6">
+                                    <a href="#" data-toggle="modal" data-target="#modalSectionRappeler"
+                                       class="col-md-12 col-xs-12 spacontact "><i
+                                                class="fa fa-phone" aria-hidden="true" style="margin-right: 5px"></i>Demande de Rappel </a>
+                                </div>
+                                <div class="col-md-6">
+
+                                    {% if not is_mobile() %}
+                                        <a class="col-md-12 col-xs-12 spacontact1  xs-btn-top  phonenumber1 "style="margin-bottom: 34px;">Tél:{{ attributes.quoiqui.phone }}</a>
+                                        <a id="buttoncall" class="col-md-12 col-xs-12 spacontact1  xs-btn-top  "style="margin-bottom: 34px;"> Afficher le numéro</a>
+                                    {% endif %}
+                                    {% if is_mobile() %}
+                                    <a href="#" data-toggle="modal" data-target="#inscription"
+                                       class="col-md-12 col-xs-12 spacontact1  xs-btn-top" style="margin-bottom: 34px;"><i class="fa fa-calendar-plus-o" aria-hidden="true"></i> Prendre RDV </a>
+                                    {% endif %}
+                                </div>
+
+                            </div>
+
+
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Fermer</button>
+
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+
+{% if  attributes.connected!=app.user %}
+
+    <div class="modal fade" id="inscription" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+                <div class="modal-body">
+                    <div class="row" style="padding: 15px;">
+                        <h3 class="text-uppercase text-center bottom40">Prendre <span class="color_red"> un rendez vous</span>
+                        </h3>
+
+
+                        <form id="send-res" action="{{ path('module_kine_booking',{"idqq": attributes.quoiqui.id }) }}" method="POST">
+
+                            <div class="row">
+
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input type="hidden" name="qqid" value="{{ attributes.quoiqui.id }}">
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <div class="single-query">
+                                        <div class="form-group">
+                                            <label>nom & prénom(*)</label>
+
+                                            <input type="text" name="name" class="keyword-input"
+                                                   required="required" value="{{ app.user.prenom }}">
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <div class="single-query">
+                                        <div class="form-group">
+                                            <label>Email(*)</label>
+                                            <input type="email" name="email" class="keyword-input"
+                                                   required="required" value=" {{ app.user.email }}">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6 col-sm-6">
+                                    <div class="single-query">
+                                        <div class="form-group">
+                                            <label>Tel(*)</label>
+                                            <input type="numbre" name="tel" class="keyword-input"
+                                                   required="required" value="+216 {{ app.user.phoneNumber }}">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <div class="single-query">
+                                        <div class="form-group">
+                                            <label>Adresse(*)</label>
+                                            <input type="text" name="adr" class="keyword-input"
+                                                   required="required" value="{{ app.user.adress }}">
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+                            <div class="row">
+
+
+                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                    <div class="single-query">
+                                        <div class="intro">
+                                            <div class="form-group">
+                                                <label>Choisissez un services(*)</label>
+                                                <select class="selectpicker form-control" id="serviceselect" name="ServSpa">
+
+                                                    <option value="autre" style="font-weight: 700;font-size: 20px;">Choisissez un service
+                                                    </option>
+
+                                                    {% for k,a in  filterListServiceKine(attributes) %}
+                                                        <option value='{{ k }}'>{{ k }}</option>
+                                                    {% endfor %}
+
+
+                                                </select>
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                            <button class=" btn btn-primary buttn pull-right buttn-width-xs" >
+                                Envoyer
+                            </button>
+
+                        </form>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger " data-dismiss="modal">Fermer</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+{% else %}
+
+
+    <div class="modal fade" id="inscription" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+                <div class="modal-body">
+                    <div class="row" style="padding: 15px;">
+                        <h3 class="text-uppercase text-center bottom40">Prendre <span class="color_red"> un rendez vous</span>
+                        </h3>
+
+
+                        <form id="send-res" action="{{ path('module_kine_booking',{"idqq":attributes.quoiqui.id}) }}" method="POST">
+                            <div class="row">
+
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input type="hidden" name="qqid" value="{{ attributes.quoiqui.id }}">
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <div class="single-query">
+                                        <div class="form-group">
+                                            <label>nom & prénom(*)</label>
+                                            <input type="text" name="name" class="keyword-input"
+
+                                                   required="required">
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <div class="single-query">
+                                        <div class="form-group">
+                                            <label>Email(*)</label>
+                                            <input type="email" name="email" class="keyword-input"
+                                                   required="required">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6 col-sm-6">
+                                    <div class="single-query">
+                                        <div class="form-group">
+                                            <label>Tel(*)</label>
+                                            <input type="number" name="tel" class="keyword-input"
+                                                   required="required">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <div class="single-query">
+                                        <div class="form-group">
+                                            <label>Adresse(*)</label>
+                                            <input type="text" name="adr" class="keyword-input"
+                                                   required="required">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+
+
+                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                    <div class="single-query">
+                                        <div class="intro">
+                                            <div class="form-group">
+                                                <label>Choisissez un service(*)</label>
+
+                                                <select class="selectpicker form-control" id="serviceselect" name="ServSpa">
+                                                    {#<option disabled selected>Sélectionner un service....</option>#}
+
+                                                    <option value="autre" style="font-weight: 700;font-size: 20px;">Choisissez un service
+                                                    </option>
+
+                                                    {% for k,a in  filterListServiceKine(attributes) %}
+                                                        <option value='{{ k }}'>{{ k }}</option>
+                                                    {% endfor %}
+
+
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <button class=" btn btn-primary buttn pull-right buttn-width-xs" >
+                                Envoyer
+                            </button>
+                        </form>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Fermer</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+{% endif %}
+<select class="selectpicker form-control " id="service_enrolled" name="mission" style="display: none">
+    <option disabled selected>Sélectionner un service....</option>
+
+
+    {% if Spaservice.service is defined %}
+
+        {% for s in Spaservice.service %}
+            <option value='{{ s.ServSpa }}'
+                    class=''>{{ s.ServSpa }}</option>
+
+        {% endfor %}
+
+    {% endif %}
+</select>

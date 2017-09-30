@@ -1,0 +1,776 @@
+<style>
+    .promo .tag {
+        top: 15px;
+        position: absolute;
+        left: 15px;
+        z-index: 1;
+        background: #ed2a28;
+    }
+
+    .property_item .promo .tag, .property_item .promo h4 {
+        display: inline-block;
+        color: #fff;
+        padding: 5px 15px;
+        font-size: 12px;
+    }
+    .gri{
+        padding: 12px;
+    }
+    figure.effe ct-layla {
+        height: 344px;
+        overflow: hidden;
+        display: grid;
+        align-items: center;
+
+    }
+    figure.effect-layla img{
+        min-width: 100%;
+        margin: 0 auto;
+    }
+    .gri figure {
+        height: 370px;
+    }
+    .gri img {
+        width: inherit;
+    }
+
+</style>
+<script>
+    $('.form_article').click(function () {
+        module = $(this).data('module');
+        if ((typeof module) == 'string'){
+            module = $(this).data('module').replace(/(\r\n|\n|\r)/g, '<br/>').toString();
+            module = JSON.parse(module);
+        }
+        link = $(this).data('link');
+        $('#Article-edit #AdminBundle_traiteur_titre').val(module.titre);
+        $('#Article-edit #AdminBundle_traiteur_details').val(module.details);
+        CKEDITOR.instances['#AdminBundle_traiteur_details'].setData(module.details);
+        $('#Article-edit #AdminBundle_traiteur_prix').val(module.prix);
+        $('#Article-edit form').attr('action',link);
+
+    })
+
+    $('.view').click(function () {
+
+        module = $(this).data('module');
+        if ((typeof module) == 'string'){
+            module = $(this).data('module').replace(/(\r\n|\n|\r)/g, '<br/>').toString();
+            module = JSON.parse(module);
+        }
+        $('.titre-view').html(module.titre);
+        $('.view-description').html(module.details);
+        $('.prix').html(module.prix);
+        $('.prev-img-view img').attr('src',module.image);
+
+    })
+
+
+    $("#servicess").change(function () {
+        selec = $("#servicess option:selected").text();
+        if (selec == "Choisir autre Service") {
+            $('#title-service-mod').show();
+            $('#service_update').attr('disabled', false);
+        } else {
+            $('#title-service-mod').hide();
+            $('#service_update').attr('disabled', true);
+        }
+    });
+    $("#services").change(function () {
+        selec = $("#services option:selected").text();
+        if (selec == "Choisir autre Service") {
+            $('#title-service-add').show();
+            $('#name-add').attr('disabled', false);
+        } else {
+            $('#title-service-add').hide();
+            $('#name-add').attr('disabled', true);
+        }
+    });
+
+    var page;
+    var numberPerPage;
+
+    var numberOfModules;
+    $(document).on("click", ".reservation-form", function () {
+        var ref = $(this).data('ref');
+
+
+        $("#reference-modal").val(ref);
+
+    });
+
+
+    $(document).ready(function () {
+
+        iImage = 0;
+
+        numberPerPage = 9;
+
+        search = {};
+        page = 0;
+        $.when(getNumberOfModules(search)).then(getObjects(search));
+
+
+
+        getMarks();
+
+        {% if app.user %}
+
+        {% if app.user.phoneNumber %}
+        $("#tel_visit").val("{{ app.user.phoneNumber }}");
+        $("#tel_apel").val("{{ app.user.phoneNumber }}");
+        {% endif %}
+        $("#first_name_visit").val("{{ app.user.username }}");
+        $("#first_name_visit").val("{{ app.user.username }}");
+        $("#last_name_visit").val("{{ app.user.prenom }}");
+        $("#mail_visit").val("{{ app.user.email }}");
+        $("#first_name_apel").val("{{ app.user.username }}");
+        $("#first_name_apel").val("{{ app.user.username }}");
+        $("#last_name_apel").val("{{ app.user.prenom }}");
+        $("#mail_apel").val("{{ app.user.email }}");
+
+
+
+        {% else %}
+        $("#footer_visit").append(" <a href='#' class='header-login' data-toggle='modal' data-target='#modalLoginToVisit'><i class='icon-icons179'></i>S'identifier/ S'inscrire</a>");
+        $("#footer_apel").append(" <a href='#' class='header-login' data-toggle='modal' data-target='#modalLoginToApel'><i class='icon-icons179'></i>S'identifier/ S'inscrire</a>");
+        {% endif %}
+        {% if app.request.cookies.get('reserve')=="true" and app.user %}
+        $('#Demandervisite').modal('show');
+        {% endif %}
+        {% if app.request.cookies.get('apel')=="true" and app.user %}
+        $('#Rappeler').modal('show');
+        {% endif %}
+
+
+    });
+
+    function getObjects(search) {
+
+
+        if (page == 0) {
+
+            $("#list_modules").empty();
+
+
+        }
+
+
+        page = page + 1;
+
+
+        $.ajax({
+            url: '{{ path('list_objects') }}',
+            data: {
+
+                'page': page,
+                'number': numberPerPage,
+                'object': '{{ category.slug }}',
+                'quoiqui': {{ qouiqui.id }},
+                'jsonSearch': JSON.stringify(search)
+
+
+            },
+
+            type: "POST",
+            dataType: "json",
+
+            success: function (response) {
+
+
+
+                if (((numberOfModules) - (page * numberPerPage)) > 0) {
+
+
+                    $("#button_pages").html("<a  class='button11' onclick='getObjects(" + JSON.stringify(search) + ")'> Voir Plus </a>");
+
+                }
+                else {
+                    $("#button_pages").empty();
+                }
+                if (page > 1) {
+                    $("#button_pages").append("<a  class='button11' onclick='Mask(" + JSON.stringify(search) + ")'> Masquer </a>");
+
+                }
+
+                for (i = 0; i < response.length; i++) {
+
+
+
+                    $("#list_modules").append("<div class='col-md-4 col-sm-4 col-xs-12'>" +
+                        "<div class='property_item heading_space' id='property_item" + response[i]["id"] + "'>" +
+                        "<div class='image' id='image_offer" + response[i]["id"] + "'>" +
+                        "<div class='price' ><span class='tag'>" + response[i]["price"] + "DT</span></div>" +
+
+
+                        "</div>" +
+                        "</div>" +
+                        "</div>");
+                    if (response[i]["statut"] == true) {
+                        $("#image_offer"+response[i]["id"] ).append("<div class='promo' ><span class='tag'>promo</span></div>");
+
+
+                    }
+
+
+                    if (response[i]["images"] != false) {
+
+
+                        $("#image_offer" + response[i]["id"]).append("<div class='center-cropped col-sm-4' style='margin-bottom:0px!important;' id='center-cropped" + response[i]["id"] + "'></div>");
+                        $("#center-cropped" + response[i]["id"]).css("background-image", "url('{{ asset('/uploads/image/') }}{{ qouiqui.user.id }}/{{ qouiqui.id }}/Offres/" + response[i]["id"] + "/" + response[i]['images'][response[i]['indexPrincipaleImage']]);
+                    }
+                    else {
+
+                        $("#image_offer" + response[i]["id"]).append("<div class='center-cropped col-sm-4' style='margin-bottom:0px!important;' id='center-cropped" + response[i]["id"] + "'></div>");
+                        $("#center-cropped" + response[i]["id"]).css("background-image", "url('{{ asset('/uploads/image/') }}/Architecture/Project/project.png')");
+
+                    }
+
+
+                    jsonStringResponse = JSON.stringify(response[i], stringifyReplacer);
+
+
+                    $("#image_offer" + response[i]["id"]).append("<div class='overlay'>" +
+                        "<div class='centered'>" +
+                        "<a class='link_arrow white_border form-details-offer'  href='#' " +
+                        "data-toggle='modal'data-target='#details-offer' data-offer='" + jsonStringResponse + "' data-images=" + response[i]['images'] + ">" +
+                        "Voir details</a>" +
+                        "</div>" +
+                        "</div>");
+
+
+                    $("#property_item" + response[i]["id"]).append("<div class='property_meta'>" +
+                        "<span><i class='fa fa-car'></i>" + response[i]["modelYear"] + "</span>" +
+                        "<span><i class='glyphicon glyphicon-dashboard'></i>" + response[i]["mileage"] + "Km</span>" +
+                        "<span><i class='glyphicon glyphicon-oil'></i>" + response[i]["energy"] + "</span>" +
+                        "</div>" +
+                        "<div class='proerty_content'>" +
+
+                        "<div class='proerty_text'>" +
+                        "<h3><a href='property_details_1.html'>" + response[i]["mark"] + "</a></h3>" +
+                        "<span class='bottom10'>" + response[i]["model"] + "</span>" +
+                        "<p><strong>" + response[i]["fiscalPower"] + "CV</strong></p>" +
+                        "</div>" +
+                        "<div class='favroute clearfix'>" +
+                        "<p class='pull-left'><i class='icon-calendar2'></i> Modifiée le: " + formatDate(new Date(response[i]["dateCreation"]['timestamp'] * 1000)) + "</p>" +
+                        "<ul class='pull-right'><li><a href='#.'><i class='icon-video'></i></a></li>" +
+                        "<li><a href='#.'><i class='icon-like'></i></a></li></ul>" +
+                        "</div>" +
+                        "</div>");
+
+
+                }
+
+
+            },
+            error: function (xhr, status, error) {
+                alert(xhr.responseText);
+            },
+
+
+        });
+
+    }
+
+
+    function escapeSpecialCharacters(string) {
+        return string
+            .replace(/[']/g, "&apos;")
+
+    }
+
+    function stringifyReplacer(key, value) {
+        if (typeof value === 'string') {
+            return escapeSpecialCharacters(value);
+        }
+
+        return value;
+    }
+
+    $(document).on("click", ".form-details-offer", function () {
+
+        var module1 = $(this).data('offer');
+
+        var images = module1.images;
+
+        Object.keys(module1).forEach(function (k1) {
+
+
+            if ($('#offer_' + k1).length) {
+                if (k1 == "price") {
+                    $('#offer_' + k1).html(module1[k1] + " DT");
+                }
+                else if (k1 == "mileage") {
+                    $('#offer_' + k1).html(module1[k1] + " Km");
+                }
+                else if (k1 == "dateCreation") {
+                    $('#offer_' + k1).html("Modifiée le :" + formatDate(new Date(module1.dateCreation.timestamp * 1000)));
+                }
+                else if (k1 == "kilow") {
+                    $('#offer_' + k1).html(module1[k1] + " KW");
+                }
+                else if (k1 == "fiscalPower") {
+                    $('#offer_' + k1).html(module1[k1] + " CV");
+                }
+                else if (k1 == "mark") {
+                    $('#offer_' + k1).html(module1[k1] + " " + module1["model"]);
+                }
+                else {
+                    $('#offer_' + k1).html(module1[k1]);
+                }
+
+
+            }
+
+
+        });
+
+        $(".reservation-form").attr('data-ref', module1.reference);
+
+
+        $("#slider_details").html("<div id='myCarousel' class='carousel slide' data-ride='carousel' style='width: 100%;height: 100%;' ><div class='carousel-inner'style='display:grid;width: 100%;height: 100%;'><div class='item active '><img id='firstImageDetails' style='width: 100%;height: 100%;'></div></div></div>");
+        if (images != false) {
+
+
+            if (images.length > 1) {
+                $("#myCarousel").append("<a class='left carousel-control' href='#myCarousel' data-slide='prev'><span class='glyphicon glyphicon-chevron-left'></span><span class='sr-only'>Previous</span></a><a class='right carousel-control' href='#myCarousel' data-slide='next'><span class='glyphicon glyphicon-chevron-right'></span><span class='sr-only'>Next</span></a>");
+            }
+            if (images.length > 0) {
+
+
+                $("#firstImageDetails").attr('src', '{{ asset('/uploads/image/') }}{{ qouiqui.user.id }}/{{ qouiqui.id }}/Offres/' + module1.id + '/' + images[0]);
+            }
+            for (i = 1; i < images.length; i++) {
+
+                $(".carousel-inner").append(" <div class='item'> <img id='details_image_slide" + i + "' style='width: 100%;height: 100%;'> </div>")
+                $("#details_image_slide" + i).attr('src', '{{ asset('/uploads/image/') }}{{ qouiqui.user.id }}/{{ qouiqui.id }}/Offres/' + module1.id + '/' + images[i]);
+            }
+        }
+        else {
+
+
+            $("#firstImageDetails").attr('src', '{{ asset('/uploads/image/Architecture/Project/project.png') }}');
+
+
+        }
+    });
+
+
+    function formatDate(date) {
+        stringDate = "";
+        month = date.getMonth() + 1;
+        stringDate = date.getDate() + '/' + month + '/' + date.getFullYear();
+        return stringDate;
+
+
+    }
+
+    $(document).on("click", ".form-add-edit", function () {
+
+        var module = $(this).data('state');
+
+
+        var link = $(this).data('link');
+        var images = $(this).data('images');
+
+        $("#image-to-upload").empty();
+
+        if (module != "") {
+            $.ajax({
+                url: '{{ path('list_models') }}',
+                data: {
+
+                    'mark': module.mark,
+                    'quoiqui': {{ qouiqui.id }}
+
+
+
+                },
+                type: "POST",
+                success: function (response) {
+                    $("#model").html(response);
+
+
+                },
+                error: function (xhr, status, error) {
+                    alert(xhr.responseText);
+                },
+
+
+            });
+
+            $("#title-form-ajout").html("Modifier Voiture");
+
+            $("#mark").val(module.mark);
+
+
+            document.getElementById("prix").value = module.prix;
+            document.getElementById("anne").value = module.modelYear;
+            document.getElementById("kilom").value = module.mileage;
+            document.getElementById("energiF").value = module.fiscalPower;
+            document.getElementById("energiK").value = module.kiloW;
+            document.getElementById("porte").value = module.porte;
+
+            document.getElementById("details").value = decodeURI((module.details).replace(/codeDouble/g, '"').replace(/BracketOpen/g, '{').replace(/BracketClose/g, '}').replace(/doublePonctuation/g, ':').replace(/retunLine/g, '\n\r'));
+            document.getElementById("reference").value = module.reference;
+            $("#ajout_voiture").attr("action", link);
+
+            $("#row-update").show();
+
+            if (images != "") {
+                images = images.split(",");
+
+                for (i = 0; i < images.length; i++) {
+                    image = images[i];
+
+                    $("#image-to-upload").append(" <tr id='tr" + i + "old'>" +
+                        "<td>" +
+                        "<img id ='old-image" + i + "' style='width: 100%' src='#' />" +
+                        "</td>" +
+                        "<td>" +
+                        "<button class='btn btn-danger' onclick='deleteOldOfferImage(" + i + "," + module.id + ",\"" + image + "\")'>Supprimer</button>" +
+                        "<input type='radio' name='principale-image' value='" + i + "' onclick='changePrincipaleImage(" + module.id + "," + i + ")'>Image principale" +
+                        "</td></tr>");
+                    $('#old-image' + i).attr('src', '{{ asset('/uploads/image/') }}{{ iduser }}/{{ qouiqui.id }}/Offres/' + module.id + '/' + images[i]);
+                }
+            }
+        }
+
+
+        else {
+            $("#title-form-ajout").html("Ajout Voiture");
+
+            $("#mark").val("empty");
+            $("#model").html("<option selected disabled>  Choisir un modèle</option>");
+            document.getElementById("prix").value = "";
+            document.getElementById("anne").value = "";
+            document.getElementById("kilom").value = "";
+            document.getElementById("energiF").value = "";
+            document.getElementById("energiK").value = "";
+            document.getElementById("porte").value = "";
+            document.getElementById("details").value = "";
+            document.getElementById("reference").value = "";
+            $("#row-update").hide();
+        }
+    });
+    function readURL(input) {
+        for (i = 0; i < input.files.length; i++) {
+            if (input.files && input.files[i]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+
+                    $("#uploaded-image").append("<tr id='tr" + iImage + "' class='tr-inner-table'><td ><img id='blah" + iImage + "' style='width: 100%' src='#' /></td><td><button class='btn btn-danger' onclick='deleteNewOfferImage(" + iImage + ")'>Supprimer</button></td></tr>");
+                    $('#blah' + iImage).attr('src', e.target.result);
+                    iImage = iImage + 1;
+
+
+                }
+
+                reader.readAsDataURL(input.files[i]);
+            }
+
+        }
+
+    }
+
+
+    function deleteNewOfferImage(iI) {
+
+        $("#tr" + iI).remove();
+        $("#ajout_voiture").append("<input name='deleteFile[" + iI + "]' value='" + iI + "' type='hidden'>");
+        if ($("#uploaded-image .tr-inner-table").length == 0) {
+            $("#table-new").hide();
+        }
+
+        event.preventDefault();
+
+    }
+
+    function deleteOldOfferImage(iI, moduleId, image) {
+
+        var result = confirm("Voulez vous vraiment supprimer cette images ?");
+        if (result) {
+            var data = {
+                'user': {{ iduser }},
+                'quoiqui': {{ qouiqui.id }},
+                'module': moduleId,
+                'image': image
+            };
+
+            $.ajax({
+                url: '{{ path('delete_file') }}',
+                data: data,
+                type: "POST",
+                success: function (response) {
+
+                    $("#tr" + iI + "old").remove();
+
+                    location.reload();
+
+
+                },
+
+
+            });
+
+
+        }
+
+
+    }
+
+    function changePrincipaleImage(moduleId, index) {
+
+        $.ajax({
+            url: '{{ path('change_principale_image') }}',
+            data: {
+
+                'module': moduleId,
+                'index': index,
+
+
+            },
+            type: "POST",
+            success: function (response) {
+                location.reload();
+
+
+            },
+            error: function (xhr, status, error) {
+                alert(xhr.responseText);
+            },
+
+
+        });
+
+
+    }
+
+
+    function getModels(mark, modelId) {
+
+
+        $.ajax({
+            url: '{{ path('list_models') }}',
+            data: {
+
+                'mark': mark,
+
+
+            },
+            type: "POST",
+            success: function (response) {
+                $("#" + modelId).append(response);
+
+
+            },
+            error: function (xhr, status, error) {
+                alert(xhr.responseText);
+            },
+
+
+        });
+
+    }
+
+    $('#mark').change(function () {
+
+        $("#model").empty();
+        getModels(this.value, "model");
+
+    })
+    $('#mark-search').change(function () {
+
+        $("#model-search option").remove();
+        $("#model-search").html("<option selected value=''>Choisir un modèle</option>");
+        getModels(this.value, "model-search");
+    })
+    function getMarks() {
+
+        $.ajax({
+            url: '{{ path('list_marks') }}',
+
+            type: "POST",
+            success: function (response) {
+
+                result = JSON.parse(response);
+
+
+                for (i = 0; i < result.length; i++) {
+
+
+                    $("#mark-search").append("<option value='" + result[i] + "'>" + result[i] + "</option>");
+                    {% if connected %}
+                    $("#mark").append("<option value='" + result[i] + "'>" + result[i] + "</option>");
+                    {% endif %}
+                }
+
+            },
+            error: function (xhr, status, error) {
+                alert(xhr.responseText);
+            },
+
+
+        });
+    }
+
+
+    $("#connectToVisit").click(function () {
+
+        var date = new Date();
+        date.setTime(date.getTime() + (5 * 1000));
+        var expires = "; expires=" + date.toGMTString();
+
+        document.cookie = "reserve=true" + expires + "; path=/";
+    });
+    $("#connectToApel").click(function () {
+
+        var date = new Date();
+        date.setTime(date.getTime() + (5 * 1000));
+        var expires = "; expires=" + date.toGMTString();
+
+        document.cookie = "apel=true" + expires + "; path=/";
+    });
+
+
+
+    {% if connected %}
+    document.getElementById('fileInput').onchange = function () {
+        $("#uploaded-image").empty();
+        $("#table-new").show();
+        readURL(this);
+    }
+
+
+    {% endif %}
+
+
+    $("#searchform").on("submit", function (event) {
+
+        event.preventDefault();
+        data = $(this).serializeObject();
+
+        page = 0;
+        $.when(getNumberOfModules(data)).then(getObjects(data));
+
+
+    });
+
+
+    (function ($) {
+        $.fn.serializeObject = function () {
+
+            var self = this,
+                json = {},
+                push_counters = {},
+                patterns = {
+                    "validate": /^[a-zA-Z][a-zA-Z0-9_]*(?:\[(?:\d*|[a-zA-Z0-9_]+)\])*$/,
+                    "key": /[a-zA-Z0-9_]+|(?=\[\])/g,
+                    "push": /^$/,
+                    "fixed": /^\d+$/,
+                    "named": /^[a-zA-Z0-9_]+$/
+                };
+
+
+            this.build = function (base, key, value) {
+                base[key] = value;
+                return base;
+            };
+
+            this.push_counter = function (key) {
+                if (push_counters[key] === undefined) {
+                    push_counters[key] = 0;
+                }
+                return push_counters[key]++;
+            };
+
+            $.each($(this).serializeArray(), function () {
+
+                // skip invalid keys
+                if (!patterns.validate.test(this.name)) {
+                    return;
+                }
+
+                var k,
+                    keys = this.name.match(patterns.key),
+                    merge = this.value,
+                    reverse_key = this.name;
+
+                while ((k = keys.pop()) !== undefined) {
+
+                    // adjust reverse_key
+                    reverse_key = reverse_key.replace(new RegExp("\\[" + k + "\\]$"), '');
+
+                    // push
+                    if (k.match(patterns.push)) {
+                        merge = self.build([], self.push_counter(reverse_key), merge);
+                    }
+
+                    // fixed
+                    else if (k.match(patterns.fixed)) {
+                        merge = self.build([], k, merge);
+                    }
+
+                    // named
+                    else if (k.match(patterns.named)) {
+                        merge = self.build({}, k, merge);
+                    }
+                }
+
+                json = $.extend(true, json, merge);
+            });
+
+            return json;
+        };
+    })(jQuery);
+    function getCookie(cname) {
+        var name = cname + "=";
+        var decodedCookie = decodeURIComponent(document.cookie);
+        var ca = decodedCookie.split(';');
+        for (var i = 0; i < ca.length; i++) {
+            var c = ca[i];
+            while (c.charAt(0) == ' ') {
+                c = c.substring(1);
+            }
+            if (c.indexOf(name) == 0) {
+                return c.substring(name.length, c.length);
+            }
+        }
+        return "";
+    }
+    function getNumberOfModules(search) {
+        $.ajax({
+            url: '{{ path('number_modules') }}',
+            data: {
+
+                'object': '{{ category.slug }}',
+                'quoiqui': {{ qouiqui.id }},
+                'jsonSearch': JSON.stringify(search)
+
+
+            },
+
+            type: "POST",
+            success: function (response) {
+
+                numberOfModules = response;
+
+
+            },
+            error: function (xhr, status, error) {
+                alert(xhr.responseText);
+            },
+
+
+        });
+
+    }
+    function Mask(search) {
+        page = 0;
+        getObjects(search);
+
+
+    }
+
+</script>

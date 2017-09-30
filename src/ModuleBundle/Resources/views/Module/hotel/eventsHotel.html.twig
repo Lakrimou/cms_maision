@@ -1,0 +1,143 @@
+{#=============================Events=====================#}
+
+<section class="event-section" id="events">
+    <div class="auto-container">
+        <div class="title-box clearfix">
+            <!--Sec Title-->
+            <div class="sec-title">
+                <h2>Nos événements</h2>
+                <!-- bouton pour ajouter une photo -->
+                {% if connected %}
+
+                {% endif %}
+                <!-- bouton pour ajouter une photo -->
+
+            </div>
+            <div class="text pull-left">
+                {% if connected %}
+            </div>
+            <input type="submit" value="Ajouter événements" class="theme-btn btn-style-ajout"
+                   data-toggle="modal"
+                   data-target=".ajout-events-modal-lg"/>
+            <a class="events-modal theme-btn btn-style-five" href="#evenements-booking"
+               data-toggle="modal"
+               data-target="#myModal-Booking">Gérer les événements</a>
+        </div>
+        {% endif %}
+        <div class="row clearfix events_details">
+            <!--Post Column-->
+            <div class="post-column col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <!--Post Style One-->
+                {% for ev in module %}
+                    {% if ev.descriptionEvents is not null %}
+                        {% if ev.id is divisible by(2) %}
+                            <div class="post-style-one left-image">
+
+                                <div class="inner-box">
+                                    <div class="clearfix">
+
+                                        <div class="inner-column col-md-6 col-sm-6 col-xs-12">
+                                            <!--Image Box-->
+                                            <figure class="image-box">
+                                                <img src="{{ asset('uploads/image/' ~ qouiqui.user.id ~'/' ~ qouiqui.id ~ '/events/'~ ev.descriptionEvents.eventsImage ) }}"
+                                                     alt=""/>
+                                            </figure>
+                                        </div>
+                                        <div class="inner-column col-md-6 col-sm-6 col-xs-12">
+                                            <!--Content Box-->
+                                            <div class="content-box">
+                                                <div class="title"><span
+                                                            class="date">{{ ev.descriptionEvents.dateEvents|date("d/m/Y") }}
+                                                        <span> </span> </span> {{ ev.descriptionEvents.nameEvents }}
+                                                </div>
+                                                <br>
+                                                <div class="text">{{ ev.descriptionEvents.eventsDetails|raw }}
+                                                </div>
+                                                {#<a href="#" class="theme-btn btn-style-four ">Afficher l'événement</a>#}
+                                                {% if app.user %}
+                                                    <a href="#" data-toggle="modal"data-target="#modal_bookingEvents{{ev.id}}" class="theme-btn btn-style-two">Réserver</a>
+                                                {% else %}
+                                                <a href="#" data-toggle="modal" data-target="#modal_connection" class="theme-btn btn-style-two">Réserver</a>
+                                                {% endif %}
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        {% else %}
+                            <div class="post-style-one rigth-image">
+                                <div class="inner-box">
+                                    <div class="clearfix">
+
+                                        <div class="inner-column col-md-6 col-sm-6 col-xs-12 pull-right">
+                                            <!--Image Box-->
+                                            <figure class="image-box">
+                                                <img src="{{ asset('uploads/image/' ~ qouiqui.user.id ~'/' ~ qouiqui.id ~ '/events/'~ ev.descriptionEvents.eventsImage ) }}"
+                                                     alt=""/>
+                                            </figure>
+                                        </div>
+
+                                        <div class="inner-column col-md-6 col-sm-6 col-xs-12 pull-left">
+                                            <!--Content Box-->
+                                            <div class="content-box">
+                                                <div class="title"><span
+                                                            class="date">{{ ev.descriptionEvents.dateEvents|date("d/m/Y") }}
+                                                        <span></span></span>   {{ ev.descriptionEvents.nameEvents }}
+                                                </div>
+                                                <br>
+                                                <div class="text">{{ ev.descriptionEvents.eventsDetails|raw }}
+                                                </div>
+                                                {#<a href="#" class="theme-btn btn-style-four">Afficher l'événement</a>#}
+                                                {% if app.user %}
+                                                <a href="#" data-toggle="modal"data-target="#modal_bookingEvents{{ev.id}}" class="theme-btn btn-style-two">Réserver</a>
+                                                {% else %}
+                                                    <a href="#" data-toggle="modal" data-target="#modal_connection" class="theme-btn btn-style-two">Réserver</a>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}
+            </div>
+
+        </div>
+    </div>
+    {% include 'ModuleBundle:Module/hotel:connectionHotelReservation.html.twig' %}
+    {% include 'ModuleBundle:Module/hotel:bookingEventsHotel.html.twig' %}
+
+    <div class="particle elem1 anim-delay1"></div>
+    <div class="particle elem2 anim-delay5"></div>
+    <div class="particle elem3 anim-delay3"></div>
+    <div class="particle elem4 anim-delay8"></div>
+    <div class="particle elem5 anim-delay9"></div>
+    <div class="particle elem6 anim-delay2"></div>
+    <div class="particle elem7 anim-delay4"></div>
+    <div class="particle elem8 anim-delay3"></div>
+    <div class="particle elem9 anim-delay10"></div>
+    <div class="particle elem8 anim-delay11"></div>
+    <div class="particle elem6 anim-delay12"></div>
+    <div class="particle elem1 anim-delay14"></div>
+    <div class="particle elem13 anim-delay16"></div>
+    <div class="particle elem17 anim-delay18"></div>
+    <div class="particle elem2 anim-delay6"></div>
+    <div class="particle elem16 anim-delay9"></div>
+    <div class="particle elem8 anim-delay3"></div>
+    <div class="particle elem9 anim-delay10"></div>
+    <div class="particle elem18 anim-delay11"></div>
+    <div class="particle elem11 anim-delay12"></div>
+    <div class="particle elem12 anim-delay14"></div>
+    <div class="particle elem13 anim-delay16"></div>
+    <div class="particle elem14 anim-delay18"></div>
+    <div class="particle elem15 anim-delay6"></div>
+    <div class="particle elem16 anim-delay9"></div>
+    <div class="particle elem17 anim-delay7"></div>
+    <div class="particle elem18 anim-delay6"></div>
+    <div class="particle elem19 anim-delay3"></div>
+</section>

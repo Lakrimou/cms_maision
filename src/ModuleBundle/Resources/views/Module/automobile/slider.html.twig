@@ -1,0 +1,617 @@
+{% if connected %}
+
+    <div class="theme_changer">
+        <tog style="float: right;margin-right:-50px;">
+            <i class="fa fa-cog" style="padding: 15px" aria-hidden="true"></i>
+        </tog>
+        <button type="button" class="theme-btn btn-style-one blue " data-toggle="modal" data-target="#gallery-modal">
+            modifier les image de slider
+        </button>
+
+        <form id="change_color_form" action="{{ path('change_color',{'qq_id': qouiqui.id }) }}" method="POST">
+            <h5><b class="theme_color">Pèrsonnaliser votre theme</b></h5>
+            <h6>Couleur des Titre</h6>
+            <div class="bfh-colorpicker" data-pour="titre" data-name="color[titre]" data-color="{% if theme.color.titre is defined %} {{ theme.color.titre }}{% endif%}"></div>
+            <h6>Couleur des Sous-titre</h6>
+            <div class="bfh-colorpicker" data-pour="Soustitre" data-name="color[Soustitre]" data-color="{% if theme.color.Soustitre is defined %}{{ theme.color.Soustitre }}{% endif%}"></div>
+            <h6>Couleur des bouton</h6>
+            <div class="bfh-colorpicker" data-pour="bouton" data-name="color[bouton]" data-color="{% if theme.color.bouton is defined %}{{ theme.color.bouton }}{% endif %}"></div>
+            <h6>Couleur des Text</h6>
+            <div class="bfh-colorpicker" data-pour="Text" data-name="color[Text]" data-color="{% if theme.color.Text is defined %}{{ theme.color.Text }}{% endif%}"></div>
+            <div class="background sectionName">
+                <h6>couleur d'arrière plan <br><span id="sectionName"></span></h6>
+            </div>
+            <input type="hidden" id="bgco_about" data-pour="background-annonce" name="color[background][about]" value="{% if theme.color.background is defined %}{{ theme.color.background.annone }}{% endif %}">
+            <input type="hidden" id="bgco_Offres" data-pour="background-gallery" name="color[background][annone]" value="{% if theme.color.background is defined %}{{ theme.color.background.gallery }}{% endif %}">
+            <input type="hidden" id="bgco_portfolio" data-pour="background-service" name="color[background][gallery]" value="{% if theme.color.background.service is defined %}{{ theme.color.background.service }}{% endif %}">
+            <input type="hidden" id="bgco_contact" data-pour="background-contact" name="color[background][contact]" value="{% if theme.color.background is defined %}{{ theme.color.background.contact }}{% endif %}">
+
+            {#-------------------input motif anime------------------#}
+            <input type="hidden" name="color[background][animation][about]" id="animation_about" {% if animation and (theme.color.background.animation.about is not empty) %} value="{{ theme.color.background.animation.about }}" {% endif %}>
+            <input type="hidden" name="color[background][animation][annone]" id="animation_Offres" {% if animation and (theme.color.background.animation.annone is not empty) %} value="{{ theme.color.background.animation.annone }}" {% endif %} >
+            <input type="hidden" name="color[background][animation][gallery]" id="annimation_portfolio" {% if animation and (theme.color.background.animation.gallery is not empty) %} value="{{ theme.color.background.animation.gallery }}" {% endif %}>
+            <input type="hidden" name="color[background][animation][contact]" id="annimation_contact" {% if animation and (theme.color.background.animation.contact is not empty) %} value="{{ theme.color.background.animation.contact }}" {% endif %}>
+            {#-------------------input motif------------------------#}
+            <input type="hidden" name="color[background][motif][about]" id="motif_about" {% if motif and (theme.color.background.motif.about is not empty) %} value="{{ theme.color.background.motif.about }}" {% endif %}>
+            <input type="hidden" name="color[background][motif][annone]" id="motif_Offres" {% if motif and (theme.color.background.motif.annone is not empty) %} value="{{ theme.color.background.motif.annone }}" {% endif %} >
+            <input type="hidden" name="color[background][motif][gallery]" id="motif_portfolio" {% if motif and (theme.color.background.motif.gallery is not empty) %} value="{{ theme.color.background.motif.gallery }}" {% endif %}>
+            <input type="hidden" name="color[background][motif][contact]" id="motif_contact" {% if motif and (theme.color.background.motif.contact is not empty) %} value="{{ theme.color.background.motif.contact }}" {% endif %}>
+
+            <div class="panel-group" id="accordion">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <h6 data-toggle="collapse" data-parent="#accordion" href="#backgroundcolor">couleur d'arrière plan</h6>
+                        </h4>
+                    </div>
+                    <div id="backgroundcolor" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <div setbg_color style="margin: 1px;border: 1px dashed grey ;width: 30px;height: 30px;float: left;background: #fff"></div>
+                            <div setbg_color style="margin: 1px;border: 1px dashed grey ;width: 30px;height: 30px;float: left;background: #293364"></div>
+                            <div setbg_color style="margin: 1px;border: 1px dashed grey ;width: 30px;height: 30px;float: left;background: #1a4a72"></div>
+                            <div setbg_color style="margin: 1px;border: 1px dashed grey ;width: 30px;height: 30px;float: left;background: rgba(18, 159, 210, 0.77)"></div>
+                            <div setbg_color style="margin: 1px;border: 1px dashed grey ;width: 30px;height: 30px;float: left;background: #e0ca85"></div>
+                            <div setbg_color style="margin: 1px;border: 1px dashed grey ;width: 30px;height: 30px;float: left;background: rgba(236, 208, 120, 0.61)"></div>
+                            <div setbg_color style="margin: 1px;border: 1px dashed grey ;width: 30px;height: 30px;float: left;background: rgb(196, 166, 72)"></div>
+                            <div setbg_color style="margin: 1px;border: 1px dashed grey ;width: 30px;height: 30px;float: left;background: #76c08a"></div>
+                            <div setbg_color style="margin: 1px;border: 1px dashed grey ;width: 30px;height: 30px;float: left;background: rgba(216, 193, 122, 0.47)"></div>
+                            <div setbg_color style="margin: 1px;border: 1px dashed grey ;width: 30px;height: 30px;float: left;background: rgba(178, 137, 27, 0.83)"></div>
+                            <div setbg_color style="margin: 1px;border: 1px dashed grey ;width: 30px;height: 30px;float: left;background: #89c436"></div>
+                            <div setbg_color style="margin: 1px;border: 1px dashed grey ;width: 30px;height: 30px;float: left;background: #75b6ce"></div>
+                            <div setbg_color style="margin: 1px;border: 1px dashed grey ;width: 30px;height: 30px;float: left;background: #D5AD70"></div>
+                            <div setbg_color style="margin: 1px;border: 1px dashed grey ;width: 30px;height: 30px;float: left;background: #c4733d"></div>
+                            <div setbg_color style="margin: 1px;border: 1px dashed grey ;width: 30px;height: 30px;float: left;background: #d1b501"></div>
+                            <div setbg_color style="margin: 1px;border: 1px dashed grey ;width: 30px;height: 30px;float: left;background: rgba(173,122,48,0.75)"></div>
+                            <div setbg_color style="margin: 1px;border: 1px dashed grey ;width: 30px;height: 30px;float: left;background: #eb42ff"></div>
+                            <div setbg_color style="margin: 1px;border: 1px dashed grey ;width: 30px;height: 30px;float: left;background: #fd3f9c"></div>
+                            <div setbg_color style="margin: 1px;border: 1px dashed grey ;width: 30px;height: 30px;float: left;background: rgba(125, 60, 243, 0.7)"></div>
+                            <div setbg_color style="margin: 1px;border: 1px dashed grey ;width: 30px;height: 30px;float: left;background: #ff8dae"></div>
+                            <div setbg_color style="margin: 1px;border: 1px dashed grey ;width: 30px;height: 30px;float: left;background: #f7f8fa"></div>
+                            <div setbg_color style="margin: 1px;border: 1px dashed grey ;width: 30px;height: 30px;float: left;background: rgba(216, 159, 245, 0.09)"></div>
+                            <div setbg_color style="margin: 1px;border: 1px dashed grey ;width: 30px;height: 30px;float: left;background: rgba(128, 128, 128, 0.09)"></div>
+                            <div setbg_color style="margin: 1px;border: 1px dashed grey ;width: 30px;height: 30px;float: left;background: #f0f7f2"></div>
+                            <div setbg_color style="margin: 1px;border: 1px dashed grey ;width: 30px;height: 30px;float: left;background: rgba(216, 159, 245, 0.31)"></div>
+                            <div setbg_color style="margin: 1px;border: 1px dashed grey ;width: 30px;height: 30px;float: left;background: rgba(245, 159, 230, 0.21)"></div>
+                            <div setbg_color style="margin: 1px;border: 1px dashed grey ;width: 30px;height: 30px;float: left;background: rgba(128, 128, 128, 0.05)"></div>
+                            <div setbg_color style="margin: 1px;border: 1px dashed grey ;width: 30px;height: 30px;float: left;background: rgba(128, 128, 128, 0.2)"></div>
+                            <div setbg_color style="margin: 1px;border: 1px dashed grey ;width: 30px;height: 30px;float: left;background: #eedddd"></div>
+                            <div setbg_color style="margin: 1px;border: 1px dashed grey ;width: 30px;height: 30px;float: left;background: #eae2ef"></div>
+                            <div setbg_color style="margin: 1px;border: 1px dashed grey ;width: 30px;height: 30px;float: left;background: #e1ddec"></div>
+                            <div setbg_color style="margin: 1px;border: 1px dashed grey ;width: 30px;height: 30px;float: left;background: #e2deeb"></div>
+                            <div setbg_color style="margin: 1px;border: 1px dashed grey ;width: 30px;height: 30px;float: left;background: #dfe2e5"></div>
+                            <div setbg_color style="margin: 1px;border: 1px dashed grey ;width: 30px;height: 30px;float: left;background: #7892a9"></div>
+                            <div setbg_color style="margin: 1px;border: 1px dashed grey ;width: 30px;height: 30px;float: left;background: #e9e2e2"></div>
+                            <div setbg_color style="margin: 1px;border: 1px dashed grey ;width: 30px;height: 30px;float: left;background: #c17f7e"></div>
+                            <div setbg_color style="margin: 1px;border: 1px dashed grey ;width: 30px;height: 30px;float: left;background: #bcdbc4"></div>
+                            <div setbg_color style="margin: 1px;border: 1px dashed grey ;width: 30px;height: 30px;float: left;background: #e8a6c9"></div>
+                            <div setbg_color style="margin: 1px;border: 1px dashed grey ;width: 30px;height: 30px;float: left;background: #ffa07a"></div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <h6 data-toggle="collapse" data-parent="#accordion" href="#background-img">Motif d'arrière plan</h6>
+                        </h4>
+                    </div>
+                    <div id="background-img" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            {% for m in patternImage() %}
+                                <div set_m_bg_color style="margin: 1px;border: 1px dashed grey ;width: 30px;height: 30px;float: left;background-image: url('{{ asset('module/spa/patterns/'~m) }}');"></div>
+                            {% endfor %}
+
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <h6 data-toggle="collapse" data-parent="#accordion" href="#backgropundmotif">Motif d'arrière plan</h6>
+                        </h4>
+                    </div>
+                    <div id="backgropundmotif" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <div data-pour="" class="motif-container">
+
+                                <div set_icon style="width: 30px;height: 30px;float: left">
+                                    <img style="width:100%" src="" alt="">
+                                </div>
+                                <div set_icon style="width: 30px;height: 30px;float: left">
+                                    <img style="width:100%" src="{{ asset('uploads/image/icon/1.png') }}" alt="">
+                                </div>
+                                <div set_icon style="width: 30px;height: 30px;float: left">
+                                    <img style="width:100%" src="{{ asset('uploads/image/icon/3.png') }}" alt="">
+                                </div>
+                                <div set_icon style="width: 30px;height: 30px;float: left">
+                                    <img style="width:100%" src="{{ asset('uploads/image/icon/4.png') }}" alt="">
+                                </div>
+                                <div set_icon style="width: 30px;height: 30px;float: left">
+                                    <img style="width:100%" src="{{ asset('uploads/image/icon/5.png') }}" alt="">
+                                </div>
+                                <div set_icon style="width: 30px;height: 30px;float: left">
+                                    <img style="width:100%" src="{{ asset('uploads/image/icon/6.png') }}" alt="">
+                                </div>
+                                <div set_icon style="width: 30px;height: 30px;float: left">
+                                    <img style="width:100%" src="{{ asset('uploads/image/icon/7.png') }}" alt="">
+                                </div>
+                                <div set_icon style="width: 30px;height: 30px;float: left">
+                                    <img style="width:100%" src="{{ asset('uploads/image/icon/8.png') }}" alt="">
+                                </div>
+                                <div set_icon style="width: 30px;height: 30px;float: left">
+                                    <img style="width:100%" src="{{ asset('uploads/image/icon/9.png') }}" alt="">
+                                </div>
+                                <div set_icon style="width: 30px;height: 30px;float: left">
+                                    <img style="width:100%" src="{{ asset('uploads/image/icon/10.png') }}" alt="">
+                                </div>
+                                <div set_icon style="width: 30px;height: 30px;float: left">
+                                    <img style="width:100%" src="{{ asset('uploads/image/icon/11.png') }}" alt="">
+                                </div>
+                                <div set_icon style="width: 30px;height: 30px;float: left">
+                                    <img style="width:100%" src="{{ asset('uploads/image/icon/12.png') }}" alt="">
+                                </div>
+
+                                <div set_icon style="width: 30px;height: 30px;float: left">
+                                    <img style="width:100%" src="{{ asset('uploads/image/icon/14.png') }}" alt="">
+                                </div>
+                                <div set_icon style="width: 30px;height: 30px;float: left">
+                                    <img style="width:100%" src="{{ asset('uploads/image/icon/15.png') }}" alt="">
+                                </div>
+                                <div set_icon style="width: 30px;height: 30px;float: left">
+                                    <img style="width:100%" src="{{ asset('uploads/image/icon/16.png') }}" alt="">
+                                </div>
+                                <div set_icon style="width: 30px;height: 30px;float: left">
+                                    <img style="width:100%" src="{{ asset('uploads/image/icon/17.png') }}" alt="">
+                                </div>
+                                <div set_icon style="width: 30px;height: 30px;float: left">
+                                    <img style="width:100%" src="{{ asset('uploads/image/icon/18.png') }}" alt="">
+                                </div>
+                                <div set_icon style="width: 30px;height: 30px;float: left">
+                                    <img style="width:100%" src="{{ asset('uploads/image/icon/19.png') }}" alt="">
+                                </div>
+                                <div set_icon style="width: 30px;height: 30px;float: left">
+                                    <img style="width:100%" src="{{ asset('uploads/image/icon/20.png') }}" alt="">
+                                </div>
+                                <div set_icon style="width: 30px;height: 30px;float: left">
+                                    <img style="width:100%" src="{{ asset('uploads/image/icon/21.png') }}" alt="">
+                                </div>
+                                <div set_icon style="width: 30px;height: 30px;float: left">
+                                    <img style="width:100%" src="{{ asset('uploads/image/icon/22.png') }}" alt="">
+                                </div>
+                                <div set_icon style="width: 30px;height: 30px;float: left">
+                                    <img style="width:100%" src="{{ asset('uploads/image/icon/23.png') }}" alt="">
+                                </div>
+                                <div set_icon style="width: 30px;height: 30px;float: left">
+                                    <img style="width:100%" src="{{ asset('uploads/image/icon/24.png') }}" alt="">
+                                </div>
+                                <div set_icon style="width: 30px;height: 30px;float: left">
+                                    <img style="width:100%" src="{{ asset('uploads/image/icon/25.png') }}" alt="">
+                                </div>
+                                <div set_icon style="width: 30px;height: 30px;float: left">
+                                    <img style="width:100%" src="{{ asset('uploads/image/icon/26.png') }}" alt="">
+                                </div>
+                                <div set_icon style="width: 30px;height: 30px;float: left">
+                                    <img style="width:100%" src="{{ asset('uploads/image/icon/27.png') }}" alt="">
+                                </div>
+                                <div set_icon style="width: 30px;height: 30px;float: left">
+                                    <img style="width:100%" src="{{ asset('uploads/image/icon/28.png') }}" alt="">
+                                </div>
+                                <div set_icon style="width: 30px;height: 30px;float: left">
+                                    <img style="width:100%" src="{{ asset('uploads/image/icon/29.png') }}" alt="">
+                                </div>
+                                <div set_icon style="width: 30px;height: 30px;float: left">
+                                    <img style="width:100%" src="{{ asset('uploads/image/icon/30.png') }}" alt="">
+                                </div>
+                                <div set_icon style="width: 30px;height: 30px;float: left">
+                                    <img style="width:100%" src="{{ asset('uploads/image/icon/31.png') }}" alt="">
+                                </div>
+                                <div set_icon style="width: 30px;height: 30px;float: left">
+                                    <img style="width:100%" src="{{ asset('uploads/image/icon/32.png') }}" alt="">
+                                </div>
+                                <div set_icon style="width: 30px;height: 30px;float: left">
+                                    <img style="width:100%" src="{{ asset('uploads/image/icon/34.png') }}" alt="">
+                                </div>
+                                <div set_icon style="width: 30px;height: 30px;float: left">
+                                    <img style="width:100%" src="{{ asset('uploads/image/icon/35.png') }}" alt="">
+                                </div>
+                                <div set_icon style="width: 30px;height: 30px;float: left">
+                                    <img style="width:100%" src="{{ asset('uploads/image/icon/36.png') }}" alt="">
+                                </div>
+
+                                <div set_icon style="width: 30px;height: 30px;float: left">
+                                    <img style="width:100%" src="{{ asset('uploads/image/icon/icone-avocat.png') }}" alt="">
+                                </div>
+                                <div set_icon style="width: 30px;height: 30px;float: left">
+                                    <img style="width:100%" src="{{ asset('uploads/image/icon/integrators-1.png') }}" alt="">
+                                </div>
+                                <div set_icon style="width: 30px;height: 30px;float: left">
+                                    <img style="width:100%" src="{{ asset('uploads/image/icon/key.png') }}" alt="">
+                                </div>
+                                <div set_icon style="width: 30px;height: 30px;float: left">
+                                    <img style="width:100%" src="{{ asset('uploads/image/icon/nutrition-icon.png') }}" alt="">
+                                </div>
+                                <div set_icon style="width: 30px;height: 30px;float: left">
+                                    <img style="width:100%" src="{{ asset('uploads/image/icon/payment-cards.png') }}" alt="">
+                                </div>
+                                <div set_icon style="width: 30px;height: 30px;float: left">
+                                    <img style="width:100%" src="{{ asset('uploads/image/icon/pic.png') }}" alt="">
+                                </div>
+                                <div set_icon style="width: 30px;height: 30px;float: left">
+                                    <img style="width:100%" src="{{ asset('uploads/image/icon/plane.png') }}" alt="">
+                                </div>
+                                <div set_icon style="width: 30px;height: 30px;float: left">
+                                    <img style="width:100%" src="{{ asset('uploads/image/icon/poop.png') }}" alt="">
+                                </div>
+                                <div set_icon style="width: 30px;height: 30px;float: left">
+                                    <img style="width:100%" src="{{ asset('uploads/image/icon/presentation-grisf.png') }}" alt="">
+                                </div>
+                                <div set_icon style="width: 30px;height: 30px;float: left">
+                                    <img style="width:100%" src="{{ asset('uploads/image/icon/Shipping.png') }}" alt="">
+                                </div>
+                                <div set_icon style="width: 30px;height: 30px;float: left">
+                                    <img style="width:100%" src="{{ asset('uploads/image/icon/star.png') }}" alt="">
+                                </div>
+                                <div set_icon style="width: 30px;height: 30px;float: left">
+                                    <img style="width:100%" src="{{ asset('uploads/image/icon/star2.png') }}" alt="">
+                                </div>
+                                <div set_icon style="width: 30px;height: 30px;float: left">
+                                    <img style="width:100%" src="{{ asset('uploads/image/icon/star3.png') }}" alt="">
+                                </div>
+                                <div set_icon style="width: 30px;height: 30px;float: left">
+                                    <img style="width:100%" src="{{ asset('uploads/image/icon/symbole.png') }}" alt="">
+                                </div>
+                                <div set_icon style="width: 30px;height: 30px;float: left">
+                                    <img style="width:100%" src="{{ asset('uploads/image/icon/symbole3.png') }}" alt="">
+                                </div>
+                                <div set_icon style="width: 30px;height: 30px;float: left">
+                                    <img style="width:100%" src="{{ asset('uploads/image/icon/tree.png') }}" alt="">
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <input type="submit" class="theme-btn btn-style-one" style="z-index: 97; margin: 0 auto; margin-top: 5px" value="changer les color">
+        </form>
+    </div>
+    <style>
+
+        div#background-img {
+            max-height: 150px;
+            overflow: auto;
+        }
+        div#backgroundcolor {
+            max-height: 150px;
+            overflow: auto;
+        }
+        .theme_changer .panel-group {
+            margin: 5px 0;
+        }
+        .bfh-colorpicker {
+            position: relative;
+            background: white;
+            /* padding: 1px; */
+            border: 1px solid #908d8d;
+            border-radius: 4px;
+        }
+
+        .theme_changer .panel-default > .panel-heading {
+            background: #f7f7f7;
+        }
+
+        .theme_changer h6 {
+            font-style: normal;
+            margin: 5px 0;
+        }
+        tog {
+            background: #e6d6d6;
+        }
+
+        tog .fa.fa-cog {
+            background: none;
+            -webkit-animation-name: clignote;
+            -webkit-animation-duration: 3s;
+            -webkit-animation-iteration-count: infinite;
+        }
+
+        @-webkit-keyframes clignote {
+
+            0% {
+                transform: scale(1) rotate(120deg);
+            }
+            50% {
+                transform: scale(1.6) rotate(240deg);
+            }
+            100% {
+                transform: scale(1) rotate(360deg);
+            }
+        }
+
+        @-webkit-keyframes color-change {
+            0% {
+                color: red;
+            }
+            50% {
+                color: blue;
+            }
+            100% {
+                color: red;
+            }
+        }
+
+        .motif-container {
+
+            overflow: auto;
+            height: 60px;
+
+        }
+
+        .theme_changer {
+            top: 15%;
+            position: fixed;
+            width: 200px;
+            background: #e6d6d6;
+            z-index: 99;
+            padding: 10px;
+            transform: translate(-200px);
+            transition: transform 2s;
+        }
+
+        .bfh-colorpicker-popover {
+            position: relative !important;
+        }
+    </style>
+
+
+    <div class="modal fade" id="gallery-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">×</button>
+                    <h4 class="modal-title">Modifier les image de sider</h4>
+                </div>
+                <div class="modal-body">
+
+
+                    <div class="row norow">
+                        <form action="{{ path('uploadslider',{'qq_id': qouiqui.id }) }}" class="dropzone" id="my-dropzone"></form>
+                    </div>
+
+                    <div class="row norow">
+                        <form id="orderimg" action="{{ path('module_spa_tmp_folder',{'qq_id': qouiqui.id } ) }}" method="post" enctype="multipart/form-data">
+
+                            <ul id="sortable">
+                                {% for img in slider %}
+
+                                    <div id="sup{{ loop.index }}" class="col-md-6 " data-div="{{ img }}">
+                                        <div class="thumbnail">
+                                            <!-- Single button -->
+                                            <div class="btn-group pull-right " style="position: absolute;right: 20px;">
+                                                <button type="button" class="btn btn-default dropdown-toggle"
+                                                        data-toggle="dropdown"
+                                                        aria-haspopup="true" aria-expanded="false">
+                                                    <i class="fa fa-pencil" aria-hidden="true"></i> <span class="caret"></span>
+                                                </button>
+                                                <ul class="dropdown-menu">
+                                                    <li>
+                                                        <a href="#" class="remove" data-name-remove="{{ img }}" data-sup="#sup{{ loop.index }}" data-id="{{ qouiqui.id }}">supprimer</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+
+                                            <li class="ui-state-default">
+
+
+                                                <input type="text" class="hidden" name="{{ loop.index }}" value="{{ img }}"><br>
+
+
+                                                <img style="width:100%" src="/uploads/image/{{ iduser }}/{{ qouiqui.id }}/slider/{{ img }}">
+                                            </li>
+
+
+                                        </div>
+                                    </div>
+                                {% endfor %}
+
+                            </ul>
+                        </form>
+
+                    </div>
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+                    <button type="submit" class="btn btn-default " data-target="modifier" data-selector="orderimg">enregistrer</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+{% endif %}
+
+
+<section id="home" class="section  home-slider">
+    <div class="flexslider" id="list-slides">
+        <ul class="slides">
+            {% for slide in slider %}
+                {% if annonce_slider is defined%}
+                {%  set one_annonce_slider = random(annonce_slider) %}
+
+                <li>
+                    <img src="{{ asset('uploads/image/') }}/{{ qouiqui.user.id }}/{{ qouiqui.id }}/slider/{{ slide }}" alt="img"/>
+
+                    {#{{ render(controller(#}
+                    {#'ModuleBundle:Automobile:getText',#}
+                    {#{ 'id': qouiqui.id }#}
+                    {#)) }}#}
+                    <div class="flex-caption">
+                        <h3>{% if one_annonce_slider.model.mark is not null %}
+                                {{ one_annonce_slider.model.mark.name }}
+                            {% endif %}
+                            {% if one_annonce_slider.model.name is not null %}
+                                {{ one_annonce_slider.model.name }}
+                            {% endif %} A vendre</h3>
+                        <p>{% if one_annonce_slider.price is  not null %}
+                                {{ one_annonce_slider.price }}
+                             <sup>DT</sup>{% else %}UNE OFFRE À NE PAS RATER{% endif %} </p>
+                        <a href="#Offres" class="btn btn-main btn-primary btn-lg uppercase" ><span>Voir offres</span></a> </div>
+
+                </li>
+                    {% else %}
+            <div class="flex-caption">
+                <p>
+                    bienvenue sur vente voiture</p>
+            </div>
+                {% endif  %}
+            {% endfor %}
+
+
+        </ul>
+    </div>
+
+
+</section>
+
+
+
+
+
+<!-- FlexSlider -->
+
+
+<script type="text/javascript">
+    var iImageFile;
+    $(document).ready(function () {
+
+        iImageFile = 0;
+
+
+    });
+    function readURLFileSlider(input) {
+
+        console.log("im here");
+        for (i = 0; i < input.files.length; i++) {
+
+            if (input.files && input.files[i]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+
+
+                    $("#uploaded-image-slider").append("<tr id='tr" + iImageFile + "file' class='tr-inner-table'><td ><img id='blah" + iImageFile + "file' style='width: 50%' src='#' /></td><td><button  onclick='deleteSlideImage(" + iImageFile + ")'>Supprimer</button></td></tr>");
+                    $('#blah' + iImageFile + 'file').attr('src', e.target.result);
+                    iImageFile = iImageFile + 1;
+
+                }
+
+                reader.readAsDataURL(input.files[i]);
+            }
+
+
+        }
+    }
+//    document.getElementById('file_image').onchange = function () {
+//
+//        $("#uploaded-image-slider").empty();
+//
+//        $("#table-silder").show();
+//        readURLFileSlider(this);
+//    };
+    function deleteSlideImage(iI) {
+        $("#update_slider").append("<input name='deleteFile[" + iI + "]' value='" + iI + "' type='hidden'>");
+        $("#tr" + iI + "file").remove();
+        if ($("#uploaded-image-slider .tr-inner-table").length == 0) {
+            $("#table-silder").hide();
+        }
+
+
+        event.preventDefault();
+    }
+
+    $(window).load(function () {
+
+        $('.flexslider').flexslider({
+            animation: 'fade', 		   //String: Select your animation type, "fade" or "slide"
+            controlNav: true,   	  //Boolean: Create navigation for paging control of each clide? Note: Leave true for manualControls usage
+            directionNav: true,		 //Boolean: Create navigation for previous/next navigation? (true/false)
+            slideshowSpeed: 7000,   //Integer: Set the speed of the slideshow cycling, in milliseconds
+            animationSpeed: 600,   //Integer: Set the speed of animations, in milliseconds
+            pauseOnHover: false,   //Boolean: Pause the slideshow when hovering over slider, then resume when no longer hovering
+            prevText: "",        //String: Set the text for the "previous" directionNav item
+            nextText: ""		//String: Set the text for the "next" directionNav item
+        });
+
+
+    });
+    function deleteOldSlider(iTR, image) {
+
+        var result = confirm("Voulez vous vraiment supprimer ce slide ?");
+        if (result) {
+            var data = {
+                'user': {{ iduser }},
+                'quoiqui': {{ qouiqui.id }},
+
+                'image': image
+            };
+
+            $.ajax({
+                url: '{{ path('delete_slide') }}',
+                data: data,
+                type: "POST",
+                success: function (response) {
+                    $("#tr" + iTR + "slide").remove();
+
+                    listSliders();
+
+
+                },
+
+
+            });
+
+
+        }
+
+    }
+    function listSliders() {
+
+        $.ajax({
+            url: '{{ path('list_slides') }}',
+            data: {
+
+                'quoiqui': {{ qouiqui.id }},
+
+
+            },
+            type: "POST",
+            success: function (response) {
+
+                $("#list-slides").html(response);
+                $("#home").reload();
+
+
+            },
+            error: function (xhr, status, error) {
+                alert(xhr.responseText);
+            },
+
+
+        });
+
+
+    }
+
+
+</script>
+
+
+
+

@@ -1,0 +1,896 @@
+<section id="section-annonces" class="property-details padding">
+
+    <div class="container">
+
+        <div class="row">
+            <div class="col-md-12" style="font-size: 43px">
+                <h2 class="text-uppercase">Nos <span class="color_red">Offre</span></h2>
+                <span class="heading-letter-style">
+                 Nos Offre
+                </span>
+            </div>
+        </div>
+
+        <div class="col-md-12 search-section">
+            <div role="tabpanel">
+                <!-- BEGIN: CATEGORY TAB -->
+                <ul class="nav nav-tabs search-top" role="tablist" id="searchTab">
+                    <li role="presentation" class="text-center active">
+                        <a href="#flight" aria-controls="flight" role="tab" data-toggle="tab" aria-expanded="true">
+                            <i class="fa fa-plane"></i>
+                            <span>FLIGHTS</span>
+                        </a>
+                    </li>
+                    <li role="presentation" class="text-center">
+                        <a href="#hotel" aria-controls="hotel" role="tab" data-toggle="tab" aria-expanded="false">
+                            <i class="fa fa-bed"></i>
+                            <span>HOTELS</span>
+                        </a>
+                    </li>
+                    <li role="presentation" class="text-center">
+                        <a href="#holiday" aria-controls="holiday" role="tab" data-toggle="tab" aria-expanded="false">
+                            <i class="fa fa-suitcase"></i>
+                            <span>HOLIDAYS</span>
+                        </a>
+                    </li>
+                    <li role="presentation" class="text-center">
+                        <a href="#taxi" aria-controls="taxi" role="tab" data-toggle="tab" aria-expanded="false">
+                            <i class="fa fa-cab"></i>
+                            <span>CAR</span>
+                        </a>
+                    </li>
+                    <li role="presentation" class="text-center">
+                        <a href="#cruise" aria-controls="cruise" role="tab" data-toggle="tab" aria-expanded="false">
+                            <i class="fa fa-ship"></i>
+                            <span>CRUISE</span>
+                        </a>
+                    </li>
+                </ul>
+                <!-- END: CATEGORY TAB -->
+
+                <!-- BEGIN: TAB PANELS -->
+                <div class="tab-content">
+                    <!-- BEGIN: FLIGHT SEARCH -->
+                    <div role="tabpanel" class="tab-pane active" id="flight">
+                        <form class="ng-pristine ng-valid">
+                            <div class="col-md-12 product-search-title">Réserver des billets d'avion</div>
+                            <div class="col-md-12 search-col-padding">
+                                <label class="radio-inline">
+                                    <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="One Way"> Sens Unique
+                                        </label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="Round Trip"> Aller-retour
+                                        </label>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="col-md-6 col-sm-6 search-col-padding">
+                                <label>Partir de</label>
+                                <div class="input-group">
+                                    <input type="text" name="departure_city" class="form-control" required="" placeholder="E.g. London">
+                                    <span class="input-group-addon"><i class="fa fa-map-marker fa-fw"></i></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-6 search-col-padding">
+                                <label>Partir à</label>
+                                <div class="input-group">
+                                    <input type="text" name="destination_city" class="form-control" required="" placeholder="E.g. New York">
+                                    <span class="input-group-addon"><i class="fa fa-map-marker fa-fw"></i></span>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="col-md-6 col-sm-6 search-col-padding">
+                                <label>Départ</label>
+                                <div class="input-group">
+                                    <input type="text" id="departure_date" name="departure_date" class="form-control hasDatepicker" placeholder="DD/MM/YYYY">
+                                    <span class="input-group-addon"><i class="fa fa-calendar fa-fw"></i></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-6 search-col-padding">
+                                <label>Revenir</label>
+                                <div class="input-group">
+                                    <input type="text" id="return_date" class="form-control hasDatepicker" name="return_date" placeholder="DD/MM/YYYY">
+                                    <span class="input-group-addon"><i class="fa fa-calendar fa-fw"></i></span>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="col-md-4 col-sm-4 search-col-padding">
+                                <label>Adulte</label><br>
+                                <span class="ui-spinner ui-widget ui-widget-content ui-corner-all"><input id="adult_count" name="adult_count" value="1" class="form-control quantity-padding ui-spinner-input" aria-valuemin="1" aria-valuenow="1" autocomplete="off" role="spinbutton"><a class="ui-spinner-button ui-spinner-up ui-corner-tr ui-button ui-widget ui-state-default ui-button-text-only" tabindex="-1" role="button"><span class="ui-button-text"><span class="ui-icon ui-icon-triangle-1-n"><i class="fa fa-plus"></i></span></span></a><a class="ui-spinner-button ui-spinner-down ui-corner-br ui-button ui-widget ui-state-default ui-button-text-only" tabindex="-1" role="button"><span class="ui-button-text"><span class="ui-icon ui-icon-triangle-1-s"><i class="fa fa-minus"></i></span></span></a></span>
+                            </div>
+                            <div class="col-md-4 col-sm-4 search-col-padding">
+                                <label>Enfant</label><br>
+                                <span class="ui-spinner ui-widget ui-widget-content ui-corner-all"><input type="text" id="child_count" name="child_count" value="1" class="form-control quantity-padding ui-spinner-input" aria-valuemin="1" aria-valuenow="1" autocomplete="off" role="spinbutton"><a class="ui-spinner-button ui-spinner-up ui-corner-tr ui-button ui-widget ui-state-default ui-button-text-only" tabindex="-1" role="button"><span class="ui-button-text"><span class="ui-icon ui-icon-triangle-1-n"><i class="fa fa-plus"></i></span></span></a><a class="ui-spinner-button ui-spinner-down ui-corner-br ui-button ui-widget ui-state-default ui-button-text-only" tabindex="-1" role="button"><span class="ui-button-text"><span class="ui-icon ui-icon-triangle-1-s"><i class="fa fa-minus"></i></span></span></a></span>
+                            </div>
+                            <div class="col-md-4 col-sm-4 search-col-padding">
+                                <label>Classe</label><br>
+                                <select class="selectpicker bs-select-hidden">
+                                    <option value="Business">Entreprise</option>
+                                    <option value="Economy">Économie</option>
+                                </select>
+                                <div class="btn-group bootstrap-select">
+                                    <button type="button" class="btn dropdown-toggle custom-select-button" data-toggle="dropdown" title="Entreprise"><span class="filter-option pull-left">Entreprise</span>&nbsp;<span class="caret"></span></button>
+                                    <div class="dropdown-menu open">
+                                        <ul class="dropdown-menu inner" role="menu">
+                                            <li data-original-index="0" class="selected"><a tabindex="0" class="" style="" data-tokens="null"><span class="text">Entreprise</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li>
+                                            <li data-original-index="1"><a tabindex="0" class="" style="" data-tokens="null"><span class="text">Économie</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="col-md-12 search-col-padding">
+                                <button type="submit" class="search-button btn transition-effect">Recherche de vols</button>
+                            </div>
+                            <div class="clearfix"></div>
+                        </form>
+                    </div>
+                    <!-- END: FLIGHT SEARCH -->
+
+                    <!-- START: HOTEL SEARCH -->
+                    <div role="tabpanel" class="tab-pane" id="hotel">
+                        <form class="ng-pristine ng-valid">
+                            <div class="col-md-12 product-search-title">Réserver des chambres d'hôtel</div>
+                            <div class="col-md-12 search-col-padding">
+                                <label>Je veux aller</label>
+                                <div class="input-group">
+                                    <input type="text" name="destination-city" class="form-control" required="" placeholder="E.g. New York">
+                                    <span class="input-group-addon"><i class="fa fa-map-marker fa-fw"></i></span>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="col-md-6 col-sm-6 search-col-padding">
+                                <label>Enregistrement</label>
+                                <div class="input-group">
+                                    <input type="text" name="check-in" id="check_in" class="form-control hasDatepicker" placeholder="DD/MM/YYYY">
+                                    <span class="input-group-addon"><i class="fa fa-calendar fa-fw"></i></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-6 search-col-padding">
+                                <label>Check-out</label>
+                                <div class="input-group">
+                                    <input type="text" name="check-out" id="check_out" class="form-control hasDatepicker" placeholder="DD/MM/YYYY">
+                                    <span class="input-group-addon"><i class="fa fa-calendar fa-fw"></i></span>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="col-md-3 col-sm-3 search-col-padding">
+                                <label>Adulte</label><br>
+                                <span class="ui-spinner ui-widget ui-widget-content ui-corner-all"><input id="hotel_adult_count" name="adult_count" value="1" class="form-control quantity-padding ui-spinner-input" aria-valuemin="1" aria-valuenow="1" autocomplete="off" role="spinbutton"><a class="ui-spinner-button ui-spinner-up ui-corner-tr ui-button ui-widget ui-state-default ui-button-text-only" tabindex="-1" role="button"><span class="ui-button-text"><span class="ui-icon ui-icon-triangle-1-n"><i class="fa fa-plus"></i></span></span></a><a class="ui-spinner-button ui-spinner-down ui-corner-br ui-button ui-widget ui-state-default ui-button-text-only" tabindex="-1" role="button"><span class="ui-button-text"><span class="ui-icon ui-icon-triangle-1-s"><i class="fa fa-minus"></i></span></span></a></span>
+                            </div>
+                            <div class="col-md-3 col-sm-3 search-col-padding">
+                                <label>Enfant</label><br>
+                                <span class="ui-spinner ui-widget ui-widget-content ui-corner-all"><input type="text" id="hotel_child_count" name="child_count" value="1" class="form-control quantity-padding ui-spinner-input" aria-valuemin="1" aria-valuenow="1" autocomplete="off" role="spinbutton"><a class="ui-spinner-button ui-spinner-up ui-corner-tr ui-button ui-widget ui-state-default ui-button-text-only" tabindex="-1" role="button"><span class="ui-button-text"><span class="ui-icon ui-icon-triangle-1-n"><i class="fa fa-plus"></i></span></span></a><a class="ui-spinner-button ui-spinner-down ui-corner-br ui-button ui-widget ui-state-default ui-button-text-only" tabindex="-1" role="button"><span class="ui-button-text"><span class="ui-icon ui-icon-triangle-1-s"><i class="fa fa-minus"></i></span></span></a></span>
+                            </div>
+                            <div class="col-md-3 col-sm-3 search-col-padding">
+                                <label>Pièces</label><br>
+                                <select class="selectpicker bs-select-hidden" name="rooms">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                </select>
+                                <div class="btn-group bootstrap-select">
+                                    <button type="button" class="btn dropdown-toggle custom-select-button" data-toggle="dropdown" title="1" aria-expanded="false"><span class="filter-option pull-left">1</span>&nbsp;<span class="caret"></span></button>
+                                    <div class="dropdown-menu open">
+                                        <ul class="dropdown-menu inner" role="menu">
+                                            <li data-original-index="0" class="selected"><a tabindex="0" class="" style="" data-tokens="null"><span class="text">1</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li>
+                                            <li data-original-index="1"><a tabindex="0" class="" style="" data-tokens="null"><span class="text">2</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li>
+                                            <li data-original-index="2"><a tabindex="0" class="" style="" data-tokens="null"><span class="text">3</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li>
+                                            <li data-original-index="3"><a tabindex="0" class="" style="" data-tokens="null"><span class="text">4</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li>
+                                            <li data-original-index="4"><a tabindex="0" class="" style="" data-tokens="null"><span class="text">5</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li>
+                                            <li data-original-index="5"><a tabindex="0" class="" style="" data-tokens="null"><span class="text">6</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-sm-3 search-col-padding">
+                                <label>Nuits</label><br>
+                                <select class="selectpicker bs-select-hidden" name="nights">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                </select>
+                                <div class="btn-group bootstrap-select">
+                                    <button type="button" class="btn dropdown-toggle custom-select-button" data-toggle="dropdown" title="1" aria-expanded="false"><span class="filter-option pull-left">1</span>&nbsp;<span class="caret"></span></button>
+                                    <div class="dropdown-menu open">
+                                        <ul class="dropdown-menu inner" role="menu">
+                                            <li data-original-index="0" class="selected"><a tabindex="0" class="" style="" data-tokens="null"><span class="text">1</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li>
+                                            <li data-original-index="1"><a tabindex="0" class="" style="" data-tokens="null"><span class="text">2</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li>
+                                            <li data-original-index="2"><a tabindex="0" class="" style="" data-tokens="null"><span class="text">3</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li>
+                                            <li data-original-index="3"><a tabindex="0" class="" style="" data-tokens="null"><span class="text">4</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li>
+                                            <li data-original-index="4"><a tabindex="0" class="" style="" data-tokens="null"><span class="text">5</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li>
+                                            <li data-original-index="5"><a tabindex="0" class="" style="" data-tokens="null"><span class="text">6</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="col-md-12 search-col-padding">
+                                <button type="submit" class="search-button btn transition-effect">Chercher un hôtel</button>
+                            </div>
+                            <div class="clearfix"></div>
+                        </form>
+                    </div>
+                    <!-- END: HOTEL SEARCH -->
+
+                    <!-- START: BEGIN HOLIDAY -->
+                    <div role="tabpanel" class="tab-pane" id="holiday">
+                        <form class="ng-pristine ng-valid">
+                            <div class="col-md-12 product-search-title">Forfaits vacances au livre</div>
+                            <div class="col-md-6 col-sm-6 search-col-padding">
+                                <label>De</label>
+                                <div class="input-group">
+                                    <input type="text" name="pack-departure-city" class="form-control" required="" placeholder="E.g. New York">
+                                    <span class="input-group-addon"><i class="fa fa-map-marker fa-fw"></i></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-6 search-col-padding">
+                                <label>Je veux aller</label>
+                                <div class="input-group">
+                                    <input type="text" name="pack-destination-city" class="form-control" required="" placeholder="E.g. New York">
+                                    <span class="input-group-addon"><i class="fa fa-map-marker fa-fw"></i></span>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="col-md-6 col-sm-6 search-col-padding">
+                                <label>A partir de</label>
+                                <div class="input-group">
+                                    <input type="text" id="package_start" class="form-control hasDatepicker" placeholder="DD/MM/YYYY">
+                                    <span class="input-group-addon"><i class="fa fa-calendar fa-fw"></i></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-6 search-col-padding">
+                                <label>Durée (facultatif)</label><br>
+                                <select class="selectpicker bs-select-hidden" name="holiday_duration">
+                                    <option value="3 Days">3 jours</option>
+                                    <option value="5 Days">5 jours</option>
+                                    <option value="1 Week">1 semaine</option>
+                                    <option value="2 Weeks">2 semaines</option>
+                                    <option value="1 Month">1 mois</option>
+                                    <option value="1+ Month">1+ mois</option>
+                                </select>
+                                <div class="btn-group bootstrap-select">
+                                    <button type="button" class="btn dropdown-toggle custom-select-button" data-toggle="dropdown" title="3 jours"><span class="filter-option pull-left">3 jours</span>&nbsp;<span class="caret"></span></button>
+                                    <div class="dropdown-menu open">
+                                        <ul class="dropdown-menu inner" role="menu">
+                                            <li data-original-index="0" class="selected"><a tabindex="0" class="" style="" data-tokens="null"><span class="text">3 jours</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li>
+                                            <li data-original-index="1"><a tabindex="0" class="" style="" data-tokens="null"><span class="text">5 jours</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li>
+                                            <li data-original-index="2"><a tabindex="0" class="" style="" data-tokens="null"><span class="text">1 semaine</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li>
+                                            <li data-original-index="3"><a tabindex="0" class="" style="" data-tokens="null"><span class="text">2 semaines</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li>
+                                            <li data-original-index="4"><a tabindex="0" class="" style="" data-tokens="null"><span class="text">1 mois</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li>
+                                            <li data-original-index="5"><a tabindex="0" class="" style="" data-tokens="null"><span class="text">1+ mois</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="col-md-6 col-sm-6 search-col-padding">
+                                <label>Type d'emballage (facultatif)</label><br>
+                                <select class="selectpicker bs-select-hidden" name="package_type">
+                                    <option value="Group">Groupe</option>
+                                    <option value="Family">Famille</option>
+                                    <option value="Individual">Individuel</option>
+                                    <option value="Honeymoon">Voyage de noces</option>
+                                </select>
+                                <div class="btn-group bootstrap-select">
+                                    <button type="button" class="btn dropdown-toggle custom-select-button" data-toggle="dropdown" title="Groupe"><span class="filter-option pull-left">Groupe</span>&nbsp;<span class="caret"></span></button>
+                                    <div class="dropdown-menu open">
+                                        <ul class="dropdown-menu inner" role="menu">
+                                            <li data-original-index="0" class="selected"><a tabindex="0" class="" style="" data-tokens="null"><span class="text">Groupe</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li>
+                                            <li data-original-index="1"><a tabindex="0" class="" style="" data-tokens="null"><span class="text">Famille</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li>
+                                            <li data-original-index="2"><a tabindex="0" class="" style="" data-tokens="null"><span class="text">Individuel</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li>
+                                            <li data-original-index="3"><a tabindex="0" class="" style="" data-tokens="null"><span class="text">Voyage de noces</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-6 search-col-padding">
+                                <label>Budget (facultatif)</label><br>
+                                <select class="selectpicker bs-select-hidden" name="package_budget">
+                                    <option value="500">500</option>
+                                    <option value="1000">1000</option>
+                                    <option value="1000+">1000+</option>
+                                </select>
+                                <div class="btn-group bootstrap-select">
+                                    <button type="button" class="btn dropdown-toggle custom-select-button" data-toggle="dropdown" title="500"><span class="filter-option pull-left">500</span>&nbsp;<span class="caret"></span></button>
+                                    <div class="dropdown-menu open">
+                                        <ul class="dropdown-menu inner" role="menu">
+                                            <li data-original-index="0" class="selected"><a tabindex="0" class="" style="" data-tokens="null"><span class="text">500</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li>
+                                            <li data-original-index="1"><a tabindex="0" class="" style="" data-tokens="null"><span class="text">1000</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li>
+                                            <li data-original-index="2"><a tabindex="0" class="" style="" data-tokens="null"><span class="text">1000+</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="col-md-12 search-col-padding">
+                                <button type="submit" class="search-button btn transition-effect">Rechercher des paquets</button>
+                            </div>
+                            <div class="clearfix"></div>
+                        </form>
+                    </div>
+                    <!-- END: HOLIDAYS -->
+
+                    <!-- START: CAR SEARCH -->
+                    <div role="tabpanel" class="tab-pane" id="taxi">
+                        <form class="ng-pristine ng-valid">
+                            <div class="col-md-12 product-search-title">Rechercher une voiture parfaite</div>
+                            <div class="col-md-6 col-sm-6 search-col-padding">
+                                <label>Lieu de ramassage</label>
+                                <div class="input-group">
+                                    <input type="text" name="departure-city" class="form-control" required="" placeholder="E.g. New York">
+                                    <span class="input-group-addon"><i class="fa fa-map-marker fa-fw"></i></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-6 search-col-padding">
+                                <label>Point de chute</label>
+                                <div class="input-group">
+                                    <input type="text" name="destination-city" class="form-control" required="" placeholder="E.g. New York">
+                                    <span class="input-group-addon"><i class="fa fa-map-marker fa-fw"></i></span>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="col-md-6 col-sm-6 search-col-padding">
+                                <label>Date de ramassage</label>
+                                <div class="input-group">
+                                    <input type="text" id="car_start" class="form-control hasDatepicker" placeholder="MM/DD/YYYY">
+                                    <span class="input-group-addon"><i class="fa fa-calendar fa-fw"></i></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-6 search-col-padding">
+                                <label>Date de décollage</label>
+                                <div class="input-group">
+                                    <input type="text" id="car_end" class="form-control hasDatepicker" placeholder="MM/DD/YYYY">
+                                    <span class="input-group-addon"><i class="fa fa-calendar fa-fw"></i></span>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="col-md-6 col-sm-6 search-col-padding">
+                                <label>Car Brnad (facultatif)</label><br>
+                                <select class="selectpicker bs-select-hidden" name="brand">
+                                    <option value="BMW">BMW</option>
+                                    <option value="Audi">Audi</option>
+                                    <option value="Mercedes">Mercedes</option>
+                                    <option value="Suzuki">Suzuki</option>
+                                    <option value="Honda">Honda</option>
+                                    <option value="Hyundai">Hyundai</option>
+                                    <option value="Toyota">Toyota</option>
+                                </select>
+                                <div class="btn-group bootstrap-select">
+                                    <button type="button" class="btn dropdown-toggle custom-select-button" data-toggle="dropdown" title="BMW" aria-expanded="false"><span class="filter-option pull-left">BMW</span>&nbsp;<span class="caret"></span></button>
+                                    <div class="dropdown-menu open">
+                                        <ul class="dropdown-menu inner" role="menu">
+                                            <li data-original-index="0" class="selected"><a tabindex="0" class="" style="" data-tokens="null"><span class="text">BMW</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li>
+                                            <li data-original-index="1"><a tabindex="0" class="" style="" data-tokens="null"><span class="text">Audi</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li>
+                                            <li data-original-index="2"><a tabindex="0" class="" style="" data-tokens="null"><span class="text">Mercedes</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li>
+                                            <li data-original-index="3"><a tabindex="0" class="" style="" data-tokens="null"><span class="text">Suzuki</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li>
+                                            <li data-original-index="4"><a tabindex="0" class="" style="" data-tokens="null"><span class="text">Honda</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li>
+                                            <li data-original-index="5"><a tabindex="0" class="" style="" data-tokens="null"><span class="text">Hyundai</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li>
+                                            <li data-original-index="6"><a tabindex="0" class="" style="" data-tokens="null"><span class="text">Toyota</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-6 search-col-padding">
+                                <label>Type de voiture (optionnel)</label><br>
+                                <select class="selectpicker bs-select-hidden" name="car_type">
+                                    <option value="Limo">Limousine</option>
+                                    <option value="Sedan">puis</option>
+                                </select>
+                                <div class="btn-group bootstrap-select">
+                                    <button type="button" class="btn dropdown-toggle custom-select-button" data-toggle="dropdown" title="Limousine" aria-expanded="false"><span class="filter-option pull-left">Limousine</span>&nbsp;<span class="caret"></span></button>
+                                    <div class="dropdown-menu open">
+                                        <ul class="dropdown-menu inner" role="menu">
+                                            <li data-original-index="0" class="selected"><a tabindex="0" class="" style="" data-tokens="null"><span class="text">Limousine</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li>
+                                            <li data-original-index="1"><a tabindex="0" class="" style="" data-tokens="null"><span class="text">puis</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="col-md-12 search-col-padding">
+                                <button type="submit" class="search-button btn transition-effect">Rechercher des voitures</button>
+                            </div>
+                            <div class="clearfix"></div>
+                        </form>
+                    </div>
+                    <!-- END: CAR SEARCH -->
+
+                    <!-- START: CRUISE SEARCH -->
+                    <div role="tabpanel" class="tab-pane" id="cruise">
+                        <form class="ng-pristine ng-valid">
+                            <div class="col-md-12 product-search-title">Vacances de croisière</div>
+                            <div class="col-md-6 col-sm-6 search-col-padding">
+                                <label>De</label>
+                                <div class="input-group">
+                                    <input type="text" name="pack-departure-city" class="form-control" required="" placeholder="E.g. New York">
+                                    <span class="input-group-addon"><i class="fa fa-map-marker fa-fw"></i></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-6 search-col-padding">
+                                <label>Je veux aller</label>
+                                <div class="input-group">
+                                    <input type="text" name="pack-destination-city" class="form-control" required="" placeholder="E.g. New York">
+                                    <span class="input-group-addon"><i class="fa fa-map-marker fa-fw"></i></span>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="col-md-6 col-sm-6 search-col-padding">
+                                <label>A partir de</label>
+                                <div class="input-group">
+                                    <input type="text" id="cruise_start" class="form-control hasDatepicker" placeholder="DD/MM/YYYY">
+                                    <span class="input-group-addon"><i class="fa fa-calendar fa-fw"></i></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-6 search-col-padding">
+                                <label>Durée (facultatif)</label><br>
+                                <select class="selectpicker bs-select-hidden" name="holiday_duration">
+                                    <option value="3 Days">3 jours</option>
+                                    <option value="5 Days">5 jours</option>
+                                    <option value="1 Week">1 semaine</option>
+                                    <option value="2 Weeks">2 semaines</option>
+                                    <option value="1 Month">1 mois</option>
+                                    <option value="1+ Month">1+ mois</option>
+                                </select>
+                                <div class="btn-group bootstrap-select">
+                                    <button type="button" class="btn dropdown-toggle custom-select-button" data-toggle="dropdown" title="3 jours" aria-expanded="false"><span class="filter-option pull-left">3 jours</span>&nbsp;<span class="caret"></span></button>
+                                    <div class="dropdown-menu open">
+                                        <ul class="dropdown-menu inner" role="menu">
+                                            <li data-original-index="0" class="selected"><a tabindex="0" class="" style="" data-tokens="null"><span class="text">3 jours</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li>
+                                            <li data-original-index="1"><a tabindex="0" class="" style="" data-tokens="null"><span class="text">5 jours</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li>
+                                            <li data-original-index="2"><a tabindex="0" class="" style="" data-tokens="null"><span class="text">1 semaine</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li>
+                                            <li data-original-index="3"><a tabindex="0" class="" style="" data-tokens="null"><span class="text">2 semaines</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li>
+                                            <li data-original-index="4"><a tabindex="0" class="" style="" data-tokens="null"><span class="text">1 mois</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li>
+                                            <li data-original-index="5"><a tabindex="0" class="" style="" data-tokens="null"><span class="text">1+ mois</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="col-md-6 col-sm-6 search-col-padding">
+                                <label>Type d'emballage (facultatif)</label><br>
+                                <select class="selectpicker bs-select-hidden" name="package_type">
+                                    <option value="Group">Groupe</option>
+                                    <option value="Family">Famille</option>
+                                    <option value="Individual">Individuel</option>
+                                    <option value="Honeymoon">Voyage de noces</option>
+                                </select>
+                                <div class="btn-group bootstrap-select">
+                                    <button type="button" class="btn dropdown-toggle custom-select-button" data-toggle="dropdown" title="Groupe" aria-expanded="false"><span class="filter-option pull-left">Groupe</span>&nbsp;<span class="caret"></span></button>
+                                    <div class="dropdown-menu open">
+                                        <ul class="dropdown-menu inner" role="menu">
+                                            <li data-original-index="0" class="selected"><a tabindex="0" class="" style="" data-tokens="null"><span class="text">Groupe</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li>
+                                            <li data-original-index="1"><a tabindex="0" class="" style="" data-tokens="null"><span class="text">Famille</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li>
+                                            <li data-original-index="2"><a tabindex="0" class="" style="" data-tokens="null"><span class="text">Individuel</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li>
+                                            <li data-original-index="3"><a tabindex="0" class="" style="" data-tokens="null"><span class="text">Voyage de noces</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-6 search-col-padding">
+                                <label>Budget (facultatif)</label><br>
+                                <select class="selectpicker bs-select-hidden" name="package_budget">
+                                    <option value="500">500</option>
+                                    <option value="1000">1000</option>
+                                    <option value="1000+">1000+</option>
+                                </select>
+                                <div class="btn-group bootstrap-select">
+                                    <button type="button" class="btn dropdown-toggle custom-select-button" data-toggle="dropdown" title="500" aria-expanded="false"><span class="filter-option pull-left">500</span>&nbsp;<span class="caret"></span></button>
+                                    <div class="dropdown-menu open">
+                                        <ul class="dropdown-menu inner" role="menu">
+                                            <li data-original-index="0" class="selected"><a tabindex="0" class="" style="" data-tokens="null"><span class="text">500</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li>
+                                            <li data-original-index="1"><a tabindex="0" class="" style="" data-tokens="null"><span class="text">1000</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li>
+                                            <li data-original-index="2"><a tabindex="0" class="" style="" data-tokens="null"><span class="text">1000+</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="col-md-12 search-col-padding">
+                                <button type="submit" class="search-button btn transition-effect">Chercher des croisières</button>
+                            </div>
+                            <div class="clearfix"></div>
+                        </form>
+                    </div>
+                    <!-- END: CRUISE SEARCH -->
+
+                </div>
+                <!-- END: TAB PANE -->
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12" style="font-size: 43px">
+                <h2 class="text-uppercase">Votre <span class="color_red">Résultat</span></h2>
+                <span class="heading-letter-style">
+                 Résultat
+                </span>
+            </div>
+        </div>
+
+        <div class="col-md-12 hot-deal-list wow slideInLeft" style="visibility: visible; animation-name: slideInLeft;">
+
+            <div class="col-md-6">
+                <div class="item">
+                    <div class="col-xs-3">
+                        <img src="assets/images/offer1.jpg" alt="Cruise">
+                    </div>
+                    <div class="col-md-7 col-xs-6">
+                        <h5>Hotel Grand Lilly</h5>
+                        <p class="location"><i class="fa fa-map-marker"></i> New York, USA</p>
+                        <p class="text-sm">Lorem Ipsum is simply dummy text. Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                    </div>
+                    <div class="col-md-2 col-xs-3">
+                        <h4>$499</h4>
+                        <h6>Per Night</h6>
+                        <a href="#">BOOK</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="item">
+                    <div class="col-xs-3">
+                        <img src="assets/images/offer1.jpg" alt="Cruise">
+                    </div>
+                    <div class="col-md-7 col-xs-6">
+                        <h5>Hotel Grand Lilly</h5>
+                        <p class="location"><i class="fa fa-map-marker"></i> New York, USA</p>
+                        <p class="text-sm">Lorem Ipsum is simply dummy text. Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                    </div>
+                    <div class="col-md-2 col-xs-3">
+                        <h4>$499</h4>
+                        <h6>Per Night</h6>
+                        <a href="#">BOOK</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="item">
+                    <div class="col-xs-3">
+                        <img src="assets/images/offer1.jpg" alt="Cruise">
+                    </div>
+                    <div class="col-md-7 col-xs-6">
+                        <h5>Hotel Grand Lilly</h5>
+                        <p class="location"><i class="fa fa-map-marker"></i> New York, USA</p>
+                        <p class="text-sm">Lorem Ipsum is simply dummy text. Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                    </div>
+                    <div class="col-md-2 col-xs-3">
+                        <h4>$499</h4>
+                        <h6>Per Night</h6>
+                        <a href="#">BOOK</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+
+
+</section>
+
+
+<style>
+    .search-section {
+        margin-top: 60px;
+        margin-bottom: 60px;
+    }
+    .search-section .nav-tabs {
+        border-bottom: none;
+    }
+    .search-section .nav-tabs .active {
+        position: relative;
+    }
+    .search-section .nav-tabs .active:after {
+        background: #f9676b none repeat scroll 0 0;
+        content: "";
+        height: 20px;
+        left: 40%;
+        position: absolute;
+        top: 80%;
+        transform: rotate(45deg);
+        -webkit-transform: rotate(45deg);
+        -ms-transform: rotate(45deg);
+        -moz-transform: rotate(45deg);
+        -o-transform: rotate(45deg);
+        width: 20px;
+    }
+    .search-section .nav-tabs > li > a {
+        color: #ffffff;
+        background: rgba(10, 49, 82, 0.5);
+        letter-spacing: 1px;
+        font-weight: bold;
+        border-radius: 2px 2px 0 0;
+        margin-right: 4px;
+    }
+    .search-section .nav > li > a {
+        padding: 15px;
+    }
+    .search-section .nav-tabs > li {
+        margin-bottom: 0px;
+    }
+    .search-section .nav-tabs > li > a:hover {
+        color: #ffffff;
+        background: #f9676b;
+        border: 1px solid transparent;
+    }
+    .search-section .nav-tabs > li.active > a,
+    .search-section .nav-tabs > li.active > a:focus,
+    .search-section .nav-tabs > li.active > a:hover {
+        color: #ffffff;
+        background: #f9676b;
+        border: 1px solid transparent;
+    }
+    .search-section .tab-content {
+        color: #07253F;
+        background: #fff;
+        padding: 30px 15px;
+    }
+    .search-section label {
+        font-size: 12px;
+        font-weight: 600;
+        text-transform: uppercase;
+    }
+    .search-section .form-control {
+        background-color: transparent;
+        border: 1px solid #BEC4C8;
+        border-radius: 0;
+        box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+        color: #07253F;
+        display: block;
+        font-size: 15px;
+        height: 40px;
+        line-height: 1.42857;
+        padding: 6px 12px;
+        transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
+        width: 100%;
+    }
+    .search-section .form-control::-moz-placeholder {
+        color: #989DA0;
+        opacity:1;
+    }
+    .search-section .form-control:-ms-input-placeholder {
+        color: #BEC4C8;
+    }
+    .search-section .form-control::-webkit-input-placeholder {
+        color: #BEC4C8;
+    }
+    .search-section .form-control::-o-input-placeholder {
+        color: #BEC4C8;
+    }
+    .search-section .input-group-addon {
+        background: transparent;
+        color: #BEC4C8;
+        border-top: 1px solid #BEC4C8;
+        border-right: 1px solid #BEC4C8;
+        border-bottom: 1px solid #BEC4C8;
+        border-radius: 0;
+    }
+    .search-section .product-search-title {
+        font-size: 18px;
+        display: block;
+        font-weight: 800;
+        text-transform: uppercase;
+        color: #f9676b;
+    }
+    .search-section .search-col-padding {
+        padding-top: 15px;
+    }
+    .search-section option {
+        color: #07253F;
+    }
+    #ui-datepicker-div {
+        background: #07253F;
+        z-index: 9999 !important;
+    }
+    #ui-datepicker-div  table {
+        margin: 10px;
+    }
+    .ui-datepicker-calendar a {
+        padding: 5px;
+        color: #ffffff;
+    }
+    .ui-datepicker-calendar a:hover {
+        color: #00ADEF;
+    }
+    .ui-datepicker-calendar td {
+        padding: 10px 5px;
+    }
+    .ui-datepicker-calendar .ui-state-disabled {
+        color: #0A3152;
+    }
+    .ui-datepicker-calendar th {
+        color: #ffffff;
+        padding: 7px;
+    }
+    .ui-datepicker-header {
+        margin: 10px;
+    }
+    .ui-datepicker-header .ui-datepicker-title {
+        color: #ffffff;
+        text-align: center;
+    }
+    .ui-datepicker-header a {
+        color: #ffffff;
+        cursor: pointer;
+    }
+    .ui-datepicker-header a:hover {
+        color: #00ADEF;
+    }
+    .ui-spinner-up i {
+        color: #BEC4C8;
+        float: right;
+        margin-top: -27px;
+        margin-right: 10px;
+        z-index: 99999;
+    }
+    .ui-spinner-down i {
+        color: #BEC4C8;
+        float: left;
+        margin-top: -27px;
+        margin-left: 10px;
+        z-index: 99999;
+    }
+    .quantity-padding {
+        padding-left: 40px !important;
+    }
+    .ui-datepicker-prev {
+        float: left;
+    }
+    .ui-datepicker-next {
+        float: right;
+    }
+    .custom-select-button {
+        background: transparent none repeat scroll 0 0;
+        border: 1px solid #BEC4C8;
+        border-radius: 0;
+        height: 40px;
+    }
+    .bootstrap-select.btn-group .dropdown-menu {
+        background: #07253F;
+        border-radius: 0;
+    }
+    .bootstrap-select.btn-group .dropdown-menu li a {
+        color: #ffffff;
+        background: #07253F !important;
+    }
+    .bootstrap-select.btn-group .dropdown-menu li a:hover {
+        color: #00ADEF;
+    }
+    .bootstrap-select:not([class*="col-"]):not([class*="form-control"]):not(.input-group-btn) {
+        width: 100%;
+    }
+    .btn:hover {
+        color: #00ADEF;
+    }
+    .search-button {
+        background: #f9676b;
+        border-radius: 0;
+        margin-top: 10px;
+        padding: 10px 30px;
+        font-size: 15px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        font-weight: bold;
+        color: #fff;
+        transition: all 0.3s ease;
+        -ms-transition: all 0.3s ease;
+        -moz-transition: all 0.3s ease;
+        -webkit-transition: all 0.3s ease;
+        -o-transition: all 0.3s ease;
+    }
+    .search-button:hover {
+        background: #00adef;
+        color: #fff;
+    }
+
+
+
+
+
+
+
+
+
+
+    .hot-deal-list .item  img {
+        max-width: 100%;
+    }
+    .hot-deal-list .item {
+        text-align: left;
+        border-bottom: 1px solid #e6e6e6;
+        padding: 20px 0px 10px;
+        overflow: hidden;
+    }
+    .hot-deal-list .item h5,
+    .hot-deal-list .item h4 {
+        font-weight: bold;
+        margin-top: 0px;
+    }
+    .hot-deal-list .item a {
+        background: #f9676b none repeat scroll 0 0;
+        color: #fff;
+        display: inline-block;
+        font-size: 13px;
+        font-weight: bold;
+        margin-top: 5px;
+        padding: 4px 10px;
+        margin-bottom: 15px;
+    }
+    .hot-deal-list .item a:hover {
+        background: #00adef;
+    }
+    .hot-deal-list .item .location {
+        color: #00adef;
+    }
+    .hot-deal-list .item .text-sm {
+        line-height: 2;
+        font-size: 13px;
+    }
+    .hot-deal-grid .item {
+        margin-top: 30px;
+        color: #fff;
+    }
+    .hot-deal-grid img {
+        max-width: 100%;
+        position: relative;
+        transition: all 1s ease;
+        -webkit-transition: all 1s ease;
+    }
+    .hot-deal-grid .item:hover img {
+        transform: scale(1.5);
+        -webkit-transform: scale(1.5);
+        -ms-transform: scale(1.5);
+        -moz-transform: scale(1.5);
+        -o-transform: scale(1.5);
+    }
+    .hot-deal-grid .item:hover a {
+        opacity: 1;
+    }
+    .hot-deal-grid .wrapper {
+        position: relative;
+        overflow: hidden;
+    }
+    .hot-deal-grid .wrapper h5 {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        text-align: center;
+        background: rgba(10, 49, 82, 0.5);
+        margin: 0;
+        padding: 5px 0px;
+        font-weight: bold;
+        line-height: 2;
+    }
+    .hot-deal-grid .wrapper a {
+        position: absolute;
+        color: #fff;
+        border: 2px solid #fff;
+        font-weight: bold;
+        padding: 5px 20px;
+        display: inline-block;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        -webkit-transform: translate(-50%,-50%);
+        -ms-transform: translate(-50%,-50%);
+        -moz-transform: translate(-50%,-50%);
+        -o-transform: translate(-50%,-50%);
+        opacity: 0;
+        transition: all 0.5s ease;
+    }
+
+
+
+
+
+
+</style>

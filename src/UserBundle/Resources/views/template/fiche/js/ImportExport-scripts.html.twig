@@ -1,0 +1,60 @@
+<style>
+    .gri{
+        padding: 12px;
+    }
+    figure.effe ct-layla {
+        height: 344px;
+        overflow: hidden;
+        display: grid;
+        align-items: center;
+
+    }
+    figure.effect-layla img{
+        min-width: 100%;
+        margin: 0 auto;
+    }
+    .gri figure {
+        height: 370px;
+    }
+    .gri img {
+        width: inherit;
+    }
+
+</style>
+<script>
+
+    $('.form_article').click(function () {
+
+
+        module = $(this).data('module');
+        if ((typeof module) == 'string'){
+            module = $(this).data('module').replace(/(\r\n|\n|\r)/g, '<br/>').toString();
+            module = JSON.parse(module);
+        }
+        link = $(this).data('link');
+        $('#Article-edit #AdminBundle_traiteur_titre').val(module.titre);
+        $('#Article-edit #AdminBundle_traiteur_details').val(module.details);
+        CKEDITOR.instances['#AdminBundle_traiteur_details'].setData(module.details);
+        $('#Article-edit #AdminBundle_traiteur_prix').val(module.prix);
+        $('#Article-edit form').attr('action',link);
+
+    })
+
+    $('.view').click(function () {
+
+        module = $(this).data('module');
+        if ((typeof module) == 'string'){
+            module = $(this).data('module').replace(/(\r\n|\n|\r)/g, '<br/>').toString();
+            module = JSON.parse(module);
+        }
+        $('.titre-view').html(module.titre);
+        $('.view-description').html(module.details);
+        $('.prix').html(module.prix);
+        $('.prev-img-view img').attr('src',module.image);
+
+    })
+
+
+
+
+</script>

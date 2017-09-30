@@ -1,0 +1,86 @@
+<!--     modal d'ajout des a propos -->
+
+<!-- Large modal -->
+
+
+<div class="modal fade ajout-apropos" tabindex="-1" role="dialog"
+     aria-labelledby="myLargeModalLabel">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Ajouter votre à propos</h4>
+            </div>
+            <div class="modal-body">
+
+                <div class="col-md-12">
+                    <div class="well-block">
+
+                        <form action="{{ path('hotel_ajouterApropos', {'id_qq': qouiqui.id}) }}" method="POST"
+                              name="chambre-form" enctype="multipart/form-data" id="apropos-form">
+                            <!-- Form start -->
+                            <div class="row">
+                                <!-- Text input-->
+
+                                <!-- Text input-->
+                                <!-- Text area -->
+                                <!-- Textarea -->
+                                <div class="form-group">
+                                    <label class="col-md-12 control-label"
+                                           for="keyinformation">Détails</label>
+                                    <div class="col-md-12">
+                                        <textarea name="apropos[apropos_details]" class="ckeditor" required></textarea>
+
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <label class="control-label" for="name"><i class="fa fa-facebook-official"
+                                                                               aria-hidden="true"> Ajouter Facebook</i></label>
+                                    <input type="text" class="form-control" name="apropos[fb]" placeholder="https://">
+                                    <label class="control-label" for="name"><i class="fa fa-google-plus-official"
+                                                                               aria-hidden="true"> Ajouter
+                                            Google+</i></label>
+                                    <input type="text" class="form-control" name="apropos[gp]" placeholder="https://">
+                                    <label class="control-label" for="name"><i class="fa fa-twitter" aria-hidden="true">
+                                            Ajouter Twitter</i></label>
+                                    <input type="text" class="form-control" name="apropos[tw]" placeholder="https://">
+                                    <br>
+                                </div>
+
+                                <div class="col-md-12 add-room ">
+                                    <div class="form-group">
+                                        <label class="btn-bs-file theme-btn btn-style-two">
+                                            Cliquer ici pour ajouter une photo
+                                            <input type="file"
+                                                   class="form-control inline-block uploadImage imageUps"
+                                                   name="apropos[image_apropos]" required/>
+                                        </label>
+                                        <img src="#" alt="image upload" class="upImg imageUplo"
+                                        />
+                                    </div>
+                                    <br>
+                                </div>
+
+
+                            </div>
+                            <button type="submit" class="theme-btn btn-style-two envoyerUpload"
+                                    id="ajouter-chambres">
+                                Ajouter
+                            </button>
+                            <button type="button" class="theme-btn btn-style-one pull-right " data-dismiss="modal">Fermer
+                            </button>
+                        </form>
+                        <!-- form end -->
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--     modal d'ajout des propos -->

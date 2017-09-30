@@ -1,0 +1,11 @@
+{% for slide in slider %}
+
+    <li>
+        <img src="{{ asset('uploads/image/') }}/{{ qouiqui.user.id }}/{{ qouiqui.id }}/slider/{{ slide }}" alt="img"/>
+        {{ render(controller(
+        'ModuleBundle:Automobile:getText',
+        { 'id': qouiqui.id }
+        )) }}
+
+    </li>
+{% endfor %}

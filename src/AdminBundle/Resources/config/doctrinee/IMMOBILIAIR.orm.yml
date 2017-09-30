@@ -1,0 +1,11 @@
+AdminBundle\Entity\IMMOBILIAIR:
+    type: entity
+    table: null
+    repositoryClass: AdminBundle\Repository\IMMOBILIAIRRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    lifecycleCallbacks: {  }

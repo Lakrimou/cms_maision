@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AdminBundle\Entity\Reviews" table="REVIEWS">
+    <indexes>
+      <index name="fk_REVIEWS_QOUIQUI1_idx" columns="QOUIQUI_id"/>
+      <index name="fk_REVIEWS_EVENTS1_idx" columns="EVENTS_id"/>
+    </indexes>
+    <id name="id" type="bigint" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="reviewTitle" type="string" column="review_title" length="45" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="reviewMsg" type="string" column="review_msg" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="reviewNote" type="string" column="review_note" length="45" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <many-to-one field="qouiqui" target-entity="Qouiqui" fetch="LAZY">
+      <join-columns>
+        <join-column name="QOUIQUI_id" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="events" target-entity="Events" fetch="LAZY">
+      <join-columns>
+        <join-column name="EVENTS_id" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

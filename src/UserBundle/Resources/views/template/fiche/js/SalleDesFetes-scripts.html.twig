@@ -1,0 +1,1183 @@
+{% block javascripts %}
+
+    <script>
+        $(".spa-service").click(function () {
+
+            var styles = {
+                border: "1px solid #e3e3e3",
+            };
+            $('#otherServices').css(styles);
+            $('.errormsg').html("");
+            $('#otherServices').val('');
+            $('#otherServices').hide();
+            $('#serviceselect').css(styles);
+            $('#serviceselect').val('');
+            $("#addServices").prop('disabled', false);
+            $("#serviceselect option:disabled").remove();
+            $('#serviceselect').prepend('<option disabled selected>Sélectionner un service*</option>');
+
+        });
+
+
+    </script>
+    <script>
+
+
+        $('form#updateserv').submit(function (e) {
+            if ($('.otherSelected').val()) {
+                var autre = $('.otherSelected').val();
+                $('select').prepend('<option  value=  "' + autre + '" >' + $('.otherSelected').val() + '</option>');
+
+                $("#serviceselect-edit [value='" + autre + "']").attr("selected", "selected");
+                $(".otherSelected").val('');
+                $(".otherSelected").hide();
+            }
+
+
+            var item = $('#serviceselect-edit  option:selected').val();
+            if (item === 'autre') {
+                e.preventDefault();
+                alert('ajouter autre service ou bien choisir un autre d aprés la liste');
+            }
+            setTimeout(function () {
+                $(this).submit();
+            }, 4000);
+
+        });
+
+
+        $('form#addserv').submit(function (e) {
+
+
+            if ($('#otherServices').val()) {
+                var autre = $('#otherServices').val();
+                $('select').prepend('<option  value=  "' + autre + '" >' + $('#otherServices').val() + '</option>');
+
+                $("#serviceselect [value='" + autre + "']").attr("selected", "selected");
+                $("#otherServices").val('');
+                $("#otherServices").hide();
+            }
+
+            var item = $('#serviceselect option:selected').val();
+            if (item === 'autre') {
+                e.preventDefault();
+                alert('ajouter un  service ou bien choisir un autre de la liste');
+            }
+
+
+        });
+
+    </script>
+    <script>
+
+        $('.edit').click(function () {
+            var styles = {
+                border: "1px solid #e3e3e3",
+            };
+
+            $('#serviceselect-edit').css(styles);
+            $('#autreServices').css(styles);
+            $('.errormsg').html("");
+            $('#autreServices').val('');
+            $('#autreServices').hide();
+            $("#editServices").prop('disabled', false);
+
+            var idqq = $(this).attr('data-id');
+            var idserv = $(this).attr('data-serv');
+            var data = {
+                idqq: idqq,
+                idserv: idserv,
+
+            };
+
+            $.ajax({
+                url: '{{ path('module_spa_get_json_spa') }}',
+                data: data,
+                type: "POST",
+                success: function (data) {
+                    var arr = [];
+                    json = JSON.stringify(eval('(' + data + ')')); //convert to json string
+                    arr = $.parseJSON(json);
+                    console.log(arr);
+                    $("#idservs").val(arr.idserv);
+                    $("#Spa-serv").val(arr.ServSpa);
+                    $("#serviceicon").val(arr.serviceIcon);
+                    $("#details").val(arr.detail);
+                    $(".seticon").html(arr.serviceIcon);
+//                    $('#seticon').attr('src', arr.serviceIcon);
+                    $("#price").val(arr.spaprix);
+                    $("#serviceselect-edit [value='" + arr.ServSpa + "']").attr("selected", "selected");
+                    $('#serviceselect-edit').change(function () {
+                        console.log(sellected);
+
+                        $("#editServices").prop('disabled', false);
+                        var styles = {
+                            border: "1px solid #e3e3e3",
+                        };
+                        $('#serviceselect-edit').css(styles);
+                        $('.errormsg').html("");
+
+
+                        var item = $('#serviceselect-edit option:selected').val();
+
+
+                        $.each(ListFromBase, function (index, value) {
+                            if (item === value && value != sellected) {
+                                $('.errormsg').html(" ce service  existe  déjà");
+                                $('#serviceselect-edit').css('border', 'solid 2px red');
+                                $("#editServices").prop('disabled', true);
+                            }
+
+
+                        });
+
+
+                    });
+
+                }
+            });
+
+        });
+    </script>
+
+    <script>
+
+        $('.edit-offre').click(function () {
+
+
+            var idqq = $(this).attr('data-id');
+            var idserv = $(this).attr('data-serv');
+
+
+            var data = {
+                idqq: idqq,
+                idserv: idserv,
+
+            };
+//            console.log(data);
+
+            $.ajax({
+                url: '{{ path('module_spa_get_json_offre') }}',
+                data: data,
+                type: "POST",
+                success: function (data) {
+
+                    var arr = [];
+                    json = JSON.stringify(eval('(' + data + ')')); //convert to json string
+                    arr = $.parseJSON(json);
+                    console.log(arr);
+//                    $("#offre").val(arr.ServSpa);
+                    $(".description-edit").val(arr.description);
+                    $("#PrvPrix").val(arr.prev_prix);
+                    $("#Percentage").val(arr.prec);
+                    $("#AcPrix").val(arr.prix);
+                    $("#idEvent").val(arr.idOffre);
+                    $("#date-start").val(arr.start_offre);
+                    $("#serviceselect-edit-promo [value='" + arr.ServSpa + "']").attr("selected", "selected");
+                    var selected = $('#serviceselect-edit-promo').val();
+                    console.log("select "+selected);
+                    console.log("lliste promo  "+PromoFromBase);
+                    $('#serviceselect-edit-promo').change(function () {
+                        console.log(selected);
+
+                        $("#editServices-promo").prop('disabled', false);
+                        var styles = {
+                            border: "1px solid #e3e3e3",
+                        };
+                        $('#serviceselect-edit-promo').css(styles);
+                        $('.errormsg1').html("");
+
+
+                        var item = $('#serviceselect-edit-promo option:selected').val();
+
+
+                        $.each(PromoFromBase , function (index, value) {
+                            if (item === value && value != selected) {
+                                $('.errormsg1').html(" ce service  existe  déjà");
+                                $('#serviceselect-edit-promo').css('border', 'solid 2px red');
+                                $("#editServices-promo").prop('disabled', true);
+                            }
+
+
+                        });
+
+
+                    });
+
+
+                }
+
+
+            });
+
+        });
+    </script>
+    <script>
+        $('.click-off').click(function () {
+            // escape here if the confirm is false;
+            if (!clickOffConfirmed) return false;
+            var btn = this;
+            setTimeout(function () {
+                $(btn).attr('disabled', 'disabled');
+            }, 1);
+            return true;
+        });
+
+    </script>
+
+    <script>
+
+        $('#serviceselect').on('change', function () {
+
+            if ($(this).val() == "autre") {
+
+                $("#otherServices").show();
+                console.log($(this).val());
+
+            }
+            else {
+                $("#otherServices").hide();
+            }
+        });
+    </script>
+    <script>
+
+        $('#serviceselect-promo').on('change', function () {
+
+            if ($(this).val() == "autre") {
+
+                $("#otherServices-promo").show();
+                console.log($(this).val());
+
+            }
+            else {
+                $("#otherServices-promo").hide();
+            }
+        });
+    </script>
+    <script>
+
+        myList = [];
+
+        $("#serviceselect option ").each(function () {
+
+            myList.push($(this).val())
+
+        });
+
+        var typingTimer;
+        var doneTypingInterval = 1000;
+        typingTimer = setTimeout(function () {
+            $('.errormsg').html("");
+            $('#otherServices').keyup(function () {
+                var autre = $('#otherServices').val();
+                $.each(myList, function (index, value) {
+                    if (($('#otherServices').val()) === value.toLowerCase()) {
+
+                        $('.errormsg').html(" ce service est déjà existe");
+                        $('#otherServices').css('border', 'solid 2px red');
+                        $("#addServices").attr('disabled', 'disabled');
+                    }
+                    else if ($('#otherServices').val() == '') {
+
+                        var styles = {
+                            border: "initial",
+                        };
+
+                        $('#otherServices').css(styles);
+                        $('.errormsg').html("");
+                        $("#addServices").prop('disabled', false);
+                    }
+
+
+                });
+            });
+        }, doneTypingInterval);
+
+
+    </script>
+
+    <script>
+        ListFromBase = [];
+        $("#service_enrolled option ").each(function () {
+
+            ListFromBase.push($(this).val())
+
+        });
+        console.log(ListFromBase);
+        $('#serviceselect').click(function () {
+            var styles = {
+                border: "1px solid #e3e3e3",
+            };
+
+
+            $('.selectOption').css(styles);
+            $('.errormsg').html("");
+            $("#addServices").prop('disabled', false);
+
+
+            var item = $('#serviceselect option:selected').val();
+
+
+            $.each(ListFromBase, function (index, value) {
+                if (item === value) {
+                    console.log(value + "aaaa");
+
+                    $('.errormsg').html(" ce service  existe  déjà");
+                    $('.selectOption').css('border', 'solid 2px red');
+                    $("#addServices").attr('disabled', 'disabled');
+                }
+
+
+            });
+
+
+        });
+
+
+    </script>
+    <script>
+        ListFromBase = [];
+        $("#service_enrolled option ").each(function () {
+
+            ListFromBase.push($(this).val())
+
+        });
+        $('#serviceselect-edit').change(function () {
+            $("#editServices").prop('disabled', false);
+            var styles = {
+                border: "1px solid #e3e3e3",
+            };
+            $('#serviceselect-edit').css(styles);
+            $('.errormsg').html("");
+
+
+            var item = $('#serviceselect-edit option:selected').val();
+
+
+            $.each(ListFromBase, function (index, value) {
+                if (item === value) {
+                    $('.errormsg').html(" ce service  existe  déjà");
+                    $('#serviceselect-edit').css('border', 'solid 2px red');
+                    $("#editServices").prop('disabled', true);
+                }
+
+
+            });
+
+
+        });
+
+
+    </script>
+    <script>
+        jQuery(document).ready(function ($) {
+
+            $('.myCarousel').carousel({
+                interval: 5000
+            });
+
+            $('#carousel-text').html($('#slide-content-0').html());
+
+            //Handles the carousel thumbnails
+            $('[id^=carousel-selector-]').click(function () {
+                var id = this.id.substr(this.id.lastIndexOf("-") + 1);
+                var id = parseInt(id);
+                $('.myCarousel').carousel(id);
+            });
+
+
+            // When the carousel slides, auto update the text
+            $('.myCarousel').on('slid.bs.carousel', function (e) {
+                var id = $('.item.active').data('slide-number');
+                $('#carousel-text').html($('#slide-content-' + id).html());
+            });
+        });
+    </script>
+    <script>
+
+        var typingTimer;
+        var doneTypingInterval = 1000;
+
+
+        $('#Percentage').keyup(function () {
+
+            clearTimeout(typingTimer);
+            if ($('#Percentage').val) {
+                typingTimer = setTimeout(function () {
+
+                    var p = $("#Percentage").val();
+
+
+                    var prPrix = $('#PrvPrix').val();
+                    console.log('ancien Prix' + prPrix);
+
+                    var acprix = prPrix * (1 - (p / 100));
+                    console.log('this' + acprix);
+                    $("#AcPrix").val(acprix);
+
+                }, doneTypingInterval);
+            }
+        });
+    </script>
+
+    <script>
+
+        var typingTimer;
+        var doneTypingInterval = 1000;
+
+
+        $('#remise').keyup(function () {
+
+            clearTimeout(typingTimer);
+            if ($('#remise').val) {
+                typingTimer = setTimeout(function () {
+
+                    var v = $("#remise").val();
+                    var AnPrix = $('#An_prix').val();
+                    var Nvprix = AnPrix * (1 - (v / 100));
+                    console.log('this' + Nvprix);
+                    $("#nv_prix").val(Nvprix);
+
+                }, doneTypingInterval);
+            }
+        });
+    </script>
+    <script>
+
+        var typingTimer;                //timer identifier
+        var doneTypingInterval = 1000;  //time in ms, 5 second for example
+
+        //on keyup, start the countdown
+        $('#nv_prix').keyup(function () {
+
+            clearTimeout(typingTimer);
+            if ($('#nv_prix').val) {
+                typingTimer = setTimeout(function () {
+                    //do stuff here e.g ajax call etc....
+                    var v = $("#nv_prix").val();
+                    var AnPrix = $("#An_prix").val();
+                    var effectif = AnPrix - v;
+                    var p = (effectif * 100) / AnPrix;
+
+
+                    $("#remise").val(p);
+                }, doneTypingInterval);
+            }
+        });
+    </script>
+
+
+
+    <script>
+
+        var typingTimer;
+        var doneTypingInterval = 1000;
+
+
+        $('#AcPrix').keyup(function () {
+
+            clearTimeout(typingTimer);
+            if ($('#AcPrix').val) {
+                typingTimer = setTimeout(function () {
+
+                    var v1 = $("#AcPrix").val();
+                    var AnPrix1 = $('#PrvPrix').val();
+                    var Nvprix1 = AnPrix1 * (1 - (v1 / 100));
+                    console.log('this' + Nvprix1);
+                    $("#Percentage").val(Nvprix1);
+
+                }, doneTypingInterval);
+            }
+        });
+    </script>
+
+    {#script ajout select promo#}
+    <script>
+        $(".addpromo").click(function () {
+
+            var styles = {
+                border: "1px solid #e3e3e3",
+            };
+            $('#otherServices-promo').css(styles);
+            $('.errormsg1').html("");
+            $('#otherServices-promo').val('');
+            $('#otherServices-promo').hide();
+            $('#serviceselect-promo').css(styles);
+            $('#serviceselect-promo').val('');
+            $("#promo").prop('disabled', false);
+            $("#serviceselect-promo option:disabled").remove();
+            $('#serviceselect-promo').prepend('<option disabled selected>Choisisseez le service en promotion *</option>');
+
+        });
+
+
+    </script>
+    <script>
+
+        ListPromo = [];
+
+
+        $("#serviceselect-promo option ").each(function () {
+
+            ListPromo .push($(this).val())
+
+        });
+
+        var typingTimer;
+        var doneTypingInterval = 1000;
+        typingTimer = setTimeout(function () {
+            $('.errormsg1').html("");
+            $('#otherServices-promo').keyup(function () {
+                var autre = $('#otherServices-promo').val();
+                $.each(ListPromo, function (index, value) {
+                    if (($('#otherServices-promo').val()) === value.toLowerCase()) {
+
+                        $('.errormsg1').html(" ce service est déjà existe");
+                        $('#otherServices-promo').css('border', 'solid 2px red');
+                        $("#promo").attr('disabled', 'disabled');
+                    }
+                    else if ($('#otherServices-promo').val() == '') {
+
+                        var styles = {
+                            border: "initial",
+                        };
+
+                        $('#otherServices-promo').css(styles);
+                        $('.errormsg1').html("");
+                        $("#promo").prop('disabled', false);
+                    }
+
+
+                });
+            });
+        }, doneTypingInterval);
+
+
+    </script>
+    <script>
+        PromoFromBase = [];
+        $("#promo_enrolled option ").each(function () {
+
+            PromoFromBase.push($(this).val())
+
+        });
+        console.log(PromoFromBase);
+        $('#serviceselect-promo').click(function () {
+            var styles = {
+                border: "1px solid #e3e3e3",
+            };
+
+
+            $('.selectOption').css(styles);
+            $('.errormsg1').html("");
+            $("#promo").prop('disabled', false);
+
+
+            var item = $('#serviceselect-promo option:selected').val();
+
+
+            $.each(PromoFromBase, function (index, value) {
+                if (item === value) {
+
+
+                    $('.errormsg1').html(" ce service  existe  déjà");
+                    $('.selectOption').css('border', 'solid 2px red');
+                    $("#promo").prop('disabled', true);
+                }
+
+
+            });
+
+
+        });
+
+
+    </script>
+
+    <script>
+
+        $('form#addpromo').submit(function (e) {
+
+            if ($('#otherServices-promo').val()) {
+                var autre = $('#otherServices-promo').val();
+                $('select').prepend('<option  value=  "' + autre + '" >' + $('#otherServices-promo').val() + '</option>');
+
+                $("#serviceselect-promo [value='" + autre + "']").attr("selected", "selected");
+                $("#otherServices-promo").val('');
+                $("#otherServices-promo").hide();
+            }
+
+            var item = $('#serviceselect-promo option:selected').val();
+            if (item === 'autre') {
+                e.preventDefault();
+                alert('ajouter un  service ou bien choisir un autre de la liste');
+            }
+
+
+        });
+
+    </script>
+    {#script ajout select promo#}
+{% endblock %}
+
+
+<style>
+    #otherServices-promo {
+        display: none;
+    }
+
+    .hide-bullets {
+        list-style: none;
+        margin-left: -16px;
+        margin-top: 20px;
+    }
+
+    #otherequipement {
+        display: none;
+    }
+
+    input.error {
+        border: 2px solid red;
+    }
+
+    @media (max-width: 992px) {
+
+        h3 {
+            font-size: 15px !important;
+        }
+    }
+
+
+
+    .spacontact {
+        background: #e96656;
+        font-size: 19px;
+        border: 1px solid #e96656;
+        padding: 10px;
+        border-radius: 1px;
+        color: #f5f5f5;
+        text-align: center;
+    }
+    .spacontact:hover {
+        background: #e96656;
+        /*font-size:19px;*/
+        border: 1px solid #e96656;
+        padding: 10px;
+        border-radius: 1px;
+        color: #f5f5f5;
+        text-align: center;
+    }
+
+
+    @media (max-width: 425px) {
+        .spacontact {
+            background: #e96656;
+            /*font-size: 14px;*/
+            border: 1px solid #e96656;
+            padding: 10px;
+            border-radius: 1px;
+            color: #f5f5f5;
+            margin-bottom: 4px;
+            text-align: center;
+        }
+    }
+    .spacontact1 {
+        background: #E7AC44;
+        font-size: 19px;
+        border: 1px solid #E7AC44;
+        padding: 10px;
+        border-radius: 1px;
+        color: #f5f5f5;
+        text-align: center;
+    }
+    .spacontact1:hover {
+        background: #E7AC44;
+        /*font-size: 19px;*/
+        border: 1px solid #E7AC44;
+        padding: 10px;
+        border-radius: 1px;
+        color: #f5f5f5;
+        text-align: center;
+    }
+
+
+    @media (max-width: 425px) {
+        .spacontact1 {
+            background: #E7AC44;
+            /*font-size: 14px;*/
+            border: 1px solid #E7AC44;
+            padding: 10px;
+            border-radius: 1px;
+            color: #f5f5f5;
+            margin-bottom: 4px;
+            text-align: center;
+        }
+        .spacontact2 {
+            background: #20AA73;
+            /*font-size: 14px;*/
+            border: 1px solid #20AA73;
+            padding: 10px;
+            border-radius: 1px;
+            color: #f5f5f5;
+            text-align: center;
+        }
+    }
+    .spacontact2 {
+        background: #20AA73;
+        font-size: 19px;
+        border: 1px solid #20AA73;
+        padding: 10px;
+        border-radius: 1px;
+        color: #f5f5f5;
+        text-align: center;
+    }
+    .spacontact2:hover {
+        background: #20AA73;
+        /*font-size: 19px;*/
+        border: 1px solid #20AA73;
+        padding: 10px;
+        border-radius: 1px;
+        color: #f5f5f5;
+        text-align: center;
+    }
+
+    @media (max-width: 768px) {
+        #news-section-1 .blog_info {
+            margin-top: 15px;
+            background: #f5f8fa;
+            min-height: 300px;
+            padding: 41px 9px 27px;
+            width: 100%;
+            box-shadow: 0px 1px 3px rgba(29, 28, 28, 0.35);
+        }
+    }
+
+    @media (max-width: 425px) {
+        .float {
+            float: left;
+        }
+    }
+
+    #news-section-1 .blog_info {
+        background: #f5f8fa;
+        min-height: 178px;
+        padding: 10px 11px 27px;
+        width: 100%;
+    }
+
+    #lire_suite {
+        display: none;
+    }
+
+    .G_titre {
+        font-weight: 500;
+        text-align: justify;
+        font-size: 32px;
+        line-height: 1.2;
+        text-align: center;
+    }
+
+    .load-less-service {
+        display: none;
+    }
+
+    .image-content-offre {
+        width: 100%;
+        height: 200px;
+        background-size: cover;
+        background-position: center;
+
+    }
+
+    .blog_info .archieves li a {
+        color: #111 !important;
+        font-size: 20px !important;
+        text-transform: none;
+
+    }
+
+    .blog_info .archieves li i {
+        color: #ed2a28;
+
+        font-size: 36px !important;
+        margin-right: 25px;
+
+    }
+
+    .span_font_size {
+        font-size: 20px;
+        color: #31639c
+
+    }
+
+    #picture {
+
+        float: left;
+
+    }
+
+    .image-content {
+        width: 370px;
+        height: 260px;
+        overflow: hidden;
+    }
+
+    .image-content img {
+        height: 100%;
+        width: auto;
+        position: relative;
+
+    }
+    .intro .zelected {
+        font-weight: normal;
+        height: 40px;
+        padding-left: 15px;
+        padding-top: 9px;
+        color: #333;
+    }
+    /*#news-section-1 img, .inner-page-left-sidebar img {*/
+    /*height: inherit;*/
+    /*}*/
+
+    @media (max-width: 768px) {
+        #news-section-1 .blog_info {
+            margin-top: 15px;
+            background: #f5f8fa;
+            min-height: 178px;
+            padding: 41px 11px 27px;
+            width: 100%;
+        }
+    }
+
+    @media (max-width: 425px) {
+        .blog_info .archieves li a {
+            color: #111 !important;
+            font-size: 14px !important;
+            text-transform: none;
+
+        }
+
+        .blog_info .archieves li i {
+            color: #ed2a28;
+
+            font-size: 25px !important;
+            margin-right: 25px;
+
+        }
+    }
+
+    @media (max-width: 991px) {
+        .center-text {
+            text-align: center;
+
+        }
+
+        .margin115 {
+            margin: 0;
+        }
+
+    }
+
+    .margin115 {
+        margin: -115px;
+    }
+
+    @media (min-width: 992px) {
+        .row-eq-height {
+            display: flex;
+            align-items: center;
+        }
+    }
+
+    #news-section-1 .blog-thumbnail {
+        float: left;
+        margin-bottom: 0;
+        max-width: 100%;
+    }
+
+    .modal-content > .close {
+        margin-top: -9px !important;
+        margin-right: -11px;
+        background: red;
+        border: solid 1px #de2525;
+        border-radius: 100%;
+        width: 26px;
+        height: 26px;
+        opacity: 1;
+        color: white;
+    }
+
+    @-webkit-keyframes clignote {
+        0% {
+            box-shadow: 0px 0px 10px #e5274b;
+        }
+        50% {
+            box-shadow: 0px 0px 0px #e5274b;
+        }
+        100% {
+            box-shadow: 0px 0px 10px #e5274b;
+        }
+    }
+
+    .floating-button a {
+        position: fixed;
+        top: 50%;
+        /*right:0;*/
+        border: 1px solid #e5274b;
+        background-color: #e5274b;
+        color: #fff;
+        -webkit-transform: rotate(-90deg);
+        transform: rotate(-90deg);
+        right: -78px !important;
+        border-top-left-radius: 25px;
+        border-top-right-radius: 25px;
+
+        font-size: 18px;
+        padding-top: 15px;
+        padding-bottom: 15px;
+        text-align: center;
+        width: 211px;
+        z-index: 99999;
+        box-shadow: 0px 0px 10px #4183C4;
+
+        -webkit-animation-name: clignote;
+        -webkit-animation-duration: 1s;
+        -webkit-animation-iteration-count: infinite;
+    }
+
+    @media (max-width: 991px) {
+        .floating-button a {
+            position: fixed;
+            top: 50%;
+            /*right:0;*/
+            border: 1px solid #e5274b;
+            background-color: #e5274b;
+            color: #fff;
+            -webkit-transform: rotate(-90deg);
+            transform: rotate(-90deg);
+            right: -73px !important;
+            border-top-left-radius: 25px;
+            border-top-right-radius: 25px;
+
+            font-size: 15px;
+            padding-top: 15px;
+            padding-bottom: 15px;
+            text-align: center;
+            width: 173px;
+            z-index: 99999;
+
+        }
+
+    }
+
+
+
+    .image-content {
+        width: 4000px;
+        height: 300px;
+        overflow: hidden;
+    }
+
+    .image-content img {
+        height: 100%;
+        width: auto;
+        position: relative;
+
+    }
+
+    .image-content-small {
+        width: 200px;
+        height: 100px;
+        overflow: hidden;
+    }
+
+    .image-content-small img {
+        height: 100%;
+        width: auto;
+        position: relative;
+
+    }
+
+    @media (max-width: 991px) {
+        .top16 {
+            margin-top: 16px;
+        }
+    }
+
+    @media (min-width: 992px) {
+        .top16 {
+            margin-top: 20px;
+        }
+    }
+    sup-nvprix {
+        top: -.5em;
+        margin: 0;
+        padding: 0;
+        vertical-align: baseline;
+        position: relative;
+        font-size: 25px;
+        line-height: 0;
+        vertical-align: baseline;
+        color:red;
+    }
+
+        sup{
+        top: -.5em;
+        margin: 0;
+        padding: 0;
+        vertical-align: baseline;
+        position: relative;
+        font-size: 158%;
+        line-height: 0;
+        vertical-align: baseline;
+        color:#1a118e;
+    }
+    @-webkit-keyframes clignote {
+        0%{box-shadow:0px 0px 10px #4183C4;}
+        50%{box-shadow:0px 0px 0px #4183C4;}
+        100%{box-shadow:0px 0px 10px #4183C4;}
+    }
+    .blink_me {
+        -webkit-animation-name: blinker;
+        -webkit-animation-duration: 1s;
+        -webkit-animation-timing-function: linear;
+        -webkit-animation-iteration-count: infinite;
+
+        -moz-animation-name: blinker;
+        -moz-animation-duration: 1s;
+        -moz-animation-timing-function: linear;
+        -moz-animation-iteration-count: infinite;
+
+        animation-name: blinker;
+        animation-duration: 1s;
+        animation-timing-function: linear;
+        animation-iteration-count: infinite;
+    }
+    @-moz-keyframes blinker {
+        0% { opacity: 1.0; }
+        50% { opacity: 0.0; }
+        100% { opacity: 1.0; }
+    }
+
+    @-webkit-keyframes blinker {
+        0% { opacity: 1.0; }
+        50% { opacity: 0.0; }
+        100% { opacity: 1.0; }
+    }
+
+    @keyframes blinker {
+        0% { opacity: 1.0; }
+        50% { opacity: 0.0; }
+        100% { opacity: 1.0; }
+    }
+    .font_span {
+        font-size: 35px;
+    }
+    #news-section-1 .blog_info {
+        /*box-shadow: 0px 1px 3px rgba(29, 28, 28, 0.35);*/
+        /*border-radius: 6px;*/
+        /*background: #f5f8fa;*/
+        /*min-height: 178px;*/
+        /*padding: 10px 11px 27px;*/
+        /*width: 100%;*/
+        box-shadow: 0px 0px 16px #bb0200;
+        border-radius: 59px;
+        background: #ffffff;
+        min-height: 178px;
+        padding: 10px 11px 27px;
+        width: 100%;
+    }
+    .blog_info .archieves li:last-child {
+        border-bottom: none;
+    }
+    .blog_info .archieves li {
+        border-bottom: 1px dashed rgba(49, 99, 156, 0.55);
+        list-style: outside none none;
+        margin: 0;
+        padding: 10px 0;
+    }
+
+    @media (min-width: 426px) and (max-width: 786px){
+        .xs-btn-top{
+            margin-top: 6px;
+        }
+    }
+
+    .image-content2{
+        /*width:370px;*/
+        /*height:200px;*/
+        /*background-size:cover;*/
+        /*background-position: center;*/
+        width: 534px;
+        height: 321px;
+        background-size: cover;
+        background-position: center;
+
+    }
+    .buttn {
+        text-transform: capitalize;
+        display: inline-block;
+        font-size: 20px;
+        text-decoration: none !important;
+        padding: 11px 25px;
+        line-height: 1;
+        overflow: hidden;
+        position: relative;
+        box-shadow: 0 1px 1px #ccc;
+        border-radius: 2px;
+    }
+    @media (max-width: 768px){
+
+        .buttn-width-xs {
+            width: 100% !important;
+        }}
+
+    @media(max-width: 768px){
+        .modal-content > .close {
+            margin-top: 0px !important;}
+    }
+    @-webkit-keyframes clignote {
+        0%{box-shadow:0px 0px 10px #e5274b;}
+        50%{box-shadow:0px 0px 0px #e5274b;}
+        100%{box-shadow:0px 0px 10px #e5274b;}
+    }
+
+    .image-content-cf-serv {
+        width: auto;
+        height: 200px;
+        background-size: cover;
+        background-position: center;
+    }
+
+    @media (max-width: 380px) {
+        .image-content-cf-serv {
+            width: auto;
+            height: 121px;
+            background-size: cover;
+            background-position: center;
+        }
+    }
+    @media (min-width: 500px) and (max-width: 786px) {
+        .image-content-cf-serv {
+            width: auto;
+            height: 100px;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .margin15 {
+            margin: -1px;
+        }}
+
+    @media (max-width: 768px){
+
+        .modal-header .close {
+            margin-top: -19px !important;
+            margin-right: -16px !important;
+            border-radius: 0px 14px 0px 0px !important;
+            width: 30px !important;
+            height: 30px !important;
+        }
+    }
+</style>

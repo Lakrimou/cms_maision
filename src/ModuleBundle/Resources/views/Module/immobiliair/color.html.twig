@@ -1,0 +1,93 @@
+
+
+
+<style>
+
+    /* titre*/
+
+    h2, .info-box li .icon, .sec-title h2 strong, .sec-title h2, .contact-section h2 {
+        color: {% if theme.color is defined %}{{ theme.color.titre }};
+    {% endif %}
+    }
+
+    /*sous titre*/
+
+    h4 {
+        color: {% if theme.color is defined %}{{ theme.color.Soustitre }};
+    {% endif %}
+    }
+
+    /* boutton*/
+
+    .theme-btn btn-style-one, button, .theme-btn {
+
+        background: {% if theme.color is defined %}{{ theme.color.bouton }};
+    {% endif %}
+    }
+
+    .text, p {
+
+        color: {% if theme.color is defined %}{{ theme.color.Text }};
+    {% endif %}
+    }
+
+    /* background */
+
+    .header-style-one .logo:before, .btn-style-one, .theme_bg_color, .modal-header {
+
+        background: {% if theme.color is defined %}{{ theme.color.bouton }};
+    {% endif %}
+
+    }
+
+    #propo {
+        {% if motif and (theme.color.background.motif.about is not empty) %}background-image: {{ theme.color.background.motif.about| join('","') | raw }}!important;{% endif %};
+
+        {% if theme.color.background.about is defined %} background: {{ theme.color.background.about }};
+    {% endif %};
+    }
+
+    .proprety {
+        {% if theme.color.background.annone is defined %}background: {{ theme.color.background.annone }}{% endif %};
+
+        {% if motif and (theme.color.background.motif.annone is not empty) %}background-image: {{ theme.color.background.motif.annone| join('","') | raw }}!important;{% endif %}
+
+    }
+
+    .property-details {
+    {% if theme.color.background.annone is defined %} background: {{ theme.color.background.annone }};
+    {% endif %};
+
+        {% if motif and (theme.color.background.motif.annone is not empty) %}background-image: {{ theme.color.background.motif.annone| join('","') | raw }}!important;{% endif %}
+    }
+
+    #service, #service .about-section {
+        {% if theme.color.background.service is defined %} background: {{ theme.color.background.service }};
+    {% endif %}
+
+    }
+
+    .gallery-section {
+    {% if theme.color.background.gallery is defined %} background: {{ theme.color.background.gallery }};
+    {% endif %}
+    }
+    {% if motif and (theme.color.background.motif.gallery is not empty) %}background-image:{{ theme.color.background.motif.gallery| join('","') | raw }}!important;{% endif %}
+    /*}*/
+
+    .section-contact {
+        background: {% if theme.color.background.contact is defined %}{{ theme.color.background.contact }};
+        background-image: none;
+    {% endif %};
+
+    background-image: {% if motif and (theme.color.background.motif.gallery is not empty) %}url("{{ theme.color.background.motif.gallery }}")!important;{% endif %}
+    }
+
+    .modal-content {
+        border-color: {% if theme.color is defined %}{{ theme.color.Soustitre }};
+    {% endif %};
+    }
+
+    .gallery-section .image-box .inner-box {
+        background: transparent;
+    }
+</style>

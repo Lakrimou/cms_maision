@@ -1,0 +1,78 @@
+location_voiture_add_vehicule:
+    path: /add_vehiculev2
+    defaults: { _controller: ModuleBundle:LocationVoiture:AddVehiculeV2 }
+Location_annonce_show:
+    path: /show/{id}/{idq}
+    defaults: { _controller: ModuleBundle:LocationVoiture:ShowVehicules }
+liste_vehicules:
+    path: /vihicules
+    defaults: { _controller: ModuleBundle:LocationVoiture:ListeVehicules }
+location_voiture_liste_mark:
+    path: /mark
+    defaults: { _controller: ModuleBundle:LocationVoiture:Getmark }
+    methods: GET
+location_voiture_liste_model:
+    path: /listModelVoiture
+    defaults: { _controller: ModuleBundle:LocationVoiture:getModelVoiture }
+    methods: [POST, GET]
+location_voiture_show_edit:
+    path: /edit/{id}
+    defaults: { _controller: ModuleBundle:LocationVoiture:showEdit }
+location_voiture_remove_picture:
+    path:     /annonce/delete/picture/{id}/{pic}
+    defaults: { _controller: ModuleBundle:LocationVoiture:deletePictureAnnonces }
+location_voiture_id:
+    path: /voiture/{id}
+    defaults: { _controller: ModuleBundle:LocationVoiture:getVoitureById }
+    methods: [POST, GET]
+location_voiture_delete:
+    path: /supprimer/{id}
+    defaults: { _controller: ModuleBundle:LocationVoiture:deleteVoiture}
+location_voiture_search:
+    path: /search
+    defaults: { _controller: ModuleBundle:LocationVoiture:searchVoiture}
+location_edit_voiture:
+    path: /modifier
+    defaults: { _controller: ModuleBundle:LocationVoiture:editVoiture}
+location_voiture_resservation:
+    path: /reservation
+    defaults: { _controller: ModuleBundle:LocationVoiture:reservationVoiture}
+module_location_voiture_about:
+    path: /edit_about
+    defaults: { _controller: ModuleBundle:LocationVoiture:edit_about}
+    methods: [GET, POST]
+module_location_voiture_avatar:
+    path: /avatar/{id}
+    defaults: { _controller: ModuleBundle:LocationVoiture:img_apropos}
+    methods: [GET, POST]
+module_location_voiture_delete_image:
+     path: /delete/photo/{idqq}
+     defaults: { _controller: ModuleBundle:LocationVoiture:deleteLogo}
+     methods: [GET, POST]
+module_location_voiture_service:
+     path: /ajout
+     defaults: { _controller: ModuleBundle:LocationVoiture:ajoutservice}
+
+
+location_voiture_service_id:
+    path: /service/afficher/{id}
+    defaults: { _controller: ModuleBundle:LocationVoiture:getServiceById }
+    methods: [POST, GET]
+
+
+location_voiture_service_delete:
+    path: /service/supprimer/
+    defaults: { _controller: ModuleBundle:LocationVoiture:deleteServiceById}
+    methods: [POST]
+
+
+
+module_location_voiture_edit_service:
+    path: /service/modifier
+    defaults: { _controller: ModuleBundle:LocationVoiture:editService}
+location_voiture_reserver_voiture:
+    path: /reserver/
+    defaults: { _controller: ModuleBundle:LocationVoiture:reservationVoiture}
+location_voiture_liste_limit:
+    path: /limit/{debut}/{fin}
+    defaults: { _controller: ModuleBundle:LocationVoiture:getListeVoituresLimit}

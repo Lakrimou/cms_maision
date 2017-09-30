@@ -1,0 +1,1352 @@
+<script src="{{ asset('tpl/fiche/js/tinymce/tinymce.min.js') }}"></script>
+<script>
+    //    $('#modalGestionProduits').modal('show');
+    $('#modalNouveauProduit').modal('show');
+    $('[data-toggle="tooltip"]').tooltip();
+
+    tinymce.init({
+        selector: '.tinymce',
+        theme: 'modern',
+        language: 'fr_FR',
+        plugins: [
+            'advlist autolink link image lists charmap print preview hr anchor pagebreak spellchecker',
+            'searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking',
+            'save table contextmenu directionality emoticons template paste textcolor'
+        ],
+        toolbar: 'insertfile undo redo | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | forecolor backcolor emoticons'
+    });
+
+
+    $('#form-prod-new').submit(function (e) {
+        {#e.preventDefault();#}
+        {#console.clear();#}
+        {#var data = $(this).serialize();#}
+        {#$.post("{{ path('ecommerce_mode_nouveau_produit') }}", data)#}
+            {#.done(function (result) {#}
+                {#console.log(result)#}
+            {#});#}
+    });
+
+
+    function format(icon) {
+        var originalOption = icon.element;
+        var $selection = $("<span><i class='spanColor' style='background: " + $(originalOption).data('icon') + ";'></i> " + icon.text + "</span>");
+
+        return $selection;
+    }
+
+
+    $('#prod-new-color').select2({
+        width: "100%",
+        templateSelection: format,
+        templateResult: format
+    });
+
+    $('.select24').select2({
+        width: "100%",
+    });
+
+
+    /* ==================== on change categorie ================== */
+    $('.selectCategory').on('change', function () {
+        var parrentVal = $(this).val();
+        $('.selectSubCategory option').remove();
+        $('.selectSubCategory optgroup').remove();
+        if ($('#cat-' + parrentVal + ' optgroup').length > 0) {
+            $('#cat-' + parrentVal + ' optgroup').each(function () {
+                $('.selectSubCategory').append('<optgroup label="' + $(this).attr('label') + '">');
+                $($(this).children()).each(function () {
+                    $('.selectSubCategory').append('<option value="' + this.value + '" data-cat="' + parrentVal + '">' + this.text + '</option>');
+                });
+                $('.selectSubCategory').append('</optgroup>');
+            });
+        }else{
+            $('#cat-' + parrentVal + ' option').each(function () {
+                $('.selectSubCategory').append('<option value="' + this.value + '" data-cat="' + parrentVal + '">' + this.text + '</option>');
+            });
+        }
+    });
+
+
+    /* ========================== Caluler le pourcentage ======================== */
+    $('#prod-new-price-ttc, #prod-new-percent').on('keyup', function () {
+        var percent = $('#prod-new-percent').val();
+        var priceTTC = $('#prod-new-price-ttc').val();
+        $('.newPricePourcent').html(calculatePrice(percent, priceTTC));
+    });
+
+    /* ========================== fanction pour calculer le pourcentage ======================== */
+    function calculatePrice(percentage, price) {
+        console.log(percentage, price);
+        return calcPrice = (price - ( price * percentage / 100 )).toFixed(3);
+    }
+
+</script>
+
+{#============================ script produits ============================#}
+<script>
+    $(document).ready(function () {
+
+        $(".largeGrid").click(function () {
+            $(this).find('a').addClass('active');
+            $('.smallGrid a').removeClass('active');
+
+            $('.product').addClass('large').each(function () {
+            });
+            setTimeout(function () {
+                $('.info-large').show();
+            }, 200);
+            setTimeout(function () {
+
+                $('.view_gallery').trigger("click");
+            }, 400);
+
+            return false;
+        });
+
+        $(".smallGrid").click(function () {
+            $(this).find('a').addClass('active');
+            $('.largeGrid a').removeClass('active');
+
+            $('div.product').removeClass('large');
+            $(".make3D").removeClass('animate');
+            $('.info-large').fadeOut("fast");
+            setTimeout(function () {
+                $('div.flip-back').trigger("click");
+            }, 400);
+            return false;
+        });
+
+        $(".smallGrid").click(function () {
+            $('.product').removeClass('large');
+            return false;
+        });
+
+        $('.colors-large a').click(function () {
+            return false;
+        });
+
+
+        $('.product').each(function (i, el) {
+
+            // Lift card and show stats on Mouseover
+            $(el).find('.make3D').hover(function () {
+                $(this).parent().css('z-index', "2");
+                $(this).addClass('animate');
+                $(this).find('div.carouselNext, div.carouselPrev').addClass('visible');
+            }, function () {
+                $(this).removeClass('animate');
+                $(this).parent().css('z-index', "1");
+                $(this).find('div.carouselNext, div.carouselPrev').removeClass('visible');
+            });
+
+            // Flip card to the back side
+            $(el).find('.view_gallery').click(function () {
+
+                $(el).find('div.carouselNext, div.carouselPrev').removeClass('visible');
+                $(el).find('.make3D').addClass('flip-10');
+                setTimeout(function () {
+                    $(el).find('.make3D').removeClass('flip-10').addClass('flip90').find('div.shadow').show().fadeTo(80, 1, function () {
+                        $(el).find('.product-front, .product-front div.shadow').hide();
+                    });
+                }, 50);
+
+                setTimeout(function () {
+                    $(el).find('.make3D').removeClass('flip90').addClass('flip190');
+                    $(el).find('.product-back').show().find('div.shadow').show().fadeTo(90, 0);
+                    setTimeout(function () {
+                        $(el).find('.make3D').removeClass('flip190').addClass('flip180').find('div.shadow').hide();
+                        setTimeout(function () {
+                            $(el).find('.make3D').css('transition', '100ms ease-out');
+                            $(el).find('.cx, .cy').addClass('s1');
+                            setTimeout(function () {
+                                $(el).find('.cx, .cy').addClass('s2');
+                            }, 100);
+                            setTimeout(function () {
+                                $(el).find('.cx, .cy').addClass('s3');
+                            }, 200);
+                            $(el).find('div.carouselNext, div.carouselPrev').addClass('visible');
+                        }, 100);
+                    }, 100);
+                }, 150);
+            });
+
+            // Flip card back to the front side
+            $(el).find('.flip-back').click(function () {
+
+                $(el).find('.make3D').removeClass('flip180').addClass('flip190');
+                setTimeout(function () {
+                    $(el).find('.make3D').removeClass('flip190').addClass('flip90');
+
+                    $(el).find('.product-back div.shadow').css('opacity', 0).fadeTo(100, 1, function () {
+                        $(el).find('.product-back, .product-back div.shadow').hide();
+                        $(el).find('.product-front, .product-front div.shadow').show();
+                    });
+                }, 50);
+
+                setTimeout(function () {
+                    $(el).find('.make3D').removeClass('flip90').addClass('flip-10');
+                    $(el).find('.product-front div.shadow').show().fadeTo(100, 0);
+                    setTimeout(function () {
+                        $(el).find('.product-front div.shadow').hide();
+                        $(el).find('.make3D').removeClass('flip-10').css('transition', '100ms ease-out');
+                        $(el).find('.cx, .cy').removeClass('s1 s2 s3');
+                    }, 100);
+                }, 150);
+
+            });
+
+            makeCarousel(el);
+        });
+
+        $('.add-cart-large').each(function (i, el) {
+            $(el).click(function () {
+                var carousel = $(this).parent().parent().find(".carousel-container");
+                var img = carousel.find('img').eq(carousel.attr("rel"))[0];
+                var position = $(img).offset();
+
+
+                var productName = $(this).parent().find('h4').get(0).innerHTML;
+
+                $("body").append('<div class="floating-cart"></div>');
+                var cart = $('div.floating-cart');
+                $("<img src='" + img.src + "' class='floating-image-large' />").appendTo(cart);
+
+                $(cart).css({'top': position.top + 'px', "left": position.left + 'px'}).fadeIn("slow").addClass('moveToCart');
+                setTimeout(function () {
+                    $("body").addClass("MakeFloatingCart");
+                }, 800);
+
+                setTimeout(function () {
+                    $('div.floating-cart').remove();
+                    $("body").removeClass("MakeFloatingCart");
+
+
+                    var cartItem = "<div class='cart-item'><div class='img-wrap'><img src='" + img.src + "' alt='' /></div><span>" + productName + "</span><strong>$39</strong><div class='cart-item-border'></div><div class='delete-item'></div></div>";
+
+                    $("#cart .empty").hide();
+                    $("#cart").append(cartItem);
+                    $("#checkout").fadeIn(500);
+
+                    $("#cart .cart-item").last()
+                        .addClass("flash")
+                        .find(".delete-item").click(function () {
+                        $(this).parent().fadeOut(300, function () {
+                            $(this).remove();
+                            if ($("#cart .cart-item").size() == 0) {
+                                $("#cart .empty").fadeIn(500);
+                                $("#checkout").fadeOut(500);
+                            }
+                        })
+                    });
+                    setTimeout(function () {
+                        $("#cart .cart-item").last().removeClass("flash");
+                    }, 10);
+
+                }, 1000);
+
+
+            });
+        })
+
+        /* ----  Image Gallery Carousel   ---- */
+        function makeCarousel(el) {
+
+
+            var carousel = $(el).find('.carousel ul');
+            var carouselSlideWidth = 315;
+            var carouselWidth = 0;
+            var isAnimating = false;
+            var currSlide = 0;
+            $(carousel).attr('rel', currSlide);
+
+            // building the width of the casousel
+            $(carousel).find('li').each(function () {
+                carouselWidth += carouselSlideWidth;
+            });
+            $(carousel).css('width', carouselWidth);
+
+            // Load Next Image
+            $(el).find('div.carouselNext').on('click', function () {
+                var currentLeft = Math.abs(parseInt($(carousel).css("left")));
+                var newLeft = currentLeft + carouselSlideWidth;
+                if (newLeft == carouselWidth || isAnimating === true) {
+                    return;
+                }
+                $(carousel).css({
+                    'left': "-" + newLeft + "px",
+                    "transition": "300ms ease-out"
+                });
+                isAnimating = true;
+                currSlide++;
+                $(carousel).attr('rel', currSlide);
+                setTimeout(function () {
+                    isAnimating = false;
+                }, 300);
+            });
+
+            // Load Previous Image
+            $(el).find('div.carouselPrev').on('click', function () {
+                var currentLeft = Math.abs(parseInt($(carousel).css("left")));
+                var newLeft = currentLeft - carouselSlideWidth;
+                if (newLeft < 0 || isAnimating === true) {
+                    return;
+                }
+                $(carousel).css({
+                    'left': "-" + newLeft + "px",
+                    "transition": "300ms ease-out"
+                });
+                isAnimating = true;
+                currSlide--;
+                $(carousel).attr('rel', currSlide);
+                setTimeout(function () {
+                    isAnimating = false;
+                }, 300);
+            });
+        }
+
+        $('.sizes a span, .categories a span').each(function (i, el) {
+            $(el).append('<span class="x"></span><span class="y"></span>');
+
+            $(el).parent().on('click', function () {
+                if ($(this).hasClass('checked')) {
+                    $(el).find('.y').removeClass('animate');
+                    setTimeout(function () {
+                        $(el).find('.x').removeClass('animate');
+                    }, 50);
+                    $(this).removeClass('checked');
+                    return false;
+                }
+
+                $(el).find('.x').addClass('animate');
+                setTimeout(function () {
+                    $(el).find('.y').addClass('animate');
+                }, 100);
+                $(this).addClass('checked');
+                return false;
+            });
+        });
+
+        $('.add_to_cart').click(function () {
+            var productCard = $(this).parent();
+            var position = productCard.offset();
+            console.log(position);
+            position = {top: 3238.21875, left: 729.859375};
+            var productImage = $(productCard).find('img').get(0).src;
+            var productName = $(productCard).find('.product_name').get(0).innerHTML;
+
+            $("body").append('<div class="floating-cart"></div>');
+            var cart = $('div.floating-cart');
+            productCard.clone().appendTo(cart);
+            $(cart).css({'top': position.top + 'px', "left": position.left + 'px'}).fadeIn("slow").addClass('moveToCart');
+            setTimeout(function () {
+                $("body").addClass("MakeFloatingCart");
+            }, 800);
+            setTimeout(function () {
+                $('div.floating-cart').remove();
+                $("body").removeClass("MakeFloatingCart");
+
+
+                var cartItem = "<div class='cart-item'><div class='img-wrap'><img src='" + productImage + "' alt='' /></div><span>" + productName + "</span><strong>$39</strong><div class='cart-item-border'></div><div class='delete-item'></div></div>";
+
+                $("#cart .empty").hide();
+                $("#cart").append(cartItem);
+                $("#checkout").fadeIn(500);
+
+                $("#cart .cart-item").last()
+                    .addClass("flash")
+                    .find(".delete-item").click(function () {
+                    $(this).parent().fadeOut(300, function () {
+                        $(this).remove();
+                        if ($("#cart .cart-item").size() == 0) {
+                            $("#cart .empty").fadeIn(500);
+                            $("#checkout").fadeOut(500);
+                        }
+                    })
+                });
+                setTimeout(function () {
+                    $("#cart .cart-item").last().removeClass("flash");
+                }, 10);
+
+            }, 1000);
+        });
+    });
+</script>
+
+<style>
+    option:after {
+        content: " ";
+        height: 17px;
+        float: right;
+        width: 17px;
+        margin-left: 10px;
+        border-radius: 5px;
+        display: inline-block;
+    }
+
+    option.red:after {
+        background: #f00;
+    }
+
+    option.green:after {
+        background: #0c0;
+    }
+
+    option.blue:after {
+        background: #00c;
+    }
+
+    [data-rgb="#E67E30"]:after {
+        background: #E67E30
+    }
+
+    [data-rgb="#88421D"]:after {
+        background: #88421D
+    }
+
+    [data-rgb="#79F8F8"]:after {
+        background: #79F8F8
+    }
+
+    [data-rgb="#A76726"]:after {
+        background: #A76726
+    }
+
+    [data-rgb="#82C46C"]:after {
+        background: #82C46C
+    }
+
+    [data-rgb="#91283B"]:after {
+        background: #91283B
+    }
+
+    [data-rgb="#F0C300"]:after {
+        background: #F0C300
+    }
+
+    [data-rgb="#884DA7"]:after {
+        background: #884DA7
+    }
+
+    [data-rgb="#303030"]:after {
+        background: #303030
+    }
+
+    [data-rgb="#AD4F09"]:after {
+        background: #AD4F09
+    }
+
+    [data-rgb="#5A5E6B"]:after {
+        background: #5A5E6B
+    }
+
+    [data-rgb="#FFFFFF"]:after {
+        background: #FFFFFF
+    }
+
+    [data-rgb="#370028"]:after {
+        background: #370028
+    }
+
+    [data-rgb="#9D3E0C"]:after {
+        background: #9D3E0C
+    }
+
+    [data-rgb="#FFCB60"]:after {
+        background: #FFCB60
+    }
+
+    [data-rgb="#568203"]:after {
+        background: #568203
+    }
+
+    [data-rgb="#007FFF"]:after {
+        background: #007FFF
+    }
+
+    [data-rgb="#1E7FCB"]:after {
+        background: #1E7FCB
+    }
+
+    [data-rgb="#AE642D"]:after {
+        background: #AE642D
+    }
+
+    [data-rgb="#8B6C42"]:after {
+        background: #8B6C42
+    }
+
+    [data-rgb="#C8AD7F"]:after {
+        background: #C8AD7F
+    }
+
+    [data-rgb="#F0E36B"]:after {
+        background: #F0E36B
+    }
+
+    [data-rgb="#766F64"]:after {
+        background: #766F64
+    }
+
+    [data-rgb="#FFE4C4"]:after {
+        background: #FFE4C4
+    }
+
+    [data-rgb="#856D4D"]:after {
+        background: #856D4D
+    }
+
+    [data-rgb="#4E3D28"]:after {
+        background: #4E3D28
+    }
+
+    [data-rgb="#FFFFFF"]:after {
+        background: #FFFFFF
+    }
+
+    [data-rgb="#FEFEE2"]:after {
+        background: #FEFEE2
+    }
+
+    [data-rgb="#F4FEFE"]:after {
+        background: #F4FEFE
+    }
+
+    [data-rgb="#E8D630"]:after {
+        background: #E8D630
+    }
+
+    [data-rgb="#3A8EBA"]:after {
+        background: #3A8EBA
+    }
+
+    [data-rgb="#5472AE"]:after {
+        background: #5472AE
+    }
+
+    [data-rgb="#048B9A"]:after {
+        background: #048B9A
+    }
+
+    [data-rgb="#26C4EC"]:after {
+        background: #26C4EC
+    }
+
+    [data-rgb="#8EA2C6"]:after {
+        background: #8EA2C6
+    }
+
+    [data-rgb="#77B5FE"]:after {
+        background: #77B5FE
+    }
+
+    [data-rgb="#22427C"]:after {
+        background: #22427C
+    }
+
+    [data-rgb="#24445C"]:after {
+        background: #24445C
+    }
+
+    [data-rgb="#2C75FF"]:after {
+        background: #2C75FF
+    }
+
+    [data-rgb="#80D0D0"]:after {
+        background: #80D0D0
+    }
+
+    [data-rgb="#002FA7"]:after {
+        background: #002FA7
+    }
+
+    [data-rgb="#6050DC"]:after {
+        background: #6050DC
+    }
+
+    [data-rgb="#03224C"]:after {
+        background: #03224C
+    }
+
+    [data-rgb="#0F056B"]:after {
+        background: #0F056B
+    }
+
+    [data-rgb="#1B019B"]:after {
+        background: #1B019B
+    }
+
+    [data-rgb="#067790"]:after {
+        background: #067790
+    }
+
+    [data-rgb="#6600FF"]:after {
+        background: #6600FF
+    }
+
+    [data-rgb="#1D4851"]:after {
+        background: #1D4851
+    }
+
+    [data-rgb="#0080FF"]:after {
+        background: #0080FF
+    }
+
+    [data-rgb="#318CE7"]:after {
+        background: #318CE7
+    }
+
+    [data-rgb="#425B8A"]:after {
+        background: #425B8A
+    }
+
+    [data-rgb="#E7A854"]:after {
+        background: #E7A854
+    }
+
+    [data-rgb="#E2BC74"]:after {
+        background: #E2BC74
+    }
+
+    [data-rgb="#6D071A"]:after {
+        background: #6D071A
+    }
+
+    [data-rgb="#FCDC12"]:after {
+        background: #FCDC12
+    }
+
+    [data-rgb="#842E1B"]:after {
+        background: #842E1B
+    }
+
+    [data-rgb="#614E1A"]:after {
+        background: #614E1A
+    }
+
+    [data-rgb="#3F2204"]:after {
+        background: #3F2204
+    }
+
+    [data-rgb="#5B3C11"]:after {
+        background: #5B3C11
+    }
+
+    [data-rgb="#CDCD0D"]:after {
+        background: #CDCD0D
+    }
+
+    [data-rgb="#614B3A"]:after {
+        background: #614B3A
+    }
+
+    [data-rgb="#2F1B0C"]:after {
+        background: #2F1B0C
+    }
+
+    [data-rgb="#357AB7"]:after {
+        background: #357AB7
+    }
+
+    [data-rgb="#462E01"]:after {
+        background: #462E01
+    }
+
+    [data-rgb="#785E2F"]:after {
+        background: #785E2F
+    }
+
+    [data-rgb="#7E5835"]:after {
+        background: #7E5835
+    }
+
+    [data-rgb="#FF5E4D"]:after {
+        background: #FF5E4D
+    }
+
+    [data-rgb="#7E3300"]:after {
+        background: #7E3300
+    }
+
+    [data-rgb="#960018"]:after {
+        background: #960018
+    }
+
+    [data-rgb="#F4661B"]:after {
+        background: #F4661B
+    }
+
+    [data-rgb="#D0C07A"]:after {
+        background: #D0C07A
+    }
+
+    [data-rgb="#7FFF00"]:after {
+        background: #7FFF00
+    }
+
+    [data-rgb="#8B6C42"]:after {
+        background: #8B6C42
+    }
+
+    [data-rgb="#85530F"]:after {
+        background: #85530F
+    }
+
+    [data-rgb="#5A3A22"]:after {
+        background: #5A3A22
+    }
+
+    [data-rgb="#DB1702"]:after {
+        background: #DB1702
+    }
+
+    [data-rgb="#DF6D14"]:after {
+        background: #DF6D14
+    }
+
+    [data-rgb="#FDE9E0"]:after {
+        background: #FDE9E0
+    }
+
+    [data-rgb="#E73E01"]:after {
+        background: #E73E01
+    }
+
+    [data-rgb="#DC143C"]:after {
+        background: #DC143C
+    }
+
+    [data-rgb="#FDF1B8"]:after {
+        background: #FDF1B8
+    }
+
+    [data-rgb="#FEE7F0"]:after {
+        background: #FEE7F0
+    }
+
+    [data-rgb="#FF69B4"]:after {
+        background: #FF69B4
+    }
+
+    [data-rgb="#B36700"]:after {
+        background: #B36700
+    }
+
+    [data-rgb="#2BFAFA"]:after {
+        background: #2BFAFA
+    }
+
+    [data-rgb="#ED0000"]:after {
+        background: #ED0000
+    }
+
+    [data-rgb="#FEFEE0"]:after {
+        background: #FEFEE0
+    }
+
+    [data-rgb="#01D758"]:after {
+        background: #01D758
+    }
+
+    [data-rgb="#AD4F09"]:after {
+        background: #AD4F09
+    }
+
+    [data-rgb="#E6E697"]:after {
+        background: #E6E697
+    }
+
+    [data-rgb="#BF3030"]:after {
+        background: #BF3030
+    }
+
+    [data-rgb="#A42424"]:after {
+        background: #A42424
+    }
+
+    [data-rgb="#C72C48"]:after {
+        background: #C72C48
+    }
+
+    [data-rgb="#FD3F92"]:after {
+        background: #FD3F92
+    }
+
+    [data-rgb="#BBD2E1"]:after {
+        background: #BBD2E1
+    }
+
+    [data-rgb="#EE1010"]:after {
+        background: #EE1010
+    }
+
+    [data-rgb="#649B88"]:after {
+        background: #649B88
+    }
+
+    [data-rgb="#C9A0DC"]:after {
+        background: #C9A0DC
+    }
+
+    [data-rgb="#BBAE98"]:after {
+        background: #BBAE98
+    }
+
+    [data-rgb="#E9383F"]:after {
+        background: #E9383F
+    }
+
+    [data-rgb="#6E0B14"]:after {
+        background: #6E0B14
+    }
+
+    [data-rgb="#606060"]:after {
+        background: #606060
+    }
+
+    [data-rgb="#AFAFAF"]:after {
+        background: #AFAFAF
+    }
+
+    [data-rgb="#677179"]:after {
+        background: #677179
+    }
+
+    [data-rgb="#7F7F7F"]:after {
+        background: #7F7F7F
+    }
+
+    [data-rgb="#CECECE"]:after {
+        background: #CECECE
+    }
+
+    [data-rgb="#CF0A1D"]:after {
+        background: #CF0A1D
+    }
+
+    [data-rgb="#56739A"]:after {
+        background: #56739A
+    }
+
+    [data-rgb="#E21313"]:after {
+        background: #E21313
+    }
+
+    [data-rgb="#DF73FF"]:after {
+        background: #DF73FF
+    }
+
+    [data-rgb="#FF6F7D"]:after {
+        background: #FF6F7D
+    }
+
+    [data-rgb="#791CF8"]:after {
+        background: #791CF8
+    }
+
+    [data-rgb="#2E006C"]:after {
+        background: #2E006C
+    }
+
+    [data-rgb="#785E2F"]:after {
+        background: #785E2F
+    }
+
+    [data-rgb="#FFFFD4"]:after {
+        background: #FFFFD4
+    }
+
+    [data-rgb="#FDEE00"]:after {
+        background: #FDEE00
+    }
+
+    [data-rgb="#E7F00D"]:after {
+        background: #E7F00D
+    }
+
+    [data-rgb="#DFFF00"]:after {
+        background: #DFFF00
+    }
+
+    [data-rgb="#F7FF3C"]:after {
+        background: #F7FF3C
+    }
+
+    [data-rgb="#EFD807"]:after {
+        background: #EFD807
+    }
+
+    [data-rgb="#EED153"]:after {
+        background: #EED153
+    }
+
+    [data-rgb="#FFF0BC"]:after {
+        background: #FFF0BC
+    }
+
+    [data-rgb="#FFE436"]:after {
+        background: #FFE436
+    }
+
+    [data-rgb="#FEF86C"]:after {
+        background: #FEF86C
+    }
+
+    [data-rgb="#94812B"]:after {
+        background: #94812B
+    }
+
+    [data-rgb="#26619C"]:after {
+        background: #26619C
+    }
+
+    [data-rgb="#8F5922"]:after {
+        background: #8F5922
+    }
+
+    [data-rgb="#9683EC"]:after {
+        background: #9683EC
+    }
+
+    [data-rgb="#AC1E44"]:after {
+        background: #AC1E44
+    }
+
+    [data-rgb="#B666D2"]:after {
+        background: #B666D2
+    }
+
+    [data-rgb="#9EFD38"]:after {
+        background: #9EFD38
+    }
+
+    [data-rgb="#FAF0E6"]:after {
+        background: #FAF0E6
+    }
+
+    [data-rgb="#DB0073"]:after {
+        background: #DB0073
+    }
+
+    [data-rgb="#FFDE75"]:after {
+        background: #FFDE75
+    }
+
+    [data-rgb="#1FA055"]:after {
+        background: #1FA055
+    }
+
+    [data-rgb="#FEA347"]:after {
+        background: #FEA347
+    }
+
+    [data-rgb="#582900"]:after {
+        background: #582900
+    }
+
+    [data-rgb="#B3B191"]:after {
+        background: #B3B191
+    }
+
+    [data-rgb="#D473D4"]:after {
+        background: #D473D4
+    }
+
+    [data-rgb="#16B84E"]:after {
+        background: #16B84E
+    }
+
+    [data-rgb="#C7CF00"]:after {
+        background: #C7CF00
+    }
+
+    [data-rgb="#FC5D5D"]:after {
+        background: #FC5D5D
+    }
+
+    [data-rgb="#F7E269"]:after {
+        background: #F7E269
+    }
+
+    2
+    [data-rgb="#000000"]:after {
+        background: #000000
+    }
+
+    [data-rgb="#120D16"]:after {
+        background: #120D16
+    }
+
+    [data-rgb="#000000"]:after {
+        background: #000000
+    }
+
+    2
+    [data-rgb="#130E0A"]:after {
+        background: #130E0A
+    }
+
+    [data-rgb="#955628"]:after {
+        background: #955628
+    }
+
+    [data-rgb="#DFAF2C"]:after {
+        background: #DFAF2C
+    }
+
+    [data-rgb="#DD985C"]:after {
+        background: #DD985C
+    }
+
+    [data-rgb="#708D23"]:after {
+        background: #708D23
+    }
+
+    [data-rgb="#FFD700"]:after {
+        background: #FFD700
+    }
+
+    [data-rgb="#FF7F00"]:after {
+        background: #FF7F00
+    }
+
+    [data-rgb="#CC5500"]:after {
+        background: #CC5500
+    }
+
+    [data-rgb="#DA70D6"]:after {
+        background: #DA70D6
+    }
+
+    [data-rgb="#FCD21C"]:after {
+        background: #FCD21C
+    }
+
+    [data-rgb="#FEE347"]:after {
+        background: #FEE347
+    }
+
+    [data-rgb="#CFA0E9"]:after {
+        background: #CFA0E9
+    }
+
+    [data-rgb="#D58490"]:after {
+        background: #D58490
+    }
+
+    [data-rgb="#CCCCFF"]:after {
+        background: #CCCCFF
+    }
+
+    [data-rgb="#BEF574"]:after {
+        background: #BEF574
+    }
+
+    [data-rgb="#B67823"]:after {
+        background: #B67823
+    }
+
+    [data-rgb="#C60800"]:after {
+        background: #C60800
+    }
+
+    [data-rgb="#9E0E40"]:after {
+        background: #9E0E40
+    }
+
+    [data-rgb="#4CA66B"]:after {
+        background: #4CA66B
+    }
+
+    [data-rgb="#811453"]:after {
+        background: #811453
+    }
+
+    [data-rgb="#4E1609"]:after {
+        background: #4E1609
+    }
+
+    [data-rgb="#FD6C9E"]:after {
+        background: #FD6C9E
+    }
+
+    [data-rgb="#997A8D"]:after {
+        background: #997A8D
+    }
+
+    [data-rgb="#F7230C"]:after {
+        background: #F7230C
+    }
+
+    [data-rgb="#B82010"]:after {
+        background: #B82010
+    }
+
+    [data-rgb="#BB0B0B"]:after {
+        background: #BB0B0B
+    }
+
+    [data-rgb="#E32636"]:after {
+        background: #E32636
+    }
+
+    [data-rgb="#A91101"]:after {
+        background: #A91101
+    }
+
+    [data-rgb="#FF4901"]:after {
+        background: #FF4901
+    }
+
+    [data-rgb="#801818"]:after {
+        background: #801818
+    }
+
+    [data-rgb="#FE1B00"]:after {
+        background: #FE1B00
+    }
+
+    [data-rgb="#850606"]:after {
+        background: #850606
+    }
+
+    [data-rgb="#AE4A34"]:after {
+        background: #AE4A34
+    }
+
+    [data-rgb="#985717"]:after {
+        background: #985717
+    }
+
+    [data-rgb="#AD4F09"]:after {
+        background: #AD4F09
+    }
+
+    [data-rgb="#E0115F"]:after {
+        background: #E0115F
+    }
+
+    [data-rgb="#E0CDA9"]:after {
+        background: #E0CDA9
+    }
+
+    [data-rgb="#000000"]:after {
+        background: #000000
+    }
+
+    [data-rgb="#0131B4"]:after {
+        background: #0131B4
+    }
+
+    [data-rgb="#730800"]:after {
+        background: #730800
+    }
+
+    [data-rgb="#850606"]:after {
+        background: #850606
+    }
+
+    [data-rgb="#0131B4"]:after {
+        background: #0131B4
+    }
+
+    [data-rgb="#008E8E"]:after {
+        background: #008E8E
+    }
+
+    [data-rgb="#F88E55"]:after {
+        background: #F88E55
+    }
+
+    [data-rgb="#AE8964"]:after {
+        background: #AE8964
+    }
+
+    [data-rgb="#149414"]:after {
+        background: #149414
+    }
+
+    [data-rgb="#003399"]:after {
+        background: #003399
+    }
+
+    [data-rgb="#01D758"]:after {
+        background: #01D758
+    }
+
+    [data-rgb="#FFFF6B"]:after {
+        background: #FFFF6B
+    }
+
+    [data-rgb="#9E9E9E"]:after {
+        background: #9E9E9E
+    }
+
+    [data-rgb="#9F551E"]:after {
+        background: #9F551E
+    }
+
+    [data-rgb="#463F32"]:after {
+        background: #463F32
+    }
+
+    [data-rgb="#926D27"]:after {
+        background: #926D27
+    }
+
+    [data-rgb="#8A3324"]:after {
+        background: #8A3324
+    }
+
+    [data-rgb="#E97451"]:after {
+        background: #E97451
+    }
+
+    [data-rgb="#DE2916"]:after {
+        background: #DE2916
+    }
+
+    [data-rgb="#FAEA73"]:after {
+        background: #FAEA73
+    }
+
+    [data-rgb="#BBACAC"]:after {
+        background: #BBACAC
+    }
+
+    [data-rgb="#25FDE9"]:after {
+        background: #25FDE9
+    }
+
+    [data-rgb="#E1CE9A"]:after {
+        background: #E1CE9A
+    }
+
+    [data-rgb="#FF0921"]:after {
+        background: #FF0921
+    }
+
+    [data-rgb="#DB1702"]:after {
+        background: #DB1702
+    }
+
+    [data-rgb="#008020"]:after {
+        background: #008020
+    }
+
+    [data-rgb="#798933"]:after {
+        background: #798933
+    }
+
+    [data-rgb="#096A09"]:after {
+        background: #096A09
+    }
+
+    [data-rgb="#83A697"]:after {
+        background: #83A697
+    }
+
+    [data-rgb="#C2F732"]:after {
+        background: #C2F732
+    }
+
+    [data-rgb="#B0F2B6"]:after {
+        background: #B0F2B6
+    }
+
+    [data-rgb="#18391E"]:after {
+        background: #18391E
+    }
+
+    [data-rgb="#95A595"]:after {
+        background: #95A595
+    }
+
+    [data-rgb="#1B4F08"]:after {
+        background: #1B4F08
+    }
+
+    [data-rgb="#22780F"]:after {
+        background: #22780F
+    }
+
+    [data-rgb="#175732"]:after {
+        background: #175732
+    }
+
+    [data-rgb="#3A9D23"]:after {
+        background: #3A9D23
+    }
+
+    [data-rgb="#00561B"]:after {
+        background: #00561B
+    }
+
+    [data-rgb="#85C17E"]:after {
+        background: #85C17E
+    }
+
+    [data-rgb="#386F48"]:after {
+        background: #386F48
+    }
+
+    [data-rgb="#679F5A"]:after {
+        background: #679F5A
+    }
+
+    [data-rgb="#3AF24B"]:after {
+        background: #3AF24B
+    }
+
+    [data-rgb="#4CA66B"]:after {
+        background: #4CA66B
+    }
+
+    [data-rgb="#34C924"]:after {
+        background: #34C924
+    }
+
+    [data-rgb="#57D53B"]:after {
+        background: #57D53B
+    }
+
+    [data-rgb="#00FF7F"]:after {
+        background: #00FF7F
+    }
+
+    [data-rgb="#095228"]:after {
+        background: #095228
+    }
+
+    [data-rgb="#689D71"]:after {
+        background: #689D71
+    }
+
+    [data-rgb="#A5D152"]:after {
+        background: #A5D152
+    }
+
+    [data-rgb="#5A6521"]:after {
+        background: #5A6521
+    }
+
+    [data-rgb="#7F00FF"]:after {
+        background: #7F00FF
+    }
+
+    [data-rgb="#723E64"]:after {
+        background: #723E64
+    }
+
+    [data-rgb="#A10684"]:after {
+        background: #A10684
+    }
+
+    [data-rgb="#40826D"]:after {
+        background: #40826D
+    }
+
+    [data-rgb="#6C0277"]:after {
+        background: #6C0277
+    }
+</style>

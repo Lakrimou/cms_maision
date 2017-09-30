@@ -1,0 +1,762 @@
+{% set tab=['#a1ad25','#964425','#798722','#f6bf00'] %}
+{% set array = ['La rédaction et la signification des actes', 'Le conseil juridique aux particuliers et aux entreprises','L’exécution des décisions de justice','Les constats',
+'Solutionner vos conflits locatifs','Solutionner vos conflits de voisinage','Le recouvrement amiable','Le recouvrement judiciaire','Les Jeux et Concours '
+
+] %}
+
+<section id="section-services" class="we_are bg_light padding">
+
+
+    <a herf="" data-toggle="modal" data-target="#etre_appeler" style="position: fixed;top: 50%;right:0;font-size: 20px;
+    z-index: 1;" class="btn_fill_about btn btn-default pull-right">Être rappelé</a>
+
+    {% if attributes.connected %}
+
+            <div class="pull-righ" style="    margin-right: 24px;">
+                <div data-step="3" data-intro="This is a tooltip!" class="pull-right margin-bott-40">
+                    <button type="button" class="theme-btn button11 btn-style-one pull-right" data-toggle="modal"
+                            data-target="#listMissions">Gérer cette section
+                    </button>
+                </div>
+            </div>
+
+    {% endif %}
+
+    <div class="container">
+
+        <div class="row">
+            <div class="col-md-10">
+                <h2 class="text-uppercase">Nos <span class="color_red">services</span></h2>
+                <div class="line_1"></div>
+                <div class="line_2"></div>
+                <div class="line_3"></div>
+            </div>
+
+
+        </div>
+        {% if mission.service is defined %}
+            {% set arraymission=mission.service %}
+
+            <div class="row">
+                {% for b in arraymission|sort|reverse %}
+
+                    {% if (arraymission|length == 1) %}
+                        <div class="col-md-4 col-sm-4 col-xs-12"></div>
+                    {% endif %}
+                    {% if (arraymission|length == 2) and (loop.index == 1) %}
+                        <div class="col-md-2 col-sm-2 col-xs-12"></div>
+                    {% endif %}
+
+
+                    <a href="#" data-toggle="modal" data-target="#lireplus" data-idqq="{{ attributes.quoiqui.id }}" data-idServ="{{ b.idMission }}" class="lire_plus">
+                        <div class=" col-md-4 col-sm-4 top40 " style="min-height: 380px;">
+                            <div class="block-service margin15 pad15" style="background: white;">
+                                <div class="row">
+                                    <div class="col-md-12 text-center">
+                                        {#<span class="icon-shortcode">#}
+                                        {#<i class=" fa fa-user" aria-hidden="true"></i>#}
+                                        {#</span>#}
+                                        <span class="icon-shortcode">
+                            {% if b["serviceIcon"]is defined %}
+                                {% if 'fa ' in b["serviceIcon"] %}
+                                    <i class="{% if b["serviceIcon"] is defined %}{{ b["serviceIcon"] }}{% endif %}"
+                                       aria-hidden="true"></i>
+                                    {% else %}
+                                    <img class="svg" width="80px" src='{{ b["serviceIcon"] }}' alt="">
+                                {% endif %}
+                            {% endif %}
+
+                                    </span>
+                                    </div>
+                                    <h3 class="serviceTitle text-center pad15">
+                                        {% if  b.mission is defined %}{{ b.mission }}{% endif %}
+                                    </h3>
+                                    <div class="clearfix">
+                                        <div class="separator" style="width: 100px;border-bottom-width: 2px; "></div>
+                                    </div>
+                                    <div class="pargraphe">
+                                        {% if b.detail is defined %}{{ b.detail|slice(0,50)|raw }}..{% endif %}
+
+                                    </div>
+                                    {% if is_mobile() %}
+
+                                        <div class="row service pad15">
+                                            <a href="#" data-toggle="modal" data-target="#lireplus"
+                                               data-idqq="{{ attributes.quoiqui.id }}" data-idServ="{{ b.idMission }}"
+                                               class="lire_plus  btn-default btn-xs pull-right suite"
+                                               data-target="#service-details">En savoir plus</a>
+                                        </div>
+                                    {% endif %}
+                                </div>
+
+                                {% if not is_mobile() %}
+
+                                    <div class="row service pad15">
+                                        <a href="#" data-toggle="modal" data-target="#lireplus"
+                                           data-idqq="{{ attributes.quoiqui.id }}" data-idServ="{{ b.idMission }}"
+                                           class="lire_plus  btn-default btn-xs pull-right suite"
+                                           data-target="#service-details">En savoir plus</a>
+                                    </div>
+                                {% endif %}
+
+                            </div>
+                        </div>
+                    </a>
+
+
+                {% endfor %}
+            </div>
+
+        {% endif %}
+    </div>
+
+</section>
+
+<div class="modal fade" id="listMissions" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Liste des Missions</h4>
+            </div>
+            <div class="modal-body">
+                <table class="table dataTable  " cellspacing="0" width="100%">
+                    <thead>
+                    <tr>
+                        {#<th>Image</th>#}
+                        <th>Les attributions</th>
+
+
+                        <th>Modifier</th>
+                        <th>Supprimer</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    {% if mission.service is defined %}
+                        {% set arraymissions=mission.service %}
+                        {% for  mis in arraymissions|sort|reverse %}
+
+                            <tr data-td="{{ mis.idMission }}">
+
+                                <td>{{ mis.mission }}</td>
+
+                                <td>
+
+                                    <a href="#" class=" btn btn-info a-btn-slide-text edit_huissier"
+                                       data-serv="{{ mis.idMission }}"
+                                       data-id="{{ attributes.quoiqui.id }}" data-toggle="modal"
+                                       data-target="#editMission">
+
+                                        <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                                        <span><strong>Modifier</strong></span>
+                                    </a>
+
+                                </td>
+
+
+                                <td>
+
+                                    <a href="{{ path('module_huissier_delate_mission',{"idqq": attributes.quoiqui.id,"idserv":mis.idMission }) }}"
+                                       class=" btn btn-danger a-btn-slide-text service_suprim click-off"
+                                       onclick="clickOffConfirmed = confirm('Vous voulez le  supprimer ?');">
+                                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                        <span><strong>Supprimer</strong></span>
+                                    </a>
+                                </td>
+
+                            </tr>
+
+                        {% endfor %}
+                    {% endif %}
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Fermer</button>
+                <button type="button" class="btn btn-primary addmissions" data-toggle="modal" data-target="#addMission"
+                >Ajouter Nouveau mission
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="addMission" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Ajouter nouveau mission</h4>
+            </div>
+            <div class="modal-body">
+                <form id="addmission" method="POST"
+                      action="{{ path('module_huissier_add_mission',{"idqq":attributes.quoiqui.id}) }}"
+                      enctype="multipart/form-data">
+                    {#<div class="col-md-6"></div>#}
+                    <input type="hidden" name="idMission" value="{{ uniqueId() }}">
+
+                    <div class="form-group">
+                        <select class="selectpicker form-control selectOption" id="serviceselect" name="mission"
+                                required="required">
+                            {#<option disabled selected>Sélectionner un service....</option>#}
+                            <option value="autre" style="font-weight: 700;font-size: 20px;">Ajouter nouveau
+                                service
+                            </option>
+                            {% for k,a in  filterListServiceHuissier(attributes) %}
+                                <option value='{{ k }}'>{{ k }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group ">
+                        <input type="text" name="autres" id="otherServices" class=" form-control otherSelected"
+                               placeholder="ajoutre autre service">
+                        <span id="idError" class="errormsg" style="color:red;"></span>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-12">Description</label>
+                        <textarea placeholder="Entrer la description.." rows="9"
+                                  class="form-control textarea "
+                                  name="detail" required="required"></textarea>
+                    </div>
+
+                    <div class="form-group row element-form">
+                        <div class="col-md-12">
+                            <label class="control-label"> Choisissez une image pour le service</label>
+                        </div>
+
+                        <div class="col-sm-9 DefaultIcon">
+
+                            {% for iconservice in DirAssetParcour(asset('uploads/image/iconService/'~attributes.category.slug|lower~'/SVG/')) %}
+                                <a href="#" onclick="javascript:;">
+                                    <img width="50px" height="50px"
+                                         src="{{ asset('uploads/image/iconService/') }}{{ attributes.category.slug|lower~'/SVG/' }}{{ iconservice }}"
+                                         alt="">
+                                </a>
+                            {% endfor %}
+
+                        </div>
+
+
+                    </div>
+
+                    <input type="text" id="icon-filtre-2" class="icon-filtre form-control name_service"
+                           placeholder="recherche Votre Image">
+                    <input type="hidden" name="serviceIcon" class="form-control name_service"
+                           placeholder="recherche Votre Image">
+                    <button type="button" class="btn btn-primary btn-lg btn-block"><i class="fa fa-search"
+                                                                                      aria-hidden="true"></i></button>
+                    <div class=" pull-right col-sm-9 icon_list">
+                        {{ include('@User/template/fontawesomeIcons.html.twig') }}
+                    </div>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Fermer</button>
+                <button type="submit" id="addServices" class=" btn btn-primary" data-target="modifier"
+                        data-selector="addmission">
+                    Enrigistrer
+                </button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="modal fade" id="editMission" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Modifier votre mission</h4>
+            </div>
+            <div class="modal-body">
+                <form id="Editmission" method="POST"
+                      action="{{ path('module_huissier_update_mission',{"idqq":attributes.quoiqui.id}) }}"
+                      enctype="multipart/form-data">
+
+                    <div class=" form-group">
+                        <input id="idmisssion" type="hidden" class="form-control" name="idMission" value="">
+
+                    </div>
+                    <div class="form-group">
+                        <select class="selectpicker form-control selectOption" id="serviceselect-edit" name="mission">
+
+
+                            <option disabled selected>Sélectionner un service....</option>
+
+                            <option value="autre" style="font-weight: 700;font-size: 20px;">Ajouter nouveau
+                                service
+                            </option>
+                            {% if mission.service is defined %}
+                                {% for s in mission.service %}
+                                    <option value='{{ s.mission }}' class=''>{{ s.mission }}</option>
+                                {% endfor %}
+
+                            {% endif %}
+                            <option value="La rédaction et la signification des actes">La rédaction et la signification
+                                des actes
+                            </option>
+                            <option value="Le conseil juridique aux particuliers et aux entreprises ">Le conseil
+                                juridique aux particuliers et aux entreprises
+                            </option>
+                            <option value="L’exécution des décisions de justice">L’exécution des décisions de justice
+                            </option>
+                            <option value="Les constats">Les constats</option>
+                            <option value="Solutionner vos conflits locatifs">Solutionner vos conflits locatifs</option>
+                            <option value="Solutionner vos conflits de voisinage">Solutionner vos conflits de
+                                voisinage
+                            </option>
+                            <option value="Le recouvrement amiable">Le recouvrement amiable</option>
+                            <option value="Le recouvrement judiciaire ">Le recouvrement judiciaire</option>
+                            <option value="Les Jeux et Concours ">Les Jeux et Concours</option>
+                        </select>
+                    </div>
+                    <div class="form-group ">
+                        <input type="text" name="autres" id="autreServices" class=" form-control otherSelected"
+                               placeholder="ajoutre autre service">
+                        <span id="msg_error" style="color:red;"></span>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-12">Description</label>
+                        <textarea id="detail_mission" placeholder="Entrer la description.." rows="3"
+                                  class="form-control textarea ckeditor"
+                                  name="detail" required="required"></textarea>
+                    </div>
+
+                    <div class="form-group row element-form">
+                        <div class="col-md-12">
+                            <label class="control-label">Modifier l'image de srvice</label>
+                        </div>
+
+                        <div class="col-sm-9 DefaultIcon">
+
+                            {% for iconservice in DirAssetParcour(asset('uploads/image/iconService/'~attributes.category.slug|lower~'/SVG/')) %}
+                                <a href="#" onclick="javascript:;">
+                                    <img width="50px" height="50px"
+                                         src="{{ asset('uploads/image/iconService/') }}{{ attributes.category.slug|lower~'/SVG/' }}{{ iconservice }}"
+                                         alt="">
+                                </a>
+                            {% endfor %}
+
+                        </div>
+
+
+                    </div>
+                    {#<div class="row">#}
+                    {#<div class="col-md-9 col-md-offset-3">#}
+
+                    <input type="text" id="icon-filtre-2" class="icon-filtre form-control name_service"
+                           placeholder="recherche Votre Image">
+                    <input id="iconhuissier" type="hidden" name="serviceIcon" class="form-control name_service"
+                           placeholder="recherche Votre Image">
+                    <button type="button" class="btn btn-primary btn-lg btn-block"><i class="fa fa-search"
+                                                                                      aria-hidden="true"></i></button>
+                    {#</div>#}
+
+                    <div class=" pull-right col-sm-9 icon_list">
+                        {{ include('@User/template/fontawesomeIcons.html.twig') }}
+                    </div>
+                    {#</div>#}
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Fermer</button>
+                <button type="submit" id="updateserv" class=" btn btn-primary" data-target="modifier"
+                        data-selector="Editmission">
+                    Enrigistrer
+                </button>
+            </div>
+        </div>
+
+    </div>
+</div>
+<div class="modal fade" id="lireplus" role="dialog">
+    <div class="modal-dialog modal-md">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 id="header" class="modal-title"
+                    style="text-align: center;font-size: 27px;color: {{ random(tab) }}"></h4>
+            </div>
+            {#<div id="header" class="modal-header " style="text-align: center;font-size: 27px;color: {{ random(tab) }}">#}
+            {#<button type="button" class="close" data-dismiss="modal">&times;</button>#}
+
+            {#</div>#}
+            <div class="modal-body">
+                <div id="news-section-1">
+
+
+                    <div class="row shownormal">
+
+                        <div class="col-md-6">
+                            <h3 class="color_red bottom30 top40">Description Détaillée</h3>
+
+
+                            <div id="detail" style="text-align: justify;text-align-last: auto;">
+
+                            </div>
+                            <span id="link2"></span>
+                            <p id="lire_suite" style="text-align: justify;text-align-last: auto;"></p>
+                        </div>
+                        <div class="col-md-6">
+                            <h3 class="color_red bottom30 top40">Nous
+                                Contacter</h3>
+                            <div class="blog_info blog-thumbnail" style="box-shadow: 0px 1px 3px rgba(29, 28, 28, 0.35);">
+
+                                <ul class="archieves">
+
+                                    <li>
+                                        <div class="col-md-12 padding_none">
+                                            <i class="fa fa-envelope" aria-hidden="true"></i>
+                                            <span class="span_font_size"></span>
+                                            <span><a href="mailto:{{ attributes.quoiqui.mail }}"> {{ attributes.quoiqui.mail }}</a></span>
+
+                                        </div>
+
+                                    </li>
+                                    <li>
+
+
+                                        <div class="col-md-12 padding_none">
+                                            <i class="fa fa-phone" aria-hidden="true"></i>
+                                            <span class="span_font_size"></span>
+                                            <span><a href="tel:{{ attributes.quoiqui.phone }}">  +216 {{ attributes.quoiqui.phone }} </a> </span>
+                                        </div>
+
+                                    </li>
+                                    <li>
+                                        <div class="col-md-12 padding_none" style="display: inline;">
+                                            <i class="fa fa-home float " aria-hidden="true"></i>
+                                            <span class="span_font_size"></span>
+                                            <span class=" margtop5">{% if attributes.quoiqui.address1 is not empty %} <a href="#">{{ attributes.quoiqui.address1 }}</a>
+                                                {% endif %}
+                                                </span>
+                                        </div>
+
+                                    </li>
+
+                                </ul>
+                            </div>
+                            <a href="#" data-toggle="modal" data-target="#modalSectionRappeler"
+                               class="col-md-12 col-xs-12 spacontact2 top10"><i
+                                        class="fa fa-phone" aria-hidden="true" style="margin-right: 5px;"></i>Demande
+                                de rappel
+                            </a>
+                        </div>
+
+                    </div>
+
+                    <div class="row showresp">
+                        <div class="col-md-6">
+                            <h3 class=" bottom30  color_red top40">Nous
+                                Contacter</h3>
+                            <div class="blog_info blog-thumbnail" style="box-shadow: 0px 1px 3px rgba(29, 28, 28, 0.35);">
+
+                                <ul class="archieves">
+
+                                    <li>
+                                        <div class="col-md-12 padding_none">
+                                            <i class="fa fa-envelope" aria-hidden="true"></i>
+                                            <span class="span_font_size"></span>
+                                            <span><a href="mailto:{{ attributes.quoiqui.mail }}"> {{ attributes.quoiqui.mail }}</a></span>
+
+                                        </div>
+
+                                    </li>
+                                    <li>
+
+
+                                        <div class="col-md-12 padding_none">
+                                            <i class="fa fa-phone" aria-hidden="true"></i>
+                                            <span class="span_font_size"></span>
+                                            <span><a href="tel:{{ attributes.quoiqui.phone }}">  +216 {{ attributes.quoiqui.phone }} </a> </span>
+                                        </div>
+
+                                    </li>
+                                    <li>
+                                        <div class="col-md-12 padding_none" style="display: inline;">
+                                            <i class="fa fa-home float " aria-hidden="true"></i>
+                                            <span class="span_font_size"></span>
+                                            <span class=" margtop5">{% if attributes.quoiqui.address1 is not empty %} <a href="#">{{ attributes.quoiqui.address1 }}</a>
+                                                {% endif %}
+                                                </span>
+                                        </div>
+
+                                    </li>
+
+                                </ul>
+                            </div>
+                            <a href="#" data-toggle="modal" data-target="#modalSectionRappeler" style="margin-bottom: 33px;"
+                               class="col-md-12 col-xs-12 spacontact2 top10"><i
+                                        class="fa fa-phone" aria-hidden="true" style="margin-right: 5px"></i>Demande
+                                de rappel
+                            </a>
+                        </div>
+                        <div class="col-md-6">
+                            <h3 class="color_red bottom30 top40">Description
+                                Détaillée</h3>
+
+                            <div id="detailles" style="text-align: justify;text-align-last: auto;">
+
+                            </div>
+                        </div>
+
+                        <span id="link"></span>
+                        <p id="lire_suite"></p>
+                    </div>
+
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Fermer</button>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<div class="modal fade" id="etre_appeler" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Être rappelé</h4>
+            </div>
+            <div class="modal-body">
+                <div class="well">Vous avez une question ou un commentaire ?
+                    <br>Remplissez les informations suivantes et nous vous appeler dans les plus brefs délais.
+                </div>
+
+                <form id="rapeler" class="form-horizontal" method="post"
+                      action="{{ path('rapeler',{'qq_id':attributes.quoiqui.id}) }}" role="form">
+                    <div class="form-group">
+                        <label for="email" class="col-sm-2 control-label">Téléphone</label>
+                        <div class="col-sm-9">
+                            <input id="tel" type="text" class="form-control bfh-phone" name="rapele[phone]"
+                                   placeholder="Numéro de Téléphone" required data-format="+216 (dd) ddd-ddd">
+
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="name" class="col-sm-2 control-label">Nom</label>
+                        <div class="col-sm-9">
+                            <input id="name" type="text" class="form-control" id="name" name="rapele[nom]"
+                                   placeholder="Nom" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="name" class="col-sm-2 control-label">Prénom</label>
+                        <div class="col-sm-9">
+                            <input id="prenom" type="text" class="form-control" id="name" name="rapele[prenom]"
+                                   placeholder="Prénom" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="name" class="col-sm-2 control-label">Email</label>
+                        <div class="col-sm-9">
+                            <input type="email" id="email" name="rapele[mail]" class="form-control"
+                                   placeholder="votre Mail" rows="3" required/>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer" id="footer_rappeler">
+
+                {#<button id="btn_insecrire" type="submit" class="btn btn-warning " data-toggle="modal" data-target="#ModalEtreApeler" data-selector="s'ident">S'identifier/s'insecrire</button>#}
+                <button type="submit" class="btn btn-primary " data-target="modifier" data-selector="rapeler">Envoyer
+                </button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Fermer</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<div class="modal fade" id="ModalEtreApeler" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+
+            <div class="modal-body">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                <div class="login-form-popup lp-border-radius-8">
+                    <div class="siginincontainer">
+                        <h1 class="text-center">S'identifier</h1>
+                        <form id="login" class="form-horizontal margin-top-30" method="post" action="/login_check">
+                            <input type="hidden" name="_csrf_token"
+                                   value="Kk4KcJ-i6lPzu7pUx0wOja7L0g5uu9CI6uWJYDGVT4Q"/>
+                            <p class="status"></p>
+                            <div class="form-group">
+                                <label for="username">Adresse email *</label>
+                                <input type="text" class="form-control" id="username" name="_username" required/>
+                            </div>
+                            <div class="form-group">
+                                <label for="password">Mot de passe *</label>
+                                <input type="password" class="form-control" id="password" name="_password" required/>
+                            </div>
+                            <div class="form-group">
+                            </div>
+                            <div class="form-group">
+                                <div class="checkbox pad-bottom-10">
+                                    <input id="check1" type="checkbox" name="_remember_me" value="on">
+                                    <label for="check1">Se souvenir de moi</label>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <input type="submit" value="Se connecter" id="rappeler"
+                                       class="lp-secondary-btn width-full btn-first-hover"/>
+                            </div>
+                            <input type="hidden" id="security" name="security" value="9f8756cb45"/><input type="hidden"
+                                                                                                          name="_wp_http_referer"
+                                                                                                          value="/"/>
+                        </form>
+                        <div class="pop-form-bottom">
+                            <div class="bottom-links">
+                                <a class="signUpClick">Nouveau sur Ween.tn? S'inscrire</a>
+                                <a class="forgetPasswordClick pull-right">Mot de passe oublié</a>
+                            </div>
+                            <p class="margin-top-15">Connectez-vous avec réseau social</p>
+                            <ul class="social-login list-style-none">
+                                <li>
+                                    <a id="logingoogle" class="google flaticon-googleplus"
+                                       href="{{ path('hwi_oauth_connect') }}google">
+                                        <i class="fa fa-google-plus"></i>
+                                        <span>Google</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a id="loginfacebook" class="facebook flaticon-facebook"
+                                       href="{{ path('hwi_oauth_connect') }}facebook">
+                                        <i class="fa fa-facebook"></i>
+                                        <span>Facebook</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a id="logintwitter" class="twitter flaticon-twitter"
+                                       href="{{ path('hwi_oauth_connect') }}facebook">
+                                        <i class="fa fa-twitter"></i>
+                                        <span>Twitter</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <a class="md-close"><i class="fa fa-close"></i></a>
+                    </div>
+
+                    <div class="siginupcontainer">
+                        <h1 class="text-center">S'inscrire</h1>
+                        <form id="register" class="form-horizontal margin-top-30" method="post">
+                            <p class="status"></p>
+                            <div class="form-group">
+                                <label for="username">Nom et prénom *</label>
+                                <input type="text" class="form-control" id="username2" name="username"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Adresse email *</label>
+                                <input type="email" class="form-control" id="email" name="email"/>
+                            </div>
+                            <div class="form-group">
+                                <p>Le mot de passe vous sera envoyé par email.</p>
+                            </div>
+                            <div class="form-group">
+                            </div>
+                            <div class="form-group">
+                                <input type="submit" value="Enregistrer"
+                                       class="lp-secondary-btn width-full btn-first-hover"/>
+                            </div>
+                            <input type="hidden" id="security" name="security" value="fac3396f28"/><input type="hidden"
+                                                                                                          name="_wp_http_referer"
+                                                                                                          value="/"/>
+                        </form>
+                        <div class="pop-form-bottom">
+                            <div class="bottom-links">
+                                <a class="signInClick">Vous avez déjà un compte? Se connecter</a>
+                                <a class="forgetPasswordClick pull-right">Mot de passe oublié</a>
+                            </div>
+                            <p class="margin-top-15">Connectez-vous avec réseau social</p>
+                            <ul class="social-login list-style-none">
+                                <li>
+                                    <a id="logingoogle" class="google flaticon-googleplus"
+                                       href="{{ path('hwi_oauth_connect') }}google">
+                                        <i class="fa fa-google-plus"></i>
+                                        <span>Google</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a id="loginfacebook" class="facebook flaticon-facebook"
+                                       href="{{ path('hwi_oauth_connect') }}facebook">
+                                        <i class="fa fa-facebook"></i>
+                                        <span>Facebook</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a id="logintwitter" class="twitter flaticon-twitter"
+                                       href="{{ path('hwi_oauth_connect') }}facebook">
+                                        <i class="fa fa-twitter"></i>
+                                        <span>Twitter</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <a class="md-close"><i class="fa fa-close"></i></a>
+                    </div>
+                    <div class="forgetpasswordcontainer">
+                        <h1 class="text-center">Mot de passe oublié</h1>
+                        <form class="form-horizontal margin-top-30" id="lp_forget_pass_form" action="#" method="post">
+                            <p class="status"></p>
+                            <div class="form-group">
+                                <label for="password">Adresse email *</label>
+                                <input type="email" name="user_login" class="form-control" id="email3"/>
+                            </div>
+                            <div class="form-group">
+                                <input type="submit" name="submit" value="Obtenir un nouveau mot de passe"
+                                       class="lp-secondary-btn width-full btn-first-hover"/>
+                                <input type="hidden" id="security3" name="security3" value="48ca5eeb94"/><input
+                                        type="hidden" name="_wp_http_referer" value="/"/></div>
+                        </form>
+                        <div class="pop-form-bottom">
+                            <div class="bottom-links"><a class="cancelClick">Annuler</a></div>
+                        </div>
+                        <a class="md-close"><i class="fa fa-close"></i></a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<select class="selectpicker form-control selectOption" id="service_enrolled" name="mission" style="display: none">
+    {#<option disabled selected>Sélectionner un service....</option>#}
+    <option disabled selected>Sélectionner un service....</option>
+
+
+    {% if mission.service is defined %}
+
+        {% for s in mission.service %}
+            <option value='{{ s.mission }}'
+                    class=''>{{ s.mission }}</option>
+
+        {% endfor %}
+
+    {% endif %}
+</select>

@@ -1,0 +1,196 @@
+<style>
+
+
+    .image-content{
+        width: 387px;
+        height: 387px;
+        overflow: hidden;
+    }
+    .image-content img{
+        height: 100%;
+        width: initial;
+        position: relative;
+
+
+    }
+
+
+</style>
+
+<section class="gallery padding-120" id="gallery">
+    {% if  connected %}
+        <a data-toggle="modal" href="#gallery-modal" class="button-default button_admin pull-right ">Gérer cette section</a>
+    {% endif %}
+    <div class="container">
+        <div class="section-header ">
+            <h3 >Notre Centre</h3>
+
+        </div>
+
+
+        <div class="gallery-items">
+            {% if img_gallery is not empty %}
+
+                {% for img in img_gallery %}
+                    <div class="gallery-item  ">
+                        <div class="gallery-image image-content">
+                            <img src="/uploads/image/{{ iduser }}/{{ qouiqui.id }}/gallery/{{ img }}"
+                                 alt="gallery image"
+                                 class="img-responsive">
+                            <div class="gallery-overlay">
+                                <div class="bg"></div>
+                            </div>
+                            <div class="gallery-content">
+                                <a href="/uploads/image/{{ iduser }}/{{ qouiqui.id }}/gallery/{{ img }}"
+                                   data-rel="lightcase:myCollection"><i
+                                            class="icon flaticon-expand"></i></a>
+
+                            </div>
+                        </div>
+
+                    </div>
+                {% endfor %}
+            {% else %}
+                <div class="gallery-item development photography">
+                    <div class="gallery-image">
+                        <img src=" {{ asset('module/centre_frm/images/gallery/gallery_02.jpg') }}" alt="gallery image"
+                             class="img-responsive">
+                        <div class="gallery-overlay">
+                            <div class="bg"></div>
+                        </div>
+                        <div class="gallery-content">
+                            <a href="images/gallery/gallery_bg_02.jpg" data-rel="lightcase:myCollection"><i
+                                        class="icon flaticon-expand"></i></a>
+                            <h4>Product Name Here</h4>
+                            <span>By: Kidschool Theme</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="gallery-item branding packing">
+                    <div class="gallery-image">
+                        <img src=" {{ asset('module/centre_frm/images/gallery/gallery_03.jpg') }}" alt="gallery image"
+                             class="img-responsive">
+                        <div class="gallery-overlay">
+                            <div class="bg"></div>
+                        </div>
+                        <div class="gallery-content">
+                            <a href="images/gallery/gallery_bg_03.jpg" data-rel="lightcase:myCollection"><i
+                                        class="icon flaticon-expand"></i></a>
+                            <h4>Product Name Here</h4>
+                            <span>By: Kidschool Theme</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="gallery-item development photography">
+                    <div class="gallery-image">
+                        <img src="{{ asset('module/centre_frm/images/gallery/gallery_04.jpg') }}" alt="gallery image"
+                             class="img-responsive">
+                        <div class="gallery-overlay">
+                            <div class="bg"></div>
+                        </div>
+                        <div class="gallery-content">
+                            <a href="images/gallery/gallery_bg_04.jpg" data-rel="lightcase:myCollection"><i
+                                        class="icon flaticon-expand"></i></a>
+                            <h4>Product Name Here</h4>
+                            <span>By: Kidschool Theme</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="gallery-item branding packing">
+                    <div class="gallery-image">
+                        <img src="{{ asset('module/centre_frm/images/gallery/gallery_05.jpg') }}" alt="gallery image"
+                             class="img-responsive">
+                        <div class="gallery-overlay">
+                            <div class="bg"></div>
+                        </div>
+                        <div class="gallery-content">
+                            <a href="images/gallery/gallery_bg_05.jpg" data-rel="lightcase:myCollection"><i
+                                        class="icon flaticon-expand"></i></a>
+                            <h4>Product Name Here</h4>
+                            <span>By: Kidschool Theme</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="gallery-item branding packing">
+                    <div class="gallery-image">
+                        <img src="{{ asset('module/centre_frm/images/gallery/gallery_06.jpg') }}" alt="gallery image"
+                             class="img-responsive">
+                        <div class="gallery-overlay">
+                            <div class="bg"></div>
+                        </div>
+                        <div class="gallery-content">
+                            <a href="images/gallery/gallery_bg_06.jpg" data-rel="lightcase:myCollection"><i
+                                        class="icon flaticon-expand"></i></a>
+                            <h4>Product Name Here</h4>
+                            <span>By: Kidschool Theme</span>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        </div><!-- gallery items -->
+        {#<div class="gallery-button"><a href="gallery.html" class="button-default">View More Gallery</a></div>#}
+    </div><!-- container -->
+
+</section><!-- gallery -->
+
+<div class="modal fade" id="gallery-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title"></h4>
+            </div>
+            <div class="modal-body">
+
+                <div class="row norow">
+                    <form action="{{ path('module_spa_gallery',{'id_qq': qouiqui.id }) }}" class="dropzone"
+                          id="my-gallery"></form>
+                </div>
+                <div class="row norow">
+                    {% if img_gallery %}
+                        {% for img in img_gallery %}
+
+
+                            <div class="col-md-6 " data-div="{{ img }}">
+                                <div class="thumbnail">
+                                    <!-- Single button -->
+                                    <div class="btn-group pull-right " style="position: absolute;right: 20px;">
+                                        <button type="button" class="btn btn-default dropdown-toggle"
+                                                data-toggle="dropdown"
+                                                aria-haspopup="true" aria-expanded="false">
+                                            <i class="fa fa-pencil" aria-hidden="true"></i> <span
+                                                    class="caret"></span>
+                                        </button>
+                                        <ul class="dropdown-menu">
+
+                                            <li><a href="#" class="remove-gallery"
+                                                   data-name-remove="{{ img }}"
+                                                   data-id="{{ qouiqui.id }}">supprimer</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+
+                                    <img src="/uploads/image/{{ iduser }}/{{ qouiqui.id }}/gallery/{{ img }}">
+
+                                </div>
+                            </div>
+
+                        {% endfor %}
+                    {% endif %}
+                </div>
+
+                {#<input type="submit" value="ok">#}
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+
+            </div>
+
+
+
+        </div>
+    </div>
+</div>

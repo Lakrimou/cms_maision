@@ -1,0 +1,60 @@
+<div id="content">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6">
+                <h3>FACILE À NOUS TROUVER</h3>
+                <p>
+                    {{ qouiqui.details|raw }}
+                </p>
+                <br>
+                <h4>ADRESSE</h4>
+                <p>
+                    {{ qouiqui.address1 }} <br>{{ qouiqui.adress2 }}
+                </p>
+                <h4>TELEPHONE</h4>
+                <p>
+                    {{ qouiqui.phone }} / {{ qouiqui.phone2 }}
+                </p>
+
+            </div>
+            <div class="col-sm-6">
+                <h3>FORMULAIRE DE CONTACT</h3>
+                <div id="note"></div>
+                <div id="fields">
+                    <form class="form-horizontal" action="{{ path('module_hotel_contactezNous',{'id_qq': qouiqui.id}) }}" method="POST" >
+                        <div class="form-group">
+                            <label for="inputName">Nom</label>
+                            <input type="text" class="form-control" placeholder="Nom" id="inputName" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputEmail">Email</label>
+                            <input type="text" class="form-control" placeholder="Email" id="inputEmail" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputEmail">Sujet</label>
+                            <input type="text" class="form-control" placeholder="Sujet" id="inputEmail" name="objet"required >
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label for="inputMessage">Your Message</label>
+                                    <textarea class="form-control" rows="7" id="inputMessage" name="message" required>Message</textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn-default btn-cf-submit">Envoyer</button>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+    </div>
+</div>

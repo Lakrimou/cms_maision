@@ -1,0 +1,226 @@
+{% set link = 'http://ween.tn' %}
+<!-- start header-->
+<div id="header">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-5">
+                <div id="left-header">
+                    <div class="row">
+                        <h1>Pour Plus D'infos: <span>+216 71 26 82 07</span></h1>
+                    </div>
+                    <div class="row">
+                       <h1>LAISSER UN MESSAGE: <a href="#">contact@webmaster-media.com</a></h1>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-sm-4 text-right">
+                <div id="right-header">
+                    <h1>Soyez connecté à ween.tn</h1>
+                    <a href="#"><i class="fa fa-facebook"></i></a>
+                    <a href="#"><i class="fa fa-twitter"></i></a>
+                    <a href="#"><i class="fa fa-google-plus"></i></a>
+                    <a href="#"><i class="fa fa-instagram"></i></a>
+                </div>
+            </div>
+            {% if not  app.user %}
+            <div class="col-md-3 col-sm-3">
+                <Strong data-toggle="modal" data-target="#loginModal"
+                        class="login-color">S'authentifier/S'inscrire</Strong>
+            </div>
+                {% else %}
+                <div class="col-md-3 col-sm-3">
+                    <a href="{{ path('dashboard_homepage') }}"> <Strong class="login-color">Mon Espace</Strong></a>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+<!-- end header-->
+<!-- start logo section-->
+<div id="logo-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-3 col-xs-7">
+                <div id="logo">
+                    <a href="{{ link }}"><img src="{{ asset('asset-front/images/logo.png') }}" alt="logo"></a>
+                </div>
+            </div>
+            <div class="col-sm-9 text-right">
+                <nav class="navbar navbar-default">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#thrift-1"
+                                aria-expanded="false">
+                            <span class="sr-only">Toggle Navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                    </div>
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse" id="thrift-1">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                           aria-expanded="false"></a>
+                        <div id="icons-list">
+                            <a href="#categories-heading"><i class="fa fa-th"></i>Catégories les plus consultées</a>
+                            <a href=""><i class="fa fa-pencil-square-o"></i>Soumettre une Fiche</a>
+                            <a href=""><i class="fa fa-map-o"></i>Contactez Nous</a>
+                        </div>
+                    </div><!-- /.navbar-collapse -->
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end logo section-->
+
+{#=============================ModalTabs============================#}
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span>
+
+                </button>
+                <h4 class="modal-title" id="myModalLabel">S'authentifier/S'inscrire</h4>
+
+            </div>
+            <div class="modal-body">
+                <div role="tabpanel">
+                    <!-- Nav tabs -->
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li role="presentation" class="active"><a href="#uploadTab" aria-controls="uploadTab" role="tab" data-toggle="tab">S'authentifier</a>
+                        </li>
+                        <li role="presentation"><a href="#browseTab" aria-controls="browseTab" role="tab" data-toggle="tab">S'inscrire</a>
+                        </li>
+                    </ul>
+                    <!-- Tab panes -->
+                    <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane active" id="uploadTab">
+                            <form action="/login_check" method="post">
+
+                                <div class="col-md-12 btn-group btn-group-justified hidden-xs hidden-sm social" role="group">
+                                    <div class="facebook btn-group" role="group">
+                                        <a class="facebook-btn btn btn-primary" href="{{ path('hwi_oauth_connect') }}facebook">
+                                            <span>Connecter avec Facebook</span>
+                                        </a>
+                                    </div>
+                                    <div class="btn-group" role="group">
+                                        <a class="btn btn-danger" href="{{ path('hwi_oauth_connect') }}google">
+                                            <span>Connecter avec Google</span>
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <input type="hidden" name="_csrf_token"
+                                           value="Kk4KcJ-i6lPzu7pUx0wOja7L0g5uu9CI6uWJYDGVT4Q"/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="username">Login</label>
+                                    <input type="text" id="username" name="_username" value="" required="required"
+                                           class="form-control"/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="password">Mot de passe</label>
+                                    <input type="password" id="password" name="_password" required="required"
+                                           class="form-control"/>
+                                </div>
+                                <div class="form-group">
+                                    <input type="checkbox" id="remember_me" name="_remember_me" value="on"/>
+                                    <label for="remember_me">Se souvenir de moi!</label>
+                                </div>
+                                <div class="form-group">
+                                    <input type="submit" id="_submit" name="_submit" value="Se connecter"
+                                           class="form-control btn btn-warning"/>
+                                </div>
+                            </form>
+                        </div>
+                        <div role="tabpanel" class="tab-pane" id="browseTab">
+
+                            <form name="fos_user_registration_form" method="post" action="/register/" class="fos_user_registration_register" enctype="multipart/form-data">
+                                <div id="fos_user_registration_form">
+                                    <div class="form-group"><label class="control-label required" for="fos_user_registration_form_email">E-mail</label><input type="email" id="fos_user_registration_form_email" name="fos_user_registration_form[email]" required="required" class="form-control"></div>
+                                    <div class="form-group"><label class="control-label required" for="fos_user_registration_form_username">Nickname</label><input type="text" id="fos_user_registration_form_username" name="fos_user_registration_form[username]" required="required" maxlength="180" pattern=".{2,}" class="form-control"></div>
+                                    <div class="form-group"><label class="control-label required" for="fos_user_registration_form_prenom">Nom et Prénom</label><input type="text" id="fos_user_registration_form_prenom" name="fos_user_registration_form[prenom]" required="required" maxlength="255" class="form-control"></div>
+                                    <div class="form-group">
+                                        <label class="control-label required">Date de naissance</label>
+                                        <div id="fos_user_registration_form_dateNaissance" class="form-inline">
+                                            <select id="fos_user_registration_form_dateNaissance_day" name="fos_user_registration_form[dateNaissance][day]" class="form-control">
+                                                {% for d in 1..31 %}
+                                                    <option value="{{ loop.index }}">{{ d }}</option>
+                                                {% endfor %}
+
+                                            </select>
+                                            <select id="fos_user_registration_form_dateNaissance_month" name="fos_user_registration_form[dateNaissance][month]" class="form-control">
+                                                <option value="1">janv.</option>
+                                                <option value="2">févr.</option>
+                                                <option value="3">mars</option>
+                                                <option value="4">avr.</option>
+                                                <option value="5">mai</option>
+                                                <option value="6">juin</option>
+                                                <option value="7">juil.</option>
+                                                <option value="8">août</option>
+                                                <option value="9">sept.</option>
+                                                <option value="10">oct.</option>
+                                                <option value="11">nov.</option>
+                                                <option value="12">déc.</option>
+                                            </select>
+                                            <select id="fos_user_registration_form_dateNaissance_year" name="fos_user_registration_form[dateNaissance][year]" class="form-control">
+                                               {% for y in 1897..2017 %}
+                                                <option value="1">{{ y }}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group"><label class="control-label required" for="fos_user_registration_form_adress">Adresse</label><input type="text" id="fos_user_registration_form_adress" name="fos_user_registration_form[adress]" required="required" maxlength="1024" class="form-control"></div>
+                                    <div class="form-group"><label class="control-label required" for="fos_user_registration_form_phone_number">Numéro du téléphonne</label><input type="text" id="fos_user_registration_form_phone_number" name="fos_user_registration_form[phone_number]" required="required" class="form-control"></div>
+                                    <div class="form-group"><label class="control-label required" for="fos_user_registration_form_image">Image</label><input type="file" id="fos_user_registration_form_image" name="fos_user_registration_form[image]"></div>
+                                    <div class="form-group"><label class="control-label required" for="fos_user_registration_form_plainPassword_first">Entrer votre mot de passe</label><input type="password" id="fos_user_registration_form_plainPassword_first" name="fos_user_registration_form[plainPassword][first]" required="required" class="form-control"></div>
+                                    <div class="form-group"><label class="control-label required" for="fos_user_registration_form_plainPassword_second">Confirmer votre mot de passe</label><input type="password" id="fos_user_registration_form_plainPassword_second" name="fos_user_registration_form[plainPassword][second]" required="required" class="form-control"></div>
+                                    <input type="hidden" id="fos_user_registration_form__token" name="fos_user_registration_form[_token]" value="8LYM9Urk1HFSX7Q0QfKUUyTqIsO_s_hwS-wKHBV8gSw">
+                                </div>
+                                <div>
+                                    <input type="submit" id="envoyer" value="S'inscrire" class="form-control btn btn-warning">
+                                </div>
+                            </form>
+
+                        </div>
+
+
+
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" id="closeEchec">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{#=============================ModalTabs============================#}
+<style>
+    .login-color {
+        color: white;
+        cursor: pointer;
+    }
+
+</style>
+{#<script src="/asset-front/js/jquery-1.11.1.min.js"></script>#}
+{#{% if  app.request.get('echec') == 1%}#}
+    {#<script>#}
+        {#jQuery( document ).ready(function() {#}
+
+            {#jQuery("#loginModal").modal()#}
+        {#});#}
+    {#</script>#}
+
+{#{% endif %}#}

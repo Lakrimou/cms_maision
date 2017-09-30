@@ -1,0 +1,416 @@
+{% extends 'back/layout_admin.html.twig' %}
+
+{% block contant %}
+
+    <!--Page content-->
+    <!--===================================================-->
+
+    <div id="page-content">
+        <!--form method="post" action="{{ path('qouiqui_new') }}"-->
+
+        {{ form_start(form,{"attr":{'action': path('qouiqui_new') }})}}
+
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="panel">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">info personelle</h3>
+                    </div>
+                    <input type="submit" class="alert-danger">
+                    <!--prso info Form -->
+                    <!--===================================================-->
+
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label  class="control-label">Firstname</label>
+                                    <!--input name="q[firstname]" type="text" class="form-control"-->
+                                    {{ form_widget(form.qouiqui.firstName, {'attr' : {'class' : 'form-control'}}) }}
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label class="control-label">Secendname</label>
+                                    {{ form_widget(form.qouiqui.lastName, {'attr' : {'class' : 'form-control'}}) }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label class="control-label">Email</label>
+                                    {{ form_widget(form.qouiqui.mail, {'attr' : {'class' : 'form-control'}}) }}
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label class="control-label">Website</label>
+                                    {{ form_widget(form.qouiqui.website, {'attr' : {'class' : 'form-control'}}) }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label class="control-label">phone 1</label>
+                                    {{ form_widget(form.qouiqui.phone, {'attr' : {'class' : 'form-control'}}) }}
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label class="control-label">phone 2</label>
+
+                                    {{ form_widget(form.qouiqui.phone2, {'attr' : {'class' : 'form-control'}}) }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!--===================================================-->
+                    <!--End prso info Form -->
+
+                </div>
+            </div>
+            <div class="col-sm-6">
+
+                <div class="panel">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">contact information</h3>
+                    </div>
+
+                    <!--contact information-->
+                    <!--===================================================-->
+
+                    <div class="panel-body">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">pays</label>
+                            <div class="col-sm-9">
+                                {{ form_widget(form.pays, {'attr' : {'class' : 'form-control ville'}}) }}
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">ville</label>
+                            <div class="col-sm-9">
+                                {{ form_widget(form.ville, {'attr' : {'class' : 'form-control ville'}}) }}
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">address</label>
+                            <div class="col-sm-9">
+                                {{ form_widget(form.qouiqui.address1, {'attr' : {'class' : 'form-control'}}) }}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">adress 2</label>
+
+                            <div class="col-sm-9">
+                                {{ form_widget(form.qouiqui.adress2, {'attr' : {'class' : 'form-control'}}) }}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">code postal</label>
+                            <div class="col-sm-9">
+                                {{ form_widget(form.qouiqui.zipCode, {'attr' : {'class' : 'form-control'}}) }}
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                    <!--===================================================-->
+                    <!--Endcontact information-->
+
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="panel">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">info personelle</h3>
+                    </div>
+
+                    <!--prso info Form -->
+                    <!--===================================================-->
+
+                    <div class="panel-body">
+                        <div class="row">
+
+                            <div style="width:100%;height:400px;" id="myMap"></div><br/>
+                            <div>
+                                {{ form_widget(form.qouiqui.geoLat, {'attr' : {'class' : 'form-control','id':'latitude'}}) }}
+                                {{ form_widget(form.qouiqui.geoLong, {'attr' : {'class' : 'form-control','id':'longitude'}}) }}
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!--===================================================-->
+                    <!--End prso info Form -->
+
+                </div>
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Gategory detail</h3>
+                    </div>
+
+
+                    <!--category section-->
+                    <!--===================================================-->
+
+
+
+                    <div class="tab-base tab-stacked-left">
+
+                        <!--Nav tabs-->
+                        <ul class="nav nav-tabs">
+                            <li class="active">
+                                <a data-toggle="tab" href="#demo-stk-lft-tab-1">category</a>
+                            </li>
+                            <li>
+                                <a data-toggle="tab" href="#demo-stk-lft-tab-2">sub category</a>
+                            </li>
+
+                        </ul>
+
+                        <!--Tabs Content-->
+                        <div class="tab-content">
+                            <div id="demo-stk-lft-tab-1" class="tab-pane fade active in">
+                                <p class="text-main text-semibold">Category</p>
+                                <div class="panel">
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title">Category</h3>
+                                    </div>
+
+
+
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            <div class="col-md-4 mar-btm">
+
+                                                {{ form_widget(form.category, {'attr' : {'class' : 'form-control'}}) }}
+                                            </div>
+
+                                        </div>
+                                        <textarea placeholder="Message" rows="13" class="form-control"></textarea>
+                                    </div>
+
+
+
+                                </div>
+                            </div>
+                            <div id="demo-stk-lft-tab-2" class="tab-pane fade">
+                                <p class="text-main text-semibold">Sous category</p>
+                                <div class="panel">
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title">sous category</h3>
+                                    </div>
+
+
+
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            <div class="col-md-4 mar-btm">
+
+                                                {{ form_widget(form.scategory, {'attr' : {'class' : 'form-control'}}) }}
+                                            </div>
+
+
+                                        </div>
+                                        {#{{ form_widget(form.scategory.details, {'attr' : {'class' : 'form-control','placeholder':'Description','rows':'13'}}) }}#}
+                                    </div>
+
+
+
+
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <!--===================================================-->
+                        <!--End category-->
+
+
+                    </div>
+                </div>
+
+            </div>
+
+
+
+        </div>
+
+        <div class="control-group" id="fields">
+
+
+            <div class="controls" id="profs">
+
+
+                <div class="btn-group select-btns"></div>
+                <div class="panel col-md-8">
+                    <div class="panel-heading clearfix">
+                        <div class="col-md-6 col-xs-6">
+                            <h3>Opening Times</h3>
+                        </div>
+                        <div class="col-md-6 col-xs-6">
+                            <p class="success pull-right live-open">--</p>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th></th>
+                                <th>Morning</th>
+                                <th>Afternoon</th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <tr class="day-monday" data-open="9:00" data-close="17:00">
+                                <th>Monday</th>
+                                <td> <input autocomplete="off" class="input"  name="opening[day1][]" type="text" placeholder="Clic Here To Put The Time" data-items="8"/></td>
+                                <td> <input autocomplete="off" class="input"  name="opening[day1][]" type="text" placeholder="Clic Here To Put The Time" data-items="8"/></td>
+                                <td class="stat">--</td>
+                            </tr>
+                            <tr class="day-tuesday" data-open="9:00" data-close="20:00">
+                                <th>Tuesday</th>
+                                <td> <input autocomplete="off" class="input"  name="opening[day2][]" type="text" placeholder="Clic Here To Put The Time" data-items="8"/></td>
+                                <td> <input autocomplete="off" class="input"  name="opening[day2][]" type="text" placeholder="Clic Here To Put The Time" data-items="8"/></td>
+                                <td class="stat">--</td>
+                            </tr>
+                            <tr class="day-wednesday" data-open="9:00" data-close="17:00">
+                                <th>Wednesday</th>
+                                <td> <input autocomplete="off" class="input"  name="opening[day3][]" type="text" placeholder="Clic Here To Put The Time" data-items="8"/></td>
+                                <td> <input autocomplete="off" class="input"  name="opening[day3][]" type="text" placeholder="Clic Here To Put The Time" data-items="8"/></td>
+                                <td class="stat">--</td>
+                            </tr>
+                            <tr class="day-thursday" data-open="9:00" data-close="17:00">
+                                <th>Thursday</th>
+                                <td> <input autocomplete="off" class="input"  name="opening[day4][]" type="text" placeholder="Clic Here To Put The Time" data-items="8"/></td>
+                                <td> <input autocomplete="off" class="input"  name="opening[day4][]" type="text" placeholder="Clic Here To Put The Time" data-items="8"/></td>
+                                <td class="stat">--</td>
+                            </tr>
+                            <tr class="day-friday" data-open="9:00" data-close="17:00">
+                                <th>Friday</th>
+                                <td> <input autocomplete="off" class="input"  name="opening[day5][]" type="text" placeholder="Clic Here To Put The Time" data-items="8"/></td>
+                                <td> <input autocomplete="off" class="input"  name="opening[day5][]" type="text" placeholder="Clic Here To Put The Time" data-items="8"/></td>
+                                <td class="stat">--</td>
+                            </tr>
+                            <tr class="day-saturday" data-open="9:00" data-close="17:00">
+                                <th>Saturday</th>
+                                <td> <input autocomplete="off" class="input"  name="opening[day6][]" type="text" placeholder="Clic Here To Put The Time" data-items="8"/></td>
+                                <td> <input autocomplete="off" class="input"  name="opening[day6][]" type="text" placeholder="Clic Here To Put The Time" data-items="8"/></td>
+                                <td class="stat">--</td>
+                            </tr>
+                            <tr class="day-sunday" data-open="9:00" data-close="17:00">
+                                <th>Sunday</th>
+                                <td> <input autocomplete="off" class="input"  name="opening[day7][]" type="text" placeholder="Clic Here To Put The Time" data-items="8"/></td>
+                                <td> <input autocomplete="off" class="input"  name="opening[day7][]" type="text" placeholder="Clic Here To Put The Time" data-items="8"/></td>
+                                <td class="stat">--</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+
+
+
+                <script >
+                    $(".input").timepicki();
+                </script>
+
+            </div>
+        </div>
+
+
+        {{ form_end(form) }}
+        <!--/form-->
+        <style>
+
+            #field {
+                margin-bottom:20px;
+            }
+
+        </style>
+
+    </div>
+
+
+    <!--===================================================-->
+    <!--End page content-->
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyBTdMydc9PUE0gPkcgjRZXOuFPXc5BUSrg"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+
+    <script type="text/javascript">
+        var map;
+        var marker;
+        var myLatlng = new google.maps.LatLng(36.679843,10.207210);
+        var geocoder = new google.maps.Geocoder();
+        var infowindow = new google.maps.InfoWindow();
+        function initialize(){
+            var mapOptions = {
+                zoom: 7,
+                center: myLatlng,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            };
+
+            map = new google.maps.Map(document.getElementById("myMap"), mapOptions);
+
+            marker = new google.maps.Marker({
+                map: map,
+                position: myLatlng,
+                draggable: true
+            });
+
+            geocoder.geocode({'latLng': myLatlng }, function(results, status) {
+                if (status == google.maps.GeocoderStatus.OK) {
+                    if (results[0]) {
+                        $('#address').val(results[0].formatted_address);
+                        $('#latitude').val(marker.getPosition().lat());
+                        $('#longitude').val(marker.getPosition().lng());
+                        infowindow.setContent(results[0].formatted_address);
+                        infowindow.open(map, marker);
+                    }
+                }
+            });
+
+
+            google.maps.event.addListener(marker, 'dragend', function() {
+
+                geocoder.geocode({'latLng': marker.getPosition()}, function(results, status) {
+                    if (status == google.maps.GeocoderStatus.OK) {
+                        if (results[0]) {
+                            $('#adminbundle_ngn_qouiqui_address1').val(results[0].formatted_address);
+                            $('#adminbundle_ngn_qouiqui_geoLat').val(marker.getPosition().lat());
+                            $('#adminbundle_ngn_qouiqui_geoLong').val(marker.getPosition().lng());
+                            infowindow.setContent(results[0].formatted_address);
+                            infowindow.open(map, marker);
+                        }
+                    }
+                });
+            });
+
+        }
+
+        google.maps.event.addDomListener(window, 'load', initialize);
+    </script>
+{% endblock %}
+
+

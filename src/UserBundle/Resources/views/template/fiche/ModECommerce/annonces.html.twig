@@ -1,0 +1,834 @@
+<link href='{{ asset('tpl/fiche/css/ecommerce.css') }}' rel='stylesheet' type='text/css'>
+<section id="section-annonces" class="property-details padding">
+    <div class="container-fluid">
+
+        {% if attributes.connected %}
+            <div class="shake pull-right margin-bott-40 numService">
+                <button type="button" class="theme-btn button11 btn-style-one pull-right" data-toggle="modal" data-target="#modalGestionProduits">Gérrer les produits</button>
+            </div>
+        {% endif %}
+
+        <div class="row">
+            <div class="col-xs-12 bottom40 text-center">
+                <h2 class="text-uppercase">Nos <span class="color_red">produits</span></h2>
+                <div class="line_1"></div>
+                <div class="line_2"></div>
+                <div class="line_3"></div>
+
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="col-md-12">
+            <div class="row">
+
+
+                <div id="wrapper">
+                    <div class="cart-icon-top"></div>
+                    <div class="cart-icon-bottom"></div>
+                    <div id="checkout">CHECKOUT</div>
+                    <div id="info">
+                        {#<p class="i1">Add to cart interaction prototype by Virgil Pana</p>#}
+                        {#<p> Follow me on <a href="https://dribbble.com/virgilpana" style="color:#ea4c89" target="_blank">Dribbble</a> | <a style="color:#2aa9e0" href="https://twitter.com/virgil_pana" target="_blank">Twitter</a></p>#}
+                    </div>
+                    <div id="header">
+                        <ul>
+                            <li><a href="">Homme</a></li>
+                            <li><a href="">Femme</a></li>
+                            <li><a href="">ENFANT</a></li>
+                            <li><a href="">CHAUSSURES</a></li>
+                        </ul>
+                    </div>
+
+                    <div id="sidebar" class="col-md-2">
+                        <h3>Pannier</h3>
+                        <div id="cart">
+                            <span class="empty">Aucun article dans le panier.</span>
+                        </div>
+
+                        <h3>CATÉGORIES</h3>
+                        <div class="checklist categories">
+                            <ul>
+                                <li><a href=""><span></span>New Arivals</a></li>
+                                <li><a href=""><span></span>Accesories</a></li>
+                                <li><a href=""><span></span>Bags</a></li>
+                                <li><a href=""><span></span>Dressed</a></li>
+                                <li><a href=""><span></span>Jackets</a></li>
+                                <li><a href=""><span></span>jewelry</a></li>
+                                <li><a href=""><span></span>Shoes</a></li>
+                                <li><a href=""><span></span>Shirts</a></li>
+                                <li><a href=""><span></span>Sweaters</a></li>
+                                <li><a href=""><span></span>T-shirts</a></li>
+                            </ul>
+                        </div>
+
+                        <h3>COLORS</h3>
+                        <div class="checklist colors">
+                            <ul>
+                                <li><a href=""><span></span>Beige</a></li>
+                                <li><a href=""><span style="background:#222"></span>Black</a></li>
+                                <li><a href=""><span style="background:#6e8cd5"></span>Blue</a></li>
+                                <li><a href=""><span style="background:#f56060"></span>Brown</a></li>
+                                <li><a href=""><span style="background:#44c28d"></span>Green</a></li>
+                            </ul>
+
+                            <ul>
+                                <li><a href=""><span style="background:#999"></span>Grey</a></li>
+                                <li><a href=""><span style="background:#f79858"></span>Orange</a></li>
+                                <li><a href=""><span style="background:#b27ef8"></span>Purple</a></li>
+                                <li><a href=""><span style="background:#f56060"></span>Red</a></li>
+                                <li><a href=""><span style="background:#fff;border: 1px solid #e8e9eb;width:13px;height:13px;"></span>White</a></li>
+                            </ul>
+                        </div>
+
+                        <h3>SIZES</h3>
+                        <div class="checklist sizes">
+                            <ul>
+                                <li><a href=""><span></span>XS</a></li>
+                                <li><a href=""><span></span>S</a></li>
+                                <li><a href=""><span></span>M</a></li>
+                            </ul>
+
+                            <ul>
+                                <li><a href=""><span></span>L</a></li>
+                                <li><a href=""><span></span>XL</a></li>
+                                <li><a href=""><span></span>XXL</a></li>
+                            </ul>
+                        </div>
+
+                        <h3>PRICE RANGE</h3>
+                        <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/245657/price-range.png" alt=""/>
+                    </div>
+
+
+                    <div id="grid" class="col-md-10">
+                        <div id="grid-selector">
+                            <div id="grid-menu">
+                                Vue:
+                                <ul>
+                                    <li class="largeGrid"><a href=""></a></li>
+                                    <li class="smallGrid"><a class="active" href=""></a></li>
+                                </ul>
+                            </div>
+
+                            Afficher 1-9 sur 48 résultats
+                        </div>
+
+                        {% for i in 0..15 %}
+                            <div class="product col-md-3">
+                                <div class="info-large">
+                                    <h4>FLUTED HEM DRESS</h4>
+                                    <div class="sku">
+                                        PRODUCT SKU: <strong>89356</strong>
+                                    </div>
+
+                                    <div class="price-big">
+                                        <span>$43</span> $39
+                                    </div>
+
+                                    <h3>COLORS</h3>
+                                    <div class="colors-large">
+                                        <ul>
+                                            <li><a href="" style="background:#222"><span></span></a></li>
+                                            <li><a href="" style="background:#6e8cd5"><span></span></a></li>
+                                            <li><a href="" style="background:#f56060"><span></span></a></li>
+                                            <li><a href="" style="background:#44c28d"><span></span></a></li>
+                                        </ul>
+                                    </div>
+
+                                    <h3>SIZE</h3>
+                                    <div class="sizes-large">
+                                        <span>XS</span>
+                                        <span>S</span>
+                                        <span>M</span>
+                                        <span>L</span>
+                                        <span>XL</span>
+                                        <span>XXL</span>
+                                    </div>
+
+                                    <button class="add-cart-large">Ajouter au panier</button>
+
+                                </div>
+                                <div class="make3D">
+                                    <div class="product-front">
+                                        <div class="shadow"></div>
+                                        <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/245657/1.jpg" alt=""/>
+                                        <div class="image_overlay"></div>
+                                        <div class="add_to_cart">Ajouter au panier</div>
+                                        <div class="view_gallery">Voir la galerie</div>
+                                        <div class="stats">
+                                            <div class="stats-container">
+                                                <span class="product_price">$39</span>
+                                                <span class="product_name">FLUTED HEM DRESS</span>
+                                                <p>Summer dress</p>
+
+                                                <div class="product-options">
+                                                    <strong>TAILLE</strong>
+                                                    <span>XS, S, M, L, XL, XXL</span>
+                                                    <strong>COULEURS</strong>
+                                                    <div class="colors">
+                                                        <div class="c-blue"><span></span></div>
+                                                        <div class="c-red"><span></span></div>
+                                                        <div class="c-white"><span></span></div>
+                                                        <div class="c-green"><span></span></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="product-back">
+                                        <div class="shadow"></div>
+                                        <div class="carousel">
+                                            <ul class="carousel-container">
+                                                <li><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/245657/1.jpg" alt=""/></li>
+                                                <li><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/245657/2.jpg" alt=""/></li>
+                                                <li><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/245657/3.jpg" alt=""/></li>
+                                            </ul>
+                                            <div class="arrows-perspective">
+                                                <div class="carouselPrev">
+                                                    <div class="y"></div>
+                                                    <div class="x"></div>
+                                                </div>
+                                                <div class="carouselNext">
+                                                    <div class="y"></div>
+                                                    <div class="x"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="flip-back">
+                                            <div class="cy"></div>
+                                            <div class="cx"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</section>
+
+
+{% if attributes.connected %}
+    <!-- ======================================== Modal Gestion des Produits ======================================== -->
+    <div class="modal fade" id="modalGestionProduits" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Gestion des produits</h4>
+                </div>
+                <div class="modal-body">
+
+                    <div class="clearfix">
+                        <button class="btn btn-primary btn-primary-new pull-right" data-toggle="modal" data-target="#modalNouveauProduit"><i class="fa fa-plus-circle"></i>&nbsp; Nouveau produit</button>
+                    </div>
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Fermer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endif %}
+
+
+
+
+{% if attributes.connected %}
+    <div id="blockSelectCategory" style="display: none;">
+        {#cat-home#}
+        <select id="cat-homme">
+            <optgroup label="Vêtements">
+                <option value="1" data-cat="homme">Tous les vêtements</option>
+                <option value="2" data-cat="homme">Manteaux</option>
+                <option value="3" data-cat="homme">Veste formelle</option>
+                <option value="4" data-cat="homme">Vestes</option>
+                <option value="5" data-cat="homme">jeans</option>
+                <option value="6" data-cat="homme">Polo</option>
+                <option value="7" data-cat="homme">Chemises</option>
+                <option value="8" data-cat="homme">Court</option>
+                <option value="9" data-cat="homme">Chandails</option>
+                <option value="10" data-cat="homme">Sweatshirts</option>
+                <option value="11" data-cat="homme">Maillots de bain</option>
+                <option value="12" data-cat="homme">T-shirts</option>
+                <option value="13" data-cat="homme">Pantalon de survêtement</option>
+                <option value="14" data-cat="homme">Pantalon</option>
+            </optgroup>
+
+            <optgroup label="Chaussures">
+                <option value="15" data-cat="homme">Tous les chaussures</option>
+                <option value="16" data-cat="homme">Bottines</option>
+                <option value="17" data-cat="homme">Chaussures plates</option>
+                <option value="18" data-cat="homme">Tongs</option>
+                <option value="19" data-cat="homme">Lacer</option>
+                <option value="20" data-cat="homme">Mocassins</option>
+                <option value="21" data-cat="homme">Baskets</option>
+            </optgroup>
+
+            <optgroup label="Des sacs">
+                <option value="22" data-cat="homme">Tous les sacs</option>
+                <option value="23" data-cat="homme">Porte-documents</option>
+                <option value="24" data-cat="homme">Sacs Crossbody</option>
+                <option value="25" data-cat="homme">Sacs à dos</option>
+                <option value="26" data-cat="homme">Sacs de voyage</option>
+            </optgroup>
+
+            <optgroup label="Accessoires">
+                <option value="27" data-cat="homme">Tous les accessoires</option>
+                <option value="28" data-cat="homme">Ceintures</option>
+                <option value="29" data-cat="homme">Des lunettes de soleil</option>
+                <option value="30" data-cat="homme">Portefeuilles</option>
+                <option value="31" data-cat="homme">Montres</option>
+            </optgroup>
+
+            <optgroup label="Saison">
+                <option value="32" data-cat="homme">Toute l'année</option>
+                <option value="33" data-cat="homme">Automne hiver</option>
+                <option value="34" data-cat="homme">Printemps été</option>
+            </optgroup>
+        </select>
+
+        {#cat-femme#}
+        <select id="cat-femme">
+            <optgroup label="Vêtements">
+                <option value="1" data-cat="femme">Tous les vêtements</option>
+                <option value="2" data-cat="femme">Manteaux</option>
+                <option value="3" data-cat="femme">Robes</option>
+                <option value="4" data-cat="femme">Veste formelle</option>
+                <option value="5" data-cat="femme">Vestes</option>
+                <option value="6" data-cat="femme">jeans</option>
+                <option value="7" data-cat="femme">Jupes</option>
+                <option value="8" data-cat="femme">Chandails</option>
+                <option value="9" data-cat="femme">Sweatshirts</option>
+                <option value="10" data-cat="femme">Maillots de bain</option>
+                <option value="11" data-cat="femme">T-shirts</option>
+                <option value="12" data-cat="femme">Tops</option>
+                <option value="13" data-cat="femme">Pantalon de survêtement</option>
+                <option value="14" data-cat="femme">Pantalon</option>
+            </optgroup>
+
+
+            <optgroup label="Chaussures">
+                <option value="15" data-cat="femme">Tous les chaussures</option>
+                <option value="16" data-cat="femme">Bottines</option>
+                <option value="17" data-cat="femme">Bottes</option>
+                <option value="18" data-cat="femme">Lacer</option>
+                <option value="19" data-cat="femme">Pompes et talons</option>
+                <option value="20" data-cat="femme">Des sandales</option>
+                <option value="21" data-cat="femme">Baskets</option>
+            </optgroup>
+            <optgroup label="des sacs">
+                <option value="22" data-cat="femme">Tous les sacs</option>
+                <option value="23" data-cat="femme">Porte-documents</option>
+                <option value="24" data-cat="femme">Sacs d'embrayage</option>
+                <option value="25" data-cat="femme">Sacs Crossbody</option>
+                <option value="26" data-cat="femme">Sacs à main</option>
+                <option value="27" data-cat="femme">Sacs à provisions</option>
+                <option value="28" data-cat="femme">Sacs à bandoulière</option>
+            </optgroup>
+
+
+            <optgroup label="Accessoires">
+                <option value="29" data-cat="femme">Tous les accessoires</option>
+                <option value="30" data-cat="femme">Des lunettes de soleil</option>
+                <option value="31" data-cat="femme">Portefeuilles</option>
+                <option value="32" data-cat="femme">Montres</option>
+            </optgroup>
+
+            <optgroup label="Saison">
+                <option value="33" data-cat="femme">Toute l'année</option>
+                <option value="34" data-cat="femme">Automne hiver</option>
+                <option value="35" data-cat="femme">Printemps été</option>
+            </optgroup>
+        </select>
+
+        {#cat-chaussures#}
+        <select id="cat-chaussures">
+            <optgroup label="Le genre">
+                <option value="1" data-cat="chaussures">Tous le genre</option>
+                <option value="2" data-cat="chaussures">Hommes</option>
+                <option value="3" data-cat="chaussures">Unisexe</option>
+                <option value="4" data-cat="chaussures">Femmes</option>
+            </optgroup>
+            <optgroup label="Saison">
+                <option value="5" data-cat="chaussures">Toute l'année</option>
+                <option value="6" data-cat="chaussures">Automne hiver</option>
+                <option value="7" data-cat="chaussures">Printemps été</option>
+            </optgroup>
+            <optgroup label="Type">
+                <option value="8" data-cat="chaussures">Tous les type</option>
+                <option value="9" data-cat="chaussures">Bottines</option>
+                <option value="10" data-cat="chaussures">Ballerines</option>
+                <option value="11" data-cat="chaussures">Bottes</option>
+                <option value="12" data-cat="chaussures">Sabots</option>
+                <option value="13" data-cat="chaussures">Robes</option>
+                <option value="14" data-cat="chaussures">Chaussures plates</option>
+                <option value="15" data-cat="chaussures">Tongs</option>
+                <option value="16" data-cat="chaussures">Lacer</option>
+                <option value="17" data-cat="chaussures">Mocassins</option>
+                <option value="18" data-cat="chaussures">Pompes et talons</option>
+                <option value="19" data-cat="chaussures">Des sandales</option>
+                <option value="20" data-cat="chaussures">Baskets</option>
+                <option value="21" data-cat="chaussures">Cales</option>
+            </optgroup>
+        </select>
+
+        {#cat-sacs#}
+        <select id="cat-sacs">
+            <option value="1" data-cat="sacs">Porte-documents</option>
+            <option value="2" data-cat="sacs">Sacs d'embrayage</option>
+            <option value="3" data-cat="sacs">Sacs Crossbody</option>
+            <option value="4" data-cat="sacs">Sacs à main</option>
+            <option value="5" data-cat="sacs">Sacs à dos</option>
+            <option value="6" data-cat="sacs">Sacs à provisions</option>
+            <option value="7" data-cat="sacs">Sacs à bandoulière</option>
+            <option value="8" data-cat="sacs">les valises</option>
+            <option value="9" data-cat="sacs">Sacs de voyage</option>
+        </select>
+    </div>
+
+    <!-- ======================================== Modal Nouveau Produit ======================================== -->
+    <div class="modal fade" id="modalNouveauProduit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Nouveau produit</h4>
+                </div>
+                <form id="form-prod-new" method="POST" action="{{ path('ecommerce_mode_nouveau_produit') }}" enctype="multipart/form-data">
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-9">
+
+                                {#======================= cat & sub cat ==================#}
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <fieldset>
+                                            <legend>CATÉGORIES</legend>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="exampleInputEmail1">Catégorie associées*</label>
+                                                        <select name="prod[cat]" class="select24 form-control selectCategory" required>
+                                                            <option disabled selected>Choisissez une catégorie</option>
+                                                            <option value="homme">Homme</option>
+                                                            <option value="femme">Femme</option>
+                                                            <option value="enfant">Enfant</option>
+                                                            <option value="chaussures">Chaussures</option>
+                                                            <option value="sacs">Sacs</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="exampleInputEmail1">Sous catégorie associées*</label>
+                                                        <select class="select24 form-control selectSubCategory" multiple="multiple" required></select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </fieldset>
+                                    </div>
+                                </div>
+
+                                {#================= nom & ref =================#}
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <div class="form-group">
+                                            <label for="prod-new-name">Nom de votre produit*</label>
+                                            <input type="text" class="form-control" name="prod[name]" id="prod-new-name" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="prod-new-reference">Référence*
+                                                <button type="button" class="btn btn-default btn-tooltip" data-toggle="tooltip" data-placement="top" title="Votre référence pour ce produit. Caractères spéciaux autorisés : .-_#."><i class="fa fa-question" aria-hidden="true"></i></button>
+                                            </label>
+                                            <input type="text" id="prod-new-reference" name="prod[reference]" class="form-control" required>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="prod-new-name">Résumé*</label>
+                                            <textarea class="tinymce">Le résumé est une phrase qui décrit brièvement votre produit.</textarea>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="prod-new-name">Description*</label>
+                                            <textarea class="tinymce"></textarea>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="row">
+                                    {#couleur#}
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="prod-new-name">Couleurs*</label>
+                                            <select id="prod-new-color" name="prod[color][]" multiple="multiple" class="form-control bfh-selectbox" data-allow-clear="true" data-name="selectbox3" data-value="12" data-filter="true">
+                                                <option value="Abricot-#E67E30" data-icon="#E67E30">Abricot</option>
+                                                <option value="Acajou-#88421D" data-icon="#88421D">Acajou</option>
+                                                <option value="Aigue-marine-#79F8F8" data-icon="#79F8F8">Aigue-marine</option>
+                                                <option value="Alezan (chevaux)-#A76726" data-icon="#A76726">Alezan (chevaux)</option>
+                                                <option value="Amande-#82C46C" data-icon="#82C46C">Amande</option>
+                                                <option value="Amarante-#91283B" data-icon="#91283B">Amarante</option>
+                                                <option value="Ambre-#F0C300" data-icon="#F0C300">Ambre</option>
+                                                <option value="Améthyste-#884DA7" data-icon="#884DA7">Améthyste</option>
+                                                <option value="Anthracite-#303030" data-icon="#303030">Anthracite</option>
+                                                <option value="Aquilain (chevaux)-#AD4F09" data-icon="#AD4F09">Aquilain (chevaux)</option>
+                                                <option value="Ardoise-#5A5E6B" data-icon="#5A5E6B">Ardoise</option>
+                                                <option value="Argent (héraldique)-#FFFFFF" data-icon="#FFFFFF">Argent (héraldique)</option>
+                                                <option value="Aubergine-#370028" data-icon="#370028">Aubergine</option>
+                                                <option value="Auburn (cheveux)-#9D3E0C" data-icon="#9D3E0C">Auburn (cheveux)</option>
+                                                <option value="Aurore-#FFCB60" data-icon="#FFCB60">Aurore</option>
+                                                <option value="Avocat-#568203" data-icon="#568203">Avocat</option>
+                                                <option value="Azur-#007FFF" data-icon="#007FFF">Azur</option>
+                                                <option value="Azur (héraldique)-#1E7FCB" data-icon="#1E7FCB">Azur (héraldique)</option>
+                                                <option value="Baillet (chevaux, vieilli)-#AE642D" data-icon="#AE642D">Baillet (chevaux, vieilli)</option>
+                                                <option value="Basané (teint)-#8B6C42" data-icon="#8B6C42">Basané (teint)</option>
+                                                <option value="Beige ou Bureau-#C8AD7F" data-icon="#C8AD7F">Beige ou Bureau</option>
+                                                <option value="Beurre-#F0E36B" data-icon="#F0E36B">Beurre</option>
+                                                <option value="Bis-#766F64" data-icon="#766F64">Bis</option>
+                                                <option value="Bisque-#FFE4C4" data-icon="#FFE4C4">Bisque</option>
+                                                <option value="Bistre-#856D4D" data-icon="#856D4D">Bistre</option>
+                                                <option value="Bitume (pigment)-#4E3D28" data-icon="#4E3D28">Bitume (pigment)</option>
+                                                <option value="Blanc-#FFFFFF" data-icon="#FFFFFF">Blanc</option>
+                                                <option value="Blanc cassé-#FEFEE2" data-icon="#FEFEE2">Blanc cassé</option>
+                                                <option value="Blanc lunaire-#F4FEFE" data-icon="#F4FEFE">Blanc lunaire</option>
+                                                <option value="Blé-#E8D630" data-icon="#E8D630">Blé</option>
+                                                <option value="Bleu acier-#3A8EBA" data-icon="#3A8EBA">Bleu acier</option>
+                                                <option value="Bleu barbeau ou bleuet-#5472AE" data-icon="#5472AE">Bleu barbeau ou bleuet</option>
+                                                <option value="Bleu canard-#048B9A" data-icon="#048B9A">Bleu canard</option>
+                                                <option value="Bleu céleste-#26C4EC" data-icon="#26C4EC">Bleu céleste</option>
+                                                <option value="Bleu charrette-#8EA2C6" data-icon="#8EA2C6">Bleu charrette</option>
+                                                <option value="Bleu ciel-#77B5FE" data-icon="#77B5FE">Bleu ciel</option>
+                                                <option value="Bleu de cobalt (pigment)-#22427C" data-icon="#22427C">Bleu de cobalt (pigment)</option>
+                                                <option value="Bleu de Prusse (pigment), de Berlin ou bleu hussard-#24445C" data-icon="#24445C">Bleu de Prusse (pigment), de Berlin ou bleu hussard</option>
+                                                <option value="Bleu électrique-#2C75FF" data-icon="#2C75FF">Bleu électrique</option>
+                                                <option value="Bleu givré-#80D0D0" data-icon="#80D0D0">Bleu givré</option>
+                                                <option value="Bleu Klein &tm;-#002FA7" data-icon="#002FA7">Bleu Klein &tm;</option>
+                                                <option value="Bleu Majorelle-#6050DC" data-icon="#6050DC">Bleu Majorelle</option>
+                                                <option value="Bleu marine-#03224C" data-icon="#03224C">Bleu marine</option>
+                                                <option value="Bleu nuit-#0F056B" data-icon="#0F056B">Bleu nuit</option>
+                                                <option value="Bleu outremer-#1B019B" data-icon="#1B019B">Bleu outremer</option>
+                                                <option value="Bleu paon-#067790" data-icon="#067790">Bleu paon</option>
+                                                <option value="Bleu Persan-#6600FF" data-icon="#6600FF">Bleu Persan</option>
+                                                <option value="Bleu pétrole-#1D4851" data-icon="#1D4851">Bleu pétrole</option>
+                                                <option value="Bleu-#0080FF" data-icon="#0080FF">Bleu</option>
+                                                <option value="Bleu roi ou de France-#318CE7" data-icon="#318CE7">Bleu roi ou de France</option>
+                                                <option value="Bleu turquin-#425B8A" data-icon="#425B8A">Bleu turquin</option>
+                                                <option value="Blond vénitien (cheveux)-#E7A854" data-icon="#E7A854">Blond vénitien (cheveux)</option>
+                                                <option value="Blond (cheveux)-#E2BC74" data-icon="#E2BC74">Blond (cheveux)</option>
+                                                <option value="Bordeaux-#6D071A" data-icon="#6D071A">Bordeaux</option>
+                                                <option value="Bouton d'or-#FCDC12" data-icon="#FCDC12">Bouton d'or</option>
+                                                <option value="Brique-#842E1B" data-icon="#842E1B">Brique</option>
+                                                <option value="Bronze-#614E1A" data-icon="#614E1A">Bronze</option>
+                                                <option value="Brou de noix-#3F2204" data-icon="#3F2204">Brou de noix</option>
+                                                <option value="Brun (cheveux)-#5B3C11" data-icon="#5B3C11">Brun (cheveux)</option>
+                                                <option value="Caca d'oie-#CDCD0D" data-icon="#CDCD0D">Caca d'oie</option>
+                                                <option value="Cacao-#614B3A" data-icon="#614B3A">Cacao</option>
+                                                <option value="Cachou (pigments)-#2F1B0C" data-icon="#2F1B0C">Cachou (pigments)</option>
+                                                <option value="Cæruleum-#357AB7" data-icon="#357AB7">Cæruleum</option>
+                                                <option value="Café-#462E01" data-icon="#462E01">Café</option>
+                                                <option value="Café au lait-#785E2F" data-icon="#785E2F">Café au lait</option>
+                                                <option value="Cannelle-#7E5835" data-icon="#7E5835">Cannelle</option>
+                                                <option value="Capucine-#FF5E4D" data-icon="#FF5E4D">Capucine</option>
+                                                <option value="Caramel (pigments)-#7E3300" data-icon="#7E3300">Caramel (pigments)</option>
+                                                <option value="Carmin (pigment)-#960018" data-icon="#960018">Carmin (pigment)</option>
+                                                <option value="Carotte-#F4661B" data-icon="#F4661B">Carotte</option>
+                                                <option value="Chamois-#D0C07A" data-icon="#D0C07A">Chamois</option>
+                                                <option value="Chartreuse-#7FFF00" data-icon="#7FFF00">Chartreuse</option>
+                                                <option value="Châtain (cheveux)-#8B6C42" data-icon="#8B6C42">Châtain (cheveux)</option>
+                                                <option value="Chaudron-#85530F" data-icon="#85530F">Chaudron</option>
+                                                <option value="Chocolat-#5A3A22" data-icon="#5A3A22">Chocolat</option>
+                                                <option value="Cinabre (pigment)-#DB1702" data-icon="#DB1702">Cinabre (pigment)</option>
+                                                <option value="Citrouille-#DF6D14" data-icon="#DF6D14">Citrouille</option>
+                                                <option value="Coquille d'œuf-#FDE9E0" data-icon="#FDE9E0">Coquille d'œuf</option>
+                                                <option value="Corail-#E73E01" data-icon="#E73E01">Corail</option>
+                                                <option value="Cramoisi-#DC143C" data-icon="#DC143C">Cramoisi</option>
+                                                <option value="Crème-#FDF1B8" data-icon="#FDF1B8">Crème</option>
+                                                <option value="Cuisse de nymphe-#FEE7F0" data-icon="#FEE7F0">Cuisse de nymphe</option>
+                                                <option value="Cuisse de nymphe émue-#FF69B4" data-icon="#FF69B4">Cuisse de nymphe émue</option>
+                                                <option value="Cuivre-#B36700" data-icon="#B36700">Cuivre</option>
+                                                <option value="Cyan-#2BFAFA" data-icon="#2BFAFA">Cyan</option>
+                                                <option value="Écarlate-#ED0000" data-icon="#ED0000">Écarlate</option>
+                                                <option value="Écru-#FEFEE0" data-icon="#FEFEE0">Écru</option>
+                                                <option value="Émeraude-#01D758" data-icon="#01D758">Émeraude</option>
+                                                <option value="Fauve-#AD4F09" data-icon="#AD4F09">Fauve</option>
+                                                <option value="Flave-#E6E697" data-icon="#E6E697">Flave</option>
+                                                <option value="Fraise-#BF3030" data-icon="#BF3030">Fraise</option>
+                                                <option value="Fraise écrasée-#A42424" data-icon="#A42424">Fraise écrasée</option>
+                                                <option value="Framboise-#C72C48" data-icon="#C72C48">Framboise</option>
+                                                <option value="Fuchsia-#FD3F92" data-icon="#FD3F92">Fuchsia</option>
+                                                <option value="Fumée-#BBD2E1" data-icon="#BBD2E1">Fumée</option>
+                                                <option value="Garance (pigment)-#EE1010" data-icon="#EE1010">Garance (pigment)</option>
+                                                <option value="Glauque-#649B88" data-icon="#649B88">Glauque</option>
+                                                <option value="Glycine-#C9A0DC" data-icon="#C9A0DC">Glycine</option>
+                                                <option value="Grège-#BBAE98" data-icon="#BBAE98">Grège</option>
+                                                <option value="Grenadine-#E9383F" data-icon="#E9383F">Grenadine</option>
+                                                <option value="Grenat-#6E0B14" data-icon="#6E0B14">Grenat</option>
+                                                <option value="Gris-#606060" data-icon="#606060">Gris</option>
+                                                <option value="Gris acier-#AFAFAF" data-icon="#AFAFAF">Gris acier</option>
+                                                <option value="Gris de Payne (mélange de pigments)-#677179" data-icon="#677179">Gris de Payne (mélange de pigments)</option>
+                                                <option value="Gris fer-#7F7F7F" data-icon="#7F7F7F">Gris fer</option>
+                                                <option value="Gris perle-#CECECE" data-icon="#CECECE">Gris perle</option>
+                                                <option value="Groseille-#CF0A1D" data-icon="#CF0A1D">Groseille</option>
+                                                <option value="Guède ou Pastel des teinturiers (pigment)-#56739A" data-icon="#56739A">Guède ou Pastel des teinturiers (pigment)</option>
+                                                <option value="Gueules (héraldique)-#E21313" data-icon="#E21313">Gueules (héraldique)</option>
+                                                <option value="Héliotrope-#DF73FF" data-icon="#DF73FF">Héliotrope</option>
+                                                <option value="Incarnat-#FF6F7D" data-icon="#FF6F7D">Incarnat</option>
+                                                <option value="Indigo-#791CF8" data-icon="#791CF8">Indigo</option>
+                                                <option value="Indigo (teinture)-#2E006C" data-icon="#2E006C">Indigo (teinture)</option>
+                                                <option value="Isabelle (chevaux)-#785E2F" data-icon="#785E2F">Isabelle (chevaux)</option>
+                                                <option value="Ivoire-#FFFFD4" data-icon="#FFFFD4">Ivoire</option>
+                                                <option value="Jaune de cobalt ou auréolin (pigment)-#FDEE00" data-icon="#FDEE00">Jaune de cobalt ou auréolin (pigment)</option>
+                                                <option value="Jaune canari-#E7F00D" data-icon="#E7F00D">Jaune canari</option>
+                                                <option value="Jaune chartreuse-#DFFF00" data-icon="#DFFF00">Jaune chartreuse</option>
+                                                <option value="Jaune citron-#F7FF3C" data-icon="#F7FF3C">Jaune citron</option>
+                                                <option value="Jaune d'or-#EFD807" data-icon="#EFD807">Jaune d'or</option>
+                                                <option value="Jaune de Mars (pigment)-#EED153" data-icon="#EED153">Jaune de Mars (pigment)</option>
+                                                <option value="Jaune de Naples (pigment)-#FFF0BC" data-icon="#FFF0BC">Jaune de Naples (pigment)</option>
+                                                <option value="Jaune impérial-#FFE436" data-icon="#FFE436">Jaune impérial</option>
+                                                <option value="Jaune mimosa-#FEF86C" data-icon="#FEF86C">Jaune mimosa</option>
+                                                <option value="Kaki-#94812B" data-icon="#94812B">Kaki</option>
+                                                <option value="Lapis-lazuli-#26619C" data-icon="#26619C">Lapis-lazuli</option>
+                                                <option value="Lavallière (reliure)-#8F5922" data-icon="#8F5922">Lavallière (reliure)</option>
+                                                <option value="Lavande-#9683EC" data-icon="#9683EC">Lavande</option>
+                                                <option value="Lie de vin-#AC1E44" data-icon="#AC1E44">Lie de vin</option>
+                                                <option value="Lilas-#B666D2" data-icon="#B666D2">Lilas</option>
+                                                <option value="Lime-#9EFD38" data-icon="#9EFD38">Lime</option>
+                                                <option value="Lin-#FAF0E6" data-icon="#FAF0E6">Lin</option>
+                                                <option value="Magenta-#DB0073" data-icon="#DB0073">Magenta</option>
+                                                <option value="Maïs-#FFDE75" data-icon="#FFDE75">Maïs</option>
+                                                <option value="Malachite-#1FA055" data-icon="#1FA055">Malachite</option>
+                                                <option value="Mandarine-#FEA347" data-icon="#FEA347">Mandarine</option>
+                                                <option value="Marron-#582900" data-icon="#582900">Marron</option>
+                                                <option value="Mastic-#B3B191" data-icon="#B3B191">Mastic</option>
+                                                <option value="Mauve (couleur)-#D473D4" data-icon="#D473D4">Mauve (couleur)</option>
+                                                <option value="Menthe-#16B84E" data-icon="#16B84E">Menthe</option>
+                                                <option value="Moutarde-#C7CF00" data-icon="#C7CF00">Moutarde</option>
+                                                <option value="Nacarat-#FC5D5D" data-icon="#FC5D5D">Nacarat</option>
+                                                <option value="Nankin-#F7E269" data-icon="#F7E269">Nankin</option>
+                                                <option value="Noir-#000000" data-icon="#000000">Noir</option>
+                                                <option value="Noir animal (pigment)-#000000" data-icon="#000000">Noir animal (pigment)</option>
+                                                <option value="Noir d'aniline (pigment)-#120D16" data-icon="#120D16">Noir d'aniline (pigment)</option>
+                                                <option value="Noir d'ivoire (pigment)-#000000" data-icon="#000000">Noir d'ivoire (pigment)</option>
+                                                <option value="Noir de carbone (pigment)-#130E0A" data-icon="#130E0A">Noir de carbone (pigment)</option>
+                                                <option value="Noir de fumée (pigment)-#130E0A" data-icon="#130E0A">Noir de fumée (pigment)</option>
+                                                <option value="Noisette-#955628" data-icon="#955628">Noisette</option>
+                                                <option value="Ocre (pigment)-#DFAF2C" data-icon="#DFAF2C">Ocre (pigment)</option>
+                                                <option value="Ocre rouge (pigment)-#DD985C" data-icon="#DD985C">Ocre rouge (pigment)</option>
+                                                <option value="Olive-#708D23" data-icon="#708D23">Olive</option>
+                                                <option value="Or-#FFD700" data-icon="#FFD700">Or</option>
+                                                <option value="Orange-#FF7F00" data-icon="#FF7F00">Orange</option>
+                                                <option value="Orange brûlé-#CC5500" data-icon="#CC5500">Orange brûlé</option>
+                                                <option value="Orchidée-#DA70D6" data-icon="#DA70D6">Orchidée</option>
+                                                <option value="Orpiment (pigment)-#FCD21C" data-icon="#FCD21C">Orpiment (pigment)</option>
+                                                <option value="Paille-#FEE347" data-icon="#FEE347">Paille</option>
+                                                <option value="Parme-#CFA0E9" data-icon="#CFA0E9">Parme</option>
+                                                <option value="Pelure d'oignon (œnologie)-#D58490" data-icon="#D58490">Pelure d'oignon (œnologie)</option>
+                                                <option value="Pervenche-#CCCCFF" data-icon="#CCCCFF">Pervenche</option>
+                                                <option value="Pistache-#BEF574" data-icon="#BEF574">Pistache</option>
+                                                <option value="Poil de chameau-#B67823" data-icon="#B67823">Poil de chameau</option>
+                                                <option value="Ponceau ou Coquelicot-#C60800" data-icon="#C60800">Ponceau ou Coquelicot</option>
+                                                <option value="Pourpre (héraldique)-#9E0E40" data-icon="#9E0E40">Pourpre (héraldique)</option>
+                                                <option value="Prasin-#4CA66B" data-icon="#4CA66B">Prasin</option>
+                                                <option value="Prune-#811453" data-icon="#811453">Prune</option>
+                                                <option value="Puce-#4E1609" data-icon="#4E1609">Puce</option>
+                                                <option value="Rose-#FD6C9E" data-icon="#FD6C9E">Rose</option>
+                                                <option value="Rose Mountbatten-#997A8D" data-icon="#997A8D">Rose Mountbatten</option>
+                                                <option value="Rouge anglais (pigment)-#F7230C" data-icon="#F7230C">Rouge anglais (pigment)</option>
+                                                <option value="Rouge cardinal-#B82010" data-icon="#B82010">Rouge cardinal</option>
+                                                <option value="Rouge cerise-#BB0B0B" data-icon="#BB0B0B">Rouge cerise</option>
+                                                <option value="Rouge d'alizarine (pigment)-#E32636" data-icon="#E32636">Rouge d'alizarine (pigment)</option>
+                                                <option value="Rouge d'Andrinople ou Rouge turc (pigment)-#A91101" data-icon="#A91101">Rouge d'Andrinople ou Rouge turc (pigment)</option>
+                                                <option value="Rouge feu-#FF4901" data-icon="#FF4901">Rouge feu</option>
+                                                <option value="Rouge de Falun (pigment)-#801818" data-icon="#801818">Rouge de Falun (pigment)</option>
+                                                <option value="Rouge feu-#FE1B00" data-icon="#FE1B00">Rouge feu</option>
+                                                <option value="Rouge sang-#850606" data-icon="#850606">Rouge sang</option>
+                                                <option value="Rouge tomette-#AE4A34" data-icon="#AE4A34">Rouge tomette</option>
+                                                <option value="Rouille-#985717" data-icon="#985717">Rouille</option>
+                                                <option value="Roux-#AD4F09" data-icon="#AD4F09">Roux</option>
+                                                <option value="Rubis-#E0115F" data-icon="#E0115F">Rubis</option>
+                                                <option value="Sable-#E0CDA9" data-icon="#E0CDA9">Sable</option>
+                                                <option value="Sable (héraldique)-#000000" data-icon="#000000">Sable (héraldique)</option>
+                                                <option value="Safre-#0131B4" data-icon="#0131B4">Safre</option>
+                                                <option value="Sang de bœuf-#730800" data-icon="#730800">Sang de bœuf</option>
+                                                <option value="Sanguine-#850606" data-icon="#850606">Sanguine</option>
+                                                <option value="Saphir-#0131B4" data-icon="#0131B4">Saphir</option>
+                                                <option value="Sarcelle-#008E8E" data-icon="#008E8E">Sarcelle</option>
+                                                <option value="Saumon-#F88E55" data-icon="#F88E55">Saumon</option>
+                                                <option value="Sépia (pigment)-#AE8964" data-icon="#AE8964">Sépia (pigment)</option>
+                                                <option value="Sinople (héraldique)-#149414" data-icon="#149414">Sinople (héraldique)</option>
+                                                <option value="Smalt (pigment)-#003399" data-icon="#003399">Smalt (pigment)</option>
+                                                <option value="Smaragdin (pigment)-#01D758" data-icon="#01D758">Smaragdin (pigment)</option>
+                                                <option value="Soufre-#FFFF6B" data-icon="#FFFF6B">Soufre</option>
+                                                <option value="Souris-#9E9E9E" data-icon="#9E9E9E">Souris</option>
+                                                <option value="Tabac-#9F551E" data-icon="#9F551E">Tabac</option>
+                                                <option value="Taupe-#463F32" data-icon="#463F32">Taupe</option>
+                                                <option value="Terre d'ombre (pigment)-#926D27" data-icon="#926D27">Terre d'ombre (pigment)</option>
+                                                <option value="Terre de Sienne (pigment)-#8A3324" data-icon="#8A3324">Terre de Sienne (pigment)</option>
+                                                <option value="Terre de Sienne brûlée (pigment)-#E97451" data-icon="#E97451">Terre de Sienne brûlée (pigment)</option>
+                                                <option value="Tomate-#DE2916" data-icon="#DE2916">Tomate</option>
+                                                <option value="Topaze-#FAEA73" data-icon="#FAEA73">Topaze</option>
+                                                <option value="Tourterelle ou Colombin-#BBACAC" data-icon="#BBACAC">Tourterelle ou Colombin</option>
+                                                <option value="Turquoise-#25FDE9" data-icon="#25FDE9">Turquoise</option>
+                                                <option value="Vanille-#E1CE9A" data-icon="#E1CE9A">Vanille</option>
+                                                <option value="Vermeil-#FF0921" data-icon="#FF0921">Vermeil</option>
+                                                <option value="Vermillon-#DB1702" data-icon="#DB1702">Vermillon</option>
+                                                <option value="Vert-#008020" data-icon="#008020">Vert</option>
+                                                <option value="Vert armée-#798933" data-icon="#798933">Vert armée</option>
+                                                <option value="Vert bouteille-#096A09" data-icon="#096A09">Vert bouteille</option>
+                                                <option value="Vert céladon-#83A697" data-icon="#83A697">Vert céladon</option>
+                                                <option value="Vert chartreuse-#C2F732" data-icon="#C2F732">Vert chartreuse</option>
+                                                <option value="Vert d'eau-#B0F2B6" data-icon="#B0F2B6">Vert d'eau</option>
+                                                <option value="Vert de chrome ou anglais (pigment)-#18391E" data-icon="#18391E">Vert de chrome ou anglais (pigment)</option>
+                                                <option value="Vert-de-gris (pigment)-#95A595" data-icon="#95A595">Vert-de-gris (pigment)</option>
+                                                <option value="Vert de Hooker (mélange de pigments)-#1B4F08" data-icon="#1B4F08">Vert de Hooker (mélange de pigments)</option>
+                                                <option value="Vert de vessie (pigment)-#22780F" data-icon="#22780F">Vert de vessie (pigment)</option>
+                                                <option value="Vert épinard-#175732" data-icon="#175732">Vert épinard</option>
+                                                <option value="Vert gazon ou herbe-#3A9D23" data-icon="#3A9D23">Vert gazon ou herbe</option>
+                                                <option value="Vert impérial-#00561B" data-icon="#00561B">Vert impérial</option>
+                                                <option value="Vert lichen-#85C17E" data-icon="#85C17E">Vert lichen</option>
+                                                <option value="Vert mélèze-#386F48" data-icon="#386F48">Vert mélèze</option>
+                                                <option value="Vert mousse-#679F5A" data-icon="#679F5A">Vert mousse</option>
+                                                <option value="Vert perroquet-#3AF24B" data-icon="#3AF24B">Vert perroquet</option>
+                                                <option value="Vert poireau-#4CA66B" data-icon="#4CA66B">Vert poireau</option>
+                                                <option value="Vert pomme-#34C924" data-icon="#34C924">Vert pomme</option>
+                                                <option value="Vert prairie-#57D53B" data-icon="#57D53B">Vert prairie</option>
+                                                <option value="Vert printemps-#00FF7F" data-icon="#00FF7F">Vert printemps</option>
+                                                <option value="Vert sapin-#095228" data-icon="#095228">Vert sapin</option>
+                                                <option value="Vert sauge-#689D71" data-icon="#689D71">Vert sauge</option>
+                                                <option value="Vert tilleul-#A5D152" data-icon="#A5D152">Vert tilleul</option>
+                                                <option value="Vert Véronèse (pigment)-#5A6521" data-icon="#5A6521">Vert Véronèse (pigment)</option>
+                                                <option value="Violet-#7F00FF" data-icon="#7F00FF">Violet</option>
+                                                <option value="Violet d'évêque-#723E64" data-icon="#723E64">Violet d'évêque</option>
+                                                <option value="Violine (pigment)-#A10684" data-icon="#A10684">Violine (pigment)</option>
+                                                <option value="Viride (pigment)-#40826D" data-icon="#40826D">Viride (pigment)</option>
+                                                <option value="Zinzolin-#6C0277" data-icon="#6C0277">Zinzolin</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    {#taille#}
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="prod-new-name">Taille*</label>
+                                            <select id="prod-new-size" name="prod[size][]" multiple="multiple" class="form-control bfh-selectbox select24" data-allow-clear="true" data-name="selectboxSize" data-value="12" data-filter="true" required>
+                                                <option value="XS">XS</option>
+                                                <option value="S">S</option>
+                                                <option value="M">M</option>
+                                                <option value="L">L</option>
+                                                <option value="XL">XL</option>
+                                                <option value="XXL">XXL</option>
+                                                {% for i in 20..50 %}
+                                                    <option value="{{ i }}">{{ i }}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <fieldset>
+                                            <legend>Images</legend>
+                                            <input type="file" name="files">
+                                        </fieldset>
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+                            <div class="col-md-3">
+
+                                {#prix, promo#}
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <fieldset>
+                                            <legend>PRIX</legend>
+                                            <div class="form-group">
+                                                <label class="form-control-label">Montant HT</label>
+
+                                                <div class="input-group money-type">
+                                                    <input type="text" id="prod-new-price-ht" name="prod[price_ht]" data-display-price-precision="6" class="form-control" value="0,000"> <span class="input-group-addon"> DT</span>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="form-control-label">Montant TTC</label>
+
+                                                <div class="input-group money-type">
+                                                    <input type="text" id="prod-new-price-ttc" name="prod[price_ttc]" class="form-control"> <span class="input-group-addon"> DT</span>
+                                                </div>
+                                            </div>
+                                        </fieldset>
+                                        <fieldset>
+                                            <legend>PROMO</legend>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="exampleInputEmail1">Valable à partir du</label>
+                                                        <input type="date" class="form-control" id="exampleInputEmail1" placeholder="Email">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="exampleInputEmail1">au</label>
+                                                        <input type="date" class="form-control" id="exampleInputEmail1" placeholder="Email">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label class="form-control-label">Appliquer une réduction de</label>
+                                                        <div class="input-group money-type">
+                                                            <input type="number" id="prod-new-percent" name="prod[percent]" class="form-control"> <span class="input-group-addon"> %</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    Nouveau prix: <strong><span class="newPricePourcent">0.000</span>DT</strong>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="checkbox"><label><input type="checkbox" id="form_step2_on_sale" name="form[step2][on_sale]" value="1">
+                                                            Afficher un bandeau "Promo !" sur la fiche produit et sur les listes de produits.</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </fieldset>
+
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button class="btn btn-primary" type="submit">Enregister</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Annuler</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endif %}

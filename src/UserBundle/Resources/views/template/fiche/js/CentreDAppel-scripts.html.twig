@@ -1,0 +1,817 @@
+{% block javascripts %}
+    <script>
+        $(".postulez").click(function () {
+            var poste = $(this).attr('data-offre');
+
+            $("#serviceselect-depot [value='" + poste+ "']").prop("selected", true);
+        })
+    </script>
+    <script>
+        ListFromBase2 = [];
+        $("#service-from-base option ").each(function () {
+
+            ListFromBase2.push($(this).val())
+
+        });
+        $('.edit').click(function () {
+            var styles = {
+                border: "1px solid #e3e3e3",
+            };
+            $('ul#comptences').empty();
+            $('ul#qualites').empty();
+            $('ul#avantages').empty();
+            $('#serviceselect-edit').css(styles);
+            $('#serviceselect-edit').css(styles);
+
+            $('.errormsg').html("");
+            $('#other').val('');
+            $('#other').hide();
+            $("#editServices").prop('disabled', false);
+
+            var idqq = $(this).attr('data-id');
+            var idserv = $(this).attr('data-serv');
+            var data = {
+                idqq: idqq,
+                idserv: idserv,
+
+            };
+            $("#serviceselect-edit option:disabled").remove();
+            $.ajax({
+                url: '{{ path('module_spa_get_json_spa') }}',
+                data: data,
+                type: "POST",
+                success: function (data) {
+                    $("#other").hide();
+                    var arr = [];
+                    json = JSON.stringify(eval('(' + data + ')'));
+                    arr = $.parseJSON(json);
+                    console.log(arr);
+                    $("#idservs").val(arr.idserv);
+                    $("#Spa-serv").val(arr.ServSpa);
+                    $("#serviceicon").val(arr.serviceIcon);
+                    $("#details").val(arr.detail);
+                    $(".seticon").html(arr.serviceIcon);
+                    $('#seticon').attr('src', arr.serviceIcon);
+                    $('#div-panel1').empty();
+                    $('#div-panel2').empty();
+                    $('#div-panel3').empty();
+                    if (arr.tab1.skills != undefined && arr.tab1.skills != '') {
+                        $("#div-panel1").append("<div class='panel panel-info'><div class='panel-heading form-group'><label id='title-competence' class='panel-title ' ></label></div><div class= 'panel-body'id='comptences'></div></div>")
+                        $('#title-competence').html('Compétece requises');
+                        $.each(arr.tab1.skills, function (index, value) {
+                            $("#comptences").append("<div class='form-group multiple-form-group input-group'><input type='text' name='tab1[skills][]' class='form-control' value='" + value + "'> <span class='input-group-btn'><button type='button' class='btn btn-danger btn-remove'style='padding-right: 20px;'>-</button></span> </div>")
+                        });
+                    }
+                    if (arr.tab2.qualite != undefined && arr.tab2.qualite != '') {
+                        $("#div-panel2").append("<div class='panel panel-info'><div class='panel-heading form-group'><label id='title-qualite' class='panel-title ' ></label></div><div class= 'panel-body'id='qualites'></div></div>")
+                        $('#title-qualite').html('Qualité requises');
+                        $.each(arr.tab1.skills, function (index, value) {
+                            console.log(index + ": " + value);
+
+                            $("#qualites").append("<div class='form-group multiple-form-group input-group'><input type='text' name='tab2[qualite][]' class='form-control' value='" + value + "'> <span class='input-group-btn'><button type='button' class='btn btn-danger btn-remove'style='padding-right: 20px;'>-</button></span> </div>")
+                        });
+                    }
+                    if (arr.tab3.avantage != undefined && arr.tab3.avantage != '') {
+
+                        $("#div-panel3").append("<div class='panel panel-info'><div class='panel-heading form-group'><label class='panel-title ' id='title-avantage'></label></div><div class=' panel-body'id='avantages'></div></div>")
+                        $('#title-avantage').html('Nous vous garantissons')
+
+                        $.each(arr.tab1.skills, function (index, value) {
+                            console.log(index + ": " + value);
+                            $("#avantages").append("<div class='form-group multiple-form-group input-group'><input type='text' name='tab3[avantage][]' class='form-control' value='" + value + "'> <span class='input-group-btn'><button type='button' class='btn btn-danger btn-remove'style='padding-right: 20px;'>-</button></span> </div>")
+                        });
+                    }
+
+                    if (arr.autres == undefined || arr.autres == '') {
+
+                        $("#serviceselect-edit [value='" + arr.ServSpa + "']").prop("selected", true);
+                        $("#other").hide();
+                        verifromliste();
+                    }
+                    else if (arr.autres != undefined) {
+
+                        $('#serviceselect-edit').prepend('<option disabled selected  >Ajouter un offre</option>');
+                        $("#other").show();
+                        $("#other").val(arr.ServSpa);
+                        veriffromautre();
+                    }
+
+                }
+            });
+
+        });
+    </script>
+    <script>
+
+        $('#section-services').on('click', '.lire_plus', function () {
+
+            var idqq = $(this).attr('data-idqq');
+            var idserv = $(this).attr('data-idServ');
+
+
+            var data = {
+                idqq: idqq,
+                idserv: idserv,
+
+            };
+            console.log(idqq, idserv);
+            $.ajax({
+                url: '{{ path('module_spa_get_json_spa') }}',
+                data: data,
+                type: "POST",
+                success: function (data) {
+                    var arr = [];
+                    json = JSON.stringify(eval('(' + data + ')')); //convert to json string
+                    arr = $.parseJSON(json);
+                    $('#idImgSpa').val(idserv);
+                    var id = $('#idImgSpa').val();
+                    $('.data').attr('data-offre', arr.ServSpa);
+
+                    $('#putImg').attr('src', '{{ asset('uploads/image/') }}{{ iduser }}/{{ qouiqui.id }}/service/' + id + "." + "jpg");
+                    console.log(arr);
+                    $("#servspa").html(arr.ServSpa);
+                    $("#SpaServ").val(arr.ServSpa);
+                    $('#lire_suite').html("");
+                    console.log(arr.tab1.skills);
+                    $('#Spadetail').html(arr.detail);
+                    if (arr.tab1.skills != undefined && arr.tab1.skills != '') {
+                        $('ul#competence').empty();
+                        $.each(arr.tab1.skills, function (index, value) {
+                            if (value != '') {
+                                var content = '<li style="margin-bottom: -20px;" class="li_list"><span style="Font-Weight: Bold;font-size: 34px;margin-right: 5px;">' + "." + '</span>' + value + "</li>";
+                            }
+                            $('ul#competence').append(content);
+
+                        });
+                    }
+                    if (arr.tab2.qualite != undefined && arr.tab2.qualite != '') {
+                        $('ul#qualite').empty();
+                        $.each(arr.tab2.qualite, function (index, value) {
+                            console.log(value)
+                            if (value != '') {
+                                var content = '<li style="margin-bottom: -20px;" class="li_list"><span style="Font-Weight: Bold;font-size: 34px;margin-right: 5px;">' + "." + '</span>' + value + "</li>";
+                            }
+
+                            $('ul#qualite').append(content);
+
+                        });
+                    }
+                    if (arr.tab3.avantage != undefined && arr.tab3.avantage != '') {
+                        $('ul#avantage').empty();
+                        $.each(arr.tab3.avantage, function (index, value) {
+                            if (value != '') {
+                                var content = '<li style="margin-bottom: -20px;" class="li_list"><span style="Font-Weight: Bold;font-size: 34px;margin-right: 5px;">' + "." + '</span>' + value + "</li>";
+                            }
+                            $('ul#avantage').append(content);
+
+                        });
+                    }
+
+
+                }
+            });
+
+
+        });
+    </script>
+    <script>
+        $(".spa-service").click(function () {
+            var styles = {
+                border: "1px solid #e3e3e3",
+            };
+            $('#otherServices').css(styles);
+            $('.errormsg').html("");
+            $('#otherServices').val('');
+            $('#otherServices').hide();
+            $('#serviceselect').css(styles);
+            $('#serviceselect').val('');
+            $("#addServices").prop('disabled', false);
+            $("#serviceselect option:disabled").remove();
+//            $('#serviceselect').prepend('<option ></option>');
+            $('#serviceselect').prepend('<option disabled selected  >Sélectionner un service*</option>');
+
+        });
+
+    </script>
+
+    <script>
+        ListFromBase = [];
+        $("#service-from-base option ").each(function () {
+
+            ListFromBase.push($(this).val())
+
+        });
+        console.log(ListFromBase);
+        $('#serviceselect').click(function () {
+            var styles = {
+                border: "1px solid #e3e3e3",
+            };
+
+
+            $('.selectOption').css(styles);
+            $('.errormsg').html("");
+            $("#addServices").prop('disabled', false);
+
+
+            var item = $('#serviceselect option:selected').val();
+
+
+            $.each(ListFromBase, function (index, value) {
+                if (item === value) {
+                    console.log(value + "aaaa");
+
+                    $('.errormsg').html(" ce service  existe  déjà");
+                    $('.selectOption').css('border', 'solid 2px red');
+                    $("#addServices").attr('disabled', 'disabled');
+                }
+
+
+            });
+
+
+        });
+
+
+    </script>
+    <script>
+        $('form#addserv').submit(function (e) {
+
+
+            if ($('#otherServices').val()) {
+                var autre = $('#otherServices').val();
+                $('select').prepend('<option  value=  "' + autre + '" >' + $('#otherServices').val() + '</option>');
+
+                $("#serviceselect [value='" + autre + "']").attr("selected", "selected");
+                $("#otherServices").hide();
+            }
+
+            var item = $('#serviceselect option:selected').val();
+            if (item === 'autre') {
+                e.preventDefault();
+                alert('ajouter un  service ou bien choisir un autre de la liste');
+            }
+
+
+        });
+    </script>
+    <script>
+
+        $('form#updateserv').submit(function (e) {
+            if ($('#other').val()) {
+                var autre = $('#other').val();
+                $('select').prepend('<option  value=  "' + autre + '" >' + $('#other').val() + '</option>');
+
+                $("#serviceselect-edit [value='" + autre + "']").attr("selected", "selected");
+
+                $("#other").hide();
+            }
+
+
+            var item = $('#serviceselect-edit  option:selected').val();
+            if (item === 'autre') {
+                e.preventDefault();
+                alert('ajouter autre service ou bien choisir un autre d aprés la liste');
+            }
+            setTimeout(function () {
+                $(this).submit();
+            }, 4000);
+
+        });
+    </script>
+
+    <script>
+        ListFromBase1 = [];
+        $("#service-from-base option ").each(function () {
+
+            ListFromBase1.push($(this).val())
+
+        });
+        console.log("liste " + ListFromBase1);
+        var typingTimer;
+        var doneTypingInterval = 1000;
+        typingTimer = setTimeout(function () {
+            $('.errormsg').html("");
+            $('#otherServices').keyup(function () {
+                var autre = $('#otherServices').val();
+                $.each(ListFromBase1, function (index, value) {
+                    if (($('#otherServices').val()) === value.toLowerCase()) {
+
+                        $('.errormsg').html(" cet offre est déjà existe");
+                        $('#otherServices').css('border', 'solid 2px red');
+                        $("#addServices").attr('disabled', 'disabled');
+                    }
+                    else if ($('#otherServices').val() == '') {
+
+                        var styles = {
+                            border: "initial",
+                        };
+
+                        $('#otherServices').css(styles);
+                        $('.errormsg').html("");
+                        $("#addServices").prop('disabled', false);
+                    }
+
+
+                });
+            });
+        }, doneTypingInterval);
+
+
+    </script>
+    <script>
+
+
+        myList = [];
+
+        $("#serviceselect option ").each(function () {
+
+            myList.push($(this).val())
+
+        });
+
+        var typingTimer;
+        var doneTypingInterval = 1000;
+        typingTimer = setTimeout(function () {
+            $('.errormsg').html("");
+            $('#otherServices').keyup(function () {
+                var autre = $('#otherServices').val();
+                $.each(myList, function (index, value) {
+                    if (($('#otherServices').val()) === value.toLowerCase()) {
+
+                        $('.errormsg').html(" cet offre est déjà existe");
+                        $('#otherServices').css('border', 'solid 2px red');
+                        $("#addServices").attr('disabled', 'disabled');
+                    }
+                    else if ($('#otherServices').val() == '') {
+
+                        var styles = {
+                            border: "initial",
+                        };
+
+                        $('#otherServices').css(styles);
+                        $('.errormsg').html("");
+                        $("#addServices").prop('disabled', false);
+                    }
+
+
+                });
+            });
+        }, doneTypingInterval);
+
+
+    </script>
+    <script>
+
+        (function ($) {
+            $(function () {
+
+                var addFormGroup = function (event) {
+
+                    var $formGroup = $(this).closest('.form-group');
+                    var $multipleFormGroup = $formGroup.closest('.multiple-form-group');
+                    var $formGroupClone = $formGroup.clone();
+
+                    $(this)
+                        .toggleClass('btn-success btn-add btn-danger btn-remove')
+                        .html('–');
+
+                    $formGroupClone.find('input').val('');
+                    $formGroupClone.find('.concept').text('Facebook');
+                    $formGroupClone.insertAfter($formGroup);
+
+                    var $lastFormGroupLast = $multipleFormGroup.find('.form-group:last');
+                    if ($multipleFormGroup.data('max') <= countFormGroup($multipleFormGroup)) {
+                        $lastFormGroupLast.find('.btn-add').attr('disabled', true);
+                    }
+
+                    $formGroupClone.find('.input-group-select-val').val('Facebook');
+
+                };
+
+                var removeFormGroup = function (event) {
+                    {#                    event.preventDefault();#}
+
+                    var $formGroup = $(this).closest('.form-group');
+                    var $multipleFormGroup = $formGroup.closest('.multiple-form-group');
+
+                    var $lastFormGroupLast = $multipleFormGroup.find('.form-group:last');
+                    if ($multipleFormGroup.data('max') >= countFormGroup($multipleFormGroup)) {
+                        $lastFormGroupLast.find('.btn-add').attr('disabled', false);
+                    }
+
+                    $formGroup.remove();
+                };
+
+                var selectFormGroup = function (event) {
+                    {#                    event.preventDefault();#}
+
+                    var $selectGroup = $(this).closest('.input-group-select');
+                    var param = $(this).attr("href").replace("#", "");
+                    var concept = $(this).text();
+
+                    $selectGroup.find('.concept').text(concept);
+                    $selectGroup.find('.input-group-select-val').val(param);
+                    console.log(param);
+
+                }
+
+                var countFormGroup = function ($form) {
+                    return $form.find('.form-group').length;
+                };
+
+                $(document).on('click', '.btn-add', addFormGroup);
+                $(document).on('click', '.btn-add', selectFormGroup);
+                $(document).on('click', '.btn-remove', removeFormGroup);
+                $(document).on('click', '.dropdown-menu a', selectFormGroup);
+
+            });
+        })(jQuery);
+    </script>
+    <script>
+        $(document).ready(function () {
+
+            $(".collapse.in").each(function () {
+
+                $(this).siblings(".panel-heading").find(".glyphicon").addClass("glyphicon-minus").removeClass("glyphicon-plus");
+
+            });
+            $(".collapse").on('show.bs.collapse', function () {
+                $(this).parent().find(".glyphicon").removeClass("glyphicon-plus").addClass("glyphicon-minus");
+                $(this).collapse('hide');
+            }).on('hide.bs.collapse', function () {
+                $(this).parent().find(".glyphicon").removeClass("glyphicon-minus").addClass("glyphicon-plus");
+            });
+        });
+    </script>
+
+    <script>
+
+        $('#serviceselect').on('change', function () {
+
+            if ($(this).val() == "autre") {
+
+                $("#otherServices").show();
+                console.log($(this).val());
+
+            }
+            else {
+                $("#otherServices").hide();
+            }
+        });
+    </script>
+
+
+
+    <script>
+        $('.check input:radio').click(function () {
+            $('.check input:radio').not(this).prop('checked', false);
+        });
+    </script>
+    <script>
+        var verifromliste = function () {
+            var sellected = $('#serviceselect-edit').val();
+
+
+            $('#serviceselect-edit').change(function () {
+
+
+                $("#editServices").prop('disabled', false);
+                var styles = {
+                    border: "1px solid #e3e3e3",
+                };
+                $('#serviceselect-edit').css(styles);
+                $('.errormsg').html("");
+                var item = $('#serviceselect-edit option:selected').val();
+
+                $.each(ListFromBase2, function (index, value) {
+                    if (item === value && value != sellected) {
+                        $('.errormsg').html(" ce service  existe  déjà");
+                        $('#serviceselect-edit').css('border', 'solid 2px red');
+                        $("#editServices").prop('disabled', true);
+                    }
+
+
+                });
+                if ($(this).val() == "autre") {
+                    $("#other").val('');
+                    $("#other").show();
+
+                }
+                else {
+                    $("#other").hide();
+                }
+
+            });
+
+        }
+    </script>
+    <script>
+        myLists = [];
+
+        $("#serviceselect option ").each(function () {
+
+            myLists.push($(this).val())
+
+        });
+        var veriffromautre = function () {
+            var typingTimer;
+            var doneTypingInterval = 1000;
+            typingTimer = setTimeout(function () {
+                $('.errormsg').html("");
+                $('#other').keyup(function () {
+                    $("#editServices").prop('disabled', false);
+                    $('.errormsg').html("");
+                    $('.errormsg').html("");
+                    var autre = $('#other').val();
+                    $.each(myLists, function (index, value) {
+                        if (($('#other').val()) === value.toLowerCase()) {
+
+                            $('.errormsg').html(" cet offre est déjà existe");
+                            $('#other').css('border', 'solid 2px red');
+                            $("#editServices").attr('disabled', 'disabled');
+                        }
+
+                        else if ($('#other').val() == '') {
+
+                            var styles = {
+                                border: "initial",
+                            };
+
+                            $('#other').css(styles);
+                            $('.errormsg').html("");
+                            $("#editServices").prop('disabled', false);
+                        }
+
+
+                    });
+                });
+            }, doneTypingInterval);
+            $('#serviceselect-edit').change(function () {
+                $('#other').hide();
+                verifromliste();
+                if ($(this).val() == "autre") {
+                    $("#other").val('');
+                    $("#other").show();
+
+                }
+                else {
+                    $("#other").hide();
+                }
+
+
+            });
+
+        }
+    </script>
+    <script>
+
+            $("#buttoncall-us").click(function () {
+                $(this).hide();
+                $(".phonenumber").show();
+            });
+    </script>
+{% endblock %}
+<style>
+
+    .phonenumber {
+        display: none;
+    }
+    .li_list {
+        list-style: none;
+        margin-left: 0;
+        padding-left: 16px;
+        text-indent: -16px;
+    }
+
+    li_list:before {
+        content: "&#9679;";
+        font-size: 16px;
+        line-height: 16px;
+        padding-right: 5px;
+        vertical-align: text-bottom;
+    }
+
+    @media (min-width: 992px) {
+        .row-eq-height {
+            display: flex;
+            align-items: center;
+        }
+    }
+
+    .blue {
+        background-color: #11c3da;
+    }
+
+    .green {
+        background: #34d293;
+    }
+
+    .rouge {
+        background: #e96656;
+    }
+
+    .green1 {
+        background: #5dc560;
+    }
+
+    .G_titre {
+        font-weight: 500;
+        text-align: justify;
+        font-size: 32px;
+        line-height: 1.2;
+        text-align: center;
+    }
+
+    .modal-content > .close {
+        margin-top: -9px !important;
+        margin-right: -11px;
+        background: red;
+        border: solid 1px #de2525;
+        border-radius: 100%;
+        width: 26px;
+        height: 26px;
+        opacity: 1;
+        color: white;
+    }
+
+    .bs-example {
+        margin: 20px;
+    }
+
+    .panel-title .glyphicon {
+        font-size: 14px;
+    }
+
+    .fixheight {
+        max-height: 150px;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    a span {
+        color: white;
+    }
+
+    .panel-default > .panel-heading {
+        color: #333;
+        background-color: #11c3da;
+        border-color: #11c3da;
+    }
+
+    .spacontact1 {
+        background: #20AA73;
+        font-size: 22px;
+        border: 1px solid #20AA73;
+        padding: 10px;
+        border-radius: 0px;
+        color: #f5f5f5;
+        text-align: center;
+    }
+
+    .spacontact1:hover {
+        background: #20AA73;
+        /*font-size: 22px;*/
+        border: 1px solid #20AA73;
+        padding: 10px;
+        border-radius: 0px;
+        color: #f5f5f5;
+        text-align: center;
+    }
+
+    @media (max-width: 425px) {
+        .spacontact1 {
+            background: #20AA73;
+            font-size: 13px;
+            border: 1px solid #20AA73;
+            padding: 10px;
+            border-radius: 0px;
+            color: #f5f5f5;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+    }
+
+    .spacontact2 {
+        background: #e96656;
+        font-size: 22px;
+        border: 1px solid #e96656;
+        padding: 10px;
+        border-radius: 0px;
+        color: #f5f5f5;
+        text-align: center;
+    }
+
+    .spacontact2:hover {
+        background: #e96656;
+        /*font-size: 22px;*/
+        border: 1px solid #e96656;
+        padding: 10px;
+        border-radius: 0px;
+        color: #f5f5f5;
+        text-align: center;
+    }
+
+    @media (max-width: 425px) {
+        .spacontact2 {
+            background: #e96656;
+            font-size: 12px;
+            border: 1px solid #e96656;
+            padding: 10px;
+            border-radius: 0px;
+            color: #f5f5f5;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+    }
+
+    @media (max-width: 991px) {
+        .margetop {
+            margin-top: 15px;
+        }
+
+    }
+
+    @media (min-width: 320px) and (max-width: 425px ) {
+        .xs-marge {
+            margin-top: -15px;
+        }
+    }
+
+    @media (min-width: 426px) and (max-width: 786px) {
+        .xs-marge {
+            margin-top: 8px;
+        }
+    }
+
+    @media (min-width: 992px) {
+        .xs-marge {
+            margin-top: 10px;
+        }
+        .pad15{
+            padding:6px;
+        }
+    }
+
+    @media (min-width: 786px) {
+        .xs-marge-top {
+            margin-top: 10px;
+        }
+    }
+
+    @media (min-width: 1024px) and (max-width: 1440px) {
+        .spacontact1 {
+            font-size: 15px;
+        }
+
+        .spacontact2 {
+            font-size: 15px;
+        }
+    }
+
+    .buttn {
+        text-transform: capitalize;
+        display: inline-block;
+        font-size: 20px;
+        text-decoration: none !important;
+        padding: 11px 25px;
+        line-height: 1;
+        overflow: hidden;
+        position: relative;
+        box-shadow: 0 1px 1px #ccc;
+        border-radius: 2px;
+        margin-bottom: 20px;
+    }
+
+    @media(max-width: 768px){
+        .modal-content > .close {
+            margin-top: 0px !important;}
+    }
+
+    .image-content-cf-serv {
+        width: auto;
+        height: 200px;
+        background-size: cover;
+        background-position: center;
+    }
+
+    @media (max-width: 380px) {
+        .image-content-cf-serv {
+            width: auto;
+            height: 121px;
+            background-size: cover;
+            background-position: center;
+        }
+    }
+    @media (min-width: 500px) and (max-width: 786px) {
+        .image-content-cf-serv {
+            width: auto;
+            height: 100px;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .margin15 {
+            margin: -1px;
+        }}
+
+</style>

@@ -1,0 +1,51 @@
+
+filtre_hotel:
+     path: /filtreh/
+     defaults: { _controller: ModuleBundle:AgenceVoyage:filtrehotel}
+     methods: [GET]
+filtre_voiture:
+     path: /filtrev/{tag}
+     defaults: { _controller: ModuleBundle:AgenceVoyage:filtrevoiture}
+     methods: [GET]
+agence_voyage_annonce_id:
+    path: /annonce/{id}
+    defaults: { _controller: ModuleBundle:AgenceVoyage:getAnnnceById }
+    methods: [POST]
+agence_voyage_annonce_delete:
+    path: /supprimer/
+    defaults: { _controller: ModuleBundle:AgenceVoyage:deleteAnnonceById}
+    methods: [POST]
+agence_voyage_new_annonce:
+    path: /new-annonce
+    defaults: { _controller: ModuleBundle:AgenceVoyage:addAnnonce }
+    methods: [POST, GET]
+agence_voyage_liste_pays:
+    path: /pays
+    defaults: { _controller: ModuleBundle:AgenceVoyage:getPays }
+agence_voyage_edit_annonce:
+    path: /annonces/modifier
+    defaults: { _controller: ModuleBundle:AgenceVoyage:modifeirAnnonce }
+change_banner:
+     path: /{qq_id}
+     defaults: { _controller: ModuleBundle:Default:changeBanner}
+     methods: [POST]
+module_agence_voyage_service:
+    path: /annonces/ajout
+    defaults: { _controller: ModuleBundle:AgenceVoyage:ajoutservice}
+module_agence_voyage_edit_service:
+    path: /annonces/service/modifier
+    defaults: { _controller: ModuleBundle:AgenceVoyage:editService}
+agence_voyage_service_id:
+    path: /annonces/service/afficher/{id}
+    defaults: { _controller: ModuleBundle:AgenceVoyage:getServiceById }
+    methods: [POST, GET]
+agence_voyage_service_delete:
+    path: /annonces/service/supprimer/
+    defaults: { _controller: ModuleBundle:AgenceVoyage:deleteServiceById}
+    methods: [POST]
+agence_voyage_reserver_ooffre:
+    path: /annonces/reserver/offre
+    defaults: { _controller: ModuleBundle:AgenceVoyage:reservationOffre }
+Ajouter_offre:
+    path: /annonces/ajouter/offre
+    defaults: { _controller: ModuleBundle:AgenceVoyage:ajouter_offre }

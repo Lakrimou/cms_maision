@@ -1,0 +1,148 @@
+
+<div class="sep-lane alt-3"><span></span></div>
+<section class="page-section  sec_contact " id="contact">
+    <div class="container align-center">
+        <h3 class="section-title bottom-line long font-alt">Contactez Nous</h3>
+
+
+    </div>
+    <div class="sep-lane-titre mt-50"><span><img src="{{ asset('module/spa/images/lines/img-line-0.png') }}"
+                                                 data-at2x="{{ asset('module/spa/images/lines/img-line-0@2x.png') }}"
+                                                 alt></span>
+    </div>
+    <div class="container align-center">
+        <div class="row">
+
+            <!-- contact offices -->
+
+
+            <!-- /contact offices -->
+
+            <!-- contact form -->
+
+            <div class="col-md-6 col-lg-6 mb-md-30">
+                <div class="contact-forms">
+                    <h4 class="contact-title font-alt color_text_contact">Contactez nous par mail</h4>
+                    <div class="img-line">
+                        <img src="{{ asset('module/spa/images/lines/img-line-40.png') }}"
+                             data-at2x="{{ asset('module/spa/images/lines/img-line-40@2x.png') }}" alt>
+                    </div>
+                    {#<div class="email_server_responce"></div>#}
+                    <form   id="myform" action="{{ path('module_hotel_contactezNous',{'id_qq': qouiqui.id }) }}" class=" form mt-10"
+                          method="POST" >
+                        <input id="name" name="name" type="text" value="" size="30" aria-required="true"
+                               placeholder="Nom& prénom" class="input-md form-control">
+                        <input id="email" name="email" type="email" value="" size="30" aria-required="true"
+                               placeholder="E-Mail" class="input-md form-control">
+                        <input id="sujets" name="objet" type="text" value="" size="30" aria-required="true"
+                               placeholder="Sujet" class="input-md form-control">
+                        <textarea id="message" name="message" cols="45" rows="8" aria-required="true"
+                                  placeholder="écrire un  Message" class="input-md form-control mb-20"></textarea>
+                        <button class="button small" name="submit" type="submit" >Envoyer</button>
+                    </form>
+
+                </div>
+            </div>
+
+            <!-- /contact form -->
+
+            <!-- contact follow -->
+
+            <div class="col-md-12 col-lg-6">
+                <div class="mall_section gradient_bg">
+                    <h4 class="contact-title font-alt color_text_contact">Nos Coordonnées</h4>
+                    <div class="img-line">
+                        <img src="{{ asset('module/spa/images/lines/img-line-40.png') }}"
+                             data-at2x="{{ asset('module/spa/images/lines/img-line-40@2x.png') }}" alt>
+                    </div>
+
+
+                    <div class="col-md-6  col-xs-12 small_detail icons" >
+                        <span class="flaticon-location74 flaticons" style="font-size: 40px;"></span>
+
+                        <h5 class="color_text_contact small_section_title">
+                            {% if qouiqui.address1 and qouiqui.adress2 %}
+                                {{ qouiqui.address1 }}, {{ qouiqui.adress2 }}</p>
+                            {% else %}
+                                {{ qouiqui.address1 }}
+                            {% endif %}
+                        </h5>
+                    </div>
+                    <div class="col-md-6  col-xs-12 small_detail icons">
+                       <span class="flaticon-telephone51 flaticons" style="font-size: 40px"></span>
+                        {#<h3 class="text-uppercase small_section_title">Telephone</h3>#}
+                        <h5 class="color_text_contact small_section_title">{% if qouiqui.phone %}
+                                <a href="tel:{{ qouiqui.phone }}">{{ qouiqui.phone }}</a> <br/>
+
+                            {% endif %}
+                            {% if qouiqui.phone2 %}
+                              <a style="font-size: 16px;" href="tel:{{ qouiqui.phone2 }}">{{ qouiqui.phone2 }}</a> <br/>
+                            {% endif %}</h5>
+                    </div>
+                    <div class="col-md-6  col-xs-12 small_detail icons">
+                        <span class="flaticon-email2 flaticons" style="font-size: 40px"></span>
+                        {#<h3 class="text-uppercase small_section_title">E-mail</h3>#}
+                        <h5 class="color_text_contact small_section_title">
+                            {% if qouiqui.mail %}
+                                <a style="font-size: 16px;" href="mailto:{{ qouiqui.mail }}">{{ qouiqui.mail }}</a>
+                            {% endif %}
+                        </h5>
+                    </div>
+                    <div class="col-md-6  col-xs-12 small_detail icons">
+                        <span class="flaticon-house113 flaticons" style="font-size: 40px"></span>
+                        {#<h3 class="text-uppercase small_section_title">Site Web</h3>#}
+                        <h5 class="color_text_contact small_section_title">
+                            <a href="{{ qouiqui.website }}">{{ qouiqui.website }}</a>
+                        </h5>
+                    </div>
+
+
+
+
+
+
+
+
+                </div>
+            </div>
+
+            <!-- /contact follow -->
+
+        </div>
+    </div>
+    <div class="particle elem1 anim-delay1 "></div>
+    <div class="particle elem2 anim-delay5"></div>
+    <div class="particle elem3 anim-delay3"></div>
+    <div class="particle elem4 anim-delay8"></div>
+    <div class="particle elem5 anim-delay9"></div>
+    <div class="particle elem6 anim-delay2"></div>
+    <div class="particle elem7 anim-delay4"></div>
+    <div class="particle elem8 anim-delay3"></div>
+    <div class="particle elem9 anim-delay10"></div>
+    <div class="particle elem8 anim-delay11"></div>
+    <div class="particle elem6 anim-delay12"></div>
+    <div class="particle elem1 anim-delay14"></div>
+    <div class="particle elem13 anim-delay16"></div>
+    <div class="particle elem17 anim-delay18"></div>
+    <div class="particle elem2 anim-delay6"></div>
+    <div class="particle elem16 anim-delay9"></div>
+    <div class="particle elem8 anim-delay3"></div>
+    <div class="particle elem9 anim-delay10"></div>
+    <div class="particle elem18 anim-delay11"></div>
+    <div class="particle elem11 anim-delay12"></div>
+    <div class="particle elem12 anim-delay14"></div>
+    <div class="particle elem13 anim-delay16"></div>
+    <div class="particle elem14 anim-delay18"></div>
+    <div class="particle elem15 anim-delay6"></div>
+    <div class="particle elem16 anim-delay9"></div>
+    <div class="particle elem17 anim-delay7"></div>
+    <div class="particle elem18 anim-delay6"></div>
+    <div class="particle elem19 anim-delay3"></div>
+</section>
+
+
+{#$("#adminbundle_docteur_lang").select2({#}
+{#tags: true,#}
+{#dropdownAutoWidth: true,#}
+{#width: '100%'#}
+{#});#}

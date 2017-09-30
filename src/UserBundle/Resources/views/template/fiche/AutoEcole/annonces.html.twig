@@ -1,0 +1,850 @@
+<style>
+    label, .valide-btn {
+        margin-top: 19px !important;
+    }
+
+    .input-form {
+        margin-top: 15px !important;
+    }
+
+    textarea {
+        margin-top: 5px;
+    }
+
+    label {
+        color: #dc2c2c !important;
+    }
+
+    .icon-style {
+        background: red;
+        color: #ffffff;
+        padding: 5px;
+    }
+
+    .prix-offre {
+        font-weight: 600;
+        font-size: 35px;
+        color: #ff3f3f;
+    }
+
+    .between-delai {
+        margin: 0px 20px;
+        color: #ff3f3f;
+        font-size: 32px;
+        font-weight: 600;
+    }
+
+    .dalai-offre {
+        margin-top: 15px;
+        text-align: center;
+    }
+
+    .detail-annonce-deb, .detail-annonce-fin {
+        font-size: 26px;
+        color: #890909;
+    }
+
+    .description-offre {
+        margin-top: 75px;
+        color: black;
+        font-weight: 500;
+        font-size: 16px;
+    }
+
+    .modal-header .close {
+        margin-top: -35px !important;
+        margin-right: -35px;
+        background: #a43232;
+        border: solid 1px #a43232;
+        border-radius: 100%;
+        width: 35px;
+        height: 35px;
+        opacity: 1;
+        color: white;
+        font-size: 32px;
+    }
+
+    .detail-annonce-title {
+        text-transform: uppercase;
+        font-size: 40px;
+        font-weight: 600;
+        color: #fff;
+    }
+
+    .modal-header {
+        background: #db3333;
+    }
+
+    .modal-title {
+        color: #fff;
+    }
+
+    .btn-action {
+        margin: 50px 0px 1px 0px;
+    }
+
+    .btn-danger, .btn-success {
+        border-radius: 0px;
+    }
+
+    .btn-purple {
+        background: #ff8080;
+        border: 1px solid #ff8080;
+        color: #fff;
+        border-radius: 0px;
+    }
+
+    .btn-purple:hover {
+        background: #f01c1c;
+        border: 1px solid #f01c1c;
+        color: #fff;
+    }
+
+    .btn-purple:active {
+        color: #fff;
+    }
+
+    .th-table {
+        background: rgb(244, 121, 121);
+        color: white;
+    }
+
+    .carousel-control.right {
+        background-image: linear-gradient(to right, rgba(255, 0, 0, .0001) 0, rgba(255, 0, 0, .2) 100%) !important;
+    }
+
+    .carousel-control.left {
+        background-image: linear-gradient(to right, rgba(255, 0, 0, .2) 0, rgba(255, 0, 0, .0001) 100%) !important;
+    }
+
+    .carousel {
+        position: relative;
+    }
+
+    .vertical-center {
+        min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
+        min-height: 340px; /* These two lines are counted as one :-)       */
+        display: flex;
+        align-items: center;
+    }
+
+    .input-group-addon:last-child {
+        border-left: 0;
+        background-color: #db3333;
+        color: #fff;
+    }
+
+    .bfh-datepicker-calendar > table.calendar > tbody > tr > td.today {
+        color: #ffffff;
+        background-color: #db3333;
+    }
+
+    .months-header {
+        background: #db3333;
+        color: white;
+    }
+
+    .modal-content {
+        -webkit-box-shadow: 0 5px 25px rgba(255, 0, 0, 0.4);
+        -moz-box-shadow: 0 5px 25px rgba(255, 0, 0, 0.4);
+        -o-box-shadow: 0 5px 25px rgba(255, 0, 0, 0.4);
+        box-shadow: 0 5px 25px rgba(255, 0, 0, 0.4);
+        border: none;
+    }
+
+    .fileuploader {
+        display: block;
+        width: 100%;
+        padding: 15px;
+        margin: 15px 0;
+        background: #ffe4e4;
+        border-radius: 4px;
+        line-height: normal;
+        text-align: left;
+        overflow: hidden;
+    }
+
+    .fileuploader-input-button:active {
+        background: #a30808;
+        box-shadow: inset 0 1px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .fileuploader-input-caption {
+        position: relative;
+        display: inline-block;
+        -webkit-box-flex: 1;
+        -ms-flex: 1;
+        flex: 1;
+        -ms-flex-item-align: start;
+        align-self: flex-start;
+        padding: 10px 15px;
+        margin-right: 15px;
+        background: #fff;
+        border: 1px solid #f9b0b0;
+        border-radius: 4px;
+        color: #db3333;
+        font-weight: bold;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        -webkit-transition: all .2s ease-out;
+        transition: all .2s ease-out;
+    }
+
+    .fileuploader-input-button:hover {
+        background: #a90d0d;
+    }
+
+    .fileuploader-input-button {
+        display: inline-block;
+        background: #db3333;
+        padding: 11px 20px;
+        border-radius: 4px;
+        color: #fff;
+        text-align: center;
+        font-weight: bold;
+        vertical-align: top;
+        cursor: pointer;
+        -webkit-transition: all .2s ease-out;
+        transition: all .2s ease-out;
+    }
+
+    .days-header th {
+        color: #dc2c2c !important;
+    }
+
+    .paginate {
+        text-align: center !important;
+    }
+    .load-more-annonce{
+        background: #f24444;
+        padding: 10px 20px;
+        color: #fff;
+        margin-right: 20px;
+        cursor: pointer;
+    }
+    .load-less-annonce{
+        background: #e86e6e;
+        padding: 10px 20px;
+        color: #fff;
+        cursor: pointer;
+    }
+    .property_item .price .tag:hover{
+        background: white;
+        color:red;
+        border: 1px solid red;
+    }
+    .btn-action-submit{
+        margin-top: 15px;
+    }
+    .fileuploader-input-button:active {
+        background: #d9534f;
+        box-shadow: inset 0 1px 6px rgba(0, 0, 0, 0.1);
+    }
+    .fileuploader-input-button:hover {
+        background: #d9534f;
+    }
+    .fileuploader-input-button {
+        display: inline-block;
+        background: #ff4c4c;
+        padding: 12px 20px;
+        border-radius: 4px;
+        color: #fff;
+        text-align: center;
+        font-weight: bold;
+        vertical-align: top;
+        cursor: pointer;
+        -webkit-transition: all .2s ease-out;
+        transition: all .2s ease-out;
+    }
+    .fileuploader-input-caption {
+        position: relative;
+        display: inline-block;
+        -webkit-box-flex: 1;
+        -ms-flex: 1;
+        flex: 1;
+        -ms-flex-item-align: start;
+        align-self: flex-start;
+        padding: 11px 15px;
+        margin-right: 15px;
+        background: #fff;
+        border: 1px solid #f2adad;
+        border-radius: 4px;
+        color: #ff4c4c;
+        font-weight: bold;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        -webkit-transition: all .2s ease-out;
+        transition: all .2s ease-out;
+    }
+    .fileuploader {
+        display: block;
+        width: 100%;
+        padding: 15px;
+        margin: 15px 0;
+        background: #ffe8e8;
+        border-radius: 4px;
+        line-height: normal;
+        text-align: left;
+        overflow: hidden;
+    }
+    @media (max-width: 994px) {
+        .vertical-center {
+            min-height: 100%;
+            top: 0px !important;
+        }
+        .depannage-help-text-form{
+            margin-top: 120px;
+        }
+    }
+
+    @media (max-width: 767px) {
+        .vertical-center {
+            min-height: 100%;
+            top: 0px !important;
+        }
+        .between-delai {
+            margin: 0px 5px !important;
+            font-size: 19px !important;
+        }
+        .detail-annonce-deb, .detail-annonce-fin {
+            font-size: 17px !important;
+            color: #890909;
+        }
+    }
+    @media (max-width: 380px) {
+        .between-delai {
+            margin: 0px 1px !important;
+            font-size: 16px !important;
+        }
+        .detail-annonce-deb, .detail-annonce-fin {
+            font-size: 14px !important;
+        }
+        .detail-annonce-title {
+            text-transform: uppercase;
+            font-size: 30px;
+            font-weight: 600;
+            color: #fff;
+        }
+    }
+    @media (max-width: 550px) {
+        .col-custom {
+            width: 100%;
+        }
+
+        .col-xs-offset-5 {
+            margin-left: 38%;
+        }
+    }
+
+    @media (max-width: 400px) {
+        .col-xs-offset-5 {
+            margin-left: 36%;
+        }
+    }
+
+    @media (max-width: 350px) {
+        .col-xs-offset-5 {
+            margin-left: 32%;
+        }
+    }
+
+
+</style>
+<section id="section-annonces" class="property-details padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-md-9 bottom40">
+                <h2 class="text-uppercase">Nos <span class="color_red">Offres</span></h2>
+                <div class="line_1"></div>
+                <div class="line_2"></div>
+                <div class="line_3"></div>
+            </div>
+            <div class="col-xs-12 col-md-3">
+                {% if app.user != null and app.user == attributes.quoiqui.user %}
+                    <div class="pull-right theme-btn ">
+                        <button type="button" class="theme-btn b theme-btn button11 btn-style-one pull-right"
+                                data-toggle="modal" data-target=".liste-produit">liste des Offres
+                        </button>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+        <div class="row">
+            {% if(produit|length == 1) %}
+            <div class="col-md-12 col-md-offset-4 col-xs-12 col-sm-offset-3 col-offset-xs-0">
+                {% elseif(produit|length == 2) %}
+                <div class="col-md-12 col-md-offset-2 col-xs-12 col-xs-offset-0">
+                    {% else %}
+                    <div class="col-md-12">
+                        {% endif %}
+                        <div class="row" id="append-item">
+                            {% for p in produit[:4] %}
+                                <div class="col-md-4 col-lg-3 col-xs-12 col-sm-6 col-custom item-scroll">
+                                    <div class="item item-produit" data-prod="{{ loop.index }}">
+                                        <div class="property_item bottom40">
+                                            <div class="image">
+                                                <img src="{{ asset('uploads/image/'~p.qouiqui.user.id~'/'~p.qouiqui.id~'/produits/'~p.photo|first) }}"
+                                                     alt="listin" style="height:247px;" class="img-responsive">
+                                                <div class="price">
+                                                    {% if app.user != attributes.quoiqui.user %}
+                                                    <span class="tag">
+                                                        <a class="reserver-offre" data-id="{{ p.id }}" data-target="#commande-annonce" data-toggle="modal">Reserver</a>
+                                                    </span>
+                                                    {% endif %}
+                                                </div>
+                                                <div class="overlay">
+                                                    <div class="centered"><a
+                                                                class="link_arrow white_border show-detail-annonce"
+                                                                href="#" data-toggle="modal"
+                                                                data-target="#showAnnonce"
+                                                                data-lien="{{ path('autoEcole_annonce_show',{'id':p.id,'idq':attributes.quoiqui.id}) }}"
+                                                                data-mod="{{ path('autoEcole_annonce_edit',{'id':p.id}) }}"
+                                                                data-sup="{{ path('autoEcole_annonce_remove',{'id':p.id}) }}"
+                                                                data-identifiant="{{ p.id }}"
+                                                                data-podui="{{ loop.index }}">Voir
+                                                            Detail</a></div>
+                                                </div>
+                                            </div>
+                                            <div class="proerty_content">
+                                                <div class="proerty_text">
+                                                    <h3>{{ p.nom }}</h3>
+                                                    <span class="bottom10">{{ p.dateDeb }}
+                                                        jusqu'a {{ p.dateFin }}</span>
+                                                    <p><strong>{{ p.prix }} DT</strong></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                        <div class="paginate">
+                            {% if nb>4 %}
+                                <span class="load-more-annonce">Voir plus</span>
+                            {% endif %}
+                            <span class="load-less-annonce">Masquer</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- modal detail annonce -->
+<div id="showAnnonce" class="modal fadein" role="dialog">
+    <div class="modal-dialog modal-md">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">
+                    <center><span class="detail-annonce-title"></span></center>
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div style="margin-top:20px;"></div>
+                <div class="row">
+                    <div class="vertical-center col-xs-10 col-xs-offset-1 col-md-5 col-md-offset-0">
+                        <div id="myCarousel" class="carousel slide " data-ride="carousel">
+                            <!-- Indicators -->
+                            <ol class="carousel-indicators show-indicators">
+                            </ol>
+
+                            <!-- Wrapper for slides -->
+                            <div class="carousel-inner show-image">
+                            </div>
+
+                            <!-- Left and right controls -->
+                            <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+                                <span class="glyphicon glyphicon-chevron-left"></span>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                            <a class="right carousel-control" href="#myCarousel" data-slide="next">
+                                <span class="glyphicon glyphicon-chevron-right"></span>
+                                <span class="sr-only">Next</span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-xs-10 col-xs-offset-1 col-md-7 col-md-offset-0">
+                        <div class="prix-offre">
+                            <span class="pull-right">
+                                <span class="detail-annonce-prix"></span><sup>DT</sup>
+                            </span>
+                        </div>
+                        <div class="description-offre">
+                            <span class="detail-annonce-description"></span>
+                        </div>
+                        <div class="dalai-offre">
+                            <span class="between-delai">Du</span> <span class="detail-annonce-deb"></span><span
+                                    class="between-delai"> Au </span><span
+                                    class="detail-annonce-fin"></span>
+                        </div>
+                        {% if app.user != null and app.user == attributes.quoiqui.user %}
+                            <div class="btn-action pull-right">
+                                <button type="button" class="btn btn-purple btn-lg annonce-modifier-1"
+                                        data-toggle="modal"
+                                        data-target="#edit-annonce">Modifier
+                                </button>
+                                <button type="button" class="btn btn-danger btn-lg annonce-supprimer-1"
+                                        data-toggle="modal"
+                                        data-target="#del-annonce">Supprimer
+                                </button>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% if app.user != null and app.user == attributes.quoiqui.user %}
+    <!-- modal de lister les annonces -->
+    <div class="modal fade liste-produit" role="dialog" aria-labelledby="myLargeModalLabel">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Liste des Offres</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="pull-right">
+                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#addProduit">
+                            Ajouter une offre
+                        </button>
+                    </div>
+                    <table id="service-tables" class="table table-responsive table-hover table-striped dataTable"
+                           style="width: 100%;">
+                        <thead>
+                        <tr>
+                            <th style="border:none;border-top-left-radius:5px;" class="th-table">Nom</th>
+                            <th style="border:none" class="th-table">Description</th>
+                            <th style="border:none" class="th-table">Prix</th>
+                            <th style="border:none" class="th-table">Date Début</th>
+                            <th style="border:none" class="th-table">Date Fin</th>
+                            <th style="border:none;border-top-right-radius:5px;" class="text-center th-table">Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for p in produit %}
+                            <tr data-prod="{{ loop.index }}">
+                                <td>{{ p.nom }}</td>
+                                <td>{{ p.description[:150]|raw }}</td>
+                                <td>{{ p.prix }}</td>
+                                <td>{{ p.dateDeb }}</td>
+                                <td>{{ p.dateFin }}</td>
+                                <td>
+                                <div class="btn-group pull-right">
+                                    <button type="button" class="btn btn-default icon-style-modifier edit-annonce"
+                                            data-toggle="modal" data-target="#edit-annonce" data-nom="{{ p.nom }}"
+                                            data-id="{{ p.id }}"
+                                            data-lien="{{ path('autoEcole_annonce_edit',{'id':p.id}) }}">Modifier
+                                    </button>
+                                    <button type="button" class="btn btn-danger icon-annonce-supprimer"
+                                            data-nom="{{ p.nom }}"
+                                            data-id="{{ p.id }}"
+                                            data-lien="{{ path('autoEcole_annonce_remove',{'id':p.id}) }}"
+                                            data-loop="{{ loop.index }}">Supprimer
+                                    </button>
+                                </div>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- modal d'ajout service -->
+    <div id="addProduit" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Ajouter une Offre</h4>
+                </div>
+                <div class="modal-body">
+                    <form action="{{ path('autoEcole_annonce_add') }}" method="post" enctype="multipart/form-data">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <label>Nom</label>
+                            </div>
+                            <div class="col-md-10">
+                                <div class="inner-addon left-addon">
+                                    <input type="text" class="form-control input-form" name="title"
+                                           title="Nom de produit entre 5 et 150 caractéres" required="required"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-2">
+                                <label>Prix</label>
+                            </div>
+                            <div class="col-md-10">
+                                <div class="inner-addon left-addon">
+                                    <input type="text" class="form-control input-form" name="prix" min="1"
+                                           required="required"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-2">
+                                <label>Début</label>
+                            </div>
+                            <div class="col-md-10" style="margin-top:10px;">
+                                <div class="form-group">
+                                    <div class="bfh-datepicker" data-format="y-m-d" data-date="today" data-align="right"
+                                         data-min="today" data-name="dateDeb" id="debb">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-2">
+                                <label style="margin-top: 8px !important;">Fin</label>
+                            </div>
+                            <div class="col-md-10">
+                                <div class="bfh-datepicker" data-format="y-m-d" data-date="today" data-align="right"
+                                     data-min="today" data-name="dateFin" id="finn"></div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-2">
+                                <label>Description</label>
+                            </div>
+                            <div class="col-md-10" style="margin-top:10px;">
+                                <div class="inner-addon left-addon">
+                                    <textarea class="form-control ckeditor" id="editeur"
+                                              name="editeur" rows="10" required="required"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-2">
+                                <label>Photo</label>
+                            </div>
+                            <div class="col-md-10">
+                                <div class="inner-addon left-addon">
+                                    <input type="file" class="form-control input-form" name="photo"
+                                           required="required"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-2 col-md-offset-5">
+                                <input type="submit" class="btn btn-danger valide-btn btn-lg" value="Enregistrer"/>
+                            </div>
+                        </div>
+                        <input type="hidden" value="{{ attributes.quoiqui.id }}" name="id"/>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!--modal de modifier une annonce -->
+    <div class="modal fade" role="dialog" id="edit-annonce">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title"><span class="nomProduit"></span></h4>
+                </div>
+                <div class="modal-body">
+                    <form action="{{ path('autoEcole_annonce_update') }}" method="post" enctype="multipart/form-data">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <label>Nom</label>
+                            </div>
+                            <div class="col-md-10">
+                                <div class="inner-addon left-addon">
+                                    <input type="text" class="form-control input-form form-annonce-nom" name="title"
+                                           title="Nom de produit entre 5 et 150 caractéres" required/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-2">
+                                <label>Prix</label>
+                            </div>
+                            <div class="col-md-10">
+                                <div class="inner-addon left-addon">
+                                    <input type="number" class="form-control input-form form-annonce-prix" name="prix"
+                                           min="1" required="required"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-2">
+                                <label>Début</label>
+                            </div>
+                            <div class="col-md-10" style="margin-top:10px;">
+                                <div class="form-group">
+                                    <div class="bfh-datepicker" data-format="y-m-d" data-align="right" data-min="today"
+                                         data-name="dateDeb" id="deb"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-2">
+                                <label>Fin</label>
+                            </div>
+                            <div class="col-md-10">
+                                <div class="bfh-datepicker" data-format="y-m-d" data-align="right" data-min="today"
+                                     data-name="dateFin" id="fin"></div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-2">
+                                <label>Description</label>
+                            </div>
+                            <div class="col-md-10" style="margin-top:10px;">
+                                <div class="inner-addon left-addon">
+                                <textarea cols="80" class="ckeditor form-annonce-desc" id="editeur" name="editeur"
+                                          rows="10" required="required"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+
+                            <div class="col-md-2">
+                                <label>Photo</label>
+                            </div>
+                            <div class="col-md-10">
+                                <div class="inner-addon left-addon">
+                                    <input type="file" class="form-control input-form" name="photo"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-10 col-md-offset-2 form-annonce-image">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-2 col-md-offset-5">
+                                <input type="submit" class="btn btn-danger valide-btn btn-lg" value="Modifier"/>
+                            </div>
+                        </div>
+                        <input type="hidden" value="" name="id" class="id-modif"/>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!--modal de suppression un service -->
+    <div class="modal fade" role="dialog" id="del-annonce">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Supprimer une Offre</h4>
+                </div>
+                <div class="modal-body">
+                    <center>Confirmer votre suppression de Produit <span class="nomSpan"></span></center>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success confirm-del-annonce">Oui</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Non</button>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endif %}
+
+
+<!-- modal commander -->
+<div id="commande-annonce" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Reserver l'Offre</h4>
+            </div>
+            <div class="modal-body">
+                <form action="{{ path('autoEcole_annonce_reserver') }}" method="post" enctype="multipart/form-data">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label>Nom</label>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="inner-addon left-addon">
+                                <input type="text" class="form-control input-form" name="nom" required="required" placeholder="Saisie votre Nom"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label>Prénom</label>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="inner-addon left-addon">
+                                <input type="text" class="form-control input-form" name="prenom" required="required" placeholder="Saisie votre Prénom" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label>Adresse</label>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="inner-addon left-addon">
+                                <input type="text" class="form-control input-form" name="adresse" required="required"  placeholder="Saisie votre Adresse"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label>Téléphone</label>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="inner-addon left-addon">
+                                <input type="tel" class="form-control input-form" name="tel" required="required"  placeholder="71 111 000"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label>Email</label>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="inner-addon left-addon">
+                                <input type="email" class="form-control input-form" name="email" required="required"  placeholder="Saisie votre Email"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label>Remarque</label>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="inner-addon left-addon">
+                                <textarea class="form-control input-form" name="remarque" placeholder="par exemple, pâte sans gluten pour les raviolis s'il vous plaît!"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <input type="hidden" value="" name="commande" id="commande"/>
+                    <input type="hidden" value="{{ attributes.quoiqui.id }}" name="id"/>
+                    <div class="row confirm-block">
+                        <div class="col-xs-2 col-xs-offset-5">
+                            <div class="inner-addon left-addon">
+                                <input type="submit" class="btn btn-bloc btn-danger btn-action-submit" value="Confirmer" id="commander-platts"/>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,370 @@
+{% extends 'front.html.twig' %}
+{% block body %}
+
+    <div class="archive tax-features term-accessories term-233 wpb-js-composer js-comp-ver-4.11.2.1 vc_responsive" data-submitlink="http://studio.listingprowp.com/submit-listing/">
+
+
+    <div id="page" class="clearfix" data-mtoken="pk.eyJ1IjoiY3JpZGhlbHAiLCJhIjoiY2o0dHNoMnc3MGFnejMzazA0ZzE2Ym5mMCJ9.Lg2w2xGoU5ZsXXMDkvcT2A" data-mstyle="mapbox.streets-basic" data-sitelogo="http://studio.listingprowp.com/wp-content/themes/listingpro/assets/images/logo.png" data-site-url="http://studio.listingprowp.com/" data-ipapi="geo_ip_db">
+
+        <!--==================================Header Open=================================-->
+        <div class="pos-relative">
+            <div class="header-container  ">
+
+
+                <!--================================full width with blue background====================================-->
+                <!--================================full width with blue background====================================-->
+                {{ include('@User/template/header.html.twig') }}
+                <!--==================================Header Close=================================-->
+
+                <!-- Listing Detail Popup -->
+
+                <!-- dynamic invoice -->
+                <div class="modal fade lp-modal-list" id="modal-invoice">
+                    <div class="modal-content">
+
+                        <div class="modal-body">
+                            Le contenu est en cours de chargement...
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-white" data-dismiss="modal">Fermer</button>
+                            <a href="#" class="lp-print-list btn-first-hover">Imprimer</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- dynamic invoice -->
+
+
+                <!-- Modal Packages -->
+                <div class="modal fade" id="modal-packages" role="dialog">
+                    <div class="modal-dialog">
+
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-body">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    <h4 class="modal-title">Change Pricing Plan</h4>
+                                    <p>We recommend you to check details of Pricing Plans before changing. <a href="http://studio.listingprowp.com/pricing-plan/" target="_blank">Click Here</a>
+                                    </p>
+                                </div>
+                                <form name="select-plan-form" id="select-plan-form" method="post" class="select-plan-form"><label class="plan-options">
+                                        <div class="radio radio-danger"><input id="479" type="radio" name="plans-posts" value="479"><label for="479"></label></div>
+                                        Basic</label><label class="plan-options">
+                                        <div class="radio radio-danger"><input id="478" type="radio" name="plans-posts" value="478"><label for="478"></label></div>
+                                        Professional</label><input type="hidden" value="" name="listing-id" id="listing_id"><input type="submit" class="btn btn-default" value="Change" name="submit"></form>
+                            </div>
+                            <div class="modal-footer">
+                                <div class="row">
+                                    <div class="col-md-9 col-sm-12 text-left">
+                                        <div class="lp-expire-update-status"></div>
+                                    </div>
+                                    <div class="col-md-3 col-sm-12 text-right">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="md-overlay"></div> <!-- Overlay for Popup -->        </div>
+            <!--==================================Header Close=================================-->
+
+            <!--================================== Search Close =================================-->
+
+            <!--================================== Search Close =================================-->
+        </div>
+
+
+        <!--==================================Section Open=================================-->
+        <section class="page-container clearfix section-fixed listing-with-map pos-relative taxonomy" id="features">
+            <div class="sidemap-container pull-right sidemap-fixed">
+                <div class="map-pop map-container3" id="map-section">
+                    <div id='map' class="mapSidebar"></div>
+                </div>
+                <a href="#" class="open-img-view"><i class="fa fa-file-image-o"></i></a>
+            </div>
+
+
+
+            <div class="all-list-map"></div>
+            <div class=" pull-left post-with-map-container-right">
+                <div class="post-with-map-container pull-left">
+                    <div class="margin-bottom-20 margin-top-30">
+                        <div class="row listing-style-3">
+                            <div class="col-md-12 search-row margin-top-subtract-35">
+                                <form autocomplete="off" class="clearfix" method="post" enctype="multipart/form-data" id="searchform">
+                                    <div class="filter-top-section pos-relative row">
+                                        <div class="lp-title col-md-10 col-sm-10">
+                                            <h3>Résultats pour <span class="font-bold term-name">[QUOI/QUI]</span></h3>
+                                        </div>
+                                        <div class="pull-right margin-right-0 col-md-2 col-sm-2 clearfix">
+                                            <div class="listing-view-layout">
+                                                <ul>
+                                                    <li><a class="grid active" href="#"><i class="fa fa-th-large"></i></a></li>
+                                                    <li><a class="list " href="#"><i class="fa fa-list-ul"></i></a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-inline lp-filter-inner">
+                                        <a id="see_filter">Voir les filtres</a>
+                                        <div class="more-filter" id="more_filters">
+                                            <div class="form-group">
+                                                <div class="currency-signs search-filter-attr">
+                                                    <ul>
+                                                        <li class="simptip-position-top simptip-movable" data-tooltip="Peu coûteux" id="one"><a href="#" data-price="inexpensive">$</a></li>
+                                                        <li class="simptip-position-top simptip-movable" data-tooltip="Modérer" id="two"><a href="#" data-price="moderate">$$</a></li>
+                                                        <li class="simptip-position-top simptip-movable" data-tooltip="Cher" id="three"><a href="#" data-price="pricey">$$$</a></li>
+                                                        <li class="simptip-position-top simptip-movable" data-tooltip="Ultra High End" id="four"><a href="#" data-price="ultra_high_end">$$$$</a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="search-filters form-group">
+                                                <ul>
+                                                    <li id="listing_openTime"><a href="#" data-value="close"><i class="fa fa-clock-o"></i>Ouvert </a></li>
+                                                </ul>
+                                            </div>
+                                            <div class="search-filters form-group">
+                                                <ul class="search-filter-attr">
+
+                                                    <li id="listingRate"><a href="#" data-value='listing_rate'><i class="fa fa-star-o"></i>Mieux notés</a></li>
+
+                                                    <li id="listingReviewed"><a href="#" data-value='listing_reviewed'><i class="fa fa-file-text-o"></i>Plus commentés</a></li>
+
+                                                </ul>
+                                            </div>
+
+                                            <div class="form-group pull-right margin-right-0">
+                                                <div class="input-group border-dropdown">
+                                                    <div class="input-group-addon lp-border"><i class="fa fa-list"></i></div>
+                                                    <select class="comboboxCategory chosen-select2 tag-select-four" name="searchcategory" id="searchcategory">
+                                                        <option value="">Toutes catégories</option>
+                                                        <option value="76">Arts &amp; Entertainment</option>
+                                                        <option value="33">Automotive</option>
+                                                        <option value="74">Beauty &amp; Spa</option>
+                                                        <option value="77">Health &amp; Medical</option>
+                                                        <option value="75">Hotels</option>
+                                                        <option value="56">Real Estate</option>
+                                                        <option value="58">Restaurant</option>
+                                                        <option class="sub_cat" value="133">-&nbsp;&nbsp;American</option>
+                                                        <option class="sub_cat" value="134">-&nbsp;&nbsp;Chinese</option>
+                                                        <option class="sub_cat" value="135">-&nbsp;&nbsp;Indian</option>
+                                                        <option class="sub_cat" value="136">-&nbsp;&nbsp;Japanese</option>
+                                                        <option class="sub_cat" value="137">-&nbsp;&nbsp;Italian</option>
+                                                        <option value="78">Services</option>
+                                                        <option value="103">Shopping</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <a href="#" class="open-map-view"><i class="fa fa-map-o"></i></a>
+                                    </div>
+                                    <input type="hidden" name="lp_search_loc" id="lp_search_loc" value=""/>
+
+
+                                    <input type="submit" style="display:none;">
+                                </form>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="LPtagsContainer "></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="content-grids-wraps">
+                        <div class="clearfix lp-list-page-grid" id="content-grids">
+
+                            <div class="promoted-listings">
+                                <div class="md-overlay"></div>
+                            </div>
+
+                            <div class="col-md-6 col-sm-12  lp-grid-box-contianer grid_view2 card1 lp-grid-box-contianer1" data-title="AleksandraD Fashion and Design" data-postid="1570" data-lattitue="36.890203" data-longitute="10.313564" data-posturl="http://studio.listingprowp.com/listing/aleksandrad-fashion-and-design/">
+                                <div class="lp-grid-box">
+                                    <div class="lp-grid-box-thumb-container">
+                                        <div class="lp-grid-box-thumb">
+                                            <div class="show-img">
+                                                <a href='http://studio.listingprowp.com/listing/aleksandrad-fashion-and-design/'>
+                                                    <img src='http://studio.listingprowp.com/wp-content/uploads/2017/04/formal-dresss-372x240.jpeg'/>
+                                                </a></div>
+                                            <div class="hide-img listingpro-list-thumb">
+                                                <a href='http://studio.listingprowp.com/listing/aleksandrad-fashion-and-design/'>
+                                                    <img src='http://studio.listingprowp.com/wp-content/uploads/2017/04/formal-dresss-372x240.jpeg'/>
+                                                </a></div>
+                                        </div>
+                                        <div class="lp-grid-box-quick">
+                                            <ul class="lp-post-quick-links">
+                                                <li>
+                                                    <a href="#" data-post-type="grids" data-post-id="1570" data-success-text="Saved" class="status-btn add-to-fav lp-add-to-fav">
+                                                        <i class="fa fa-bookmark-o"></i> <span>Save</span>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a class="icon-quick-eye md-trigger qickpopup" data-modal="modal-11570"><i class="fa fa-eye"></i> Preview</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="lp-grid-desc-container lp-border clearfix">
+                                        <div class="lp-grid-box-description ">
+                                            <div class="lp-grid-box-left pull-left">
+                                                <h4 class="lp-h4">
+                                                    <a href="http://studio.listingprowp.com/listing/aleksandrad-fashion-and-design/">
+                                                        AleksandraD Fashion and Design </a>
+                                                </h4>
+                                                <ul>
+                                                    <li>
+                                                        <span class="rate lp-rate-satisfactory">2.0<sup>/ 5</sup></span> <span>
+															1															Rating														</span>
+                                                    </li>
+                                                    <li class="middle">
+
+					<span class="element-price-range list-style-none"><span class="grayscale simptip-position-top simptip-movable" data-tooltip="Pricey" title="Pricey">$$$</span>
+					</span></li>
+                                                    <li>
+                                                        <span class="cat-icon"><img class="icon icons8-Food"
+                                                                                    src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAACMElEQVRoge1Z23HCQAykhJSQEijhrAroAEpwCXRAOgg/SJ9QQjpIKvDSQeiAfGBdHBJzp/PrQrIznmEG+24XSaysm83+0Q7HWJLguWC8kuBMgnP9+dkxllPzC8IxFoUASr7tKgRwjMXUfH8EMTYNom/EKN0Oc/3e7TAnRlkI3rwoxmZKzt9AjKcLuepEjDLi/pKkOtVinsbgGIRjLFREMwLB53aYa2SySDNfExGRuMYlMpeaGYJbPBHBSmsidQ2tmUmjUgi2qdFQNKKy7ZGaDeoTltq4htZKwXjtk5sJWqy5rDM5gX8h1g1yuf62ECdwIY8YK7W81wiceXEvhPGSSiAWQSGMl2QhIaP60iv14CO31ulkvCRY1xusWxb37x1deqWYdUJcQhscbv0Kvg0XnImro3kDwzqN7DiYNwjlpRM44upIXB2TctewTky9tkJD3iX/+4Lvx1JSePK24QpJfNweD7kKcXs8RD/UKScHQpKX3I0Q/7+dy4Rj1pzUGLykkwENhCROPow5jGlqkA46LOneqUkbCEl1WzDeayGPgzEzwgkeayHv0Q/l5iEKEy9VTlKdBuZlhjaYUZmSo4coTLWrQ+mshcT8m+boIQoTtyQHHQmmjiNHD1GY6vduhCT1/SPB9J6Uqxkqovj5GVOHqcjQIK6OwVlCzmaoiKph+jwTtM+PRoKftwlWrTflbIaKKI59HG4OjajD05w9RBFVx/6U9ncIaT8Fjjk1yum6SyEf1erUSWNGix0AAAAASUVORK5CYII="
+                                                                                    alt="cat-icon"></span>
+                                                        <a href="http://studio.listingprowp.com/listing-category/shopping/">
+                                                            Shopping
+                                                        </a></li>
+                                                </ul>
+                                                <div class="review">
+                                                    <div class="review-post">
+                                                        <div class="reviewer-thumb">
+                                                            <img src="http://0.gravatar.com/avatar/ceb3b0ac8505f53c921d685e6b7039a2?s=94&#038;d=mm&#038;r=g" alt="">
+                                                        </div>
+                                                        <div class="reviewer-details">
+                                                            <!-- <h4>Aleksandra met our choice really. - <span>Tuesday April 11, 2017</span></h4> -->
+                                                            <p>Dress for our choice for wedding is not easy task but when we reached at place where we feel co...</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="lp-grid-box-right pull-right">
+                                            </div>
+                                        </div>
+                                        <div class="lp-grid-box-bottom">
+                                            <div class="pull-left">
+                                                <div class="show">
+                                                    <span class="cat-icon"><img class="icon icons8-mapMarkerGrey"
+                                                                                src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAC8UlEQVRoge1aS3HDMBA1BEMIhEAwhEAohEIIgx3tk8+FYAiGEAiBYAjpoZKyTmx9Ym2cQ9+MZ3qIpf2+/bhN849nEFFLQGeMOTMwArgwMDEwub8HtpYI6PaWdRFE1LK15IS+ZT/WEhEd9pZ/UQEAF2PMmYCO+v5IRK17DgBOxpiz885MoX2VAAYh0Eh9f8x+v++PbO2PNAARtZoyrwlxdda8bon52VnAVGKMTSCiVoTGWCPGnXfHoIy2Z2Q4aYSCVwbApea5T3C0+hdOClaT3jbGnGufHy7x7KRZB4joIELsUP2C4A1gqH74AwKbWfujcfiVgVsOqxBRy8zfDAwALu7dITdcnPdvDEybBZcAcMpNQgK6p4InHgCXnNAMlMz8VUOHpmnuYZWyKAGdqPKjqO4HACepYEoZQSz1wktQ7mlVCVlf/nqoRVZzLU0ybJxRbgyMW+UP8ALGWMTlhC+SUWr29SLmYZU8CYkeUyTDax4+52IMqKOIrx8RS+coWyqkz6cXRF5GCK0I9dZWhPr+WL1dCe16hAp9EcsJrZxEVkn2wDTM32u/EZU/ebE3TCzZA3nUpN+cOuKmxWuBgNHGU9SRetOjYJmotUU4zCq4X0rIiTIVgiUsmA2RnMlkfpj4lp4pJVzJfcUQCb+aJxJ+JeSoe2JgNMacc+YYUVzrd9rM/PW2Nr7QaEWQ3K85U88GOK2dl0pr/XiH87zq3B7Cy9qr1h2hg1Y0VtM0d69UpUWHQPNKy40ZfKHScH1Oe18NWhwviqn+gs5DTHnVqPit3vCYeaXCrla0QO/zhofcOm455y3bxZQANepKbjesChkSr7wvq7h63UhBroBK39UgjZchls5FiT+j23d93EkhWDYz8XdP8BhKBJPdwW4JvoZZiEX2umI/PH3s9/bUXvejQ+oRfP+o+bSoEMuH5H54dzzUhjCqijlc55OaBuRaiIBOfjfRmGNUIfMleGjPf9XYApEvNwaGj8+LNQiW+vzk/hT8Ak0IUQVkeTWPAAAAAElFTkSuQmCC"
+                                                                                alt="mapMarkerGrey"></span>
+                                                    <a href="http://studio.listingprowp.com/location/chicago/">
+                                                        Chicago
+                                                    </a></div>
+                                                <div class="hide">
+												<span class="cat-icon">
+													<img class="icon icons8-mapMarkerGrey"
+                                                         src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAC8UlEQVRoge1aS3HDMBA1BEMIhEAwhEAohEIIgx3tk8+FYAiGEAiBYAjpoZKyTmx9Ym2cQ9+MZ3qIpf2+/bhN849nEFFLQGeMOTMwArgwMDEwub8HtpYI6PaWdRFE1LK15IS+ZT/WEhEd9pZ/UQEAF2PMmYCO+v5IRK17DgBOxpiz885MoX2VAAYh0Eh9f8x+v++PbO2PNAARtZoyrwlxdda8bon52VnAVGKMTSCiVoTGWCPGnXfHoIy2Z2Q4aYSCVwbApea5T3C0+hdOClaT3jbGnGufHy7x7KRZB4joIELsUP2C4A1gqH74AwKbWfujcfiVgVsOqxBRy8zfDAwALu7dITdcnPdvDEybBZcAcMpNQgK6p4InHgCXnNAMlMz8VUOHpmnuYZWyKAGdqPKjqO4HACepYEoZQSz1wktQ7mlVCVlf/nqoRVZzLU0ybJxRbgyMW+UP8ALGWMTlhC+SUWr29SLmYZU8CYkeUyTDax4+52IMqKOIrx8RS+coWyqkz6cXRF5GCK0I9dZWhPr+WL1dCe16hAp9EcsJrZxEVkn2wDTM32u/EZU/ebE3TCzZA3nUpN+cOuKmxWuBgNHGU9SRetOjYJmotUU4zCq4X0rIiTIVgiUsmA2RnMlkfpj4lp4pJVzJfcUQCb+aJxJ+JeSoe2JgNMacc+YYUVzrd9rM/PW2Nr7QaEWQ3K85U88GOK2dl0pr/XiH87zq3B7Cy9qr1h2hg1Y0VtM0d69UpUWHQPNKy40ZfKHScH1Oe18NWhwviqn+gs5DTHnVqPit3vCYeaXCrla0QO/zhofcOm455y3bxZQANepKbjesChkSr7wvq7h63UhBroBK39UgjZchls5FiT+j23d93EkhWDYz8XdP8BhKBJPdwW4JvoZZiEX2umI/PH3s9/bUXvejQ+oRfP+o+bSoEMuH5H54dzzUhjCqijlc55OaBuRaiIBOfjfRmGNUIfMleGjPf9XYApEvNwaGj8+LNQiW+vzk/hT8Ak0IUQVkeTWPAAAAAElFTkSuQmCC"
+                                                         alt="mapMarkerGrey">												</span>
+                                                    <span class="text gaddress">Chicago Metropolitan Area, 643...</span>
+                                                </div>
+                                            </div>
+
+                                            <div class="pull-right">
+                                                <a href="#" class="status-btn"><span class="grid-closed">Closed Now!</span>
+                                                </a>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="md-modal md-effect-3" id="modal-11570">
+                                <div class="container">
+                                    <div class="md-content ">
+                                        <div class="row popup-inner-left-padding ">
+                                            <div class="col-md-6 lp-insert-data">
+                                                <div class="lp-grid-box-thumb">
+
+                                                    <div class="slide">
+                                                        <img src="http://studio.listingprowp.com/wp-content/uploads/2017/04/formal-dresss-650x300.jpeg" alt="post1"/>
+                                                    </div>
+                                                </div><!-- ../grid-box-thumb -->
+                                                <div class="lp-grid-desc-container lp-border clearfix">
+                                                    <div class="lp-grid-box-description ">
+                                                        <div class="lp-grid-box-left pull-left">
+                                                            <h4 class="lp-h4">
+                                                                <a href="http://studio.listingprowp.com/listing/aleksandrad-fashion-and-design/">
+                                                                    AleksandraD Fashion and Design </a>
+                                                            </h4>
+                                                            <ul>
+                                                                <li>
+                                                                    <span class="rate">2.0<sup>/5</sup></span>
+                                                                    1 Reviews
+                                                                </li>
+                                                                <li class="middle">
+
+					<span class="element-price-range list-style-none"><span class="grayscale simptip-position-top simptip-movable" data-tooltip="Pricey" title="Pricey">$$$</span>
+					</span></li>
+                                                                <li>
+                                                                    <span class="cat-icon"><img class="icon icons8-Food"
+                                                                                                src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAACMElEQVRoge1Z23HCQAykhJSQEijhrAroAEpwCXRAOgg/SJ9QQjpIKvDSQeiAfGBdHBJzp/PrQrIznmEG+24XSaysm83+0Q7HWJLguWC8kuBMgnP9+dkxllPzC8IxFoUASr7tKgRwjMXUfH8EMTYNom/EKN0Oc/3e7TAnRlkI3rwoxmZKzt9AjKcLuepEjDLi/pKkOtVinsbgGIRjLFREMwLB53aYa2SySDNfExGRuMYlMpeaGYJbPBHBSmsidQ2tmUmjUgi2qdFQNKKy7ZGaDeoTltq4htZKwXjtk5sJWqy5rDM5gX8h1g1yuf62ECdwIY8YK7W81wiceXEvhPGSSiAWQSGMl2QhIaP60iv14CO31ulkvCRY1xusWxb37x1deqWYdUJcQhscbv0Kvg0XnImro3kDwzqN7DiYNwjlpRM44upIXB2TctewTky9tkJD3iX/+4Lvx1JSePK24QpJfNweD7kKcXs8RD/UKScHQpKX3I0Q/7+dy4Rj1pzUGLykkwENhCROPow5jGlqkA46LOneqUkbCEl1WzDeayGPgzEzwgkeayHv0Q/l5iEKEy9VTlKdBuZlhjaYUZmSo4coTLWrQ+mshcT8m+boIQoTtyQHHQmmjiNHD1GY6vduhCT1/SPB9J6Uqxkqovj5GVOHqcjQIK6OwVlCzmaoiKph+jwTtM+PRoKftwlWrTflbIaKKI59HG4OjajD05w9RBFVx/6U9ncIaT8Fjjk1yum6SyEf1erUSWNGix0AAAAASUVORK5CYII="
+                                                                                                alt="cat-icon"></span>
+                                                                    <a href="http://studio.listingprowp.com/listing-category/shopping/">
+                                                                        Shopping
+                                                                    </a></li>
+                                                                <li>
+                                                                    <a href="tel:(415) 312-2458">
+                                                                        (415) 312-2458 </a>
+                                                                </li>
+                                                            </ul>
+                                                            <div class="lp-grid-desc">
+                                                                <p>We shopped for the fabrics together and shared many pictures and ideas. She was very helpful. I went to many fittings to her cozy place, where she was a great host and made me feel really welcomed. I loved every fitting where I co</p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="lp-grid-box-right pull-right">
+                                                        </div>
+                                                    </div>
+                                                    <div class="lp-grid-box-bottom">
+                                                        <div class="pull-left">
+																			<span class="cat-icon">
+											<img class="icon icons8-Food"
+                                                 src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAABv0lEQVRoge1ZUbGDMBA8CUhAAhKQUAlIqILsOkBCJSABCUhAAhJ4Hw1vGB4tB82R9A07c7+Z3dxmuQSRCxcuBAPJwjlHAC2ADsDgqwfQOOdIsojN8w9Ilp7wqKyOZBWbt5AsdhJfExKnI37Xhw/ITzWQLL+V/G+dJoJkHpr8rBP2dsIzYUKTn6o3JU/yZkh+xNNKlZkAfJY42hpMyPvI1JJoSZYkC5K571y7owt5cAH+C6shUJPM1tYAUGvWcM4xuAAAjXLnV8nP1tF0orUQ0Ctaf9taRxkE4c+BUkCuEJDFErD58QooYLQQsBmhSguVCgGdhQBNgmwePijDILgAbYy+i0CSd80aAOrgAnaOEd00XZLMvG00Oz8CRuOE9vCFKJMvsYgIgMcJAhoT8iIiJKsTdr+yFGBto8HMPhNga6OHKXkR0y6cc6UUMetC+Ox/BYMu2Ht/CSgvJ8nt/gTfhT4A+X7rEmQpQjNZvi3NBGsK7JhxkrDOEt5KR17q4llniSNWim6dJbAvleJbZw1QPpkkY50lFNGaju9fwT+/r5E//0fGUawd6uQO7Rbmd2iS99h8DsG/QqSZOBcu/BP8AL+XHO7G8elbAAAAAElFTkSuQmCC"
+                                                 alt="cat-icon">
+										</span>
+                                                            <span class="text gaddress">Chicago Metropolitan Area, 643 Spruce St, Aurora, IL, United States</span>
+                                                        </div>
+
+                                                        <div class="pull-right">
+                                                            <a href="#" class="status-btn"><span class="grid-closed">Closed Now!</span>
+                                                            </a>
+                                                        </div>
+                                                        <div class="clearfix"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div id="quickmap1570" class="quickmap"></div>
+                                                <a class="md-close widget-map-click"><i class="fa fa-close"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+
+
+                            <div class="md-overlay"></div>
+                        </div>
+                    </div>
+
+                    <div id="lp-pages-in-cats"></div>
+                    <div class="lp-pagination pagination lp-filter-pagination-ajx"></div>
+                </div>
+            </div>
+        </section>
+        <script type='text/javascript'>
+            /* <![CDATA[ */
+            var ajax_listingpro_submit_object = {"ajaxurl": "http:\/\/studio.listingprowp.com\/wp-admin\/admin-ajax.php"};
+            /* ]]> */
+        </script>
+
+    </div>
+{% endblock %}

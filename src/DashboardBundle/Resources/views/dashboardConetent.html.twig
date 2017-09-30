@@ -1,0 +1,130 @@
+<div class="col-sm-9" style="" contenteditable="false">
+    <div class="col-md-12">
+        <div class="col-md-6">
+            <div class="thumbnail icon-img">
+                <img  src="{{ asset('/uploads/default/ajouterQouiqui.png') }}">
+                <div class="caption">
+                    <a href="{{ path('dashboard_ajout') }}" class="btn btn-info center-block">Ajouter quoiqui!</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="thumbnail icon-img">
+                <img  src="{{ asset('/uploads/default/ajouterEvents.png') }}">
+                <div class="caption">
+                    <a href="{{ path('dashboard_liste') }}" class="btn btn-info center-block">Liste quoiqui!</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="thumbnail icon-img">
+                <img  src="{{ asset('/uploads/default/listeReservation.png') }}">
+                <div class="caption">
+                    <a href="{{ path('dashboard_booking_liste_reservation') }}" class="btn btn-info center-block">Liste de mes réservation!</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="thumbnail icon-img">
+                <img  src="{{ asset('asset-front/images/maps-and-flags.png') }}">
+                <div class="caption">
+                    <a onclick="getLocation()" class="btn btn-info center-block">Mettre à jour votre position Sur Ween</a>
+                </div>
+            </div>
+        </div>
+
+        <script>
+
+            function getLocationAction() {
+
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(showPosition);
+                }
+
+            }
+            function updatelocation(link,data) {
+                $.ajax({
+                    type: "POST",
+                    url: link,
+                    data: data,
+                    success: function (result) {
+
+                        new PNotify({
+                            title: 'Succès!',
+                            text: 'position à été mise à jour !.',
+                            type: 'success'
+                        });
+
+                    },
+                    error: function () {
+                        new PNotify({
+                            title: 'Oh Non!',
+                            text: 'Position non Détecté !',
+                            type: 'error'
+                        });
+                    }
+                });
+            }
+            function showPosition(position) {
+                qq_id = 255;
+                lat = position.coords.latitude;
+                long = position.coords.longitude;
+                var data = {
+                    qqid: qq_id,
+                    lat: lat,
+                    long: long
+                };
+
+                link = '{{ path('geoupdate') }}';
+
+                console.log(data,lat,long)
+                updatelocation(link,data);
+
+            }
+
+            function getLocation() {
+                $.confirm({
+                    title: '<div style="color: cadetblue"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Déterminer votre position !</div>',
+                    content: '<div class="qouiqui-liste">' +
+                    '<div class="alert alert-danger row" role="alert">' +
+                    '                   <i class="fa fa-exclamation-circle col-md-1 col-sm-1 col-xs-1" aria-hidden="true"></i>' +
+                    '                  <strong class="col-md-10 col-sm-10 col-xs-10">Il faut que vous soyez dans votre adresse professionnelle a fin de valider votre Geolocalisation !!</strong>' +
+                    '           </div>' +
+                    '           <div class="alert alert-warning row" role="alert">' +
+                    '                   <i class="fa fa-exclamation-circle col-md-1 col-sm-1 col-xs-1" aria-hidden="true"></i>' +
+                    '                  <strong class="col-md-10 col-sm-10 col-xs-10">Si vous etes actuellement dans votre adresse professionnel cliquer sur <b>CONFIRMER</b> si non cliquer <b>ANNULER</b> !</strong>' +
+                    '           </div>' +
+                    '          </div>' +
+
+                    ' {% for qouiqui in  qouiqui %}'+
+                    {% if loop.index < 2 %}
+                    '<input class="form-control hidden" value="{{ qouiqui.id }}" name="qq_id" id="qouiqui-liste"/>'+
+                    {%  endif %}
+                    '{% endfor %}',
+
+                    buttons: {
+                        Confirmer: function () {
+                            getLocationAction();
+                        },
+                        Annuler: function () {
+
+                        }
+                    }
+                });
+            }
+        </script>
+
+
+
+    </div>
+</div>
+{#==============================Dashboard Content col-md-3==================================#}
+<style>
+    .icon-img img{
+        height: auto;
+        width: 100px;
+    }
+    .margin15{
+        margin: 0 15px;
+    }
+</style>

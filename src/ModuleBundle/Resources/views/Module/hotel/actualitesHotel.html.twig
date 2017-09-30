@@ -1,0 +1,147 @@
+<section class="news-section">
+    <div class="auto-container">
+        <div class="title-box clearfix">
+            <!--Sec Title-->
+            <div class="sec-title col-md-12">
+                <h2>Dernières actualités</h2>
+                <br>
+            </div>
+            {% if connected %}
+                <input type="submit" value="Ajouter Actualités" class="theme-btn btn-style-ajout"
+                       data-toggle="modal"
+                       data-target=".ajout-actualités-modal-lg"/>
+                <a class=" actualites-booking theme-btn btn-style-five see-events "
+                   href="#actualites-booking"
+                   data-toggle="modal" data-target="#myModal-Booking">Gérer les actualités</a>
+                {% include 'ModuleBundle:Module/hotel:ajouterActualites.html.twig' %}
+            {% endif %}
+        </div>
+    </div>
+    {#=====================AccordionActualites=============#}
+    <div class="auto-container">
+        <div class="row">
+            <div class="col-md-12  col-xs-12">
+                <div class="panel-group" id="accordion">
+
+                    <!-- panel1  -->
+                    {% for ac in module %}
+                        {% if ac.descriptionNews is not null %}
+                            {% if ac.descriptionNews.date_actualites|date("m/d/Y") >= "now"|date("m/d/Y") %}
+                                <div class="panel panel-default">
+
+                                    <div class="panel-heading " data-toggle="collapse"
+                                         data-target="#collapse{{ ac.id }}">
+                                        <h4 class="panel-title"><a data-toggle="collapse" data-target="#collapse"
+                                                                   href="#collapse{{ ac.id }}">{{ ac.descriptionNews.titre_actualites }}
+                                                | {{ qouiqui.firstName }}</a></h4>
+                                    </div>
+                                    <div id="collapse{{ ac.id }}"
+                                         class="panel-collapse collapse   in  fade">
+                                        <div class="panel-body">
+                                            <div class="col-md-12 col-sm-12">
+                                                <br>
+                                                <div class="col-md-6 col-sm-12">
+                                                    <figure class="image">
+                                                        <img src="{{ asset('uploads/image/' ~ qouiqui.user.id ~'/' ~ qouiqui.id ~ '/actualites/'~ ac.descriptionNews.image_actualites) }}"
+                                                             alt=""/>
+                                                        <h4><i class="fa fa-calendar"> {{ ac.descriptionNews.date_actualites|date("d/m/Y") }}</i></h4>
+                                                    </figure>
+                                                    <br>
+                                                </div>
+                                                <div class="col-md-6 col-sm-12 ">
+                                                    {{ ac.descriptionNews.actualitesDetails|raw }}
+
+                                                </div>
+                                                <br>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {#{% else %}#}
+
+                                {#<!-- panel1  -->#}
+                                {#<div class="panel panel-default">#}
+
+                                {#<div class="panel-heading " data-toggle="collapse" data-target="#collapse194">#}
+                                {#<h4 class="panel-title"><a data-toggle="collapse" data-target="#collapse" href="#collapse194">Escapades en Europe#}
+                                {#| Mövenpick</a></h4>#}
+                                {#</div>#}
+                                {#<div id="collapse194" class="panel-collapse collapse   in  fade">#}
+                                {#<div class="panel-body">#}
+                                {#<div class="col-md-12 col-sm-12">#}
+                                {#<br>#}
+                                {#<div class="col-md-6 col-sm-12">#}
+                                {#<figure class="image">#}
+                                {#<img src="/uploads/image/5/350/actualites/593fd374878c5.jpg" alt="">#}
+                                {#</figure>#}
+                                {#<br>#}
+                                {#</div>#}
+                                {#<div class="col-md-6 col-sm-12 ">#}
+                                {#<h2><strong>Détendez-vous et trouvez l'offre parfaite pour votre séjour en Europe. </strong></h2>#}
+
+                                {#<p><strong>Choisissez votre destination parmis nos hôtels en France, Allemagne, Suisse, aux Pays-Bas ou en Turquie.</strong></p>#}
+
+                                {#<p>Pour tout séjour&nbsp;réservé sur&nbsp;movenpick.com,&nbsp;recevez un bon de <strong>50 USD&nbsp;</strong>à dépenser dans les restaurants de votre hôtel.&nbsp;En savoir plus.&nbsp;</p>#}
+
+                                {#<p><strong>NOUVEAU ! Café Mövenpick dans votre chambre d'hôtel :</strong>&nbsp;Prenez un moment pour savourer une bonne tasse de café préparée dans votre chambre d'hôtel. Faites votre choix parmi une sélection de capsules Mövenpick et préparez votre café avec la machine Nespresso* mise à votre disposition.</p>#}
+
+
+                                {#</div>#}
+                                {#<br>#}
+                                {#</div>#}
+                                {#</div>#}
+                                {#</div>#}
+                                {#</div>#}
+
+                                {#<!-- panel2 -->#}
+
+
+                                {#<!-- panel3 -->#}
+
+                            {% endif %}
+                        {% endif %}
+                    {% endfor %}
+
+                    <!-- panel2 -->
+
+
+                    <!-- panel3 -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+    {#=====================AccordionActualites=============#}
+    <br>
+    <br>
+    </div>
+
+    <div class="particle elem1 anim-delay1"></div>
+    <div class="particle elem2 anim-delay5"></div>
+    <div class="particle elem3 anim-delay3"></div>
+    <div class="particle elem4 anim-delay8"></div>
+    <div class="particle elem5 anim-delay9"></div>
+    <div class="particle elem6 anim-delay2"></div>
+    <div class="particle elem7 anim-delay4"></div>
+    <div class="particle elem8 anim-delay3"></div>
+    <div class="particle elem9 anim-delay10"></div>
+    <div class="particle elem8 anim-delay11"></div>
+    <div class="particle elem6 anim-delay12"></div>
+    <div class="particle elem1 anim-delay14"></div>
+    <div class="particle elem13 anim-delay16"></div>
+    <div class="particle elem17 anim-delay18"></div>
+    <div class="particle elem2 anim-delay6"></div>
+    <div class="particle elem16 anim-delay9"></div>
+    <div class="particle elem8 anim-delay3"></div>
+    <div class="particle elem9 anim-delay10"></div>
+    <div class="particle elem18 anim-delay11"></div>
+    <div class="particle elem11 anim-delay12"></div>
+    <div class="particle elem12 anim-delay14"></div>
+    <div class="particle elem13 anim-delay16"></div>
+    <div class="particle elem14 anim-delay18"></div>
+    <div class="particle elem15 anim-delay6"></div>
+    <div class="particle elem16 anim-delay9"></div>
+    <div class="particle elem17 anim-delay7"></div>
+    <div class="particle elem18 anim-delay6"></div>
+    <div class="particle elem19 anim-delay3"></div>
+</section>

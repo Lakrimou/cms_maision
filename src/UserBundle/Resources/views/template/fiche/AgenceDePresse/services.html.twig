@@ -1,0 +1,215 @@
+<!--===== WHAT WE DO =====-->
+<section id="section-services" class="we_are bg_light padding" style="padding-top: 0px;">
+    <div class="container">
+        {% if app.user %}
+            {% if app.user.id==quoiqui.user.id %}
+                <div class="row">
+                    <div class="col-md-10 col-sm-4"></div>
+                    <div class="col-md-2 col-sm-3"><button type="button" class="button11" id="btn_submit" name="btn_submit" data-toggle="modal" data-target="#listService">Gérer cette section</button></div>
+                </div>
+            {% endif %}
+        {% endif %}
+        <div class="row" style="margin-top: 40px;">
+            <div class="col-md-12">
+                <h2 class="text-uppercase">Nos <span class="color_red">services</span></h2>
+                <div class="line_1"></div>
+                <div class="line_2"></div>
+                <div class="line_3"></div>
+            </div>
+        </div>
+        <div class="row">
+            {%  if services == null %}
+            <div class="col-md-4 col-sm-4 col-xs-12"></div>
+            <div class="col-md-5 col-sm-4 top40">
+                <h1>Aucune services disponible</h1>
+            </div>
+            {% else %}
+            {% for service in services.service %}
+                {% if (services.service|length == 1) %}
+                    <div class="col-md-4 col-sm-4 col-xs-12"></div>
+                {% endif %}
+                {% if (services.service|length == 2) and (loop.index == 1) %}
+                    <div class="col-md-2 col-sm-2 col-xs-12"></div>
+                {% endif %}
+                    <div class="col-md-4 col-sm-4 top40">
+                    <div class="feature_box equal-height">
+                        <span class="icon"> <i class="icon-user-tie"></i></span>
+                        <div class="description">
+                            <h4>{{ service.service[:17] }}</h4>
+                            <p>
+                                {{ service.text[:125]|raw }}
+                                {% if service.text|length>=125 %}
+                                    ...
+                                {% endif %}
+                                {% if service.text|length>=125 %}
+                                <div>
+                                <a href="" data-toggle="modal" class="service-details-btn btn-default btn-xs pull-right suite" data-target="#lireSuite{{ service.idservice }}">Lire la suite</a></div>
+                                {% endif %}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+</section>
+<!--===== #/WHAT WE DO =====-->
+ {#liste des services#}
+<div class="modal fade" id="listService" role="dialog" aria-labelledby="service" aria-hidden="true">
+    <div class="modal-dialog" role="document" style="width: 90%;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="row">
+                    <div class="col-md-10 col-sm-4">
+                        <h2 class="text-uppercase">Nos <span class="color_red">services</span></h2>
+                    </div>
+                        <div class="col-md-2 col-sm-3">
+                            <button type="button" class="button11" id="btn_submit" name="btn_submit" data-toggle="modal" data-target="#addService">Nouveau service</button>
+                        </div>
+                </div>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <table id="listeServices" class="dataTable" cellspacing="0" width="100%">
+                    <thead>
+                    <tr>
+                        <th>Numéros</th>
+                        <th>Services</th>
+                        <th>Description</th>
+                        <th>Modification</th>
+                        <th>Suppression</th>
+                    </tr>
+                    </thead>
+                    <tfoot>
+                    <tr>
+                        <th>Numéros</th>
+                        <th>Services</th>
+                        <th>Description</th>
+                        <th>Modification</th>
+                        <th>Suppression</th>
+                    </tr>
+                    </tfoot>
+                    <tbody>
+                    {% if services %}
+                    {% for service in services.service %}
+                    <tr data-tr-voiture="{{ service.idservice }}">
+                        <td>{{ service.idservice }}</td>
+                        <td>{{ service.service }}</td>
+                        <td style="text-justify: auto">{{ service.text[:70]|raw }}</td>
+                        <td>
+                            <button type="button" class="btn btn-info btn-lg edit" data-link-edit="{{ path('location_voiture_service_id',{'id': service.idservice}) }}"><i class="fa fa-pencil-square" aria-hidden="true"></i></button>
+                        </td>
+                        <td>
+                            <button class="btn btn-danger deleteAuto" data-id="{{ service.idservice }}"   data-link="{{ path('location_voiture_service_delete') }}"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                    {% else %}
+                        <h1>Aucune services disponible</h1>
+                    {% endif %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{#formulaire ajout nouveau service#}
+<div class="modal fade" id="addService" role="dialog" aria-labelledby="service" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1>Nouveau service</h1>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form class="" id="service-form" method="POST" action="{{ path('module_location_voiture_service') }}">
+                    <input type="hidden" name="qq_id" value="{{ attributes.quoiqui.id }}">
+                    {% if services %}
+                    <input type="hidden" name="idservice" value="{{ services.service|length+1 }}">
+                        {% else %}
+                            <input type="hidden" name="idservice" value="1">
+                    {% endif %}
+                    <div class="">
+                        <div class="single-query">
+                            <input type="text" class="keyword-input" placeholder="Service *" name="service" id="service" required="">
+                        </div>
+                    </div>
+                    <div class="">
+                        <div class="single-query">
+                            <textarea name="text" placeholder="Description *" id="desc" required=""></textarea>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="reset" class="button11" data-dismiss="modal">Anuler</button>
+                <button type="submit" class="button11" id="btn_submit" name="btn_submit" data-target="modifier" data-selector="service-form">Enregistrer</button>
+            </div>
+        </div>
+    </div>
+</div>
+{# modal Edit  service#}
+<div class="modal fade" id="editService" role="dialog" aria-labelledby="Service" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1>Modification</h1>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form class="" id="service-form1" method="POST" action="{{ path('module_location_voiture_edit_service') }}">
+                    <input type="hidden" name="qq_id" value="{{ attributes.quoiqui.id }}">
+                        <input type="hidden" name="idservice" id="idservice" value="">
+                    <div class="">
+                        <div class="single-query">
+                            <input type="text" class="keyword-input" placeholder="Service *" name="service" id="service1" required="">
+                        </div>
+                    </div>
+                    <div class="">
+                        <div class="single-query">
+                            <textarea name="text" placeholder="Description *" id="desc1" required=""></textarea>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="reset" class="button11" data-dismiss="modal">Anuler</button>
+                <button type="submit" class="button11" id="btn_submit" name="btn_submit" data-target="modifier" data-selector="service-form1">Enregistrer</button>
+            </div>
+        </div>
+    </div>
+</div>
+ {#detail service modale#}
+{% if services %}
+{% for service in services.service %}
+        <div class="modal fade" id="lireSuite{{ service.idservice }}" role="dialog" aria-labelledby="service" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h3>{{ service.service }}</h3>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="description">
+                <p style="text-align: justify">
+                    {{ service.text }}
+                </p>
+            </div>
+        </div>
+            <div class="modal-footer">
+                <button type="reset" class="service-details-btn btn-default btn-xs pull-right suite" data-dismiss="modal">Fermer</button>
+            </div>
+        </div>
+        </div>
+        </div>
+{% endfor %}
+{% endif %}

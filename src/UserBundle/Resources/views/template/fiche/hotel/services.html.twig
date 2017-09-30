@@ -1,0 +1,316 @@
+<!--===== WHAT WE DO =====-->
+<section id="section-services" class="we_are bg_light padding">
+    <div class="container">
+        {% if attributes.connected %}
+            <div class="shake pull-right margin-bott-40 numService" data-step="3" data-intro="Le Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page avant impression. Le Lorem Ipsum est le faux texte standard de l'imprimerie depuis les années 1500, quand un peintre anonyme assem">
+                <button type="button" class="theme-btn button11 btn-style-one pull-right" data-toggle="modal" data-target="#list-services">Gérrer les services</button>
+            </div>
+        {% endif %}
+        <div class="row">
+            <div class="col-md-12">
+                <h2 class="text-uppercase">Nos <span class="color_red">services</span></h2>
+                <div class="line_1"></div>
+                <div class="line_2"></div>
+                <div class="line_3"></div>
+            </div>
+        </div>
+        <div class="row">
+            {% set theme = attributes.theme %}
+            {% if theme !=null %}
+                {% if theme["Service"] is defined and theme["Service"]|length>0 %}
+                    {% for key, service in theme["Service"] %}
+                        {% if (theme.Service|length == 1) %}
+                            <div class="col-md-4 col-sm-4 col-xs-12"></div>
+                        {% endif %}
+                        {% if (theme.Service|length == 2) and (loop.index == 1) %}
+                            <div class="col-md-2 col-sm-2 col-xs-12"></div>
+                        {% endif %}
+                        <div class="col-md-4 col-sm-4 top40">
+                            <div class="feature_box equal-height">
+                                <span class="icon"><img src="{{ asset('tpl/images/service-ween-icon.png') }}" alt=""></span>
+                                <div class="description">
+                                    <h4><strong>{{ service["service"] }}</strong></h4>
+                                    <p>{{ service["description"]|slice(0,50) }}..</p>
+                                    <div class="row padd15">
+                                        <a href="#" data-toggle="modal" class="service-details-btn btn-default btn-xs pull-right suite"
+                                           data-target="#service-details" data-module='{"service":"{{ service["service"] }}","description":"{{ service["description"] }}"}' data-key='{{ key }}'>Lire la suite</a>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <div class="col-md-4 col-sm-4 top40">
+                        <div class="feature_box equal-height">
+                            <span class="icon"> <i class="icon-user-tie"></i></span>
+                            <div class="description">
+                                <h4>Conception-réalisation</h4>
+                                <p></p>
+                                <a href="#" class="link_arrow top20">Lire la suite</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-4 top40">
+                        <div class="feature_box equal-height">
+                            <span class="icon"> <i class="icon-user-tie"></i></span>
+                            <div class="description">
+                                <h4>Modélisation des données du bâtiment (MIB)</h4>
+                                <p></p>
+                                <a href="#" class="link_arrow top20">Lire la suite</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-4 top40">
+                        <div class="feature_box equal-height">
+                            <span class="icon"> <i class="icon-user-tie"></i></span>
+                            <div class="description">
+                                <h4>Services de construction</h4>
+                                <p></p>
+                                <a href="#" class="link_arrow top20">Lire la suite</a>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+
+
+            {% endif %}
+
+        </div>
+    </div>
+    <div class="paralax-icon">
+        <div class="particle elem1 anim-delay1"></div>
+        <div class="particle elem2 anim-delay5"></div>
+        <div class="particle elem3 anim-delay3"></div>
+        <div class="particle elem4 anim-delay8"></div>
+        <div class="particle elem5 anim-delay9"></div>
+        <div class="particle elem6 anim-delay2"></div>
+        <div class="particle elem7 anim-delay4"></div>
+        <div class="particle elem8 anim-delay3"></div>
+        <div class="particle elem9 anim-delay10"></div>
+        <div class="particle elem8 anim-delay11"></div>
+        <div class="particle elem6 anim-delay12"></div>
+        <div class="particle elem1 anim-delay14"></div>
+        <div class="particle elem13 anim-delay16"></div>
+        <div class="particle elem17 anim-delay18"></div>
+        <div class="particle elem2 anim-delay6"></div>
+        <div class="particle elem16 anim-delay9"></div>
+        <div class="particle elem8 anim-delay3"></div>
+        <div class="particle elem9 anim-delay10"></div>
+        <div class="particle elem18 anim-delay11"></div>
+        <div class="particle elem11 anim-delay12"></div>
+        <div class="particle elem12 anim-delay14"></div>
+        <div class="particle elem13 anim-delay16"></div>
+        <div class="particle elem14 anim-delay18"></div>
+        <div class="particle elem15 anim-delay6"></div>
+        <div class="particle elem16 anim-delay9"></div>
+        <div class="particle elem17 anim-delay7"></div>
+        <div class="particle elem18 anim-delay6"></div>
+        <div class="particle elem19 anim-delay3"></div>
+    </div>
+</section>
+
+{% if attributes.connected %}
+    <!-- Modal -->
+    <div id="add-service" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title text-center"><strong>Ajout service</strong></h4>
+                </div>
+                <div class="modal-body">
+                    <form id="ajout_service_global" action="#" method="post" enctype="multipart/form-data">
+                        <div class="form-group row element-form">
+                            <div class="col-sm-9">
+                                <input name="logo" id="logo_service" type="hidden" value="fa-home">
+                            </div>
+                        </div>
+                        <div class="form-group row element-form">
+                            <div class="col-md-3">
+                                <label class="control-label">Nom</label>
+                            </div>
+                            <div class="col-sm-9">
+                                <select class="form-control" name="service">
+                                    <option value="Thalasso & spa">Thalasso & spa</option>
+                                    <option value="Congrès et mariage">Congrès et mariage</option>
+                                    <option value="Voyage de noce">Voyage de noce</option>
+                                    <option value="Transferts">Transferts</option>
+                                    <option value="Football">Football</option>
+                                    <option value="Golf">Golf</option>
+                                    <option value="Seniors">Seniors</option>
+                                    <option value="Excursions">Excursions</option>
+                                    <option value="Stationnement">Stationnement</option>
+                                    <option value="Lobby bar">Lobby bar</option>
+                                    <option value="Restaurant Fiesta">Restaurant Fiesta</option>
+                                    <option value="Service de change">Service de change</option>
+                                    <option value="lavage et de repassage">lavage et de repassage</option>
+                                    <option value="Distribution de courrier">Distribution de courrier</option>
+                                    <option value="Chauffeur privé">Chauffeur privé</option>
+
+                                </select>
+
+                                {#<input type="text" name="service" class="form-control name_service" placeholder="Ecrir le nom du service">#}
+                            </div>
+                        </div>
+
+                        <div class="form-group row element-form">
+
+                            <div class="col-md-3">
+                                <label class="control-label">Description</label>
+                            </div>
+                            <div class="col-sm-9">
+                                <textarea class="form-control" cols="60" name="description" rows="10" placeholder="Ajoutez des details par rapport à ce service.." required></textarea>
+                            </div>
+                        </div>
+
+
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Annuler</button>
+                    <button type="submit" class="btn btn-primary " data-target="modifier" data-selector="ajout_service_global">Enregistrer</button>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+    <div class="modal fade" id="list-services" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-md" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title text-center" id="exampleModalLongTitle"><strong>Gérrer les services</strong></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+
+                            <div class="text-center" style="margin-bottom: 20px;">
+                                <button type="button" class="btn btn-primary form_add_service_global" data-toggle="modal" data-target="#add-service"><i class="fa fa-plus" aria-hidden="true"></i> Ajouter service</button>
+
+                            </div>
+
+
+                            {% if attributes.theme["Service"] is defined %}
+                                {% if theme!=null %}
+                                    <ul class="list-group">
+                                        {% for key,service in attributes.theme["Service"] %}
+                                            <li class="list-group-item">
+                                                {{ service["service"] }}
+                                                <span class="pull-right">
+                                        <button type="button" class="btn btn-warning form_update_service_global" data-toggle="modal" data-target="#update-service" data-service='{"service_update":"{{ service["service"] }}","description_update":"{{ service["description"] }}" }' data-id="{{ key }}"
+                                                data-link='{{ path('update_service_global',{"serviceId":key,"themeId":attributes["themeId"]}) }}'>Modifier</button>
+                                        <a href="{{ path('delete_service_global',{"serviceId": key,"themeId":attributes["themeId"]}) }}" type="button" class="btn btn-danger" onclick="return confirm('Voulez-vous supprimer ce service?')">Supprimer</a>
+                                        </span>
+                                            </li>
+                                        {% endfor %}
+
+                                    </ul>
+                                {% endif %}
+                            {% else %}
+                                <div class="text-center">
+                                    <h3> Pas de service pour le moment !</h3>
+                                </div>
+                            {% endif %}
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="update-service" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title text-center">Modifier service</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-10 col-md-offset-1">
+                            <form method="post" id="update_service_form" action="" enctype="multipart/form-data">
+                                <div class="form-group row element-form">
+                                    <div class="col-md-3">
+                                        <label class="control-label">Nom</label>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <select class="form-control" name="service" id="service_update">
+                                            <option value="Thalasso & spa">Thalasso & spa</option>
+                                            <option value="Congrès et mariage">Congrès et mariage</option>
+                                            <option value="Voyage de noce">Voyage de noce</option>
+                                            <option value="Transferts">Transferts</option>
+                                            <option value="Football">Football</option>
+                                            <option value="Golf">Golf</option>
+                                            <option value="Seniors">Seniors</option>
+                                            <option value="Excursions">Excursions</option>
+                                            <option value="Stationnement">Stationnement</option>
+                                            <option value="Lobby bar">Lobby bar</option>
+                                            <option value="Restaurant Fiesta">Restaurant Fiesta</option>
+                                            <option value="Service de change">Service de change</option>
+                                            <option value="lavage et de repassage">lavage et de repassage</option>
+                                            <option value="Distribution de courrier">Distribution de courrier</option>
+                                            <option value="Chauffeur privé">Chauffeur privé</option>
+                                        </select>
+                                        {#<input type="text" id="service_update" name="service" class="form-control name_service" placeholder="Ecrir le nom du service" required>#}
+                                    </div>
+                                </div>
+                                <div class="form-group row element-form">
+                                    <div class="col-md-3">
+                                        <label class="control-label">Description</label>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <textarea id="description_update" class="form-control" cols="60" name="description" rows="10" required></textarea>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Fermer</button>
+                    <button type="submit" class="btn btn-primary " data-target="modifier" data-selector="update_service_form">Enregistrer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endif %}
+<div class="modal fade" id="service-details" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="text-uppercase"><span class="service-details-titre color_red">Description</span></h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <p class="p-font-15 service-details-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras et dui vestibulum, bibendum purus sit amet, vulputate mauris. Ut adipiscing gravida tincidunt. Duis euismod placerat rhoncus. Phasellus mollis imperdiet placerat. Sed ac turpis nisl. Mauris at ante mauris. Aliquam posuere fermentum lorem, a aliquam mauris rutrum a. Curabitur sit amet pretium lectus, nec consequat orci.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--===== #/WHAT WE DO =====-->

@@ -1,0 +1,41 @@
+medecin_service_index:
+    path:     /service/index
+    defaults: { _controller: "ModuleBundle:Medecin:ficheAnnonces" }
+medecin_service_add:
+    path:     /service/add
+    defaults: { _controller: "ModuleBundle:Medecin:addService" }
+medecin_service_show:
+    path:     /service/show/{id}/{pos}
+    defaults: { _controller: "ModuleBundle:Medecin:showService" }
+medecin_service_remove:
+    path:     /service/delete/{id}/{pos}
+    defaults: { _controller: "ModuleBundle:Medecin:deleteService" }
+medecin_service_edit:
+    path:     /service/edit/{id}/{pos}
+    defaults: { _controller: "ModuleBundle:Medecin:editService" }
+medecin_service_update:
+    path:     /service/update/{id}
+    defaults: { _controller: "ModuleBundle:Medecin:updateService" }
+
+
+medecin_professional_add:
+    path:     /professional/add
+    defaults: { _controller: "ModuleBundle:Medecin:addProfesionnal" }
+medecin_professional_show:
+    path:     /professional/show/{id}
+    defaults: { _controller: "ModuleBundle:Medecin:showProfesionnal" }
+
+
+medecin_schedule_add:
+    path:     /schedule/add
+    defaults: { _controller: "ModuleBundle:Medecin:addSchedule" }
+medecin_schedule_show:
+    path:     /professional/schedule/{id}
+    defaults: { _controller: "ModuleBundle:Medecin:showSchedule" }
+
+medecin_pratique_add:
+    path:     /pratique/add
+    defaults: { _controller: "ModuleBundle:Medecin:addPratique" }
+medecin_pratique_show:
+    path:     /professional/pratique/{id}
+    defaults: { _controller: "ModuleBundle:Medecin:showPratique" }

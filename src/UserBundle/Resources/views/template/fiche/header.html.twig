@@ -1,0 +1,139 @@
+<header id="header-top_3">
+    <div id="header-top">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 col-sm-4 col-xs-12">
+                    <div class="hidden">
+                        <h1>hidden</h1>
+                    </div>
+                    <p class="p-white"></p>
+                </div>
+                <div class="col-md-8 col-sm-8 col-xs-12 text-right">
+                    <div class="header-top-links">
+                        <ul>
+                            {#<li><a href="#"><i class="icon-heart2"></i>Favorites</a></li>#}
+                            {#<li class="af-line"></li>#}
+                            <li><a href="#"><i class="icon-icons215"></i>Submit Property</a></li>
+
+
+                            {% if app.user %}
+                                <li class="af-line"></li>
+                                <li><a href="//{{ domain }}{{ path('dashboard_homepage') }}"><i class="icon-icons215"></i>{{ app.user.username|upper }} {{ app.user.prenom|capitalize }}</a></li>
+                                <li class="af-line"></li>
+                                <li><a class="header-login" href="{{ absolute_url(path('fos_user_security_logout')) }}"><i class="icon-icons179"></i>Déconnexion</a></li>
+                            {% else %}
+                                <li><a href="#" class="header-login" data-toggle="modal" data-target="#modalLogin"><i class="icon-icons179"></i>S'identifier/ S'inscrire</a></li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="header-bottom">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-2 hidden-xs hidden-sm">
+                    <a href="#section-accueil" class="center-logo-big">
+                        {#<img src="{{ asset('tpl/fiche/images/logo-white.png') }}" alt="logo"/>#}
+                        {% set path =  asset('uploads/image/')~qouiqui.user.id ~'/'~ qouiqui.id ~'/avatar/avatar.jpg' %}
+                        {% if asset_exists(path) %}
+                            <img src="{{ asset('uploads/image/') }}{{ qouiqui.user.id }}/{{ qouiqui.id }}/avatar/avatar.jpg" class="logo-fiche-big">
+                        {% else %}
+                            <div id="big-header" style="width:200px; height:100px;">
+                                <span class="tlt" data-in-effect="rollIn" data-out-effect="rotateOut" data-out-shuffle="true">{{ qouiqui.firstName }}</span>
+                                {#<h1 class="header-company-title">{{ qouiqui.firstName }}</h1>#}
+                            </div>
+                        {% endif %}
+
+
+                    </a>
+                </div>
+
+
+                <div class="col-md-10 col-sm-12 col-xs-12 header-info-section">
+                    {% if qouiqui.phone %}
+                        <div class="get-tuch text-left top20">
+                            <i class="icon-telephone114"></i>
+                            <ul>
+                                <li style="margin-bottom: 3px;"><h4>Téléphone</h4></li>
+                                <li class='my-header-fills' style='width:150px;'>
+                                    <img class="imgPhone1">
+                                    <img class="imgPhone2">
+                                    {#<span>{{ qouiqui.phone }}</span>#}
+                                </li>
+                            </ul>
+                        </div>
+                    {% endif %}
+                    {% if qouiqui.address1 %}
+                        <div class="get-tech-line top20"><img src="{{ asset('tpl/fiche/images/get-tuch-line.png') }}" alt="line"/></div>
+                        <div class="get-tuch text-left top20">
+                            <i class="icon-icons74"></i>
+                            <ul>
+                                <li style="margin-bottom: 3px;"><h4>Adresse</h4></li>
+                                <li class='my-header-fill' style='width:220px;height:50px;'>
+                                    <span style="font-family: Acme;">
+                                        {{ qouiqui.address1 }}{% if qouiqui.adress2 %}, {{ qouiqui.adress2 }}{% endif %}
+                                        {% for location in qouiqui.qvilles %}
+                                            {% if location.delegation %}, {{ location.delegation.libelle }}{% endif %}
+                                            {% if location.ville %}, {{ location.ville.libelle }}{% endif %}
+                                        {% endfor %}
+                                    </span>
+                                </li>
+                            </ul>
+                        </div>
+                    {% endif %}
+                    <div class="get-tech-line top20"><img src="{{ asset('tpl/fiche/images/get-tuch-line.png') }}" alt="line"/></div>
+                    <div class="get-tuch text-left top20">
+                        <i class=" icon-browser2"></i>
+                        <ul>
+                            <li style="margin-bottom: 3px;"><h4>Site web</h4></li>
+                            {% if qouiqui.website %}
+                                <li class="my-header-fill" style='width:200px;height:25px;font-family: Acme;'><span href="{{ qouiqui.website }}" target="_blank">{{ qouiqui.website }}</span></li>
+                            {% endif %}
+                            <li class="my-header-fill" style='width:200px;height:25px;font-family: Acme;'><span href="{{ app.request.server.get('SCRIPT_URI') }}" target="_blank">{{ app.request.server.get('SCRIPT_URI') }}</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <nav class="navbar navbar-default no-background navbar-sticky bootsnav">
+        <div class="container">
+            <!-- Start Header Navigation -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-menu">
+                    <i class="fa fa-bars"></i>
+                </button>
+                <a href="#section-accueil" class="navbar-brand sticky_logo center-logo-big">
+                    {#<img src="{{ asset('tpl/fiche/images/logo-white.png') }}" class="logo" alt="">#}
+                    {% set path =  asset('uploads/image/')~qouiqui.user.id ~'/'~ qouiqui.id ~'/avatar/avatar.jpg' %}
+                    {% if asset_exists(path) %}
+                        <img src="{{ asset('uploads/image/') }}{{ qouiqui.user.id }}/{{ qouiqui.id }}/avatar/avatar.jpg" class="logo-fiche-small">
+                    {% else %}
+                        <h1 class="header-company-title tlt" data-in-effect="swing" data-out-effect="swing" data-out-shuffle="true">{{ qouiqui.firstName }}</h1>
+                    {% endif %}
+                </a>
+            </div><!-- End Header Navigation -->
+            <div class="collapse navbar-collapse nav_3 clearfix" id="navbar-menu">
+                <ul class="nav navbar-nav navbar-center" data-in="fadeInDown" data-out="fadeOutUp">
+
+                    <li><a href="#section-accueil">Accueil</a></li>
+                    <li><a href="#section-apropos">A propos</a></li>
+                    <li><a href="#section-services">Nos services</a></li>
+                    <li><a href="#section-annonces">Nos annonces</a></li>
+                    <li><a href="#section-gallerie">Gallerie</a></li>
+                    <li><a href="#section-contact">Contactez-nous</a></li>
+
+                    {% if app.user %}
+                        <li><a class="color_red hidden-lg hidden-md" href="//{{ domain }}{{ path('dashboard_homepage') }}"><strong>{{ app.user.username|upper }} {{ app.user.prenom|capitalize }}</strong></a></li>
+                        <li><a class="header-login color_red hidden-lg hidden-md" href="{{ absolute_url(path('fos_user_security_logout')) }}"><strong>Déconnexion</strong></a></li>
+                    {% else %}
+
+                        <li><a href="#" data-toggle="modal" data-target="#modalLogin" class="hidden-lg hidden-md">S'identifier/ S'inscrire</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>

@@ -1,0 +1,72 @@
+admin_homepage:
+    path:     /
+    defaults: { _controller: AdminBundle:Default:index }
+
+admin_ngn:
+        resource: "@AdminBundle/Resources/config/routing/ngn.yml"
+        prefix:   /ngn
+
+admin_booking:
+    resource: "@AdminBundle/Resources/config/routing/booking.yml"
+    prefix:   /booking
+
+admin_category:
+    resource: "@AdminBundle/Resources/config/routing/category.yml"
+    prefix:   /category
+    
+admin_events:
+    resource: "@AdminBundle/Resources/config/routing/events.yml"
+    prefix:   /events
+
+admin_pays:
+    resource: "@AdminBundle/Resources/config/routing/pays.yml"
+    prefix:   /pays
+    
+admin_qouiqui:
+    resource: "@AdminBundle/Resources/config/routing/qouiqui.yml"
+    prefix:   /qouiqui
+    
+admin_Qville:
+    resource: "@AdminBundle/Resources/config/routing/qville.yml"
+    prefix:   /Qville
+    
+admin_reviews:
+    resource: "@AdminBundle/Resources/config/routing/reviews.yml"
+    prefix:   /reviews
+    
+admin_scategory:
+    resource: "@AdminBundle/Resources/config/routing/scategory.yml"
+    prefix:   /scategory
+    
+admin_ville:
+    resource: "@AdminBundle/Resources/config/routing/ville.yml"
+    prefix:   /ville
+
+user_edit_admin:
+    path:     /user/edit/{id}
+    defaults: { _controller: "AdminBundle:Default:user",id: false }
+    methods:  [GET, POST]
+
+user_list_admin:
+    path:     /user/list
+    defaults: { _controller: "AdminBundle:Default:userlist" }
+
+admin_car:
+        resource: "@AdminBundle/Resources/config/routing/car.yml"
+        prefix:   /car
+
+admin_weenmail:
+        path: /mail
+        defaults: { _controller: "AdminBundle:Default:mail" }
+
+admin_category_list:
+        resource: "@AdminBundle/Resources/config/routing/Module.yml"
+        prefix:   /{category}/{qq}/list
+admin_immo:
+        resource: "@AdminBundle/Resources/config/routing/immobiliair.yml"
+        prefix:   /immo
+admin_traiteur:
+        resource: "@AdminBundle/Resources/config/routing/traiteur.yml"
+        prefix:   /tre
+
+

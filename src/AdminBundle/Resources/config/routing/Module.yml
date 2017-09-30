@@ -1,0 +1,24 @@
+immobiliair_index:
+    path:     /
+    defaults: { _controller: "AdminBundle:Module:index" }
+    methods:  GET
+
+immobiliair_show:
+    path:     /{id}/show
+    defaults: { _controller: "AdminBundle:Immobiliair:show" }
+    methods:  GET
+
+immobiliair_new:
+    path:     /new
+    defaults: { _controller: "AdminBundle:Immobiliair:new" }
+    methods:  [GET, POST]
+
+immobiliair_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "AdminBundle:Module:edit" }
+    methods:  [GET, POST]
+
+immobiliair_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "AdminBundle:Immobiliair:delete" }
+    methods:  DELETE

@@ -1,0 +1,4 @@
+module_module_centredapel:
+    path: /postule/{idqq}
+    defaults: { _controller: ModuleBundle:CentreDAppel:reservation}
+    methods: [GET, POST]

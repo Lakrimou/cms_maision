@@ -1,0 +1,18 @@
+imprimerie_add_offre:
+    path: /offre/{idqq}
+    defaults: { _controller: ModuleBundle:Imprimerie:addOffres}
+    methods: [GET, POST]
+
+imprimerie_update_event:
+     path: /update-event/{idqq}
+     defaults: { _controller: ModuleBundle:Imprimerie:updateEvent}
+     methods: [GET, POST]
+
+imprimerie_get_json_offre:
+     path: /jsonoffre
+     defaults: { _controller: ModuleBundle:Imprimerie:getJsonOffreSpa}
+     methods: [GET, POST]
+
+imprimerie_demande_devis:
+    path:    /demande_devis
+    defaults: { _controller: ModuleBundle:Imprimerie:demandeDevis}

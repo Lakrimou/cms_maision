@@ -1,0 +1,147 @@
+module_homepage:
+    path:     /
+    defaults: { _controller: ModuleBundle:Default:index }
+
+module_spa:
+    resource: "@ModuleBundle/Resources/config/routing/spa.yml"
+    prefix:   /spa
+module_hotel:
+    resource: "@ModuleBundle/Resources/config/routing/hotel.yml"
+    prefix:   /hotel
+module_immo:
+    resource: "@ModuleBundle/Resources/config/routing/immo.yml"
+    prefix:   /immo
+module_centreformation:
+    resource: "@ModuleBundle/Resources/config/routing/cformation.yml"
+    prefix:   /cf
+module_automobile:
+    resource: "@ModuleBundle/Resources/config/routing/automobile.yml"
+    prefix:   /automobile
+module_foyer_prive:
+    resource: "@ModuleBundle/Resources/config/routing/foyerPrive.yml"
+    prefix:   /foyerprive
+module_restaurant:
+    resource: "@ModuleBundle/Resources/config/routing/restaurant.yml"
+    prefix:   /restaurant
+module_voyage:
+    resource: "@ModuleBundle/Resources/config/routing/agencevoyage.yml"
+    prefix:   /agencevoyage
+module_ecommerce:
+    resource: "@ModuleBundle/Resources/config/routing/ecommerce.yml"
+    prefix:   /ecommerce
+module_comptable:
+    resource: "@ModuleBundle/Resources/config/routing/comptable.yml"
+    prefix:   /comptable
+module_avocat:
+    resource: "@ModuleBundle/Resources/config/routing/avocat.yml"
+    prefix:   /avocat
+module_medecin:
+    resource: "@ModuleBundle/Resources/config/routing/medecin.yml"
+    prefix:   /medecin
+module_huissier:
+    resource: "@ModuleBundle/Resources/config/routing/huissier.yml"
+    prefix:   /huissier
+module_auto_ecole:
+    resource: "@ModuleBundle/Resources/config/routing/autoEcole.yml"
+    prefix:   /auto-ecole
+module_depannage_vehicule:
+    resource: "@ModuleBundle/Resources/config/routing/depannageVehicule.yml"
+    prefix:   /depannage-vehicule
+module_notaire:
+    resource: "@ModuleBundle/Resources/config/routing/notaire.yml"
+    prefix:   /notaire
+module_serrurier:
+    resource: "@ModuleBundle/Resources/config/routing/serrurier.yml"
+    prefix:   /serrurier
+module_centredapel:
+    resource: "@ModuleBundle/Resources/config/routing/centredappel.yml"
+    prefix: /centredappel
+module_chauffeur:
+    resource: "@ModuleBundle/Resources/config/routing/chauffeur.yml"
+    prefix: /chauffeur
+module_opticien:
+    resource: "@ModuleBundle/Resources/config/routing/opticien.yml"
+    prefix: /opticien
+module_kine:
+    resource: "@ModuleBundle/Resources/config/routing/kine.yml"
+    prefix: /kine
+module_salle_de_fete:
+    resource: "@ModuleBundle/Resources/config/routing/salledefete.yml"
+    prefix: /salle_de_fete
+imprimerie:
+    resource: "@ModuleBundle/Resources/config/routing/imprimerie.yml"
+    prefix: /imprimerie
+module_foyer:
+    resource: "@ModuleBundle/Resources/config/routing/foyerPrive.yml"
+    prefix:   /foyer
+module_ambulance:
+    resource: "@ModuleBundle/Resources/config/routing/ambulance.yml"
+    prefix:   /ambulance
+module_location_voiture:
+    resource: "@ModuleBundle/Resources/config/routing/locationVoiture.yml"
+    prefix: /location_voiture
+moduel_agence_presse:
+    resource: "@ModuleBundle/Resources/config/routing/AgenceDePresse.yml"
+    prefix: /agence_presse
+module_traiteur:
+    resource: "@ModuleBundle/Resources/config/routing/traiteur.yml"
+    prefix: /traiteur
+module_architecture:
+    resource: "@ModuleBundle/Resources/config/routing/architecture.yml"
+    prefix:   /architecture
+module_fiche:
+     defaults: { _controller: ModuleBundle:Default:index}
+     path: /{categorie}/module
+module_propo:
+     path: /propo
+     defaults: { _controller: ModuleBundle:Immobiliair:editpropos}
+     methods: [GET, POST]
+change_avatar:
+     path: /avatar/{qq_id}
+     defaults: { _controller: ModuleBundle:Default:changeavatar}
+     methods: [GET, POST]
+change_color:
+     path: /color/{qq_id}
+     defaults: { _controller: ModuleBundle:Default:changecolor}
+     methods: [GET, POST]
+reservation_event:
+     path: /event/{event_id}
+     defaults: { _controller: ModuleBundle:Default:reservation}
+     methods: [GET, POST]
+supp_avatar:
+     path: /ssuppavatar/{qq_id}
+     defaults: { _controller: ModuleBundle:Default:suppavatar}
+     methods: [GET, POST]
+rapeler:
+     path: /rapeler/{qq_id}
+     defaults: { _controller: ModuleBundle:Default:etrerapeler}
+     methods: [GET, POST]
+visite:
+     path: /visite/{qq_id}
+     defaults: { _controller: ModuleBundle:Default:Demandevisite}
+     methods: [GET, POST]
+number_modules:
+    path: /numberOfModules/
+    defaults: { _controller: ModuleBundle:Default:numberOfModules}
+    methods: [GET, POST]
+list_objects:
+    path: /listObjects/
+    defaults: { _controller: ModuleBundle:Default:listObjects}
+    methods: [GET, POST]
+delete_logo:
+     path: /deleteLogo
+     defaults: { _controller: ModuleBundle:Default:deleteLogo}
+     methods: [GET, POST]
+update_isview:
+    path: /updateisview/
+    defaults: { _controller: ModuleBundle:Default:isview}
+    methods: [POST]
+logo_mailler:
+    path: /maillerLogo/{qqid}
+    defaults: { _controller: ModuleBundle:Default:logomail}
+    methods: [GET,POST]
+test_global:
+    path: /testGlobal/
+    defaults: { _controller: ModuleBundle:Default:testTransformObjectToString}
+    methods: [GET,POST]
+

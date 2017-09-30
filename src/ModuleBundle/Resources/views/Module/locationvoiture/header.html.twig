@@ -1,0 +1,336 @@
+<div id="header">
+
+    <div class="header-main">
+        <div class="container">
+            <div class="clearfix">
+                <!--Logo-->
+                <div class="logo-main">
+                    <a class="bloglogo" href="http://motors.stylemixthemes.com/">
+                        {% set path =  asset('uploads/image/')~qouiqui.user.id ~'/'~ qouiqui.id ~'/avatar/avatar.jpg' %}
+                        {% if asset_exists(path) %}
+                        <img
+                                src="{{ asset('uploads/image/') }}{{ qouiqui.user.id }}/{{ qouiqui.id }}/avatar/avatar.jpg"
+                                style="width: 138px;"
+                                title="Home"
+                                alt="Logo"
+                        />
+                        {% else %}
+                        Bienvenue chez  {{ qouiqui.firstName }}
+                        {% endif %}
+                    </a>
+                    <div class="mobile-menu-trigger visible-sm visible-xs">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
+
+                <div class="mobile-menu-holder">
+                    <ul class="header-menu clearfix">
+                        <li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-202"><a href="#">Accueil</a></li>
+                        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1311"><a href="#">Réservation</a>
+                        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-711"><a href="#">Nos Voitures</a></li>
+                        <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-203"><a href="#">Nos Tarifs</a></li>
+                        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1310"><a href="#">A Propos</a></li>
+                        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-723"><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div class="header-top-info" style="margin-top: 0px;">
+                    <div class="clearfix">
+
+                        <!--Socials-->
+
+                        <!-- Header top bar Socials -->
+                        <div class="pull-right">
+                            <div class="header-main-socs">
+                                <ul class="clearfix">
+
+                                    <li>
+                                        <a href="https://www.facebook.com/" target="_blank">
+                                            <i class="fa fa-facebook"></i>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="https://www.twitter.com/" target="_blank">
+                                            <i class="fa fa-twitter"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!--Header secondary phones-->
+                        <div class="pull-right">
+                            <div class="header-secondary-phone">
+                                {% if qouiqui.phone2 is defined %}
+                                <div class="phone">
+                                    <span class="phone-label">Tél:</span>
+                                    <span class="phone-number heading-font"><a href="tel:{{ qouiqui.phone2 }}">{{ qouiqui.phone2 }}</a></span>
+                                </div>
+                                {% endif %}
+                                {% if qouiqui.mail is defined %}
+                                <div class="phone">
+                                    <span class="phone-label">E-Mail:</span>
+                                    <span class="phone-number heading-font"><a href="email:{{ qouiqui.mail }}">{{ qouiqui.mail }}</a></span>
+                                </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <!--Header main phone-->
+                        {% if qouiqui.phone is defined %}
+                        <div class="pull-right">
+                            <div class="header-main-phone heading-font">
+                                <i class="stm-icon-phone"></i>
+                                <div class="phone">
+                                    <span class="phone-label">Tél:</span>
+                                    <span class="phone-number heading-font"><a href="tel:{{ qouiqui.phone }}">{{ qouiqui.phone }}</a></span>
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+
+
+                        <!--Header address-->
+                        {% if qouiqui.address1 is defined %}
+                        <div class="pull-right">
+                            <div class="header-address">
+                                <i class="stm-icon-pin"></i>
+                                <div class="address">
+                                    <span class="heading-font">{{ qouiqui.address1 }}</span>
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+                    </div> <!--clearfix-->
+                </div> <!--header-top-info-->
+
+            </div> <!--clearfix-->
+        </div> <!--container-->
+    </div> <!--header-main-->
+    <div id="header-nav-holder" class="hidden-sm hidden-xs">
+        <div class="header-nav header-nav-transparent header-nav-fixed">
+            <div class="container">
+                <div class="header-help-bar-trigger">
+                    <i class="fa fa-chevron-down"></i>
+                </div>
+                <div class="header-help-bar">
+                    <ul>
+                        <li class="help-bar-compare">
+                            <a
+                                    href="http://motors.stylemixthemes.com/compare"
+                                    title="Watch compared">
+                                <span class="list-label heading-font">Compare</span>
+                                <i class="list-icon stm-icon-speedometr2"></i>
+                                <span class="list-badge"><span class="stm-current-cars-in-compare"></span></span>
+                            </a>
+                        </li>
+
+
+                        <!--Shop archive-->
+                        <li class="help-bar-shop">
+                            {% if app.user %}
+                            <a
+                                    href="#"
+                                    title="Connexion"
+                            >
+                                <a href="{{ path("fos_user_security_logout") }}"><span class="list-label heading-font">Déconnexion</span>
+                                    <i class="list-icon stm-service-icon-user"></i></a>
+                                <span class="list-badge"><span class="stm-current-items-in-cart"></span></span>
+                            </a>
+                            {% else %}
+                            <a
+                                    href="#"
+                                    title="Connexion"
+                                    data-toggle="modal"data-target="#modal_connexion">
+                                <span class="list-label heading-font">se connecter</span>
+                                <i class="list-icon stm-service-icon-user"></i>
+                                <span class="list-badge"><span class="stm-current-items-in-cart"></span></span>
+                            </a>
+                            {% endif %}
+                        </li>
+                        <!--Live chat-->
+                        <li class="help-bar-live-chat">
+                            <a
+                                    id="chat-widget"
+                                    title="Open Live Chat"
+                            >
+                                <span class="list-label heading-font">Live chat</span>
+                                <i class="list-icon stm-icon-chat2"></i>
+                            </a>
+                        </li>
+
+                        <li class="nav-search">
+                            <a href="" data-toggle="modal" data-target="#searchModal"><i class="stm-icon-search"></i></a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="main-menu">
+                    <ul class="header-menu clearfix">
+                        <li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-202"><a href="#">Accueil</a></li>
+                        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1311"><a href="#">Réservation</a>
+                        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-711"><a href="#">Nos Voitures</a></li>
+                        <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-203"><a href="#">Nos Tarifs</a></li>
+                        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1310"><a href="#">A Propos</a></li>
+                        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-723"><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> <!-- id header -->
+<div id="modal_connexion" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">connection</h4>
+            </div>
+            <div class="modal-body">
+                <div role="tabpanel">
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li role="presentation" class="active"><a href="#es_admin" aria-controls="es_admin"
+                                                                  role="tab"
+                                                                  data-toggle="tab">Espace Admin</a>
+                        </li>
+                        <li role="presentation"><a href="#es_client" aria-controls="es_client" role="tab"
+                                                   data-toggle="tab">Espace Utilisateur</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane active" id="es_admin">
+                            <div class="col-md-12 btn-group btn-group-justified hidden-xs hidden-sm social"
+                                 role="group">
+                                <div class="facebook btn-group" role="group">
+                                    <a class="facebook-btn btn btn-primary" href="/login/facebook">
+                                        <span>Connecter avec Facebook</span>
+                                    </a>
+                                </div>
+                                <div class="btn-group" role="group">
+                                    <a class="btn btn-danger" href="/login/google">
+                                        <span>Connecter avec Google</span>
+                                    </a>
+                                </div>
+                            </div>
+                            <form action="/login_check" method="post">
+                                <div class="form-group">
+                                    <input type="hidden" name="_csrf_token"
+                                           value="Kk4KcJ-i6lPzu7pUx0wOja7L0g5uu9CI6uWJYDGVT4Q">
+                                </div>
+                                <div class="form-group">
+                                    <label for="username">Nom d'utilisateur</label>
+                                    <input type="text" id="username" name="_username" value="" required="required"
+                                           class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label for="password">Mot de passe</label>
+                                    <input type="password" id="password" name="_password" required="required"
+                                           class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <input type="checkbox" id="remember_me" name="_remember_me" value="on">
+                                    <label for="remember_me">Se souvenir de moi!</label>
+                                </div>
+                                <div class="form-group">
+                                    <input type="submit" id="_submit" name="_submit" value="Se connecter"
+                                           class="form-control btn btn-warning">
+                                </div>
+                            </form>
+                        </div>
+                        <div role="tabpanel" class="tab-pane" id="es_client">
+                            <form action="/login_check" method="post">
+                                <div class="form-group">
+                                    <input type="hidden" name="_csrf_token"
+                                           value="Kk4KcJ-i6lPzu7pUx0wOja7L0g5uu9CI6uWJYDGVT4Q">
+                                </div>
+                                <div class="form-group">
+                                    <label for="username">Login</label>
+                                    <input type="text" id="username" name="_username" value="" required="required"
+                                           class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label for="password">Mot de passe</label>
+                                    <input type="password" id="password" name="_password" required="required"
+                                           class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <input type="checkbox" id="remember_me" name="_remember_me" value="on">
+                                    <label for="remember_me">Se souvenir de moi!</label>
+                                </div>
+                                <div class="form-group">
+                                    <input type="submit" id="_submit" name="_submit" value="Se connecter"
+                                           class="form-control btn btn-primary">
+                                </div>
+                            </form>
+                            Nouveau ? Insecrivez-vous
+
+                            <form name="fos_user_registration_form" method="post" action="/register/"
+                                  class="fos_user_registration_register">
+                                <div id="fos_user_registration_form">
+
+                                    <div class="form-group"><label class="control-label required"
+                                                                   for="fos_user_registration_form_email">E-mail</label><input
+                                                type="email" id="fos_user_registration_form_email"
+                                                name="fos_user_registration_form[email]" required="required"
+                                                class="form-control"></div>
+                                    <div class="form-group"><label class="control-label required"
+                                                                   for="fos_user_registration_form_username">Nom </label><input
+                                                type="text" id="fos_user_registration_form_username"
+                                                name="fos_user_registration_form[username]" required="required"
+                                                maxlength="180" pattern=".{2,}" class="form-control"></div>
+                                    <div class="form-group"><label class="control-label required"
+                                                                   for="fos_user_registration_form_prenom">
+                                            Prénom</label><input type="text" id="fos_user_registration_form_prenom"
+                                                                 name="fos_user_registration_form[prenom]"
+                                                                 required="required" maxlength="255"
+                                                                 class="form-control"></div>
+                                    <div class="form-group"><label class="control-label required"
+                                                                   for="fos_user_registration_form_phone_number">téléphonne</label><input
+                                                type="text" id="fos_user_registration_form_phone_number"
+                                                name="fos_user_registration_form[phone_number]" required="required"
+                                                class="form-control"></div>
+
+                                    <div class="form-group"><label class="control-label required"
+                                                                   for="fos_user_registration_form_adress">Adresse</label><input
+                                                type="text" id="fos_user_registration_form_adress"
+                                                name="fos_user_registration_form[adress]" required="required"
+                                                maxlength="1024" class="form-control"></div>
+                                    <div class="form-group"><label class="control-label required"
+                                                                   for="fos_user_registration_form_plainPassword_first">Entrer
+                                            le mot de passe</label><input type="password"
+                                                                          id="fos_user_registration_form_plainPassword_first"
+                                                                          name="fos_user_registration_form[plainPassword][first]"
+                                                                          required="required" class="form-control">
+                                    </div>
+                                    <div class="form-group"><label class="control-label required"
+                                                                   for="fos_user_registration_form_plainPassword_second">Confirmer
+                                            le mot de passe</label><input type="password"
+                                                                          id="fos_user_registration_form_plainPassword_second"
+                                                                          name="fos_user_registration_form[plainPassword][second]"
+                                                                          required="required" class="form-control">
+                                    </div>
+                                    {#<input type="text" id="fos_user_registration_form__token" name="fos_user_registration_form[_token]" value="">#}
+
+                                </div>
+
+
+                                <div>
+                                    <input type="submit" id="envoyer" value="S'inscrire"
+                                           class="form-control btn btn-primary">
+                                </div>
+
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>

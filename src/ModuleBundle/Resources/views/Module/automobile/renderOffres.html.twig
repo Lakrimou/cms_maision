@@ -1,0 +1,121 @@
+{% set numberperPage=7 %}
+{% set numberOfPages= ((automobiles|length)/numberperPage)|round(0, 'ceil') %}
+<div class="row">
+
+    <ul class="list-group catalog-product-list">
+
+        {% for module in automobiles|slice((app.request.cookies.get('page')-1)*numberperPage,numberperPage) %}
+            {% set images ="" %}
+            {% set listImages= browseAutomobileOfferImage(qouiqui.user.id, qouiqui.id , module.id) %}
+
+            <li class="list-group-item" style="min-width: 100%">
+                <div class="media col-md-5">
+                    <figure class="pull-left" id='final-image{{ module.id }}'>
+
+
+                        {% if listImages != false %}
+                            <img alt="img" style="min-width: 100%" class="img-responsive" src="{{ asset('/uploads/image/') }}{{ qouiqui.user.id }}/{{ qouiqui.id }}/Offres/{{ module.id }}/{{ listImages[module.indexPrincipaleImage] }}">
+                        {% endif %}
+                    </figure>
+                </div>
+                <div class="col-md-4">
+                    <h4 class="list-group-item-heading"> {{ module.model.mark.name }}</h4>
+                    <p class="list-group-item-text">{{ module.details }}
+                    </p>
+                    <div class="fa-featured">
+                        <p><i class="fa fa-tachometer"></i> {{ module.mileage }} KM &nbsp;&nbsp;
+
+
+                    </div>
+                </div>
+                <div class="col-md-3 text-center">
+                    <h2> {{ module.price }} DT</h2>
+
+
+                    <div class="btn-group">
+
+
+                        <a href="#" class="btn btn-default btn-main2" data-toggle="modal" data-target="#details{{module.id}}"><span>Voir Plus</span></a>
+
+                        {% if app.user and app.user.id == qouiqui.user.id %}
+
+                            {% set iImage=0 %}
+                            {% if listImages != false %}
+                                {% for image in listImages %}
+
+                                    {% set images=images~image %}
+                                    {% if iImage != (listImages|length)-1 %}
+
+
+                                        {% set images=images~"," %}
+                                    {% endif %}
+                                    {% set iImage=iImage+1 %}
+                                {% endfor %}
+                            {% endif %}
+                            <a href="#" class="btn btn-default btn-main button-clignote form-add-edit" data-toggle="modal" data-target="#ajout" data-state='{"mark":"{{ module.model.mark.name }}","reference":"{{ module.reference }}","model":"{{ module.model.name }}","mileage":"{{ module.mileage }}","energy":"{{ module.energy }}","prix":"{{ module.price }}","kiloW":"{{ module.kiloW }}","fiscalPower":"{{ module.fiscalPower }}","modelYear":"{{ module.modelYear }}","porte":"{{ module.porte }}","details":"{{ module.details }}","id":"{{ module.id }}"}'
+                               data-link='{{ path('car_new',{"id":qouiqui.id,"idVoiture":module.id}) }}' data-images='{{ images }}'> <span>Modifier</span></a>
+                            <a href="{{ path('delete_offer',{"idQuoi":qouiqui.id,"idModule":module.id}) }}" class="btn btn-default btn-main button-clignote "> <span>Supprimer</span></a>
+
+                        {% endif %}
+                    </div>
+
+
+                </div>
+            </li>
+        {% endfor %}
+
+    </ul>
+
+    <div class="col-xs-4"></div>
+    <div class="col-xs-4">
+        <ul class="pagination pagination-lg">
+
+            {% if app.request.cookies.get('page')-1> 0 %}
+
+                <li class="page-item">
+                    <a class="page-link" aria-label="Previous"
+                       onclick="changeListModels({{ app.request.cookies.get('page')-1 }})"
+                    >
+                        <span aria-hidden="true">&laquo;</span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                </li>
+            {% endif %}
+            {% if numberOfPages>0 %}
+
+
+                {% for number in 1..numberOfPages %}
+
+                    <li><a onclick="changeListModels({{ number }})">{{ number }}</a></li>
+                {% endfor %}
+
+            {% else %}
+                0 resultat
+            {% endif %}
+            {% if app.request.cookies.get('page')+1<numberOfPages %}
+
+                <li class="page-item">
+                    <a class="page-link" aria-label="Next" onclick="changeListModels({{app.request.cookies.get('page')+1}})">
+                        <span aria-hidden="true">&raquo;</span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </li>
+            {% endif %}
+        </ul>
+    </div>
+    <div class="col-xs-4"></div>
+
+</div>
+{% if app.session.flashBag.has('success') %}
+
+    <div class="alert alert-danger alert-dismissable">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        {% for msg in app.session.flashBag.get('success') %}
+            {{ msg }}
+        {% endfor %}
+    </div>
+{% endif %}
+
+<div class="row">   {% if app.user and app.user.id == qouiqui.user.id %}
+        <a href="#" class="btn btn-main btn-primary btn-lg button-clignote form-add-edit" data-toggle="modal" data-target="#ajout" data-state=""><span>Ajouter voiture</span></a>
+    {% endif %}</div>

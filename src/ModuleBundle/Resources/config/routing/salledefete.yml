@@ -1,0 +1,8 @@
+module_salle_de_fete_add_service:
+    path: /add/{idqq}
+    defaults: { _controller: ModuleBundle:SalleDesFetes:addService}
+    methods: [GET, POST]
+module_salle_de_fete_add_offre:
+    path: /add-offre/{idqq}
+    defaults: { _controller: ModuleBundle:SalleDesFetes:addOffres}
+    methods: [GET, POST]

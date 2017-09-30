@@ -1,0 +1,12 @@
+information_new:
+    path:    addInformationGlobal
+    defaults: { _controller: ModuleBundle:Avocat:addInformationGlobal}
+    methods: [GET, POST]
+information_delete:
+    path:    deleteInformationGlobal
+    defaults: { _controller: ModuleBundle:Avocat:deleteInformationGlobal}
+    methods: [GET, POST]
+all_informations:
+    path:    getAllInformationsGlobal
+    defaults: { _controller: ModuleBundle:Avocat:getAllInformationsGlobal}
+    methods: [GET, POST]

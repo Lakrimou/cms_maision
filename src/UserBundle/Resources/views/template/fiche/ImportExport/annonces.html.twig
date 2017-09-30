@@ -1,0 +1,322 @@
+<section id="section-annonces" class="property-details padding">
+
+    <div class="container">
+        {% if attributes.connected %}
+            <div class="shake pull-right margin-bott-40 numService">
+                <button type="button" class="theme-btn button11 btn-style-one pull-right" data-toggle="modal"
+                        data-target="#Article-liste">Gérrer les services
+                </button>
+            </div>
+        {% endif %}
+        <div class="col-md-12">
+            <h2 class="text-uppercase">Nos <span class="color_red">Article</span></h2>
+            <div class="line_1"></div>
+            <div class="line_2"></div>
+            <div class="line_3"></div>
+        </div>
+
+        {% for module in attributes.module %}
+            {% set imageModule = asset('uploads/image/')~ attributes.quoiqui.user.id~'/'~attributes.quoiqui.id~'/Article/'~module.id~'/ween-Article-'~module.id~'.jpg' %}
+            <div class="col-md-6 col-sm-6 col-xs-12 project-images">
+                <div class="gri">
+                    {% if asset_exists(imageModule) %}
+                        <figure class="effect-layla">
+                            <img src="{{ imageModule }}" alt="img">
+                            <figcaption></figcaption>
+                        </figure>
+                    {% else %}
+                        <figure class="effect-layla">
+                            <img src="{{ asset('tpl/images/no-preview.jpg') }}" alt="img">
+                            <figcaption></figcaption>
+                        </figure>
+                    {% endif %}
+                </div>
+                <div class="col-md-3 col-sm-3 col-xs-12 project-owl-slidee padding-left-0 project-owl-slideee">
+                    <div class="item background-color-white">
+                        <h4>{{ module.titre }}</h4>
+                        <div class="small-title">
+                            <div class="line1"></div>
+                            <div class="line2"></div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="client-loc">
+                            <p><span>prix:</span> {{ module.prix }} </p>
+                            <p><span>detail</span> {{ module.details|slice(0,50)|raw }}- <br> {{ module.details|slice(50,50)|raw }} ... </p>
+                        </div>
+                        <a href="#" data-toggle="modal" data-module='{"titre":"{{ module.titre }}","details":"{{ module.details }}","prix":"{{ module.prix }}","image":"{{ imageModule }}"}' data-target="#Article-view" class="link_arrow view">lire la suite</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    <div class="modal fade" id="Article-view" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-md" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Article Détails</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <style>
+                    .prev-img-view{
+                        display: grid;
+                        width: 100%;
+                        height: 300px;
+                        overflow: hidden;
+                        align-items: center;
+                        margin: 0 auto;
+                        text-align: center;
+                    }
+                    .prev-img-view img{
+                        max-height: 100% ;
+                        width: initial;
+
+                    }
+                </style>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <figure class="prev-img-view">
+                               <p><img src="/tpl/images/no-preview.jpg" alt="img"></p>
+                            </figure>
+                        </div>
+                        <div class="col-md-6">
+                            <h3 class="text-uppercase  bottom20 top10"><span class="color_red titre-view">Titre</span></h3>
+                            <p class="p-font-15 view-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras et dui vestibulum, bibendum purus sit amet, vulputate mauris. Ut adipiscing gravida tincidunt. Duis euismod placerat rhoncus. Phasellus mollis imperdiet placerat. Sed ac turpis nisl. Mauris at ante mauris. Aliquam posuere fermentum lorem, a aliquam mauris rutrum a. Curabitur sit amet pretium lectus, nec consequat orci.</p>
+                            <hr>
+                            <div class="property_meta bottom40">
+                                <span><i class="fa fa-money"></i><span class="prix">530 sq ft</span></span>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">fermer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="Article-liste" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-md" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Article Détails</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+
+
+                            <button type="button" class="btn btn-primary pull-right margin20 margin" data-toggle="modal" data-target="#Article-m" data-link="#">Ajouter un Nouveaux Article</button>
+                            <table class="dataTable table table-striped table-bordered" cellspacing="0" width="100%">
+                                <thead>
+                                <tr>
+                                    <th>Image</th>
+                                    <th>Titre</th>
+                                    <th>Description</th>
+                                    <th>prix</th>
+                                    <th>Action</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for module in attributes.module %}
+                                    {% set imageModule = asset('uploads/image/')~ attributes.quoiqui.user.id~'/'~attributes.quoiqui.id~'/Article/'~module.id~'/ween-Article-'~module.id~'.jpg' %}
+                                    <tr>
+                                        <td >
+
+                                            {% if asset_exists(imageModule) %}
+
+                                                    <img style="height: 60px" src="{{ imageModule }}" alt="img">
+
+                                            {% else %}
+
+                                                    <img style="height: 60px" src="{{ asset('tpl/images/no-preview.jpg') }}" alt="img">
+
+
+                                            {% endif %}
+
+                                        </td>
+                                        <td>{{ module.titre }}</td>
+                                        <td>{{ module.details|slice(0,78)|raw }}</td>
+                                        <td>{{ module.prix }}</td>
+                                        <td>
+                                    <span class="pull-right">
+                                        <button type="button" class="btn btn-warning form_article"
+                                                data-toggle="modal"
+                                                data-titre="modal" data-target="#Article-edit"
+                                                data-module='{"titre":"{{ module.titre }}","details":"{{ module.details }}","prix":"{{ module.prix }}"}'
+                                                data-link="{{ path('traiteur_modif',{'id' : module.id }) }}">
+                                            Modifier
+                                        </button>
+
+                                        </span>
+                                            <a href="{{ path('traiteur_supp',{'id': module.id }) }}" type="button" class="btn btn-danger">Supprimer</a>
+                                        </td>
+
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">fermer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="Article-m" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-md" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Service Détails</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <form action="{{ path('traiteur_add') }}" id="add-article" name="AdminBundle_traiteur" method="post" enctype="multipart/form-data">
+                                <div id="AdminBundle_traiteur">
+                                    <div class="col-md-12">
+
+                                        <div class="form-group">
+                                            <label class="control-label required" for="AdminBundle_traiteur_titre">Titre</label>
+                                            <input type="text" id="AdminBundle_traiteur_titre" name="AdminBundle_traiteur[titre]" required="required" maxlength="80" class="form-control" value="Titre de votre Article">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="control-label required" for="AdminBundle_traiteur_details">Details</label>
+                                            <textarea class="ckeditor" id="#AdminBundle_traiteur_details_add" name="AdminBundle_traiteur[details]" value=""></textarea>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label required" for="AdminBundle_traiteur_prix">Prix</label>
+                                            <input type="number" id="AdminBundle_traiteur_prix" name="AdminBundle_traiteur[prix]" required="required" class="form-control" value="122">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label class="control-label required" for="AdminBundle_traiteur_prix">Image</label>
+                                            <div class="form-inline">
+                                                <div class="form-group" style="width: 100%">
+                                                    <label class="btn btn-default btn-sm center-block btn-file">
+                                                        <i class="fa fa-picture-o fa-2x" aria-hidden="true"></i>
+                                                        <input type="file" name="files[]" style="display: none;" accept="image/*" required="">
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <input type="hidden" name="AdminBundle_traiteur[qqId]" required="required" class="form-control" value="{{ attributes.quoiqui.id }}">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">fermer</button>
+                    <button type="submit" class="btn btn-primary " data-target="modifier" data-selector="add-article">Enregistrer</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="Article-edit" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-md" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Service Détails</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <form action="#" id="edit-article" name="AdminBundle_traiteur" method="post" enctype="multipart/form-data">
+                                <div id="AdminBundle_traiteur">
+                                    <div class="col-md-12">
+
+                                        <div class="form-group">
+                                            <label class="control-label required" for="AdminBundle_traiteur_titre">Titre</label>
+                                            <input type="text" id="AdminBundle_traiteur_titre" name="AdminBundle_traiteur[titre]" required="required" maxlength="80" class="form-control" value="Titre de votre Article">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="control-label required" for="AdminBundle_traiteur_details">Details</label>
+                                            <textarea class="ckeditor" id="#AdminBundle_traiteur_details" name="AdminBundle_traiteur[details]" value=""></textarea>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label required" for="AdminBundle_traiteur_prix">Prix</label>
+                                            <input type="number" id="AdminBundle_traiteur_prix" name="AdminBundle_traiteur[prix]" required="required" class="form-control" value="122">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label class="control-label required" for="AdminBundle_traiteur_prix">Image</label>
+                                            <div class="form-inline">
+                                                <div class="form-group" style="width: 100%">
+                                                    <label class="btn btn-default btn-sm center-block btn-file">
+                                                        <i class="fa fa-picture-o fa-2x" aria-hidden="true"></i>
+                                                        <input type="file" name="files[]" style="display: none;" accept="image/*" >
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <input type="hidden" name="AdminBundle_traiteur[qqId]" required="required" class="form-control" value="{{ attributes.quoiqui.id }}">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">fermer</button>
+                    <button type="submit" class="btn btn-primary " data-target="modifier" data-selector="edit-article">Enregistrer</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="paralax-icon">
+        <div class="particle elem1 anim-delay1"></div>
+        <div class="particle elem2 anim-delay5"></div>
+        <div class="particle elem3 anim-delay3"></div>
+        <div class="particle elem4 anim-delay8"></div>
+        <div class="particle elem5 anim-delay9"></div>
+        <div class="particle elem6 anim-delay2"></div>
+        <div class="particle elem7 anim-delay4"></div>
+        <div class="particle elem8 anim-delay3"></div>
+        <div class="particle elem9 anim-delay10"></div>
+        <div class="particle elem8 anim-delay11"></div>
+        <div class="particle elem6 anim-delay12"></div>
+        <div class="particle elem1 anim-delay14"></div>
+        <div class="particle elem13 anim-delay16"></div>
+        <div class="particle elem17 anim-delay18"></div>
+        <div class="particle elem2 anim-delay6"></div>
+        <div class="particle elem16 anim-delay9"></div>
+        <div class="particle elem8 anim-delay3"></div>
+        <div class="particle elem9 anim-delay10"></div>
+        <div class="particle elem18 anim-delay11"></div>
+        <div class="particle elem11 anim-delay12"></div>
+        <div class="particle elem12 anim-delay14"></div>
+        <div class="particle elem13 anim-delay16"></div>
+        <div class="particle elem14 anim-delay18"></div>
+        <div class="particle elem15 anim-delay6"></div>
+        <div class="particle elem16 anim-delay9"></div>
+        <div class="particle elem17 anim-delay7"></div>
+        <div class="particle elem18 anim-delay6"></div>
+        <div class="particle elem19 anim-delay3"></div>
+    </div>
+</section>
+

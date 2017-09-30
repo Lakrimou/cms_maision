@@ -1,0 +1,794 @@
+<section id="project" class="clearfix">
+
+    <div class="ro">
+        <div class="column12">
+            <div class="recent-work">
+
+                <h3 class="main-title">Nos projets</h3>
+                <span class="main-subtitle">some handpicked projects we’ve done</span>
+                <div class="list_carousel responsive">
+                    <ul id="foo4">
+                        {% for module in module %}
+                            {% set listImages= browseAutomobileOfferImage(qouiqui.user.id, qouiqui.id , module.id) %}
+                            {% if listImages!=false %}
+                                {% set images ="" %}
+                                {% set iImage=0 %}
+
+                                {% for image in listImages %}
+
+                                    {% set images=images~image %}
+                                    {% if iImage != (listImages|length)-1 %}
+
+
+                                        {% set images=images~"," %}
+                                    {% endif %}
+                                    {% set iImage=iImage+1 %}
+                                {% endfor %}
+                                <li>
+                                    <div class="view view-sixth">
+                                        <img width="384" style="min-height: 295px" src="{{ asset('/uploads/image/') }}{{ qouiqui.user.id }}/{{ qouiqui.id }}/Offres/{{ module.id }}/{{ listImages[module.indexPrincipaleImage] }}" class="attachment-384x295 size-384x295 wp-post-image" alt="" sizes="(max-width: 382px) 100vw, 382px"/>
+
+                                        <div class="mask">
+                                            {% set i= loop.index %}
+
+
+                                            <a href="{{ asset('/uploads/image/') }}{{ qouiqui.user.id }}/{{ qouiqui.id }}/Offres/{{ module.id }}/{{ listImages[module.indexPrincipaleImage] }}" data-fancybox-group="group{{ i }}"><i class="fa fa-search"></i></a>
+
+                                            <a href="#" class="form-details-project" data-toggle="modal" data-target="#details-project" data-project='{"name_details":"{{ module.name }}","client_details":"{{ module.client }}","adress_details":"{{ module.adress }}","description_details":"{{ module.description }}","dateCreation_details":"{{ module.dateCreation|date("m/d/Y") }}","id_details":"{{ module.id }}","client_details":"{{ module.client }}","adress_details":"{{ module.client }}","principal_image":"{{ module.indexPrincipaleImage }}"}'
+                                               data-images='{{ images }}'><i class="fa fa-file-o"></i></a>
+
+                                        </div>
+
+                                    </div>
+                                    <div class="desc">
+                                        <h4><a href="portfolio/arkitekt-design-6/index.html">arkitekt design 6</a></h4>
+                                        <span><a href="portfolio_category/buissness-cards/index.html" rel="tag">BUISSNESS CARDS</a>, <a href="portfolio_category/logos/index.html" rel="tag">LOGOS</a>, <a href="portfolio_category/websites/index.html" rel="tag">WEBSITES</a></span>
+                                    </div>
+                                    {% for image in listImages %}
+                                        {% if loop.index-1 !=module.indexPrincipaleImage %}
+                                            <a href="{{ asset('/uploads/image/') }}{{ qouiqui.user.id }}/{{ qouiqui.id }}/Offres/{{ module.id }}/{{ image }}" data-fancybox-group="group{{ i }}" hidden></a>
+                                        {% endif %}
+                                    {% endfor %}
+                                </li>
+                            {% endif %}
+
+                        {% endfor %}
+
+
+                    </ul>
+
+                    <div class="clearfix">
+                    </div>
+                    <a id="prev3" class="prev" href="#">&lt;</a>
+                    <a id="next3" class="next" href="#">&gt;</a>
+                </div>
+                <!-- End List Carousel -->
+            </div>
+            <!-- End Recent Works -->
+
+
+            {% if app.session.flashBag.has('success') %}
+
+                <div class="alert alert-danger alert-dismissable">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    {% for msg in app.session.flashBag.get('success') %}
+                        {{ msg }}
+                    {% endfor %}
+                </div>
+            {% endif %}
+            {% if  app.user and app.user.id==qouiqui.user.id %}
+                <button type="button" class="theme-btn btn-style-one blue" data-toggle="modal"
+                        data-target="#add-project">Ajouter un projet
+                </button>
+                <button type="button" class="theme-btn btn-style-one blue" data-toggle="modal"
+                        data-target="#list-projects">Modifier les projets
+                </button>
+            {% endif %}
+        </div>
+    </div>
+</section>
+
+
+<div class="modal fade" id="add-project" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Ajouter un nouveau projet</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+
+                    <div class="col-md-10 col-md-offset-1">
+                        <form id="ajout_voiture" name="adminbundle_automobile" action="{{ path('project_new',{"id":qouiqui.id}) }}" method="post" enctype="multipart/form-data">
+
+                            <h2 class="text-center" id="title-form-ajout">Ajout projet</h2>
+                            <div class="form-group row element-form">
+
+                                <div class="col-md-3">
+                                    <label class="control-label">Référence</label>
+                                </div>
+
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" placeholder="Exemple:#ref1*" name="reference" required>
+                                </div>
+                            </div>
+                            <div class="form-group row element-form">
+
+                                <div class="col-md-3">
+                                    <label class="control-label">Nom</label>
+                                </div>
+
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" placeholder="Entrez le titre du projet*" name="name" required>
+                                </div>
+                            </div>
+                            <div class="form-group row element-form">
+
+                                <div class="col-md-3">
+                                    <label class="control-label">Client</label>
+                                </div>
+
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" placeholder="Entrez le nom de client" name="client">
+                                </div>
+                            </div>
+                            <div class="form-group row element-form">
+
+                                <div class="col-md-3">
+                                    <label class="control-label">Adresse</label>
+                                </div>
+
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" placeholder="Entrez l'adresse du projet" name="adress">
+                                </div>
+                            </div>
+                            <div class="form-group row element-form">
+
+                                <div class="col-md-3">
+                                    <label class="control-label">Description</label>
+                                </div>
+
+                                <div class="col-sm-9">
+
+                                         <textarea cols="60" name="description"
+                                                   rows="10" required>Ajoutez des details par rapport à ce projet..</textarea>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+
+                                <div class="col-md-3">
+                                    <label class="control-label " for="model">Date</label>
+                                </div>
+                                <div class="input-group date" data-provide="datepicker">
+                                    <input type="text" class="form-control" name="date">
+                                    <div class="input-group-addon">
+                                        <span class="glyphicon glyphicon-th"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+
+                                <div class="col-md-3">
+                                    <label class="control-label " for="image">Télécharger image</label>
+                                </div>
+                                <div class="col-sm-9">
+                                    <input type="file" name="images[]" id="fileInput" multiple>
+                                </div>
+                            </div>
+                            <div class="row">
+
+                                <div class="col-md-8">
+                                    <table class="table table-bordered " id="table_new" hidden>
+                                        <thead>
+                                        <tr>
+                                            <th>Images à télécharger</th>
+                                            <th>Action</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody id="uploaded_image">
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div id="removed_images_add" type="hidden">
+
+                            </div>
+                            <div class="row">
+                                <div class="col-md-8 ">
+                                </div>
+                                <div class="col-md-2 ">
+                                    <input class="btn btn-main btn-primary btn-lg" type="submit" value="Enregistrer">
+                                </div>
+                            </div>
+
+
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="list-projects" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLong">Liste des projets</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+
+                    <div class="col-md-10 col-md-offset-1">
+                        <table class="table table-bordered " id="table_projects">
+
+
+                        </table>
+
+                        <ul class="pagination pagination-lg" id="button_pages">
+                        </ul>
+
+
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="update-project" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Modifier projet</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+
+                    <div class="col-md-10 col-md-offset-1">
+                        <form id="update-project-form" name="adminbundle_architecture" action="" method="post" enctype="multipart/form-data">
+
+                            <h2 class="text-center" id="title-form-ajout">Modifier Projet</h2>
+                            <div class="form-group row element-form">
+
+                                <div class="col-md-3">
+                                    <label class="control-label">Référence</label>
+                                </div>
+
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="reference" placeholder="Exemple:#ref1*" name="adminbundle_architecture[reference]" required>
+                                </div>
+                            </div>
+                            <div class="form-group row element-form">
+
+                                <div class="col-md-3">
+                                    <label class="control-label">Nom</label>
+                                </div>
+
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="name" placeholder="Entrez le titre du projet*" name="adminbundle_architecture[name]" required>
+                                </div>
+                            </div>
+                            <div class="form-group row element-form">
+
+                                <div class="col-md-3">
+                                    <label class="control-label">Client</label>
+                                </div>
+
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" placeholder="Entrez le nom de client" name="client" id="client">
+                                </div>
+                            </div>
+                            <div class="form-group row element-form">
+
+                                <div class="col-md-3">
+                                    <label class="control-label">Adresse</label>
+                                </div>
+
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" placeholder="Entrez l'adresse du projet" name="adress" id="adress">
+                                </div>
+                            </div>
+                            <div class="form-group row element-form">
+
+                                <div class="col-md-3">
+                                    <label class="control-label">Description</label>
+                                </div>
+
+                                <div class="col-sm-9">
+
+                                         <textarea cols="60"
+                                                   rows="10" required id="description" name="adminbundle_architecture[description]">Ajoutez des details par rapport à ce projet..</textarea>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+
+                                <div class="col-md-3">
+                                    <label class="control-label " for="model">Date</label>
+                                </div>
+                                <div class="input-group date" data-provide="datepicker">
+                                    <input type="text" class="form-control" name="adminbundle_architecture[dateCreation]" id="dateCreation">
+                                    <div class="input-group-addon">
+                                        <span class="glyphicon glyphicon-th"></span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+
+                                    <div class="col-md-3">
+                                        <label class="control-label " for="image">Télécharger image</label>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <input type="file" name="images[]" id="fileInputUpdate" multiple>
+                                    </div>
+                                </div>
+                                <div class="row">
+
+                                    <div class="col-md-8">
+                                        <table class="table table-bordered " id="table_new_update" hidden>
+                                            <thead>
+                                            <tr>
+                                                <th>Images à télécharger</th>
+                                                <th>Action</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody id="uploaded_image_update">
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-8 ">
+                                    </div>
+                                    <div class="col-md-2 ">
+                                        <input class="btn btn-main btn-primary btn-lg" type="submit" value="Enregistrer">
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div id="removed_images_update" hidden>
+
+                            </div>
+                        </form>
+                        <div class="row" id="row-update" style="display: none">
+
+                            <div class="col-md-1">
+
+                            </div>
+                            <div class="col-md-3">
+                                <label class="control-label " for="image">Modifier les images téléchargées</label>
+                            </div>
+                            <div class="col-md-6">
+                                <table class="table table-bordered " id="downloadedImages"
+                                >
+                                    <thead>
+                                    <tr>
+
+                                        <th>Images téléchargées</th>
+                                        <th>Action</th>
+
+                                    </tr>
+
+
+                                    </thead>
+                                    <tbody id="image_to_upload_update">
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="details-project" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Détails du projet</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="content column12 clearfix">
+
+
+                    <div class="column4">
+                        <div class="portfolio_details">
+                            <div class="details_section">
+                                <h4 id="name_project_details"></h4>
+
+                                <h3>Lieux</h3>
+                                <p id="adress_details"></p>
+                                <hr>
+                                <h3>Details</h3>
+                                <p id="description_details"></p>
+                                <hr>
+
+                                <ul>
+                                    <li class="version">
+                                        Client:
+                                        <span><a href="#" title=""></a></span>
+                                    </li>
+
+
+                                    <li><span id="client_details"></span></li>
+
+
+                                    <li class="release">
+                                        Date de réalisation:
+                                        <span id="dateCreation_details"></span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <!-- details section -->
+                        </div>
+                        <!-- theme details -->
+                    </div>
+                    <!-- end col-lg 8 -->
+
+                    <div class="column8" id="slider_details">
+
+
+                        <!-- end item_image -->
+                    </div>
+                    <!-- end col-lg 8 -->
+
+                    <div class="clear"></div>
+
+
+                    <div class="clearfix"></div>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+            </div>
+            <!-- end content -->
+        </div>
+    </div>
+</div>
+<!-- end container -->
+
+
+<script type="text/javascript">
+    var number;
+    var page;
+    var numberPerPage;
+    $(document).ready(function () {
+
+        iImage = 0;
+        page = 1;
+        numberPerPage = 7
+        getNumberOfPages();
+        getObjects(page);
+
+
+    });
+
+    function getNumberOfPages() {
+        $.ajax({
+            url: '{{ path('number_pages') }}',
+            data: {
+
+                'number': numberPerPage,
+                'object': '{{ category.libelle }}',
+                'quoiqui': {{ qouiqui.id }},
+
+
+            },
+
+            type: "POST",
+
+            success: function (response) {
+
+                number = response;
+
+
+            },
+            error: function (xhr, status, error) {
+                alert(xhr.responseText);
+            },
+
+
+        });
+    }
+
+
+    function getButtonPages(page) {
+
+
+        if (number > 0) {
+            if (page > 1) {
+
+                $("#button_pages").append("<li class='page-item'><a class='page-link' aria-label='Previous' onclick='getObjects(" + page + "-1)'><span aria-hidden='true'>&laquo;</span><span class='sr-only'>Previous</span></a></li>"
+                );
+
+
+            }
+            for (i = 1; i <= number; i++) {
+                $("#button_pages").append("<li><a onclick='getObjects(" + i + ")'>" + i + " </a></li>");
+            }
+            if (page < number) {
+                $("#button_pages").append("<li class='page-item'><a class='page-link' aria-label='Next'onclick='getObjects(" + page + 1 + ")'><span aria-hidden='true'>&raquo;</span><span class='sr-only'>Next</span></a></li>"
+                );
+
+
+            }
+        }
+        else {
+            $("#button_pages").append("0 resultat");
+        }
+    }
+
+    function getObjects(page) {
+
+        $.ajax({
+            url: '{{ path('list_objects') }}',
+            data: {
+
+                'page': page,
+                'number': numberPerPage,
+                'object': '{{ category.libelle }}',
+                'quoiqui': {{ qouiqui.id }},
+
+
+            },
+
+            type: "POST",
+
+            success: function (response) {
+                $("#table_projects").html(response);
+
+                $("#button_pages").empty();
+                getButtonPages(page);
+
+
+            },
+            error: function (xhr, status, error) {
+                alert(xhr.responseText);
+            },
+
+
+        });
+
+    }
+    $(document).on("click", ".form-update-project", function () {
+        var module = $(this).data('project');
+        var link = $(this).data('link');
+        var images = $(this).data('images');
+        var image;
+
+        Object.keys(module).forEach(function (k) {
+            if (k != "id") {
+                document.getElementById(k).value = module[k];
+            }
+        });
+
+
+        $("#update-project-form").attr("action", link);
+        $("#row-update").show();
+
+        $("#image_to_upload_update").empty();
+        if (images != "") {
+
+            images = images.split(",");
+
+            for (i = 0; i < images.length; i++) {
+                image = images[i];
+
+                $("#image_to_upload_update").append(" <tr id='tr" + i + "old'><td><img id ='old-image" + i + "' style='width: 100%' src='#' /></td><td><button  onclick='deleteOldOfferImage(" + i + "," + module.id + ",\"" + image + "\")'>Supprimer</button><input type='radio' name='principale-image' value='" + i + "' onclick='changePrincipaleImage(" + module.id + "," + i + ")'>Image principale" +
+                    "</td></tr>");
+                $('#old-image' + i).attr('src', '{{ asset('/uploads/image/') }}{{ iduser }}/{{ qouiqui.id }}/Offres/' + module.id + '/' + image);
+            }
+        }
+
+    });
+    function readURL(input, listImages, iImage, divContent, table, inputFile) {
+        for (i = 0; i < input.files.length; i++) {
+
+            if (input.files && input.files[i]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+
+                    $("#" + listImages).append("<tr id='tr-add" + iImage + "' class='tr-inner-table'><td ><img  style='width: 100%' src='" + e.target.result + "' /></td><td><button onclick='deleteNewOfferImage(" + iImage + "," + divContent + "," + listImages + "," + table + "," + inputFile + ")'>Supprimer</button></td></tr>");
+
+                    iImage = iImage + 1;
+
+
+                }
+
+                reader.readAsDataURL(input.files[i]);
+            }
+
+        }
+
+    }
+
+    document.getElementById('fileInput').onchange = function () {
+
+        var iImage = 0;
+        $("#removed_images_add").empty();
+
+        uploadNewImage(this, "uploaded_image", "table_new", iImage, "removed_images_add", "fileInput");
+
+
+    };
+    document.getElementById('fileInputUpdate').onchange = function () {
+
+
+        var iImageUpdate = 0;
+        $("#removed_images_update").empty();
+        uploadNewImage(this, "uploaded_image_update", "table_new_update", iImageUpdate, "removed_images_update", "fileInputUpdate");
+
+
+    };
+
+    function deleteNewOfferImage(iI, divContent, listImages, table, inputFile) {
+
+        $("#tr-add" + iI).remove();
+
+        $(divContent).append("<input name='deleteFile[" + iI + "]' value='" + iI + "' type='hidden'>");
+
+        if ($(listImages).is(':empty')) {
+            console.log(table);
+
+            $(table).hide();
+            $(divContent).empty();
+
+            $(inputFile).empty();
+
+
+        }
+
+
+        event.preventDefault();
+
+    }
+    function uploadNewImage(input, listeImages, table, iImage, divContent, inputFile) {
+
+        $("#" + listeImages).empty();
+        $("#" + table).show();
+        readURL(input, listeImages, iImage, divContent, table, inputFile);
+    }
+
+    function deleteOldOfferImage(iI, moduleId, image) {
+
+        var result = confirm("Voulez vous vraiment supprimer cette images ?");
+        if (result) {
+
+
+            $.ajax({
+                url: '{{ path('delete_image_project') }}',
+                data: {
+                    'user': {{ qouiqui.user.id }},
+                    'quoiqui': {{ qouiqui.id }},
+                    'module': moduleId,
+                    'image': image,
+                },
+                type: "POST",
+                success: function (response) {
+
+
+                    $("#tr" + iI + "old").remove();
+
+                    location.reload();
+
+
+                },
+
+
+            });
+
+
+        }
+
+
+    }
+    function changePrincipaleImage(moduleId, index) {
+
+        $.ajax({
+            url: '{{ path('change_principal_image_project') }}',
+            data: {
+
+                'module': moduleId,
+                'index': index,
+
+
+            },
+            type: "POST",
+            success: function (response) {
+                location.reload();
+
+
+            },
+            error: function (xhr, status, error) {
+                alert(xhr.responseText);
+            },
+
+
+        });
+
+
+    }
+    $(document).on("click", ".form-details-project", function () {
+        var module = $(this).data('project');
+
+        var images = $(this).data('images');
+
+
+
+        $("#description_details").html(module.description_details);
+        $("#name_project_details").html(module.name_details);
+        $("#adress_details").html(module.adress_details);
+        $("#client_details").html(module.client_details);
+        $("#dateCreation_details").html(module.dateCreation_details);
+        $("#slider_details").html("<div class='item_image'><div id='myCarousel' class='carousel slide' data-ride='carousel'> <div class='carousel-inner'><div class='item active' id='content_imges_details' style='  width:100%;height:auto;'> <img  id='firstImageDetails' style='width:100%;height:auto;'></div> </div><a class='left carousel-control' href='#myCarousel' data-slide='prev'> <span class='glyphicon glyphicon-chevron-left'></span><span class='sr-only'>Previous</span></a><a class='right carousel-control' href='#myCarousel' data-slide='next'> <span class='glyphicon " +
+            "glyphicon-chevron-right'></span><span class='sr-only'>Next</span> </a>  </div></div>");
+
+
+
+
+
+
+
+
+
+
+
+
+        var imagesArray = images.split(",");
+
+        $("#firstImageDetails").attr('src', '{{ asset('/uploads/image/') }}{{ qouiqui.user.id }}/{{ qouiqui.id }}/Offres/' + module.id_details + '/' + imagesArray[0]);
+        for (i = 1; i < imagesArray.length; i++) {
+            $("#content_imges_details").append(" <div class='item'> <img id='details_image_slide'  > </div>")
+            $("#details_image_slide").attr('src', '{{ asset('/uploads/image/') }}{{ qouiqui.user.id }}/{{ qouiqui.id }}/Offres/' + module.id_details + '/' + imagesArray[i]);
+        }
+
+    });
+    function changeImageProjectDetails(index, images, moduleId) {
+
+
+        var indexNext = 0;
+
+
+        if (index < imagesArray.length - 1) {
+
+            indexNext = parseInt(index) + 1;
+
+        }
+        else {
+            indexNext = 0;
+        }
+
+        $("#next_image_project").attr("onclick", "changeImageProjectDetails(" + indexNext + ",\"" + images + "\"," + moduleId + ")");
+    }
+
+</script>

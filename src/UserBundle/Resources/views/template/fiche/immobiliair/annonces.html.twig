@@ -1,0 +1,858 @@
+<section id="section-annonces" class="property-details padding">
+    <div class="ooo">
+
+        <span class="o bg" data-toggle="tooltip" data-placement="left" title="Couleur d'arrière plan!"></span>
+        <span class="o mt" data-toggle="tooltip" data-placement="left" title="Motif d'arrière plan!"></span>
+        <span class="o an" data-toggle="tooltip" data-placement="left" title="Animation d'arrière plan!"></span>
+
+    </div>
+    <div class="container">
+        {% if attributes.connected %}
+            <span class="pull-right margin-bott-40"><button class="theme-btn btn-style-one button11" data-toggle="modal" data-target="#modalGererAnnonces">Gérer cette section</button></span>
+        {% endif %}
+
+
+        <div class="row">
+            <div class="col-xs-12 bottom40">
+                <h2 class="text-uppercase">Nos <span class="color_red">annonces</span></h2>
+                <div class="line_1"></div>
+                <div class="line_2"></div>
+                <div class="line_3"></div>
+            </div>
+        </div>
+        <div class="row bottom30">
+            <style>
+                .filtriz {
+                    background: rgba(255, 255, 255, 0.26);
+                    padding: 15px;
+                    box-shadow: 0 0 20px 0px;
+                }
+            </style>
+            <div class="container filtriz bottom30">
+                <form method="POST" action="{{ path('filtre_annonce') }}" id="filtriz">
+
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6">
+                            <div class="single-query form-group">
+                                <label>Mot-clé</label>
+                                <input type="text" id="keyword" name="titre" class="keyword-input" placeholder="Exemple: Villa vue de mer" required="">
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-3">
+                            <div class="single-query form-group">
+                                <div class="intro">
+                                    <label>Offre</label>
+                                    <select name="offre" id="offre">
+                                        <option selected value="Vendre">à vendre</option>
+                                        <option value="Louer">à louer</option>
+
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-3">
+                            <div class="single-query form-group">
+                                <div class="intro">
+                                    <label>Type de propriété</label>
+                                    <select name="propriete" id="propriete">
+                                        <option selected value="Appartement">Appartement</option>
+                                        <option villa="villa">villa</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="search-2">
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-6">
+                                        <div class="single-query form-group">
+                                            <div class="intro">
+                                                <label>Chambre</label>
+                                                <select name="chambre">
+                                                    <option value="1">1</option>
+                                                    <option value="2">2</option>
+                                                    <option value="3">3</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-sm-6">
+                                        <div class="single-query form-group">
+                                            <div class="intro">
+                                                <label>Salle de bains</label>
+                                                <select name="Sbains">
+                                                    <option value="1">1</option>
+                                                    <option value="2">2</option>
+                                                    <option value="3">3</option>
+                                                </select>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-7 col-sm-6">
+                                        <div class="single-query-slider top10 bottom10">
+                                            <label>Échelle des prix:</label>
+                                            <div class="price text-right">
+                                                <div class="leftLabel">0</div>
+                                                <span><sup>DT</sup> à</span>
+                                                <div class="rightLabel">500</div>
+                                                <span><sup>DT</sup></span>
+                                            </div>
+                                            <div data-range_min="0" data-range_max="999999999" data-cur_min="0" data-cur_max="2000" class="nstSlider">
+                                                <div class="bar nst-animating" style="left: 0px; width: 311px;"></div>
+                                                <div class="leftGrip nst-animating" tabindex="0" style="left: 0px;"></div>
+                                                <div class="rightGrip nst-animating" tabindex="0" style="left: 299px;"></div>
+                                            </div>
+                                            <input type="hidden" name="minprice" value="0" id="minprice">
+                                            <input type="hidden" name="maxprice" value="999999999" id="maxprice">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-5 col-sm-6 text-right">
+                                        <div class="query-submit-button top10">
+                                            <input type="button" id="submitFiltAnnonce" class="btn_fill" value="Chercher">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+            <div class="row">
+
+                <div id="list-anonce">
+                </div>
+            </div>
+            <div class="clear-fix"></div>
+            <div class="row">
+
+                <div class="paginate">
+                    <span class="load-more-annonce">Voir plus</span>
+                    <span class="load-less-annonce">Masquer</span>
+                </div>
+
+            </div>
+        </div>
+
+
+        <style>
+            .paginate {
+                text-align: center !important;
+            }
+
+            .load-more-annonce {
+                background: #f24444;
+                padding: 10px 20px;
+                color: #fff;
+                margin-right: 20px;
+                cursor: pointer;
+            }
+
+            .load-less-annonce {
+                background: #e86e6e;
+                padding: 10px 20px;
+                color: #fff;
+                cursor: pointer;
+            }
+        </style>
+    </div>
+    <div class="paralax-icon">
+        <div class="particle elem1 anim-delay1"></div>
+        <div class="particle elem2 anim-delay5"></div>
+        <div class="particle elem3 anim-delay3"></div>
+        <div class="particle elem4 anim-delay8"></div>
+        <div class="particle elem5 anim-delay9"></div>
+        <div class="particle elem6 anim-delay2"></div>
+        <div class="particle elem7 anim-delay4"></div>
+        <div class="particle elem8 anim-delay3"></div>
+        <div class="particle elem9 anim-delay10"></div>
+        <div class="particle elem8 anim-delay11"></div>
+        <div class="particle elem6 anim-delay12"></div>
+        <div class="particle elem1 anim-delay14"></div>
+        <div class="particle elem13 anim-delay16"></div>
+        <div class="particle elem17 anim-delay18"></div>
+        <div class="particle elem2 anim-delay6"></div>
+        <div class="particle elem16 anim-delay9"></div>
+        <div class="particle elem8 anim-delay3"></div>
+        <div class="particle elem9 anim-delay10"></div>
+        <div class="particle elem18 anim-delay11"></div>
+        <div class="particle elem11 anim-delay12"></div>
+        <div class="particle elem12 anim-delay14"></div>
+        <div class="particle elem13 anim-delay16"></div>
+        <div class="particle elem14 anim-delay18"></div>
+        <div class="particle elem15 anim-delay6"></div>
+        <div class="particle elem16 anim-delay9"></div>
+        <div class="particle elem17 anim-delay7"></div>
+        <div class="particle elem18 anim-delay6"></div>
+        <div class="particle elem19 anim-delay3"></div>
+    </div>
+
+
+    <style>
+
+
+        .annoncePrice {
+            background: red;
+            padding: 10px 15px;
+            color: white;
+            border-radius: 15px;
+            position: absolute;
+            right: 0;
+            top: 0;
+        }
+
+        .annonceRef {
+            font-size: 21px;
+            color: green;
+        }
+
+        .btn-rappel {
+
+            background: #E7AC44;
+            font-size: 19px;
+            border: 1px solid #E7AC44;
+            padding: 10px;
+            border-radius: 1px;
+            color: #f5f5f5;
+            text-align: center;
+        }
+
+        .btn-demande {
+            background: #e96656;
+            font-size: 19px;
+            border: 1px solid #e96656;
+            padding: 10px;
+            border-radius: 1px;
+            color: #f5f5f5;
+            text-align: center;
+        }
+        @media (max-width: 767px){
+            .annonce-bottom{
+                padding-bottom: 15px;
+            }
+        }
+
+
+    </style>
+</section>
+
+
+{% if attributes.connected %}
+    <div id="modalGererAnnonces" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="gridSystemModalLabel">Gérer les annonces</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <span class="pull-right margin-bott-40"><button class="theme-btn btn-style-one button11" data-toggle="modal" data-target="#Ajouter_annonce">Ajouter annonce</button></span>
+                            </div>
+                        </div>
+                        <br>
+
+                        <table id="annonces-table" class="dataTable display responsive" cellspacing="0" width="100%">
+                            <thead>
+                            <tr>
+                                <th align="center">#</th>
+                                <th>Titre</th>
+                                <th>Prix</th>
+                                <th>Description</th>
+                                <th>Action</th>
+                            </tr>
+                            </thead>
+                            <tfoot>
+                            <tr>
+                                <th align="center">#</th>
+                                <th>Titre</th>
+                                <th>Prix</th>
+                                <th>Description</th>
+                                <th>Action</th>
+                            </tr>
+                            </tfoot>
+                            <tbody>
+                            {% for ann in  attributes.module|reverse %}
+                                <tr data-tr-id="{{ ann.id }}">
+                                    <td align="center">{{ loop.index }}</td>
+                                    <td>{{ ann.titre|capitalize }}</td>
+                                    <td>{{ ann.prix }}</td>
+                                    <td>{{ ann.details|slice(0, 120)|raw }}</td>
+                                    <td>
+                                        <button class="btnEditAnnonce btn btn-primary btn-sm" data-toggle="modal" data-target="#modifierAnnonce"
+                                                data-id="{{ ann.id }}"
+                                                data-adresse="{{ ann.adresse }}"
+                                                data-geoLat="{{ ann.geoLat }}"
+                                                data-geoLong="{{ ann.geoLong }}"
+                                                data-statu="{{ ann.statu }}"
+                                                data-cuisineEquipee="{{ ann.cuisineEquipee }}"
+                                                data-sallon="{{ ann.sallon }}"
+                                                data-suits="{{ ann.suits }}"
+                                                data-salleDeBain="{{ ann.salleDeBain }}"
+                                                data-ascenseur="{{ ann.ascenseur }}"
+                                                data-archive="{{ ann.archive }}"
+                                                data-prix="{{ ann.prix }}"
+                                                data-prefix="{{ ann.prefix }}"
+                                                data-equipment="{{ ann.equipment }}"
+                                                data-titre="{{ ann.titre }}"
+                                                data-details="{{ ann.details }}"
+                                                data-qouiqui="{{ ann.qouiqui }}"
+
+                                        ><i class="fa fa-edit"></i></button>
+                                        <a class="btn btn-danger btn-sm" href="{{ path('suppr_annonce',{'id': ann.id}) }}" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ?');"><i class="fa fa-trash-o"></i></a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    {#=========================================================== MODAL AJOUTER ANNONCE =================================================#}
+    <div id="Ajouter_annonce" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-lg">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Ajouter une Annonce</h4>
+                </div>
+                <div class="modal-body row">
+                    <form id="add_ann" name="adminbundle_immobiliair"
+                          action="{{ path('immobiliair_new',{'qq_id': attributes.quoiqui.id }) }}" method="POST"
+                          enctype="multipart/form-data">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="control-label" for="time">Titre de votre annonce</label>
+                                <input type="text" name="adminbundle_immobiliair[titre]" placeholder="" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="control-label" for="time">Réferance</label>
+                                <input type="text" name="adminbundle_immobiliair[prefix]" placeholder="Exemple: Ref-1235" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label" for="time">Cuisine equipee</label>
+                                <select id="time" name="adminbundle_immobiliair[cuisineEquipee]" class="form-control" required>
+                                    <option value="0">aucun</option>
+                                    <option value="1">1 Cuisine equipee</option>
+                                    <option value="2">2 Cuisine equipee</option>
+                                    <option value="3">plus que deux Cuisine equipee</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label" for="time">vendre ou a louer</label>
+                                <select id="time" name="adminbundle_immobiliair[statu]" class="form-control" required>
+                                    <option value="vendre">à vendre</option>
+                                    <option value="louer">à louer</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="control-label" for="time">Equipment</label>
+
+                                <select name="adminbundle_immobiliair[equipment][]" class="selectpicker form-control" multiple required>
+                                    <option>Camera de surveillance</option>
+                                    <option>Jardin</option>
+                                    <option>Piscine</option>
+                                    <option>Garage</option>
+                                    <option>climatisation</option>
+                                    <option>système de chauffage central</option>
+                                    <option> système d'alarme</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label" for="time">Sallon</label>
+                                <select id="time" name="adminbundle_immobiliair[sallon]" class="form-control" required>
+                                    <option value="0">Aucun</option>
+                                    <option value="1">1 Sallon</option>
+                                    <option value="2">2 Sallon</option>
+                                    <option value="3">plus que deux Sallon</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label" for="time">Chambre</label>
+                                <select id="time" name="adminbundle_immobiliair[chambre]" class="form-control" required>
+                                    <option value="0">Aucun</option>
+                                    <option value="1">Une Chambre</option>
+                                    <option value="2">2 Chambres</option>
+                                    <option value="3">plus que deux Chambres</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label" for="time">Suits</label>
+                                <select id="time" name="adminbundle_immobiliair[suits]" class="form-control" required>
+                                    <option value="0">Aucun</option>
+                                    <option value="1">1 Suits</option>
+                                    <option value="2">2 Suits</option>
+                                    <option value="3">plus que deux Suits</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label" for="time">Salle de bain</label>
+                                <select id="time" name="adminbundle_immobiliair[salleDeBain]" class="form-control" required>
+                                    <option value="0">Aucun</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">plus que deux Salle de bain</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label" for="time">Ascenseur</label>
+                                <select id="time" name="adminbundle_immobiliair[ascenseur]" class="form-control" required>
+                                    <option value="0">Aucun</option>
+                                    <option value="1">1 Ascenseur</option>
+                                    <option value="2">2 Ascenseurs</option>
+                                    <option value="3">plus que deux Ascenseurs</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label" for="time">prix</label>
+                                <input type="text" name="adminbundle_immobiliair[prix]" placeholder="9999.9" class="form-control" required>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="control-label" for="time">Details</label>
+                                <textarea name="adminbundle_immobiliair[details]" class="edit" cols="30" rows="10" required>Décrire votre propriété </textarea>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="control-label" for="time">envoi des image</label>
+                                <input type="file" name="image[]" multiple required>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Annuler</button>
+                    <button type="submit" class="btn btn-primary " data-target="modifier" data-selector="add_ann">Enregistrer</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+{% endif %}
+
+
+{#======================================== MODAL MODIFIER ANNANCE =======================================#}
+{% if attributes.connected %}
+    <div id="modifierAnnonce" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-lg">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Gérer l'Annonce</h4>
+                </div>
+                <div class="modal-body row">
+                    <form id="modif_ann" name="adminbundle_immobiliair" action="{{ path('modifer_annonce',{'id': '0000' }) }}" method="POST" enctype="multipart/form-data">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="control-label" for="time">Titre de votre annonce</label>
+                                <input type="text" value="" name="adminbundle_immobiliair[titre]" placeholder="" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label" for="time">Cuisine equipee</label>
+                                <select id="time" value="" name="adminbundle_immobiliair[cuisineEquipee]" class="form-control" required>
+                                    <option value="0">aucun</option>
+                                    <option value="1">1 Cuisine equipee</option>
+                                    <option value="2">2 Cuisine equipee</option>
+                                    <option value="3">plus que deux Cuisine equipee</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label" for="time">vendre ou a louer</label>
+                                <select id="time" name="adminbundle_immobiliair[statu]" class="form-control" required>
+                                    <option value="vendre">à vendre</option>
+                                    <option value="louer">à louer</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label" for="time">Sallon</label>
+                                <select id="time" name="adminbundle_immobiliair[sallon]" class="form-control" required>
+                                    <option value="0">aucun</option>
+                                    <option value="1">1 Sallon</option>
+                                    <option value="2">2 Sallon</option>
+                                    <option value="3">plus que deux Sallon</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label" for="time">Suits</label>
+                                <select id="time" name="adminbundle_immobiliair[suits]" class="form-control" required>
+                                    <option value="0">aucun</option>
+                                    <option value="1">1 Suits</option>
+                                    <option value="2">2 Suits</option>
+                                    <option value="3">plus que deux Suits</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label" for="time">Salle de bain</label>
+                                <select id="time" name="adminbundle_immobiliair[salleDeBain]" class="form-control" required>
+                                    <option value="0">aucun</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">plus que deux Salle de bain</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label" for="time">Ascenseur</label>
+                                <select id="time" name="adminbundle_immobiliair[ascenseur]" class="form-control" required>
+                                    <option value="0">aucun</option>
+                                    <option value="1">1 Ascenseur</option>
+                                    <option value="2">2 Ascenseur</option>
+                                    <option value="3">plus que deux Ascenseur</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label" for="time">Equipment</label>
+
+
+                                <select name="adminbundle_immobiliair[equipment][]" class="selectpicker form-control" multiple required>
+                                    <option value="Camera de surveillance">Camera de surveillance</option>
+                                    <option value="Jardin">Jardin</option>
+                                    <option value="Piscine">Piscine</option>
+                                    <option value="Garage">Garage</option>
+                                    <option value="climatisation">climatisation</option>
+                                    <option value="système de chauffage central">système de chauffage central</option>
+                                    <option value="système d'alarme">système d'alarme</option>
+                                </select>
+
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label" for="time">prix</label>
+                                <input type="text" name="adminbundle_immobiliair[prix]" value="" placeholder="9999.9" class="form-control" required>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="control-label" for="time">Details</label>
+                                <textarea name="adminbundle_immobiliair[details]" class="edit" cols="30" rows="10" id="editAnnonceDetails" required></textarea>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="control-label" for="time">envoi des image</label>
+                                <input type="file" name="image[]" multiple>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="modal-footer">
+                    {#<button type="button" class="btn btn-danger pull-left delet-annonce" data-dismiss="modal" data-link="{{ path('suppr_annonce',{'id': attributes.module.id}) }}">Effacer l'annonce !</button>#}
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Fermer</button>
+                    <button type="submit" class="btn btn-primary " data-target="modifier" data-selector="modif_ann">Enregistrer</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+{% endif %}
+
+
+
+{#=================================== MODAL DETAIL ANNONCE ==================================#}
+
+{% for module in attributes.module|reverse %}
+    <!-- Modal{{ loop.index }} -->
+    <div id="annonce{{ module.id }}" class="modal fade " role="dialog">
+        <div class="modal-dialog modal-md">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">{{ module.titre|upper }}</h4>
+
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid">
+
+                        {% set img = DirParcour( attributes.quoiqui.user.id,attributes.quoiqui.id,module.id) %}
+                        <div class="col-md-6 annonce-bottom">
+
+
+                            <div id="annonce-item-{{ module.id }}" class="carousel slide" data-ride="carousel">
+
+                                <!-- Wrapper for slides -->
+                                <div class="carousel-inner" role="listbox">
+
+
+                                    {% set imgNb = img|length %}
+
+                                    {% for image in img %}
+                                        <div class=" item {% if loop.index == 1 %}active{% endif %}">
+                                            <a class="lightbox-img" data-toggle="modal" data-target="#lightbox-img">
+                                                <img width="100%" src="{{ asset('uploads/image/') }}/{{ attributes.quoiqui.user.id }}/{{ attributes.quoiqui.id }}/annonce/annonce{{ module.id }}/{{ image }}" alt="...">
+                                            </a>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+
+
+                                {% if img is empty %}
+                                    <div class=" item active">
+                                        <img width="100%" src="{{ asset('tpl/fiche/images/my-room.jpg') }}">
+                                    </div>
+                                {% endif %}
+
+
+                                {% if imgNb > 1 %}
+                                    <!-- Controls -->
+                                    <a class="left carousel-control" role="button"
+                                       data-slide="prev" data-id-carousel="#annonce-item-{{ module.id }}">
+                                        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                                        <span class="sr-only">Previous</span>
+                                    </a>
+                                    <a class="right carousel-control" role="button"
+                                       data-slide="next" data-id-carousel="#annonce-item-{{ module.id }}">
+                                        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                                        <span class="sr-only">Suivant</span>
+                                    </a>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="border">
+                                <h3 class="theme_color " style="padding-bottom: 15px;">{{ module.titre|upper }} - À {{ module.statu|upper }} </h3>
+                                <h5 class="pull-right padd20 annoncePrice">{{ module.prix }} DT</h5>
+
+                                <h5 class="pull-left padd20 annonceRef" style="padding-bottom: 15px;">Réferance: {{ module.prefix }}</h5>
+                                <section class="col-md-12 nopadd" style="padding-bottom: 15px;">
+                                    <p class="description theme_color" style="font-size: 23px ;clear: both">Spécification:</p>
+                                    <div class="clear-fix"></div>
+                                    <ul class="list-inline mrg-0 btm-mrg-10 clr-535353">
+                                        <li>{{ module.sallon }} sallon |</li>
+                                        <li>champbre : 3</li>
+                                        <li>{{ module.salleDeBain }} salle De Bain |</li>
+                                        <li>{{ module.ascenseur }} ascenseur |</li>
+                                        {% set equipemt = jsonDecod(module.equipment) %}
+                                        {% for e in equipemt %}
+                                            <li>{{ e }} |</li>
+                                        {% endfor %}
+                                    </ul>
+                                </section>
+
+                                <section class="col-md-12 nopadd" style="padding-bottom: 15px;">
+                                    <div class="description ">
+                                        <p style="font-size: 23px" class="theme_color">Description :</p>
+                                        <raw class="text_detail">
+                                            {{ module.details|raw }}
+                                        </raw>
+
+                                    </div>
+
+                                </section>
+                                <div class="col-md-12 nopadd tag">
+                                    <i class="fa fa-tags" aria-hidden="true"></i>
+                                    {% set equipemt = jsonDecod(module.equipment) %}
+                                    {% for e in equipemt %}
+                                        {{ e }},
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            {#{% if attributes.connected %}#}
+                            {#<button type="button" class="btn btn-primary mag10 pull-right" data-toggle="modal" data-target="#modifier_annonce{{ loop.index }}">Gérer</button>#}
+                            {#{% endif %}#}
+                        </div>
+
+                    </div>
+                </div>
+
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-demande shake-little shake-constant shake-constant--hover" data-ref="{{ module.prefix }}" data-toggle="modal" data-target="#Demandervisite">Demander une Visite</button>
+                    <button type="button" class="btn  btn-rappel shake-little shake-constant shake-constant--hover" data-toggle="modal" data-target="#Rappeler">Être Rappelé</button>
+                    <button type="button" class="btn btn-default " data-dismiss="modal">Fermer</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    </div>
+
+{% endfor %}
+
+
+<!--etre Rappeler-->
+<div id="Rappeler" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Être rappelé</h4>
+            </div>
+            <div class="modal-body">
+                <div class="well">Vous avez une question ou un commentaire ?
+                    <br>Remplissez les informations suivantes et nous vous appeler dans les plus brefs délais.
+                </div>
+
+                <form id="rapeler" class="form-horizontal" method="post" action="{{ path('rapeler',{'qq_id':attributes.quoiqui.id}) }}" role="form">
+                    <div class="form-group">
+                        <label for="email" class="col-sm-2 control-label">Téléphone</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control bfh-phone" name="rapele[phone]" placeholder="Numéro de Téléphone" required data-format="+216 (dd) ddd-ddd">
+
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="name" class="col-sm-2 control-label">Nom</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="name" name="rapele[nom]" placeholder="Nom" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="name" class="col-sm-2 control-label">Prénom</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="name" name="rapele[prenom]" placeholder="Prénom" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="name" class="col-sm-2 control-label">Email</label>
+                        <div class="col-sm-9">
+                            <input type="email" id="mail" name="rapele[mail]" class="form-control" placeholder="votre Mail" rows="3" required/>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Fermer</button>
+                <button type="submit" class="btn btn-primary " data-target="modifier" data-selector="rapeler">Envoyer</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!--end etre Rappeler-->
+
+<!--Demander une Visite-->
+<div id="Demandervisite" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Demande une visite !</h4>
+            </div>
+            <div class="modal-body">
+                <div class="well">
+                    Remplissez les informations suivantes et nous vous appeler dans les plus brefs délais.
+                </div>
+
+                <form id="visite" action="{{ path('visite',{'qq_id': attributes.quoiqui.id }) }}?ref=coderef" class="form-horizontal" method="post" role="form">
+                    <input value="Vous Demanderai une Visite!" name="visite[title]" hidden>
+                    <div class="form-group">
+                        <label for="email" class="col-sm-2 control-label">
+
+                            téléphone</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control bfh-phone" name="visite[phone]" placeholder="Numéro de Téléphone" required data-format="+216 (dd) ddd-ddd">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="name" class="col-sm-2 control-label">Nom</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="name" name="visite[nom]" placeholder="Nom" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="name" class="col-sm-2 control-label">Prenom</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="name" name="visite[prenom]" placeholder="Prénom" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="name" class="col-sm-2 control-label">Adresse</label>
+                        <div class="col-sm-9">
+                            <input id="message" type="mail" name="visite[mail]" class="form-control" placeholder="votre Mail" rows="3" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="name" class="col-sm-2 control-label">Date</label>
+                        <div class="col-sm-9">
+                            <div class="bfh-datepicker" data-name="visite[date]" data-close="false" data-required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="name" class="col-sm-2 control-label">Heure</label>
+                        <div class="col-sm-9">
+                            <div class="bfh-timepicker" data-name="visite[time]" data-close="false" data-required></div>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Fermer</button>
+                <button type="submit" class="btn btn-primary " data-target="modifier" data-selector="visite">Envoyer</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!--end Demander une Visite-->

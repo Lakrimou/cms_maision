@@ -1,0 +1,29 @@
+qouiqui_index:
+    path:     /
+    defaults: { _controller: "AdminBundle:Qouiqui:index" }
+    methods:  GET
+
+qouiqui_show:
+    path:     /{id}/show
+    defaults: { _controller: "AdminBundle:Qouiqui:show" }
+    methods:  GET
+
+qouiqui_new:
+    path:     /new
+    defaults: { _controller: "AdminBundle:Qouiqui:new" }
+    methods:  [GET, POST]
+
+qouiqui_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "AdminBundle:Default:edit" }
+    methods:  [GET, POST]
+
+qouiqui_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "AdminBundle:Qouiqui:delete" }
+    methods:  DELETE
+
+qouiqui_sup:
+    path:     /{id}/sup
+    defaults: { _controller: "AdminBundle:Qouiqui:sup" }
+    methods:  [GET, POST]

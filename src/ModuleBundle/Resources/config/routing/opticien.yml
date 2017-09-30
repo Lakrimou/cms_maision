@@ -1,0 +1,24 @@
+Opticien_annonce_add:
+    path:     /annonce/add
+    defaults: { _controller: "ModuleBundle:Opticien:addAnnonces" }
+Opticien_annonce_show:
+    path:     /annonce/show/{id}/{idq}
+    defaults: { _controller: "ModuleBundle:Opticien:showAnnonces" }
+Opticien_annonce_remove:
+    path:     /annonce/delete/{id}
+    defaults: { _controller: "ModuleBundle:Opticien:deleteAnnonces" }
+Opticien_annonce_edit:
+    path:     /annonce/edit/{id}
+    defaults: { _controller: "ModuleBundle:Opticien:editAnnonces" }
+Opticien_annonce_update:
+    path:     /annonce/update
+    defaults: { _controller: "ModuleBundle:Opticien:updateAnnonces" }
+Opticien_annonce_reserver:
+    path:     /annonce/reserver
+    defaults: { _controller: "ModuleBundle:Opticien:reserverAnnonces" }
+Opticien_annonce_page:
+    path:     /annonce/{page}/{id}/{categorie}
+    defaults: { _controller: "ModuleBundle:Opticien:ficheAnnoncesPages" }
+Opticien_annonce_page_delete:
+    path:     /annonce/delete/{page}/{id}/{categorie}
+    defaults: { _controller: "ModuleBundle:Opticien:ficheAnnoncesPagesDelete" }

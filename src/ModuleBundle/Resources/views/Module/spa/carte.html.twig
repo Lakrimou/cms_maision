@@ -1,0 +1,843 @@
+{% set carte = [] %}
+
+{% for mod in module %}
+    {% if mod.section== 'carte' %}
+        {% set carte = carte|merge({(loop.index0):mod}) %}
+    {% endif %}
+{% endfor %}
+<style>
+
+    .item-adv {
+        display: block;
+        position: relative;
+        width: 100%;
+        height: 200px;
+        overflow: hidden;
+        color: #fff !important;
+    }
+
+    .item-adv:before, .item-adv:after {
+        content: "";
+        -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=85)";
+        -moz-opacity: .85;
+        -khtml-opacity: .85;
+        opacity: .85;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 10;
+        width: 101%;
+        height: 101%;
+        background: #6b3593;
+        background: -moz-linear-gradient(-45deg, #6b3593 0, #cc3197 100%);
+        background: -webkit-linear-gradient(-45deg, #6b3593 0, #cc3197 100%);
+        background: linear-gradient(135deg, #6b3593 0, #cc3197 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#6b3593', endColorstr='#cc3197', GradientType=1);
+        transition: all .4s ease;
+        -moz-transition: all .4s ease;
+        -o-transition: all .4s ease;
+        -ms-transition: all .4s ease;
+        -webkit-transition: all .4s ease;
+    }
+
+    .item-adv .thumb {
+        position: absolute;
+        top: 0;
+        left: 0;
+        left: 50%;
+        -webkit-transform: translateX(-50%);
+        -o-transform: translateX(-50%);
+        transform: translateX(-50%);
+        max-width: 10000px;
+        min-width: 100%;
+    }
+
+    img, .res-img {
+        max-width: 100%;
+        height: auto;
+    }
+
+    .item-adv .content {
+        position: absolute;
+        top: 52px;
+        left: -8px;
+        z-index: 20;
+        padding: 0 15px;
+        width: 100%;
+        text-align: center;
+    }
+
+    .item-adv:after {
+        left: -101%;
+    }
+
+    .item-adv.rose:before, .item-adv.rose:after {
+        background: #fd3e4f;
+        background: -moz-linear-gradient(-45deg, #fd3e4f 0, #fd3f9c 100%);
+        background: -webkit-linear-gradient(-45deg, #fd3e4f 0, #fd3f9c 100%);
+        background: linear-gradient(135deg, #fd3e4f 0, #fd3f9c 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fd3e4f', endColorstr='#fd3f9c', GradientType=1);
+    }
+
+    .item-adv.blue:before, .item-adv.blue:after {
+        background: #04c7ff;
+        background: -moz-linear-gradient(-45deg, #04c7ff 0, #0072bb 100%);
+        background: -webkit-linear-gradient(-45deg, #04c7ff 0, #0072bb 100%);
+        background: linear-gradient(135deg, #04c7ff 0, #0072bb 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#04c7ff', endColorstr='#0072bb', GradientType=1);
+    }
+
+    .item-adv.orange:before, .item-adv.orange:after {
+        background: #ffb00b;
+        background: -moz-linear-gradient(-45deg, #ffb00b 0, #d8970d 100%);
+        background: -webkit-linear-gradient(-45deg, #ffb00b 0, #d8970d 100%);
+        background: linear-gradient(135deg, #ffb00b 0, #d8970d 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffb00b', endColorstr='#d8970d', GradientType=1);
+    }
+
+    .item-adv.orange2:before, .item-adv.orange2:after {
+        background: #5a4415;
+        background: -moz-linear-gradient(-45deg, #5a4415 0, #5a4415 100%);
+        background: -webkit-linear-gradient(-45deg, #5a4415 0, #5a4415 100%);
+        background: linear-gradient(135deg, #5a4415 0, #5a4415 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#5a4415', endColorstr='#5a4415', GradientType=1);
+    }
+
+    .item-adv.green:before, .item-adv.green:after {
+        background: #95d32a;
+        background: -moz-linear-gradient(-45deg, #95d32a 0, #79b411 100%);
+        background: -webkit-linear-gradient(-45deg, #95d32a 0, #79b411 100%);
+        background: linear-gradient(135deg, #95d32a 0, #79b411 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#95d32a', endColorstr='#79b411', GradientType=1);
+    }
+
+    .item-adv.red:before, .item-adv.red:after {
+        background: #f57635;
+        background: -moz-linear-gradient(-45deg, #f57635 0, #e95c13 100%);
+        background: -webkit-linear-gradient(-45deg, #f57635 0, #e95c13 100%);
+        background: linear-gradient(135deg, #f57635 0, #e95c13 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f57635', endColorstr='#e95c13', GradientType=1);
+    }
+
+    .item-adv.purple:before, .item-adv.purple:after {
+        background: #eb42ff;
+        background: -moz-linear-gradient(-45deg, #eb42ff 0, #fc7ddb 100%);
+        background: -webkit-linear-gradient(-45deg, #eb42ff 0, #fc7ddb 100%);
+        background: linear-gradient(135deg, #eb42ff 0, #fc7ddb 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#eb42ff', endColorstr='#fc7ddb', GradientType=1);
+    }
+
+
+</style>
+{% if  connected %}
+
+    <div class="pull-right margin-bott " style="top: 7px;
+        right: 3px;">
+        {% if spaCarte(carte) is not empty %}
+
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#carte_list"
+            >modifier
+            </button>
+        {% else %}
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#carte_list"
+            >Ajouter votre carte
+            </button>
+        {% endif %}
+    </div>
+
+{% endif %}
+<style>
+    /*.colwidth{*/
+    /*width: 207px;*/
+    /*}*/
+
+    @media (max-width: 800px) {
+
+        .colwidth {
+            width: 100%;
+        }
+    }
+
+    @media (min-width: 803px) {
+
+        .colwidth {
+            width: 207px;
+        }
+    }
+
+    @media (min-width: 992px) {
+        .margin-ul {
+            margin-left: -37px;
+        }
+    }
+
+    @media (max-width: 800px) {
+        .sub-item-service-resp {
+            display: table;
+            font-size: 13px;
+            width: 100%;
+            margin-bottom: 15px;
+            font-family: serif;
+        }
+    }
+
+    #skltbsResponsive1 h2 {
+        pointer-events: none;
+    }
+</style>
+{% if spaCarte(carte) is not empty %}
+
+    <section class="page-section sec-carte-bg"
+             id="carte" {% if theme.Couleur.bg_sec_cart is defined %} style="background-color: {{ theme.Couleur.bg_sec_cart }} " {% endif %}>
+
+        <div class="container align-center">
+
+
+            <h3 class="section-title bottom-line font-alt">Nos Cartes</h3>
+            <div class="sep-lane-titre mt-50"><span><img src="{{ asset('module/spa/images/lines/img-line-0.png') }}"
+                                                         data-at2x="{{ asset('module/spa/images/lines/img-line-0@2x.png') }}"
+                                                         alt></span>
+            </div>
+
+
+            {#{% for flash_message in app.session.flashBag.get('notice') %}#}
+            {#<div class="alert alert-warning alert-dismissible" role="alert">#}
+            {#<button type="button" class="close" data-dismiss="alert" aria-label="Close">#}
+            {#<span aria-hidden="true">&times;</span></button>#}
+            {#<strong>{{ flash_message }}</strong> .#}
+            {#</div>#}
+
+            {#{% endfor %}#}
+
+            {% set color_carte=['orange','rose','green','blue','red','purple'] %}
+            <div class="carrousel_cart">
+
+                <style>
+
+                    .tabHcontent {
+                        overflow: hidden;
+                        width: 185px;
+                        height: 160px;
+                    }
+
+                    .tab-titre-color {
+                        position: relative;
+                        z-index: 4;
+                        color: #fff
+                    }
+
+                    .tab-overlay-color {
+                        width: 185px;
+                        height: 160px;
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        z-index: 3;
+                    }
+
+                    .image-overlay {
+                        height: 100%;
+                        width: initial;
+                        position: relative;
+                        top: 0;
+                        left: 0;
+                        z-index: 1;
+                    }
+
+
+                    @media(max-width: 425px ){
+                        .tabHcontent{
+                            width: 100%!important;
+                        }
+                        .carrousel_cart .nav-tabs>li{
+                            width: 100%!important;
+                        }
+                        .tab-titre-color {
+                            position: absolute;
+                            width: 100%!important;
+                            text-align: center;}
+                        .tab-overlay-color{
+                            width: 100%!important;
+                        }
+                        .image-overlay {
+                             height: initial;
+                             width: 100%;
+                        }
+                    }
+
+                    .orange {
+                        background-color: rgba(255, 165, 0, 0.43) !important;
+                    }
+
+                    .rose {
+                        background-color: rgba(230, 93, 117, 0.46) !important;
+                    }
+
+                    .green {
+                        background-color: rgba(51, 234, 51, 0.48);
+                    }
+
+                    .blue {
+                        background-color: rgba(14, 191, 247, 0.56);
+                    }
+
+                    .purple {
+                        background-color: rgba(248, 82, 140, 0.55);
+                    }
+
+                    .red {
+                        background-color: rgba(255, 54, 54, 0.54);
+                    }
+                </style>
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs" role="tablist">
+                    {% for a,c in spaCarte(carte) %}
+                        {% if a=='COIFFURE' %}
+                            <li role="presentation" class="{% if loop.index == 1 %} active {% endif %}">
+                                <a href="#cart-{{ loop.index }}" aria-controls="home" role="tab" data-toggle="tab"
+                                   style="padding: 0;">
+                                    <div class="tabHcontent">
+                                        <span class="tab-titre-color">{{ a }}</span>
+                                        <span class="tab-overlay-color rose"></span>
+                                        <img class="image-overlay"
+                                             src="{{ asset('module/spa/images/carte/coiffure.jpg') }}">
+                                    </div>
+                                </a>
+                            </li>
+                        {% elseif a=='EPILATION' %}
+                            <li role="presentation" class="{% if loop.index == 1 %} active {% endif %}"><a
+                                        href="#cart-{{ loop.index }}" aria-controls="home" role="tab" data-toggle="tab"
+                                        style="padding: 0;">
+
+                                    <div class="tabHcontent colwidth">
+                                        <span class="tab-titre-color">{{ a }}</span>
+                                        <span class="tab-overlay-color blue"></span>
+                                        <img class="image-overlay"
+                                             src="{{ asset('module/spa/images/carte/epilation.jpg') }}">
+                                    </div>
+
+                                </a>
+                            </li>
+                        {% elseif a=='SOIN MARIA GALLAND' %}
+                            <li role="presentation" class="{% if loop.index == 1 %} active {% endif %}"><a
+                                        href="#cart-{{ loop.index }}" aria-controls="home" role="tab" data-toggle="tab"
+                                        style="padding: 0;">
+                                    <div class="tabHcontent">
+                                        <span class="tab-titre-color">{{ a }}</span>
+                                        <span class="tab-overlay-color purple"></span>
+                                        <img class="image-overlay"
+                                             src="{{ asset('module/spa/images/carte/soin2.jpg') }}">
+                                    </div>
+
+                                </a>
+                            </li>
+
+                        {% elseif a=='MASSAGE & HAMAM' %}
+                            <li role="presentation" class="{% if loop.index == 1 %} active {% endif %}"><a
+                                        href="#cart-{{ loop.index }}" aria-controls="home" role="tab" data-toggle="tab"
+                                        style="padding: 0;">
+
+                                    <div class="tabHcontent">
+                                        <span class="tab-titre-color">{{ a }}</span>
+                                        <span class="tab-overlay-color green"></span>
+                                        <img class="image-overlay"
+                                             src="{{ asset('module/spa/images/carte/message.jpg') }}">
+                                    </div>
+
+                                </a>
+                            </li>
+                        {% elseif a=='ONGLERIE' %}
+                            <li role="presentation" class="{% if loop.index == 1 %} active {% endif %}"><a
+                                        href="#cart-{{ loop.index }}" aria-controls="home" role="tab" data-toggle="tab"
+                                        style="padding: 0;">
+
+                                    <div class="tabHcontent">
+                                        <span class="tab-titre-color">{{ a }}</span>
+                                        <span class="tab-overlay-color orange"></span>
+                                        <img class="image-overlay"
+                                             src="{{ asset('module/spa/images/carte/ongle.jpg') }}">
+                                    </div>
+
+                                </a>
+                            </li>
+                        {% else %}
+                            <li role="presentation" class="{% if loop.index == 1 %} active {% endif %}"><a
+                                        href="#cart-{{ loop.index }}" aria-controls="home" role="tab" data-toggle="tab"
+                                        style="padding: 0;">
+
+                                    <div class="tabHcontent">
+                                        <span class="tab-titre-color">{{ a }}</span>
+                                        <span class="tab-overlay-color {{ random(color_carte) }}"></span>
+                                        <img class="image-overlay" src="{{ asset('module/spa/images/carte/spa.jpg') }}">
+                                    </div>
+
+
+                                </a>
+                            </li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+
+                <!-- Tab panes -->
+                <div class="tab-content">
+                    {% for a,c in spaCarte(carte) %}
+                        <div role="tabpanel" class="tab-pane {% if loop.index == 1 %} active {% endif %}"
+                             id="cart-{{ loop.index }}">
+
+
+                            {% for cc in c %}
+
+                                <div class="panel-body">
+
+
+                                    <div class="sub-item-service sub-item-service-resp ">
+
+                                        <div class="c1">{{ cc.sdesignation }}</div>
+                                        <div class="c2"></div>
+                                        <div class="c3">{{ cc.prix }} dt</div>
+                                    </div>
+
+                                </div>
+
+                            {% endfor %}
+
+
+                        </div>
+                    {% endfor %}
+
+                </div>
+
+            </div>
+
+        </div>
+        <div class="particle elem1 anim-delay1 "></div>
+        <div class="particle elem2 anim-delay5"></div>
+        <div class="particle elem3 anim-delay3"></div>
+        <div class="particle elem4 anim-delay8"></div>
+        <div class="particle elem5 anim-delay9"></div>
+        <div class="particle elem6 anim-delay2"></div>
+        <div class="particle elem7 anim-delay4"></div>
+        <div class="particle elem8 anim-delay3"></div>
+        <div class="particle elem9 anim-delay10"></div>
+        <div class="particle elem8 anim-delay11"></div>
+        <div class="particle elem6 anim-delay12"></div>
+        <div class="particle elem1 anim-delay14"></div>
+        <div class="particle elem13 anim-delay16"></div>
+        <div class="particle elem17 anim-delay18"></div>
+        <div class="particle elem2 anim-delay6"></div>
+        <div class="particle elem16 anim-delay9"></div>
+        <div class="particle elem8 anim-delay3"></div>
+        <div class="particle elem9 anim-delay10"></div>
+        <div class="particle elem18 anim-delay11"></div>
+        <div class="particle elem11 anim-delay12"></div>
+        <div class="particle elem12 anim-delay14"></div>
+        <div class="particle elem13 anim-delay16"></div>
+        <div class="particle elem14 anim-delay18"></div>
+        <div class="particle elem15 anim-delay6"></div>
+        <div class="particle elem16 anim-delay9"></div>
+        <div class="particle elem17 anim-delay7"></div>
+        <div class="particle elem18 anim-delay6"></div>
+        <div class="particle elem19 anim-delay3"></div>
+    </section>
+{% endif %}
+<div id="carte_list" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="pull-right margin-bott">
+
+
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#edit_carte"
+                    >Ajouter nouveau service
+                    </button>
+
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#select_carte"
+                    >Afficher les prix
+                    </button>
+                </div>
+                {#<button type="button" class="close" data-dismiss="modal">&times;</button>#}
+                <h4 class="modal-title">Votre Carte</h4>
+            </div>
+
+            <div class="modal-body">
+                <table id="table_carte" class="display">
+                    <thead>
+                    <tr>
+
+                        <th>Sous Categories</th>
+                        <th>Prix</th>
+                        <th>modifier</th>
+                        <th>supprimer</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% if spaCarte(carte) %}
+                        {% for a,c in  spaCarte(carte) %}
+                            {% for cc in c %}
+                                <tr>
+
+                                    <td>{{ cc.sdesignation }}</td>
+
+                                    <td style="float:left;">{{ cc.prix }}</td>
+                                    <td><a href="#" data-carte="{{ cc.id }}" data-id="{{ qouiqui.id }}"
+                                           class="modifier_prix btn btn-success" data-toggle="modal"
+                                           data-target="#modifiercarte "><span class="glyphicon glyphicon-edit"></span></a>
+                                    </td>
+                                    <td><a href='{{ cc.id }}' class="suprim_prix btn btn-danger" data-id='{{ cc.id }}'
+                                           data-toggle="modal" data-toggle="modal"
+                                           data-target="#confirm-delete-carte"><span
+                                                    class="glyphicon glyphicon-trash"></span></a></td>
+
+                                </tr>
+                            {% endfor %}
+                        {% endfor %}
+
+                    {% endif %}
+                    </tbody>
+
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<div id="edit_carte" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Ajouter à votre carte</h4>
+            </div>
+
+            <div class="modal-body">
+                <form id="ajoutype" method="POST"
+                      action="{{ path('module_spa_ajoutcarte_type', {'idqq':qouiqui.id}) }}">
+                    <div class="form-group">
+                        <label for="email"> Désignation</label>
+                        <input type="email" class="form-control" name="cat1" id="email">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Sous désignation</label>
+                        <input type="text" class="form-control" name="cat2" id="pwd">
+                    </div>
+
+
+                </form>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+                <button type="button" id="btn-add-states1" class="btn btn-active-default" data-target="modifier"
+                        data-selector="ajoutype">Confirmer
+                </button>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+<style>
+
+</style>
+<div id="select_carte" class="modal  fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Afficher vos prix</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12 col-xs-12">
+                        <form id="prix" method="POST" action="{{ path('module_spa_ajout_carte') }}">
+                            <div class="form-group">
+                                <select class="selectpicker form-control" id="designation" name="designation"
+                                        placeholder="choisissez un service">
+                                    {#<option value="">Choisissez un désignation</option>#}
+                                    {% if (spaNouveauCarte(module) is not empty ) %}
+                                        {% for s in spaNouveauCarte(module) %}
+                                            <option value='{{ s.designation }}'>{{ s.designation }}</option>
+
+                                        {% endfor %}
+                                    {% endif %}
+                                    <option value="COIFFURE">Coiffure</option>
+                                    <option value="ONGLERIE">ONGLERIE</option>
+                                    <option value="EPILATION">EPILATION</option>
+                                    <option value="SOIN GUINOT">SOIN GUINOT</option>
+                                    <option value="MASSAGE & HAMAM">MASSAGE & HAMAM</option>
+                                    <option value="SOIN MARIA GALLAND">SOIN MARIA GALLAND</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <select class="selectpicker form-control" id="sousdesignation" name="sdesignation"
+                                        placeholder="choisissez un service">
+
+                                    {#<option value="">Choisissez un désignation</option>#}
+                                    {% if (spaNouveauCarte(module) ) is not empty %}
+                                        {% for s in spaNouveauCarte(module) %}
+                                            <option value='{{ s.sdesignation }}'
+                                                    class='{{ s.designation }}'>{{ s.sdesignation }}</option>
+                                        {% endfor %}
+                                    {% endif %}
+                                    <option value="Coup de peigne" class="COIFFURE">Coup de peigne</option>
+                                    <option value="Coup" class="COIFFURE">Coup</option>
+                                    <option value="cil a cil" class="COIFFURE">cil a cil</option>
+                                    <option value="Vernis permenent" class="ONGLERIE">Vernis permenent</option>
+                                    <option value="Soin de lux (manucure)" class="ONGLERIE">Soin de lux (manucure)
+                                    </option>
+
+
+                                    <option value="Coup de peigne" class="COIFFURE">Soin botox fiberceutic</option>
+                                    <option value="Coloration racine inoa" class="COIFFURE">Coloration racine inoa
+                                    </option>
+                                    <option value="Babylis brushing" class="COIFFURE">Babylis brushing</option>
+                                    <option value="Coloration racine inoa" class="COIFFURE">Coloration racine inoa
+                                    </option>
+                                    <option value="Coloration majirel" class="COIFFURE">Coloration majirel
+                                    </option>
+                                    <option value="Soin de lux ( pédicure )" class="ONGLERIE">Soin de lux ( pédicure )
+                                    </option>
+                                    <option value="Soin hydra dermi basic selon le type de peau" class="SOIN GUINOT">
+                                        Soin hydra dermi basic selon le type de peau
+
+                                    </option>
+                                    <option value="Soin anti-ride" class="SOIN GUINOT">Soin anti-ride</option>
+                                    <option value="Soin soleil		" class="SOIN GUINOT">Soin soleil</option>
+                                    <option value="Soin hydratation" class="SOIN GUINOT">Soin hydratation</option>
+                                    <option value="Soin eclaircisant" class="SOIN GUINOT">Soin eclaircisant</option>
+                                    <option value="Stimulation des muscules" class="SOIN GUINOT">Stimulation des
+                                        muscules
+                                    </option>
+                                    <option value="Epilation sourcils" class="EPILATION">Epilation sourcils</option>
+                                    <option value="Epilation menton" class="EPILATION">Epilation menton</option>
+                                    <option value="Aisselles" class="EPILATION">Aisselles</option>
+                                    <option value="Avant bras (sucre)" class="EPILATION">Avant bras (sucre)</option>
+                                    <option value="Jambe complète (cire)" class="EPILATION">Jambe complète (cire)
+                                    </option>
+                                    <option value="Maillot classique" class="EPILATION">Maillot classique
+                                    </option>
+                                    <option value="Corps complet (cire)" class="EPILATION">Corps complet (cire)
+                                    </option>
+                                    <option value="Epilation pour tour du visage" class="EPILATION">Epilation pour tour
+                                        du visage
+                                    </option>
+                                    <option value="Epilation ventre " class="EPILATION">Epilation ventre
+                                    </option>
+
+
+                                    <option value="Soin hydra dermi basic selon le type de peau" class="Soin">Soin hydra
+                                        dermi basic selon le type de peau
+                                    </option>
+                                    <option value="Soin anti-ride" class="Soin">Soin anti-ride</option>
+                                    <option value="Soin purifiant" class="Soin">Soin purifiant</option>
+                                    <option value="Soin soleil" class="Soin">Soin soleil</option>
+                                    <option value="Combiné machine" class="Soin">Combiné machine
+                                    </option>
+
+                                    <option value="Soin hydra dermi basic selon le type de peau" class="Soin">Soin hydra
+                                        dermi basic selon le type de peau
+                                    </option>
+                                    <option value="Soin anti-ride" class="Soin">Soin anti-ride</option>
+                                    <option value="Soin purifiant" class="Soin">Soin purifiant</option>
+                                    <option value="Soin soleil" class="Soin">Soin soleil</option>
+                                    <option value="Combiné machine" class="Soin">Combiné machine
+                                    </option>
+
+
+                                    <option value="Hammam+gommage+savon marocain+enveloppement" class="MASSAGE & HAMAM">
+                                        Hammam+gommage+savon marocain+enveloppement
+                                    </option>
+                                    <option value="Massage relaxant 1h" class="MASSAGE & HAMAM">SMassage relaxant 1h
+                                    </option>
+                                    <option value="Soin purifiant" class="MASSAGE & HAMAM">Soin purifiant</option>
+                                    <option value="Massage pierre chaude" class="MASSAGE & HAMAM">Massage pierre
+                                        chaude
+                                    </option>
+                                    <option value="Réflexologie palmaire" class="MASSAGE & HAMAM">Réflexologie palmaire
+                                    </option>
+
+
+                                    option value="Soin thalasso visage" class="SOIN MARIA GALLAND">Soin thalasso
+                                    visage</option>
+                                    <option value="Soin modelant des yeux" class="SOIN MARIA GALLAND">Soin modelant des
+                                        yeux
+                                    </option>
+                                    <option value="Soin tendresse" class="SOIN MARIA GALLAND">Soin tendresse</option>
+                                    <option value="Soin basic" class="SOIN MARIA GALLAND">Soin basic</option>
+                                    <option value="Soin spécifique" class="SOIN MARIA GALLAND">Soin spécifique
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <input type=text class="form-control " placeholder="tapez le prix" name="prix">
+                                <input type="hidden" name="qq_id" value="{{ qouiqui.id }}" required>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+                    <button type="submit" class="btn btn-primary " data-target="modifier" data-selector="prix">
+                        Ajouter
+                    </button>
+
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+{##############edit carte#}
+<div id="modifiercarte" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Modifier Votre carte</h4>
+            </div>
+            <div class="modal-body">
+                <form id="editt_carte" method="POST" action="{{ path('module_spa_modif_carte') }}">
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+
+                                <div id="modal-serv" class="panel-body"></div>
+                                <label for="email"> Désignation</label>
+                                <input id="sousdesigna" type="text" name="sdesignation" class="form-control"
+                                       style="width: 50%;"
+                                       value="">
+
+                            </div>
+                        </div>
+                        <input type="hidden" name="qq_id" value="{{ qouiqui.id }}" required>
+                        <input id="idcarte" type="hidden" name="carteID" value="" required>
+
+
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="email"> Prix</label>
+                                <input id="prix1" type="text" name="nouveauprix" class="form-control"
+                                       style="width: 50%;">
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                </form>
+
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+                <button type="submit" class="btn btn-primary " data-target="modifier" data-selector="editt_carte">
+                    Modifier
+                </button>
+            </div>
+        </div>
+
+    </div>
+</div>
+</div>
+
+
+<div class="modal fade" id="confirm-delete-carte" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-body">
+
+                {#<form id="supprim_service" method="POST" action="">#}
+                <input type="hidden" name="supprimer" value="" class="delate">
+                <input type="hidden" name="id_qq" value="{{ qouiqui.id }}" class="">
+
+                <p>Voulez vous le supprimer ?</p>
+                <p class="debug-url"></p>
+                {#</form>#}
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Annuler</button>
+
+
+                <button type="submit" data-qq="{{ qouiqui.id }}" class="btn btn-danger supprime_carte "
+                        data-target="modifier" data-selector="supprim_cartes">
+                    Supprimer
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+{#{% for a,c in spaCarte(carte) %}#}
+        {#<a href="#{{ a }}" class="btn btn-info item-adv rose" data-toggle="collapse"  style="width: 226px;"> <img src="http://demo.ninjateam.org/html/beauty-centre/assets/images/index-1/img-3.jpg" alt="" class="thumb">#}
+
+        {#<div class="content">#}
+        {#<h2 class="title">{{ a }}</h2>#}
+        {#<!-- /.title -->#}
+
+        {#</div></a>#}
+        {#{% for cc in c %}#}
+        {#<div id="{{ a }}" class="collapse">#}
+        {#{{ cc.sdesignation }}#}
+        {#</div>#}
+        {#{% endfor %}#}
+        {#{% endfor %}#}
+
+     {#<div class=" responsive-tabs btn_carte">#}
+
+
+        {#{% for a,c in spaCarte(carte) %}#}
+
+
+
+
+
+
+        {#<h2 style="font-size: 20px;">#}
+        {##}
+        {#{{ a }}#}
+        {#</h2>#}
+
+        {#<div class="">#}
+
+        {#<div class="col-md-11  de_tab_content" style="width:100% ">#}
+        {#{% for cc in c %}#}
+
+        {#<div class="sub-item-service">#}
+        {#<div class="c1">{{ cc.sdesignation }}</div>#}
+        {#<div class="c2"></div>#}
+        {#<div class="c3">{{ cc.prix }} dt</div>#}
+
+        {#</div>#}
+
+        {#{% endfor %}#}
+        {#</div>#}
+
+
+        {#</div>#}
+
+
+
+
+        {#{% endfor %}#}
+
+
+        {#</div>#}

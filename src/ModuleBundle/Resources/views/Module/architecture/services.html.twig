@@ -1,0 +1,567 @@
+<style>
+    @media only screen and (max-width: 800px) {
+
+        /* Force table to not be like tables anymore */
+        #no-more-tables table,
+        #no-more-tables thead,
+        #no-more-tables tbody,
+        #no-more-tables th,
+        #no-more-tables td,
+        #no-more-tables tr {
+            display: block;
+        }
+
+        /* Hide table headers (but not display: none;, for accessibility) */
+        #no-more-tables thead tr {
+            position: absolute;
+            top: -9999px;
+            left: -9999px;
+        }
+
+        #no-more-tables tr {
+            border: 1px solid #ccc;
+        }
+
+        #no-more-tables td {
+            /* Behave  like a "row" */
+            border: none;
+            border-bottom: 1px solid #eee;
+            position: relative;
+            padding-left: 50%;
+            white-space: normal;
+            text-align: left;
+        }
+
+        #no-more-tables td:before {
+            /* Now like a table header */
+            position: absolute;
+            /* Top/left values mimic padding */
+            top: 6px;
+            left: 6px;
+            width: 45%;
+            padding-right: 10px;
+            white-space: nowrap;
+            text-align: left;
+            font-weight: bold;
+        }
+
+        /*
+        Label the data
+        */
+        #no-more-tables td:before {
+            content: attr(data-title);
+        }
+    }
+</style>
+<section id="services" class="clearfix">
+    <div id="header_bottom_wrapper" class="header_bottom_wrapper">
+        <div class="container_service">
+            <div class="row_service">
+
+
+                <h3 class="main-title title block-title">Nos services</h3>
+
+                <div class="view view-services view-id-services view-display-id-block row view-dom-id-bc4b12f23225c75bad55d28b6814c46e clearfix">
+
+
+                    <div class="view-content">
+                        <div class="row">
+
+                            {% set data= jsonDecod(qouiqui.data) %}
+                            {% if data["Service"] is defined %}
+                                {% for key,service in data["Service"] %}
+                                    <div class="views-row col-xs-12 col-md-4 first odd">
+
+                                        <div class="views-field views-field-nothing">
+                                            <div class="services-item">
+                                                <div class="service-icon">
+                                                    <i class="fa {{ service["logo"] }}"></i>
+                                                </div>
+
+                                                <div class="service-content">
+
+
+                                                    <h6><a class="none_css details_service_modal" href="#" data-toggle="modal"
+                                                           data-target="#details_service" data-module='{"service":"{{ service["service"] }}","description":"{{ service["description"] }}"}' data-key='{{ key }}'>{{ service["service"] }}</a></h6>
+                                                    {{ service["description"] }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+
+                            {% else %}
+                                <div class="views-row col-xs-12 col-md-4 first odd">
+
+                                    <div class="views-field views-field-nothing">
+                                        <div class="services-item">
+                                            <div class="service-icon">
+                                                <i class="fa fa-home"></i>
+
+                                            </div>
+                                            <div class="service-content">
+                                                <h6><a href="#">Modélisation des données du bâtiment (MIB)</a></h6>
+                                                Oftentimes physical and functional essence of any construction project needs to be represented digitally, in a 3D model format.
+                                                In short,...
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="views-row col-xs-12 col-md-4 even">
+
+                                    <div class="views-field views-field-nothing">
+                                        <div class="services-item">
+                                            <div class="service-icon">
+                                                <i class="fa fa-cubes"></i>
+
+                                            </div>
+                                            <div class="service-content">
+                                                <h6><a href="#"> Conception-réalisation</a></h6>
+                                                Our customers love the pace/quality tempo that we show during each of the principal construction processes!
+                                                We’re comfortable with any kind...
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="views-row col-xs-12 col-md-4 last odd">
+
+                                    <div class="views-field views-field-nothing">
+                                        <div class="services-item">
+                                            <div class="service-icon">
+                                                <i class="fa fa-pencil-square-o"></i>
+
+                                            </div>
+                                            <div class="service-content">
+                                                <h6><a href="#">Services de construction</a></h6>
+                                                We take our time on initial planning before any construction begins, to balance all the financial and efficiency issues beforehand.
+                                                This...
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            {% endif %}
+
+                        </div>
+
+
+                    </div>
+
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+    {% if  app.user and app.user.id==qouiqui.user.id %}
+        <button type="button" class="theme-btn btn-style-one blue form_add_service" data-toggle="modal"
+                data-target="#add-service">Ajouter Service
+        </button>
+        <button type="button" class="theme-btn btn-style-one blue" data-toggle="modal"
+                data-target="#list-services">Modifier services
+        </button>
+
+    {% endif %}
+</section>
+<div class="modal fade" id="add-service" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Ajouter un nouveau service</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+
+                    <div class="col-md-10 col-md-offset-1">
+                        <form id="ajout_service" action="{{ path('service_new',{"id":qouiqui.id}) }}" method="post" enctype="multipart/form-data">
+
+                            <h2 class="text-center" id="title-form-ajout">Ajout service</h2>
+
+                            <div class="form-group row element-form">
+
+                                <div class="col-md-3">
+                                    <label class="control-label">Service</label>
+                                </div>
+
+                                <div class="col-sm-9">
+                                    <select name="service" class="form-control service_name_list">
+                                        <option value="Modélisation des données du bâtiment (MIB)"> Modélisation des données du bâtiment (MIB)</option>
+                                        <option value="Conception-réalisation"> Conception-réalisation</option>
+                                        <option value="Services de construction"> Services de construction</option>
+                                        <option value="Gestion de la construction"> Gestion de la construction</option>
+                                        <option value="Service de pré-construction"> Service de pré-construction</option>
+                                        <option value="Maîtrise d'œuvre<"> Maîtrise d'œuvre</option>
+                                        <option> Ajouter un service</option>
+
+                                    </select>
+                                    <input name="logo" id="logo_service" type="hidden" value="fa-home">
+
+                                </div>
+
+                            </div>
+                            <div class="form-group row element-form">
+
+                                <div class="col-md-3">
+                                    <label class="control-label">Nom</label>
+                                </div>
+                                <div class="col-sm-9">
+                                    <input type="text" name="service" class="form-control name_service" placeholder="Ecrir le nom du service" disabled>
+                                </div>
+
+                            </div>
+
+                            <div class="form-group row element-form">
+
+                                <div class="col-md-3">
+                                    <label class="control-label">Description</label>
+                                </div>
+
+                                <div class="col-sm-9">
+
+                                         <textarea class="form-control" cols="60" name="description"
+                                                   rows="10" required>Ajoutez des details par rapport à ce service..</textarea>
+                                </div>
+                            </div>
+                            <div class="form-group row element-form">
+
+                                <div class="col-md-3">
+                                    <label class="control-label">Image</label>
+                                </div>
+
+                                <div class="col-sm-9">
+                                    <input type="file" name="images" class="fileInputServiceTeam">
+                                </div>
+                            </div>
+
+
+                            <div class="row">
+
+                                <div class="col-md-8">
+                                    <table class="table table-bordered upload_image_service_team" hidden>
+                                        <thead>
+                                        <tr>
+                                            <th>Image</th>
+                                            <th>Action</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody class="uploaded_image_service_team">
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-8 ">
+                                </div>
+                                <div class="col-md-2 ">
+                                    <input class="btn btn-main btn-primary btn-lg" type="submit" value="Enregistrer">
+                                </div>
+                            </div>
+
+
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="details_service" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Details service</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div id="content" class="content content-main col-sm-12 ">
+                        <header id="content-header" class="content-header">
+
+
+                            <!-- Page title -->
+                            <h4 id="service" class="title page-title"></h4>
+
+
+                        </header>
+
+                        <div>
+
+                            <img id="logoService" src="">
+                            <p id="description">
+
+                            </p>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="list-services" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">liste des services</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <div id="no-more-tables">
+                    <table class="table-bordered table-striped table-condensed cf">
+                        <thead class="cf">
+                        <tr>
+                            <th>Service</th>
+                            <th>Option</th>
+
+
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% if data["Service"] is defined %}
+                            {% for key,service in data["Service"] %}
+                                <tr>
+                                    <td data-title="Service">{{ service["service"] }}</td>
+                                    <td data-title="Supprimer"><a href="{{ path('delete_service',{"serviceId": key,"quoiquiId":qouiqui.id }) }}">Supprimer</a>
+
+                                        <a href="#" class="btn btn-default btn-main form_update_service" data-toggle="modal" data-target="#update-service" data-service='{"service_update":"{{ service["service"] }}","description_update":"{{ service["description"] }}" }' data-id="{{ key }}"
+                                           data-link='{{ path('update_service',{"serviceId":key,"quoiquiId":qouiqui.id}) }}'> <span>Modifier</span></a>
+                                    </td>
+                                    </td>
+
+
+                                </tr>
+                            {% endfor %}
+                        {% endif %}
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="update-service" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Modifier service</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+
+                    <div class="col-md-10 col-md-offset-1">
+
+                        <form method="post" id="update_service_form" action="" enctype="multipart/form-data">
+
+                            <h2 class="text-center" id="title-form-ajout">Modifier service</h2>
+                            <div class="form-group row element-form">
+
+                                <div class="col-md-3">
+                                    <label class="control-label">Service</label>
+                                </div>
+
+                                <div class="col-sm-9">
+                                    <select name="service" class="form-control service_name_list">
+                                        <option value="Modélisation des données du bâtiment (MIB)"> Modélisation des données du bâtiment (MIB)</option>
+                                        <option value="Conception-réalisation"> Conception-réalisation</option>
+                                        <option value="Services de construction"> Services de construction</option>
+                                        <option value="Gestion de la construction"> Gestion de la construction</option>
+                                        <option value="Service de pré-construction"> Service de pré-construction</option>
+                                        <option value="Maîtrise d'œuvre<"> Maîtrise d'œuvre</option>
+                                        <option> Ajouter un service</option>
+
+                                    </select>
+                                    <input name="logo" class="logo_service" type="hidden" value="fa-home">
+                                </div>
+                            </div>
+                            <div class="form-group row element-form">
+
+                                <div class="col-md-3">
+                                    <label class="control-label">Nom</label>
+                                </div>
+                                <div class="col-sm-9">
+                                    <input type="text" name="service" class="form-control name_service" placeholder="Ecrir le nom du service" disabled>
+                                </div>
+
+                            </div>
+                            <div class="form-group row element-form">
+
+                                <div class="col-md-3">
+                                    <label class="control-label">Description</label>
+                                </div>
+
+                                <div class="col-sm-9">
+
+                                         <textarea id="description_update" class="form-control" cols="60" name="description"
+                                                   rows="10" required></textarea>
+                                </div>
+                            </div>
+
+
+                            <div class="form-group row">
+
+                                <div class="col-md-3">
+                                    <label class="control-label " for="image">Télécharger image</label>
+                                </div>
+                                <div class="col-sm-9">
+                                    <input type="file" name="images[]" class="fileInputServiceTeam">
+                                    <input name="isDeleted" class="deletetedImage" value="false" hidden>
+                                </div>
+                            </div>
+                            <div class="row">
+
+                                <div class="col-md-8">
+                                    <table class="table table-bordered upload_image_service_team">
+                                        <thead>
+                                        <tr>
+                                            <th>Image</th>
+                                            <th>Action</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody class="uploaded_image_service_team">
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+
+                            <div class="row">
+                                <div class="col-md-8 ">
+                                </div>
+                                <div class="col-md-2 ">
+                                    <input class="btn btn-main btn-primary btn-lg" type="submit" value="Enregistrer">
+                                </div>
+                            </div>
+
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    var services = [];
+    {% if data["Service"] is defined %}
+    {% for service in data["Service"] %}
+    services.push("{{ service["service"] }}");
+    {% endfor %}
+    {% endif %}
+    $(document).ready(function () {
+        $(".service_name_list  option").each(function () {
+            testServiceExist($(this));
+        });
+    });
+
+    $(".service_name_list").change(function () {
+        var index = $(this).prop('selectedIndex');
+        if ($('.name_service').is(':enabled')) {
+            $('.name_service').prop('disabled', true);
+        }
+        var inputValue = "fa-home";
+        switch (index) {
+            case 1:
+                inputValue = "fa-pencil"
+                break;
+            case 2:
+                inputValue = "fa-cubes"
+                break;
+            case 3:
+                inputValue = "fa-building-o"
+                break;
+            case 4:
+                inputValue = "fa-pencil-square-o"
+                break;
+            case 5:
+                inputValue = "fa-users"
+                break;
+            case 6:
+
+                $('.name_service').prop('disabled', false);
+
+
+                break;
+
+        }
+        $("#logo_service").val(inputValue);
+
+    });
+    $(document).on("click", ".details_service_modal", function () {
+        var module1 = $(this).data('module');
+
+        Object.keys(module1).forEach(function (k) {
+
+            $("#" + k).html(module1[k]);
+
+        });
+        var moduleId = $(this).data('key');
+
+
+        $("#logoService").attr('src', '{{ asset('/uploads/image/') }}{{ qouiqui.user.id }}/{{ qouiqui.id }}/Service/' + moduleId + '/service.jpg');
+    });
+    $(document).on("click", ".form_add_service", function () {
+        $(".fileInputServiceTeam").val('');
+
+        $(".upload_image_service_team").hide();
+    });
+    $(document).on("click", ".form_update_service", function () {
+        $(".upload_image_service_team").show();
+
+        var id = $(this).data('id');
+        var module = $(this).data('service');
+        var link = $(this).data('link');
+        $(".service_name_list  option").each(function () {
+            testServiceExist($(this));
+        });
+        $(".deletetedImage").value = "false";
+        $('#update_service_form').attr("action", link);
+        $('#description_update').html(module.description_update);
+        $('.service_name_list  option[value=\'' + module.service_update + '\']').attr("disabled", false);
+        $('.service_name_list  option[value=\'' + module.service_update + '\']').attr("selected", "selected");
+        $(".uploaded_image_service_team").html("<tr>" +
+            "<td>" +
+            "<img class='image_member_team_update' style='width: 100%' src='#' />" +
+            "</td>" +
+            "<td>" +
+            "<a class='btn btn-default' onclick='deleteNewServiceTeamImage(\"" + id + "\") '>Supprimer</a></td></tr>");
+
+        $('.image_member_team_update').attr('src', '{{ asset('/uploads/image/') }}{{ iduser }}/{{ qouiqui.id }}/Service/' + id + '/service.jpg');
+
+    });
+
+
+    function testServiceExist(service) {
+
+        $.each(services, function (key, value) {
+            if (value == service.val()) {
+
+                service.attr("disabled", "disabled");
+            }
+        });
+    }
+</script>

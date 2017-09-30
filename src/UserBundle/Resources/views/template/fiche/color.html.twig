@@ -1,0 +1,197 @@
+
+<style>
+    .o.an,.o.bg,.o.mt{
+        animation: clignoteBorder 1.3s linear infinite;
+    {% if connected %}
+        display: block;
+    {% else %}
+        display: none;
+    {% endif %}
+    }
+    /* titre*/
+
+    h2, .serviceTitle,.info-box li .icon, .sec-title h2 strong, .sec-title h2, .contact-section h2, .heading-letter-style {
+        color: {% if theme.color is defined %}{{ theme.color.titre }};
+    {% endif %}
+    }
+
+    svg{
+        fill: {% if theme.color is defined %}{{ theme.color.titre }};{% endif %}
+    }
+
+    /*sous titre*/
+
+    h4 {
+        color: {% if theme.color is defined %}{{ theme.color.Soustitre }};
+    {% endif %}
+    }
+
+    /* boutton*/
+
+    .modal-header, .theme-btn btn-style-one, button, .theme-btn {
+
+        background: {% if theme.color is defined %}{{ theme.color.bouton }};
+    {% endif %}
+    }
+    .modal-header {
+
+        background: {% if theme.color is defined %}{{ theme.color.bouton }};
+    {% endif %}
+    }
+
+    .text, p {
+
+        color: {% if theme.color is defined %}{{ theme.color.Text }};
+    {% endif %}
+    }
+
+    /* background */
+
+    .header-style-one .logo:before, .btn-style-one, .theme_bg_color, .modal-header {
+
+        background: {% if theme.color is defined %}{{ theme.color.bouton }};
+    {% endif %}
+
+    }
+
+    #section-apropos {
+    {% if motif and (theme.color.background.motif.about is not empty) %} background-image: {{ theme.color.background.motif.about| join('","') | raw }} !important;
+    {% endif %};
+
+    {% if theme.color.background.about is defined %} background: {{ theme.color.background.about }};
+    {% endif %};
+    }
+    #section-apropos .o.bg{
+    {% if theme.color.background.about is defined %} background: {{ theme.color.background.about }};
+        animation: none;
+    {% endif %};
+    }
+    #section-apropos .o.mt{
+    {% if motif and (theme.color.background.motif.about is not empty) %} background-image: {{ theme.color.background.motif.about| join('","') | raw }} !important;
+        animation: none;
+    {% endif %};
+        background-size: cover;
+    }
+    #section-services {
+    {% if theme.color.background.services is defined %} background: {{ theme.color.background.services }}{% endif %};
+
+    {% if motif and (theme.color.background.motif.services is not empty) %} background-image: {{ theme.color.background.motif.services| join('","') | raw }} !important;
+    {% endif %}
+
+    }
+
+    #section-services .o.bg{
+    {% if theme.color.background.services is defined %} background: {{ theme.color.background.services }};
+        animation: none;
+    {% endif %};
+    }
+    #section-services .o.mt{
+    {% if motif and (theme.color.background.motif.services is not empty) %} background-image: {{ theme.color.background.motif.services| join('","') | raw }} !important;
+        animation: none;
+    {% endif %};
+        background-size: cover;
+    }
+
+
+    #section-annonces {
+    {% if theme.color.background.annonces is defined %} background: {{ theme.color.background.annonces }};
+    {% endif %};
+
+    {% if motif and (theme.color.background.motif.annonces is not empty) %} background-image: {{ theme.color.background.motif.annonces| join('","') | raw }} !important;
+    {% endif %}
+    }
+
+    #section-annonces .o.bg{
+    {% if motif and theme.color.background.annonces is not empty %} background: {{ theme.color.background.annonces }};
+        animation: none;
+    {% endif %};
+    }
+    #section-annonces .o.mt{
+    {% if motif and (theme.color.background.motif.annonces is not empty) %} background-image: {{ theme.color.background.motif.annonces| join('","') | raw }} !important;
+        animation: none;
+    {% endif %};
+        background-size: cover;
+    }
+
+
+    #section-gallerie {
+    {% if theme.color.background.gallerie is defined %} background: {{ theme.color.background.gallerie }};
+    {% endif %}
+    {% if motif and (theme.color.background.motif.gallerie is not empty) %} background-image: {{ theme.color.background.motif.gallerie| join('","') | raw }} !important;
+    {% endif %}
+    }
+    #section-gallerie .o.bg{
+    {% if motif and theme.color.background.gallerie is not empty %} background: {{ theme.color.background.gallerie }};
+        animation: none;
+    {% endif %}
+    }
+    #section-gallerie .o.mt{
+    {% if motif and (theme.color.background.motif.gallerie is not empty) %} background-image: {{ theme.color.background.motif.gallerie| join('","') | raw }} !important;
+        animation: none;
+
+    {% endif %}
+        background-size: cover;
+    }
+
+    #section-contact {
+    {% if theme.color.background.contact is defined %} background: {{ theme.color.background.contact }};
+    {% endif %} {% if motif and (theme.color.background.motif.contact is not empty) %} background-image: {{ theme.color.background.motif.contact| join('","') | raw }} !important;
+    {% endif %}
+    }
+
+    #section-contact .o.bg{
+    {% if motif and theme.color.background.contact is not empty %} background: {{ theme.color.background.contact }};
+        animation: none;
+
+    {% endif %}
+    }
+    #section-contact .o.mt{
+    {% if motif and (theme.color.background.motif.contact is not empty) %} background-image: {{ theme.color.background.motif.contact| join('","') | raw }} !important;
+        animation: none;
+
+    {% endif %}
+        background-size: cover;
+    }
+    {% if theme.color.background.animation is defined %}
+
+        {% if theme.color.background.animation.about|default %}
+        #section-apropos .o.an{
+            animation: none;
+        }
+        {% endif %}
+
+        {% if theme.color.background.animation.services|default %}
+        #section-services .o.an{
+            animation: none;
+        }
+        {% endif %}
+
+        {% if theme.color.background.animation.annonces|default %}
+        #section-annonces .o.an{
+            animation: none;
+        }
+        {% endif %}
+
+        {% if theme.color.background.animation.gallerie|default %}
+        #section-gallerie .o.an{
+            animation: none;
+        }
+        {% endif %}
+
+        {% if theme.color.background.animation.contact|default %}
+        #section-contact .o.an{
+
+            animation: none;
+        }
+        {% endif %}
+
+    {% endif %}
+
+
+    .modal-content {
+        border-color: {% if theme.color is defined %}{{ theme.color.Soustitre }};
+    {% endif %};
+    }
+
+
+</style>

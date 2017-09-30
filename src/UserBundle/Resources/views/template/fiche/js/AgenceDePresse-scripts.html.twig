@@ -1,0 +1,197 @@
+{#css#}
+<style type="text/css">
+    #afficherMoins {
+        visibility: hidden;
+        display: none;
+    }
+
+    #afficherPlus {
+        visibility: visible;
+        display: block;
+    }
+    #agent-2 .img-info{
+        width: 100%;
+    }
+</style>
+{#javascript#}
+<script>
+    $(function () {
+        $('.load-less-annonce').hide();
+        $('.load-more-annonce').click(function () {
+            nb = 1;
+            id ={{ qouiqui.id }};
+            $.ajax({
+                url: '/module/agence_presse/annonce/' + nb + '/' + id,
+                method: 'post',
+                success: function (data) {
+                    console.log(data);
+//                    var articles = JSON.parse(data);
+//                    if (articles.length > 0) {
+//                        for (i = 0; i < articles.length; i++) {
+//
+//                        }
+//                    }else {
+//                        $('.load-more-annonce').hide();
+//                    }
+//                    $('.load-less-annonce').show();
+//                    var p = $(".item-scroll:last");
+//                    var offset = p.offset();
+//                    $('html body').animate({scrollTop: offset.top - 200}, 1500);
+                },
+                error: function (xhr, status, error) {
+                }
+                ,
+            });
+        });
+//        $('#add').modal('show');
+        $('#Categorie').change(function () {
+           if($(this).val()=="autre"){
+            $('#autreCategorie').html("<input type='text' name='autreCategorie' class='form-control' placeholder='Autre catégirie...' >");
+           }
+        });
+    });
+</script>
+{# SCRIPT modifier service#}
+<script>
+    $(document).ready(function () {
+
+        $('#listeServices').on('click', '.edit', function () {
+            link = $(this).attr('data-link-edit');
+            $.ajax({
+                type: "POST",
+                data: {
+                    quoiqui: '{{ qouiqui.id }}'
+                },
+                url: link,
+                success: function (data) {
+                    var vservice = JSON.parse(data);
+                    //console.log(vservice);
+                    document.getElementById("idservice").setAttribute("value", vservice.idservice);
+                    document.getElementById("service1").setAttribute("value", vservice.service);
+                    $('#desc1').val(vservice.text);
+                    $('#editService').modal('show');
+
+                }
+            });
+
+        });
+    });
+</script>
+{# SCRIPT Delete service#}
+<script>
+    $(document).ready(function () {
+        $('#listService').on('click', '.deleteAuto', function () {
+            $button_delete = $(this);
+            link = $(this).attr("data-link");
+            (new PNotify({
+                title: 'Confirmation requise',
+                text: 'Êtes-vous sûr?',
+                icon: 'glyphicon glyphicon-question-sign',
+                hide: false,
+                confirm: {
+                    confirm: true
+                },
+                buttons: {
+                    closer: false,
+                    sticker: false
+                },
+                history: {
+                    history: false
+                },
+                addclass: 'stack-modal',
+                stack: {'dir1': 'down', 'dir2': 'right', 'modal': true}
+            })).get().on('pnotify.confirm', function () {
+                url = $button_delete.attr('data-link');
+                id = $button_delete.attr('data-id');
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data: {idService: id, idquoiqui: {{ qouiqui.id }} },
+                    success: function (result) {
+                        new PNotify('Le service à été supprimer');
+                        $("[data-tr-voiture=" + id + "]").fadeOut();
+                    },
+                    error: function () {
+                        PNotify.desktop.permission();
+                        (new PNotify({
+                            title: 'Service',
+                            text: 'une erreur est survenue ',
+                            type: 'error',
+                            desktop: {
+                                desktop: true
+                            }
+                        }))
+                    }
+
+                });
+            }).on('pnotify.cancel', function () {
+            });
+        })
+    });
+</script>
+<script>
+    $(function () {
+            paginaton(6, "element", "#afficherPlus", "#afficherMoins");
+            function paginaton(parPage, element, afficherPlus, afficherMoins) {
+                page = Math.ceil($('[class*="' + element + '"]').length / parPage);
+                debut = 1;
+                fin = parPage;
+                debutMoins = 0;
+                finMoins = 0;
+                pageMoins = 0;
+                if ($('[class*="' + element + '"]').length > parPage) {
+                    page = page - 1;
+                    for (j = fin; j < $('[class*="' + element + '"]').length; j++) {
+                        $('.element' + (j + 1)).toggle();
+                    }
+                    debut = fin + 1;
+                    fin = fin + parPage;
+                    $(afficherPlus).css('visibility', 'visible').css('display', 'inline');
+                    $(afficherPlus).click(function () {
+                        pageMoins = pageMoins + 1;
+                        page = page - 1;
+                        for (k = debut; k <= fin; k++) {
+                            $("." + element + k).toggle();
+                        }
+                        if (pageMoins >= 1) {
+                            $(afficherMoins).css('visibility', 'visible').css('display', 'inline');
+                        }
+                        if (page === 0) {
+                            $(afficherPlus).css('visibility', 'hidden').css('display', 'none');
+                        }
+                        debut = fin + 1;
+                        fin = fin + parPage;
+                    });
+                    $(afficherMoins).click(function () {
+                        pageMoins = pageMoins - 1;
+                        debutMoins = debut - parPage;
+                        finMoins = fin - parPage;
+                        debut = debutMoins;
+                        page++;
+                        fin = finMoins;
+                        for (l = debutMoins; l <= finMoins; l++) {
+                            $("." + element + l).toggle();
+                        }
+                        if (pageMoins === 0) {
+                            $(afficherMoins).css('visibility', 'hidden').css('display', 'none');
+                        }
+                        if (page >= 1) {
+                            $(afficherPlus).css('visibility', 'visible').css('display', 'inline');
+                        }
+                    });
+                }
+            }
+
+            $('#liste').on('click', '.edit', function () {
+                link = $(this).attr('data-link-edit');
+                $('#edit').modal('show');
+            });
+            $('#add_article').click(function () {
+                $('#add').modal('show');
+            });
+            $('#btn_gest_article').click(function () {
+                $('#liste').modal('show');
+            });
+        }
+    );
+</script>

@@ -1,0 +1,947 @@
+{% block javascreepts %}
+    <script src="{{ asset('module/spa/js/jquery.chained.js') }}"></script>
+
+    {#script pour celst chained#}
+
+    <script>
+
+        (function ($, window, document, undefined) {
+
+
+            $.fn.chained = function (parent_selector, options) {
+
+                return this.each(function () {
+
+                    /* Save this to child because this changes when scope changes. */
+                    var child = this;
+                    var backup = $(child).clone();
+
+                    /* Handles maximum two parents now. */
+                    $(parent_selector).each(function () {
+                        $(this).bind("change", function () {
+                            updateChildren();
+                        });
+
+                        /* Force IE to see something selected on first page load, */
+                        /* unless something is already selected */
+                        if (!$("option:selected", this).length) {
+                            $("option", this).first().attr("selected", "selected");
+                        }
+
+                        /* Force updating the children. */
+                        updateChildren();
+                    });
+
+                    function updateChildren() {
+                        var trigger_change = true;
+                        var currently_selected_value = $("option:selected", child).val();
+
+                        $(child).html(backup.html());
+
+                        /* If multiple parents build classname like foo\bar. */
+                        var selected = "";
+                        $(parent_selector).each(function () {
+                            var selectedClass = $("option:selected", this).val();
+                            if (selectedClass) {
+                                if (selected.length > 0) {
+                                    if (window.Zepto) {
+                                        /* Zepto class regexp dies with classes like foo\bar. */
+                                        selected += "\\\\";
+                                    } else {
+                                        selected += "\\";
+                                    }
+                                }
+                                selected += selectedClass;
+                            }
+                        });
+
+                        /* Also check for first parent without subclassing. */
+                        /* TODO: This should be dynamic and check for each parent */
+                        /*       without subclassing. */
+                        var first;
+                        if ($.isArray(parent_selector)) {
+                            first = $(parent_selector[0]).first();
+                        } else {
+                            first = $(parent_selector).first();
+                        }
+                        var selected_first = $("option:selected", first).val();
+
+                        $("option", child).each(function () {
+                            /* Remove unneeded items but save the default value. */
+                            if ($(this).hasClass(selected) && $(this).val() === currently_selected_value) {
+                                $(this).prop("selected", true);
+                                trigger_change = false;
+                            } else if (!$(this).hasClass(selected) && !$(this).hasClass(selected_first) && $(this).val() !== "") {
+                                $(this).remove();
+                            }
+                        });
+
+                        /* If we have only the default value disable select. */
+                        if (1 === $("option", child).size() && $(child).val() === "") {
+                            $(child).prop("disabled", true);
+                        } else {
+                            $(child).prop("disabled", false);
+                        }
+                        if (trigger_change) {
+                            $(child).trigger("change");
+                        }
+                    }
+                });
+            };
+
+
+            $.fn.chainedTo = $.fn.chained;
+
+
+            $.fn.chained.defaults = {};
+
+        })(window.jQuery || window.Zepto, window, document);
+
+
+        $(document).ready(function () {
+            $("#souscategories").chained("#categories");
+        });
+        $(document).ready(function () {
+            $("#editsouscategories").chained("#editcategories");
+        });
+
+    </script>
+    {#script pour celst chained#}
+    {# select2#}
+    <script type="text/javascript">
+        $(".js-example-basic-multiple").select2({
+            width: '100%'
+        });
+    </script>
+    {# select2#}
+    <script>
+        $('.voir-plus').click(function () {
+
+
+            var idqq = $(this).attr('data-qq');
+            var idserv = $(this).attr('data-idevent');
+
+
+            var data = {
+                idqq: idqq,
+                idserv: idserv,
+
+            };
+
+            console.log(data);
+            $.ajax({
+                url: '{{ path('module_spa_get_json_offre') }}',
+                data: data,
+                type: "POST",
+                success: function (data) {
+
+                    var arr = [];
+                    json = JSON.stringify(eval('(' + data + ')')); //convert to json string
+                    arr = $.parseJSON(json);
+                    console.log(arr);
+                    $("#equipment").html(arr.categorie);
+
+                    $("#ambdetails").html(arr.description);
+                    $("#idImgambs").val(idserv);
+                    var id = $('#idImgambs').val();
+                    console.log(arr.souscategorie)
+                    console.log(id + "." + 'jpg');
+                    $('ul#myList').empty();
+                    $('#AmbsImg').attr('src', '{{ asset('uploads/image/') }}{{ iduser }}/{{ qouiqui.id }}/event/' + id + "." + "jpg");
+                    $.each(arr.souscategorie, function (index, value) {
+
+                        var content = '<li style="margin-bottom: -20px;" class="li_list"><span style="Font-Weight: Bold;font-size: 34px;margin-right: 5px;">' + "." + '</span>' + value + "</li>";
+                        $('ul#myList').append(content);
+                    });
+
+//                    var length = (arr.detail).length;
+//                    console.log(length);
+//                    if (length > 1053) {
+//                        var str2 = (arr.detail).slice(0, 1053);
+//
+//                        $('#detail').html((arr.detail).slice(0, 1053));
+//                        $('#link').html("En savoir plus");
+//                        $('#lire_suite').html((arr.detail).slice(1053, length));
+//
+//
+//                    }
+//                    else {
+//                        $('#detail').html(arr.detail);
+//                    }
+
+
+                }
+
+
+            });
+
+        });
+    </script>
+    <script>
+
+        $('.click-off').click(function () {
+            // escape here if the confirm is false;
+            if (!clickOffConfirmed) return false;
+            var btn = this;
+            setTimeout(function () {
+                $(btn).attr('disabled', 'disabled');
+            }, 1);
+            return true;
+        });
+
+        $(".addmissions").click(function () {
+            var styles = {
+                border: "1px solid #e3e3e3",
+            };
+            $('#otherServices').css(styles);
+            $('.errormsg').html("");
+            $('#otherServices').val('');
+            $('#otherServices').hide();
+            $('#serviceselect').css(styles);
+            $('#serviceselect').val('');
+            $("#addServices").prop('disabled', false);
+            $("#serviceselect option:disabled").remove();
+            $('#serviceselect').prepend('<option disabled selected>Sélectionner un service*</option>');
+
+
+        });
+    </script>
+    <script>
+        //        $('#listOffres').modal('show');
+
+
+        $('.edit-offre').click(function () {
+
+
+            var idqq = $(this).attr('data-id');
+            var idserv = $(this).attr('data-serv');
+
+
+            var data = {
+                idqq: idqq,
+                idserv: idserv,
+
+            };
+//            console.log(data);
+
+            $.ajax({
+                url: '{{ path('module_spa_get_json_offre') }}',
+                data: data,
+                type: "POST",
+                success: function (data) {
+
+                    var arr = [];
+                    json = JSON.stringify(eval('(' + data + ')')); //convert to json string
+                    arr = $.parseJSON(json);
+                    console.log(arr);
+
+                    $("#idEvent").val(arr.idOffre);
+
+                    $(".description-edit").val(arr.description);
+
+                    $("#editcategories [value='" + arr.categorie + "']").prop("selected", true);
+
+                    jQuery('#editsouscategories option').remove();
+                    var dg = new Array();
+                    jQuery('#sousCategoriesHidden option').each(function () {
+                        if (arr.categorie == jQuery(this).attr('data-cat')) {
+                            var dgOne = new Array();
+                            dgOne.push(this.value);
+                            dgOne.push(this.text);
+                            dg.push(dgOne);
+                        }
+                    });
+
+
+                    jQuery.each(dg, function (ke, item) {
+
+
+                        jQuery('#editsouscategories').append('<option value="' + item[0] + '" data-cat="' + arr.categorie + '">' + item[0] + '</option>');
+                    });
+
+                    jQuery.each(arr.souscategorie, function (ke, item) {
+                        $("#editsouscategories [value='" + item + "']").prop("selected", true);
+                    });
+
+                    jQuery('#editsouscategories').select2();
+
+
+                    jQuery('#editcategories').on('change', function (e) {
+                        var dg1 = new Array();
+                        jQuery('#sousCategoriesHidden option').each(function () {
+                            console.log(arr.categorie);
+                            if (arr.categorie == jQuery(this).attr('data-cat')) {
+                                var dgOne1 = new Array();
+                                dgOne1.push(this.value);
+                                dgOne1.push(this.text);
+                                dg1.push(dgOne1);
+                            }
+                        });
+
+                        jQuery.each(dg1, function (ke, item) {
+
+                            jQuery('#editsouscategories').append('<option value="' + item[0] + '" data-cat="' +  arr.categorie + '">' + item[0] + '</option>');
+                        });
+
+                        jQuery.each(arr.souscategorie, function (ke, item) {
+                            $("#editsouscategories [value='" + item + "']").prop("selected", true);
+                        });
+
+                        jQuery('#editsouscategories').select2();
+                    });
+
+                }
+
+
+            });
+
+        });
+
+    </script>
+    <script>
+        var typingTimer;
+        var doneTypingInterval = 1000;
+        typingTimer = setTimeout(function () {
+        var el_t = document.getElementById('textlength');
+        var length = el_t.getAttribute("maxlength");
+
+        el_t.onkeyup = function () {
+            console.log(this.value.length);
+
+            if( this.value.length > length ){
+                $("#count").html("les longuer de texte doit être entre 300 et 500 caractéres");
+                $("#addServices").prop('disabled',true);
+
+            }
+
+            else  if( this.value.length <= length ) {
+
+                $("#count").html("");
+                $("#addServices").prop('disabled',false);
+
+
+            }
+        };
+        }, doneTypingInterval);
+    </script>
+
+
+
+    <script>
+
+        $('.lire_plus').click(function () {
+
+
+            var idqq = $(this).attr('data-idqq');
+            var idserv = $(this).attr('data-idServ');
+
+
+            var data = {
+                idqq: idqq,
+                idserv: idserv,
+
+            };
+
+            console.log(data);
+            $.ajax({
+                url: '{{ path('module_spa_get_json_spa') }}',
+                data: data,
+                type: "POST",
+                success: function (data) {
+
+                    var arr = [];
+                    json = JSON.stringify(eval('(' + data + ')')); //convert to json string
+                    arr = $.parseJSON(json);
+                    console.log(arr);
+                    $("#servamb").html(arr.mission);
+
+                    $("#ambdetail").html(arr.detail);
+                    $("#idImgamb").val(idserv);
+                    var id = $('#idImgamb').val();
+
+                    console.log(id + "." + 'jpg');
+
+                    $('#AmbImg').attr('src', '{{ asset('uploads/image/') }}{{ iduser }}/{{ qouiqui.id }}/service/' + id + "." + "jpg");
+
+
+
+                }
+
+
+            });
+
+        });
+    </script>
+
+
+    <script>
+
+        $('.edit_huissier').click(function () {
+            var styles = {
+                border: "1px solid #e3e3e3",
+            };
+
+            $('#serviceselect-edit').css(styles);
+            $('#autreServices').css(styles);
+            $('#msg_error').html("");
+            $('#autreServices').val('');
+            $('#autreServices').hide();
+
+            var idqq = $(this).attr('data-id');
+            var idserv = $(this).attr('data-serv');
+
+
+            var data = {
+                idqq: idqq,
+                idserv: idserv,
+
+            };
+
+            console.log(data);
+            $.ajax({
+                url: '{{ path('module_spa_get_json_spa') }}',
+                data: data,
+                type: "POST",
+                success: function (data) {
+
+                    var arr = [];
+                    json = JSON.stringify(eval('(' + data + ')')); //convert to json string
+                    arr = $.parseJSON(json);
+                    console.log(arr);
+                    $("#idambu").val(idserv);
+                    $("#detail_ambu").val(arr.detail);
+                    $("#serviceselect-edit [value='" + arr.mission + "']").prop("selected", true);
+                    var sellected = $('#serviceselect-edit').val();
+
+
+                    $('#serviceselect-edit').change(function () {
+                        console.log(sellected);
+
+                        $("#updateserv").prop('disabled', false);
+                        var styles = {
+                            border: "1px solid #e3e3e3",
+                        };
+                        $('#serviceselect-edit').css(styles);
+                        $('#msg_error').html("");
+
+
+                        var item = $('#serviceselect-edit option:selected').val();
+
+
+                        $.each(ListFromBase, function (index, value) {
+                            if (item === value && value != sellected) {
+                                $('#msg_error').html(" ce service  existe  déjà");
+                                $('#serviceselect-edit').css('border', 'solid 2px red');
+                                $("#updateserv").prop('disabled', true);
+                            }
+
+
+                        });
+
+
+                    });
+                }
+            });
+
+        });
+    </script>
+
+    <script>
+
+        $('#serviceselect').on('change', function () {
+
+            if ($(this).val() == "autre") {
+
+                $("#otherServices").show();
+                console.log($(this).val());
+
+            }
+            else {
+                $("#otherServices").hide();
+            }
+        });
+
+
+    </script>
+
+
+
+    <script>
+
+        myList = [];
+
+        $("#serviceselect option ").each(function () {
+
+            myList.push($(this).val())
+
+        });
+
+        var typingTimer;
+        var doneTypingInterval = 1000;
+        typingTimer = setTimeout(function () {
+            $('#otherServices').keyup(function () {
+                var autre = $('#otherServices').val();
+                $.each(myList, function (index, value) {
+                    if (($('#otherServices').val()) === value.toLowerCase()) {
+                        $('.errormsg').html(" ce service  existe  déjà");
+                        $('#otherServices').css('border', 'solid 2px red');
+                        $("#addServices").attr('disabled', 'disabled');
+                    }
+                    else if ($('#otherServices').val() == '') {
+
+                        var styles = {
+                            border: "1px solid #e3e3e3",
+                        };
+                        $('#otherServices').css(styles);
+                        $('.errormsg').html("");
+                        $("#addServices").prop('disabled', false);
+                    }
+
+
+                });
+            });
+        }, doneTypingInterval);
+        $('form#addmission').submit(function (e) {
+
+
+            if ($('#otherServices').val()) {
+                var autre = $('#otherServices').val();
+                $('select').prepend('<option  value=  "' + autre + '" >' + $('#otherServices').val() + '</option>');
+
+                $("#serviceselect [value='" + autre + "']").attr("selected", "selected");
+                $("#otherServices").val('');
+                $("#otherServices").hide();
+            }
+
+            var item = $('#serviceselect option:selected').val();
+            if (item === 'autre') {
+                e.preventDefault();
+                alert('ajouter un  service ou bien choisir un autre de la liste');
+            }
+
+
+        });
+
+    </script>
+
+    <script>
+
+        $('#serviceselect-edit').on('change', function () {
+
+
+            if ($(this).val() == "autre") {
+
+                $("#autreServices").show();
+
+
+            }
+            else {
+                $("#autreServices").hide();
+            }
+        });
+    </script>
+
+    <script>
+
+        myList1 = [];
+
+        $("#serviceselect-edit option ").each(function () {
+
+            myList1.push($(this).val())
+
+        });
+
+//        var typingTimer;
+//        var doneTypingInterval = 1000;
+//        typingTimer = setTimeout(function () {
+//            $('#autreServices').keyup(function () {
+//
+//                var autre = $('#autreServices').val();
+//
+//                $.each(myList1, function (index, value) {
+//                    if (($('#autreServices').val()) === value.toLowerCase()) {
+//
+//                        $('#msg_error').html(" ce service  existe  déjà");
+//                        $('#autreServices').css('border', 'solid 2px red');
+//                        $("#updateserv").attr('disabled', 'disabled');
+//
+//
+//                    }
+//                    else if (($('#autreServices').val()) == '') {
+//                        var styles = {
+//                            border: "1px solid #e3e3e3",
+//
+//                        };
+//
+//                        $('#autreServices').css(styles);
+//                        $('#msg_error').html("");
+//                        $("#updateserv").prop('disabled', false);
+//                    }
+//
+//
+//                });
+//            });
+//        }, doneTypingInterval);
+//
+//        function validate() {
+//
+//            alert(' le service est déja existé')
+//
+//        }
+
+
+    </script>
+    <script>
+
+
+        $('form#Editmission').submit(function (e) {
+            if ($('#autreServices').val()) {
+                var autre = $('#autreServices').val();
+                $('select').prepend('<option  value=  "' + autre + '" >' + $('#autreServices').val() + '</option>');
+
+                $("#serviceselect-edit [value='" + autre + "']").attr("selected", "selected");
+                $("#autreServices").val('');
+                $("#autreServices").hide();
+            }
+
+
+            var item = $('#serviceselect-edit  option:selected').val();
+            if (item === 'autre') {
+                e.preventDefault();
+                alert('ajouter autre service ou bien choisir un autre d aprés la liste');
+            }
+            setTimeout(function () {
+                $(this).submit();
+            }, 4000);
+
+        });
+
+
+        $('.click-off').click(function () {
+            // escape here if the confirm is false;
+            if (!clickOffConfirmed) return false;
+            var btn = this;
+            setTimeout(function () {
+                $(btn).attr('disabled', 'disabled');
+            }, 1);
+            return true;
+        });
+
+
+    </script>
+
+
+    <script>
+        ListFromBase = [];
+        $("#service_enrolled option ").each(function () {
+            ListFromBase.push($(this).val())
+        });
+
+        $('#serviceselect').click(function () {
+            var styles = {
+                border: "1px solid #e3e3e3",
+            };
+            $('.selectOption').css(styles);
+            $('#idError').html("");
+            $("#addServices").prop('disabled', false);
+
+
+            var item = $('#serviceselect option:selected').val();
+            console.log("this" + item);
+
+
+            $.each(ListFromBase, function (index, value) {
+                if (item === value && item != 'autre') {
+
+                    $('#idError').html(" ce service  existe  déjà");
+                    $('.selectOption').css('border', 'solid 2px red');
+                    $("#addServices").attr('disabled', 'disabled');
+                }
+            });
+        });
+    </script>
+
+
+
+
+    <script>
+        ListFromBase = [];
+        $("#service_enrolled option ").each(function () {
+
+            ListFromBase.push($(this).val())
+
+        });
+
+        $('#serviceselect').click(function () {
+            var styles = {
+                border: "1px solid #e3e3e3",
+            };
+            $('.selectOption').css(styles);
+            $('#idError').html("");
+            $("#addServices").prop('disabled', false);
+
+            var item = $('#serviceselect option:selected').val();
+            console.log("this" + item);
+
+
+            $.each(ListFromBase, function (index, value) {
+                if (item === value && item != 'autre') {
+
+                    $('#idError').html(" ce service  existe  déjà");
+                    $('.selectOption').css('border', 'solid 2px red');
+                    $("#addServices").attr('disabled', 'disabled');
+                }
+
+
+            });
+
+
+
+        });
+    </script>
+{% endblock %}
+<style>
+
+    .feature_box .description h4 {
+        height: 43px;
+    }
+
+    #otherServices {
+        display: none;
+    }
+
+    #autreServices {
+        display: none;
+    }
+
+    input.error {
+        border: 2px solid red;
+    }
+
+    .image-content-offre {
+        width: 100%;
+        height: 200px;
+        background-size: cover;
+        background-position: center;
+
+    }
+    .G_titre {
+        font-weight: 500;
+        text-align: justify;
+        font-size: 35px;
+        line-height: 1.2;
+        text-align: center;
+    }
+    @media(max-width: 768px){
+        .G_titre {
+            font-weight: 500;
+            text-align: justify;
+            font-size: 30px;
+            line-height: 1.2;
+            text-align: center;
+        }
+    }
+    @media(max-width: 768px){
+        .top40{
+            margin-top: 40px;
+        }
+    }
+    .btn_bottom{
+        /*position: absolute;*/
+        bottom: 65px;
+        margin: 0 auto;
+        margin-left: 199px;
+    }
+    .pargraphe{
+
+        margin: 15px 5px 21px;
+        text-align: center;
+
+    }
+    @media (max-width: 992px) {
+
+        h3 {
+            font-size: 15px !important;
+        }
+    }
+    .spacontact {
+        background: #e96656;
+        font-size: 22px;
+        border: 1px solid #e96656;
+        padding: 10px;
+        border-radius: 1px;
+        color: #f5f5f5;
+        text-align: center;
+    }
+
+    .spacontact:hover {
+        background: #e96656;
+        /*font-size: 22px;*/
+        border: 1px solid #e96656;
+        padding: 10px;
+        border-radius: 1px;
+        color: #f5f5f5;
+        text-align: center;
+    }
+
+    @media (max-width: 425px) {
+        .spacontact {
+            background: #e96656;
+            /*font-size: 14px;*/
+            border: 1px solid #e96656;
+            padding: 10px;
+            border-radius: 1px;
+            color: #f5f5f5;
+            margin-bottom: 4px;
+            text-align: center;
+        }
+    }
+
+    .spacontact1 {
+        background: #5dc560;
+        font-size: 22px;
+        border: 1px solid #5dc560;
+        padding: 10px;
+        border-radius: 1px;
+        color: #f5f5f5;
+        text-align: center;
+    }
+
+    .spacontact1:hover {
+        background: #5dc560;
+        /*font-size: 22px;*/
+        border: 1px solid #5dc560;
+        padding: 10px;
+        border-radius: 1px;
+        color: #f5f5f5;
+        text-align: center;
+    }
+
+    @media (max-width: 425px) {
+        .spacontact1 {
+            background: #5dc560;
+            /*font-size: 14px;*/
+            border: 1px solid #5dc560;
+            padding: 10px;
+            border-radius: 1px;
+            color: #f5f5f5;
+            margin-bottom: 4px;
+            text-align: center;
+        }
+    }
+    @media (max-width: 380px) {
+        .spacontact {
+            background: #e96656;
+            font-size: 17px;
+            border: 1px solid #e96656;
+            padding: 10px;
+            border-radius: 1px;
+            color: #f5f5f5;
+            margin-bottom: 4px;
+            text-align: center;
+        }
+        .spacontact1 {
+            background: #5dc560;
+            font-size: 17px;
+            border: 1px solid #5dc560;
+            padding: 10px;
+            border-radius: 1px;
+            color: #f5f5f5;
+            margin-bottom: 4px;
+            text-align: center;
+        }
+    }
+    .top24{
+        margin-top: 24px;
+    }
+
+    @media(min-width: 992px)
+    {
+        .margintop34{
+            margin-top: 34px;
+        }
+    }
+
+    .li_list {
+        list-style: none;
+        margin-left: 0;
+        padding-left: 16px;
+        text-indent: -16px;
+    }
+
+    li_list:before {
+        content: "&#9679;";
+        font-size: 16px;
+        line-height: 16px;
+        padding-right: 5px;
+        vertical-align: text-bottom;
+    }
+    .modal-content > .close {
+        margin-top: -9px !important;
+        margin-right: -11px;
+        background: red;
+        border: solid 1px #de2525;
+        border-radius: 100%;
+        width: 26px;
+        height: 26px;
+        opacity: 1;
+        color: white;
+    }
+
+
+    @media (min-width: 992px) {
+        .row-eq-height {
+            display: flex;
+            align-items: center;
+        }
+    }
+    @media (max-width: 991px) {
+        .top16 {
+           margin-top: 27px;
+        }
+    }
+    @media(max-width: 768px){
+        .modal-content > .close {
+            margin-top: 0px !important;}
+    }
+    .proerty_content .favroute-bottom {
+        border-top: 1px solid #e5e5e5;
+    }
+
+    .image-content-cf-serv {
+        width: auto;
+        height: 200px;
+        background-size: cover;
+        background-position: center;
+    }
+
+    @media (max-width: 380px) {
+        .image-content-cf-serv {
+            width: auto;
+            height: 121px;
+            background-size: cover;
+            background-position: center;
+        }
+    }
+    @media (min-width: 500px) and (max-width: 786px) {
+        .image-content-cf-serv {
+            width: auto;
+            height: 100px;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .margin15 {
+            margin: -1px;
+        }}
+    @media (max-width: 768px)
+    {
+        .modal-header .close {
+            margin-top: -17px !important;
+            margin-right: -16px !important;
+            border-radius: 0px 14px 0px 0px !important;
+            width: 30px !important;
+            height: 30px !important;
+        }
+    }
+</style>

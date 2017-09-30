@@ -1,0 +1,645 @@
+{% extends 'front.html.twig' %}
+{% block body %}
+    <div class="home page-template-default page page-id-471 wpb-js-composer js-comp-ver-4.11.2.1 vc_responsive" data-submitlink="http://studio.listingprowp.com/submit-listing/">
+
+
+        <div id="page" class="clearfix" data-mtoken="pk.eyJ1IjoiY3JpZGhlbHAiLCJhIjoiY2o0dHNoMnc3MGFnejMzazA0ZzE2Ym5mMCJ9.Lg2w2xGoU5ZsXXMDkvcT2A" data-mstyle="mapbox.streets-basic" data-sitelogo="http://studio.listingprowp.com/wp-content/themes/listingpro/assets/images/logo.png" data-site-url="http://studio.listingprowp.com/" data-ipapi="geo_ip_db">
+
+            <!--==================================Header Open=================================-->
+            <div class="pos-relative">
+                <div class="header-container lp-header-bg ">
+
+
+                    <!--================================full width with blue background====================================-->
+                    {{ include('@User/template/header.html.twig') }}
+                    <!--==================================Header Close=================================-->
+                    <!-- Listing Detail Popup -->
+
+
+                    <!-- dynamic invoice -->
+                    <div class="modal fade lp-modal-list" id="modal-invoice">
+                        <div class="modal-content">
+
+                            <div class="modal-body">
+                                Content is loading...
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
+                                <a href="#" class="lp-print-list btn-first-hover">Print</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- dynamic invoice -->
+
+
+                    <!-- Modal Packages -->
+                    <div class="modal fade" id="modal-packages" role="dialog">
+                        <div class="modal-dialog">
+
+                            <!-- Modal content-->
+                            <div class="modal-content">
+                                <div class="modal-body">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        <h4 class="modal-title">Change Pricing Plan</h4>
+                                        <p>We recommend you to check details of Pricing Plans before changing. <a href="http://studio.listingprowp.com/pricing-plan/" target="_blank">Click Here</a>
+                                        </p>
+                                    </div>
+                                    <form name="select-plan-form" id="select-plan-form" method="post" class="select-plan-form"><label class="plan-options">
+                                            <div class="radio radio-danger"><input id="479" type="radio" name="plans-posts" value="479"><label for="479"></label></div>
+                                            Basic</label><label class="plan-options">
+                                            <div class="radio radio-danger"><input id="478" type="radio" name="plans-posts" value="478"><label for="478"></label></div>
+                                            Professional</label><input type="hidden" value="" name="listing-id" id="listing_id"><input type="submit" class="btn btn-default" value="Change" name="submit"></form>
+                                </div>
+                                <div class="modal-footer">
+                                    <div class="row">
+                                        <div class="col-md-9 col-sm-12 text-left">
+                                            <div class="lp-expire-update-status"></div>
+                                        </div>
+                                        <div class="col-md-3 col-sm-12 text-right">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="md-overlay"></div> <!-- Overlay for Popup -->
+                    <div class="lp-home-banner-contianer lp-home-banner-with-loc">
+                        <div class="lp-home-banner-contianer-inner">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-12 col-sm-12 text-center lp_auto_loc_container">
+                                        <h1 data-locnmethod="withip">Ween<span class="lp-dyn-city">.tn</span></h1>
+                                        <p class="lp-banner-browse-txt">Le service de recherche de particuliers</p>
+                                    </div>
+
+                                    <div class="col-md-8 col-xs-12 col-md-offset-2 col-sm-offset-0">
+                                        <div class="lp-search-bar">
+                                            <form autocomplete="on" class="form-inline" action="{{ path('recherche_result') }}" method="GET" accept-charset="UTF-8" id="recherche">
+
+                                                <div class="form-group lp-suggested-search ">
+                                                    <div class="input-group-addon lp-border">What</div>
+                                                    <div class="pos-relative">
+                                                        <div class="what-placeholder pos-relative" data-holder="">
+                                                            <input autocomplete="off" type="text" class="lp-suggested-search js-typeahead-input lp-search-input form-control ui-autocomplete-input dropdown_fields" name="q" id="select" placeholder="Ex: food, service, barber, hotel" data-prev-value='0' data-noresult="More results for" required>
+                                                            <i class="cross-search-q fa fa-times-circle" aria-hidden="true"></i>
+                                                            <img class='loadinerSearch' width="100px" src="{{ asset('tpl/images/search-load.gif') }}"/>
+                                                        </div>
+                                                        <div id="input-dropdown">
+                                                            {% for cat in category %}
+                                                                <ul>
+                                                                    <li class="lp-wrap-cats"><img class="d-icon"
+                                                                                                  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAE7ElEQVR4Xu2dQVbbVhiF78+oMAlZQVE3ULKCyCtoGMaeOCtosoKSFeAdQAc2Q+gKECsI3kBEVhCYNB3x9zzZ0pFlG6RTkG7tq6mfpfvup196etK5z6CNygGjUiMxEBCyk0BABITMATI5qhABIXOATI4qREDIHCCTowoREDIHyOSoQliBxBfpvv2Nt76DQzKNGy3HHnDje7hOjqK70NGsQuLzNIbj1ICDje49aeccuIXjKBlENxafpwd4wBcz7JPq3QpZ7rjDDt5YPE4vzfBbqdfXW+EATyff5lLc8VcA8j2vDnd8SAbRGY/WzVcSj9OhGU5DT0OVWG+SekHI0EveR8nm28DTw2ww9QPfc0WPAonH6aEZXvHI51Piu5jmI6Rc3WO+ueM+3LzLPSkXxVog8Tg9NsMffBZwKcpuxnuIcijxJH1nwMVjKt3xORlEx3mbWkB6kzRcuoobDpcNXGq8dKmveSJfX/WjuBGQedmFG/yvXN1nUuP3DjtL+tHH4nI1e4wYVUauZdFTdwzLl61aFcLU7U3XIiBkhAVEQMgcIJOjChEQMgfI5KhCBITMATI5qhABIXOATI4qREDIHCCTowoREDIHyOSoQgSEzAEyOaoQASFzgEyOKkRAyBwgk6MKERAyB8jkqEIEhMwBMjmqEAEhc4BMjipEQMgcIJOjChEQMgfI5KhCBITMATI5qhABIXOATI4qREDIHCCTowoREDIHyOSoQgSEzAEyOaoQASFzgEyOKmQNkBAcA+AEwE3Sj46qzUK2Vfa7IcRpfFr6fZKewBHafGqSO7YeiOOjGRaig8hOpmeRsyoiKey4HLhTDpTJD7qQLbaL1+VYpnk2zJfQNiQEJYPo9RKw8/TAHD+v6ESRUbYQz/Qsvf2f7GRVel4jIJWwtxAkao6rvPtX/WghgjdkW5ojfcqebQaykFnVuEKaA1kAtg5MFcgUQJYfu8nbPHRsWE2Ca1QhjjfliKWnKiT4GU/SkWFlLnKRS6bMxdKZNzfsd8Dv3ewweR/dlk/MApj7t6vBL0sZx73J1zvAXoV00WQQhQFCrU2jrEdsykKlgdsqjOwMv0j38Q8O8RNuqtVV/r1pkKiA1Dpv22skIO15XetIAlLLpnYaVYfD1ht/vYVZ9rDijrNkEH1oR4qOkt13xumpWfZ0HwB8C1HjyuclOTdCnq/No67Do7viYLsFM/VdxLP1Q8Jw7geODT4M4+hudW3b0f3e3UbYwygMpZeWPCrG2iy+OA5tNgMbtqkbitDiOhLNMcqr34E/w0xtnf+10mbF8wz9GlSVKYmFiO46pi1Mh1Qy1+v8v+02AtK2408cT0AEpJkDumQ18+vFWwvIi1u8+gDhFSh2FhYnmzV8wEH+JJstL9d0lOQY5ssBOpDAsLyk00M2XU7x6rrze0gGwnBiQLHASRfnRAbLs48TOgXTKZDyCmVdQFh1zK5XqusMyBoYYfWZyzbhmCG82VuYNuoSSidAlmFkr0zfNX3T9lzgZgMHvyxPG3UFpXUgK2G4xV1fu2ffVXnSNZRWgay6TDnRx3ke5s0sm/sqtrYrpTUg1c9knuty08Z+Vn3F+FLHbQ9IjQUXX6qT/3W/Dhwl/aiVwUZrQIIp87eTnT5vNIXjjqS8KmfT/zdt3yqQpuK2sb2AkFEXEAEhc4BMjipEQMgcIJPzL2J+xEIoICaVAAAAAElFTkSuQmCC"/>
+                                                                        <span class="lp-s-cat">{{ cat.libelle }}</span>
+                                                                    </li>
+                                                                </ul>
+                                                            {% endfor %}
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group lp-location-search">
+                                                    <div class="input-group-addon lp-border lp-where">Oû</div>
+                                                    <div data-option="no" class="ui-widget border-dropdown">
+                                                        <i class="fa fa-crosshairs"></i>
+                                                        <select class="chosen-select chosen-select5" name="ville" id="searchlocation">
+                                                            <option id="def_location" value="">Votre Ville...</option>
+
+                                                            {% for v in villes %}
+                                                                <option value="{{ v.id }}">{{ v.libelle }}</option>
+                                                            {% endfor %}
+
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group pull-right ">
+                                                    <div class="lp-search-bar-right">
+                                                        <input value="Search" class="lp-search-btn" type="submit">
+                                                        <i class="icons8-search lp-search-icon"></i>
+                                                        <img src="http://studio.listingprowp.com/wp-content/themes/listingpro/assets/images/ellipsis.gif" class="searchloading">
+                                                        <!--
+                                                            <img src="/assets/images/searchloader.gif" class="searchloading">
+                                                        -->
+                                                    </div>
+                                                </div>
+
+
+                                            </form>
+
+                                        </div>
+                                        <div class="text-center lp-search-description">
+                                            <p>Vous cherchez juste autour? Permettez-nous de vous proposer quelque chose de chaud et d'actualité!</p>
+                                            <img src="http://studio.listingprowp.com/wp-content/themes/listingpro/assets/images/banner-arrow.png" alt="banner-arrow" class="banner-arrow"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="page-header-overlay"></div>
+
+                    </div><!-- ../Home Search Container -->
+
+                </div>
+                <!--==================================Header Close=================================-->
+
+                <!--================================== Search Close =================================-->
+
+                <!--================================== Search Close =================================-->
+            </div>
+
+            <div class="home-categories-area ">
+                <div class="lp-section-row margin-bottom-60">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <ul class="lp-home-categoires padding-left-0">
+                                    <li>
+                                        <a href="recherche/?q=Automobile&ville=3656" class="lp-border-radius-5">
+                                            <span><img class="icon icons-banner-cat"
+                                                       src="data:image/png;base64,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"
+                                                       alt="Automobile"/>
+                                                <br>Automobile</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="recherche/?q=spa&ville=3656" class="lp-border-radius-5">
+                                            <span>
+                                                <img class="icon icons-banner-cat"
+                                                     src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAADWUlEQVRoge1awXXiQAx1CZSQEuiAmWkgdBB3sOkAd0A6WC5IuTkdQAdQAX87gA7Yg0djeYDExmPwIXrPh/ghjTSSvmQpWZaQTImJIbw5QmkZG0vYOcbZMc6WsLOMjSOUhvBmSkxSnp2EDGFuGRtRuvVTGTV/tv6ZYZjYAMv4cozcMIxZYxp+u8bUMIxj5P43mmdjGOYpRjjCsr7Zwz/HyLuEiykxcYzc84qHlkPqfKFA7YXDyTGKPvHuDSq8rMo7Q+ePKTGpE/hw0qHTW/Ya02AMYTeoMeIJy9gPcZD39l48k1p+lmVZ5hh/gycGvK0q1CrPOMJHWuEV2iQPp5vnqTBLimYKYotkQn+gCgAShpghzAViH1mNdYglKZqWsPXeyPur140cI5ci20uQx/izY5yf0RslOz/ZjfQg1c7kzxXSkxzhvfdlSn48raHLaui3hO3dQqQdeUTtuEVVTanaltZMlrDTDJJog2jYgWI9Yj1vMgjTGA2JdfyWQX4kDdwoQouxv6bjVYoVH2Oyx4ZdpbiKjwJ+o1oW/v4OxaRRk/Z5jAXRET5+bGClQRREGGOLEkrCd+HeYGS8eMbRNI2G8dIaSS1jpcMreImBR7fxlnDUbbyElWWsfhZQo8RR3imvFINpHlH4sFJJHQxri6Jh1kR4z7KmcY/71A0hbiqdQvN4G3YvBNVJf5RcCW4lHIcePsjNh/BmvMRh1ppCOBHK+N1Qcyc9N9Mh5Qjl3R1whRB+LOMRqzF3ShxmZo2p3LqemwlyOT6cJDq6C5fBQ2xM7ZmjYywSjEwXco4lbC+NSDCACNU+EqYqbAXNHXcesksJ+RAN5KJLLHoZIRRqC+NsPvEnHMYwCpr1zuPNEmbxWsESZrII0jyWsNWQ2vBQm5rRhbQHHKHUt+8XPY2dR5vHMr60l02JScPI1CNTrbCamF/kh+w8LOPLErYCDJLA/l21CLrkW9RhdjgNvsnymL5VYVEZdAei+N5pofPEh1lnWXeTYZjGtsknvSMs7SdeLWGmFfIXMLOfeHWEpWUg4t0/8wNO9ogrVXM6PIeTZayeasA18pBZSI5cJHedI8UotrldqPX3w9jp15Cx0a8hY6NfQ8ZGozdE/y9WqqfTDiSZIaqzTWZIlwlJRP8BNaGdsHugFfEAAAAASUVORK5CYII="
+                                                     alt="Beauty & Spa"/>
+                                                <br>Beauty &amp; Spa
+                                            </span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="recherche/?q=hotel&ville=3656" class="lp-border-radius-5">
+                                            <span>
+                                                <img class="icon icons-banner-cat" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAB/klEQVRoge2YW5nCMBCFkYAEJNQBkxjYOgAnVAImOrNvrANwAAo4OEAC+9LJ9k4vQAqb//vmpZdwDs2ZpJ3NAoFAIBAIfChWsDECWMFtypVp3NSbYGx9CxxQScWIYVyt4EYpoic/+NFQikifTOWkuvSgaxCNeoMRT/xvI+YbX1lr3hvBXhtDpS0yrnqNFWwMY/nIMQYboRTR2HXFCPCIMcrdtJcRJ4DPF8vYEiMmAdEO87p/iXaYk4CIEVvG1vL54gSNHKPcansZeURunjVGMKJQisgwllawKYS3JcD3Qq3B1nB3ycMgIyp4TGAHhlwNDjdCjFXtD/D5YhgHK0isICEBueqxT6MUUf5eHc8wDoUmkStirDobIQEV2mW+2zR0mmdAO8zrup8RIDPebiR3w4kY8auE34MYsRGcyjorF5YuSF4vtRvZFKw3QjvMcyfXfiR2xwrWLgr56a5vh0bw41FfL7KGU5w97u1QsPCmrCckWOh6pAdIw+1ZW280/CSgv/Awtr6F9SX3wSRxc21KrbYrxIhdtp0RAfkW1hcXC8bhrT4DlSl8FmpcId8Ep//VO9pn1ecZ8T1FhhKMTI27RogRG8bR99zXMoxj3aLdakRXzClW2UyrkdyTSB40A0Zjsz2hYRxLx5uNTDU3rVqDEQ90MlJXvgQ30ar1U4z8AqzZRBgg+pcOAAAAAElFTkSuQmCC" alt="Hotels"/>
+                                                <br>Hotels
+                                            </span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="recherche/?q=Restaurant&ville=3656" class="lp-border-radius-5">
+                                            <span>
+                                                <img class="icon icons-banner-cat"
+                                                     src="data:image/png;base64,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"
+                                                     alt="Restaurant"/>
+                                                <br>Restaurant</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="recherche/?q=E-commerce&ville=3656" class="lp-border-radius-5">
+                                            <span>
+                                                <img class="icon icons-banner-cat" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAACMElEQVRoge1Z23HCQAykhJSQEijhrAroAEpwCXRAOgg/SJ9QQjpIKvDSQeiAfGBdHBJzp/PrQrIznmEG+24XSaysm83+0Q7HWJLguWC8kuBMgnP9+dkxllPzC8IxFoUASr7tKgRwjMXUfH8EMTYNom/EKN0Oc/3e7TAnRlkI3rwoxmZKzt9AjKcLuepEjDLi/pKkOtVinsbgGIRjLFREMwLB53aYa2SySDNfExGRuMYlMpeaGYJbPBHBSmsidQ2tmUmjUgi2qdFQNKKy7ZGaDeoTltq4htZKwXjtk5sJWqy5rDM5gX8h1g1yuf62ECdwIY8YK7W81wiceXEvhPGSSiAWQSGMl2QhIaP60iv14CO31ulkvCRY1xusWxb37x1deqWYdUJcQhscbv0Kvg0XnImro3kDwzqN7DiYNwjlpRM44upIXB2TctewTky9tkJD3iX/+4Lvx1JSePK24QpJfNweD7kKcXs8RD/UKScHQpKX3I0Q/7+dy4Rj1pzUGLykkwENhCROPow5jGlqkA46LOneqUkbCEl1WzDeayGPgzEzwgkeayHv0Q/l5iEKEy9VTlKdBuZlhjaYUZmSo4coTLWrQ+mshcT8m+boIQoTtyQHHQmmjiNHD1GY6vduhCT1/SPB9J6Uqxkqovj5GVOHqcjQIK6OwVlCzmaoiKph+jwTtM+PRoKftwlWrTflbIaKKI59HG4OjajD05w9RBFVx/6U9ncIaT8Fjjk1yum6SyEf1erUSWNGix0AAAAASUVORK5CYII=" alt="Shopping"/>
+                                                <br>E-commerce
+                                            </span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <section>
+                <div id="lp_597ee1f1016b2" class="lp-section-row ">
+                    <div class="lp_section_inner  clearfix container">
+                        <div class="row lp-section-content clearfix">
+                            <div class="lp-section-title-container text-center "><h1>Happening Cities</h1>
+                                <div class="lp-sub-title">Cities you must explore this summer</div>
+                            </div>
+                            <div class="wpb_column vc_column_container vc_col-sm-12">
+                                <div class="vc_column-inner ">
+                                    <div class="wpb_wrapper">
+                                        <div class="lp-section-content-container clearfix">
+                                            <div class="col-md-6 col-sm-6  col-xs-12">
+                                                <div class="city-girds lp-border-radius-8">
+                                                    <div class="city-thumb">
+                                                        <img src="http://studio.listingprowp.com/wp-content/uploads/2017/01/8680800001_02ed76abd8_z-570x455.jpg" alt="london"/>
+                                                    </div>
+                                                    <div class="city-title text-center">
+                                                        <h3 class="lp-h3">
+                                                            <a href="http://studio.listingprowp.com/location/chicago/">Chicago</a>
+                                                        </h3>
+                                                        <label class="lp-listing-quantity">5 Listings</label>
+                                                    </div>
+                                                    <a href="http://studio.listingprowp.com/location/chicago/" class="overlay-link"></a>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 col-sm-6  col-xs-12">
+                                                <div class="city-girds lp-border-radius-8">
+                                                    <div class="city-thumb">
+                                                        <img src="http://studio.listingprowp.com/wp-content/uploads/2017/01/losanglese-570x228.jpg" alt="london"/>
+                                                    </div>
+                                                    <div class="city-title text-center">
+                                                        <h3 class="lp-h3">
+                                                            <a href="http://studio.listingprowp.com/location/los-angeles/">Los Angeles</a>
+                                                        </h3>
+                                                        <label class="lp-listing-quantity">5 Listings</label>
+                                                    </div>
+                                                    <a href="http://studio.listingprowp.com/location/los-angeles/" class="overlay-link"></a>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3 col-sm-3 col-xs-12">
+                                                <div class="city-girds lp-border-radius-8">
+                                                    <div class="city-thumb">
+                                                        <img src="http://studio.listingprowp.com/wp-content/uploads/2017/01/newyork-270x197.jpeg" alt="london"/>
+                                                    </div>
+                                                    <div class="city-title text-center">
+                                                        <h3 class="lp-h3">
+                                                            <a href="http://studio.listingprowp.com/location/new-york/">New York</a>
+                                                        </h3>
+                                                        <label class="lp-listing-quantity">9 Listings</label>
+                                                    </div>
+                                                    <a href="http://studio.listingprowp.com/location/new-york/" class="overlay-link"></a>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3 col-sm-3 col-xs-12">
+                                                <div class="city-girds lp-border-radius-8">
+                                                    <div class="city-thumb">
+                                                        <img src="http://studio.listingprowp.com/wp-content/uploads/2017/01/800px-Cable_car_on_California_Street-270x197.jpg" alt="london"/>
+                                                    </div>
+                                                    <div class="city-title text-center">
+                                                        <h3 class="lp-h3">
+                                                            <a href="http://studio.listingprowp.com/location/san-francisco/">San Francisco</a>
+                                                        </h3>
+                                                        <label class="lp-listing-quantity">4 Listings</label>
+                                                    </div>
+                                                    <a href="http://studio.listingprowp.com/location/san-francisco/" class="overlay-link"></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="lp_597ee1f103048" class="lp-section-row ">
+                    <div class="lp_section_inner  clearfix " style="background-color: #eff3f6;">
+                        <div class="container">
+                            <div class="row lp-section-content clearfix">
+                                <div class="lp-section-title-container text-center "><h1>Commencer Maintenant!</h1>
+                                    <div class="lp-sub-title">Argent, Facile, Rapide & Gratuit Lorem ipsum dolor sit amet, consectetur adipisicing elit. A iure maxime</div>
+                                </div>
+                                <div class="wpb_column vc_column_container vc_col-sm-12">
+                                    <div class="vc_column-inner ">
+                                        <div class="wpb_wrapper">
+                                            <div class="promotional-element listingpro-columns">
+                                                <div class="listingpro-row padding-top-60 padding-bottom-60">
+                                                    <div class="promotiona-col-left">
+                                                        <img src="http://studio.listingprowp.com/wp-content/uploads/2017/03/columns.png" alt="">
+                                                    </div>
+                                                    <div class="promotiona-col-right">
+                                                        <article>
+                                                            <h3>1- Declarer</h3>
+                                                            <p>Declaration a une nouvelle entreprise par l'ajoute de l'information principale</p>
+                                                        </article>
+                                                        <article>
+                                                            <h3>2- Fiche</h3>
+                                                            <p>tous entreprise ou personne déclarer a ca propre fiche</p>
+                                                        </article>
+                                                        <article>
+                                                            <h3>3- Personnalisation</h3>
+                                                            <p>Chaque utilisateur a une fiche dynamique , avec la possibilité de modificaton de desgin</p>
+                                                        </article>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="lp_597ee1f1037e1" class="lp-section-row ">
+                    <div class="lp_section_inner  clearfix container">
+                        <div class="row lp-section-content clearfix">
+                            {#{{ dump(qouiquis) }}#}
+                            <div class="lp-section-title-container text-center "><h1>Exclusive</h1>
+                                <div class="lp-sub-title">popular exclusive listings in our directory</div>
+                            </div>
+                            <div class="wpb_column vc_column_container vc_col-sm-12">
+                                <div class="vc_column-inner ">
+                                    <div class="wpb_wrapper">
+                                        <div class="listing-simple listing_grid_view">
+                                            <div class="lp-section-content-container lp-list-page-grid clearfix" id="content-grids">
+
+
+                                                {% for qouiqui in qouiquis %}
+                                                    {% set qq = qouiqui %}
+
+                                                    <div class="col-md-4 col-sm-6 promoted lp-grid-box-contianer grid_view2 card1 lp-grid-box-contianer1" data-title="Sushi Kashiba" data-postid="{{ qouiqui.id }}" data-lattitue="{{ qouiqui.geoLat }}" data-longitute="{{ qouiqui.geoLong }}" data-posturl="{{ qouiqui.website }}">
+                                                        <div class="lp-grid-box">
+                                                            <div class="lp-grid-box-thumb-container">
+                                                                <div class="lp-grid-box-thumb">
+                                                                    <div class="show-img">
+                                                                        {% set path =  asset('uploads/image/')~qq.user.id ~'/'~ qq.id ~'/avatar/avatar.jpg' %}
+                                                                        {% if asset_exists(path) %}
+                                                                            <span class="pre_imagecenter"></span>
+                                                                            <img src="{{ asset('uploads/image/') }}{{ qq.user.id }}/{{ qq.id }}/avatar/avatar.jpg">
+                                                                        {% else %}
+                                                                            <img src="{{ asset('tpl/images/ween_no_img.png') }}"/>
+                                                                        {% endif %}
+                                                                    </div>
+                                                                </div>
+                                                                <div class="lp-grid-box-quick">
+                                                                    <ul class="lp-post-quick-links">
+                                                                        <li>
+                                                                            <a href="#" data-post-type="grids" data-post-id="{{ qouiqui.id }}" data-success-text="Saved" class="status-btn add-to-fav lp-add-to-fav">
+                                                                                <i class="fa fa-bookmark-o"></i> <span>Save</span>
+                                                                            </a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a class="icon-quick-eye md-trigger qickpopup" data-modal="modal-{{ qouiqui.id }}"><i class="fa fa-eye"></i> Preview</a>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                            <div class="lp-grid-desc-container lp-border clearfix">
+                                                                <div class="lp-grid-box-description ">
+                                                                    <div class="lp-grid-box-left pull-left">
+                                                                        <h4 class="lp-h4">
+                                                                            <a href="http://{{ qq.slug }}.{{ app.request.server.get("SERVER_NAME") }}">
+                                                                                <span class="listing-pro">Ad</span> <span class="uppercase">{{ qouiqui.firstName }}</span> </a>
+                                                                        </h4>
+                                                                        <ul>
+                                                                            <li>
+                                                                                <span class="rate">2.0<sup>/5</sup></span>
+                                                                                1 Reviews
+                                                                            </li>
+
+                                                                            <li>
+                                                                                <span class="cat-icon"><i class="fa fa-tag" aria-hidden="true"></i></span>
+                                                                                <a href="javascript:;">
+                                                                                    {% for ngn in qq.ngns %}
+                                                                                        {{ ngn.category.libelle|upper }}
+                                                                                    {% endfor %}
+                                                                                </a></li>
+                                                                        </ul>
+                                                                        <div class="review">
+                                                                            <div class="review-post">
+                                                                                <div class="reviewer-thumb">
+                                                                                    <img src="http://0.gravatar.com/avatar/366a2d70d05137017cd9eeb98bd11c61?s=94&#038;d=mm&#038;r=g" alt="">
+                                                                                </div>
+                                                                                <div class="reviewer-details">
+                                                                                    <p>{{ qq.details|raw|slice(3,75) }}</p>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+
+                                                                    </div>
+                                                                    <div class="lp-grid-box-right pull-right">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="lp-grid-box-bottom">
+                                                                    <div class="pull-left">
+                                                                        <div class="show">
+                                                                <span class="cat-icon"><img class="icon icons8-mapMarkerGrey"
+                                                                                            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAC8UlEQVRoge1aS3HDMBA1BEMIhEAwhEAohEIIgx3tk8+FYAiGEAiBYAjpoZKyTmx9Ym2cQ9+MZ3qIpf2+/bhN849nEFFLQGeMOTMwArgwMDEwub8HtpYI6PaWdRFE1LK15IS+ZT/WEhEd9pZ/UQEAF2PMmYCO+v5IRK17DgBOxpiz885MoX2VAAYh0Eh9f8x+v++PbO2PNAARtZoyrwlxdda8bon52VnAVGKMTSCiVoTGWCPGnXfHoIy2Z2Q4aYSCVwbApea5T3C0+hdOClaT3jbGnGufHy7x7KRZB4joIELsUP2C4A1gqH74AwKbWfujcfiVgVsOqxBRy8zfDAwALu7dITdcnPdvDEybBZcAcMpNQgK6p4InHgCXnNAMlMz8VUOHpmnuYZWyKAGdqPKjqO4HACepYEoZQSz1wktQ7mlVCVlf/nqoRVZzLU0ybJxRbgyMW+UP8ALGWMTlhC+SUWr29SLmYZU8CYkeUyTDax4+52IMqKOIrx8RS+coWyqkz6cXRF5GCK0I9dZWhPr+WL1dCe16hAp9EcsJrZxEVkn2wDTM32u/EZU/ebE3TCzZA3nUpN+cOuKmxWuBgNHGU9SRetOjYJmotUU4zCq4X0rIiTIVgiUsmA2RnMlkfpj4lp4pJVzJfcUQCb+aJxJ+JeSoe2JgNMacc+YYUVzrd9rM/PW2Nr7QaEWQ3K85U88GOK2dl0pr/XiH87zq3B7Cy9qr1h2hg1Y0VtM0d69UpUWHQPNKy40ZfKHScH1Oe18NWhwviqn+gs5DTHnVqPit3vCYeaXCrla0QO/zhofcOm455y3bxZQANepKbjesChkSr7wvq7h63UhBroBK39UgjZchls5FiT+j23d93EkhWDYz8XdP8BhKBJPdwW4JvoZZiEX2umI/PH3s9/bUXvejQ+oRfP+o+bSoEMuH5H54dzzUhjCqijlc55OaBuRaiIBOfjfRmGNUIfMleGjPf9XYApEvNwaGj8+LNQiW+vzk/hT8Ak0IUQVkeTWPAAAAAElFTkSuQmCC"
+                                                                                            alt="mapMarkerGrey"></span>
+                                                                            <a target="_blank" href="https://www.google.com/maps?q={{ qouiqui.geoLat }},{{ qouiqui.geoLong }}">
+                                                                                Seattle
+                                                                            </a></div>
+                                                                        <div class="hide">
+												<span class="cat-icon">
+													<img class="icon icons8-mapMarkerGrey"
+                                                         src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAC8UlEQVRoge1aS3HDMBA1BEMIhEAwhEAohEIIgx3tk8+FYAiGEAiBYAjpoZKyTmx9Ym2cQ9+MZ3qIpf2+/bhN849nEFFLQGeMOTMwArgwMDEwub8HtpYI6PaWdRFE1LK15IS+ZT/WEhEd9pZ/UQEAF2PMmYCO+v5IRK17DgBOxpiz885MoX2VAAYh0Eh9f8x+v++PbO2PNAARtZoyrwlxdda8bon52VnAVGKMTSCiVoTGWCPGnXfHoIy2Z2Q4aYSCVwbApea5T3C0+hdOClaT3jbGnGufHy7x7KRZB4joIELsUP2C4A1gqH74AwKbWfujcfiVgVsOqxBRy8zfDAwALu7dITdcnPdvDEybBZcAcMpNQgK6p4InHgCXnNAMlMz8VUOHpmnuYZWyKAGdqPKjqO4HACepYEoZQSz1wktQ7mlVCVlf/nqoRVZzLU0ybJxRbgyMW+UP8ALGWMTlhC+SUWr29SLmYZU8CYkeUyTDax4+52IMqKOIrx8RS+coWyqkz6cXRF5GCK0I9dZWhPr+WL1dCe16hAp9EcsJrZxEVkn2wDTM32u/EZU/ebE3TCzZA3nUpN+cOuKmxWuBgNHGU9SRetOjYJmotUU4zCq4X0rIiTIVgiUsmA2RnMlkfpj4lp4pJVzJfcUQCb+aJxJ+JeSoe2JgNMacc+YYUVzrd9rM/PW2Nr7QaEWQ3K85U88GOK2dl0pr/XiH87zq3B7Cy9qr1h2hg1Y0VtM0d69UpUWHQPNKy40ZfKHScH1Oe18NWhwviqn+gs5DTHnVqPit3vCYeaXCrla0QO/zhofcOm455y3bxZQANepKbjesChkSr7wvq7h63UhBroBK39UgjZchls5FiT+j23d93EkhWDYz8XdP8BhKBJPdwW4JvoZZiEX2umI/PH3s9/bUXvejQ+oRfP+o+bSoEMuH5H54dzzUhjCqijlc55OaBuRaiIBOfjfRmGNUIfMleGjPf9XYApEvNwaGj8+LNQiW+vzk/hT8Ak0IUQVkeTWPAAAAAElFTkSuQmCC"
+                                                         alt="mapMarkerGrey">												</span>
+                                                                            <span class="text gaddress">86 East Pine Street, Seattle, ...</span>
+                                                                        </div>
+                                                                    </div>
+
+
+                                                                    <div class="clearfix"></div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="md-modal md-effect-3" id="modal-{{ qouiqui.id }}">
+                                                        <div class="container">
+                                                            <div class="md-content ">
+                                                                <div class="row popup-inner-left-padding ">
+                                                                    <div class="col-md-6 lp-insert-data">
+                                                                        <div class="lp-grid-box-thumb">
+
+                                                                            <div class="slide">
+                                                                                {% set path =  asset('uploads/image/')~qq.user.id ~'/'~ qq.id ~'/avatar/avatar.jpg' %}
+                                                                                {% if asset_exists(path) %}
+                                                                                    <img src="{{ asset('uploads/image/') }}{{ qq.user.id }}/{{ qq.id }}/avatar/avatar.jpg">
+                                                                                {% else %}
+                                                                                    <img src="{{ asset('tpl/images/ween_no_img.png') }}"/>
+                                                                                {% endif %}
+                                                                            </div>
+                                                                        </div><!-- ../grid-box-thumb -->
+                                                                        <div class="lp-grid-desc-container lp-border clearfix">
+                                                                            <div class="lp-grid-box-description ">
+                                                                                <div class="lp-grid-box-left pull-left">
+                                                                                    <h4 class="lp-h4">
+                                                                                        <a href="http://studio.listingprowp.com/listing/sushi-kashiba/">
+                                                                                            <span class="listing-pro">Ad</span> Sushi Kashiba </a>
+                                                                                    </h4>
+                                                                                    <ul>
+                                                                                        <li>
+                                                                                            <span class="rate">5.0<sup>/5</sup></span>
+                                                                                            3 Reviews
+                                                                                        </li>
+                                                                                        <li class="middle">
+
+                                                                                        <span class="element-price-range list-style-none"><span class="grayscale simptip-position-top simptip-movable" data-tooltip="Ultra High End" title="Ultra High End">$$$$</span>
+                                                                                        </span></li>
+                                                                                        <li>
+                                                                                <span class="cat-icon"><img class="icon icons8-Food"
+                                                                                                            src="data:image/png;base64,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"
+                                                                                                            alt="cat-icon"></span>
+                                                                                            <a href="http://studio.listingprowp.com/listing-category/restaurant/">
+                                                                                                Restaurant
+                                                                                            </a></li>
+                                                                                        <li>
+                                                                                            <a href="tel:(206) 441-8844">
+                                                                                                (206) 441-8844 </a>
+                                                                                        </li>
+                                                                                    </ul>
+                                                                                    <div class="lp-grid-desc">
+                                                                                        <p>Legendary sushi maestro, Chef Shiro Kashiba brings his authentic and innovative Edomae style of sushi and acclaimed Japanese cuisine to downtown Seattle. Chef Shiro Kashiba started Seattle\&#039;s first sushi bar in 1970 after years of</p>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="lp-grid-box-right pull-right">
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="lp-grid-box-bottom">
+                                                                                <div class="pull-left">
+																			<span class="cat-icon">
+                                                                                    <img class="icon icons8-Food"
+                                                                                         src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAABv0lEQVRoge1ZUbGDMBA8CUhAAhKQUAlIqILsOkBCJSABCUhAAhJ4Hw1vGB4tB82R9A07c7+Z3dxmuQSRCxcuBAPJwjlHAC2ADsDgqwfQOOdIsojN8w9Ilp7wqKyOZBWbt5AsdhJfExKnI37Xhw/ITzWQLL+V/G+dJoJkHpr8rBP2dsIzYUKTn6o3JU/yZkh+xNNKlZkAfJY42hpMyPvI1JJoSZYkC5K571y7owt5cAH+C6shUJPM1tYAUGvWcM4xuAAAjXLnV8nP1tF0orUQ0Ctaf9taRxkE4c+BUkCuEJDFErD58QooYLQQsBmhSguVCgGdhQBNgmwePijDILgAbYy+i0CSd80aAOrgAnaOEd00XZLMvG00Oz8CRuOE9vCFKJMvsYgIgMcJAhoT8iIiJKsTdr+yFGBto8HMPhNga6OHKXkR0y6cc6UUMetC+Ox/BYMu2Ht/CSgvJ8nt/gTfhT4A+X7rEmQpQjNZvi3NBGsK7JhxkrDOEt5KR17q4llniSNWim6dJbAvleJbZw1QPpkkY50lFNGaju9fwT+/r5E//0fGUawd6uQO7Rbmd2iS99h8DsG/QqSZOBcu/BP8AL+XHO7G8elbAAAAAElFTkSuQmCC"
+                                                                                         alt="cat-icon">
+                                                                                </span>
+                                                                                    <span class="text gaddress">86 East Pine Street, Seattle, WA, United States</span>
+                                                                                </div>
+
+                                                                                <div class="pull-right">
+                                                                                    <a href="#" class="status-btn"><span class="grid-closed">Closed Now!</span>
+                                                                                    </a>
+                                                                                </div>
+                                                                                <div class="clearfix"></div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-6">
+                                                                        <div id="quickmap{{ qouiqui.id }}" class="quickmap"></div>
+                                                                        <a class="md-close widget-map-click"><i class="fa fa-close"></i></a>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+
+                                                {% endfor %}
+
+
+                                                <div class="clearfix"></div>
+
+                                                <div class="md-overlay"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="lp_597ee1f10cd69" class="lp-section-row ">
+                    <div class="lp_section_inner  clearfix " style="background-color: #eff3f6;">
+                        <div class="container">
+                            <div class="row lp-section-content clearfix">
+                                <div class="wpb_column vc_column_container vc_col-sm-12">
+                                    <div class="vc_column-inner ">
+                                        <div class="wpb_wrapper">
+                                            <div class="testimonial lp-section-content-container clearfix">
+                                                <div class="col-md-6">
+
+                                                    <iframe width="100%" height="315" src="https://www.youtube.com/embed/aPRM-s0Lad0" frameborder="0"></iframe>
+
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="testimonial-inner-box">
+                                                        <h3 class="margin-top-0">People talking about us</h3>.
+                                                        <div class="testimonial-description lp-border-radius-5">
+                                                            <p> We have exceeded our `{`goals for`}` how many people are going to our website, staying on our website and also calling us… We’ve always viewed our relationship with listingpro as an investment to keep us current in our community and to keep us relevant and our brand out there. </p>
+                                                        </div><!-- ../testimonial-description -->
+                                                        <div class="testimonial-user-info user-info">
+                                                            <div class="testimonial-user-thumb user-thumb">
+                                                                <img src="http://studio.listingprowp.com/wp-content/uploads/2016/12/happy_client-63x63-1.jpg">
+                                                            </div>
+                                                            <div class="testimonial-user-txt user-text">
+                                                                <label class="testimonial-user-name user-name">Richard Jeans</label><br>
+                                                                <label class="testimonial-user-position user-position">DX Media. Cortland, OH</label>
+                                                            </div>
+                                                        </div><!-- ../testimonial-user-info -->
+                                                    </div><!-- ../testimonial-inner-box -->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="lp_597ee1f10d8af" class="lp-section-row ">
+                    {{ dump(events) }}
+                    <div class="lp_section_inner   clearfix container">
+                        <div class="row lp-section-content clearfix">
+                            <div class="lp-section-title-container text-center "><h1>Nouvel événement</h1>
+                                <div class="lp-sub-title">checkout latest news and articles from our blog</div>
+                            </div>
+                            <div class="wpb_column vc_column_container vc_col-sm-12">
+                                <div class="vc_column-inner ">
+                                    <div class="wpb_wrapper">
+                                        <div class="lp-section-content-container lp-blog-grid-container clearfix">
+                                            {% for event in events  %}
+                                            {% if  date(event.dateStart) > date() %}
+                                            <div class="col-md-4 col-sm-4 lp-blog-grid-box" >
+                                                <div class="lp-blog-grid-box-container lp-border lp-border-radius-8">
+                                                    <div class="lp-blog-grid-box-thumb event">
+                                                        <a href='javascript:;'>
+
+                                                            <div class="show-img">
+                                                                {% set path =  asset('uploads/image/')~event.qville.qouiqui.user.id ~'/'~ event.qville.qouiqui.id ~'/event/'~ event.image ~'.jpg' %}
+                                                                {% if asset_exists(path) %}
+                                                                    <img src="{{ asset('uploads/image/') }}{{ event.qville.qouiqui.user.id }}/{{ event.qville.qouiqui.id }}/event/{{ event.image }}.jpg" />
+                                                                {% else %}
+                                                                    <img src="{{ asset('tpl/images/ween_no_img.png') }}"/>
+                                                                {% endif %}
+
+                                                            </div>
+
+
+                                                        </a>
+                                                    </div>
+                                                    <div class="lp-blog-grid-box-description text-center">
+                                                        <div class="lp-blog-user-thumb margin-top-subtract-25">
+
+                                                            {% set path =  asset('uploads/image/')~ event.qville.qouiqui.user.id ~'/'~ event.qville.qouiqui.id ~'/avatar/avatar.jpg' %}
+                                                            {% if asset_exists(path) %}
+                                                                <img src="{{ asset('uploads/image/') }}{{ event.qville.qouiqui.user.id }}/{{ event.qville.qouiqui.id }}/avatar/avatar.jpg">
+                                                            {% else %}
+                                                                <img src="{{ asset('tpl/images/ween_no_img.png') }}"/>
+                                                            {% endif %}
+                                                        </div>
+                                                        <div class="lp-blog-grid-category">
+                                                            <a href="http://{{ event.qville.qouiqui.slug }}.{{ app.request.server.get("SERVER_NAME") }}">{{ event.qville.qouiqui.firstName }}</a>
+                                                        </div>
+                                                        <div class="lp-blog-grid-title">
+                                                            <h4 class="lp-h4">
+                                                                <a href="http://studio.listingprowp.com/chemex-coffee-for-two-people/">{{ event.eventName }}</a>
+                                                            </h4>
+                                                        </div>
+                                                        <ul class="lp-blog-grid-author">
+                                                            <li>
+                                                                <a href="http://studio.listingprowp.com/author/listingpro/">
+                                                                    <i class="fa fa-user"></i>
+                                                                    <span>{{ event.orgBy }}</span>
+                                                                </a>
+                                                            </li>
+                                                            <li>
+                                                                <i class="fa fa-calendar"></i>
+
+                                                                <span>{{ translateDate(event.dateStart|date('y-m-d')) }}</span>
+                                                            </li>
+                                                        </ul><!-- ../lp-blog-grid-author -->
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            {% endif %}
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+
+            <!-- End Main -->
+        </div>
+    </div>
+
+
+
+{% endblock %}
+{% block javascripts %}
+    <script>
+        jQuery('#recherche [type="submit"]').click(function () {
+            jQuery('#recherche').submit();
+        })
+    </script>
+{% endblock %}

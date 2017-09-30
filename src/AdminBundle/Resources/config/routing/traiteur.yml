@@ -1,0 +1,24 @@
+traiteur_index:
+    path:     /
+    defaults: { _controller: "AdminBundle:Traiteur:index" }
+    methods:  GET
+
+traiteur_show:
+    path:     /{id}/show
+    defaults: { _controller: "AdminBundle:Traiteur:show" }
+    methods:  GET
+
+traiteur_new:
+    path:     /new
+    defaults: { _controller: "AdminBundle:Traiteur:new" }
+    methods:  [GET, POST]
+
+traiteur_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "AdminBundle:Traiteur:edit" }
+    methods:  [GET, POST]
+
+traiteur_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "AdminBundle:Traiteur:delete" }
+    methods:  DELETE

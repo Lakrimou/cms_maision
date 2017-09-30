@@ -1,0 +1,619 @@
+<link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker.css"/>
+<style>
+    .th-table {
+        background: rgba(255, 0, 0, .7);
+        color: white;
+    }
+
+    input[type="search"] {
+        height: 35px;
+        border-radius: 5px;
+        border: 1px solid #e3e3e3;
+        margin-bottom: 10px;
+        padding: 10px;
+    }
+
+    select {
+        height: 35px;
+        border-radius: 5px;
+        border: 1px solid #e3e3e3;
+        margin-bottom: 10px;
+        padding: 8px;
+    }
+
+    table.dataTable.no-footer {
+        border: none;
+    }
+
+    table.dataTable tbody th, table.dataTable tbody td {
+        border: none;
+        padding: 8px 10px;
+    }
+
+    .col-space {
+        padding: 5px;
+    }
+</style>
+<script type="text/javascript" src="{{ asset('tpl/js/moment.min.js') }}"></script>
+<link href="{{ asset('tpl/css/bootstrap-datetimepicker.min.css') }}" rel="stylesheet">
+<script type="text/javascript" src="{{ asset('tpl/js/bootstrap-datetimepicker.min.js') }}"></script>
+<script>
+
+    //supprimer produit
+    $(".icon-annonce-supprimer").click(function () {
+        var lien = $(this).data('lien');
+        var id = $(this).data('loop');
+        $.confirm({
+            title: '<div style="color: cadetblue"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Confirm de suppression</div>',
+            content: '',
+            buttons: {
+                Confirmer: function () {
+                    supprimProduit(lien, id);
+                },
+                Annuler: function () {
+                }
+            }
+        });
+
+    });
+
+    function supprimProduit(lien, id) {
+        $.ajax({
+            url: lien,
+            method: 'post',
+            success: function () {
+                $('#service-tables tr[data-prod="' + id + '"]').fadeOut();
+                $('.owl-carousel div[data-prod="' + id + '"]').hide();
+            }
+        });
+    }
+
+    //insertion des donnee offre dans formulaire de modification
+    $('.edit-annonce').click(function () {
+        lien = $(this).data('lien');
+        if(lien === undefined){
+            lien = lienModif;
+        }
+        id = $(this).data('id');
+        pic = "";
+        $('.nomProduit').text($(this).data('nom'));
+        //CKEDITOR.instances['editeur'].setData('');
+        $.ajax({
+            url: lien,
+            method: 'post',
+            success: function (data) {
+                console.log(data);
+                var produit = JSON.parse(data);
+                if(produit.sex == true){
+                    produit.sex = 1;
+                }else if(produit.sex == false){
+                    produit.sex = 0;
+                }else{
+                    produit.sex = 2;
+                }
+                $('.nomProduit').text(produit.nom);
+                $('.ref-lentille-form').val(produit.reference);
+                $('.nom-lentille-form').val(produit.nom);
+                $('.sex-lentille-form').val(produit.sex);
+                $('.couleur-lentille-form').val(produit.color);
+                $('.modele-lentille-form').val(produit.model);
+                $('.marque-lentille-form').val(produit.marque);
+                $('.forme-lentille-form').val(produit.forme);
+                $('.stock-lentille-form').val(produit.quantity);
+                $('.prix-lentille-form').val(produit.price);
+                $('.periodicite-lentille-form').val(produit.periodicite);
+                $('.labo-lentille-form').val(produit.labo);
+                $('.boite-lentille-form').val(produit.conditions);
+                $('.matiere-lentille-form').val(produit.material);
+                $('.correction-lentille-form').val(produit.correction);
+                $('.indice-lentille-form').val(produit.indice);
+                $('.weight-lentille-form').val(produit.weight);
+                $('.dimension-lentille-form').val(produit.dimensions);
+                $('.id-lentille-form').val(produit.id);
+                if(produit.categorie == "lentille"){
+                    CKEDITOR.instances['description-lentille'].setData(produit.description);
+                }else if(produit.categorie == "lunette soleil"){
+                    CKEDITOR.instances['description-soleil'].setData(produit.description);
+                }else if(produit.categorie == "lunette vue"){
+                    CKEDITOR.instances['description-vue'].setData(produit.description);
+                }else{
+                    CKEDITOR.instances['description-verre'].setData(produit.description);
+                }
+
+               /* for (p = 0; p < produit.picture.length; p++) {
+                    pic += '<div class="col-md-4 col-xs-6 col-sm-4"><div style="margin-top: 20px;"><span class="notify-badge" data-lien="/module/opticien/annonce/delete/picture/' + produit.id + '/' + produit.picture[p] + '" >x</span><img src="' + produit.picture[p] + '" alt="' + p + '" style="width:100%;height: 96px;"></div></div>';
+                }*/
+                $('.form-annonce-image').html(pic);
+                $('.id').val(id);
+            }
+        });
+    });
+
+    lienModif = "";
+    lienSupp = "";
+    //consulter les detail lentille
+    $('.item-food-content').on('click', '.show-lentille-detail', function () {
+        lien = $(this).data('lien');
+        lienModif = $(this).data('mod');
+        lienSupp = $(this).data('sup');
+        id = $(this).data('identifiant');
+        idItem = $(this).data('podui');
+        pic = "";
+        item = "";
+        $.ajax({
+            url: lien,
+            method: 'post',
+            success: function (data) {
+                var produit = JSON.parse(data);
+                if(produit.sex == true){
+                    produit.sex = "(homme)";
+                }else if(produit.sex == false){
+                    produit.sex = "(femme)";
+                }else{
+                    produit.sex = "(Enfant)";
+                }
+                $('.detail-annonce-title,.detail-annonce-nom').text(produit.nom);
+                $('.detail-annonce-description').text(produit.description);
+                $('.detail-annonce-prix').text(produit.price+"DT");
+                $('.detail-annonce-marque').text(produit.marque);
+                $('.detail-annonce-model').text(produit.model);
+                $('.detail-annonce-sex').text(produit.sex);
+                $('.detail-annoce-labo').text(produit.labo);
+                $('.detail-annoce-boite').text(produit.conditions);
+                $('.detail-annoce-correction').text(produit.correction);
+                $('.detail-annoce-matiere').text(produit.material);
+                $('.detail-annoce-couleur').text(produit.color);
+                $('.detail-annoce-periodiciite').text(produit.periodicite);
+                if (produit.picture.length > 1) {
+                    $('.carousel-control').show();
+                    $('.carousel-indicators').show();
+                } else {
+                    $('.carousel-control').hide();
+                    $('.carousel-indicators').hide();
+                }
+                for (p = 0; p < produit.picture.length; p++) {
+                    if (p === 0) {
+                        item += '<li data-target="#myCarousel" data-slide-to="' + p + '" class="active"></li>';
+                        pic += '<div class="item active"><img src="' + produit.picture[p] + '" alt="' + p + '" style="width:100%;"></div>';
+                    } else {
+                        item += '<li data-target="#myCarousel" data-slide-to="' + p + '"></li>';
+                        pic += '<div class="item"><img src="' + produit.picture[p] + '" alt="' + p + '" style="width:100%;"></div>';
+                    }
+                }
+                console.log(item);
+                $('.carousel-indicators').html(item);
+                $('.carousel-inner').html(pic);
+            }
+        });
+    });
+
+    //consulter les detail lunette Soleil
+    $('.item-food-content').on('click', '.show-soleil-detail', function () {
+        lien = $(this).data('lien');
+        lienModif = $(this).data('mod');
+        lienSupp = $(this).data('sup');
+        id = $(this).data('identifiant');
+        idItem = $(this).data('podui');
+        pic = "";
+        item = "";
+        $.ajax({
+            url: lien,
+            method: 'post',
+            success: function (data) {
+                var produit = JSON.parse(data);
+                if(produit.sex == true){
+                    produit.sex = "(homme)";
+                }else if(produit.sex == false){
+                    produit.sex = "(femme)";
+                }else{
+                    produit.sex = "(Enfant)";
+                }
+                $('.detail-annonce-title,.detail-annonce-nom').text(produit.nom);
+                $('.detail-annonce-description').text(produit.description);
+                $('.detail-annonce-prix').text(produit.price+"DT");
+                $('.detail-annonce-marque').text(produit.marque);
+                $('.detail-annonce-model').text(produit.model);
+                $('.detail-annonce-sex').text(produit.sex);
+                $('.detail-annoce-couleur').text(produit.color);
+                $('.detail-annoce-indice').text(produit.indice);
+                $('.detail-annoce-forme').text(produit.forme);
+                if (produit.picture.length > 1) {
+                    $('.carousel-control').show();
+                    $('.carousel-indicators').show();
+                } else {
+                    $('.carousel-control').hide();
+                    $('.carousel-indicators').hide();
+                }
+                for (p = 0; p < produit.picture.length; p++) {
+                    if (p === 0) {
+                        item += '<li data-target="#myCarousel" data-slide-to="' + p + '" class="active"></li>';
+                        pic += '<div class="item active"><img src="' + produit.picture[p] + '" alt="' + p + '" style="width:100%;"></div>';
+                    } else {
+                        item += '<li data-target="#myCarousel" data-slide-to="' + p + '"></li>';
+                        pic += '<div class="item"><img src="' + produit.picture[p] + '" alt="' + p + '" style="width:100%;"></div>';
+                    }
+                }
+                console.log(item);
+                $('.carousel-indicators').html(item);
+                $('.carousel-inner').html(pic);
+            }
+        });
+    });
+
+    //consulter les detail lunette de Vue
+    $('.item-food-content').on('click', '.show-vue-detail', function () {
+        lien = $(this).data('lien');
+        lienModif = $(this).data('mod');
+        lienSupp = $(this).data('sup');
+        id = $(this).data('identifiant');
+        idItem = $(this).data('podui');
+        pic = "";
+        item = "";
+        $.ajax({
+            url: lien,
+            method: 'post',
+            success: function (data) {
+                var produit = JSON.parse(data);
+                if(produit.sex == true){
+                    produit.sex = "(homme)";
+                }else if(produit.sex == false){
+                    produit.sex = "(femme)";
+                }else{
+                    produit.sex = "(Enfant)";
+                }
+                $('.detail-annonce-title,.detail-annonce-nom').text(produit.nom);
+                $('.detail-annonce-description').text(produit.description);
+                $('.detail-annonce-prix').text(produit.price+"DT");
+                $('.detail-annonce-marque').text(produit.marque);
+                $('.detail-annonce-model').text(produit.model);
+                $('.detail-annonce-sex').text(produit.sex);
+                $('.detail-annoce-couleur').text(produit.color);
+                $('.detail-annoce-forme').text(produit.forme);
+                if (produit.picture.length > 1) {
+                    $('.carousel-control').show();
+                    $('.carousel-indicators').show();
+                } else {
+                    $('.carousel-control').hide();
+                    $('.carousel-indicators').hide();
+                }
+                for (p = 0; p < produit.picture.length; p++) {
+                    if (p === 0) {
+                        item += '<li data-target="#myCarousel" data-slide-to="' + p + '" class="active"></li>';
+                        pic += '<div class="item active"><img src="' + produit.picture[p] + '" alt="' + p + '" style="width:100%;"></div>';
+                    } else {
+                        item += '<li data-target="#myCarousel" data-slide-to="' + p + '"></li>';
+                        pic += '<div class="item"><img src="' + produit.picture[p] + '" alt="' + p + '" style="width:100%;"></div>';
+                    }
+                }
+                console.log(item);
+                $('.carousel-indicators').html(item);
+                $('.carousel-inner').html(pic);
+            }
+        });
+    });
+
+    //consulter les detail Verre
+    $('.item-food-content').on('click', '.show-verre-detail', function () {
+        lien = $(this).data('lien');
+        lienModif = $(this).data('mod');
+        lienSupp = $(this).data('sup');
+        id = $(this).data('identifiant');
+        idItem = $(this).data('podui');
+        pic = "";
+        item = "";
+        $.ajax({
+            url: lien,
+            method: 'post',
+            success: function (data) {
+                var produit = JSON.parse(data);
+                $('.detail-annonce-title,.detail-annonce-nom').text(produit.nom);
+                $('.detail-annonce-description').text(produit.description);
+                $('.detail-annonce-prix').text(produit.price+"DT");
+                $('.detail-annonce-marque').text(produit.marque);
+                $('.detail-annonce-modele').text(produit.model);
+                $('.detail-annoce-couleur').text(produit.color);
+                $('.detail-annoce-forme').text(produit.forme);
+                $('.detail-annoce-dimension').text(produit.dimensions);
+                $('.detail-annoce-weight').text(produit.weight);
+                if (produit.picture.length > 1) {
+                    $('.carousel-control').show();
+                    $('.carousel-indicators').show();
+                } else {
+                    $('.carousel-control').hide();
+                    $('.carousel-indicators').hide();
+                }
+                for (p = 0; p < produit.picture.length; p++) {
+                    if (p === 0) {
+                        item += '<li data-target="#myCarousel" data-slide-to="' + p + '" class="active"></li>';
+                        pic += '<div class="item active"><img src="' + produit.picture[p] + '" alt="' + p + '" style="width:100%;"></div>';
+                    } else {
+                        item += '<li data-target="#myCarousel" data-slide-to="' + p + '"></li>';
+                        pic += '<div class="item"><img src="' + produit.picture[p] + '" alt="' + p + '" style="width:100%;"></div>';
+                    }
+                }
+                $('.carousel-indicators').html(item);
+                $('.carousel-inner').html(pic);
+            }
+        });
+    });
+
+    $('.annonce-modifier-1').click(function () {
+        pic = "";
+        CKEDITOR.instances['editeur'].setData('');
+        $.ajax({
+            url: lienModif,
+            method: 'post',
+            success: function (data) {
+                var produit = JSON.parse(data);
+                $('.nomProduit').text(produit.nom);
+                $('.form-annonce-nom').val(produit.nom);
+                $('.form-annonce-prix').val(produit.prix);
+                $('#deb').val(produit.dateDeb);
+                $('#fin').val(produit.dateFin);
+                CKEDITOR.instances['editeur'].setData(produit.description);
+                for (p = 0; p < produit.photo.length; p++) {
+                    pic += '<div class="col-md-4 col-xs-6 col-sm-4"><div style="margin-top: 20px;"><span class="notify-badge" data-lien="/module/depannage-vehicule/annonce/delete/picture/' + produit.id + '/' + produit.photoArr[p] + '" >x</span><img src="' + produit.photo[p] + '" alt="' + p + '" style="width:100%;height: 96px;"></div></div>';
+                }
+                $('.form-annonce-image').html(pic);
+                $('.id').val(produit.id);
+            }
+        });
+    });
+
+    $('.annonce-supprimer-1').click(function () {
+        $(".confirm-del-annonce").click(function () {
+            $.ajax({
+                url: lienSupp,
+                method: 'post',
+                success: function (data) {
+                    $('#del-annonce').modal('hide');
+                    $('#showAnnonce').modal('hide');
+                    $('.item-produit[data-prod="' + idItem + '"]').fadeOut();
+                    $('#service-tables tr[data-prod="' + idItem + '"]').fadeOut();
+                }
+            });
+        });
+    });
+
+    $('#title-service-add').hide();
+    $('#title-service-mod').hide();
+
+    $("#servicess").change(function () {
+        selec = $("#servicess option:selected").text();
+        if (selec == "Choisir autre Service") {
+            $('#title-service-mod').show();
+            $('#service_update').attr('disabled', false);
+        } else {
+            $('#title-service-mod').hide();
+            $('#service_update').attr('disabled', true);
+        }
+    });
+    $("#services").change(function () {
+        selec = $("#services option:selected").text();
+        if (selec == "Choisir autre Service") {
+            $('#title-service-add').show();
+            $('#name-add').attr('disabled', false);
+        } else {
+            $('#title-service-add').hide();
+            $('#name-add').attr('disabled', true);
+        }
+    });
+
+</script>
+<script>
+
+    $('.form_article').click(function () {
+        module = $(this).data('module');
+        if ((typeof module) == 'string') {
+            module = $(this).data('module').replace(/(\r\n|\n|\r)/g, '<br/>').toString();
+            module = JSON.parse(module);
+        }
+        link = $(this).data('link');
+        $('#Article-edit #AdminBundle_traiteur_titre').val(module.titre);
+        $('#Article-edit #AdminBundle_traiteur_details').val(module.details);
+        CKEDITOR.instances['#AdminBundle_traiteur_details'].setData(module.details);
+        $('#Article-edit #AdminBundle_traiteur_prix').val(module.prix);
+        $('#Article-edit form').attr('action', link);
+
+    });
+
+    $('.view').click(function () {
+
+        module = $(this).data('module');
+        if ((typeof module) == 'string') {
+            module = $(this).data('module').replace(/(\r\n|\n|\r)/g, '<br/>').toString();
+            module = JSON.parse(module);
+        }
+        $('.titre-view').html(module.titre);
+        $('.view-description').html(module.details);
+        $('.prix').html(module.prix);
+        $('.prev-img-view img').attr('src', module.image);
+
+    });
+</script>
+{% if app.session.flashbag.get('email') != null %}
+    <script type="text/javascript">
+        $(document).ready(
+            function () {
+                new PNotify({
+                    title: 'Email',
+                    text: 'l\'email enoyer avec succée.'
+                });
+            });
+    </script>
+{% endif %}
+<script>
+    $(".form-annonce-image").on('click', '.notify-badge', function () {
+        pic = "";
+        lien = $(this).attr('data-lien');
+        $.confirm({
+            title: '<div style="color: cadetblue"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Confirm de suppression photo</div>',
+            content: '',
+            buttons: {
+                Confirmer: function () {
+                    $.ajax({
+                        url: lien,
+                        method: 'post',
+                        success: function (data) {
+                            var produit = JSON.parse(data);
+                            $('.form-annonce-nom').val(produit.nom);
+                            $('.form-annonce-prix').val(produit.prix);
+                            $('.form-annonce-categorie').val(produit.category);
+                            CKEDITOR.instances['editeur'].setData(produit.description);
+                            for (p = 0; p < produit.photo.length; p++) {
+                                pic += '<div class="col-md-4 col-xs-6 col-sm-4"><span class="notify-badge" data-lien="module/depannage-vehicule/annonce/delete/picture/' + produit.id + '/' + produit.photoArr[p] + '" >x</span><img src="' + produit.photo[p] + '" alt="' + p + '" style="width:100%;"></div>';
+                            }
+                            $('.form-annonce-image').html(pic);
+                            $('.id').val(produit.id);
+                        }
+                    });
+                },
+                Annuler: function () {
+                }
+            }
+        });
+    });
+
+
+    nb = 1;
+    $('.load-less-annonce').hide();
+    $('.load-more-annonce').click(function () {
+        item = "";
+        id ={{ qouiqui.id }};
+        idp ={{ qouiqui.user.id }}
+            $.ajax({
+                url: '/module/depannage-vehicule/annonce/' + nb + '/' + id,
+                method: 'post',
+                success: function (data) {
+                    var produit = JSON.parse(data);
+                    if (produit.length > 0) {
+                        for (i = 0; i < produit.length; i++) {
+                            item += '<div class="col-md-4 col-lg-3 col-sm-12 col-sm-6 col-xs-12 col-custom item-scroll item-id-' + produit[i].id + '">\n' +
+                                '                                    <div class="item item-produit" data-prod="' + produit[i].id + '">\n' +
+                                '                                        <div class="property_item bottom40">\n' +
+                                '                                            <div class="image">\n' +
+                                '                                                <img src="/uploads/image/' + idp + '/' + id + '/produits/' + produit[i].photo[0] + '" alt="listin" style="height:247px;" class="img-responsive">\n' +
+                                '                                                 <div class="price">\n' +
+                                '                                                      <span class="tag">\n' +
+                                '                                                           <a class="reserver-offre" data-id="'+produit[i].id+'" onclick="geoLocate();">Reserver</a>\n' +
+                                '                                                        </span>\n'+
+                                '                                                 </div>' +
+                                '                                                <div class="overlay">\n' +
+                                '                                                    <div class="centered"><a\n' +
+                                '                                                                class="link_arrow white_border show-detail-annonce"\n' +
+                                '                                                                href="#" data-toggle="modal"\n' +
+                                '                                                                data-target="#showAnnonce"\n' +
+                                '                                                                data-lien="/module/depannage-vehicule/annonce/show/' + produit[i].id + '/' + id + '"' +
+                                '                                                                data-mod="/module/depannage-vehicule/annonce/edit/' + produit[i].id + '"' +
+                                '                                                                data-sup="/module/depannage-vehicule/annonce/delete/' + produit[i].id + '"' +
+                                '                                                                data-identifiant="' + produit[i].id + '" data-podui="' + produit[i].id + '">Voir Detail</a></div></div></div>' +
+                                '                                            <div class="proerty_content">\n' +
+                                '                                                <div class="proerty_text">\n' +
+                                '                                                    <h3>' + produit[i].nom + '</h3>\n' +
+                                '                                                    <span class="bottom10">' + produit[i].dateDeb + ' jusqu\'a ' + produit[i].dateFin + '</span>\n' +
+                                '                                                    <p><strong>' + produit[i].prix + ' DT</strong></p>\n' +
+                                '                                                </div>\n' +
+                                '                                            </div>\n' +
+                                '                                        </div>\n' +
+                                '                                    </div>\n' +
+                                '                                </div>';
+                        }
+                        if (produit.length < 4) {
+                            $('.load-more-annonce').hide();
+                        }
+                        nb += 1;
+                        $('#append-item').append(item).fadeIn();
+                    } else {
+                        $('.load-more-annonce').hide();
+                    }
+                    $('.load-less-annonce').show();
+                    var p = $(".item-scroll:last");
+                    var offset = p.offset();
+                    $('html body').animate({scrollTop: offset.top - 200}, 1500);
+                }
+                ,
+                error: function (xhr, status, error) {
+
+                }
+                ,
+
+            });
+    });
+
+    function removeOBJ(target) {
+        $(".item-id-" + target).remove();
+    }
+
+    $('.load-less-annonce').click(function () {
+        id ={{ qouiqui.id }};
+        idp ={{ qouiqui.user.id }};
+        idd = nb - 1;
+        $.ajax({
+            url: '/module/depannage-vehicule/annonce/delete/' + idd + '/' + id,
+            method: 'post',
+            success: function (data) {
+                var produit = JSON.parse(data);
+                var p = $(".item-scroll:first");
+                var offset = p.offset();
+                $('html body').animate({scrollTop: offset.top - 250}, 1500);
+                $('.load-more-annonce').show();
+                for (i = 0; i < produit.length; i++) {
+                    $(".item-id-" + produit[i]).hide("slow", function () {
+                        setTimeout($(this).remove(), 1000);
+                    });
+                }
+                nb -= 1;
+                verificationItem();
+            }
+        });
+    });
+
+    function verificationItem() {
+        nombre = 0;
+        $(".item-scroll").each(function () {
+            nombre++;
+        });
+        if (nombre <= 8) {
+            $('.load-less-annonce').hide();
+        }
+    }
+
+    verificationItem();
+
+    //service detail
+    $('.service-details-btn').click(function(){
+        data=$(this).attr('data-module');
+        $('.service-text-modal').text(data.service);
+        $('.service-description-modal').text(data.description);
+    });
+    //
+    $('#append-item').on('click','.reserver-offre',function(){
+        id= $(this).attr('data-id');
+        $('#id-reservation').attr('value',id);
+        a =$("#appel-urgence").offset().top;
+        if($(window).width()<994){
+            a=a+440;
+        }
+        $('html, body').animate({
+            scrollTop: a
+        }, 1000);
+    });
+</script>
+<style>
+    .notify-badge {
+        position: absolute;
+        background: red;
+        height: 21px;
+        top: 9px;
+        right: 8px;
+        width: 21px;
+        text-align: center;
+        line-height: 2rem;
+        font-size: 18px;
+        border-radius: 50%;
+        color: white;
+        border: 1px solid red;
+        cursor: pointer;
+    }
+</style>

@@ -1,0 +1,70 @@
+<!-- modal ajout des des evenements -->
+
+<div class="container">
+    <div class="modal fade ajout-events-modal-lg css-modal-galerie" tabindex="-1" role="dialog"
+         aria-labelledby="myLargeModalLabel">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Ajouter évenement</h4>
+                </div>
+                <div class="modal-body">
+
+                    <div class="col-md-12">
+                        <div class="well-block">
+                            <form action="{{ path('hotel_ajouterEvents',{'id_qq':qouiqui.id}) }}" method="POST"
+                                  enctype="multipart/form-data" name="ajouter-events">
+                                <!-- Form start -->
+                                <div class="row">
+
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label class="control-label" for="name">Ajouter un titre</label>
+                                            <input id="hotelname" name="events[nameEvents]" type="text"
+                                                   placeholder="Titre de l'évenements" class="form-control input-md"
+                                                   required="">
+                                            <label class="control-label" for="name">Date</label>
+                                            <input type="date" class="form-control" id="date" name="events[dateEvents]" required/>
+
+                                        </div>
+                                    </div>
+                                    <!-- Text area -->
+                                    <div class="col-md-12">
+                                        <textarea name="events[eventsDetails]" class="ckeditor"></textarea>
+                                    </div>
+                                    <!-- Textarea -->
+                                    <!-- Text area -->
+                                    <div class="col-md-12 add-room ">
+                                        <div class="form-group">
+                                            <label class="btn-bs-file theme-btn btn-style-two">
+                                                Cliquer ici pour ajouter une photo
+                                                <input type="file" id="imgUploadEvents"
+                                                       class="form-control inline-block uploadImage" name="events[eventsImage]" required/>
+                                            </label>
+                                            <img id="imagUpEvents" src="#" alt="image upload" class="upImg"/>
+                                        </div>
+                                    </div>
+                                    <!-- Button -->
+
+                                </div>
+                                <button type="submit" class="theme-btn btn-style-two envoyerUpload"
+                                        id="ajouter-events">
+                                    Ajouter
+                                </button>
+                                <button type="button" class="theme-btn btn-style-one pull-right " data-dismiss="modal">Fermer</button>
+                            </form>
+                            <!-- form end -->
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer ">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- modal ajout des evenements -->

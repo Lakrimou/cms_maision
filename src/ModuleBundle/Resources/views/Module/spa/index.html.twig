@@ -1,0 +1,2649 @@
+{% set connected = false %}
+{% if app.user %}
+    {% if app.user.id == qouiqui.user.id %}
+        {% set connected = true %}
+    {% endif %}
+{% endif %}
+{% set carte = [] %}
+
+{% for mod in module %}
+    {% if mod.section== 'carte' %}
+        {% set carte = carte|merge({(loop.index0):mod}) %}
+    {% endif %}
+{% endfor %}
+
+
+<!DOCTYPE html>
+
+<head>
+    {% if (encodeData(qouiqui)).tags is defined %}
+        <meta name="keywords" content="{{ (encodeData(qouiqui)).tags }}"/>
+    {% endif %}
+    <meta name="description" content="{{ qouiqui.details }}"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+
+    <!-- FONTS -->
+
+
+    <link href="{{ asset('module/immobiliair/css/animate.css') }}" rel="stylesheet">
+
+    <link href="{{ asset('module/immobiliair/css/style.css') }}" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Work+Sans:400,300,500,600,700' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Philosopher:400,400italic,700,700italic' rel='stylesheet'
+          type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Bilbo+Swash+Caps' rel='stylesheet' type='text/css'>
+
+    <!-- STYLESHEETS -->
+    <link href="{{ asset('module/spa/css/bootstrap.css') }}" rel="stylesheet" type="text/css">
+    {#<link rel="stylesheet" href="{{ asset('module/spa/font-awesome/css/font-awesome.min.css') }}">#}
+    <link href="{{ asset('module/spa/css/vertical.min.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('module/spa/css/magnific-popup.css') }}" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="{{ asset('module/spa/css/flaticon.css') }}">
+    {#<link rel="stylesheet" href="{{ asset('module/spa/css/responsive-tabs.css') }}">#}
+    {#<link rel="stylesheet" href="{{ asset('module/spa/picker/css/datepicker.css') }}">#}
+
+    <link rel="stylesheet" href="{{ asset('module/spa/css/owl.carousel.css') }}">
+    <link rel="stylesheet" href="{{ asset('module/spa/css/ihover.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('module/spa/revslider/css/settings.css') }}" media="screen">
+    <link href="{{ asset('module/spa/css/styles.css') }}" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="{{ asset('module/spa/tuner/css/colorpicker.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('module/spa/tuner/css/styles.css') }}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    {#<link rel="stylesheet" href="{{ asset('module/spa/resources/demos/style.css') }}">#}
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link href="{{ asset('module/spa/picker/css/bootstrap-datetimepicker.min.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('asset-back/css/bootstrap-datetimepicker.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('asset-back/css/dropzone.css') }}" type="text/css" rel="stylesheet"/>
+    <link rel="stylesheet" href="{{ asset('//cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css') }}"
+          id="theme-stylesheet">
+    {#<link rel="stylesheet" href="{{ asset('//cdn.datatables.net/responsive/2.1.1/css/responsive.bootstrap.min.css') }}">#}
+    <link href="{{ asset('module/spa/dist/css/bootstrap-colorpicker.min.css') }}" rel="stylesheet">
+
+    <link href="{{ asset('module/spa/dist/css/bootstrap-colorpicker-plus.css') }}" rel="stylesheet">
+    {#<link href="{{ asset('module/spa/custom/css/jquery.mCustomScrollbar.min.css') }}" rel="stylesheet">#}
+    <link href="{{ asset('module/spa/dist/css/jquery.timepicker.css') }}" rel="stylesheet">
+    <script src="{{ asset('module/spa/js/jquery.min.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-formhelpers/2.3.0/js/bootstrap-formhelpers.js"></script>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-formhelpers/2.3.0/css/bootstrap-formhelpers.css">
+    <link rel="stylesheet" href="https://rawgit.com/hawk-ip/jquery.tabSlideOut.js/master/jquery.tabSlideOut.css">
+    <script src="https://rawgit.com/hawk-ip/jquery.tabSlideOut.js/master/jquery.tabSlideOut.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-one-page-nav/3.0.0/jquery.nav.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+    {#<link rel="stylesheet" type="text/css" href="{{ asset('module/spa/fluxtabs/css/styles/style.min.css') }}" />#}
+    <link rel="stylesheet" type="text/css" href="{{ asset('module/spa/fluxtabs/css/skeletabs.min.css') }}"/>
+    <link rel="stylesheet" type="text/css" href="{{ asset('module/spa/select/dist/css/select2.css') }}"/>
+
+    <link href="{{ asset('module/spa/gallerycss/style1.css') }}" rel="stylesheet">
+    <link href="{{ asset('module/spa/gallerycss/style_common.css') }}" rel="stylesheet">
+
+    {#<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css"></script>#}
+
+    {#<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker.css" rel="stylesheet"#}
+    {#type="text/css"/>#}
+
+
+    <title>{{ qouiqui.firstName }}</title>
+</head>
+<body>
+<!-- PAGE -->
+
+
+<div class="page" id="top">
+
+
+    <!-- preloader -->
+
+    <div id="preloader">
+        <div class="preloader-wave"></div>
+    </div>
+    {{ include('@Module/Module/spa/header.html.twig') }}
+
+    {{ include('ModuleBundle:Module:spa/colorpiker.html.twig') }}
+    {% if  connected %}
+
+        <button type="button" class="btn btn-primary button-slider" data-toggle="modal" data-target="#gallery-modal"
+        >modifier les images
+
+        </button>
+
+
+    {% endif %}
+
+    <div class="tp-banner-container  ">
+
+        <div class="tp-banner-slider">
+            {% if slider %}
+
+
+                {% for img in slider %}
+
+                    <ul>
+                        <li data-masterspeed="700">
+                            <img src="uploads/image/{{ iduser }}/{{ qouiqui.id }}/slider/{{ img }}">
+
+
+                        </li>
+                    </ul>
+                {% endfor %}
+
+
+            {% else %}
+                <ul>
+                    <li data-masterspeed="700">
+                        <img src="{{ asset('module/spa/images/section-bg/Spa-Vanity-12-14.jpg') }}" alt>
+                    </li>
+                    <li data-masterspeed="700">
+                        <img src="{{ asset('module/spa/images/section-bg/slider-1.jpg') }}" alt>
+                    </li>
+                    <li data-masterspeed="700">
+                        <img src="{{ asset('module/spa/images/section-bg/slider-2.jpg') }}" alt>
+
+
+                    </li>
+                    <li data-masterspeed="700">
+                        <img src="{{ asset('module/spa/images/section-bg/slider-3.jpg') }}" alt>
+
+                    </li>
+
+                </ul>
+
+            {% endif %}
+
+
+        </div>
+        <div class="slider-rect-bot">
+            <img src="{{ asset('module/spa/images/lines/rectangle-2.png') }}"
+                 data-at2x="{{ asset('module/spa/images/lines/rectangle-2@2x.png') }}" alt>
+        </div>
+    </div>
+
+
+    {{ include('ModuleBundle:Module:spa/about.html.twig') }}
+
+
+
+
+    {{ include('ModuleBundle:Module:spa/service.html.twig') }}
+
+
+    {{ include('ModuleBundle:Module:spa/carte.html.twig') }}
+
+
+
+
+    {{ include('ModuleBundle:Module:spa/reservation.html.twig') }}
+
+
+    {{ include('ModuleBundle:Module:spa/event.html.twig') }}
+
+
+    {{ include('ModuleBundle:Module:spa/gallery.html.twig') }}
+
+
+    {{ include('ModuleBundle:Module:spa/contact.html.twig') }}
+
+
+    <hr class="mt-0 mb-0 alt-2"/>
+
+    <!-- google map -->
+
+    <div class="google-map">
+        <div id="map-spa" style="height: 300px; width: 100%;"></div>
+
+
+        <div id="ite">
+            <div class="col-md-12 align-center">
+                <div class="col-md-12">
+                    <div style="    text-align: center;font-size: 20px; color:white">
+
+                        Y aller
+                    </div>
+                    <form class="form-inline">
+
+                        <div class="col-md-8 no-padding">
+                            <div class="input-group first-ch">
+                                <div class="input-group-addon btn btn-cta-primary"
+                                     onclick="javascript:geolocate()"
+                                     data-toggle="tooltip" data-placement="bottom"
+                                     title="Détecter ma position"><i
+                                            class="fa fa-location-arrow" aria-hidden="true"></i></div>
+                                <input type="text" name="origin" id="origin"
+                                       placeholder="Indiquez un lieu"
+                                       class="form-control map-input" size="0" autocomplete="off">
+                            </div>
+                        </div>
+                        <div class="col-md-4 no-padding">
+
+
+                            <a class="btn btn-primary btn-block btn-sm"
+                               style="cursor:pointer;padding: 7px;"
+                               onclick="calculate();">Itinéraire</a>
+
+
+                            <input type="hidden" value="36.851822,10.1576564" name="destination"
+                                   id="destination">
+
+                        </div>
+
+                    </form>
+                    <div id="panel"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{#<div id="map-spa" style="height: 300px; width: 100%;"></div>#}
+
+<!-- /google map -->
+
+<hr class="mt-0 mb-0 alt-2"/>
+
+
+<footer>
+    <div class="footer-rect">
+        <img src="{{ asset('module/spa/images/lines/rectangle-3.png') }}"
+             data-at2x="{{ asset('module/spa/images/lines/rectangle-3@2x.png') }}" alt>
+    </div>
+
+
+    <div class="bottom-footer">
+
+        <div class="container">
+
+
+            <div class="footer-copy">
+                <a href="https://webmaster-media.tn/" target="_blank" style="color:white;">
+                    <div class="copyright">© 2017 Webmaster-Media tous les droits sont réservés</div>
+                </a>
+            </div>
+
+
+            <div class="footer-soc-links">
+                <a href="#">
+                    <i class="flaticon-social"></i>
+                </a>
+                <a href="#">
+                    <i class="flaticon-social-4"></i>
+                </a>
+                <a href="#">
+                    <i class="flaticon-social-5"></i>
+                </a>
+                <a href="#">
+                    <i class="flaticon-connection"></i>
+                </a>
+                <a href="#">
+                    <i class="flaticon-social-2"></i>
+                </a>
+
+            </div>
+
+        </div>
+    </div>
+
+
+</footer>
+
+
+<div id="scroll-top">
+    <i class="fa fa-angle-up"></i>
+    top
+</div>
+
+</div>
+<!--modal-->
+
+{#modaaaaaaaaaaal2#}
+<div class="modal fade" id="gallery-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title"></h4>
+            </div>
+            <div class="modal-body">
+
+                <div class="row norow">
+                    <form action="{{ path('module_spa_upload',{'idqq': qouiqui.id} ) }}" class="dropzone"
+                          id="my-dropzone"></form>
+                </div>
+                {% if slider is not empty %}
+                    <div class="row norow change_avatar">
+                        <div class="alert alert-info">
+                            <strong>Info!</strong> Vous pouovez changer l'ordre de l'apparition de l'image juste glisser
+                            les images
+                        </div>
+                        <form id="orderimg" action="{{ path('module_spa_tmp_folder',{'qq_id': qouiqui.id} ) }}"
+                              method="post"
+                              enctype="multipart/form-data">
+
+                            <ul id="sortable">
+
+                                {% for img in slider %}
+
+
+
+
+                                    <div class="col-md-6 " data-div="{{ img }}">
+                                        <div class="thumbnail remove-div">
+                                            <!-- Single button -->
+                                            <div id="div1" class="btn-group pull-right"
+                                                 style="position: absolute;right: 20px;">
+                                                <button type="button" class="btn btn-default dropdown-toggle"
+                                                        data-toggle="dropdown"
+                                                        aria-haspopup="true" aria-expanded="false">
+                                                    <i class="fa fa-pencil" aria-hidden="true"></i> <span
+                                                            class="caret"></span>
+                                                </button>
+                                                <ul class="dropdown-menu">
+
+                                                    <li><a href="#" class="remove"
+                                                           data-name-remove="{{ img }}"
+                                                           data-id="{{ qouiqui.id }}">supprimer</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+
+                                            <li class="ui-state-default">
+
+
+                                                <input type="hidden" name="{{ loop.index }}" value="{{ img }}"><br>
+
+
+                                                <img src="/uploads/image/{{ iduser }}/{{ qouiqui.id }}/slider/{{ img }}">
+                                            </li>
+
+
+                                        </div>
+                                    </div>
+                                {% endfor %}
+
+
+                            </ul>
+                        </form>
+                    </div>
+                {% endif %}
+                {#<input type="submit" value="ok">#}
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+                <button type="submit" id="envois_photo" class="btn btn-default " data-target="modifier"
+                        data-selector="orderimg">
+                    enregistrer
+                </button>
+            </div>
+            </form>
+
+
+        </div>
+    </div>
+</div>
+
+
+{#=============================modal logo============================#}
+
+{#=============================connection modal============================#}
+<div id="modal_connection" class="modal   fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">connection</h4>
+            </div>
+            <div class="modal-body">
+
+                <div class="tab-content">
+                    <div class="col-md-12 btn-group btn-group-justified hidden-xs hidden-sm social"
+                         role="group">
+                        <div class="facebook btn-group" role="group">
+                            <a class="facebook-btn btn btn-primary" href="/login/facebook">
+                                <span>Connecter avec Facebook</span>
+                            </a>
+                        </div>
+                        <div class="btn-group" role="group">
+                            <a class="btn btn-danger" href="/login/google">
+                                <span>Connecter avec Google</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <form id="reservation" action="{{ path("fos_user_security_check") }}" method="post">
+                        <div class="form-group">
+                            <input type="hidden" name="_csrf_token"
+                                   value="Kk4KcJ-i6lPzu7pUx0wOja7L0g5uu9CI6uWJYDGVT4Q">
+                        </div>
+                        <div class="form-group">
+                            <label for="username">Login</label>
+                            <input type="text" id="username" name="_username" value="" required="required"
+                                   class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Mot de passe</label>
+                            <input type="password" id="password" name="_password" required="required"
+                                   class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <input type="checkbox" id="remember_me" name="_remember_me" value="on">
+                            <label for="remember_me">Se souvenir de moi!</label>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" id="_submit" name="_submit" value="Se connecter"
+                                   class="form-control btn btn-primary spa-reservation" data-toggle="modal">
+                            {#<a href="#modal_booking" role="button"  class="form-control btn btn-primary spa-reservation" data-toggle="modal">se connecter</a>#}
+                        </div>
+                    </form>
+                    Nouveau ? Insecrivez-vous
+
+                    <form name="fos_user_registration_form" method="post" action="/register/"
+                          class="fos_user_registration_register">
+                        <div id="fos_user_registration_form">
+
+                            <div class="form-group"><label class="control-label required"
+                                                           for="fos_user_registration_form_email">E-mail</label><input
+                                        type="email" id="fos_user_registration_form_email"
+                                        name="fos_user_registration_form[email]" required="required"
+                                        class="form-control"></div>
+                            <div class="form-group"><label class="control-label required"
+                                                           for="fos_user_registration_form_username">Nom </label><input
+                                        type="text" id="fos_user_registration_form_username"
+                                        name="fos_user_registration_form[username]" required="required"
+                                        maxlength="180"
+                                        pattern=".{2,}" class="form-control"></div>
+                            <div class="form-group"><label class="control-label required"
+                                                           for="fos_user_registration_form_prenom">
+                                    Prénom</label><input
+                                        type="text" id="fos_user_registration_form_prenom"
+                                        name="fos_user_registration_form[prenom]" required="required"
+                                        maxlength="255"
+                                        class="form-control"></div>
+                            <div class="form-group"><label class="control-label required"
+                                                           for="fos_user_registration_form_phone_number">téléphonne</label><input
+                                        type="text" id="fos_user_registration_form_phone_number"
+                                        name="fos_user_registration_form[phone_number]" required="required"
+                                        class="form-control"></div>
+
+                            <div class="form-group"><label class="control-label required"
+                                                           for="fos_user_registration_form_adress">Adresse</label><input
+                                        type="text" id="fos_user_registration_form_adress"
+                                        name="fos_user_registration_form[adress]" required="required"
+                                        maxlength="1024"
+                                        class="form-control"></div>
+                            <div class="form-group"><label class="control-label required"
+                                                           for="fos_user_registration_form_plainPassword_first">Entrer
+                                    le mot de passe</label><input type="password"
+                                                                  id="fos_user_registration_form_plainPassword_first"
+                                                                  name="fos_user_registration_form[plainPassword][first]"
+                                                                  required="required" class="form-control"></div>
+                            <div class="form-group"><label class="control-label required"
+                                                           for="fos_user_registration_form_plainPassword_second">Confirmer
+                                    le mot de passe</label><input type="password"
+                                                                  id="fos_user_registration_form_plainPassword_second"
+                                                                  name="fos_user_registration_form[plainPassword][second]"
+                                                                  required="required" class="form-control"></div>
+                            {#<input type="text" id="fos_user_registration_form__token" name="fos_user_registration_form[_token]" value="">#}
+
+                        </div>
+
+
+                        <div>
+                            <input type="submit" id="envoyer" value="S'inscrire"
+                                   class="form-control btn btn-primary">
+                        </div>
+
+
+                    </form>
+
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+{#=============================modal  reservation============================#}
+
+<div class="modal  fade" id="modal_booking" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <div class="container make_an_appointment ">
+                    <div class="row">
+
+
+                        <div class="col-sm-6  col-xs-12">
+
+
+                            <form id=booking method="post"
+                                  action="{{ path('module_spa_booking',{'id_qq': qouiqui.id }) }}">
+                                <div class="text-center">
+                                    <h3 class="text-uppercase">Choisissez votre rendez-vous</h3>
+                                </div>
+
+
+                                {#<input class="form-control" id="appointment" name="appointment">#}
+                                <div class="col-sm-12  col-md-12 col-xs-12 form-group">
+                                    <label for="usr"> Choisissez notre service</label>
+                                    {% if spaCarte(carte) %}
+                                        <select class="js-example-basic-multiple form-control " name="service[data][]"
+                                                multiple="multiple">
+                                            {% for a,c in  spaCarte(carte) %}
+                                                <optgroup label="{{ a }}">
+                                                    {% for cc in c %}
+                                                        <option value="{{ cc.sdesignation }}">{{ cc.sdesignation }}</option>
+                                                    {% endfor %}
+                                                </optgroup>
+                                            {% endfor %}
+                                        </select>
+
+                                        {#<select id="reserver" class="selectpicker form-control " name="reserver">#}
+                                        {#{% for a,c in  spaCarte(carte) %}#}
+                                        {#<optgroup label="{{ a }}">#}
+                                        {#{% for cc in c %}#}
+                                        {#<option value="{{ cc.sdesignation }}">{{ cc.sdesignation }}</option>#}
+                                        {#{% endfor %}#}
+                                        {#</optgroup>#}
+                                        {#{% endfor %}#}
+
+
+                                        {#</select>#}
+                                    {% endif %}
+                                </div>
+
+
+                                <label for="usr" class=" col-md-12"> Choisissez la date</label>
+                                <div class='input-group date ' id='datepicker'>
+                                    <input type='text' class="form-control"/>
+                                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                                </div>
+
+                                <label for="usr" class="col-sm-12 col-md-12 col-xs-12 "> Vous êtes disponible :</label>
+                                <div class="col-sm-12 col-md-6 col-xs-12  " style="bottom: 20px;">
+
+                                    <h5>de</h5>
+
+                                    <div class="bfh-timepicker" data-mode="12h" data-time="08:00" value=""
+                                         data-name="from">
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-md-6 col-xs-12  " value="" style="bottom: 20px;">
+                                    <h5>à</h5>
+                                    <div class="bfh-timepicker" data-mode="12h" data-time="18:00"
+                                         data-name="to" value="">
+                                    </div>
+
+
+                                </div>
+
+                                <div class="pull-right">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+                                    <button type="submit" class="btn btn-default spabooking " data-target="modifier"
+                                            data-selector="">
+                                        Envoyer
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+{#=============================modal reservation============================#}
+
+<div id="connexion" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">bconnection</h4>
+            </div>
+            <div class="modal-body">
+                <div role="tabpanel">
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li role="presentation" class="active"><a href="#es_admin" aria-controls="es_admin"
+                                                                  role="tab"
+                                                                  data-toggle="tab">Espace Admin</a>
+                        </li>
+                        <li role="presentation"><a href="#es_client" aria-controls="es_client" role="tab"
+                                                   data-toggle="tab">Espace Utilisateur</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane active" id="es_admin">
+                            <div class="col-md-12 btn-group btn-group-justified hidden-xs hidden-sm social"
+                                 role="group">
+                                <div class="facebook btn-group" role="group">
+                                    <a class="facebook-btn btn btn-primary" href="/login/facebook">
+                                        <span>Connecter avec Facebook</span>
+                                    </a>
+                                </div>
+                                <div class="btn-group" role="group">
+                                    <a class="btn btn-danger" href="/login/google">
+                                        <span>Connecter avec Google</span>
+                                    </a>
+                                </div>
+                            </div>
+                            <form action="/login_check" method="post">
+                                <div class="form-group">
+                                    <input type="hidden" name="_csrf_token"
+                                           value="Kk4KcJ-i6lPzu7pUx0wOja7L0g5uu9CI6uWJYDGVT4Q">
+                                </div>
+                                <div class="form-group">
+                                    <label for="username">Nom d'utilisateur</label>
+                                    <input type="text" id="username" name="_username" value="" required="required"
+                                           class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label for="password">Mot de passe</label>
+                                    <input type="password" id="password" name="_password" required="required"
+                                           class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <input type="checkbox" id="remember_me" name="_remember_me" value="on">
+                                    <label for="remember_me">Se souvenir de moi!</label>
+                                </div>
+                                <div class="form-group">
+                                    <input type="submit" id="_submit" name="_submit" value="Se connecter"
+                                           class="form-control btn btn-warning">
+                                </div>
+                            </form>
+                        </div>
+                        <div role="tabpanel" class="tab-pane" id="es_client">
+                            <form action="/login_check" method="post">
+                                <div class="form-group">
+                                    <input type="hidden" name="_csrf_token"
+                                           value="Kk4KcJ-i6lPzu7pUx0wOja7L0g5uu9CI6uWJYDGVT4Q">
+                                </div>
+                                <div class="form-group">
+                                    <label for="username">Login</label>
+                                    <input type="text" id="username" name="_username" value="" required="required"
+                                           class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label for="password">Mot de passe</label>
+                                    <input type="password" id="password" name="_password" required="required"
+                                           class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <input type="checkbox" id="remember_me" name="_remember_me" value="on">
+                                    <label for="remember_me">Se souvenir de moi!</label>
+                                </div>
+                                <div class="form-group">
+                                    <input type="submit" id="_submit" name="_submit" value="Se connecter"
+                                           class="form-control btn btn-primary">
+                                </div>
+                            </form>
+                            Nouveau ? Insecrivez-vous
+
+                            <form name="fos_user_registration_form" method="post" action="/register/"
+                                  class="fos_user_registration_register">
+                                <div id="fos_user_registration_form">
+
+                                    <div class="form-group"><label class="control-label required"
+                                                                   for="fos_user_registration_form_email">E-mail</label><input
+                                                type="email" id="fos_user_registration_form_email"
+                                                name="fos_user_registration_form[email]" required="required"
+                                                class="form-control"></div>
+                                    <div class="form-group"><label class="control-label required"
+                                                                   for="fos_user_registration_form_username">Nom </label><input
+                                                type="text" id="fos_user_registration_form_username"
+                                                name="fos_user_registration_form[username]" required="required"
+                                                maxlength="180" pattern=".{2,}" class="form-control"></div>
+                                    <div class="form-group"><label class="control-label required"
+                                                                   for="fos_user_registration_form_prenom">
+                                            Prénom</label><input type="text" id="fos_user_registration_form_prenom"
+                                                                 name="fos_user_registration_form[prenom]"
+                                                                 required="required" maxlength="255"
+                                                                 class="form-control"></div>
+                                    <div class="form-group"><label class="control-label required"
+                                                                   for="fos_user_registration_form_phone_number">téléphonne</label><input
+                                                type="text" id="fos_user_registration_form_phone_number"
+                                                name="fos_user_registration_form[phone_number]" required="required"
+                                                class="form-control"></div>
+
+                                    <div class="form-group"><label class="control-label required"
+                                                                   for="fos_user_registration_form_adress">Adresse</label><input
+                                                type="text" id="fos_user_registration_form_adress"
+                                                name="fos_user_registration_form[adress]" required="required"
+                                                maxlength="1024" class="form-control"></div>
+                                    <div class="form-group"><label class="control-label required"
+                                                                   for="fos_user_registration_form_plainPassword_first">Entrer
+                                            le mot de passe</label><input type="password"
+                                                                          id="fos_user_registration_form_plainPassword_first"
+                                                                          name="fos_user_registration_form[plainPassword][first]"
+                                                                          required="required" class="form-control">
+                                    </div>
+                                    <div class="form-group"><label class="control-label required"
+                                                                   for="fos_user_registration_form_plainPassword_second">Confirmer
+                                            le mot de passe</label><input type="password"
+                                                                          id="fos_user_registration_form_plainPassword_second"
+                                                                          name="fos_user_registration_form[plainPassword][second]"
+                                                                          required="required" class="form-control">
+                                    </div>
+                                    {#<input type="text" id="fos_user_registration_form__token" name="fos_user_registration_form[_token]" value="">#}
+
+                                </div>
+
+
+                                <div>
+                                    <input type="submit" id="envoyer" value="S'inscrire"
+                                           class="form-control btn btn-primary">
+                                </div>
+
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+{#===========================end connection modal============================#}
+
+
+
+
+{{ include('ModuleBundle:Module:spa/stylecolor.html.twig') }}
+{% block javascripts %}
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdn.ckeditor.com/4.6.2/standard/ckeditor.js"></script>
+    <script src="{{ asset('module/spa/js/jquery.easing.js') }}"></script>
+    {#<script src="{{ asset('module/spa/js/bootstrap.min.js') }}"></script>#}
+    <script src="{{ asset('module/spa/js/owl.carousel.min.js') }}"></script>
+    <script src="{{ asset('module/spa/js/isotope.pkgd.min.js') }}"></script>
+    <script src="{{ asset('module/spa/js/droparea.js') }}"></script>
+    <script src="{{ asset('module/spa/js/droparea.min.js') }}"></script>
+    <script src="{{ asset('module/spa/js/jquery.fitvids.js') }}"></script>
+    <script src="{{ asset('module/spa/js/jquery.magnific-popup.js') }}"></script>
+    <script src="{{ asset('module/spa/js/imagesloaded.pkgd.min.js') }}"></script>
+    <script src="{{ asset('module/spa/js/masonry.pkgd.min.js') }}"></script>
+    <script src="{{ asset('module/spa/js/jquery.sticky.js') }}"></script>
+    <script src="{{ asset('module/spa/js/jquery.form.min.js') }}"></script>
+    <script src="{{ asset('module/spa/js/jquery.validate.min.js') }}"></script>
+    <script src="{{ asset('module/spa/js/jquery.parallax.min.js') }}"></script>
+    <script src="{{ asset('module/spa/js/jquery.appear.js') }}"></script>
+    <script src="{{ asset('module/spa/js/retina.min.js') }}"></script>
+    <script src="{{ asset('module/spa/dist/js/bootstrap-colorpicker.js') }}"></script>
+    <script src="{{ asset(('module/spa/dist/colorpicker/bootstrap-colorpicker.min.js')) }}"></script>
+    <script src="{{ asset('module/spa/dist/js/bootstrap-colorpicker-plus.js') }}"></script>
+    <script src="{{ asset('module/spa/dist/js/jquery.timepicker.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+    <script type='text/javascript'
+            src='{{ asset('module/spa/revslider/js/jquery.themepunch.tools.min.js') }}'></script>
+    <script type='text/javascript'
+            src='{{ asset('module/spa/revslider/js/jquery.themepunch.revolution.min.js') }}'></script>
+    <script type='text/javascript'
+            src='{{ asset('module/spa/revslider/js/jquery.themepunch.tools.min.js') }}'></script>
+    <script type='text/javascript'
+            src='{{ asset('module/spa/revslider/js/jquery.themepunch.revolution.min.js') }}'></script>
+    <script type="text/javascript"
+            src="{{ asset('module/spa/revslider/js/extensions/revolution.extension.slideanims.min.js') }}"></script>
+    <script type="text/javascript"
+            src="{{ asset('module/spa/revslider/js/extensions/revolution.extension.layeranimation.min.js') }}"></script>
+    <script type="text/javascript"
+            src="{{ asset('module/spa/revslider/js/extensions/revolution.extension.navigation.min.js') }}"></script>
+    <script type="text/javascript"
+            src="{{ asset('module/spa/revslider/js/extensions/revolution.extension.parallax.min.js') }}"></script>
+
+    <script type="text/javascript"
+            src="{{ asset('module/spa/revslider/js/extensions/revolution.extension.actions.min.js') }}"></script>
+    <script type="text/javascript"
+            src="{{ asset('module/spa/revslider/js/extensions/revolution.extension.kenburn.min.js') }}"></script>
+    <script type="text/javascript"
+            src="{{ asset('module/spa/revslider/js/extensions/revolution.extension.migration.min.js') }}"></script>
+
+    <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/base/jquery-ui.css"
+          type="text/css" media="all">
+
+
+
+    <script src="{{ asset('module/spa/js/gmap3.min.js') }}"></script>
+    <script src="{{ asset('module/spa/js/jquery.ui.min.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.js"></script>
+    {#<script src="{{ asset('asset-back/js/demo/bootstrap-datetimepicker.fr.js') }}"></script>#}
+
+    <script src="{{ asset('//cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js') }}"></script>
+
+    <script src="{{ asset('//cdn.datatables.net/1.10.15/js/dataTables.bootstrap.min.js') }}"></script>
+    <script src="{{ asset('//cdn.datatables.net/responsive/2.1.1/js/dataTables.responsive.min.js') }}"></script>
+    <script src="{{ asset('//cdn.datatables.net/responsive/2.1.1/js/responsive.bootstrap.min.js') }}"></script>
+
+
+
+
+    {#<script src="{{ asset('module/spa/custom/jquery.mCustomScrollbar.js') }}"></script>#}
+    {#<script src="{{ asset('module/spa/custom/jquery.mCustomScrollbar.concat.min.js') }}"></script>#}
+    <script src="{{ asset('module/spa/js/jquery.tweet.js') }}"></script>
+    {#<script type="text/javascript" src="{{ asset('module/spa/tuner/js/colorpicker.js') }}"></script>#}
+    {#<script type="text/javascript" src="{{ asset('module/spa/tuner/js/scripts.js') }}"></script>#}
+    <script src="{{ asset('module/spa/js/scripts.js') }}"></script>
+    <script src="{{ asset('asset-back/js/moment.js') }}"></script>
+    <script src="{{ asset('module/spa/picker/js/bootstrap-datetimepicker.min.js') }}"></script>
+
+
+    <script src="{{ asset('asset-back/js/dropzone.min.js') }}"></script>
+    <script src="{{ asset('module/spa/js/jquery.chained.js') }}"></script>
+    {#<script src="{{ asset('module/spa/sidebar/js/jquery.tabslideout.1.3.js') }}"></script>#}
+    {#<script src="{{ asset('module/spa/js/jquery.responsiveTabs.js') }}"></script>#}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tokenfield/0.12.0/bootstrap-tokenfield.js"></script>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tokenfield/0.12.0/css/bootstrap-tokenfield.css">
+    <script src="http://boutique.ween.tn/module/ecommerce/js/pnotify.custom.min.js"></script>
+    <link rel="stylesheet" href="{{ asset('module/ecommerce/css/pnotify.custom.min.css') }}" id="theme-stylesheet">
+    <script src="{{ asset('module/spa/fluxtabs/js/skeletabs.min.js') }}"></script>
+    <script src="{{ asset('module/spa/select/dist/js/select2.js') }}"></script>
+
+
+
+
+
+{% endblock %}
+<!-- / SCRIPTS -->
+
+<script>
+
+    var maxImageWidth = 800,
+        maxImageHeight = 700;
+    Dropzone.options.myDropzone = {
+        dictDefaultMessage: 'Télécharger une image',
+        addRemoveLinks: true,
+
+        acceptedFiles: ".png,.jpg,.gif,.jpeg",
+        clickable: true,
+        init: function () {
+
+
+            this.on("thumbnail", function (file) {
+                // Do the dimension checks you want to do
+                if (file.width <= maxImageWidth || file.height <= maxImageHeight) {
+                    file.rejectDimensions()
+                }
+                else {
+                    file.acceptDimensions();
+                }
+            });
+            this.on("error", function (file, message) {
+
+                return false;
+            });
+
+
+            thisDropzone = this;
+            this.on("removedfile", function (file) {
+
+                console.log(file.name),
+                    $.ajax({
+                        url: '{{ path('module_spa_delate') }}?filetodelete=' + file.name,
+                        data: {'filetodelete': file.name},
+                        type: "POST",
+                        success: function () {
+
+                        },
+                        error: function () {
+
+                        }
+                    });
+            });
+
+        },
+        accept: function (file, done) {
+            file.acceptDimensions = done;
+            file.rejectDimensions = function () {
+                done("Le Dimension de la Photo doit être suppérieur à 800x800 ");
+            };
+
+        }
+    };
+
+
+</script>
+
+<script>
+    $('.remove').click(function () {
+
+        var filetodelete = $(this).attr('data-name-remove');
+        var id = $(this).attr('data-id');
+
+
+        var data = {
+            id: id,
+            filetodelete: filetodelete
+        };
+
+        $.ajax({
+            url: '{{ path('module_spa_delate') }}',
+            data: data,
+            type: "POST",
+            success: function (data) {
+                $('[data-div="' + filetodelete + '"]').remove();
+                // $( "#div1" ).remove( );
+
+//                $('[data-div="' + filetodelete + '"]').fadeOut();
+
+            }
+
+
+        });
+    });
+
+
+</script>
+{##################remove from gallery#}
+<script>
+    $('.remove-gallery').click(function () {
+
+        var filetodelete = $(this).attr('data-name-remove');
+        var id = $(this).attr('data-id');
+
+        var data = {
+            id: id,
+            filetodelete: filetodelete
+        };
+
+        $.ajax({
+            url: '{{ path('module_spa_delate_gallery') }}',
+            data: data,
+            type: "POST",
+            success: function (data) {
+
+                $('[data-div="' + filetodelete + '"]').fadeOut();
+
+            }
+
+
+        });
+    });
+</script>
+{###############drop zone gallery#}
+
+
+<script>
+
+
+    Dropzone.options.myGallery = {
+        dictDefaultMessage: 'Télécharger une image',
+        addRemoveLinks: true,
+
+        acceptedFiles: ".png,.jpg,.gif,.jpeg",
+        clickable: true,
+        init: function () {
+
+
+            this.on("error", function (file, message) {
+
+                return false;
+            });
+
+
+            thisDropzone = this;
+            this.on("removedfile", function (file) {
+
+                console.log(file.name),
+                    $.ajax({
+                        url: '{{ path('module_spa_delate') }}?filetodelete=' + file.name,
+                        data: {'filetodelete': file.name},
+                        type: "POST",
+                        success: function () {
+
+                        },
+                        error: function () {
+
+                        }
+                    });
+            });
+
+        },
+
+    };
+
+
+</script>
+
+<script>
+    $(function () {
+        $("#sortable").sortable();
+        $("#sortable").disableSelection();
+    });
+    $('#gallery-modal').on('hidden.bs.modal', function () {
+        location.reload(true);
+    });
+</script>
+{% if connected %}
+<script>
+    CKEDITOR.replace('editor');
+    CKEDITOR.replaceClass = 'edit';
+    CKEDITOR.replace('desc');
+    CKEDITOR.replace('data');
+</script>
+{% endif %}
+<script>
+    jQuery("[data-target='modifier']").click(function () {
+        id = $(this).attr("data-selector");
+        jQuery("#" + id).submit()
+    });
+</script>
+<script type='text/javascript'
+        src='https://maps.googleapis.com/maps/api/js?key=AIzaSyBabWKVmMpB5ZVqYN2H2ubUXTITp9k5fuc&v=3.20&#038;libraries=places&#038;language=fr&#038;ver=4.4.1'></script>
+<script>
+    var map;
+    var panel;
+    var initialize;
+    var calculate;
+    var direction;
+    initialize = function () {
+        {% if qouiqui.geoLat and  qouiqui.geoLong %}
+        var latLng = new google.maps.LatLng({{ qouiqui.geoLat }},{{ qouiqui.geoLong }} ); // Correspond au coordonnées de Lille
+        {% else %}
+        var latLng = new google.maps.LatLng(36.810257, 10.183101); // Correspond au coordonnées de Lille
+        {% endif %}
+        var myOptions = {
+            zoom: 14, // Zoom par défaut
+            center: latLng, // Coordonnées de départ de la carte de type latLng
+            mapTypeId: google.maps.MapTypeId.TERRAIN, // Type de carte, différentes valeurs possible HYBRID, ROADMAP, SATELLITE, TERRAIN
+            maxZoom: 20
+        };
+        map = new google.maps.Map(document.getElementById('map-spa'), myOptions);
+        panel = document.getElementById('panel');
+        var marker = new google.maps.Marker({
+            position: latLng,
+            map: map,
+            title: "Lille"
+        });
+        var contentMarker = [].join('');
+        var infoWindow = new google.maps.InfoWindow({
+            content: contentMarker,
+            position: latLng
+        });
+        google.maps.event.addListener(marker, 'click', function () {
+            infoWindow.open(map, marker);
+        });
+        google.maps.event.addListener(infoWindow, 'domready', function () { // infoWindow est biensûr notre info-bulle
+            jQuery("#tabs").tabs();
+        });
+        direction = new google.maps.DirectionsRenderer({
+            map: map,
+            panel: panel // Dom element pour afficher les instructions d'itinéraire
+        });
+    };
+    calculate = function () {
+        origin = document.getElementById('origin').value; // Le point départ
+        destination = document.getElementById('destination').value; // Le point d'arrivé
+        if (origin && destination) {
+            var request = {
+                origin: origin,
+                destination: destination,
+                travelMode: google.maps.DirectionsTravelMode.DRIVING // Mode de conduite
+            }
+            var directionsService = new google.maps.DirectionsService(); // Service de calcul d'itinéraire
+            directionsService.route(request, function (response, status) { // Envoie de la requête pour calculer le parcours
+                if (status == google.maps.DirectionsStatus.OK) {
+                    direction.setDirections(response); // Trace l'itinéraire sur la carte et les différentes étapes du parcours
+                }
+            });
+        }
+        jQuery("#ite").show();
+    };
+
+    initialize();</script>
+<script type="text/javascript">
+    (function ($) {
+        "use strict";
+        // ITEM DETAIL PAGE MAP FUNCTION STARTED --------------------------------------------------------------------------------------------
+        $.pfitemdetailpagemap = function () {
+            $(function () {
+                var inputMyLocation = document.getElementById("origin");
+                $("#origin").bind("keypress", function (e) {
+                    if (e.keyCode == 13) {
+                        e.preventDefault();
+                        return false;
+                    }
+                });
+
+                var autocomplete = new google.maps.places.Autocomplete(inputMyLocation);
+                google.maps.event.addListener(autocomplete, "place_changed", function () {
+                    var place = autocomplete.getPlace();
+                    if (!place.geometry) {
+                        return;
+                    }
+                    console.log(place);
+                });
+
+            });
+        };
+        // LOAD MAP STARTED --------------------------------------------------------------------------------------------
+        $(function () {
+            $.pfitemdetailpagemap();
+            // End
+        });
+        // GET DIRECTION BUTTON PRESSED END --------------------------------------------------------------------------------------------
+
+    })(jQuery);
+    function geolocate() {
+        console.log('aaa');
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function (position) {
+                var geolocation = {
+                    lat: position.coords.latitude,
+                    lng: position.coords.longitude
+                };
+                $('#originMobile').val(position.coords.latitude + ',' + position.coords.longitude).show('fast', calculateMobile);
+            });
+        }
+    }
+
+    $(document).ready(function () {
+        if (localStorage['visited'] == "yes") {
+            $("#card").hide();
+        }
+        $("#contact-form-holder").fadeIn();
+    });
+
+
+</script>
+{% if not connected %}
+    <script>
+        $(document).ready(function () {
+            $('.common-btn').click(function () {
+                var service = $(this).attr('data-service');
+                $("#appointment").val(service);
+                var date = new Date();
+                date.setTime(date.getTime() + (30 * 1000));
+                var expires = "; expires=" + date.toGMTString();
+                document.cookie = "appointment=true" + expires + "; path=/";
+            });
+
+            {% if app.user %}
+            if ($.cookie("appointment") == "true") {
+                $('#modal_booking').modal('show');
+                document.body.scrollTop = 2300;
+            }
+            {% endif %}
+        });
+    </script>
+{% endif %}
+<script>
+    $(function () {
+        $('#timepicker3').datetimepicker({});
+    });
+</script>
+<script>
+
+    $(document).ready(function () {
+        $('#table_id').DataTable({
+
+            "language": {
+                "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/French.json"
+            },
+        });
+    });
+</script>
+<script>
+
+    $(document).ready(function () {
+        $('#table_id_event').DataTable({
+            "language": {
+                "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/French.json"
+            },
+        });
+    });
+</script>
+<script>
+
+    (function ($, window, document, undefined) {
+
+
+        $.fn.chained = function (parent_selector, options) {
+
+            return this.each(function () {
+
+                /* Save this to child because this changes when scope changes. */
+                var child = this;
+                var backup = $(child).clone();
+
+                /* Handles maximum two parents now. */
+                $(parent_selector).each(function () {
+                    $(this).bind("change", function () {
+                        updateChildren();
+                    });
+
+                    /* Force IE to see something selected on first page load, */
+                    /* unless something is already selected */
+                    if (!$("option:selected", this).length) {
+                        $("option", this).first().attr("selected", "selected");
+                    }
+
+                    /* Force updating the children. */
+                    updateChildren();
+                });
+
+                function updateChildren() {
+                    var trigger_change = true;
+                    var currently_selected_value = $("option:selected", child).val();
+
+                    $(child).html(backup.html());
+
+                    /* If multiple parents build classname like foo\bar. */
+                    var selected = "";
+                    $(parent_selector).each(function () {
+                        var selectedClass = $("option:selected", this).val();
+                        if (selectedClass) {
+                            if (selected.length > 0) {
+                                if (window.Zepto) {
+                                    /* Zepto class regexp dies with classes like foo\bar. */
+                                    selected += "\\\\";
+                                } else {
+                                    selected += "\\";
+                                }
+                            }
+                            selected += selectedClass;
+                        }
+                    });
+
+                    /* Also check for first parent without subclassing. */
+                    /* TODO: This should be dynamic and check for each parent */
+                    /*       without subclassing. */
+                    var first;
+                    if ($.isArray(parent_selector)) {
+                        first = $(parent_selector[0]).first();
+                    } else {
+                        first = $(parent_selector).first();
+                    }
+                    var selected_first = $("option:selected", first).val();
+
+                    $("option", child).each(function () {
+                        /* Remove unneeded items but save the default value. */
+                        if ($(this).hasClass(selected) && $(this).val() === currently_selected_value) {
+                            $(this).prop("selected", true);
+                            trigger_change = false;
+                        } else if (!$(this).hasClass(selected) && !$(this).hasClass(selected_first) && $(this).val() !== "") {
+                            $(this).remove();
+                        }
+                    });
+
+                    /* If we have only the default value disable select. */
+                    if (1 === $("option", child).size() && $(child).val() === "") {
+                        $(child).prop("disabled", true);
+                    } else {
+                        $(child).prop("disabled", false);
+                    }
+                    if (trigger_change) {
+                        $(child).trigger("change");
+                    }
+                }
+            });
+        };
+
+
+        $.fn.chainedTo = $.fn.chained;
+
+
+        $.fn.chained.defaults = {};
+
+    })(window.jQuery || window.Zepto, window, document);
+
+
+    $(document).ready(function () {
+        $("#sousdesignation").chained("#designation");
+    });
+
+</script>
+
+
+{# ====================table responsive ================ #}
+
+
+<script>
+    $(document).ready(function () {
+        $('.service_suprim').click(function () {
+            var id = $(this).attr('data-id');
+            $(".delate").val(id);
+//            alert(service);
+
+        });
+    });
+
+</script>
+<script>
+    $(document).ready(function () {
+        $('.service_suprim_event').click(function () {
+            var id = $(this).attr('data-id');
+            $(".delate").val(id);
+//            alert(service);
+
+        });
+    });
+
+</script>
+
+<script>
+    $('.modifier').click(function () {
+
+
+        var idqq = $(this).attr('data-id');
+        var idserv = $(this).attr('data-serv');
+
+
+        var data = {
+            idqq: idqq,
+            idserv: idserv,
+
+        };
+
+        $.ajax({
+            url: '{{ path('module_spa_edit_service') }}',
+            data: data,
+            type: "POST",
+            success: function (data) {
+                console.log(data);
+
+                var arr = [];
+                json = JSON.stringify(eval('(' + data + ')')); //convert to json string
+                arr = $.parseJSON(json);
+                $('#idsevice').val(arr.id);
+                $('#type').val(arr.nom);
+                $('#textarea').val(arr.desc);
+                console.log(arr);
+
+            }
+
+
+        });
+
+    });
+
+    $('.modifier_event').click(function () {
+
+
+        var idqq = $(this).attr('data-id');
+        var idserv = $(this).attr('data-serv');
+
+
+        var data = {
+            idqq: idqq,
+            idserv: idserv,
+
+        };
+
+        $.ajax({
+            url: '{{ path('module_spa_edit_event') }}',
+            data: data,
+            type: "POST",
+            success: function (data) {
+                console.log(data);
+
+                var tab = [];
+                json = JSON.stringify(eval('(' + data + ')')); //convert to json string
+                tab = $.parseJSON(json);
+                console.log(tab);
+                $('#idevent').val(tab.id);
+                $('#nomevent').val(tab.nom);
+
+                $('#dataEvent').val(tab.data);
+                $('#prixEvent').val(tab.prix);
+
+
+            }
+
+
+        });
+
+    });
+
+
+</script>
+<script>
+
+</script>
+<script>
+
+    $('.supprime').click(function () {
+        idserv = $(".delate").val();
+        var idqq = $(this).attr('data-qq');
+        console.log(idqq, idserv);
+
+        var data = {
+            idqq: idqq,
+            idserv: idserv,
+
+        };
+
+        $.ajax({
+            url: '{{ path('module_spa_delate_service') }}',
+            data: data,
+            type: "POST",
+            success: function (data) {
+                new PNotify({
+                    title: 'Succès!',
+                    text: 'votre service est bien supprimé .',
+                    type: 'success'
+                });
+                $('#confirm-delete').fadeOut();
+                $('[data-div="' + idserv + '"]').fadeOut();
+            }
+
+        });
+    })
+
+
+    $('.supprime_events').click(function () {
+
+        idev = $(".delate").val();
+        var idqqev = $(this).attr('data-qq');
+        console.log(idqqev, idev);
+
+        var data = {
+            idqqev: idqqev,
+            idev: idev,
+
+        };
+
+        $.ajax({
+            url: '{{ path('module_spa_delate_event') }}',
+            data: data,
+            type: "POST",
+            success: function (data) {
+                new PNotify({
+                    title: 'Succès!',
+                    text: 'votre service est bien supprimé .',
+                    type: 'success'
+                });
+                $('#confirm-delete-event').fadeOut();
+                $('[data-div="' + idev + '"]').fadeOut();
+            }
+
+        });
+    })
+
+</script>
+
+
+<script>
+
+
+    function unescapeHtml(safe) {
+        return safe.replace(/&amp;/g, '&')
+            .replace(/&lt;/g, '<')
+            .replace(/&gt;/g, '>')
+            .replace(/&quot;/g, '"')
+            .replace(/&#039;/g, "'");
+    }
+    {% if getColorModuleJSON(theme) is not empty %}
+
+    var $color = jQuery.parseJSON(unescapeHtml('{{ getColorModuleJSON(theme) }}'));
+
+
+    {% endif %}
+    //    console.log($color.Couleur);
+    //
+    //    $color.Couleur.bg = 'test';
+    //
+    //    console.log($color.Couleur);
+
+
+    $(function () {
+
+        var demo1 = $('#demo1');
+        demo1.colorpickerplus();
+        demo1.on('changeColor', function (e, color) {
+            if (color == null)
+                $(this).val('transparent').css('background-color', '#fff');//tranparent
+            else
+                $('.section-title').val(color).css('color', color);
+            $(this).val(color).css('background-color', color);
+
+            var color = $('#demo1').css("background-color");
+
+            $color.Couleur.titre = color;
+
+
+        });
+
+
+        var sous_titres = $('#sous_titres');
+        sous_titres.colorpickerplus();
+        sous_titres.on('changeColor', function (e, color) {
+            if (color == null)
+                $(this).val('transparent').css('background-color', '#fff');//tranparent
+            else
+                $(this).val(color).css('background-color', color);
+            $('.sous_titre1').val(color).css('color', color);
+            var color = $('#sous_titres').css("background-color");
+
+            $color.Couleur.sous_titre_sec1 = color;
+
+
+        });
+        var text_color = $('#text_color');
+        text_color.colorpickerplus();
+        text_color.on('changeColor', function (e, color) {
+            if (color == null)
+                $(this).val('transparent').css('background-color', '#fff');//tranparent
+            else
+                $(this).val(color).css('background-color', color);
+            $('.text').val(color).css('color', color);
+
+            var color = $('#text_color').css("background-color");
+
+            $color.Couleur.text = color;
+
+
+        });
+
+
+        var demo3 = $('#demo3');
+        demo3.colorpickerplus();
+        demo3.on('changeColor ', function (e, color) {
+            if (color == null)
+                $(this).val('transparent').css('background-color', '#fff');//tranparent
+            else
+                $(this).val(color).css('background-color', color);
+//            $('.btn-style-one').val(color).css('background-color', color);
+            $('.btn-style-one').val(color).css('background-color', color);
+            var color = $('#demo3').css("background-color");
+            $color.Couleur.btn = color;
+
+        });
+
+
+        var demo4 = $('#demo4');
+        demo4.colorpickerplus();
+        demo4.on('changeColor', function (e, color) {
+            if (color == null)
+                $(this).val('transparent').css('background-color', '#fff');//tranparent
+            else
+                $(this).val(color).css('background-color', color);
+
+            $('.icon').val(color).css('color', color);
+
+
+            var color = $('#demo4').css("background-color");
+            $color.Couleur.fonticon = color;
+
+
+        });
+
+        var demo5 = $('#demo5');
+        demo5.colorpickerplus();
+        demo5.on('changeColor', function (e, color) {
+            if (color == null)
+                $(this).val('transparent').css('background-color', '#fff');//tranparent
+            else
+                $(this).val(color).css('background-color', color);
+
+            $('.header-style-one').val(color).css('background-color', color);
+
+
+            var color = $('#demo5').css("background-color");
+            $color.Couleur.menu = color;
+
+
+        });
+
+
+        var demo7 = $('#demo7');
+        demo7.colorpickerplus();
+        demo7.on('changeColor', function (e, color) {
+            if (color == null)
+
+                $(this).val('transparent').css('background-color', '#fff');//tranparent
+
+            else
+                $(this).val(color).css('background-color', color);
+
+            $('.titre_serv').val(color).css('color', color);
+
+
+            var color = $('#demo7').css("background-color");
+
+            $color.Couleur.titre_serv = color;
+
+
+        });
+
+
+        var demo9 = $('#demo9');
+        demo9.colorpickerplus();
+        demo9.on('changeColor', function (e, color) {
+            if (color == null)
+                $(this).val('transparent').css('background-color', '#fff');//tranparent
+            else
+                $(this).val(color).css('background-color', color);
+
+            $('.responsive-tabs__list__item').val(color).css('background-color', color);
+
+
+            var color = $('#demo9').css("background-color");
+            $color.Couleur.btn_carte = color;
+
+
+        });
+
+
+        var demo13 = $('#demo13');
+        demo13.colorpickerplus();
+        demo13.on('changeColor', function (e, color) {
+            if (color == null)
+                $(this).val('transparent').css('background-color', '#fff');//tranparent
+            else
+                $(this).val(color).css('background-color', color);
+
+            $('.prix_color').val(color).css('color', color);
+
+
+            var color = $('#demo13').css("background-color");
+            $color.Couleur.prix_color = color;
+
+
+        });
+
+        var demo14 = $('#demo14');
+        demo14.colorpickerplus();
+        demo14.on('changeColor', function (e, color) {
+            if (color == null)
+                $(this).val('transparent').css('background-color', '#fff');//tranparent
+            else
+                $(this).val(color).css('background-color', color);
+
+            $('.gift-inside-2').val(color).css('border-color', color);
+
+
+            var color = $('#demo14').css("background-color");
+            $color.Couleur.btn_offre = color;
+
+
+        });
+        var text_contact = $('#text_contact');
+        text_contact.colorpickerplus();
+        text_contact.on('changeColor', function (e, color) {
+            if (color == null)
+                $(this).val('transparent').css('background-color', '#fff');//tranparent
+            else
+                $(this).val(color).css('background-color', color);
+
+            $('.color_text_contact').val(color).css('color', color);
+            $('.color_text_contact a').val(color).css('color', color);
+
+
+            var color = $('#text_contact').css("background-color");
+            $color.Couleur.text_contact_color = color;
+
+
+        });
+
+
+        var flaticon = $('#flaticon');
+        flaticon.colorpickerplus();
+        flaticon.on('changeColor', function (e, color) {
+            if (color == null)
+                $(this).val('transparent').css('background-color', '#fff');//tranparent
+            else
+                $(this).val(color).css('background-color', color);
+
+            $('.flaticons').val(color).css('color', color);
+
+
+            var color = $('#flaticon').css("background-color");
+            $color.Couleur.icon_contact = color;
+
+
+        });
+    });
+
+
+</script>
+<script>
+
+
+    $(' .change-color').click(function () {
+        var bg_event = $('.bg_sec_offre').css("background-color");
+        $color.Couleur.bg_sec_offre = bg_event;
+        var sec_contacts = $('.sec_contact').css("background-color");
+        $color.Couleur.sec_contacts = sec_contacts;
+        var bg_gallery = $('.sec_gallery').css("background-color");
+        $color.Couleur.sec_galleries = bg_gallery;
+        var bg_carte = $('.sec-carte-bg').css("background-color");
+        $color.Couleur.bg_sec_cart = bg_carte;
+        var bg_sec1 = $('.back_image').css("background-color");
+        $color.Couleur.bg = bg_sec1;
+        var bg_serv = $('.serv').css("background-color");
+        $color.Couleur.bg_sec_serv = bg_serv;
+        var img = $('.back_image').css('background-image');
+        var cleanup = /\"|\'|\)/g;
+        var imgback = img.split('/').pop().replace(cleanup, '')
+//        if (idSection == 'a[href$="#service"]') {
+        $color.Couleur.back_img = imgback;
+        {######### get motif name for all section###########}
+        if ($('.serv').css('background-image') !== undefined) {
+            var img = $('.serv').css('background-image');
+            var cleanup = /\"|\'|\)/g;
+            var imgserv = img.split('/').pop().replace(cleanup, '')
+            $color.Couleur.back_img_serv = imgserv;
+        }
+
+
+        if ($('.bg_sec_offre').css('background-image') !== undefined) {
+
+            var img = $('.bg_sec_offre').css('background-image');
+            var cleanup = /\"|\'|\)/g;
+            var imgevent = img.split('/').pop().replace(cleanup, '')
+
+            $color.Couleur.back_img_event = imgevent;
+        }
+        if ($('.sec-carte-bg').css('background-image') !== undefined) {
+            var imgs = $('.sec-carte-bg').css('background-image');
+
+            var cleanup = /\"|\'|\)/g;
+            var imgcarte = imgs.split('/').pop().replace(cleanup, '')
+
+            $color.Couleur.back_img_carte = imgcarte;
+        }
+        if ($('.sec_contact').css('background-image') !== undefined) {
+            var img = $('.sec_contact').css('background-image');
+            var cleanup = /\"|\'|\)/g;
+            var imgcontact = img.split('/').pop().replace(cleanup, '')
+            $color.Couleur.back_img_contact = imgcontact;
+        }
+        if ($('.sec_gallery').css('background-image') !== undefined) {
+            var img = $('.sec_gallery').css('background-image');
+            var cleanup = /\"|\'|\)/g;
+            var imggal = img.split('/').pop().replace(cleanup, '')
+
+            $color.Couleur.back_img_gallery = imggal;
+        }
+
+        {######### get motif name for all section###########}
+        {######### get animation name for all section###########}
+        var anim1 = $('#sec_propos').val();
+        $color.Couleur.sec_prop = anim1;
+        var anim1 = $('#sec_service').val();
+        $color.Couleur.sec_service = anim1;
+        var anim1 = $('#sec_carte').val();
+        $color.Couleur.sec_carte = anim1;
+        var anim1 = $('#sec_event').val();
+        $color.Couleur.sec_event = anim1;
+        var anim1 = $('#sec_gallery').val();
+        $color.Couleur.sec_gallery = anim1;
+        var anim1 = $('#sec_contact').val();
+        $color.Couleur.sec_contact = anim1;
+        {######### get animation name for all section###########}
+        console.log($color.Couleur);
+        $.ajax({
+            url: "{{ path('module_spa_couleur',{'idqq': qouiqui.id }) }}",
+            data: $color.Couleur,
+            type: "POST",
+            success: function (data) {
+                new PNotify({
+                    title: "",
+                    text: 'Votre changement des couleurs sont affectés',
+                    addclass: "stack-custom",
+                    closer: true,
+                    delay: 8000,
+                    type: "success",
+                    stack: {"dir1": "down", "dir2": "right", "push": "top"}
+
+                });
+            }
+
+        });
+    })
+</script>
+
+
+<script type="text/javascript">
+
+
+    $('.bnv').hide();
+    $('.services').hide();
+    $('.tarif').hide();
+    $('.offres').hide();
+    $('.images').hide();
+    $('.contact').hide()
+    $('.s2').fadeOut();
+    $('.s3').fadeOut();
+    $('.scontact').fadeOut();
+    $('.s6').fadeOut();
+    $('.text_contact').fadeOut();
+    $('.flaticon').fadeOut();
+    $('.s1').fadeIn();
+
+
+    function unescapeHtml(safe) {
+        return safe.replace(/&amp;/g, '&')
+            .replace(/&lt;/g, '<')
+            .replace(/&gt;/g, '>')
+            .replace(/&quot;/g, '"')
+            .replace(/&#039;/g, "'");
+    }
+    {% if getColorModuleJSON(theme) is not empty %}
+
+    var $color = jQuery.parseJSON(unescapeHtml('{{ getColorModuleJSON(theme)}}'));
+    {% else %}
+    var $color = jQuery.parseJSON(unescapeHtml('{"Couleur":{"titre":"rgb(7, 55, 99)","btn":"rgb(28, 69, 135)","fonticon":"rgb(127, 96, 0)" }}'));
+
+    {% endif %}
+
+    var idSection = 'a[href$="#agent-section"]';
+    $(document).ready(function () {
+
+        var left = $('#left').tabSlideOut({
+            tabLocation: 'left',
+            clickScreenToClose: false,
+            offset: '40px',
+            offsetReverse: true, // offset from bottom, not top
+            // handlers: enable and disable buttons when sliding open or closed
+            onOpen: function () {
+                $('#open').prop('disabled', true);
+                $('#close').prop('disabled', false);
+            },
+            onClose: function () {
+                $('#open').prop('disabled', false);
+                $('#close').prop('disabled', true);
+            }
+        });
+    });
+
+    $('#nav-menu').onePageNav({
+
+
+        scrollSpeed: 750,
+        scrollThreshold: 0.5,
+        filter: ':not(.external)',
+        scrollChange: function ($currentListItem) {
+
+            var selector = $currentListItem.prevObject.selector;
+            if (selector == 'a[href$="#agent-section"]') {
+                $('.motif-container').attr('data-pour', 'propos');
+                $('.tog').show();
+                $('.bnv').show();
+                $('.services').hide();
+                $('.tarif').hide();
+                $('.offres').hide();
+                $('.images').hide();
+                $('.contact').hide();
+                $('.s2').fadeOut();
+                $('.s3').fadeOut();
+                $('.scontact').fadeOut();
+
+                $('.text_contact').fadeOut();
+                $('.flaticon').fadeOut();
+                $('.s6').fadeOut();
+                $('.s1').fadeIn();
+
+
+            }
+            if (selector == 'a[href$="#acceueil"]') {
+
+
+            }
+            else if (selector == 'a[href$="#service"]') {
+                $('.motif-container').attr('data-pour', 'serv');
+                $('.bnv').hide()
+                $('.services').show()
+                $('.tarif').hide()
+                $('.offres').hide()
+                $('.images').hide()
+                $('.contact').hide()
+                $('.s2').fadeIn();
+                $('.s1').fadeOut();
+                $('.s3').fadeOut();
+                $('.s6').fadeOut();
+                $('.text_contact').fadeOut();
+                $('.flaticon').fadeOut();
+                $('.scontact').fadeOut();
+
+
+            }
+            else if (selector == 'a[href$="#carte"]') {
+                $('.motif-container').attr('data-pour', 'carte');
+                $('.services').hide()
+                $('.bnv').hide()
+
+                $('.tarif').show()
+                $('.offres').hide()
+                $('.images').hide()
+                $('.contact').hide()
+                $('.s3').fadeIn();
+                $('.s1').fadeOut();
+                $('.s2').fadeOut();
+                $('.s6').fadeOut();
+                $('.text_contact').fadeOut();
+                $('.flaticon').fadeOut();
+                $('.scontact').fadeOut();
+
+
+            }
+
+            else if (selector == 'a[href$="#event"]') {
+                $('.motif-container').attr('data-pour', 'event');
+                $('.tarif').hide()
+                $('.services').hide()
+                $('.bnv').hide()
+
+
+                $('.offres').show()
+                $('.images').hide()
+                $('.contact').hide()
+                $('.s6').fadeIn();
+                $('.s1').fadeOut();
+                $('.scontact').fadeOut();
+                $('.s3').fadeOut();
+                $('.s2').fadeOut();
+                $('.text_contact').fadeOut();
+                $('.flaticon').fadeOut();
+
+
+            }
+            else if (selector == 'a[href$="#gallery"]') {
+                $('.motif-container').attr('data-pour', 'galery');
+                $('.offres').hide()
+                $('.tarif').hide()
+                $('.services').hide()
+                $('.bnv').hide()
+                $('.scontact').fadeOut();
+
+                $('.images').show()
+                $('.contact').hide()
+                $('.s1').fadeOut();
+                $('.s3').fadeOut();
+                $('.s2').fadeOut();
+                $('.s6').fadeOut();
+                $('.text_contact').fadeOut();
+                $('.flaticon').fadeOut();
+
+
+            }
+            else if (selector == 'a[href$="#contact"]') {
+                $('.motif-container').attr('data-pour', 'contact');
+                $('.images').hide()
+                $('.offres').hide()
+                $('.tarif').hide()
+                $('.services').hide()
+                $('.bnv').hide()
+
+
+                $('.contact').show()
+                $('.scontact').fadeIn();
+                $('.text_contact').fadeIn();
+                $('.flaticon').fadeIn();
+                $('.s1').fadeOut();
+                $('.s3').fadeOut();
+                $('.s2').fadeOut();
+                $('.s6').fadeOut();
+
+
+            }
+
+
+            idSection = selector;
+            console.log(idSection);
+
+        }
+
+
+    });
+
+
+</script>
+<script>
+    $(document).ready(function () {
+
+
+        $("#btn-add-state").on("click", function () {
+            var newStateVal = $("#val1").val();
+
+            // Set the value, creating a new option if necessary
+            if ($("#designation").find("option[value='" + newStateVal + "']").length) {
+                $("#designation").val(newStateVal).trigger("change");
+            } else {
+                // Create the DOM option that is pre-selected by default
+                var newState = new Option(newStateVal, newStateVal, true, true);
+                // Append it to the select
+                $("#designation").append(newState).trigger('change');
+            }
+
+
+        });
+    });
+
+
+    $("#btn-add-states1").on("click", function () {
+
+        var newStateVal = $("#val2").val();
+        var newStateVal1 = $("#val1").val();
+        var newStateVal2 = $("#val2").val();
+        var data = {
+            newStateVal1: newStateVal1,
+            newStateVal2: newStateVal2,
+        }
+        // Set the value, creating a new option if necessary
+        if ($("#sousdesignation").find("option[value='" + newStateVal + "']").length) {
+            $("#sousdesignation").val(newStateVal).trigger("change");
+        } else {
+            // Create the DOM option that is pre-selected by default
+            var newState = new Option(newStateVal, newStateVal, true, true);
+            // Append it to the select
+            $("#sousdesignation").append(newState).trigger('change');
+        }
+        $.ajax({
+            url: "{{ path('module_spa_ajoutcarte_type',{'idqq': qouiqui.id }) }}",
+            data: data,
+            type: "POST",
+            success: function (data) {
+                console.log('ddd');
+
+            }
+
+        });
+    });
+
+</script>
+
+
+<script>
+
+    $(document).ready(function () {
+
+        $('#table_carte').DataTable({
+
+            "language": {
+                "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/French.json"
+            },
+        });
+    });
+
+    $('.modifier_prix').click(function () {
+
+
+        var idqq = $(this).attr('data-id');
+        var idcarte = $(this).attr('data-carte');
+
+
+        var data = {
+            idqq: idqq,
+            idcarte: idcarte,
+
+        };
+
+        $.ajax({
+            url: '{{ path('module_spa_modifier_carte') }}',
+            data: data,
+            type: "POST",
+            success: function (data) {
+                console.log(data);
+//
+                var arr = [];
+                json = JSON.stringify(eval('(' + data + ')')); //convert to json string
+                arr = $.parseJSON(json);
+                $('#idcarte').val(arr.id);
+                $('#sousdesigna').val(arr.nom);
+                $("#prix1").val(arr.prix);
+
+                console.log(arr);
+
+
+            }
+
+
+        });
+
+    });
+</script>
+<script>
+    $(document).ready(function () {
+        $('.suprim_prix').click(function () {
+            var id = $(this).attr('data-id');
+            $(".delate").val(id);
+//            alert(service);
+
+        });
+    });
+
+</script>
+<script>
+
+    $('.supprime_carte').click(function () {
+        idserv = $(".delate").val();
+        var idqq = $(this).attr('data-qq');
+        console.log(idqq, idserv);
+
+        var data = {
+            idqq: idqq,
+            idserv: idserv,
+
+        };
+
+        $.ajax({
+            url: '{{ path('module_spa_delate_carte') }}',
+            data: data,
+            type: "POST",
+            success: function (data) {
+                new PNotify({
+                    title: 'Succès!',
+                    text: 'votre service est bien supprimé .',
+                    type: 'success'
+                });
+                $('#confirm-delete').fadeOut();
+                $('[data-carte="' + idserv + '"]').fadeOut();
+            }
+
+        });
+    })
+</script>
+<script>
+
+    var nowDate = new Date();
+    var today = new Date(nowDate.getFullYear(), nowDate.getMonth(), nowDate.getDate(), 0, 0, 0, 0);
+
+
+    $('#datepicker').datetimepicker({
+        language: 'fr',
+        weekStart: 1,
+        todayBtn: 1,
+        autoclose: 1,
+        todayHighlight: 1,
+        startView: 2,
+        minView: 2,
+        forceParse: 0,
+        startDate: today
+
+
+
+    });
+
+</script>
+
+<script>
+
+
+    //    $('.containers1').mCustomScrollbar({
+    //        theme: "dark-3"
+    //    });
+    //    $('.containers2').mCustomScrollbar({
+    //        theme: "dark-3"
+    //    });
+
+
+
+
+    $('.sp-preview-inner').click(function () {
+
+        color = $(this).css('background-color');
+
+        if (idSection == 'a[href$="#agent-section"]') {
+
+            $('#sec_propos_color').val(color);
+        }
+        else if (idSection == 'a[href$="#service"]') {
+
+            $('#sec_service_color').val(color);
+        }
+
+        else if (idSection == 'a[href$="#carte"]') {
+            $('#sec_carte_color').val(color);
+        }
+        else if (idSection == 'a[href$="#event"]') {
+
+            $('#sec_event_color').val(color);
+
+        }
+        else if (idSection == 'a[href$="#gallery"]') {
+
+            $('#sec_gallery_color').val(color);
+        }
+        else if (idSection == 'a[href$="#contact"]') {
+
+            $('#sec_contact_color').val(color);
+        }
+
+    })
+
+
+
+    function selectPattern(ele, url) {
+
+        if (idSection == 'a[href$="#service"]') {
+            $('.serv').css('background-image', 'url(' + url + ')');
+        }
+        else if (idSection == 'a[href$="#carte"]') {
+            $('.sec-carte-bg').css('background-image', 'url(' + url + ')');
+        }
+        else if (idSection == 'a[href$="#event"]') {
+            $('.bg_sec_offre').css('background-image', 'url(' + url + ')');
+        }
+        else if (idSection == 'a[href$="#gallery"]') {
+            $('.sec_gallery').css('background-image', 'url(' + url + ')');
+        } else if (idSection == 'a[href$="#contact"]') {
+            $('.sec_contact').css('background-image', 'url(' + url + ')');
+        }
+        else {
+
+            $('.back_image').css('background-image', 'url(' + url + ')');
+        }
+
+    }
+    function selectColor(color) {
+
+        if (idSection == 'a[href$="#service"]') {
+            $('.serv').css('background-color', color);
+        }
+        else if (idSection == 'a[href$="#carte"]') {
+            $('.sec-carte-bg').css('background-color', color);
+        }
+        else if (idSection == 'a[href$="#event"]') {
+            $('.bg_sec_offre').css('background-color', color);
+        }
+        else if (idSection == 'a[href$="#gallery"]') {
+            $('.sec_gallery').css('background-color', color);
+        } else if (idSection == 'a[href$="#contact"]') {
+            $('.sec_contact').css('background-color', color);
+        }
+        else {
+            $('.back_image').css('background-color', color);
+        }
+
+    }
+    function selectNone() {
+        if (idSection == 'a[href$="#service"]') {
+            $('.serv').css('background-image', 'none');
+
+
+        }
+
+        else if (idSection == 'a[href$="#carte"]') {
+            $('.sec-carte-bg').css('background-image', 'none');
+
+
+        }
+        else if (idSection == 'a[href$="#event"]') {
+            $('.bg_sec_offre').css('background-image', 'none');
+
+
+        }
+        else if (idSection == 'a[href$="#gallery"]') {
+            $('.sec_gallery').css('background-image', 'none');
+
+
+        } else if (idSection == 'a[href$="#contact"]') {
+            $('.sec_contact').css('background-image', 'none');
+
+
+        }
+        else {
+
+            $('.back_image').css('background-image', 'none');
+
+
+        }
+
+
+    }
+    function selectNonebackcolor() {
+
+
+        if (idSection == 'a[href$="#service"]') {
+            $('.serv').css('background', color);
+
+        }
+
+        else if (idSection == 'a[href$="#carte"]') {
+            $('.sec-carte-bg').css('background-color', 'white');
+
+        }
+        else if (idSection == 'a[href$="#event"]') {
+            $('.bg_sec_offre').css('background-color', 'white');
+
+        }
+        else if (idSection == 'a[href$="#gallery"]') {
+            $('.sec_gallery').css('background-color', 'white');
+        } else if (idSection == 'a[href$="#contact"]') {
+
+
+            $('.sec_contact').css('background-color', 'white');
+        }
+        else {
+
+            $('.back_image').css('background-color', 'white');
+        }
+
+
+    }
+
+    function selectNoneMotif() {
+
+
+        if (idSection == 'a[href$="#agent-section"]') {
+
+            chnageicon('', '#agent-section');
+        }
+        else if (idSection == 'a[href$="#service"]') {
+            chnageicon('', '#service');
+
+        }
+
+        else if (idSection == 'a[href$="#carte"]') {
+            chnageicon('', '#carte');
+
+        }
+        else if (idSection == 'a[href$="#event"]') {
+            chnageicon('', '#event');
+
+        }
+        else if (idSection == 'a[href$="#gallery"]') {
+            chnageicon('', '#gallery');
+        }
+        else if (idSection == 'a[href$="#contact"]') {
+
+
+            chnageicon('', '#contact');
+        }
+        else {
+
+            chnageicon('', '#agent-section');
+        }
+
+
+    }
+
+
+</script>
+
+<script>
+
+    $('tog').click(function () {
+
+        left = $('.theme_changer').position().left;
+
+        if (left < 0) {
+            $('.theme_changer').css('transform', 'translate(0px)')
+        } else {
+            $('.theme_changer').css('transform', 'translate(-200px)')
+        }
+    })
+
+</script>
+
+{#-------------------------annimation background--------------------------------#}
+<script>
+
+    function chnageicon(iconlink, div_name) {
+
+        for (var i = 1; i < 29; i++) {
+
+            $(div_name + " .elem" + i).css('background-image', 'url(' + iconlink + ')')
+
+        }
+    }
+
+    $('[set_icon]').click(function () {
+
+        data_pour = $(this).parent().attr('data-pour');
+
+        section = $(this);
+
+        srcicon = section.find('img').attr('src')
+
+
+        if (data_pour == 'propos') {
+            chnageicon(srcicon, '#agent-section');
+            $('#sec_propos').val(srcicon);
+        }
+        else if (data_pour == 'serv') {
+            chnageicon(srcicon, '#service');
+            $('#sec_service').val(srcicon);
+        }
+        else if (data_pour == 'carte') {
+            chnageicon(srcicon, '#carte');
+            $('#sec_carte').val(srcicon);
+        }
+        else if (data_pour == 'event') {
+            chnageicon(srcicon, '#event');
+            $('#sec_event').val(srcicon);
+
+        }
+        else if (data_pour == 'galery') {
+            chnageicon(srcicon, '.gallery-section');
+            $('#sec_gallery').val(srcicon);
+        }
+        else if (data_pour == 'contact') {
+            chnageicon(srcicon, '.conatct-section');
+            $('#sec_conatct').val(srcicon);
+        }
+
+
+    });
+
+
+
+    {% if theme %}
+
+    {% if theme.Couleur.sec_prop is not empty %}
+    $(document).ready(function () {
+
+        propoicon = '{{ theme.Couleur.sec_prop }}';
+        chnageicon(propoicon, '#agent-section');
+
+    });
+    {% endif %}
+
+    {% if theme.Couleur.sec_service is not empty %}
+    $(document).ready(function () {
+
+        propoicon = '{{ theme.Couleur.sec_service }}';
+        chnageicon(propoicon, '#service');
+
+    });
+    {% endif %}
+
+    {% if theme.Couleur.sec_carte is not empty %}
+    $(document).ready(function () {
+
+        propoicon = '{{ theme.Couleur.sec_carte }}';
+        chnageicon(propoicon, '#carte');
+
+    });
+    {% endif %}
+
+    {% if theme.Couleur.sec_event is not empty %}
+    $(document).ready(function () {
+
+        propoicon = '{{ theme.Couleur.sec_event }}';
+        chnageicon(propoicon, '#event');
+
+    });
+    {% endif %}
+    {% if theme.Couleur.sec_gallery is not empty %}
+    $(document).ready(function () {
+
+        propoicon = '{{ theme.Couleur.sec_gallery }}';
+        chnageicon(propoicon, '.gallery-section');
+
+    });
+    {% endif %}
+    {% if theme.Couleur.sec_contact is not empty %}
+    $(document).ready(function () {
+
+        propoicon = '{{ theme.Couleur.sec_contact }}';
+        chnageicon(propoicon, '.conatct-section');
+
+    });
+    {% endif %}
+
+    {% endif %}
+
+</script>
+{#------------------------- end annimation background--------------------------------#}
+
+<script>
+    var data = $("#booking");
+    $('.spabooking').click(function (e) {
+        e.preventDefault();
+        var idqqev = $(this).attr('data-qq');
+        $.ajax({
+            url: "{{ path('module_spa_booking',{'id_qq': qouiqui.id }) }}",
+            data: data.serialize(),
+            type: "POST",
+            success: function (data) {
+                new PNotify({
+                    title: "Rendez-vous reservé",
+                    text: 'Votre Rendez-vous est envoyé.Nous allons vous contacter bientôt pour confirmer la date',
+                    addclass: "stack-custom",
+                    closer: true,
+                    delay: 8000,
+                    type: "success",
+                    stack: {"dir1": "down", "dir2": "right", "push": "top"}
+
+                });
+
+            }
+
+        });
+    })
+
+</script>
+
+<script>
+
+    $('#skltbsResponsive1 h2').click(function (e) {
+        e.preventDefault();
+        return false;
+    });
+
+    $("#skltbsResponsive1").skeletabs({
+//        equalHeights: true,
+//        animation: "fade-scale",
+//        autoplay: true,
+//        autoplayInterval: 4500,
+        responsive: {
+            breakpoint: 800,
+            headingTagName: "h4"
+        }
+    });
+
+
+</script>
+<script>
+    {% if  connected %}
+    $(".spabooking").prop('disabled', true);
+    {% endif %}
+</script>
+<script>
+    $(".add-sec-reserv").click(function () {
+
+
+        var idReserv = $('.data_reserv').attr('data-name');
+
+        console.log(idReserv)
+        var data = {
+
+            idReserv: idReserv,
+
+        };
+
+        $.ajax({
+            url: '{{ path('module_spa_section-reservation',{'idqq':qouiqui.id}) }}',
+            data: data,
+            type: "POST",
+            success: function (data) {
+                console.log(data);
+
+
+            }
+
+        });
+    });
+
+
+</script>
+<script>
+    $('.tokenfield').tokenfield()
+    //    $("#e1").select2();
+
+
+</script>
+
+<script type="text/javascript">
+    $(".js-example-basic-multiple").select2({
+        width: '100%'
+    });
+</script>
+<script>
+    $(".log_suprim").click(function () {
+
+
+
+        $.ajax({
+            url: '{{ path('module_spa_delete_image',{'idqq':qouiqui.id}) }}',
+            data: '',
+            type: "POST",
+            success: function (data) {
+                new PNotify({
+                    title: 'Succès!',
+                    text: 'votre image  est bien supprimé .',
+                    type: 'success'
+                });
+
+
+            }
+
+        });
+    });
+
+</script>
+<script>
+
+    $(document).ready(function () {
+
+        $('#myform').validate({ // initialize the plugin
+            rules: {
+                name: {
+                    required: true,
+                    minlength:5
+                },
+               message: {
+                    required: true,
+                    minlength: 10
+                }
+            },
+
+        });
+
+    });
+</script>
+
+</body>
+</html>

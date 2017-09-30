@@ -1,0 +1,24 @@
+scategory_index:
+    path:     /
+    defaults: { _controller: "AdminBundle:Scategory:index" }
+    methods:  GET
+
+scategory_show:
+    path:     /{id}/show
+    defaults: { _controller: "AdminBundle:Scategory:show" }
+    methods:  GET
+
+scategory_new:
+    path:     /new
+    defaults: { _controller: "AdminBundle:Scategory:new" }
+    methods:  [GET, POST]
+
+scategory_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "AdminBundle:Scategory:edit" }
+    methods:  [GET, POST]
+
+scategory_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "AdminBundle:Scategory:delete" }
+    methods:  DELETE

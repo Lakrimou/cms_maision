@@ -1,0 +1,1107 @@
+{% extends 'front/layout_front.html.twig' %}
+
+{% block body %}
+
+    <body>
+
+    <div id="loader">
+        <div class="book">
+            <div class="book__page"></div>
+            <div class="book__page"></div>
+            <div class="book__page"></div>
+        </div>
+    </div>
+    {#=======================================header===========================================#}
+    {% include 'UserBundle::header.html.twig' %}
+    {#=======================================header===========================================#}
+
+    <!-- start search section-->
+    <div id="search-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <for id="search-form">
+                        <div class="col-sm-9 col-md-10 nopadding">
+                            <div id="search-input">
+                                <div class="col-sm-3 nopadding">
+                                    <select id="search-location" class="form-control">
+                                        {% for v in villes %}
+                                            <option value="{{ v.id }}">{{ v.libelle }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                                <div class="col-sm-9 nopadding">
+                                    <div class="form-group">
+                                        <input id="search-data" class="form-control" name="info"
+                                               placeholder="Quoi, Qui : hôtel avec piscine, Chez Lily, ..." required>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-3 col-md-2 text-right nopadding-right">
+                            <div id="search-button">
+                                <button onclick="filtre();" id="search"><i class="fa fa-search"></i>Recherche</button>
+                            </div>
+                        </div>
+                    </for>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end search section-->
+
+    <!-- start banner map-->
+    <div id="banner-map">
+        <div id="homemap"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div id="map-link">
+                        <button><i class="fa fa-angle-double-up"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end banner map-->
+
+    <!-- start main banner-->
+    <div id="main-banner">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 text-center">
+                    <div id="banner-link">
+                        <button><i class="fa fa-map-marker"></i></button>
+                    </div>
+                    <div id="main-banner-text">
+                        <h1>RECHERCHE PRODUITS ET SERVICES</h1>
+                        <p>WEEEN vous aide à découvrir ce qui se passe dans votre ville, explorons.</p>
+                    </div>
+                    <div id="visited-categories">
+                        <h1>LES CATÉGORIES LES PLUS VISITESES</h1>
+                    </div>
+                    <div id="categories-box">
+                        <div class="categories-boxes">
+                            <a href="#">
+                                <img src="{{ asset('asset-front/images/home.png') }}" alt="Immobilier">
+                                <span>Immobilier</span>
+                            </a>
+                        </div>
+                        <div class="categories-boxes">
+                            <a href="#">
+                                <img src="{{ asset('asset-front/images/food.png') }}" alt="Traiteur">
+                                <span>Traiteur</span>
+                            </a>
+                        </div>
+                        <div class="categories-boxes">
+                            <a href="#">
+                                <img src="{{ asset('asset-front/images/movie.png') }}" alt="movie">
+                                <span>movie</span>
+                            </a>
+                        </div>
+                        <div class="categories-boxes">
+                            <a href="#">
+                                <img src="{{ asset('asset-front/images/automotive.png') }}" alt="Automobile">
+                                <span>Automobile</span>
+                            </a>
+                        </div>
+                        <div class="categories-boxes">
+                            <a href="#">
+                                <img src="{{ asset('asset-front/images/shopping.png') }}" alt="Import-Export">
+                                <span>Import-Export</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end main banner-->
+    <!-- start search categories-->
+    <div id="search-categories">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 text-center">
+                    <div id="categories-heading">
+                        <h1><span>Recherche avec Les catégories</span></h1>
+                    </div>
+                    <div id="search-categories-boxes">
+                        <div class="col-sm-6 col-md-4">
+                            <div class="search-categories-boxes">
+                                <h2>
+                                    <img src="{{ asset('asset-front/images/business.png') }}" alt="business">
+                                    business
+                                </h2>
+                            </div>
+                            <div class="categories-list">
+                                <ul>
+                                    <li><a href="listings.html">Automotive</a><span>78</span></li>
+                                    <li><a href="listings.html">Food</a><span>67</span></li>
+                                    <li><a href="listings.html">Property</a><span>29</span></li>
+                                    <li><a href="listings.html">Shopping</a><span>36</span></li>
+                                    <li><a href="listings.html">Others</a><span>84</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-md-4">
+                            <div class="search-categories-boxes">
+                                <h2>
+                                    <img src="{{ asset('asset-front/images/real-estate.png') }}" alt="real estate">
+                                    real estate
+                                </h2>
+                            </div>
+                            <div class="categories-list">
+                                <ul>
+                                    <li><a href="listings.html">Commercial & Local</a><span>78</span></li>
+                                    <li><a href="listings.html">Farms</a><span>67</span></li>
+                                    <li><a href="listings.html">Home & Office</a><span>29</span></li>
+                                    <li><a href="listings.html">Plaza & Property</a><span>36</span></li>
+                                    <li><a href="listings.html">Flats</a><span>93</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-md-4">
+                            <div class="search-categories-boxes">
+                                <h2>
+                                    <img src="{{ asset('asset-front/images/services.png') }}" alt="services">
+                                    settings
+                                </h2>
+                            </div>
+                            <div class="categories-list">
+                                <ul>
+                                    <li><a href="listings.html">Photography</a><span>58</span></li>
+                                    <li><a href="listings.html">Cleaning Services</a><span>12</span></li>
+                                    <li><a href="listings.html">Educational</a><span>16</span></li>
+                                    <li><a href="listings.html">Home & Office Removals</a><span>84</span></li>
+                                    <li><a href="listings.html">Others</a><span>17</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div id="search-categories-boxes1">
+                        <div class="col-sm-6 col-md-4">
+                            <div class="search-categories-boxes1">
+                                <h2>
+                                    <img src="{{ asset('asset-front/images/vehicles.png') }}" alt="vehicles">
+                                    vehicles
+                                </h2>
+                            </div>
+                            <div class="categories-list1">
+                                <ul>
+                                    <li><a href="listings.html">cars</a><span>78</span></li>
+                                    <li><a href="listings.html">bikes</a><span>67</span></li>
+                                    <li><a href="listings.html">vans</a><span>29</span></li>
+                                    <li><a href="listings.html">trucks</a><span>36</span></li>
+                                    <li><a href="listings.html">cycles</a><span>52</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-md-4">
+                            <div class="search-categories-boxes1">
+                                <h2>
+                                    <img src="{{ asset('asset-front/images/travel.png') }}" alt="travel">
+                                    travel
+                                </h2>
+                            </div>
+                            <div class="categories-list1">
+                                <ul>
+                                    <li><a href="listings.html">air tickets</a><span>78</span></li>
+                                    <li><a href="listings.html">bus tickets</a><span>67</span></li>
+                                    <li><a href="listings.html">train tickets</a><span>29</span></li>
+                                    <li><a href="listings.html">taxi booking</a><span>36</span></li>
+                                    <li><a href="listings.html">others</a><span>93</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-md-4">
+                            <div class="search-categories-boxes1">
+                                <h2>
+                                    <img src="{{ asset('asset-front/images/stationary.png') }}" alt="stationary">
+                                    stationary
+                                </h2>
+                            </div>
+                            <div class="categories-list1">
+                                <ul>
+                                    <li><a href="listings.html">books</a><span>58</span></li>
+                                    <li><a href="listings.html">pens</a><span>12</span></li>
+                                    <li><a href="listings.html">calculators</a><span>16</span></li>
+                                    <li><a href="listings.html">note books</a><span>84</span></li>
+                                    <li><a href="listings.html">others</a><span>17</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-offset-5 col-sm-offset-4 col-sm-4 col-md-2">
+                        <button class="search-category"><i class="fa fa-bars"></i>Voire Plus</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end search categories-->
+{{ dump(qouiquis) }}
+    <!-- start feature listings-->
+    <div id="feature-listings">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 text-center">
+                    <div id="feature-listings-heading">
+                        <h1><span>Listes en vedette</span></h1>
+                    </div>
+                    <div id="feature-box">
+                        <div class="col-sm-6 col-md-3">
+                            <div class="feature-boxes-container">
+                                <div class="feature-boxes">
+                                    <img src="{{ asset('asset-front/images/img1.png') }}" alt="feature img1">
+                                    <h1><span>automotive</span></h1>
+                                </div>
+                                <div class="feature-box-text">
+                                    <h2>
+                                        $23K
+                                        <span>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star-half-empty"></i>
+                                            4.5
+                                        </span>
+                                    </h2>
+                                    <a href="listings-detail.html"><h3>Luxary Car for Sale</h3></a>
+                                    <p>9089 Surrey Lane </p>
+                                    <p>Madison Heights, MI 48071</p>
+                                    <a href="#"><i class="fa fa-phone"></i>202-555-0109</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-md-3">
+                            <div class="feature-boxes-container">
+                                <div class="feature-boxes">
+                                    <img src="{{ asset('asset-front/images/img2.png') }}" alt="feature img2">
+                                    <h1><span>food</span></h1>
+                                </div>
+                                <div class="feature-box-text">
+                                    <h2>
+                                        $119K
+                                        <span>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star-half-empty"></i>
+                                            4.5
+                                        </span>
+                                    </h2>
+                                    <a href="listings-detail.html"><h3>Fried Rice Dish Delivery</h3></a>
+                                    <p>6704 Fairview Road </p>
+                                    <p>Evans, GA 30809</p>
+                                    <a href="#"><i class="fa fa-phone"></i>202-555-0162</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-md-3">
+                            <div class="feature-boxes-container">
+                                <div class="feature-boxes">
+                                    <img src="{{ asset('asset-front/images/img3.png') }}" alt="feature img3">
+                                    <h1><span>property</span></h1>
+                                </div>
+                                <div class="feature-box-text">
+                                    <h2>
+                                        $250K
+                                        <span>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star-half-empty"></i>
+                                            4.5
+                                        </span>
+                                    </h2>
+                                    <a href="listings-detail.html"><h3>House for Sale</h3></a>
+                                    <p>5986 Main Street North </p>
+                                    <p>Paterson, NJ 07501</p>
+                                    <a href="#"><i class="fa fa-phone"></i>202-555-0135</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-md-3">
+                            <div class="feature-boxes-container">
+                                <div class="feature-boxes">
+                                    <img src="{{ asset('asset-front/images/img4.png') }}" alt="feature img4">
+                                    <h1><span>shopping</span></h1>
+                                </div>
+                                <div class="feature-box-text">
+                                    <h2>
+                                        $39K
+                                        <span>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star-half-empty"></i>
+                                            4.5
+                                        </span>
+                                    </h2>
+                                    <a href="listings-detail.html"><h3>Modern Sunglasses</h3></a>
+                                    <p>1255 Union Street </p>
+                                    <p>Loxahatchee, FL 33470</p>
+                                    <a href="#"><i class="fa fa-phone"></i>202-555-0159</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="clearfix"></div>
+
+                    <div id="feature-box1">
+                        <div class="col-sm-6 col-md-3">
+                            <div class="feature-boxes-container">
+                                <div class="feature-boxes">
+                                    <img src="{{ asset('asset-front/images/img5.png') }}" alt="feature img5">
+                                    <h1><span>property</span></h1>
+                                </div>
+                                <div class="feature-box-text">
+                                    <h2>
+                                        $55K
+                                        <span>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star-half-empty"></i>
+                                            4.5
+                                        </span>
+                                    </h2>
+                                    <a href="listings-detail.html"><h3>Apartment for Rent</h3></a>
+                                    <p>5986 Main Street North </p>
+                                    <p>Paterson, NJ 07501</p>
+                                    <a href="#"><i class="fa fa-phone"></i>202-555-0135</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-md-3">
+                            <div class="feature-boxes-container">
+                                <div class="feature-boxes">
+                                    <img src="{{ asset('asset-front/images/img6.png') }}" alt="feature img6">
+                                    <h1><span>shopping</span></h1>
+                                </div>
+                                <div class="feature-box-text">
+                                    <h2>
+                                        $42K
+                                        <span>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star-half-empty"></i>
+                                            4.5
+                                        </span>
+                                    </h2>
+                                    <a href="listings-detail.html"><h3>Stylish Men Jacket</h3></a>
+                                    <p>1255 Union Street </p>
+                                    <p>Loxahatchee, FL 33470</p>
+                                    <a href="#"><i class="fa fa-phone"></i>202-555-0159</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-md-3">
+                            <div class="feature-boxes-container">
+                                <div class="feature-boxes">
+                                    <img src="{{ asset('asset-front/images/img7.png') }}" alt="feature img7">
+                                    <h1><span>automotive</span></h1>
+                                </div>
+                                <div class="feature-box-text">
+                                    <h2>
+                                        $35K
+                                        <span>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star-half-empty"></i>
+                                            4.5
+                                        </span>
+                                    </h2>
+                                    <a href="listings-detail.html"><h3>Honda Accord for Sale</h3></a>
+                                    <p>9089 Surrey Lane </p>
+                                    <p>Madison Heights, MI 48071</p>
+                                    <a href="#"><i class="fa fa-phone"></i>202-555-0109</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-md-3">
+                            <div class="feature-boxes-container">
+                                <div class="feature-boxes">
+                                    <img src="{{ asset('asset-front/images/img8.png') }}" alt="feature img8">
+                                    <h1><span>food</span></h1>
+                                </div>
+                                <div class="feature-box-text">
+                                    <h2>
+                                        $92K
+                                        <span>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star-half-empty"></i>
+                                            4.5
+                                        </span>
+                                    </h2>
+                                    <a href="listings-detail.html"><h3>Italian Pasta Delivery</h3></a>
+                                    <p>6704 Fairview Road </p>
+                                    <p>Evans, GA 30809</p>
+                                    <a href="#"><i class="fa fa-phone"></i>202-555-0162</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end feature listings-->
+
+    <!-- start events -->
+
+    {% if events %}
+        <div id="events-section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <div id="easy-search-events">
+                            <h1><span>Quick Events</span></h1>
+                        </div>
+                        {% for ev in events %}
+                            <div class="col-sm-6">
+                                <div class="listing-boxes-container">
+                                    <div class="col-sm-12 col-md-4 nopadding">
+                                        {% if ev.image %}
+                                        <div class="listing-boxes-image">
+                                            <img src="{{ asset('uploads/events/'~ ev.image ~'.jpg')}}" alt="events" />
+                                            {% if ev.eventName %}
+                                            <h1><span>{{ ev.eventName }}</span></h1>
+                                            {% endif %}
+                                        </div>
+                                        {% else %}
+                                        <div class="listing-boxes-image">
+                                            <img src="{{ asset('uploads/events/Default/quoiqui-events.jpg') }}" alt="events-defaults" }} alt="listing 1">
+                                            {% if ev.eventName %}
+                                            <h1><span>{{ ev.eventName }}</span></h1>
+                                            {% endif %}
+                                        </div>
+                                        {% endif %}
+                                    </div>
+                                    <div class="col-sm-12 col-md-8 nopadding">
+                                        <div class="listing-boxes-text">
+                                            {#<h2>#}
+               {#<span>#}
+               {#<i class="fa fa-star"></i>#}
+               {#<i class="fa fa-star"></i>#}
+               {#<i class="fa fa-star"></i>#}
+               {#<i class="fa fa-star-half-empty"></i>#}
+               {#4.5#}
+               {#</span>#}
+                                            {#</h2>#}
+                                            {% if ev.qville %}
+                                            <a href="#">
+                                                <h3>{{ ev.qville.qouiqui.firstName }} {{ ev.qville.qouiqui.lastName }}</h3>
+                                            </a>
+                                            {% endif %}
+                                            {% if ev.details %}
+                                            <p>{{ eventLength(ev.details)}}</p>
+                                            {% endif %}
+                                            {% if ev.qville %}
+                                            <h5>{{ ev.qville.ville.libelle }}</h5>
+                                            {% endif %}
+                                            {% if  ev.dateStart|date("m/d/Y") and ev.dateEnd|date("m/d/Y") %}
+                                            <span class="glyphicon glyphicon-calendar"><a href="#"> {{ ev.dateStart|date("m/d/Y") }} | {{ ev.dateEnd|date("m/d/Y") }}</a></span>
+                                            {% endif %}
+                                            <span> <a href="{{ path('dashboard_booking_reservation', { 'id': ev.id }) }}" class="btn btn-warning">Reservées</a></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+    <!-- end events-->
+
+    <!-- start quick any easy search -->
+
+    <div id="easy-search">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 text-center">
+                    <div id="easy-search-heading">
+                        <h1><span>Quick and easy search</span></h1>
+                    </div>
+                    <div id="search-steps">
+                        <div class="col-sm-4 nopadding">
+                            <div class="search-steps">
+                                <div class="seperator">
+                                    <hr>
+                                </div>
+                                <h1>Select Your Location</h1>
+                                <p><span>1.</span>Sed ut perspiciatis unde omnis iste</p>
+                                <h4>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium
+                                    doloremque laudantium, totam rem aperiam.</h4>
+                            </div>
+                        </div>
+                        <div class="col-sm-4 nopadding">
+                            <div class="search-steps">
+                                <div class="seperator">
+                                    <hr>
+                                </div>
+                                <h1>Choose a Category</h1>
+                                <p><span>2.</span>Sed ut perspiciatis unde omnis iste</p>
+                                <h4>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium
+                                    doloremque laudantium, totam rem aperiam.</h4>
+                            </div>
+                        </div>
+                        <div class="col-sm-4 nopadding">
+                            <div class="search-steps">
+                                <h1>Search What You Want</h1>
+                                <p><span>3.</span>Sed ut perspiciatis unde omnis iste</p>
+                                <h4>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium
+                                    doloremque laudantium, totam rem aperiam.</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end quick and easy search-->
+
+    <div class="clearfix"></div>
+
+    <!-- start recent listings -->
+    <div id="recent-listings">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 text-center">
+                    <div id="recent-listings-heading">
+                        <h1><span>recent listings</span></h1>
+                    </div>
+                    <div class="listing-boxes">
+                        <div class="col-sm-6">
+                            <div class="listing-boxes-container">
+                                <div class="col-sm-12 col-md-6 nopadding">
+                                    <div class="listing-boxes-image">
+                                        <img src="{{ asset('asset-front/images/listing-1.png') }}" alt="listing 1">
+                                        <h1><span>food</span></h1>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-md-6 nopadding">
+                                    <div class="listing-boxes-text">
+                                        <h2>
+                                            $84
+                                            <span>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star-half-empty"></i>
+                                                4.5
+                                            </span>
+                                        </h2>
+                                        <a href="listings-detail.html"><h3>Italian Pasta Delivery</h3></a>
+                                        <p>6704 Fairview Road </p>
+                                        <p>Evans, GA 30809</p>
+                                        <a href="#"><i class="fa fa-phone"></i>202-555-0162</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="listing-boxes-container">
+                                <div class="col-sm-12 col-md-6 nopadding">
+                                    <div class="listing-boxes-image">
+                                        <img src="{{ asset('asset-front/images/listing-2.png') }}" alt="listing 2">
+                                        <h1><span>property</span></h1>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-md-6 nopadding">
+                                    <div class="listing-boxes-text">
+                                        <h2>
+                                            $20
+                                            <span>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star-half-empty"></i>
+                                                4.5
+                                            </span>
+                                        </h2>
+                                        <a href="listings-detail.html"><h3>Italian Pasta Delivery</h3></a>
+                                        <p>6704 Fairview Road </p>
+                                        <p>Evans, GA 30809</p>
+                                        <a href="#"><i class="fa fa-phone"></i>202-555-0162</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="listing-boxes1">
+                        <div class="col-sm-6">
+                            <div class="listing-boxes-container">
+                                <div class="col-sm-12 col-md-6 nopadding">
+                                    <div class="listing-boxes-image">
+                                        <img src="{{ asset('asset-front/images/listing-3.png') }}" alt="listing 3">
+                                        <h1><span>shopping</span></h1>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-md-6 nopadding">
+                                    <div class="listing-boxes-text">
+                                        <h2>
+                                            $30
+                                            <span>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star-half-empty"></i>
+                                                4.5
+                                            </span>
+                                        </h2>
+                                        <a href="listings-detail.html"><h3>Italian Pasta Delivery</h3></a>
+                                        <p>6704 Fairview Road </p>
+                                        <p>Evans, GA 30809</p>
+                                        <a href="#"><i class="fa fa-phone"></i>202-555-0162</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="listing-boxes-container">
+                                <div class="col-sm-12 col-md-6 nopadding">
+                                    <div class="listing-boxes-image">
+                                        <img src="{{ asset('asset-front/images/listing-4.png') }}" alt="listing 4">
+                                        <h1><span>automotive</span></h1>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-md-6 nopadding">
+                                    <div class="listing-boxes-text">
+                                        <h2>
+                                            $210
+                                            <span>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star-half-empty"></i>
+                                                4.5
+                                            </span>
+                                        </h2>
+                                        <a href="listings-detail.html"><h3>Italian Pasta Delivery</h3></a>
+                                        <p>6704 Fairview Road </p>
+                                        <p>Evans, GA 30809</p>
+                                        <a href="#"><i class="fa fa-phone"></i>202-555-0162</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end recent listings-->
+
+    <!-- start counter -->
+    <div class="jx-container jx-padding jx-default-bg counter">
+        <div class="jx-container-slope jx-bottom-slope jx-left-slope"></div>
+        <!-- container slope -->
+        <div class="container">
+            <div class="sixteen columns">
+                <div class="jx-counter-up">
+                    <div class="container">
+                        <div class="col-xs-6 col-sm-3">
+                            <div class="jx-countup">
+                                <div class="jx-black-top-arrow"><img
+                                            src="{{ asset('asset-front/images/icon1.png') }}"
+                                            alt="img"></div>
+                                <div id="count-1" class="success-count count_number jx-count-up">578</div>
+                                <div class="counter_text">listings</div>
+                            </div>
+                        </div>
+                        <div class="col-xs-6 col-sm-3">
+                            <div class="jx-countup">
+                                <div class="jx-black-top-arrow"><img
+                                            src="{{ asset('asset-front/images/icon2.png') }}"
+                                            alt="img"></div>
+                                <div id="count-2" class="success-count count_number jx-count-up">942</div>
+                                <div class="counter_text">users</div>
+                            </div>
+                        </div>
+                        <div class="col-xs-6 col-sm-3">
+                            <div class="jx-countup">
+                                <div class="jx-black-top-arrow"><img
+                                            src="{{ asset('asset-front/images/icon3.png') }}"
+                                            alt="img"></div>
+                                <div id="count-3" class="success-count count_number jx-count-up">12</div>
+                                <div class="counter_text">categories</div>
+                            </div>
+                        </div>
+                        <div class="col-xs-6 col-sm-3">
+                            <div class="jx-countup last-countup">
+                                <div class="jx-black-top-arrow"><img
+                                            src="{{ asset('asset-front/images/icon4.png') }}"
+                                            alt="img"></div>
+                                <div id="count-4" class="success-count count_number jx-count-up">118</div>
+                                <div class="counter_text">listings types</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- end counter -->
+
+    <!-- strat pricong plan-->
+    <div id="pricing-plan">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 text-center">
+                    <div id="pricing-plan-heading">
+                        <h1><span>pricing plan</span></h1>
+                    </div>
+                    <div id="price">
+                        <div class="col-sm-4 nopadding-right">
+                            <div class="price-table">
+                                <h1>Silver</h1>
+                                <hr>
+                                <p>From <span>$30</span> Per Months</p>
+                                <div class="price-seperator">
+                                    <span><i class="fa fa-angle-down"></i></span>
+                                </div>
+                                <div class="price-list">
+                                    <h2>Free ad posting</h2>
+                                    <p>Curabitur ac lacus arcu. Sed vehicula lectus auctor viverra. Vehicula.</p>
+                                    <hr>
+                                </div>
+                                <div class="price-list">
+                                    <h2>5 Featured ads availability</h2>
+                                    <p>Curabitur ac lacus arcu. Sed vehicula lectus auctor viverra. Vehicula.</p>
+                                    <hr>
+                                </div>
+                                <div class="price-list list">
+                                    <h2> For 30 days</h2>
+                                    <p>Curabitur ac lacus arcu. Sed vehicula lectus auctor viverra. Vehicula.</p>
+                                    <hr>
+                                </div>
+                                <div class="price-link">
+                                    <button>get started now</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4 nopadding">
+                            <div class="price-table active">
+                                <div class="ribbon-wrapper">
+                                    <div class="ribbon">Recommended</div>
+                                </div>
+                                <h1>standard</h1>
+                                <hr>
+                                <p>From <span>$25</span> Per Months</p>
+                                <div class="price-seperator">
+                                    <span><i class="fa fa-angle-down"></i></span>
+                                </div>
+                                <div class="price-list">
+                                    <h2>Free ad posting</h2>
+                                    <p>Curabitur ac lacus arcu. Sed vehicula lectus auctor viverra. Vehicula.</p>
+                                    <hr>
+                                </div>
+                                <div class="price-list">
+                                    <h2>6 Featured ads availability</h2>
+                                    <p>Curabitur ac lacus arcu. Sed vehicula lectus auctor viverra. Vehicula.</p>
+                                    <hr>
+                                </div>
+                                <div class="price-list list">
+                                    <h2> For 25 days</h2>
+                                    <p>Curabitur ac lacus arcu. Sed vehicula lectus auctor viverra. Vehicula.</p>
+                                    <hr>
+                                </div>
+                                <div class="price-link">
+                                    <button>get started now</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4 nopadding-left">
+                            <div class="price-table">
+                                <h1>platinum</h1>
+                                <hr>
+                                <p>From <span>$49</span> Per Months</p>
+                                <div class="price-seperator">
+                                    <span><i class="fa fa-angle-down"></i></span>
+                                </div>
+                                <div class="price-list">
+                                    <h2>Free ad posting</h2>
+                                    <p>Curabitur ac lacus arcu. Sed vehicula lectus auctor viverra. Vehicula.</p>
+                                    <hr>
+                                </div>
+                                <div class="price-list">
+                                    <h2>30 Featured ads availability</h2>
+                                    <p>Curabitur ac lacus arcu. Sed vehicula lectus auctor viverra. Vehicula.</p>
+                                    <hr>
+                                </div>
+                                <div class="price-list list">
+                                    <h2>For 30 days</h2>
+                                    <p>Curabitur ac lacus arcu. Sed vehicula lectus auctor viverra. Vehicula.</p>
+                                    <hr>
+                                </div>
+                                <div class="price-link">
+                                    <button>get started now</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end pricing plan-->
+
+    <!-- start clients-->
+    <div id="clients">
+        <div class="container">
+            <div class="row">
+                <div id="client-slider">
+                    <ul class="client-carousel">
+                        <li>
+                            <img src="{{ asset('asset-front/images/logo1.jpg') }}" alt="Logo">
+                        </li>
+                        <li>
+                            <img src="{{ asset('asset-front/images/logo2.jpg') }}" alt="Logo">
+                        </li>
+                        <li>
+                            <img src="{{ asset('asset-front/images/logo3.jpg') }}" alt="Logo">
+                        </li>
+                        <li>
+                            <img src="{{ asset('asset-front/images/logo4.jpg') }}" alt="Logo">
+                        </li>
+                        <li>
+                            <img src="{{ asset('asset-front/images/logo5.jpg') }}" alt="Logo">
+                        </li>
+                        <li>
+                            <img src="{{ asset('asset-front/images/logo6.jpg') }}" alt="Logo">
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end clients-->
+    {#=======================================footer===========================================#}
+    {% include 'UserBundle::footer.html.twig' %}
+    {#=======================================footer===========================================#}
+    {% block stylesheets %}
+        {{ parent() }}
+        <style>
+            #events-section {
+                background: #f7f7f7;
+                padding: 80px 0px;
+            }
+
+            #easy-search-events h1 span::before {
+                border-left: 3px solid #ffbe00;
+                bottom: 5px;
+                content: "";
+                height: 30px;
+                margin-right: 20px;
+                position: relative;
+                width: 3px;
+            }
+
+            #easy-search-events h1 span::after {
+                border-right: 3px solid #ffbe00;
+                content: "";
+                height: 30px;
+                margin-left: 20px;
+                width: 3px;
+                position: relative;
+                top: 5px;
+            }
+        </style>
+    {% endblock %} }
+    {% block javascript %}
+        <!-- Scripts -->
+        <script src="{{ asset('asset-front/js/wow.min.js') }}"></script>
+        <script src="{{ asset('asset-front/js/jquery-1.11.1.min.js') }}"></script>
+        <script src="{{ asset('asset-front/js/bootstrap.min.js') }}"></script>
+        <script src="{{ asset('asset-front/js/waypoints.js') }}"></script>
+        <script src="{{ asset('asset-front/js/jquery.counterup.js') }}"></script>
+        <script src="{{ asset('asset-front/js/jquery.bxslider-rahisified.min.js') }}"></script>
+        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+        <script src="{{ asset('asset-front/js/custom.js') }}"></script>
+
+        <script>
+
+            /*************** show and hide map and banner ********************/
+            $(document).ready(function (e) {
+                $("#banner-map").hide();
+                $("#banner-link").click(function () {
+                    $("#main-banner,#banner-map").slideToggle("slow");
+                    initmap();
+                });
+                $("#map-link").click(function () {
+                    $("#main-banner,#banner-map").slideToggle("slow");
+                });
+            });
+
+            // home page map
+
+            function initmap() {
+                var map = new google.maps.Map(document.getElementById("homemap"), {
+                    zoom: 10,
+                    scrollwheel: false,
+                    center: new google.maps.LatLng(40.6700, -73.9400), // New York
+
+                    styles: [
+                        {
+                            "featureType": "administrative",
+                            "elementType": "labels.text.fill",
+                            "stylers": [
+                                {
+                                    "color": "#444444"
+                                }
+                            ]
+                        },
+                        {
+                            "featureType": "landscape",
+                            "elementType": "all",
+                            "stylers": [
+                                {
+                                    "color": "#f2f2f2"
+                                }
+                            ]
+                        },
+                        {
+                            "featureType": "poi",
+                            "elementType": "all",
+                            "stylers": [
+                                {
+                                    "visibility": "off"
+                                }
+                            ]
+                        },
+                        {
+                            "featureType": "road",
+                            "elementType": "all",
+                            "stylers": [
+                                {
+                                    "saturation": -100
+                                },
+                                {
+                                    "lightness": 45
+                                }
+                            ]
+                        },
+                        {
+                            "featureType": "road.highway",
+                            "elementType": "all",
+                            "stylers": [
+                                {
+                                    "visibility": "simplified"
+                                }
+                            ]
+                        },
+                        {
+                            "featureType": "road.arterial",
+                            "elementType": "labels.icon",
+                            "stylers": [
+                                {
+                                    "visibility": "off"
+                                }
+                            ]
+                        },
+                        {
+                            "featureType": "transit",
+                            "elementType": "all",
+                            "stylers": [
+                                {
+                                    "visibility": "off"
+                                }
+                            ]
+                        },
+                        {
+                            "featureType": "water",
+                            "elementType": "all",
+                            "stylers": [
+                                {
+                                    "color": "#ffbe00"
+                                },
+                                {
+                                    "visibility": "on"
+                                }
+                            ]
+                        }
+                    ]
+
+                });
+
+                setMarkers(map);
+            }
+
+            // Data for the markers consisting of a Country name, Item Name, Address for Item, a LatLng and a zIndex // for the order in which these markers should display on top of each other.
+            var item_location = [
+                ['New York', 'Luxary Car for Sale', '9089 Surrey Lane Madison Heights, MI 48071', 40.6700, -73.9400, 4, 'map-icon1.png'],
+                ['Elezabeth', 'Modern Sunglasses', '1255 Union Street Loxahatchee, FL 33470', 40.66605, -74.200974, 5, 'map-icon2.png'],
+                ['Queens', 'House for Sale', '5986 Main Street North Paterson, NJ 07501', 40.742054, -73.769417, 3, 'map-icon1.png'],
+                ['Edison', 'Fried Rice Dish Delivery', '6704 Fairview Road Evans, GA 30809', 40.518715, -74.412095, 2, 'map-icon3.png'],
+                ['Garden City', 'Italian Pasta Delivery', '6704 Fairview Road Evans, GA 30809', 40.726768, -73.634295, 1, 'map-icon3.png'],
+                ['Clifton', 'Apartment for Rent', '5986 Main Street North Paterson, NJ 07501', 40.858433, -74.163755, 1, 'map-icon2.png'],
+            ];
+
+            function setMarkers(map) {
+                // Adds markers to the map.
+
+                // Marker sizes are expressed as a Size of X,Y where the origin of the image
+                // (0,0) is located in the top left of the image.
+
+                // Origins, anchor positions and coordinates of the marker increase in the X
+                // direction to the right and in the Y direction down.
+
+
+                // Shapes define the clickable region of the icon. The type defines an HTML
+                // <area> element 'poly' which traces out a polygon as a series of X,Y points.
+                // The final coordinate closes the poly by connecting to the first coordinate.
+                var shape = {
+                    coords: [1, 1, 1, 52, 50, 52, 50, 1],
+                    type: 'poly'
+                };
+                for (var i = 0; i < item_location.length; i++) {
+                    var item = item_location[i];
+                    var image = {
+                        url: 'images/' + item[6],
+
+                        size: new google.maps.Size(52, 53),
+
+                        origin: new google.maps.Point(0, 0),
+
+                        anchor: new google.maps.Point(0, 53)
+                    };
+                    var infoWindow = new google.maps.InfoWindow({
+                        content: item[0],
+                    });
+                    var marker = new google.maps.Marker({
+                        position: {lat: item[3], lng: item[4]},
+                        animation: google.maps.Animation.DROP,
+                        map: map,
+                        icon: image,
+                        shape: shape,
+                        title: item[0],
+                        zIndex: item[5]
+                    });
+                    (function (marker, item) {
+                        google.maps.event.addListener(marker, "click", function (e) {
+                            //Wrap the content inside an HTML DIV in order to set height and width of InfoWindow.
+                            infoWindow.setContent("<div style = 'width:220px;min-height:40px' id='m-info-window'> <h6 class='info-window-hding'>" + item[1] + "</h6> <p class='info-window-desc'>" + item[2] + "</p> </div>");
+                            infoWindow.open(map, marker);
+                        });
+                    })(marker, item);
+                }
+            }
+
+        </script>
+    {% endblock %}
+
+    </body>
+{% endblock %}

@@ -1,0 +1,123 @@
+<style>
+    @import url('https://fonts.googleapis.com/css?family=Lobster');
+</style>
+<header class="main-header">
+
+
+
+    <!--Header-Upper-->
+    <div class="header-upper">
+        <div class="auto-container">
+            <div class="clearfix">
+
+                <div class="pull-left logo-outer">
+                   <h1 style="text-transform: uppercase;font-family: 'Lobster', cursive;">{{ qouiqui.firstname }}</h1>
+                </div>
+
+                <div class="pull-right upper-right clearfix">
+
+                    <!--Info Box-->
+                    <div class="upper-column info-box">
+                        <div class="icon-box"><span class="flaticon-clock-2"></span></div>
+                        HORAIRE
+                        <div class="light-text">
+                            {% if horaire != null %}
+                            Ouvert du {{ horaire.week.start }} à {{ horaire.week.end }}<br>
+                            Fermer du {{ horaire.close.start }} à {{ horaire.close.end }}<br></div>
+                            {% else %}
+                            Pas D'horaire !
+                            {% endif %}
+                    </div>
+
+                    <!--Info Box-->
+                    <div class="upper-column info-box">
+                        <div class="icon-box"><span class="flaticon-technology-1"></span></div>
+                        APPELER
+                        <div class="light-text">{{ qouiqui.phone }}</div>
+                    </div>
+
+                    <!--Info Box-->
+                    <div class="upper-column info-box">
+                        <div class="icon-box"><span class="flaticon-envelope-3"></span></div>
+                       CONTACTEZ-NOUS
+                        <div class="light-text">{{ qouiqui.mail }}</div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!--Header-Lower-->
+    <div class="header-lower">
+
+        <div class="auto-container">
+            <div class="nav-outer clearfix">
+                <!-- Main Menu -->
+                <nav id="main-menu" class="main-menu">
+                    <div class="navbar-header">
+                        <!-- Toggle Button -->
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                    </div>
+
+                    <div class="navbar-collapse collapse clearfix">
+                        <ul class="navigation clearfix">
+                            <li class="current"><a href="#"> Accueil</a></li>
+                            <li><a href="#about">A Propo</a></li>
+                            <li ><a href="#services-section">NOS SERVICES</a></li>
+                            <li ><a href="#gallery-section">Galleries</a></li>
+                            <li><a href="#contact-form-section">Contactez nouz</a></li>
+                        </ul>
+                    </div>
+                </nav>
+                <!-- Main Menu End-->
+
+                <div class="outer-btn"><a href="tel:{{ qouiqui.phone }}" class="theme-btn consultation">APPELER MAINTENANT</a></div>
+
+            </div>
+        </div>
+    </div>
+
+    <!--Sticky Header-->
+    <div class="sticky-header">
+        <div class="auto-container clearfix">
+            <!--Logo-->
+            <div class="logo pull-left">
+               <h1 style="text-transform: uppercase;font-family: 'Lobster', cursive;">{{ qouiqui.firstName }}</h1>
+            </div>
+
+            <!--Right Col-->
+            <div class="right-col pull-right">
+                <!-- Main Menu -->
+                <nav class="main-menu">
+                    <div class="navbar-header">
+                        <!-- Toggle Button -->
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                    </div>
+
+                    <div class="navbar-collapse collapse clearfix">
+                        <ul id="nav-suiv" class="navigation clearfix">
+                            <li class="current"><a href="#"> Accueil</a></li>
+                            <li><a href="#about">A Propo</a></li>
+                            <li ><a href="#services-section">NOS SERVICES</a></li>
+                            <li ><a href="#gallery-section">Gallerie</a></li>
+                            <li><a href="#contact-form-section">Contactez nouz</a></li>
+                        </ul>
+                    </div>
+                </nav><!-- Main Menu End-->
+            </div>
+
+        </div>
+    </div>
+    <!--End Sticky Header-->
+
+</header>

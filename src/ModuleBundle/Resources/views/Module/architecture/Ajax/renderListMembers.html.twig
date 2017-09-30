@@ -1,0 +1,39 @@
+<tr>
+    <th>
+        Nom
+    </th>
+    <th>
+        Prenom
+    </th>
+    <th>
+        Poste
+    </th>
+
+    <th>
+        Action
+    </th>
+
+</tr>
+{% for member in members %}
+    <tr>
+        <td>
+            {{ member["lastName"] }}
+        </td>
+        <td>
+            {{ member["firstName"] }}
+        </td>
+        <td>
+            {{ member["post"] }}
+        </td>
+        <td>
+            <a href="{{ path('delete_member',{"id": member['id'],"quoiqui":quoiqui }) }}">Supprimer</a>
+
+            <a href="#" class="btn btn-default btn-main form_update_member" data-toggle="modal" data-target="#update-member" data-project='{"firstName":"{{ member["firstName"] }}","lastName":"{{ member["lastName"] }}","post":"{{ member["post"] }}","facebook":"{{ member["social"]["Facebook"]}}","id":"{{ member["id"] }}","google":"{{ member["social"]["Google"] }}","Tweeter":"{{ member["social"]["Tweeter"] }}","Dribbble":"{{ member["social"]["Dribbble"] }}"}'
+               data-link='{{ path('update_member',{"id":member['id'],"quoiqui":quoiqui}) }}' data-image="{{ member["image"] }}"> <span>Modifier</span></a>
+        </td>
+
+    </tr>
+
+{% endfor %}
+
+

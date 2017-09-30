@@ -1,0 +1,30 @@
+<div id="ite">
+    <div class="col-md-12 align-center">
+        <div class="col-md-12">
+            <div style="    text-align: center;font-size: 20px; color:#ff3d54">
+
+                Y aller
+            </div>
+            <form class="form-inline">
+
+                <div class="col-md-8 no-padding">
+                    <div class="input-group first-ch">
+                        <div class="input-group-addon btn btn-cta-primary" onclick="javascript:geolocate()" data-toggle="tooltip" data-placement="bottom" title="Détecter ma position"><i class="fa fa-location-arrow" aria-hidden="true"></i></div>
+                        <input type="text" name="origin" id="origin" placeholder="Indiquez un lieu" class="form-control map-input" size="0" autocomplete="off">
+                    </div>
+                </div>
+                <div class="col-md-4 no-padding">
+
+
+                    <a class="theme-btn btn-style-two" style="cursor:pointer;padding: 7px;" onclick="calculate();">Itinéraire</a>
+
+
+                    <input type="hidden" value="36.851822,10.1576564" name="destination" id="destination">
+
+                </div>
+
+            </form>
+            <div id="panel"></div>
+        </div>
+    </div>
+</div>

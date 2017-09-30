@@ -1,0 +1,1625 @@
+<script>
+    var idSection = 'a[href$="#acceuil"]';
+
+    $('#navbar-menus').onePageNav({
+        scrollSpeed: 750,
+        scrollThreshold: 0.5,
+        filter: ':not(.external)',
+        scrollChange: function ($currentListItem) {
+
+            var selector = $currentListItem.prevObject.selector;
+             if (selector == 'a[href$="#acceuil"]') {
+            }
+
+            else if (selector == 'a[href$="#propos"]') {
+
+
+                $('.motif-container').attr('data-pour', 'propos');
+                $('#backgroundcolor').attr('data-pour', 'propos');
+                $("#sectionName").html(' SectionApropos');
+                $('.color-service').hide();
+                $('.color-event').hide();
+                $('.color-section-about').show();
+            }
+            else if (selector == 'a[href$="#service"]') {
+                $('.motif-container').attr('data-pour', 'service');
+                $('#backgroundcolor').attr('data-pour', 'service');
+                $("#sectionName").html('Section formations');
+                $('.color-service').show();
+                $('.color-event').hide();
+                $('.color-section-about').hide();
+
+            }
+            else if (selector == 'a[href$="#event"]') {
+                $('.motif-container').attr('data-pour', 'event');
+                $('#backgroundcolor').attr('data-pour', 'event');
+                $("#sectionName").html('Section évenement');
+                $('.color-section-about').hide();
+                $('.color-service').hide();
+                $('.color-event').show();
+            }
+            else if (selector == 'a[href$="#gallery"]') {
+                $('.motif-container').attr('data-pour', 'gallery');
+                $('#backgroundcolor').attr('data-pour', 'gallery');
+                $("#sectionName").html(' Section Gallerie');
+                $('.color-section-about').hide();
+                $('.color-service').hide();
+                $('.color-event').hide();
+            }
+            else if (selector == 'a[href$="#formateur"]') {
+                $('.motif-container').attr('data-pour', 'formateur');
+                $('#backgroundcolor').attr('data-pour', 'formateur');
+                $("#sectionName").html('Section formateur');
+                $('.color-section-about').hide();
+                $('.color-service').hide();
+                $('.color-event').hide();
+            }
+            else if (selector == 'a[href$="#contact"]') {
+                $('.motif-container').attr('data-pour', 'contact');
+                $('#backgroundcolor').attr('data-pour', 'contact');
+                $("#sectionName").html('Section contact');
+                $('.color-section-about').hide();
+                $('.color-service').hide();
+                $('.color-event').hide();
+            }
+             else if (selector == 'a[href$="#footer"]') {
+
+
+                 $('#backgroundcolor').attr('data-pour', 'footer');
+                 $("#sectionName").html('Section footer');
+                 $('.color-section-about').hide();
+                 $('.color-service').hide();
+                 $('.color-event').hide();
+             }
+
+            idSection = selector;
+            console.log(idSection);
+
+        }
+
+    });
+
+</script>
+
+
+<script>
+    var maxImageWidth = 1900,
+        maxImageHeight = 800;
+    Dropzone.options.myDropzone = {
+        dictDefaultMessage: 'Télécharger une image',
+        addRemoveLinks: true,
+
+        acceptedFiles: ".png,.jpg,.gif,.jpeg",
+        clickable: true,
+        init: function () {
+
+
+            this.on("thumbnail", function (file) {
+                // Do the dimension checks you want to do
+                if (file.width < maxImageWidth || file.height < maxImageHeight) {
+                    file.rejectDimensions()
+                }
+                else {
+                    file.acceptDimensions();
+                }
+            });
+            this.on("error", function (file, message) {
+
+                return false;
+            });
+
+
+            thisDropzone = this;
+            this.on("removedfile", function (file) {
+
+                console.log(file.name),
+                    $.ajax({
+                        url: '{{ path('module_spa_delate') }}?filetodelete=' + file.name,
+                        data: {'filetodelete': file.name},
+                        type: "POST",
+                        success: function () {
+
+                        },
+                        error: function () {
+
+                        }
+                    });
+            });
+
+        },
+        accept: function (file, done) {
+            file.acceptDimensions = done;
+            file.rejectDimensions = function () {
+                done("Le Dimension de la Photo doit être suppérieur à 800x800 ");
+            };
+
+        }
+    };
+
+    $('.remove').click(function () {
+
+        var filetodelete = $(this).attr('data-name-remove');
+        var id = $(this).attr('data-id');
+
+
+        var data = {
+            id: id,
+            filetodelete: filetodelete
+        };
+
+        $.ajax({
+            url: '{{ path('module_spa_delate') }}',
+            data: data,
+            type: "POST",
+            success: function (data) {
+                $('[data-div="' + filetodelete + '"]').remove();
+                // $( "#div1" ).remove( );
+
+//                $('[data-div="' + filetodelete + '"]').fadeOut();
+
+            }
+
+
+        });
+    });
+
+    $(function () {
+        $("#sortable").sortable();
+        $("#sortable").disableSelection();
+    });
+
+
+    Dropzone.options.myGallery = {
+        dictDefaultMessage: 'Télécharger une image',
+        addRemoveLinks: true,
+
+        acceptedFiles: ".png,.jpg,.gif,.jpeg",
+        clickable: true,
+        init: function () {
+
+
+            this.on("error", function (file, message) {
+
+                return false;
+            });
+
+
+            thisDropzone = this;
+            this.on("removedfile", function (file) {
+
+                console.log(file.name),
+                    $.ajax({
+                        url: '{{ path('module_spa_delate') }}?filetodelete=' + file.name,
+                        data: {'filetodelete': file.name},
+                        type: "POST",
+                        success: function () {
+
+                        },
+                        error: function () {
+
+                        }
+                    });
+            });
+
+        },
+
+    };
+
+
+    $('.remove-gallery').click(function () {
+
+        var filetodelete = $(this).attr('data-name-remove');
+        var id = $(this).attr('data-id');
+
+        var data = {
+            id: id,
+            filetodelete: filetodelete
+        };
+
+        $.ajax({
+            url: '{{ path('module_spa_delate_gallery') }}',
+            data: data,
+            type: "POST",
+            success: function (data) {
+
+                $('[data-div="' + filetodelete + '"]').fadeOut();
+
+            }
+
+
+        });
+    });
+
+    //    $(document).ready(function() {
+    //        var table = $('#table-cour').DataTable( {
+    //            responsive: true
+    //        } );
+    //
+    //
+    //    } );
+//    $(".modal-wide").on("show.bs.modal", function () {
+//        var height = $(window).height() - 200;
+//        $(this).find(".modal-body").css("max-height", height);
+//    });
+//
+//    $(".modal_large").on("show.bs.modal", function () {
+//        var height = $(window).height() - 200;
+//        $(this).find(".modal-body").css("max-height", height);
+//    });
+
+
+</script>
+<script>
+    jQuery("[data-target='modifier']").click(function () {
+        id = $(this).attr("data-selector");
+        jQuery("#" + id).submit()
+    });
+</script>
+<script>
+
+    $('.form_date').datetimepicker({
+        language: 'fr',
+        weekStart: 1,
+        todayBtn: 1,
+        autoclose: 1,
+        todayHighlight: 1,
+        startView: 2,
+        minView: 2,
+        forceParse: 0
+    });
+</script>
+<script>
+    $('.modifier').click(function () {
+
+
+        var idqq = $(this).attr('data-id');
+        var idserv = $(this).attr('data-serv');
+
+
+        var data = {
+            idqq: idqq,
+            idserv: idserv,
+
+        };
+        console.log(data);
+        $.ajax({
+            url: '{{ path('module_centreformation_edit_service') }}',
+            data: data,
+            type: "POST",
+            success: function (data) {
+                console.log(data);
+
+                var arr = [];
+                json = JSON.stringify(eval('(' + data + ')')); //convert to json string
+                arr = $.parseJSON(json);
+                $('#idsevice').val(idserv);
+                $('#type').val(arr.ncour);
+                $('#info').val(arr.desc);
+                $('#price').val(arr.prix);
+                $('#trainer').val(arr.trainer);
+                $('#date-cour-start').val(arr.start);
+                $('#date-cour-end').val(arr.end);
+                $('#Dure').val(arr.dure);
+                $('#plus_detail').val(arr.detaille);
+                $("#t1").val(arr.qouiqui.Lun.start);
+                $("#t2").val(arr.qouiqui.Lun.end);
+                $("#t3").val(arr.qouiqui.Mar.start);
+                $("#t4").val(arr.qouiqui.Mar.end);
+                $("#t5").val(arr.qouiqui.Mer.start);
+                $("#t6").val(arr.qouiqui.Mer.end);
+                $("#t7").val(arr.qouiqui.Jeu.start);
+                $("#t8").val(arr.qouiqui.Jeu.end);
+                $("#t9").val(arr.qouiqui.Ven.start);
+                $("#t10").val(arr.qouiqui.Ven.end);
+                $("#t11").val(arr.qouiqui.Sam.start);
+                $("#t12").val(arr.qouiqui.Sam.end);
+                $("#t13").val(arr.qouiqui.Dim.start);
+                $("#t14").val(arr.qouiqui.Dim.end);
+                console.log(arr.qouiqui.Lun.start);
+                if (arr.certif == 'on') {
+                    $('#certeficat').val('oui');
+                    console.log(arr.certif);
+                }
+
+                if (arr.certif == 'on')
+                {
+                    console.log(arr.certif);
+                    $( "#certaficat").prop('checked', true);
+                }
+                else
+                {
+                    $( "#certaficat").prop('checked', false);
+                }
+
+            }
+
+
+        });
+
+    });
+
+</script>
+<script>
+    $(document).ready(function () {
+        $('.service_suprim').click(function () {
+            var id = $(this).attr('data-id');
+            $(".delate").val(id);
+
+
+        });
+    });
+
+</script>
+<script>
+    $(document).ready(function () {
+        $('.service_suprim_event').click(function () {
+            var id = $(this).attr('data-id');
+            $(".delate").val(id);
+//            alert(service);
+
+        });
+    });
+
+
+    $('.supprime').click(function () {
+        idserv = $(".delate").val();
+        var idqq = $(this).attr('data-qq');
+        console.log(idqq, idserv);
+
+        var data = {
+            idqq: idqq,
+            idserv: idserv,
+
+        };
+
+        $.ajax({
+            url: '{{ path('module_centreformation_delate_service') }}',
+            data: data,
+            type: "POST",
+            success: function (data) {
+                new PNotify({
+                    title: 'Succès!',
+                    text: 'votre service est bien supprimé .',
+                    type: 'success'
+                });
+                $('#confirm-delete').fadeOut();
+                $('[data-div="' + idserv + '"]').fadeOut();
+            },
+            error: function (data) {
+
+                new PNotify({
+                    title: 'Succès!',
+                    text: 'Désolé la suppresion n.',
+                    type: 'danger'
+                });
+
+            }
+        });
+    })
+
+</script>
+
+<script type="text/javascript">
+    $(function () {
+        $('#datetimepicker6').datetimepicker();
+        $('#datetimepicker7').datetimepicker({
+            useCurrent: false //Important! See issue #1075
+        });
+        $("#datetimepicker6").on("dp.change", function (e) {
+            $('#datetimepicker7').data("DateTimePicker").minDate(e.date);
+        });
+        $("#datetimepicker7").on("dp.change", function (e) {
+            $('#datetimepicker6').data("DateTimePicker").maxDate(e.date);
+        });
+    });
+</script>
+
+<script type="text/javascript">
+    $(function () {
+        $('#datetimepicker4').datetimepicker();
+        $('#datetimepicker5').datetimepicker({
+            useCurrent: false //Important! See issue #1075
+        });
+        $("#datetimepicker4").on("dp.change", function (e) {
+            $('#datetimepicker5').data("DateTimePicker").minDate(e.date);
+        });
+        $("#datetimepicker4").on("dp.change", function (e) {
+            $('#datetimepicker5').data("DateTimePicker").maxDate(e.date);
+        });
+    });
+</script>
+<script>
+    $('.modifier_event').click(function () {
+
+
+        var idqq = $(this).attr('data-id');
+        var idserv = $(this).attr('data-serv');
+
+
+        var data = {
+            idqq: idqq,
+            idserv: idserv,
+
+        };
+
+        $.ajax({
+            url: '{{ path('module_centreformation_edit_event') }}',
+            data: data,
+            type: "POST",
+            success: function (data) {
+                console.log(data);
+
+                var tab = [];
+                json = JSON.stringify(eval('(' + data + ')')); //convert to json string
+                tab = $.parseJSON(json);
+                console.log(tab);
+                $('#idevent').val(idserv);
+                $('#name').val(tab.nom);
+
+                $('#info1').val(tab.desc);
+                $('#info2').val(tab.detaille);
+                $('.date6').val(tab.start);
+                $('.date7').val(tab.end);
+                $('#adr1').val(tab.adr);
+
+
+            }
+
+
+        });
+
+    });
+
+</script>
+<script>
+    $(document).ready(function () {
+        $('.service_suprim_event').click(function () {
+            var id = $(this).attr('data-id');
+            $(".delate").val(id);
+//            alert(service);
+
+        });
+    });
+
+</script>
+<script>
+
+    $('.supprime_events').click(function () {
+
+        idev = $(".delate").val();
+        var idqqev = $(this).attr('data-qq');
+        console.log(idqqev, idev);
+        var  divTodelete= $(this).attr('data-id-remove');
+        alert(divTodelete);
+        var data = {
+            idqqev: idqqev,
+            idev: idev,
+
+        };
+
+        $.ajax({
+            url: '{{ path('module_centreformation_delate_event') }}',
+            data: data,
+            type: "POST",
+            success: function (data) {
+                new PNotify({
+                    title: 'Succès!',
+                    text: 'votre evenement est bien supprimé .',
+                    type: 'success'
+                });
+                $('#confirm-delete-event').fadeOut();
+                $('[data-tr="' + idev + '"]').fadeOut();
+
+                $('[data-id-remove="' + divTodelete + '"]').fadeOut();
+            }
+
+        });
+    })
+
+</script>
+
+<script>
+    $('.modifier_trainer').click(function () {
+
+
+        var idqq = $(this).attr('data-id');
+        var idserv = $(this).attr('data-train');
+        console.log(idserv);
+
+        var data = {
+            idqq: idqq,
+            idserv: idserv,
+
+        };
+
+        $.ajax({
+            url: '{{ path('module_centreformation_edit_trainer') }}',
+            data: data,
+            type: "POST",
+            success: function (data) {
+                console.log(data);
+
+                var tab = [];
+                json = JSON.stringify(eval('(' + data + ')')); //convert to json string
+                tab = $.parseJSON(json);
+                console.log(tab);
+                $('#idtrainer').val(idserv);
+                $('#names').val(tab.noms);
+
+                $('#details').val(tab.detail);
+
+                $('#spc').val(tab.spec);
+                if (tab.gender=='Male')
+                {
+                    console.log(tab.gender);
+                    $( "#male").prop('checked', true);
+                }
+                else  if (tab.gender=='Female')
+                {
+                    $( "#female").prop('checked', true);
+                }
+
+
+            }
+
+
+        });
+
+    });
+
+</script>
+
+<script>
+
+    $(document).ready(function () {
+        $('.cf_suprim_trainer').click(function () {
+            var id = $(this).attr('data-id');
+            $(".delate").val(id);
+//            alert(service);
+
+        });
+    });
+
+    $('.supprime_trainer').click(function () {
+
+        idev = $(".delate").val();
+        var idqqev = $(this).attr('data-qq');
+        console.log(idqqev, idev);
+
+        var data = {
+            idqqev: idqqev,
+            idev: idev,
+
+        };
+
+        $.ajax({
+            url: '{{ path('module_centreformation_delate_trainer') }}',
+            data: data,
+            type: "POST",
+            success: function (data) {
+                new PNotify({
+                    title: 'Succès!',
+                    text: 'votre evenement est bien supprimé .',
+                    type: 'success'
+                });
+                $('#confirm-delete-event').fadeOut();
+                $('[data-tr="' + idev + '"]').fadeOut();
+            }
+
+        });
+    })
+
+</script>
+<script>
+    $('.current_modal ').click(function () {
+        var idqq = $(this).attr('data-qq');
+        var idserv = $(this).attr('data-id');
+
+        var data = {
+            idqq: idqq,
+            idserv: idserv,
+
+        };
+        console.log(data);
+        $.ajax({
+            url: '{{ path('module_centreformation_edit_service') }}',
+            data: data,
+            type: "POST",
+            success: function (data) {
+                console.log(data);
+
+                var arr = [];
+                json = JSON.stringify(eval('(' + data + ')')); //convert to json string
+                arr = $.parseJSON(json);
+
+
+                $('#more').html(arr.desc);
+
+                $('.date-debut').html(arr.start);
+                $('.duree').html(arr.dure + "heures");
+                $('.lieu').html(arr.adr);
+                $('.prix1').html(arr.prix+'DT');
+                $('#titre_cour').html(arr.ncour);
+                $('.idcour').val(idserv);
+
+                var id = $('.idcour').val();
+
+                console.log(id + "." + 'jpg');
+                $('#id1').attr('src', '{{ asset('uploads/image/') }}{{ iduser }}/{{ qouiqui.id }}/service/' + id + "." + "jpg");
+                if (arr.certif == undefined) {
+                    $('#certif').html('non');
+                    console.log(arr.certif);
+                }
+                else{
+                    $('#certif').html('oui')
+                }
+                console.log(arr);
+
+            }
+
+
+        });
+    });
+
+</script>
+
+<script>
+    $('.current_modal_iscription').click(function () {
+        var idqq = $(this).attr('data-qq');
+        var idserv = $(this).attr('data-id');
+
+        var data = {
+            idqq: idqq,
+            idserv: idserv,
+
+        };
+        console.log(data);
+        $.ajax({
+            url: '{{ path('module_centreformation_edit_service') }}',
+            data: data,
+            type: "POST",
+            success: function (data) {
+                console.log(data);
+
+                var arr = [];
+                json = JSON.stringify(eval('(' + data + ')')); //convert to json string
+                arr = $.parseJSON(json);
+
+//
+                $('#Debut_cour').html(arr.start);
+                $('#fin_cour').html(arr.end);
+                $('#cour').html(arr.ncour);
+                $('#frm').val(arr.ncour);
+                $('#prices').html(arr.prix);
+                $('#nb_jour').html(arr.dure);
+
+                console.log(arr);
+
+            }
+
+
+        });
+    });
+
+</script>
+
+
+<script>
+    $('.this_modal').click(function () {
+        var idqq = $(this).attr('data-qq');
+        var idfrm = $(this).attr('data-id');
+
+        var data = {
+            idqq: idqq,
+            idserv: idfrm,
+
+        };
+        console.log(data);
+        $.ajax({
+            url: '{{ path('module_centreformation_edit_trainer') }}',
+            data: data,
+            type: "POST",
+            success: function (data) {
+                console.log(data);
+
+                var arr = [];
+                json = JSON.stringify(eval('(' + data + ')')); //convert to json string
+                arr = $.parseJSON(json);
+                $('.idtrainer').val(idfrm);
+                var id = $('.idtrainer').val();
+                $('#id3').attr('src', '{{ asset('uploads/image/') }}{{ iduser }}/{{ qouiqui.id }}/trainer/' + id + "." + "jpg");
+//                $('#type').val(arr.ncour);
+                $('#skills').html(arr.detail);
+//                $('#price').val(arr.prix);
+                $('#trainer_name').html(arr.noms);
+                $('#spcs').html("Professeur" + " " + arr.spec);
+//                $('#date').val(arr.date);
+//                $('#Dure').val(arr.dure);
+                console.log(arr);
+
+            }
+
+
+        });
+    });
+
+</script>
+<script>
+    $(".current_modal_event").click(function () {
+        console.log('aaaaa');
+        var idqq = $(this).attr('data-qq');
+        var ideve = $(this).attr('data-id');
+
+
+        var data = {
+            idqq: idqq,
+            idserv: ideve,
+
+        };
+
+        $.ajax({
+            url: '{{ path('module_centreformation_edit_event') }}',
+            data: data,
+            type: "POST",
+            success: function (data) {
+                console.log(data);
+
+                var tab = [];
+                json = JSON.stringify(eval('(' + data + ')')); //convert to json string
+                tab = $.parseJSON(json);
+                console.log(tab);
+
+                $('.id_img').val(ideve);
+                var id = $('.id_img').val();
+                $('#id2').attr('src', '{{ asset('uploads/image/') }}{{ iduser }}/{{ qouiqui.id }}/event/' + id + "." + "jpg");
+                $('#event_name').html(tab.nom);
+
+                $('#detail1').html(tab.desc);
+                var h1 = tab.start;
+                var h2 = tab.end;
+                var heure = h1 + "-" + h2;
+                $('#time').html(h1 + "-" + h2);
+                $('#adrs').html(tab.adr);
+
+
+            }
+
+
+        });
+    });
+
+</script>
+
+
+<script>
+    {% if app.user %}
+    {% if app.user.id == qouiqui.user.id %}
+    $(".send-reservation").prop('disabled', true);
+    {% endif %}
+    {% endif %}
+</script>
+
+
+<script>
+
+
+    $('tog').click(function () {
+
+        left = $('.theme_changer').position().left;
+
+        if (left < 0) {
+            $('.theme_changer').css('transform', 'translate(0px)')
+        } else {
+            $('.theme_changer').css('transform', 'translate(-200px)')
+        }
+    })
+</script>
+
+<script>
+    $(document).ready(function () {
+
+        jQuery('canvas.bfh-colorpicker-palette').click(function () {
+
+            data_pour = $(this).parent().parent().attr('data-pour');
+
+            color = $('[data-pour=' + data_pour + '] input').val()
+
+            console.log(color);
+            console.log(data_pour);
+
+            color = color + '!important';
+
+
+            if (data_pour == 'titre') {
+                jQuery('h3').attr('style', 'color:' + color);
+            }
+            else if (data_pour == 'Soustitre') {
+                jQuery('h4').attr('style', 'color:' + color);
+            }
+            else if (data_pour == 'bouton') {
+                jQuery('.button-default').attr('style', 'background:' + color);
+            }
+            else if (data_pour == 'Text') {
+                jQuery('.about-contact,p').attr('style', 'color:' + color);
+            }
+            else if (data_pour == 'icon') {
+
+                $('.info-item,.section-header span').css('color', color);
+            }
+            else if (data_pour == 'SousTitreService') {
+
+                $('.content ul li span,.content ul li a').css('color', color);
+            }
+            else if (data_pour == 'TitreService') {
+
+                $('.content h4 a').css('color', color);
+
+                ///section event
+
+            } else if (data_pour == 'TitreEvent') {
+
+                $('.event-content h4').css('color', color);
+            }
+            else if (data_pour == 'SousTitreEvent') {
+
+                $('.event-content ul li span,.event-content ul li ').css('color', color);
+            }
+
+        })
+
+        $('[setbg_color]').click(function () {
+
+            bg_color = $(this).css('background-color');
+            bg_data_pour = $('#backgroundcolor').attr('data-pour');
+
+
+            console.log(bg_data_pour);
+
+            if (bg_data_pour == 'propos') {
+                bg_img = jQuery('#motif_about').val();
+
+                jQuery('section#propos').attr('style', 'background-image:' + bg_img + '!important; background-color:' + bg_color + '!important');
+                $('#bgco_about').val(bg_color);
+            }
+            else if (bg_data_pour == 'service') {
+                bg_img = jQuery('#motif_service').val();
+                jQuery('section#service').attr('style', 'background-image:' + bg_img + '!important; background-color:' + bg_color + '!important');
+                $('#bgco_service').val(bg_color);
+            }
+            else if (bg_data_pour == 'event') {
+                bg_img = jQuery('#motif_Offres').val();
+                jQuery('section#event').attr('style', 'background-image:' + bg_img + '!important; background-color:' + bg_color + '!important');
+                $('#bgco_Offres').val(bg_color);
+            }
+            else if (bg_data_pour == 'gallery') {
+                bg_img = jQuery('#motif_portfolio').val();
+                jQuery('section#gallery').attr('style', 'background-image:' + bg_img + '!important; background-color:' + bg_color + '!important');
+                $('#bgco_portfolio').val(bg_color);
+            }
+            else if (bg_data_pour == 'formateur') {
+                bg_img = jQuery('#motif_formateur').val();
+                jQuery('section#formateur').attr('style', 'background-image:' + bg_img + '!important; background-color:' + bg_color + '!important');
+                $('#bgco_formateur').val(bg_color);
+            }
+
+
+            else if (bg_data_pour == 'contact') {
+                bg_img = jQuery('#motif_contact').val();
+                jQuery('section#contact').attr('style', 'background-image:' + bg_img + '!important; background-color:' + bg_color + '!important');
+                $('#bgco_contact').val(bg_color);
+            }
+            else if (bg_data_pour == 'footer') {
+                console.log('ici'+bg_data_pour);
+                console.log('andici'+bg_color);
+                bg_img = jQuery('#motif_footer').val();
+                jQuery('section#footer').attr('style','background-image:' + bg_img + ' background-color:' + bg_color + '!important');
+                $('#bgco_footer').val(bg_color);
+            }
+
+        })
+
+        $('[set_m_bg_color]').click(function () {
+
+            bg_img = $(this).css('background-image');
+            bg_data_pour = $('#backgroundcolor').attr('data-pour');
+
+
+            if (bg_data_pour == 'propos') {
+
+                background_color = jQuery('#bgco_about').val();
+
+                jQuery('section#propos').attr('style', 'background-image:' + bg_img + '!important; background-color:' + background_color + '!important');
+                $('#motif_about').val(bg_img);
+            }
+            else if (bg_data_pour == 'service') {
+
+                background_color = jQuery('#bgco_service').val();
+                jQuery('section#service').attr('style', 'background-image:' + bg_img + '!important; background-color:' + background_color + '!important');
+                $('#motif_service').val(bg_img);
+
+            }
+            else if (bg_data_pour == 'event') {
+
+                background_color = jQuery('#bgco_Offres').val();
+                jQuery('section#event').attr('style', 'background-image:' + bg_img + '!important; background-color:' + background_color + '!important');
+                $('#motif_Offres').val(bg_img);
+
+            }
+            else if (bg_data_pour == 'gallery') {
+                background_color = jQuery('#bgco_portfolio').val();
+                jQuery('section#gallery').attr('style', 'background-image:' + bg_img + '!important; background-color:' + background_color + '!important');
+                $('#motif_portfolio').val(bg_img);
+            }
+            else if (bg_data_pour == 'formateur') {
+                background_color = jQuery('#bgco_fomateur').val();
+                jQuery('section#formateur').attr('style', 'background-image:' + bg_img + '!important; background-color:' + background_color + '!important');
+                $('#motif_formateur').val(bg_img);
+            }
+            else if (bg_data_pour == 'contact') {
+                background_color = jQuery('#bgco_contact').val();
+                jQuery('section#contact').attr('style', 'background-image:' + bg_img + '!important; background-color:' + background_color + '!important');
+                $('#motif_contact').val(bg_img);
+            }
+            else if (bg_data_pour == 'footer') {
+                background_color = jQuery('#bgco_footer').val();
+                jQuery('section#footer').attr('style', 'background-image:' + bg_img + '!important; background-color:' + background_color + '!important');
+                $('#motif_footer').val(bg_img);
+            }
+
+        })
+
+
+
+    })
+    function chnageicon(iconlink, div_name) {
+
+        for (var i = 1; i < 29; i++) {
+
+            $(div_name + " .elem" + i).css('background-image', 'url(' + iconlink + ')')
+
+        }
+    }
+    $('[set_icon]').click(function () {
+
+
+        data_pour = $(this).parent().attr('data-pour');
+        console.log(data_pour);
+        section = $(this);
+        srcicon = section.find('img').attr('src')
+        if (data_pour == 'propos') {
+            chnageicon(srcicon, 'section#propos');
+
+            $('#animation_about').val(srcicon);
+
+        }
+        else if (data_pour == 'service') {
+            chnageicon(srcicon, 'section#service');
+            console.log(srcicon);
+            $('#animation_service').val(srcicon);
+        }
+        else if (data_pour == 'event') {
+            chnageicon(srcicon, 'section#event');
+            $('#animation_Offres').val(srcicon);
+        }
+
+        else if (data_pour == 'gallery') {
+            chnageicon(srcicon, 'section#gallery');
+            $('#annimation_portfolio').val(srcicon);
+        }
+        else if (data_pour == 'formateur') {
+            chnageicon(srcicon, 'section#formateur');
+            $('#annimation_formateur').val(srcicon);
+        }
+        else if (data_pour == 'contact') {
+            chnageicon(srcicon, 'section#contact');
+            $('#annimation_contact').val(srcicon);
+        }
+
+    });
+
+    {% if theme.color.background.animation is defined %}
+
+    {% if theme.color.background.animation.about is not empty %}
+    $(document).ready(function () {
+
+        propoicon = '{{ theme.color.background.animation.about }}';
+        chnageicon(propoicon, 'section#propos');
+
+    });
+    {% endif %}
+    {% if theme.color.background.animation.service is not empty %}
+    $(document).ready(function () {
+
+        propoicon = '{{ theme.color.background.animation.service }}';
+        chnageicon(propoicon, 'section#service');
+
+    });
+    {% endif %}
+    {% if theme.color.background.animation.offre is not empty %}
+    $(document).ready(function () {
+
+        propoicon = '{{ theme.color.background.animation.offre }}';
+        chnageicon(propoicon, 'section#event');
+
+    });
+    {% endif %}
+
+    {% if theme.color.background.animation.gallery is not empty %}
+    $(document).ready(function () {
+
+        propoicon = '{{ theme.color.background.animation.gallery }}';
+        chnageicon(propoicon, 'section#gallery');
+
+    });
+    {% endif %}
+
+    {% if theme.color.background.animation.contact is not empty %}
+    $(document).ready(function () {
+
+        propoicon = '{{ theme.color.background.animation.formateur }}';
+        chnageicon(propoicon, 'section#formateur');
+
+    });
+    {% endif %}
+
+    {% if theme.color.background.animation.contact is not empty %}
+    $(document).ready(function () {
+
+        propoicon = '{{ theme.color.background.animation.contact }}';
+        chnageicon(propoicon, 'section#contact');
+
+    });
+    {% endif %}
+
+    {% endif %}
+
+
+</script>
+{#<script>#}
+    {#CKEDITOR.replace('editor');#}
+{#</script>#}
+<script>
+    $('.current_modal').click(function () {
+
+        var idqq = $(this).attr('data-qq');
+        var idserv = $(this).attr('data-id');
+
+        console.log(idserv);
+
+
+        var data = {
+            idqq: idqq,
+            idserv: idserv,
+
+        };
+        console.log(data);
+        $.ajax({
+            url: '{{ path('module_centreformation_horaire') }}',
+            data: data,
+            type: "POST",
+            success: function (data) {
+                console.log(data);
+                var tab = [];
+                var arr = [];
+                json = JSON.stringify(eval('(' + data + ')')); //convert to json string
+                arr = $.parseJSON(json);
+
+                $.each(arr, function (key, value) {
+//                    console.log(value + ": " + key);
+
+
+                    $('.horaire').append(value + ": " + key + "</br>")
+
+                });
+
+            }
+
+
+        });
+
+    });
+
+</script>
+
+<script>
+
+
+    $('#tokenfield-typeahead').tokenfield();
+
+</script>
+{#{#}
+{#limit: 1,#}
+
+{#}#}
+<script>
+
+//    $('.carousel[data-type="multi"] .item').each(function () {
+//        var next = $(this).next();
+//        if (!next.length) {
+//            next = $(this).siblings(':first');
+//        }
+//        next.children(':first-child').clone().appendTo($(this));
+//
+//        for (var i = 0; i < 2; i++) {
+//            next = next.next();
+//            if (!next.length) {
+//                next = $(this).siblings(':first');
+//            }
+//
+//            next.children(':first-child').clone().appendTo($(this));
+//        }
+//    });
+</script>
+
+<script type='text/javascript'
+        src='https://maps.googleapis.com/maps/api/js?key=AIzaSyBabWKVmMpB5ZVqYN2H2ubUXTITp9k5fuc&v=3.20&#038;libraries=places&#038;language=fr&#038;ver=4.4.1'></script>
+<script>
+    function getLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition);
+        } else {
+//            alert("Geolocation is not supported by this browser.");
+        }
+    }
+
+    function showPosition(position) {
+//        $('#origin').val(position.coords.latitude + "," + position.coords.longitude);
+        geo = position.coords.latitude + "," + position.coords.longitude;
+        $('#origin').val(position.coords.latitude + "," + position.coords.longitude);
+        return geo;
+    }
+</script>
+<!--{#============map iteneraire==============#}-->
+<script>
+    var map;
+    var panel;
+    var initialize;
+    //    var calculate;
+    var direction;
+    style = [
+        {
+            "elementType": "geometry",
+            "stylers": [
+                {
+                    "color": "#f5f5f5"
+                }
+            ]
+        },
+        {
+            "elementType": "labels.icon",
+            "stylers": [
+                {
+                    "visibility": "off"
+                }
+            ]
+        },
+        {
+            "elementType": "labels.text.fill",
+            "stylers": [
+                {
+                    "color": "#616161"
+                }
+            ]
+        },
+        {
+            "elementType": "labels.text.stroke",
+            "stylers": [
+                {
+                    "color": "#f5f5f5"
+                }
+            ]
+        },
+        {
+            "featureType": "administrative.land_parcel",
+            "elementType": "labels.text.fill",
+            "stylers": [
+                {
+                    "color": "#bdbdbd"
+                }
+            ]
+        },
+        {
+            "featureType": "poi",
+            "elementType": "geometry",
+            "stylers": [
+                {
+                    "color": "#eeeeee"
+                }
+            ]
+        },
+        {
+            "featureType": "poi",
+            "elementType": "labels.text.fill",
+            "stylers": [
+                {
+                    "color": "#757575"
+                }
+            ]
+        },
+        {
+            "featureType": "poi.park",
+            "elementType": "geometry",
+            "stylers": [
+                {
+                    "color": "#e5e5e5"
+                }
+            ]
+        },
+        {
+            "featureType": "poi.park",
+            "elementType": "labels.text.fill",
+            "stylers": [
+                {
+                    "color": "#9e9e9e"
+                }
+            ]
+        },
+        {
+            "featureType": "road",
+            "elementType": "geometry",
+            "stylers": [
+                {
+                    "color": "#ffffff"
+                }
+            ]
+        },
+        {
+            "featureType": "road.arterial",
+            "elementType": "labels.text.fill",
+            "stylers": [
+                {
+                    "color": "#757575"
+                }
+            ]
+        },
+        {
+            "featureType": "road.highway",
+            "elementType": "geometry",
+            "stylers": [
+                {
+                    "color": "#dadada"
+                }
+            ]
+        },
+        {
+            "featureType": "road.highway",
+            "elementType": "labels.text.fill",
+            "stylers": [
+                {
+                    "color": "#616161"
+                }
+            ]
+        },
+        {
+            "featureType": "road.local",
+            "elementType": "labels.text.fill",
+            "stylers": [
+                {
+                    "color": "#9e9e9e"
+                }
+            ]
+        },
+        {
+            "featureType": "transit.line",
+            "elementType": "geometry",
+            "stylers": [
+                {
+                    "color": "#e5e5e5"
+                }
+            ]
+        },
+        {
+            "featureType": "transit.station",
+            "elementType": "geometry",
+            "stylers": [
+                {
+                    "color": "#eeeeee"
+                }
+            ]
+        },
+        {
+            "featureType": "water",
+            "elementType": "geometry",
+            "stylers": [
+                {
+                    "color": "#c9c9c9"
+                }
+            ]
+        },
+        {
+            "featureType": "water",
+            "elementType": "labels.text.fill",
+            "stylers": [
+                {
+                    "color": "#9e9e9e"
+                }
+            ]
+        }
+    ];
+
+    initialize = function () {
+
+        var latLng = new google.maps.LatLng({{ qouiqui.geoLat }},{{ qouiqui.geoLong }}); // Correspond au coordonnées de Lille
+
+        var myOptions = {
+            zoom: 11,
+            center: new google.maps.LatLng({{ qouiqui.geoLat }},{{ qouiqui.geoLong }}),
+            mapTypeId: google.maps.MapTypeId.TERRAIN, // Type de carte, différentes valeurs possible HYBRID, ROADMAP, SATELLITE, TERRAIN
+            maxZoom: 20,
+//            styles: style,
+            scrollwheel: false
+
+        };
+
+        map2 = new google.maps.Map(document.getElementById('map-container'), myOptions);
+        //map.setOptions({styles: style2});
+
+
+        panel = document.getElementById('panel');
+        var marker = new google.maps.Marker({
+            position: latLng,
+            map: map2,
+            icon: 'https://cdn0.iconfinder.com/data/icons/small-n-flat/24/678111-map-marker-32.png',
+            title: "Lille",
+        });
+
+        var contentMarker = [].join('');
+        var infoWindow = new google.maps.InfoWindow({
+            content: contentMarker,
+            position: latLng
+        });
+        google.maps.event.addListener(marker, 'click', function () {
+            infoWindow.open(map2, marker);
+        });
+        google.maps.event.addListener(infoWindow, 'domready', function () { // infoWindow est biensûr notre info-bulle
+            jQuery("#tabs").tabs();
+        });
+        direction = new google.maps.DirectionsRenderer({
+            map: map2,
+            panel: panel // Dom element pour afficher les instructions d'itinéraire
+        });
+    };
+    function calculate(origin) {
+        origin = origin; // Le point départ
+        destination = document.getElementById('destination').value; // Le point d'arrivé
+        console.log("origin : " + origin, "destination : " + destination);
+        if (origin && destination) {
+            var request = {
+                origin: origin,
+                destination: destination,
+                travelMode: google.maps.DirectionsTravelMode.DRIVING // Mode de conduite
+            }
+            var directionsService = new google.maps.DirectionsService(); // Service de calcul d'itinéraire
+            directionsService.route(request, function (response, status) { // Envoie de la requête pour calculer le parcours
+                if (status == google.maps.DirectionsStatus.OK) {
+                    direction.setDirections(response); // Trace l'itinéraire sur la carte et les différentes étapes du parcours
+                }
+            });
+        }
+        jQuery("#ite").show();
+    }
+    ;
+    initialize();
+    function geoLocate() {
+
+        if ($('#origin').val().length !== 0) {
+            calculate($('#origin').val())
+        } else {
+            ori = true;
+            if (navigator.geolocation && ori) {
+                navigator.geolocation.getCurrentPosition(function (position) {
+                    var geolocation = {
+                        lat: position.coords.latitude,
+                        lng: position.coords.longitude
+                    };
+                    geo = position.coords.latitude + ',' + position.coords.longitude;
+                    $('#origin').val(position.coords.latitude + ',' + position.coords.longitude).show('slow', calculate(geo));
+                });
+            }
+        }
+
+        ;
+    }
+</script>
+
+<script type="text/javascript">
+
+
+    (function ($) {
+        "use strict";
+        // ITEM DETAIL PAGE MAP FUNCTION STARTED --------------------------------------------------------------------------------------------
+        $.pfitemdetailpagemap = function () {
+            $(function () {
+                var inputMyLocation = document.getElementById("origin");
+                $("#origin").bind("keypress", function (e) {
+                    if (e.keyCode == 13) {
+                        e.preventDefault();
+                        return false;
+                    }
+                });
+                var autocomplete = new google.maps.places.Autocomplete(inputMyLocation);
+                google.maps.event.addListener(autocomplete, "place_changed", function () {
+                    var place = autocomplete.getPlace();
+                    if (!place.geometry) {
+                        return;
+                    }
+                    console.log(place);
+                });
+
+            });
+        };
+        // LOAD MAP STARTED --------------------------------------------------------------------------------------------
+        $(function () {
+            $.pfitemdetailpagemap();
+            // End
+        });
+        // GET DIRECTION BUTTON PRESSED END --------------------------------------------------------------------------------------------
+
+    })(jQuery);
+    function geolocate() {
+        console.log('aaa');
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function (position) {
+                var geolocation = {
+                    lat: position.coords.latitude,
+                    lng: position.coords.longitude
+                };
+                $('#originMobile').val(position.coords.latitude + ',' + position.coords.longitude).show('fast', calculateMobile);
+            });
+        }
+    }
+
+</script>
+
+<script>
+    $('.current_modal_iscription-event').click(function () {
+        var idqq = $(this).attr('data-qq');
+        var idserv = $(this).attr('data-id');
+
+        var data = {
+            idqq: idqq,
+            idserv: idserv,
+
+        };
+        console.log(data);
+        $.ajax({
+            url: '{{ path('module_centreformation_edit_event') }}',
+            data: data,
+            type: "POST",
+            success: function (data) {
+                console.log(data);
+
+                var arr = [];
+                json = JSON.stringify(eval('(' + data + ')')); //convert to json string
+                arr = $.parseJSON(json);
+
+//
+//                $('#Debut_cour').html(arr.start);
+//                $('#fin_cour').html(arr.end);
+//                $('#cour').html(arr.ncour);
+                $('#nos-event').val(arr.nom);
+//                $('#prices').html(arr.prix);
+//                $('#nb_jour').html(arr.dure);
+
+                console.log(arr);
+
+            }
+
+
+        });
+    });
+
+</script>
+
+<script>
+
+    $('#niveau-etude').on('change', function () {
+        if ($(this).val() === "autre") {
+            $("#otherType").show()
+        }
+        else {
+            $("#otherType").hide()
+        }
+    });
+</script>
+
+
+<script>
+    CKEDITOR.replace('editor');
+    CKEDITOR.replace('desc');
+    CKEDITOR.replace('ad');
+
+</script>
+<script>
+
+    function selectNone() {
+        bg_img = $(this).css('background-image','none');
+        bg_data_pour = $('#backgroundcolor').attr('data-pour');
+
+
+        if (bg_data_pour == 'propos') {
+
+            background_color = jQuery('#bgco_about').val();
+
+            jQuery('section#propos').attr('style', 'background-image:' + bg_img + '!important; background-color:' + background_color + '!important');
+            $('#motif_about').val(bg_img);
+        }
+    }
+
+</script>
+<script>
+
+//    $('#myCarousel-trainer').carousel({
+//        interval: 10000
+//    })
+//
+//    $('.carousell .item').each(function(){
+//        var next = $(this).next();
+//        if (!next.length) {
+//            next = $(this).siblings(':first');
+//        }
+//        next.children(':first-child').clone().appendTo($(this));
+//
+//
+//    });
+$('.carousel[id="myCarousel2"] .item').each(function () {
+    var next = $(this).next();
+    if (!next.length) {
+        next = $(this).siblings(':first');
+    }
+    next.children(':first-child').clone().appendTo($(this));
+
+    next = next.next();
+
+});
+</script>
+<script>
+        $('.carousel[data-type="multi"] .item').each(function () {
+            var next = $(this).next();
+            if (!next.length) {
+                next = $(this).siblings(':first');
+            }
+            next.children(':first-child').clone().appendTo($(this));
+
+            for (var i = 0; i < 2; i++) {
+                next = next.next();
+                if (!next.length) {
+                    next = $(this).siblings(':first');
+                }
+
+                next.children(':first-child').clone().appendTo($(this));
+            }
+        });
+</script>
+<script>
+    $("input:checkbox").click(function() {
+        if ($(this).is(":checked")) {
+
+            var group = "input:checkbox[name='" + $(this).attr("name") + "']";
+            $(group).prop("checked", false);
+            $(this).prop("checked", true);
+        } else {
+            $(this).prop("checked", false);
+        }
+    });
+</script>
+<script>
+
+    var typingTimer;                //timer identifier
+    var doneTypingInterval = 100;  //time in ms, 5 second for example
+
+    //on keyup, start the countdown
+    $('#tokenfield-typeahead').keyup(function(){
+        clearTimeout(typingTimer);
+        if ($('#tokenfield-typeahead').val) {
+            typingTimer = setTimeout(function(){
+                //do stuff here e.g ajax call etc....
+                var v = $("#tokenfield-typeahead").val();
+//                $("#out").html(v);
+                alert(v);
+            }, doneTypingInterval);
+        }
+    });
+
+</script>
+

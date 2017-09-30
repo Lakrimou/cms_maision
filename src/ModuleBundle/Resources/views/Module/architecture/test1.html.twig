@@ -1,0 +1,36 @@
+<section id="map-section" class="map-section" >
+    <div id="map-container" class="map-container" ></div>
+    <div id="ite">
+        <div class="col-md-12 align-center">
+            <div class="col-md-12">
+                <div style="    text-align: center;font-size: 20px; color:white">
+
+                    Y aller
+                </div>
+                <form class="form-inline">
+
+                    <div class="no-padding hidden">
+                        <div class="input-group first-ch">
+
+                            <input  type="hidden" name="origin" id="origin" placeholder="Indiquez un lieu"
+                                    class="form-control map-input" size="0" autocomplete="on">
+                        </div>
+                    </div>
+                    <div class="col-md-8 no-padding col-sm-offset-2">
+
+
+                        <a class="btn btn-primary btn-block btn-sm" style="cursor:pointer;padding: 7px;"
+                           onclick="geoLocate();">Itinéraire</a>
+
+
+                        <input type="hidden" value="{{ qouiqui.geoLat }},{{ qouiqui.geoLong }}" name="destination" id="destination">
+
+                    </div>
+
+                </form>
+                <div id="panel"></div>
+            </div>
+        </div>
+    </div>
+
+</section>

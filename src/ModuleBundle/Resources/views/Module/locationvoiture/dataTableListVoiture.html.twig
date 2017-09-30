@@ -1,0 +1,76 @@
+<table id="example" class="" cellspacing="0" width="100%">
+    <thead>
+    <tr>
+        <th>Numéro</th>
+        <th>serie</th>
+        <th>Nombre de Places</th>
+        <th>prix de Jour</th>
+        <th>statut</th>
+        <th>marque</th>
+        <th>model</th>
+        <th>Tarif</th>
+        <th>Modification</th>
+        <th>Suppression</th>
+
+    </tr>
+    </thead>
+    <tfoot>
+    <tr>
+        <th>Numéro</th>
+    <th>serie</th>
+    <th>Nombre de Places</th>
+    <th>prix de Jour</th>
+    <th>statut</th>
+    <th>marque</th>
+    <th>model</th>
+        <th>Tarif</th>
+    <th>Modification</th>
+    <th>Suppression</th>
+
+    </tr>
+    </tfoot>
+    <tbody>
+
+    {% for module in module %}
+        <tr data-tr-voiture="{{ module.id }}">
+            <td>{{ module.id }}</td>
+            <td>{{ module.serie }}</td>
+            <td>{{ module.nbrPlace }}</td>
+            <td>{{ module.prixJour }}</td>
+            <td>
+                {% if module.statut == "reserves" %}
+                    reservé
+                {% endif %}
+                {% if module.statut == "non_reserves" %}
+                    non reservé
+                {% endif %}
+
+
+            </td>
+            <td>
+
+                {% if module.model %}
+                    {{ module.model.mark.name }}
+                {% endif %}
+            </td>
+            <td>
+
+                {% if module.model %}
+                    {{ module.model.name }}
+                {% endif %}
+            </td>
+            <td>{{ module.tarif }}</td>
+            <td>
+
+                <button type="button" class="btn btn-info btn-lg edit" data-toggle="modal" data-target="#editVoiture" data-link-edit="{{ path('location_voiture_id',{'id': module.id}) }}"><i class="fa fa-pencil-square" aria-hidden="true"></i></button>
+            </td>
+            <td>
+
+                <button class="btn btn-danger deleteAuto"  data-id="{{ module.id }}"   data-link="{{ path('location_voiture_delete') }}"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+
+</table>
+

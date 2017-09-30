@@ -1,0 +1,644 @@
+{% set tab=['#a1ad25','#964425','#798722','#f6bf00'] %}
+<section id="section-services" class="we_are bg_light padding">
+
+
+    <a herf="" data-toggle="modal" data-target="#etre_appeler" style="position: fixed;top: 50%;right:0;font-size: 20px;
+    z-index: 1;" class="btn_fill_about btn btn-default pull-right">Être rappelé</a>
+
+    {% if attributes.connected %}
+        <div class="row">
+            <div class="pull-righ" style="    margin-right: 24px;">
+                <div data-step="3" data-intro="This is a tooltip!" class="pull-right margin-bott-40">
+                    <button type="button" class="theme-btn button11 btn-style-one pull-right" data-toggle="modal"
+                            data-target="#listMissions">Gérer cette section
+                    </button>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+    <div class="container">
+
+        <div class="row">
+            <div class="col-md-10">
+                <h2 class="text-uppercase">Nos <span class="color_red">services</span></h2>
+                <div class="line_1"></div>
+                <div class="line_2"></div>
+                <div class="line_3"></div>
+            </div>
+
+
+        </div>
+        {% if mission.service is defined %}
+            {% set arraymission=mission.service %}
+
+            <div class="row">
+                {% for b in arraymission|sort|reverse %}
+                    {% set image= asset('uploads/image/')~"/"~attributes.quoiqui.user.id~"/"~ attributes.quoiqui.id ~"/service/"~b.idserv  ~'.jpg' %}
+
+                    {% if (arraymission|length == 1) %}
+                        <div class="col-md-4 col-sm-4 col-xs-12"></div>
+                    {% endif %}
+                    {% if (arraymission|length == 2) and (loop.index == 1) %}
+                        <div class="col-md-2 col-sm-2 col-xs-12"></div>
+                    {% endif %}
+
+                    <a  data-toggle="modal" data-target="#lireplus" data-idqq="{{ attributes.quoiqui.id }}"data-idServ="{{ b.idserv }}" class="lire_plus">
+                    <div class=" col-md-4 col-sm-4 top40  " style="min-height: 380px;">
+                        <div class="block-service margin15 pad15" style="background: white;">
+                            <div class="row">
+                                <div class="col-md-12 text-center">
+                                    {% if   image is defined %}
+                                    <div class=" image-content-cf-serv " style="background-image: Url('{{ asset('uploads/image/') }}{{ attributes.quoiqui.user.id }}/{{ attributes.quoiqui.id }}/service/{{ b.idserv ~'.jpg' }}')"></div>
+                                    {% elseif image is not defined %}
+                                    <span class="icon-shortcode">
+                                    <i class=" fa fa-ambulance" aria-hidden="true"></i>
+                                    </span>
+                                    {% endif %}
+                                </div>
+                                <h3 class="serviceTitle text-center pad15" style="font-size: 20px">
+                                    {% if b.mission is defined %}{{ b.mission }}{% endif %}
+                                </h3>
+                                <div class="clearfix">
+                                    <div class="separator" style="width: 100px;border-bottom-width: 2px; "></div>
+                                </div>
+                                <div class="pargraphe">
+                                    {% if b.detail is defined %}{{ b.detail|slice(0,40)|raw }}..{% endif %}
+
+                                </div>
+                                {% if is_mobile() %}
+                                    <div class="row service pad15 ">
+                                        <a data-toggle="modal" data-target="#lireplus" data-idqq="{{ attributes.quoiqui.id }}"data-idServ="{{ b.idserv }}"
+                                           class="btn-default btn-xs pull-right suite  lire_plus">En
+                                            savoir plus</a>
+                                    </div>
+                                {% endif %}
+                            </div>
+                            {% if not is_mobile() %}
+                            <div class="row service pad15 ">
+                                <a data-toggle="modal" data-target="#lireplus" data-idqq="{{ attributes.quoiqui.id }}"data-idServ="{{ b.idserv }}"
+                                   class="btn-default btn-xs pull-right suite  lire_plus">En
+                                    savoir plus</a>
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+            </a>
+                {% endfor %}
+            </div>
+
+        {% endif %}
+    </div>
+    {% if not is_mobile() %}
+        <div class="paralax-icon">
+            <div class="particle elem1 anim-delay1"></div>
+            <div class="particle elem2 anim-delay5"></div>
+            <div class="particle elem3 anim-delay3"></div>
+            <div class="particle elem4 anim-delay8"></div>
+            <div class="particle elem5 anim-delay9"></div>
+            <div class="particle elem6 anim-delay2"></div>
+            <div class="particle elem7 anim-delay4"></div>
+            <div class="particle elem8 anim-delay3"></div>
+            <div class="particle elem9 anim-delay10"></div>
+            <div class="particle elem8 anim-delay11"></div>
+            <div class="particle elem6 anim-delay12"></div>
+            <div class="particle elem1 anim-delay14"></div>
+            <div class="particle elem13 anim-delay16"></div>
+            <div class="particle elem17 anim-delay18"></div>
+            <div class="particle elem2 anim-delay6"></div>
+            <div class="particle elem16 anim-delay9"></div>
+            <div class="particle elem8 anim-delay3"></div>
+            <div class="particle elem9 anim-delay10"></div>
+            <div class="particle elem18 anim-delay11"></div>
+            <div class="particle elem11 anim-delay12"></div>
+            <div class="particle elem12 anim-delay14"></div>
+            <div class="particle elem13 anim-delay16"></div>
+            <div class="particle elem14 anim-delay18"></div>
+            <div class="particle elem15 anim-delay6"></div>
+            <div class="particle elem16 anim-delay9"></div>
+            <div class="particle elem17 anim-delay7"></div>
+            <div class="particle elem18 anim-delay6"></div>
+            <div class="particle elem19 anim-delay3"></div>
+        </div>
+    {% endif %}
+</section>
+{#{{ dump(filterListServiceAmbu(attributes)) }}#}
+<div class="modal fade" id="listMissions" role="dialog">
+    <div class="modal-dialog modal-md">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Liste des Missions</h4>
+            </div>
+            <div class="modal-body">
+                <table class="table dataTable  " cellspacing="0" width="100%">
+                    <thead>
+                    <tr>
+                        {#<th>Image</th>#}
+                        <th  width="100">Les services</th>
+
+
+                        <th width="100">Modifier</th>
+                        <th  width="100">Supprimer</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    {% if mission.service is defined %}
+                        {% set arraymission=mission.service %}
+                        {% for b in arraymission|sort|reverse %}
+                            {#{% for b in a %}#}
+
+                            <tr data-td="{{ b.idserv }}">
+
+
+                                <td align="center">{{ b.mission }}</td>
+
+
+                                <td align="center">
+
+                                    <a href="#" class=" btn btn-info a-btn-slide-text edit_huissier"
+                                       data-serv="{{ b.idserv }}"
+                                       data-id="{{ attributes.quoiqui.id }}" data-toggle="modal"
+                                       data-target="#editMission">
+
+                                        <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                                        <span><strong>Modifier</strong></span>
+                                    </a>
+
+                                </td>
+
+
+                                <td align="center">
+
+                                    <a href="{{ path('module_spa_supprim_services',{"idqq": attributes.quoiqui.id,"idserv":b.idserv }) }}"
+                                       class=" btn btn-danger a-btn-slide-text service_suprim"
+                                       onclick="clickOffConfirmed = confirm('Vous voulez le  supprimer ?');">
+                                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                        <span><strong>Supprimer</strong></span>
+                                    </a>
+                                </td>
+
+                            </tr>
+                            {#{% endfor %}#}
+                        {% endfor %}
+                    {% endif %}
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Fermer</button>
+                <button type="button" class="btn btn-primary addmissions" data-toggle="modal" data-target="#addMission"
+                >Ajouter Nouveau mission
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="addMission" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header ">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Ajouter nouveau service</h4>
+            </div>
+            <div class="modal-body">
+                <form id="addmission" method="POST"class=" fileuploader"
+                      action="{{ path('module_spa_add_service',{"idqq":attributes.quoiqui.id}) }}"
+                      enctype="multipart/form-data">
+
+                    <input type="hidden" name="idserv" value="{{ uniqueId() }}">
+                    <div class="form-group">
+                        <label >Sélectionner un service </label>
+                        <select class="selectpicker form-control selectOption" id="serviceselect" name="mission"
+                                required="required">
+
+
+                            {#<option disabled selected>Sélectionner un service....</option>#}
+
+                            <option value="autre" style=" font-weight: bold;  font-weight: 900;">Ajouter nouveau
+                                service
+                            </option>
+
+                            {% for k,a in  filterListServiceAmbu(attributes) %}
+                                <option value='{{ k }}'>{{ k }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group ">
+                        <input type="text" name="autres" id="otherServices" class=" form-control otherSelected"
+                               placeholder="ajoutre autre service">
+                        <span id="idError" class="errormsg" style="color:red;"></span>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label class="col-md-12">Description</label>
+                        <textarea  onKeyUp="count_it()"   id ="textlength" placeholder="Entrer la description.." rows="3"
+                                  class="form-control textarea   "
+                                  name="detail" required="required "maxlength="1000" minlength="800"></textarea>
+                        <span id="count" class="counter" style="color:red; "  ></span>
+                    </div>
+
+                    <div class=" form-group">
+                        <label class="col-md-12">Choisissez une photo</label>
+                        <input autocomplete="off" class="form-control "
+                               name="file" type="file" required="required"
+                               placeholder="choisissez_image" data-items="8"/>
+
+                    </div>
+
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Fermer</button>
+                <button type="submit" id="addServices" class=" btn btn-primary " data-target="modifier"
+                        data-selector="addmission">
+                    Enrigistrer
+                </button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="modal fade" id="editMission" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Modifier votre service</h4>
+            </div>
+            <div class="modal-body">
+                <form id="Editmission" method="POST"class=" fileuploader"
+                      action="{{ path('module_spa_update_service',{"idqq":attributes.quoiqui.id}) }}"
+                      enctype="multipart/form-data">
+
+                    <div class=" form-group">
+                        <input id="idambu" type="hidden" class="form-control" name="idserv" value="">
+                        {#<label class="col-md-12">Mission</label>#}
+                        {#<input id="ambul" type="text" placeholder="Entrer Nom du Mission." required="required"#}
+                        {#class="form-control" name="mission">#}
+                    </div>
+                    <div class="form-group">
+                        <label>Sélectionner un service</label>
+                        <select class="selectpicker form-control selectOption" id="serviceselect-edit" name="mission">
+                            <option disabled selected>Sélectionner un service....</option>
+
+                            <option value="autre" style=" font-weight: bold;  font-weight: 900;">Ajouter un nouveau
+                                service
+                            </option>
+                            {% for k,a in  filterListServiceAmbu(attributes) %}
+                                <option value='{{ k }}'>{{ k }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    {#<div class="form-group ">#}
+                        {#<input type="text" name="autres" id="autreServices" class=" form-control otherSelected"#}
+                               {#placeholder="ajoutre autre service">#}
+                        {#<span id="msg_error" style="color:red;"></span>#}
+                    {#</div>#}
+                    <div class="form-group">
+                        <label >Description</label>
+                        <textarea  onKeyUp="count_it()" id="detail_ambu" placeholder="Entrer la description.." rows="3"
+                                  class="form-control textarea longtext  "maxlength="1000"
+                                  name="detail" required="required"></textarea>
+                        <span id="counted" class="counter" style="color:red; "  ></span>
+                    </div>
+
+                    <div class=" form-group">
+                        <label >Choisissez une photo</label>
+                        <input autocomplete="off" class="form-control "
+                               name="file" type="file"
+                               placeholder="choisissez_image" data-items="8"/>
+
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Fermer</button>
+                <button type="submit" id="updateserv" class=" btn btn-primary" data-target="modifier"
+                        data-selector="Editmission">
+                    Enrigistrer
+                </button>
+            </div>
+        </div>
+
+    </div>
+</div>
+<div class="modal fade" id="lireplus" role="dialog">
+    <div class="modal-dialog modal-md">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            {#<div class="modal-header">#}
+
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+
+                <div style="text-align: center">
+                    <span id="servamb" class="service-details-titre color_red G_titre"></span>
+
+                </div>
+
+
+
+            </div>
+
+            <div class="modal-body">
+                <div id="news-section-1">
+
+
+                    <div class="row">
+                        <div class="col-md-12">
+
+                            <div class="row ">
+
+                                <input type="hidden" id="idImgamb" value="">
+                                <div class="col-md-6 ">
+                                    <img id="AmbImg" src="" class="img-responsive" style="width: 100%">
+                                </div>
+                            <div class="col-md-6 ">
+
+                                <div class="col-xs-12 ">
+                                    <h3 class="top16 bottom30">Description <span
+                                                class="color_red"> Détaillé</span></h3>
+                                    <p class="bottom30" id="ambdetail"></p>
+                                </div>
+
+                            </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 ">
+                                    <a href="tel:{{ attributes.quoiqui.phone }}"
+                                       class="col-md-12 col-xs-12 spacontact1 top10 "> Contacter nous: {{ attributes.quoiqui.phone }}
+                                    </a>
+                                </div>
+
+                                <div class="col-md-6 ">
+                                    <a href="#" data-toggle="modal" data-target="#modalSectionRappeler"
+                                       class="col-md-12 col-xs-12 spacontact top10" style="margin-bottom: 34px;"><i
+                                                class="fa fa-phone" aria-hidden="true" style="margin-right: 5px"></i>Demande
+                                        de rappel
+                                    </a>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+                </div>
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Fermer</button>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<div class="modal fade" id="etre_appeler" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Être rappelé</h4>
+            </div>
+            <div class="modal-body">
+                <div class="well">Vous avez une question ou un commentaire ?
+                    <br>Remplissez les informations suivantes et nous vous appeler dans les plus brefs délais.
+                </div>
+
+                <form id="rapeler" class="form-horizontal" method="post"
+                      action="{{ path('rapeler',{'qq_id':attributes.quoiqui.id}) }}" role="form">
+                    <div class="form-group">
+                        <label for="email" class="col-sm-2 control-label">Téléphone</label>
+                        <div class="col-sm-9">
+                            <input id="tel" type="text" class="form-control bfh-phone" name="rapele[phone]"
+                                   placeholder="Numéro de Téléphone" required data-format="+216 (dd) ddd-ddd">
+
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="name" class="col-sm-2 control-label">Nom</label>
+                        <div class="col-sm-9">
+                            <input id="name" type="text" class="form-control" id="name" name="rapele[nom]"
+                                   placeholder="Nom" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="name" class="col-sm-2 control-label">Prénom</label>
+                        <div class="col-sm-9">
+                            <input id="prenom" type="text" class="form-control" id="name" name="rapele[prenom]"
+                                   placeholder="Prénom" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="name" class="col-sm-2 control-label">Email</label>
+                        <div class="col-sm-9">
+                            <input type="email" id="email" name="rapele[mail]" class="form-control"
+                                   placeholder="votre Mail" rows="3" required/>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer" id="footer_rappeler">
+
+                {#<button id="btn_insecrire" type="submit" class="btn btn-warning " data-toggle="modal" data-target="#ModalEtreApeler" data-selector="s'ident">S'identifier/s'insecrire</button>#}
+                <button type="submit" class="btn btn-primary " data-target="modifier" data-selector="rapeler">Envoyer
+                </button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Fermer</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<div class="modal fade" id="ModalEtreApeler" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+
+            <div class="modal-body">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                <div class="login-form-popup lp-border-radius-8">
+                    <div class="siginincontainer">
+                        <h1 class="text-center">S'identifier</h1>
+                        <form id="login" class="form-horizontal margin-top-30" method="post" action="/login_check">
+                            <input type="hidden" name="_csrf_token"
+                                   value="Kk4KcJ-i6lPzu7pUx0wOja7L0g5uu9CI6uWJYDGVT4Q"/>
+                            <p class="status"></p>
+                            <div class="form-group">
+                                <label for="username">Adresse email *</label>
+                                <input type="text" class="form-control" id="username" name="_username" required/>
+                            </div>
+                            <div class="form-group">
+                                <label for="password">Mot de passe *</label>
+                                <input type="password" class="form-control" id="password" name="_password" required/>
+                            </div>
+                            <div class="form-group">
+                            </div>
+                            <div class="form-group">
+                                <div class="checkbox pad-bottom-10">
+                                    <input id="check1" type="checkbox" name="_remember_me" value="on">
+                                    <label for="check1">Se souvenir de moi</label>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <input type="submit" value="Se connecter" id="rappeler"
+                                       class="lp-secondary-btn width-full btn-first-hover"/>
+                            </div>
+                            <input type="hidden" id="security" name="security" value="9f8756cb45"/><input type="hidden"
+                                                                                                          name="_wp_http_referer"
+                                                                                                          value="/"/>
+                        </form>
+                        <div class="pop-form-bottom">
+                            <div class="bottom-links">
+                                <a class="signUpClick">Nouveau sur Ween.tn? S'inscrire</a>
+                                <a class="forgetPasswordClick pull-right">Mot de passe oublié</a>
+                            </div>
+                            <p class="margin-top-15">Connectez-vous avec réseau social</p>
+                            <ul class="social-login list-style-none">
+                                <li>
+                                    <a id="logingoogle" class="google flaticon-googleplus"
+                                       href="{{ path('hwi_oauth_connect') }}google">
+                                        <i class="fa fa-google-plus"></i>
+                                        <span>Google</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a id="loginfacebook" class="facebook flaticon-facebook"
+                                       href="{{ path('hwi_oauth_connect') }}facebook">
+                                        <i class="fa fa-facebook"></i>
+                                        <span>Facebook</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a id="logintwitter" class="twitter flaticon-twitter"
+                                       href="{{ path('hwi_oauth_connect') }}facebook">
+                                        <i class="fa fa-twitter"></i>
+                                        <span>Twitter</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <a class="md-close"><i class="fa fa-close"></i></a>
+                    </div>
+
+                    <div class="siginupcontainer">
+                        <h1 class="text-center">S'inscrire</h1>
+                        <form id="register" class="form-horizontal margin-top-30" method="post">
+                            <p class="status"></p>
+                            <div class="form-group">
+                                <label for="username">Nom et prénom *</label>
+                                <input type="text" class="form-control" id="username2" name="username"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Adresse email *</label>
+                                <input type="email" class="form-control" id="email" name="email"/>
+                            </div>
+                            <div class="form-group">
+                                <p>Le mot de passe vous sera envoyé par email.</p>
+                            </div>
+                            <div class="form-group">
+                            </div>
+                            <div class="form-group">
+                                <input type="submit" value="Enregistrer"
+                                       class="lp-secondary-btn width-full btn-first-hover"/>
+                            </div>
+                            <input type="hidden" id="security" name="security" value="fac3396f28"/><input type="hidden"
+                                                                                                          name="_wp_http_referer"
+                                                                                                          value="/"/>
+                        </form>
+                        <div class="pop-form-bottom">
+                            <div class="bottom-links">
+                                <a class="signInClick">Vous avez déjà un compte? Se connecter</a>
+                                <a class="forgetPasswordClick pull-right">Mot de passe oublié</a>
+                            </div>
+                            <p class="margin-top-15">Connectez-vous avec réseau social</p>
+                            <ul class="social-login list-style-none">
+                                <li>
+                                    <a id="logingoogle" class="google flaticon-googleplus"
+                                       href="{{ path('hwi_oauth_connect') }}google">
+                                        <i class="fa fa-google-plus"></i>
+                                        <span>Google</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a id="loginfacebook" class="facebook flaticon-facebook"
+                                       href="{{ path('hwi_oauth_connect') }}facebook">
+                                        <i class="fa fa-facebook"></i>
+                                        <span>Facebook</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a id="logintwitter" class="twitter flaticon-twitter"
+                                       href="{{ path('hwi_oauth_connect') }}facebook">
+                                        <i class="fa fa-twitter"></i>
+                                        <span>Twitter</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <a class="md-close"><i class="fa fa-close"></i></a>
+                    </div>
+                    <div class="forgetpasswordcontainer">
+                        <h1 class="text-center">Mot de passe oublié</h1>
+                        <form class="form-horizontal margin-top-30" id="lp_forget_pass_form" action="#" method="post">
+                            <p class="status"></p>
+                            <div class="form-group">
+                                <label for="password">Adresse email *</label>
+                                <input type="email" name="user_login" class="form-control" id="email3"/>
+                            </div>
+                            <div class="form-group">
+                                <input type="submit" name="submit" value="Obtenir un nouveau mot de passe"
+                                       class="lp-secondary-btn width-full btn-first-hover"/>
+                                <input type="hidden" id="security3" name="security3" value="48ca5eeb94"/><input
+                                        type="hidden" name="_wp_http_referer" value="/"/></div>
+                        </form>
+                        <div class="pop-form-bottom">
+                            <div class="bottom-links"><a class="cancelClick">Annuler</a></div>
+                        </div>
+                        <a class="md-close"><i class="fa fa-close"></i></a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<select class="selectpicker form-control selectOption" id="service_enrolled" name="mission" style="display: none">
+
+    <option disabled selected>Sélectionner un service....</option>
+
+
+    {% if mission.service is defined %}
+
+        {% for s in mission.service %}
+            <option value='{{ s.mission }}'
+                    class=''>{{ s.mission }}</option>
+
+        {% endfor %}
+
+    {% endif %}
+</select>

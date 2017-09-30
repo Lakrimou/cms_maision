@@ -1,0 +1,47 @@
+{% extends 'dashboardLayaout/dashboardLayout.html.twig' %}
+{% block body %}
+    <div class="col-sm-9 col-md-12">
+    <span class="titre-spain">Liste des réservation</span>
+    <table id="quoiquiUsers" class="display" cellspacing="0" width="100%">
+        <thead>
+        <tr>
+            <th>Name events</th>
+            <th>Name Quoiqui</th>
+            <th>Date</th>
+            <th>Statut</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for bo in booking %}
+        <tr>
+            <td>{{ bo.events.eventName }}</td>
+            <td>{{ bo.qouiqui.firstName }} {{ bo.qouiqui.lastName }}</td>
+            <td>{{ bo.events.dateStart|date("m/d/Y") }} - {{ bo.events.dateEnd|date("m/d/Y") }}</td>
+            <td>{% if bo.statu ==0 %}
+                    <input type="button" class="btn btn-danger" value="Non confirmer"/>
+                {% else %}
+                    <input type="button" class="btn btn-success" value="Confirmer"/>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    </div>
+{% endblock %}
+    {% block stylesheets %}
+        {{ parent() }}
+{#<style>#}
+    {#.titre-t {#}
+        {#font-size: 50px;#}
+    {#}#}
+{#</style>#}
+    {% endblock %}
+    {% block javascripts %}
+        {{ parent() }}
+        <script>
+            $(document).ready(function () {
+                $('#quoiquiUsers').DataTable();
+            });
+        </script>
+    {% endblock %}

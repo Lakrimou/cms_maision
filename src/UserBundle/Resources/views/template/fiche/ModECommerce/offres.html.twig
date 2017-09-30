@@ -1,0 +1,401 @@
+<style>
+    label, .valide-btn {
+        margin-top: 19px !important;
+    }
+
+    .input-form {
+        margin-top: 15px !important;
+    }
+
+    textarea {
+        margin-top: 5px;
+    }
+
+    .icon-style {
+        background: red;
+        color: #ffffff;
+        padding: 5px;
+    }
+
+    .category-select {
+        margin-top: 15px;
+        margin-bottom: -6px;
+    }
+
+    .description-block {
+        margin-top: 15px;
+    }
+
+    .deal-product{
+        margin-top:10px;
+    }
+    .deb{
+        margin-top:10px;
+    }
+</style>
+
+<!-- Section offre-->
+<section id="section-offre" class="we_are bg_light padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 bottom40">
+                <h2 class="text-uppercase">Nos <span class="color_red">Offres </span></h2>
+                <div class="line_1"></div>
+                <div class="line_2"></div>
+                <div class="line_3"></div>
+                <p class="margin-t-20">
+                </p>
+            </div>
+        </div>
+
+
+        <!-- modal detail annonce -->
+        <div id="showAnnonce" class="modal fadein" role="dialog">
+            <div class="modal-dialog modal-md">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title"><span class="detail-annonce-title"></span></h4>
+                    </div>
+                    <div class="modal-body">
+                        <div style="margin-top:20px;"></div>
+                        <div class="row">
+                            <div class="col-md-5">
+                                <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                                    <!-- Indicators -->
+                                    <ol class="carousel-indicators show-indicators">
+                                    </ol>
+
+                                    <!-- Wrapper for slides -->
+                                    <div class="carousel-inner show-image">
+                                    </div>
+
+                                    <!-- Left and right controls -->
+                                    <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+                                        <span class="glyphicon glyphicon-chevron-left"></span>
+                                        <span class="sr-only">Previous</span>
+                                    </a>
+                                    <a class="right carousel-control" href="#myCarousel" data-slide="next">
+                                        <span class="glyphicon glyphicon-chevron-right"></span>
+                                        <span class="sr-only">Next</span>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-md-7">
+                                Nom : <span class="detail-annonce-nom"></span></br>
+                                Marque : <span class="detail-annonce-marque"></span></br>
+                                Prix : <span class="detail-annonce-prix"></span></br>
+                                Stock :<span class="detail-annonce-stock"></span></br>
+                                Statu :<span class="detail-annonce-status"></span></br>
+                                Description : <span class="detail-annonce-description"></span></br>
+                            </div>
+                        </div>
+                    </div>
+                    {% if app.user != null and app.user == attributes.quoiqui.user %}
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-success annonce-modifier-1" data-toggle="modal"
+                                    data-target="#edit-annonce">Modifier
+                            </button>
+                            <button type="button" class="btn btn-danger annonce-supprimer-1" data-toggle="modal"
+                                    data-target="#del-annonce">Supprimer
+                            </button>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+
+        {% if app.user != null and app.user == attributes.quoiqui.user %}
+        <!-- modal de lister les annonces -->
+        <div class="">
+            <div class="pull-right">
+                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#addOffre">Ajouter
+                    une Offre
+                </button>
+            </div>
+            <table class="table table-responsive table-hover table-striped dataTable" style="width: 100%;"
+                   id="service-tables">
+                <thead>
+                <tr>
+                    <th style="border:none;border-top-left-radius:5px;">Nom</th>
+                    <th style="border:none">Date Debut</th>
+                    <th style="border:none">Date Fin</th>
+                    <th style="border:none">Prix</th>
+                    <th style="border:none">Promotion</th>
+                    <th style="border:none">Stock</th>
+                    <th style="border:none;border-top-right-radius:5px;" class="text-center">Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for p in offre %}
+                    <tr data-prod="{{ loop.index }}">
+                        <td>{{ p.nom }}</td>
+                        <td>{{ p.dateDeb }}</td>
+                        <td>{{ p.dateFin }}</td>
+                        <td>{{ p.prix }} DT</td>
+                        <td>{{ p.prixN }} DT</td>
+                        <td>{{ p.stock }}</td>
+                        <td>
+                            <div class="btn-group pull-right">
+                                <button type="button" class="btn btn-default icon-style-modifier edit-annonce"
+                                        data-toggle="modal" data-target="#edit-annonce" data-nom="{{ p.nom }}"
+                                        data-id="{{ p.id }}"
+                                        data-lien="{{ path('ecommerce_annonce_edit',{'id':p.id}) }}"><span
+                                            class="glyphicon glyphicon-pencil"></span>
+                                </button>
+                                <button type="button" class="btn btn-danger icon-annonce-supprimer"
+                                        data-nom="{{ p.nom }}"
+                                        data-id="{{ p.id }}"
+                                        data-lien="{{ path('ecommerce_annonce_remove',{'id':p.id}) }}"
+                                        data-loop="{{ loop.index }}"><span class="glyphicon glyphicon-remove"></span>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- modal d'ajout offre -->
+    <div id="addOffre" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Ajouter une Offre</h4>
+                </div>
+                <div class="modal-body">
+                    <form action="{{ path('ecommerce_offre_add') }}" method="post">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label>Produit </label>
+                            </div>
+                            <div class="col-md-9">
+                                <div class="inner-addon left-addon">
+                                    <div class="bfh-selectbox deal-product" data-name="selectbox1">
+                                        <div data-value="">Choisir le produit</div>
+                                        {% for p in produit %}
+                                        <div data-value="{{ p.id }}">{{ p.nom }} / {{ p.prix }}DT</div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label>Date Début</label>
+                            </div>
+                            <div class="col-md-9">
+                                <div class="inner-addon left-addon deb">
+                                    <div class="bfh-datepicker" data-min="today" data-format="y-m-d" data-align="right" data-name="start"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label>Date Fin</label>
+                            </div>
+                            <div class="col-md-9">
+                                <div class="inner-addon left-addon deb">
+                                    <div class="bfh-datepicker" data-min="today" data-format="y-m-d" data-align="right" data-name="end"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label>Nouveau Prix</label>
+                            </div>
+                            <div class="col-md-9">
+                                <div class="inner-addon left-addon">
+                                    <input type="text" class="form-control input-form" name="prix"  required="required">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-2 col-md-offset-5">
+                                <input type="submit" class="btn btn-danger valide-btn" value="Enregistrer"/>
+                            </div>
+                        </div>
+                        <input type="hidden" value="{{ attributes.quoiqui.id }}" name="id"/>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!--modal de modifier une annonce -->
+    <div class="modal fade" role="dialog" id="edit-annonce">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title"> Offre <span class="nomProduit"></span></h4>
+                </div>
+                <div class="modal-body">
+                    <form action="{{ path('ecommerce_annonce_update') }}" method="post" enctype="multipart/form-data">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <label>Nom</label>
+                            </div>
+                            <div class="col-md-10">
+                                <div class="inner-addon left-addon">
+                                    <input type="text" class="form-control input-form form-annonce-nom" name="title"
+                                           title="Nom de produit entre 5 et 150 caractéres" required/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-2">
+                                <label>Prix</label>
+                            </div>
+                            <div class="col-md-10">
+                                <div class="inner-addon left-addon">
+                                    <input type="number" class="form-control input-form form-annonce-prix" name="prix"
+                                           min="1" required="required"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-2">
+                                <label>Marque</label>
+                            </div>
+                            <div class="col-md-10">
+                                <div class="inner-addon left-addon">
+                                    <input type="text" class="form-control input-form form-annonce-marque" name="marque"
+                                           required="required">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-2">
+                                <label>Stock</label>
+                            </div>
+                            <div class="col-md-10">
+                                <div class="inner-addon left-addon">
+                                    <input type="number" class="form-control input-form form-annonce-stock" name="stock"
+                                           min="0" required="required">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-2">
+                                <label>Description</label>
+                            </div>
+                            <div class="col-md-10">
+                                <div class="inner-addon left-addon">
+                                <textarea cols="80" class="ckeditor form-annonce-desc" id="editeur" name="editeur"
+                                          rows="10" required="required"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-2">
+                                <label>Photo</label>
+                            </div>
+                            <div class="col-md-10">
+                                <div class="inner-addon left-addon">
+                                    <input type="file" class="form-control input-form" name="photo[]" multiple/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-10 col-md-offset-2">
+                                <img class="img img-responsive form-annonce-image" src=""/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-2 col-md-offset-5">
+                                <input type="submit" class="btn btn-danger valide-btn" value="Modifier"/>
+                            </div>
+                        </div>
+                        <input type="hidden" value="" name="id" class="id"/>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!--modal de suppression un service -->
+    <div class="modal fade" role="dialog" id="del-annonce">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Supprimer une Offre</h4>
+                </div>
+                <div class="modal-body">
+                    <center>Confirmer votre suppression de Produit <span class="nomSpan"></span></center>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success confirm-del-annonce">Oui</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Non</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    {% else %}
+        <div class="row">
+            <div id="property-2-slider" class="owl-carousel">
+                {% for p in offre %}
+                    <div class="item item-produit" data-prod="{{ loop.index }}">
+                        <div class="property_item bottom40">
+                            <div class="image">
+                                <img src="{{ asset('uploads/image/'~attributes.quoiqui.user.id~'/'~attributes.quoiqui.id~'/produits/'~p.photoArray|first) }}"
+                                     style="height: 330px;">
+                                <div class="price"><span
+                                            class="tag">{% if p.stock == 0 %} Indisponible  {% else %}Disponible{% endif %}</span>
+                                </div>
+                                <div class="overlay">
+                                    <div class="centered"><a
+                                                class="link_arrow white_border show-detail-annonce"
+                                                href="#" data-toggle="modal"
+                                                data-target="#showAnnonce"
+                                                data-lien="{{ path('ecommerce_annonce_show',{'id':p.id,'idq':attributes.quoiqui.id}) }}"
+                                                data-mod="{{ path('ecommerce_annonce_edit',{'id':p.id}) }}"
+                                                data-sup="{{ path('ecommerce_annonce_remove',{'id':p.id}) }}"
+                                                data-identifiant="{{ p.id }}" data-podui="{{ loop.index }}">Voir
+                                            Detail</a></div>
+                                </div>
+                            </div>
+                            <div class="proerty_content">
+                                <div class="proerty_text">
+                                    <h3>{{ p.nom }}</h3>
+                                    <span class="bottom10">{{ p.marque }}</span>
+                                    <p><strong>{{ p.prix }} DT</strong></p>
+                                    <p><strong>{{ p.prixN }} DT</strong></p>
+                                </div>
+                                <div class="favroute clearfix">
+                                    <p class="pull-left">
+                                        <i class="icon-calendar2"></i>
+                                        {% set difference = date("now"|date("Y-m-d h:i:s")).diff(date(p.dateCreate)) %}
+                                        {% if difference.d > 0 %}
+                                            il y a {{ difference.d }} jours
+                                        {% elseif difference.h > 0 %}
+                                            il y a {{ difference.h }} heures
+                                        {% elseif difference.i > 0 %}
+                                            il y a {{ difference.i }} minutes
+                                        {% elseif difference.s > 0 %}
+                                            il y a {{ difference.s }} secondes
+                                        {% endif %}
+                                    </p>
+                                    <ul class="pull-right">
+                                        <li><a href="#.">{{ p.stock }}</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    {% endif %}
+</section>

@@ -1,0 +1,24 @@
+spa_index:
+    path:     /
+    defaults: { _controller: "AdminBundle:Spa:index" }
+    methods:  GET
+
+spa_show:
+    path:     /{id}/show
+    defaults: { _controller: "AdminBundle:Spa:show" }
+    methods:  GET
+
+spa_new:
+    path:     /new
+    defaults: { _controller: "AdminBundle:Spa:new" }
+    methods:  [GET, POST]
+
+spa_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "AdminBundle:Spa:edit" }
+    methods:  [GET, POST]
+
+spa_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "AdminBundle:Spa:delete" }
+    methods:  DELETE

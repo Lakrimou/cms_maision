@@ -1,0 +1,184 @@
+<div id="why1">
+    {% if connected %}
+        <div class="pull-right margin-bott-40">
+            <button type="button" class="theme-btn btn-style-one blue" data-toggle="modal"
+                    data-target="#editservice"
+                    style="  z-index: 20; position: relative; ">modifier Les Sevices
+            </button>
+        </div>
+    {% endif %}
+    <div class="container">
+        <h2 class="animated">Nos Services</h2>
+        <div class="title1 animated">{% if (theme is not empty) and  (theme.section.SousTitre is defined) %} {{ theme.section.SousTitre }}{% endif %}</div>
+        <br><br>
+        <div class="row">
+            <div class="col-sm-3">
+                <div class="thumb2 animated" data-animation="flipInY" data-animation-delay="200">
+                    <div class="thumbnail clearfix">
+                        <a href="#">
+                            <figure class="">
+                                <img src="{{ asset('module/agencevoyage/images/why1.png') }}" alt="" class="img1 img-responsive">
+                                <img src="{{ asset('module/agencevoyage/images/why1_hover.png') }}" alt="" class="img2 img-responsive">
+                            </figure>
+                            <div class="caption">
+                                <div class="txt1">{% if (theme is not empty) and  (theme.section.titre1 is defined) %} {{ theme.section.titre1 }}{% endif %}</div>
+                                <div class="txt2">{% if (theme is not empty) and  (theme.section.text1 is defined) %} {{ theme.section.text1|raw }}{% endif %}</div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="thumb2 animated" data-animation="flipInY" data-animation-delay="300">
+                    <div class="thumbnail clearfix">
+                        <a href="#">
+                            <figure class="">
+                                <img src="{{ asset('module/agencevoyage/images/why2.png') }}" alt="" class="img1 img-responsive">
+                                <img src="{{ asset('module/agencevoyage/images/why2_hover.png') }}" alt="" class="img2 img-responsive">
+                            </figure>
+                            <div class="caption">
+                                <div class="txt1">{% if (theme is not empty) and  (theme.section.titre1 is defined) %} {{ theme.section.titre2 }}{% endif %}</div>
+                                <div class="txt2">{% if (theme is not empty) and  (theme.section.text2 is defined) %} {{ theme.section.text2|raw }}{% endif %}</div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="thumb2 animated" data-animation="flipInY" data-animation-delay="400">
+                    <div class="thumbnail clearfix">
+                        <a href="#">
+                            <figure class="">
+                                <img src="{{ asset('module/agencevoyage/images/why3.png') }}" alt="" class="img1 img-responsive">
+                                <img src="{{ asset('module/agencevoyage/images/why3_hover.png') }}" alt="" class="img2 img-responsive">
+                            </figure>
+                            <div class="caption">
+                                <div class="txt1">{% if (theme is not empty) and  (theme.section.titre1 is defined) %} {{ theme.section.titre3 }}{% endif %}</div>
+                                <div class="txt2">{% if (theme is not empty) and  (theme.section.text3 is defined) %} {{ theme.section.text3|raw }}{% endif %}</div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="thumb2 animated" data-animation="flipInY" data-animation-delay="500">
+                    <div class="thumbnail clearfix">
+                        <a href="#">
+                            <figure class="">
+                                <img src="{{ asset('module/agencevoyage/images/why4.png') }}" alt="" class="img1 img-responsive">
+                                <img src="{{ asset('module/agencevoyage/images/why4_hover.png') }}" alt="" class="img2 img-responsive">
+                            </figure>
+                            <div class="caption">
+                                <div class="txt1">{% if (theme is not empty) and  (theme.section.titre1 is defined) %} {{ theme.section.titre4 }}{% endif %}</div>
+                                <div class="txt2">{% if (theme is not empty) and  (theme.section.text4 is defined) %} {{ theme.section.text4|raw }}{% endif %}</div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% if connected %}
+<!-- Modal -->
+    <div id="editservice" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-lg">
+
+            <!-- Modal content-->
+
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Modifier les information</h4>
+                </div>
+                <div class="modal-body">
+                    <form id="edit_section1" method="POST" action="{{ path('section1') }}">
+
+                        <div class=" row">
+                            <div class="col-md-12" style="padding: 0 30px;">
+                                <h4>Sous Titre-Service</h4>
+                                <input type="text" name="section1[SousTitre]" class="form-control"
+                                       value="{% if theme is empty %}Sous Titre{% else %}{{ theme.section.SousTitre }}{% endif %}">
+                            </div>
+                            <div class="col-md-6">
+                                <div class="col-md-12">
+                                    <h4>Services - 1</h4>
+
+                                    <input type="text" name="section1[titre1]" class="form-control"
+                                           value="{% if theme is empty %}Titres Services{% else %}{{ theme.section.titre1 }}{% endif %}">
+                                    <input type="text" name="id_qq" class="hidden" value="{{ qouiqui.id }}">
+
+                                </div>
+                                <div class="col-md-12">
+                                            <textarea name="section1[text1]" class="edit" cols="30" rows="10">
+                                                {% if theme is empty %}Description Service{% else %}{{ theme.section.text1 }}{% endif %}
+                                           </textarea>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="col-md-12">
+                                    <h4>Services - 2</h4>
+
+                                    <input type="text" name="section1[titre2]" class="form-control"
+                                           value="{% if theme is empty %}Titres Services{% else %}{{ theme.section.titre2 }}{% endif %}">
+                                    <input type="text" name="id_qq" class="hidden" value="{{ qouiqui.id }}">
+
+                                </div>
+                                <div class="col-md-12">
+
+                                            <textarea name="section1[text2]" class="edit" cols="30" rows="10">
+                                                {% if theme is empty %}Description Service{% else %}{{ theme.section.text2 }}{% endif %}
+                                            </textarea>
+
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="col-md-12">
+                                    <h4>Services - 3</h4>
+
+                                    <input type="text" name="section1[titre3]" class="form-control"
+                                           value="{% if theme is empty %}Titres Services{% else %}{{ theme.section.titre3 }}{% endif %}">
+                                    <input type="text" name="id_qq" class="hidden" value="{{ qouiqui.id }}">
+
+                                </div>
+                                <div class="col-md-12">
+
+                                            <textarea name="section1[text3]" class="edit" cols="30" rows="10">
+                                                {% if theme is empty %}Description Service{% else %}{{ theme.section.text3 }}{% endif %}
+                                            </textarea>
+
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="col-md-12">
+                                    <h4>Services - 4</h4>
+
+                                    <input type="text" name="section1[titre4]" class="form-control"
+                                           value="{% if theme is empty %}Titres Services{% else %}{{ theme.section.titre4 }}{% endif %}">
+                                    <input type="text" name="id_qq" class="hidden" value="{{ qouiqui.id }}">
+
+                                </div>
+                                <div class="col-md-12">
+
+                                            <textarea name="section1[text4]" class="edit" cols="30" rows="10">
+                                                {% if theme is empty %}Description Service{% else %}{{ theme.section.text4 }}{% endif %}
+                                            </textarea>
+
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+                    <button type="submit" class="btn btn-default " data-target="modifier" data-selector="edit_section1">
+                        enregistrer
+                    </button>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+{% endif %}

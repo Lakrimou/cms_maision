@@ -1,0 +1,21 @@
+dashboard_event_ajout:
+    path:     /{qq_id}/ajout
+    defaults: { _controller: DashboardBundle:Default:ajoutev }
+    methods:  [GET, POST]
+
+#========================Show events================================#
+dashboard_event_afficher:
+    path:     /{qq_id}/liste
+    defaults: { _controller: DashboardBundle:Events:afficherev }
+    methods:  [GET, POST]
+#========================Show events================================#
+
+dashboard_event_reservation:
+    path:     /reservation
+    defaults: { _controller: DashboardBundle:Default:reservation }
+    methods:  [GET, POST]
+
+#================================ListePepoleBooking======================#
+dashboard_events_liste_pepole_booking:
+    path:     /ListePepoleBooking/{id}
+    defaults: { _controller: DashboardBundle:Events:listePepoleBooking }

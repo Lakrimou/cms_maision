@@ -1,0 +1,982 @@
+<section id="section-services" class="we_are bg_light padding">
+    {% if attributes.connected %}
+
+            <div class="pull-righ" style="    margin-right: 24px;">
+                <div data-step="3" data-intro="This is a tooltip!" class="pull-right margin-bott-40">
+                    <button type="button" class="theme-btn button11 btn-style-one pull-right" data-toggle="modal"
+                            data-target="#service-modal">Gérer cette section
+                    </button>
+                </div>
+            </div>
+
+    {% endif %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h2 class="text-uppercase">Nos <span class="color_red">Formations</span></h2>
+                <div class="line_1"></div>
+                <div class="line_2"></div>
+                <div class="line_3"></div>
+            </div>
+        </div>
+        <div class="row" id="append-item-frm">
+
+            {% if formation is defined %}
+                {% set nb = formation|length %}
+                {% for  b in formation[:3]|sort|reverse %}
+                    {% set image= asset('uploads/image/')~attributes.quoiqui.user.id~"/"~ attributes.quoiqui.id ~"/service/"~ b.idfrm ~'.jpg' %}
+                    {% if (formation|length == 1) %}
+                        <div class="col-md-4 col-sm-4 col-xs-12"></div>
+                    {% endif %}
+                    {% if (formation|length == 2) and (loop.index == 1) %}
+                        <div class="col-md-2 col-sm-2 col-xs-12"></div>
+                    {% endif %}
+
+                    <a href="#" data-toggle="modal" data-target="#voir_plus" data-idqq="{{ attributes.quoiqui.id }}" class="voir_detail" data-idServ="{{ b.idfrm }}" class="lire_plus">
+                        <div class=" col-md-4 col-sm-4 top40 item-id-{{ b.idfrm }}  item-scroll col-custom " style="min-height: 380px;">
+                            <div class="block-service margin15 pad15  " style="background: white; ">
+                                <div class="row">
+
+
+                                    <div class="col-md-12 text-center">
+                                        {% if   image is defined %}
+                                        <div class=" image-content-cf-serv " style="background-image: Url('{{ asset('uploads/image/') }}{{ attributes.quoiqui.user.id }}/{{ attributes.quoiqui.id }}/service/{{ b.idfrm ~'.jpg' }}')"></div>
+                                        {% elseif image is not defined %}
+                                        <span class="icon-shortcode">
+                                {% if 'fa ' in b["serviceIcon"] %}
+                                    <i class="{% if b["serviceIcon"] is defined %}{{ b["serviceIcon"] }}{% endif %}" aria-hidden="true"></i>
+                                    {% else %}
+                                    <img class="svg" width="80px" src='{{ b["serviceIcon"] }}' alt="">
+                                {% endif %}
+
+                                    </span>
+                                        {% endif %}
+                                    </div>
+
+                                    <h3 class="serviceTitle text-center pad15"> {% if  b.ncour  is defined %}{{ b.ncour }}{% endif %} </h3>
+                                    <div class="clearfix">
+                                        <div class="separator" style="width: 100px;border-bottom-width: 2px; "></div>
+                                    </div>
+                                    <div class="margin28">
+                                        <ul>
+                                            <li>
+                                                <i class="fa fa-calendar" aria-hidden="true" style="color: red;"></i><span style="margin-left: 10px;" id="dure"> du {{ b.start_cour|date('d-m-y') }}à {{ b.end_cour|date('d-m-y') }}</span>
+                                            </li>
+                                            <li>
+                                                <i class="fa fa-clock-o" aria-hidden="true" style="color: red;"></i><span style="  margin-left: 14px;" id="dure">{{ b.dure }} Heures</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    {% if is_mobile() %}
+                                        <div class="row service pad15">
+                                            <a href="#" data-toggle="modal" data-target="#voir_plus" data-idqq="{{ attributes.quoiqui.id }}" data-idServ="{{ b.idfrm }}" class="voir_detail btn-default btn-xs pull-right suite">En savoir plus</a></div>
+                                    {% endif %}
+                                </div>
+
+                                {% if not is_mobile() %}
+                                    <div class="row service pad15">
+                                        <a href="#" data-toggle="modal" data-target="#voir_plus" data-idqq="{{ attributes.quoiqui.id }}" data-idServ="{{ b.idfrm }}" class="voir_detail btn-default btn-xs pull-right suite">En savoir plus</a>
+                                    </div>
+                                {% endif %}
+
+                            </div>
+                        </div>
+                    </a>
+
+                {% endfor %}
+            {% endif %}
+
+        </div>
+
+
+        <div class="pull-left margin-bott-40">
+            {% if nb>3 %}
+                <span id="load-more-service-frm" class="theme-btn button11 btn-style-one pull-left">Voir plus</span>
+            {% endif %}
+            <span class="load-less-service theme-btn button11 btn-style-one pull-left">Voir moins</span>
+        </div>
+
+    </div>
+
+    {% if not is_mobile() %}
+        <div class="paralax-icon">
+            <div class="particle elem1 anim-delay1"></div>
+            <div class="particle elem2 anim-delay5"></div>
+            <div class="particle elem3 anim-delay3"></div>
+            <div class="particle elem4 anim-delay8"></div>
+            <div class="particle elem5 anim-delay9"></div>
+            <div class="particle elem6 anim-delay2"></div>
+            <div class="particle elem7 anim-delay4"></div>
+            <div class="particle elem8 anim-delay3"></div>
+            <div class="particle elem9 anim-delay10"></div>
+            <div class="particle elem8 anim-delay11"></div>
+            <div class="particle elem6 anim-delay12"></div>
+            <div class="particle elem1 anim-delay14"></div>
+            <div class="particle elem13 anim-delay16"></div>
+            <div class="particle elem17 anim-delay18"></div>
+            <div class="particle elem2 anim-delay6"></div>
+            <div class="particle elem16 anim-delay9"></div>
+            <div class="particle elem8 anim-delay3"></div>
+            <div class="particle elem9 anim-delay10"></div>
+            <div class="particle elem18 anim-delay11"></div>
+            <div class="particle elem11 anim-delay12"></div>
+            <div class="particle elem12 anim-delay14"></div>
+            <div class="particle elem13 anim-delay16"></div>
+            <div class="particle elem14 anim-delay18"></div>
+            <div class="particle elem15 anim-delay6"></div>
+            <div class="particle elem16 anim-delay9"></div>
+            <div class="particle elem17 anim-delay7"></div>
+            <div class="particle elem18 anim-delay6"></div>
+            <div class="particle elem19 anim-delay3"></div>
+        </div>
+    {% endif %}
+</section>
+
+
+<div id="service-modal" class=" modal  fade" role="dialog">
+    <div class="modal-dialog modal-md ">
+
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Liste des formations</h4>
+            </div>
+
+            <div class="modal-body ">
+                <table class="table dataTable " cellspacing="0" width="100%">
+                    <thead>
+                    <tr>
+                        <th width="74">Image</th>
+                        <th>Formation</th>
+                        <th>Prix</th>
+                        <th>date-début</th>
+                        <th>date-fin</th>
+                        <th>durée</th>
+                        <th>Modifier</th>
+                        <th>Supprimer</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for b in formation|sort|reverse %}
+
+                        <tr data-td="{{ b.idfrm }}">
+
+                            <td align="center">
+
+                                <img src="{{ asset('uploads/image/') }}{{ attributes.quoiqui.user.id }}/{{ attributes.quoiqui.id }}/service/{{ b.idfrm ~'.jpg' }}" data-pin-nopin="true" style="  width:  74px;">
+
+                            </td>
+                            <td align="center"> {{ b.ncour }}</td>
+                            <td align="center">{{ b.prix }}Dt</td>
+                            <td align="center">{{ b.start_cour }}</td>
+                            <td align="center">{{ b.end_cour }}</td>
+                            <td align="center">{{ b.dure }} Heures</td>
+                            <td align="center">
+                                <a href="#" class=" btn btn-info a-btn-slide-text modifier" data-serv="{{ b.idfrm }}" data-id="{{ attributes.quoiqui.id }}" data-toggle="modal" data-target="#edit_service">
+                                    <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                                    <span><strong>Modifier</strong></span>
+                                </a>
+
+                            </td>
+
+
+                            <td align="center">
+
+                                <a href="{{ path('module_centreformation_delate_services',{"idserv":  b.idfrm ,"idqq": attributes.quoiqui.id}) }}" class=" btn btn-danger a-btn-slide-text service_suprim click-off" onclick="clickOffConfirmed = confirm('Vous voulez le  supprimer ?');">
+                                    <span class="glyphicon glyphicon-remove " aria-hidden="true"></span>
+                                    <span><strong>Supprimer</strong></span>
+                                </a>
+                            </td>
+
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary btn-ajout" data-toggle="modal" data-target="#modal_service">Ajouter une Nouvelle Formation</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Fermer</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div id="modal_service" class="modal  fade" role="dialog">
+    <div class="modal-dialog modal-md ">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Ajouter une Formation</h4>
+            </div>
+            <div class="modal-body row ">
+                <form id="ajout_services_frm" method="POST" action="{{ path('module_centreformation_service') }}" enctype="multipart/form-data">
+                    <div class="col-md-12">
+                        <div class="col-md-6">
+                            <input type="hidden" name="qq_id" value="{{ attributes.quoiqui.id }}">
+                            <input type="hidden" name="idfrm" value="{{ uniqueId() }}">
+                            <div class=" form-group">
+                                <label class="col-md-12">Nom de la Formation*</label>
+                                <input type="text" placeholder="Nom de la formation" class=" form-control" name="ncour" required="required">
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-12">Description</label>
+                                <textarea placeholder="Entrer description.." rows="3" class="form-control ckeditor" name="desc" required="required"></textarea>
+                            </div>
+                            <div class="col-sm-6 form-group">
+                                <label class="col-md-12">Date début* </label>
+                                <div class="form-group">
+                                    <div class="bfh-datepicker" data-name="start_cour" data-min="today" data-format="d-m-y" aria-required="true"></div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 form-group">
+                                <label class="col-md-12">Date fin*</label>
+                                <div class="form-group">
+                                    <div class="bfh-datepicker" data-name="end_cour" data-format="d-m-y" data-min="today" aria-required="true"></div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 form-group">
+                                <label class="col-md-12">Prix</label>
+                                <input type="number" placeholder="Entrer le prix.." class="form-control" name="prix">
+                            </div>
+                            <div class="col-sm-6 form-group">
+                                <label class="col-md-12">Durée* </label>
+                                <input type="number" placeholder="Entrer durée de la formation.." class="form-control" name="dure" required="required">
+                            </div>
+                            <div class="checkbox col-md-12 ">
+                                <div class="input-group">
+                                     <span class="input-group-addon beautiful">
+                                        <input type="checkbox" name="certif">
+                                       </span>
+                                    <input type="text" class="form-control " value="Formation certifiée">
+                                    {#<span class="input-group-addon">#}
+                                    {#<input type="radio" name="certif">#}
+                                    {#</span>#}
+                                    {#<input type="text" class="form-control" value="Formation certifiée">#}
+                                </div>
+
+                            </div>
+
+                            <div class="col-sm-12 form-group">
+                                <label class="col-md-12">Choisissez une photo*</label>
+                                <input autocomplete="off" class="form-control " name="file" type="file" required="required" placeholder="choisissez_image" data-items="8"/>
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-6 ">
+                            <div class="form-group">
+                                <label class="col-md-12">Les horaires de la formation</label>
+                            </div>
+                            <div id="no-more-tables">
+                                <table class="table-bordered table-striped table-condensed cf hour-table">
+                                    <thead class="cf">
+                                    <tr>
+                                        <th>Jours</th>
+                                        <th>du</th>
+                                        <th>à</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr class="day-monday jours" data-open="9:00" data-close="17:00">
+                                        <td data-title="Jours">Lundi</td>
+                                        <td data-title="du">
+                                            <div class='input-group date'>
+                                                <input type='text' name="qouiqui[Lun][start]" class="form-control timepick2 "/><span class="input-group-addon"><span class="glyphicon glyphicon-time"></span> </span>
+                                            </div>
+
+                                        </td>
+                                        <td data-title="à">
+                                            <div class='input-group date'>
+                                                <input type='text' name="qouiqui[Lun][end]" class="form-control timepick2 "/><span class="input-group-addon"><span class="glyphicon glyphicon-time"></span> </span>
+                                            </div>
+
+                                        </td>
+
+                                    </tr>
+                                    <tr class="day-tuesday jours" data-open="9:00" data-close="20:00">
+                                        <td data-title="Jours">Mardi</td>
+                                        <td data-title="du">
+                                            <div class='input-group date'>
+                                                <input type='text' name="qouiqui[Mar][start]" class="form-control  timepick2 time0"/><span class="input-group-addon"><span class="glyphicon glyphicon-time"></span> </span>
+                                            </div>
+
+                                        </td>
+                                        <td data-title="à">
+                                            <div class='input-group date'>
+                                                <input type='text' name="qouiqui[Mar][end]" class="form-control  timepick2 time1"/><span class="input-group-addon"><span class="glyphicon glyphicon-time"></span> </span>
+                                            </div>
+
+                                        </td>
+
+                                    </tr>
+
+                                    <tr class="day-wednesday" data-open="9:00" data-close="17:00">
+                                        <td data-title="Jours">Merecredi</td>
+                                        <td data-title="du">
+                                            <div class='input-group date'>
+                                                <input type='text' name="qouiqui[Mer][start]" class="form-control  timepick2"/><span class="input-group-addon"><span class="glyphicon glyphicon-time"></span> </span>
+                                            </div>
+
+                                        </td>
+                                        <td data-title="à">
+                                            <div class='input-group date'>
+                                                <input type='text' name="qouiqui[Mer][end]" class="form-control  timepick2"/><span class="input-group-addon"><span class="glyphicon glyphicon-time"></span> </span>
+                                            </div>
+
+                                        </td>
+
+                                    </tr>
+                                    <tr class="day-thursday" data-open="9:00" data-close="17:00">
+                                        <td data-title="Jours">Jeudi</td>
+                                        <td data-title="du">
+                                            <div class='input-group date'>
+                                                <input type='text' name="qouiqui[Jeu][start]" class="form-control  timepick2"/><span class="input-group-addon"><span class="glyphicon glyphicon-time"></span> </span>
+                                            </div>
+
+
+                                        </td>
+                                        <td data-title="à">
+                                            <div class='input-group date'>
+                                                <input type='text' name="qouiqui[Jeu][end]" class="form-control  timepick2"/><span class="input-group-addon"><span class="glyphicon glyphicon-time"></span> </span>
+                                            </div>
+
+                                        </td>
+
+                                    </tr>
+                                    <tr class="day-friday" data-open="9:00" data-close="17:00">
+                                        <td data-title="Jours">Vendredi</td>
+                                        <td data-title="du">
+                                            <div class='input-group date'>
+                                                <input type='text' name="qouiqui[Ven][start]" class="form-control  timepick2"/><span class="input-group-addon"><span class="glyphicon glyphicon-time"></span> </span>
+                                            </div>
+
+                                        </td>
+                                        <td data-title="à">
+                                            <div class='input-group date'>
+                                                <input type='text' name="qouiqui[Ven][end]" class="form-control  timepick2"/><span class="input-group-addon"><span class="glyphicon glyphicon-time"></span> </span>
+                                            </div>
+
+                                        </td>
+
+                                    </tr>
+                                    <tr class="day-saturday" data-open="9:00" data-close="17:00">
+                                        <td data-title="Jours">Samedi</td>
+                                        <td data-title="du">
+                                            <div class='input-group date'>
+                                                <input type='text' name="qouiqui[Sam][start]" class="form-control  timepick2"/><span class="input-group-addon"><span class="glyphicon glyphicon-time"></span> </span>
+                                            </div>
+
+
+                                        </td>
+                                        <td data-title="à">
+                                            <div class='input-group date'>
+                                                <input type='text' name="qouiqui[Sam][end]" class="form-control  timepick2"/><span class="input-group-addon"><span class="glyphicon glyphicon-time"></span> </span>
+                                            </div>
+
+                                        </td>
+
+                                    </tr>
+                                    <tr class="day-sunday" data-open="9:00" data-close="17:00">
+                                        <td data-title="Jours">Dimanche</td>
+                                        <td data-title="du">
+                                            <div class='input-group date'>
+                                                <input type='text' name="qouiqui[Dim][start]" class="form-control  timepick2"/><span class="input-group-addon"><span class="glyphicon glyphicon-time"></span> </span>
+                                            </div>
+
+
+                                        </td>
+                                        <td data-title="à">
+                                            <div class='input-group date'>
+                                                <input type='text' name="qouiqui[Dim][end]" class="form-control  timepick2"/><span class="input-group-addon"><span class="glyphicon glyphicon-time"></span> </span>
+                                            </div>
+
+                                        </td>
+
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+
+                            <div class="form-group row element-form">
+                                <div class="col-md-12">
+                                    <label class="control-label"> Choisissez une image pour le service</label>
+                                </div>
+                                <div class="col-sm-9 DefaultIcon">
+                                    {% for iconservice in DirAssetParcour(asset('uploads/image/iconService/'~attributes.category.slug|lower~'/SVG/')) %}
+                                        <a href="#" onclick="javascript:;">
+                                            <img width="50px" height="50px" src="{{ asset('uploads/image/iconService/') }}{{ attributes.category.slug|lower~'/SVG/' }}{{ iconservice }}" alt="">
+                                        </a>
+                                    {% endfor %}
+                                </div>
+                            </div>
+
+                            <input type="text" id="icon-filtre-2" class="icon-filtre form-control name_service" placeholder="recherche Votre Image">
+                            <input type="hidden" name="serviceIcon" class="form-control name_service" placeholder="recherche Votre Image">
+                            <button type="button" class="btn btn-primary btn-lg btn-block"><i class="fa fa-search" aria-hidden="true"></i></button>
+                            <div class=" pull-right col-sm-9 icon_list">
+                                {{ include('@User/template/fontawesomeIcons.html.twig') }}
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class=" btn btn-danger button-annuler" data-dismiss="modal">Annuler</button>
+                <button type="submit" class=" btn btn-primary button-default " data-target="modifier" data-selector="ajout_services_frm">Ajouter</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="edit_service" class="modal  fade" role="dialog">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Modifier le service</h4>
+            </div>
+            <div class="modal-body row">
+                <form id="edit-frm" method="POST" action="{{ path('module_centreformation_modif_service') }}"
+                      enctype="multipart/form-data">
+                    <input type="hidden" id="icon" name="id_icon" value=""/>
+                    <input id="idsevice" type="hidden" name="idfrm" value="" required>
+                    <div class="col-md-12">
+                        <div class="col-md-6">
+                            <input type="hidden" name="qq_id" value="{{ attributes.quoiqui.id }}">
+                            <div class=" form-group">
+                                <label class="col-md-12">Nom de la Formation*</label>
+                                <input id="type" type="text" placeholder="Entrer le Nom de la Formation.." required="required" class="form-control" name="ncour">
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-12">Description</label>
+                                <textarea id="info" placeholder="Entrer description.." rows="3" class="form-control textarea ckeditor" name="desc" required="required"></textarea>
+                            </div>
+                            <div class="col-sm-12 col-md-6 form-group">
+                                <label class="col-md-12">Date début* </label>
+                                <div class="form-group">
+                                    <div class="bfh-datepicker" id="date-cour-start" data-name="start_cour" data-min="today" data-format="y-m-d" aria-required="true"></div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-md-6 form-group">
+                                <label class="col-md-12">Date fin*</label>
+                                <div class="form-group">
+                                    <div class="bfh-datepicker" id="date-cour-end" data-name="end_cour" data-format="y-m-d" data-min="today" aria-required="true"></div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-md-6 form-group">
+                                <div class=" form-group">
+                                    <label class="col-md-12">Prix</label>
+                                    <input type="number" id="price" placeholder="Entrer le prix.." class="form-control"
+                                           name="prix" required="required">
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-md-6 form-group">
+                                <div class=" form-group">
+                                    <label class="col-md-12">Durée* </label>
+                                    <input id="Dure" type="number" placeholder="Entrer durée de la formation.." class="form-control" name="dure" required="required">
+                                </div>
+                            </div>
+                            <div class="checkbox col-md-12 ">
+                                <div class="  input-group">
+                                    <span class="input-group-addon">
+                                     <input id="certaficat" type="radio"
+                                            aria-label="Radio button for following text input" name="certif">
+                                     </span>
+                                    <input type="text" class="form-control"
+                                           aria-label="Text input with radio button" value="Formation certifiée">
+                                </div>
+                            </div>
+                            <div class=" col-md-12 col-sm-12  form-group">
+                                <input autocomplete="off" class="form-control " name="file" type="file" placeholder="choisissez_image" data-items="8"/>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class=" form-group">
+                                <label class="col-md-12">Les horaires de la formation</label>
+                                <div id="no-more-tables">
+                                    <table class="table-bordered table-striped table-condensed cf">
+                                        <thead class="cf">
+                                        <tr>
+                                            <th>Jours</th>
+                                            <th>du</th>
+                                            <th>à</th>
+
+                                        </tr>
+                                        </thead>
+                                        <tr class="day-monday" data-open="9:00" data-close="17:00">
+                                            <td data-title="Jours">Lundi</td>
+                                            <td data-title="du">
+
+                                                <div class='input-group date'>
+                                                    <input id="t1" type='text' name="qouiqui[Lun][start]" class="form-control timepick2 "/><span class="input-group-addon"><span class="glyphicon glyphicon-time"></span> </span>
+                                                </div>
+
+                                            </td>
+                                            <td data-title="à">
+                                                <div class='input-group date'>
+                                                    <input id="t2" type='text' name="qouiqui[Lun][end]" class="form-control timepick2 "/><span class="input-group-addon"><span class="glyphicon glyphicon-time"></span> </span>
+                                                </div>
+
+                                            </td>
+
+                                        </tr>
+                                        <tr class="day-tuesday" data-open="9:00" data-close="20:00">
+                                            <td data-title="Jours">Mardi</td>
+                                            <td data-title="du">
+                                                <div class='input-group date'>
+                                                    <input id="t3" type='text' name="qouiqui[Mar][start]" class="form-control timepick2 "/><span class="input-group-addon"><span class="glyphicon glyphicon-time"></span> </span>
+                                                </div>
+
+                                            </td>
+                                            <td data-title="à">
+                                                <div class='input-group date'>
+                                                    <input id="t4" type='text' name="qouiqui[Mar][end]" class="form-control timepick2 "/><span class="input-group-addon"><span class="glyphicon glyphicon-time"></span> </span>
+                                                </div>
+                                                {#<div id="t4" class="bfh-timepicker"#}
+                                                {#data-name="qouiqui[Mar][end]">#}
+                                                {#</div>#}
+                                            </td>
+
+                                        </tr>
+                                        <tr class="day-wednesday" data-open="9:00" data-close="17:00">
+                                            <td data-title="Jours">Merecredi</td>
+                                            <td data-title="du">
+                                                <div class='input-group date'>
+                                                    <input id="t5" type='text' name="qouiqui[Mer][start]" class="form-control timepick2 "/><span class="input-group-addon"><span class="glyphicon glyphicon-time"></span> </span>
+                                                </div>
+
+                                            </td>
+                                            <td data-title="à">
+                                                <div class='input-group date'>
+                                                    <input id="t6" type='text' name="qouiqui[Mer][end]" class="form-control timepick2 "/><span class="input-group-addon"><span class="glyphicon glyphicon-time"></span> </span>
+                                                </div>
+
+                                            </td>
+
+                                        </tr>
+                                        <tr class="day-thursday" data-open="9:00" data-close="17:00">
+                                            <td data-title="Jours">Jeudi</td>
+                                            <td data-title="du">
+                                                <div class='input-group date'>
+                                                    <input id="t7" type='text' name="qouiqui[Jeu][start]" class="form-control timepick2 "/><span class="input-group-addon"><span class="glyphicon glyphicon-time"></span> </span>
+                                                </div>
+
+                                            </td>
+                                            <td data-title="à">
+                                                <div class='input-group date'>
+                                                    <input id="t8" type='text' name="qouiqui[Jeu][end]" class="form-control timepick2 "/><span class="input-group-addon"><span class="glyphicon glyphicon-time"></span> </span>
+                                                </div>
+
+                                            </td>
+
+                                        </tr>
+                                        <tr class="day-friday" data-open="9:00" data-close="17:00">
+                                            <td data-title="Jours">Vendredi</td>
+                                            <td data-title="du">
+                                                <div class='input-group date'>
+                                                    <input id="t9" type='text' name="qouiqui[Ven][start]" class="form-control timepick2 "/><span class="input-group-addon"><span class="glyphicon glyphicon-time"></span> </span>
+                                                </div>
+
+                                            </td>
+                                            <td data-title="à">
+                                                <div class='input-group date'>
+                                                    <input id="t10" type='text' name="qouiqui[Ven][end]" class="form-control timepick2 "/><span class="input-group-addon"><span class="glyphicon glyphicon-time"></span> </span>
+                                                </div>
+
+                                            </td>
+
+                                        </tr>
+                                        <tr class="day-saturday" data-open="9:00" data-close="17:00">
+                                            <td data-title="Jours">Samedi</td>
+                                            <td data-title="du">
+                                                <div class='input-group date'>
+                                                    <input id="t11" type='text' name="qouiqui[Sam][start]" class="form-control timepick2 "/><span class="input-group-addon"><span class="glyphicon glyphicon-time"></span> </span>
+                                                </div>
+
+
+                                            </td>
+                                            <td data-title="à">
+                                                <div class='input-group date'>
+                                                    <input id="t12" type='text' name="qouiqui[Sam][end]" class="form-control timepick2 "/><span class="input-group-addon"><span class="glyphicon glyphicon-time"></span> </span>
+                                                </div>
+
+                                            </td>
+
+                                        </tr>
+                                        <tr class="day-sunday" data-open="9:00" data-close="17:00">
+                                            <td data-title="Jours">Dimanche</td>
+                                            <td data-title="du">
+                                                <div class='input-group date'>
+                                                    <input id="t13" type='text' name="qouiqui[Dim][start]" class="form-control timepick2 "/><span class="input-group-addon"><span class="glyphicon glyphicon-time"></span> </span>
+                                                </div>
+
+
+                                            </td>
+                                            <td data-title="à">
+                                                <div class='input-group date'>
+                                                    <input id="t14" type='text' name="qouiqui[Dim][end]" class="form-control timepick2 "/><span class="input-group-addon"><span class="glyphicon glyphicon-time"></span> </span>
+                                                </div>
+
+                                            </td>
+
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div class="form-group row element-form">
+                                    <div class="col-md-12">
+                                        <label class="control-label"> Choisissez une image pour le service</label>
+                                    </div>
+
+                                    <div class="col-sm-9 DefaultIcon">
+
+                                        {% for iconservice in DirAssetParcour(asset('uploads/image/iconService/'~attributes.category.slug|lower~'/SVG/')) %}
+                                            <a href="#" onclick="javascript:;">
+                                                <img width="50px" height="50px"
+                                                     src="{{ asset('uploads/image/iconService/') }}{{ attributes.category.slug|lower~'/SVG/' }}{{ iconservice }}" alt="">
+                                            </a>
+                                        {% endfor %}
+
+                                    </div>
+
+
+                                </div>
+
+                                <input type="text" id="icon-filtre-2" class="icon-filtre form-control name_service" placeholder="recherche Votre Image">
+                                <input id="iconfrmserv" type="text" name="serviceIcon" class="form-control name_service" placeholder="idicon">
+                                <button type="button" class="btn btn-primary btn-lg btn-block"><i class="fa fa-search" aria-hidden="true"></i>
+                                </button>
+                                <div class=" pull-right col-sm-9 icon_list icon_list-edit">
+                                        <span class="current-icon" style="font-size: 20px"> Votre Icon Actuelle
+
+                                            <img id="update_icon" width="50px" src="" alt="">
+                                            <a class="fileuploader-action fileuploader-action-remove remove_icon" title="Remove" onclick="clickOffConfirmed = confirm('Vous voulez le  supprimer ?');"></a>
+                                            {#<i class="{% if service["serviceIcon"] is defined %}{{ service["serviceIcon"] }}{% endif %}" aria-hidden="true" style="font-size: 35px;"></i>#}
+                                        </span>
+                                </div>
+                                {#<div class=" pull-right col-sm-9 icon_list">{{ include('@User/template/fontawesomeIcons.html.twig') }}#}
+                                {#</div>#}
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger button-annuler" data-dismiss="modal">Annuler</button>
+                <button type="submit" class="btn btn-primary" data-target="modifier" data-selector="edit-frm">
+                    Modifier
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="voir_plus" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 id="nom_frm" class=" text-uppercase  color_red G_titre"></h4>
+            </div>
+            <div class="modal-body ">
+                <div id="news-section-1" style="padding-right: 15px;padding-left: 15px;margin-right: auto;margin-left: auto;">
+                    <div class="row">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <input type="hidden" id="idImg" value="">
+                                <div class="col-md-6 ">
+                                    <img id="setImg" src="" class="img-responsive">
+                                </div>
+                                <div class="col-md-6 ">
+                                    <div class="blog_info blog-thumbnail">
+
+                                        <ul class="archieves">
+                                            <li class="div-center">
+                                                <div class="col-md-12 padding_none">
+                                                    <div class="col-md-6 title-color">
+                                                        <i class="fa fa-calendar " aria-hidden="true"></i>
+                                                        <span>Date</span>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <span id="date_start"></span>
+                                                    </div>
+                                                </div>
+
+                                            </li>
+                                            <li class="div-center">
+                                                <div class="col-md-12 padding_none">
+                                                    <div class="col-md-6 title-color">
+                                                        <i class="fa fa-clock-o" aria-hidden="true"></i> <span>Durée</span>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <span id="nbHeure"></span>
+                                                    </div>
+                                                </div>
+
+                                            </li>
+
+
+                                            <li class="div-center">
+                                                <div class="col-md-12 padding_none">
+                                                    <div class="col-md-6 title-color">
+                                                        <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                                                        <span>Prix</span>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <span id="prices"></span>
+                                                    </div>
+                                                </div>
+
+                                            </li>
+                                            <li class="div-center">
+                                                <div class="col-md-12 padding_none">
+                                                    <div class="col-md-6 title-color">
+                                                        <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                                                        <span>Formation certifiée</span>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <span id="certif"><a href=""></a></span>
+                                                    </div>
+
+                                                </div>
+
+                                            </li>
+                                            <li class="div-center">
+                                                <div class="col-md-12 padding_none ">
+                                                    <div class="col-md-6 title-color">
+                                                        <i class="fa fa-hourglass " aria-hidden="true"></i>
+                                                        <span>Horaire</span>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <span class="getHoraire horaire-xs"></span>
+                                                    </div>
+                                                </div>
+
+                                            </li>
+                                            <li class="div-center">
+                                                <div class="col-md-12 padding_none ">
+                                                    <div class="col-md-6 title-color">
+                                                        <i class="fa fa-home " aria-hidden="true"></i>
+                                                        <span>Adresse</span>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <span id="lieu">{% if attributes.quoiqui.address1 is not empty %}{{ attributes.quoiqui.address1 }}
+                                                            {% endif %}
+                                                </span>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12 ">
+                                <h3 class="color_red " style="margin-bottom: 14px;">Description Détaillée</h3>
+                                <p class="" id="descrip" style="text-align: justify;text-align-last: auto;"></p>
+                                <span id="link1"></span>
+                                <p class="bottom30" id="lire_suite" style="text-align: justify;text-align-last: auto;"></p>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-4">
+                                <a href="#" data-toggle="modal" data-target="#inscription"
+                                   class="col-md-12 col-xs-12 spacontact top10 bottom34">Réservez cette formation</a>
+                            </div>
+                            <div class="col-md-4">
+                                <a href="#" data-toggle="modal" data-target="#modalSectionRappeler" class="col-md-12 col-xs-12 spacontact2 top10 margin-top-button bottom34"><i class="fa fa-phone" aria-hidden="true" style="margin-right: 5px"></i>Demande
+                                    de Rappel
+                                </a>
+                            </div>
+                            <div class="col-md-4">
+                                <a href="tel:{{ attributes.quoiqui.phone }}" class="col-md-12 col-xs-12 spacontact1 top10 margin-top-button " style="margin-bottom: 13px"> Contactez nous: {{ attributes.quoiqui.phone }}</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Fermer</button>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% if  attributes.connected!=app.user %}
+
+    <div class="modal fade" id="inscription" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title text-uppercase">Remplir le <span class="color_red"> Formulaire</span></h4>
+                </div>
+
+                <div class="modal-body">
+                    <div class="row" style="padding: 15px;">
+                        <form id="send-res" action="{{ path('module_centreformation_booking') }}" method="POST">
+                            <div class="row">
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input type="hidden" id="namefrm" name="frmat">
+                                </div>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input type="hidden" name="qqid" value="{{ attributes.quoiqui.id }}">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <div class="single-query">
+                                        <div class="form-group">
+                                            <label> nom & prénom(*)</label>
+
+
+                                            <input type="text" name="name" class="keyword-input"
+                                                   required="required" value="{{ app.user.prenom }}">
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <div class="single-query">
+                                        <div class="form-group">
+                                            <label> Email(*)</label>
+                                            <input type="email" name="email" class="keyword-input"
+                                                   required="required" value=" {{ app.user.email }}">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6 col-sm-6">
+                                    <div class="single-query">
+                                        <div class="form-group">
+                                            <label> Tel(*)</label>
+                                            <input type="number" name="tel" class="keyword-input"
+                                                   required="required" value="+216 {{ app.user.phoneNumber }}">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <div class="single-query">
+                                        <div class="form-group">
+                                            <label> Adresse(*)</label>
+                                            <input type="text" name="adr" class="keyword-input" placeholder="Adresse"
+                                                   required="required" value="{{ app.user.adress }}">
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="form-group">
+                                <label>Message</label>
+                                <textarea placeholder="Ecrire un message" rows="4" class="form-control "
+                                          name="message" required="required"></textarea>
+                            </div>
+                            <button class=" btn btn-primary buttn pull-right buttn-width-xs">
+                                Envoyer
+                            </button>
+
+                        </form>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger " data-dismiss="modal">Fermer</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+{% else %}
+
+
+    <div class="modal fade" id="inscription" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title text-uppercase">Remplir le <span class="color_red"> Formulaire</span></h4>
+                </div>
+
+                <div class="modal-body">
+                    <div class="row" style="padding: 15px;">
+                        <form id="send-res" action="{{ path('module_centreformation_booking') }}" method="POST">
+                            <div class="row">
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input type="hidden" id="namefrm" name="frmat">
+                                </div>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input type="hidden" name="qqid" value="{{ attributes.quoiqui.id }}">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <div class="single-query">
+                                        <div class="form-group">
+                                            <label>nom & prénom(*)</label>
+                                            <input type="text" name="name" class="keyword-input" required="required">
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <div class="single-query">
+                                        <div class="form-group">
+                                            <label>Email(*)</label>
+                                            <input type="email" name="email" class="keyword-input"
+                                                   required="required">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6 col-sm-6">
+                                    <div class="single-query">
+                                        <div class="form-group">
+                                            <label>Tel(*)</label>
+                                            <input type="number" name="tel" class="keyword-input"
+                                                   required="required">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <div class="single-query">
+                                        <div class="form-group">
+                                            <label>Adresse(*)</label>
+                                            <input type="text" name="adr" class="keyword-input"
+                                                   required="required">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Message</label>
+                                <textarea placeholder="Ecrire un message" rows="4" class="form-control "
+                                          name="message" required="required"></textarea>
+                            </div>
+
+                            <button class=" btn btn-primary buttn pull-right buttn-width-xs">
+                                Envoyer
+                            </button>
+                        </form>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Fermer</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+{% endif %}
+

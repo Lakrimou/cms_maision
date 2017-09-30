@@ -1,0 +1,484 @@
+<section id="section-annonces" class="property-details padding">
+    <div class="container">
+        {% if attributes.connected %}
+            <div class="row">
+                <div class="pull-right margin-bott-40">
+                    <button type="button" class="theme-btn button11 btn-style-one pull-right" data-toggle="modal"
+                            data-target="#list-projects">Gérer les projets
+                    </button>
+                </div>
+            </div>
+
+        {% endif %}
+        <div class="row">
+            <div class="col-xs-12 bottom40">
+                <h2 class="text-uppercase">Nos <span class="color_red">projets</span></h2>
+                <div class="line_1"></div>
+                <div class="line_2"></div>
+                <div class="line_3"></div>
+
+            </div>
+        </div>
+        <div class="row bottom30" id="list_modules">
+
+
+        </div>
+        <nav aria-label="Page navigation example">
+            <ul class="pagination" id="button_pages">
+
+            </ul>
+        </nav>
+    </div>
+</section>
+<div class="modal fade" id="list-projects" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLong">Liste des projets</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row" style="margin-bottom: 20px">
+                    <div class="col-md-12">
+                        <button type="button" class="btn btn-info  pull-right" data-toggle="modal"
+                                data-target="#add-project">Ajouter un projet
+                        </button>
+
+                    </div>
+                </div>
+                <div class="row">
+
+                    <div class="col-md-10 col-md-offset-1">
+
+
+                        <table class="dataTable table table-striped table-bordered" cellspacing="0" width="100%">
+                            <thead>
+                            <tr>
+                                <th>Référence</th>
+                                <th>Nom</th>
+                                <th>Description</th>
+                                <th>Date de création</th>
+                                <th>Action</th>
+
+                            </tr>
+                            </thead>
+
+                            <tbody>
+                            {% for module in attributes["module"] %}
+                                {% set listImages= browseAutomobileOfferImage(attributes["quoiqui"].user.id, attributes["quoiqui"].id , module.id) %}
+                                {% set images ="" %}
+                                {% set iImage=0 %}
+                                {% if listImages != false %}
+                                    {% for image in listImages %}
+
+                                        {% set images=images~image %}
+                                        {% if iImage != (listImages|length)-1 %}
+
+
+                                            {% set images=images~"," %}
+                                        {% endif %}
+                                        {% set iImage=iImage+1 %}
+                                    {% endfor %}
+                                {% endif %}
+                                <tr>
+                                    <td>
+                                        {{ module.reference }}
+                                    </td>
+                                    <td>
+                                        {{ module.name }}
+                                    </td>
+                                    <td>
+                                        {{ module.description }}
+                                    </td>
+                                    <td>
+                                        {{ module.dateCreation|date("m/d/Y") }}
+                                    </td>
+                                    <td><a class="btn btn-danger" href="{{ path('delete-project',{"id":module.id}) }}">Supprimer</a>
+
+                                        <a href="#" class="btn btn-warning  btn-main form-update-project" data-toggle="modal" data-target="#update-project" data-project='{"reference":"{{ module.reference|replace({'"':'codeDouble','{':'BracketOpen','}':'BracketClose',':':'doublePonctuation',"\n":"retunLine","\r":""}) }}","name":"{{ module.name|replace({'"':'codeDouble','{':'BracketOpen','}':'BracketClose',':':'doublePonctuation',"\n":"retunLine","\r":""}) }}","description":"{{ module.description|replace({'"':'codeDouble','{':'BracketOpen','}':'BracketClose',':':'doublePonctuation',"\n":"retunLine","\r":""}) }}","dateCreation":"{{ module.dateCreation|date("m/d/Y") }}","id":"{{ module.id }}","client":"{{ module.client|replace({'"':'codeDouble','{':'BracketOpen','}':'BracketClose',':':'doublePonctuation',"\n":"retunLine","\r":""}) }}","adress":"{{ module.adress|replace({'"':'codeDouble','{':'BracketOpen','}':'BracketClose',':':'doublePonctuation',"\n":"retunLine","\r":""}) }}","surface":"{{ module.surface }}"}'
+                                           data-link='{{ path('update_project',{"id":module.id}) }}' data-images='{{ images }}'> <span>Modifier</span></a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+
+
+
+                            </tbody>
+                        </table>
+
+
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="add-project" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-md" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="text-center" >Ajout projet</h2>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+
+                    <div class="col-md-10 col-md-offset-1">
+                        <form id="ajout_voiture" name="adminbundle_automobile" action="{{ path('project_new',{"id":attributes["quoiqui"].id}) }}" method="post" enctype="multipart/form-data">
+
+
+                            <div class="form-group row element-form">
+
+                                <div class="col-md-3">
+                                    <label class="control-label">Référence</label>
+                                </div>
+
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" placeholder="Exemple:#ref1*" name="reference" required>
+                                </div>
+                            </div>
+                            <div class="form-group row element-form">
+
+                                <div class="col-md-3">
+                                    <label class="control-label">Nom</label>
+                                </div>
+
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" placeholder="Entrez le titre du projet*" name="name" required>
+                                </div>
+                            </div>
+                            <div class="form-group row element-form">
+
+                                <div class="col-md-3">
+                                    <label class="control-label">Client</label>
+                                </div>
+
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" placeholder="Entrez le nom de client" name="client">
+                                </div>
+                            </div>
+                            <div class="form-group row element-form">
+
+                                <div class="col-md-3">
+                                    <label class="control-label">Surface</label>
+                                </div>
+
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" placeholder="Entrez la surface du projet *" name="surface" required>
+                                </div>
+                            </div>
+                            <div class="form-group row element-form">
+
+                                <div class="col-md-3">
+                                    <label class="control-label">Adresse</label>
+                                </div>
+
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" placeholder="Entrez l'adresse du projet" name="adress">
+                                </div>
+                            </div>
+                            <div class="form-group row element-form">
+
+                                <div class="col-md-3">
+                                    <label class="control-label">Description</label>
+                                </div>
+
+                                <div class="col-sm-9">
+
+                                         <textarea cols="60" name="description"
+                                                   rows="10" required>Ajoutez des details par rapport à ce projet..</textarea>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+
+                                <div class="col-md-3">
+                                    <label class="control-label " for="model">Date</label>
+                                </div>
+                                <div class="bfh-datepicker" id="dateCreation" data-name="date" data-format="y-m-d"
+                                     aria-required="true"></div>
+
+                            </div>
+                            <div class="form-group row">
+
+                                <div class="col-md-3">
+                                    <label class="control-label " for="image">Télécharger image</label>
+                                </div>
+                                <div class="col-sm-9">
+                                    <input type="file" name="images[]" id="fileInput" multiple>
+                                </div>
+                            </div>
+                            <div class="row">
+
+                                <div class="col-md-8">
+                                    <table class="table table-bordered " id="table_new" hidden>
+                                        <thead>
+                                        <tr>
+                                            <th>Images à télécharger</th>
+                                            <th>Action</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody id="uploaded_image">
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div id="removed_images_add" type="hidden">
+
+                            </div>
+
+
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Annuler</button>
+                <button type="submit" class="btn  btn-primary" data-target="modifier" data-selector="ajout_voiture">Enregistrer</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="update-project" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-md" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="text-center" id="title-form-ajout">Modifier Projet</h2>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+
+                    <div class="col-md-10 col-md-offset-1">
+                        <form id="update-project-form" name="adminbundle_architecture" action="" method="post" enctype="multipart/form-data">
+
+
+                            <div class="form-group row element-form">
+
+                                <div class="col-md-3">
+                                    <label class="control-label">Référence</label>
+                                </div>
+
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="reference" placeholder="Exemple:#ref1*" name="adminbundle_architecture[reference]" required>
+                                </div>
+                            </div>
+                            <div class="form-group row element-form">
+
+                                <div class="col-md-3">
+                                    <label class="control-label">Nom</label>
+                                </div>
+
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="name" placeholder="Entrez le titre du projet*" name="adminbundle_architecture[name]" required>
+                                </div>
+                            </div>
+                            <div class="form-group row element-form">
+
+                                <div class="col-md-3">
+                                    <label class="control-label">Client</label>
+                                </div>
+
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" placeholder="Entrez le nom de client" name="adminbundle_architecture[client] " id="client">
+                                </div>
+                            </div>
+                            <div class="form-group row element-form">
+
+                                <div class="col-md-3">
+                                    <label class="control-label">Surface</label>
+                                </div>
+
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" placeholder="Entrez la surface du projet*" name="adminbundle_architecture[surface]" id="surface" required>
+                                </div>
+                            </div>
+                            <div class="form-group row element-form">
+
+                                <div class="col-md-3">
+                                    <label class="control-label">Adresse</label>
+                                </div>
+
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" placeholder="Entrez l'adresse du projet" name="adminbundle_architecture[adress]" id="adress">
+                                </div>
+                            </div>
+                            <div class="form-group row element-form">
+
+                                <div class="col-md-3">
+                                    <label class="control-label">Description</label>
+                                </div>
+
+                                <div class="col-sm-9">
+
+                                         <textarea cols="60"
+                                                   rows="10" required id="description_update_project" name="adminbundle_architecture[description]">Ajoutez des details par rapport à ce projet..</textarea>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+
+                                <div class="col-md-3">
+                                    <label class="control-label " for="model">Date</label>
+                                </div>
+                                <div class="bfh-datepicker" id="dateCreation" data-name="adminbundle_architecture[dateCreation]" data-format="y-m-d"
+                                     aria-required="true"></div>
+
+
+                                <div class="form-group row">
+
+                                    <div class="col-md-3">
+                                        <label class="control-label " for="image">Télécharger image</label>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <input type="file" name="images[]" id="fileInputUpdate" multiple>
+                                    </div>
+                                </div>
+                                <div class="row">
+
+                                    <div class="col-md-8">
+                                        <table class="table table-bordered " id="table_new_update" hidden>
+                                            <thead>
+                                            <tr>
+                                                <th>Images à télécharger</th>
+                                                <th>Action</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody id="uploaded_image_update">
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                            <div id="removed_images_update" hidden>
+
+                            </div>
+                        </form>
+                        <div class="row" id="row-update" style="display: none">
+
+                            <div class="col-md-1">
+
+                            </div>
+                            <div class="col-md-3">
+                                <label class="control-label " for="image">Modifier les images téléchargées</label>
+                            </div>
+                            <div class="col-md-6">
+                                <table class="table table-bordered " id="downloadedImages"
+                                >
+                                    <thead>
+                                    <tr>
+
+                                        <th>Images téléchargées</th>
+                                        <th>Action</th>
+
+                                    </tr>
+
+
+                                    </thead>
+                                    <tbody id="image_to_upload_update">
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Annuler</button>
+                <button type="submit" class="btn  btn-primary" data-target="modifier" data-selector="update-project-form">Enregistrer</button>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="details-project" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-md" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Détails du projet</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="container-fluid">
+
+
+                    <div class="col-md-6" id="slider_details">
+
+
+                    </div>
+                    <div class="col-md-6">
+                        <div class="border">
+                            <h3 class="theme_color " id="name_project_details"></h3>
+
+
+                            <section class="col-md-12">
+                                <p class="description theme_color " style="font-size: 23px">Client:</p>
+                                <raw class="text_detail" id="client_details">
+
+                                </raw>
+                            </section>
+                            <section class="col-md-12">
+                                <p class="description theme_color" style="font-size: 23px">Adresse:</p>
+                                <raw class="text_detail" id="adress_details">
+
+                                </raw>
+                            </section>
+                            <section class="col-md-12">
+                                <p class="description theme_color" style="font-size: 23px">Surface:</p>
+                                <raw class="text_detail" id="surface_details">
+
+                                </raw>
+                            </section>
+                            <section class="col-md-12">
+                                <p class="description theme_color" style="font-size: 23px">Date de réalisation:</p>
+                                <raw class="text_detail" id="dateCreation_details">
+
+                                </raw>
+                            </section>
+
+
+                            <section class="col-md-12">
+                                <div class="description ">
+                                    <p style="font-size: 23px" class="theme_color">Description :</p>
+                                    <raw class="text_detail " id="description_details">
+
+                                    </raw>
+
+                                </div>
+
+                            </section>
+
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+            </div>
+            <!-- end content -->
+        </div>
+    </div>
+</div>

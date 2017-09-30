@@ -1,0 +1,473 @@
+
+
+    {% if connected %}
+<div class="theme_changer">
+    <input type="hidden" value="" id="sec_propos">
+    <input type="hidden" value="" id="sec_service">
+    <input type="hidden" value="" id="sec_carte">
+    <input type="hidden" value="" id="sec_event">
+    <input type="hidden" value="" id="sec_gallery">
+    <input type="hidden" value=""id="sec_contact">
+
+    <input type="hidden" value="" id="sec_propos_color">
+    <input type="hidden" value="" id="sec_service_color">
+    <input type="hidden" value="" id="sec_carte_color">
+    <input type="hidden" value="" id="sec_event_color">
+    <input type="hidden" value="" id="sec_gallery_color">
+    <input type="hidden" value=""id="sec_contact_color">
+    <style>
+        tog{
+            background: #e6d6d6;
+        }
+        .fa.fa-cog{
+            background: none;
+            -webkit-animation-name: clignote;
+            -webkit-animation-duration: 3s;
+            -webkit-animation-iteration-count: infinite;
+        }
+        @-webkit-keyframes clignote {
+
+            0% {
+                transform: scale(1) rotate(120deg);
+            }
+            50% {
+                transform: scale(1.6) rotate(240deg);
+            }
+            100% {
+                transform: scale(1) rotate(360deg);
+            }
+        }
+        @-webkit-keyframes color-change {
+            0% { color: red; }
+            50% { color: blue; }
+            100% { color: red; }
+        }
+    </style>
+
+        <tog style="float: right;margin-right:-50px;" class="tog" style="background: #e6d6d6">
+            <i class="fa fa-cog" style="padding: 15px;" aria-hidden="true"></i>
+        </tog>
+
+    <div class="titre-section align-center">
+        <h6 class="bnv" style="display: inline; font-size: 19px;"> Personaliser le section bienvennue</h6>
+        <h6 class="services"style="display: inline;font-size: 19px;"> Personaliser le section service</h6>
+        <h6 class="tarif" style="display: inline;font-size: 19px;"> Personaliser le section carte</h6>
+        <h6 class="offres"style="display: inline;font-size: 19px;"> Personaliser le section offre</h6>
+        <h6 class="images"style="display: inline;font-size: 19px;"> Personaliser le section gallery</h6>
+        <h6 class="contact"style="display: inline;font-size: 19px;"> Personaliser le section contact</h6>
+        <hr>
+    </div>
+
+    <div class="s1">
+
+        <div class="sp-replacer  ">
+            <div class="sp-preview">
+                <div class="sp-preview-inner" id="demo5" style="background-color: rgb(255, 0, 0);"></div>
+            </div>
+        </div>
+
+
+        changer le couleur du menu
+        <br>
+
+
+        <div class="sp-replacer ">
+            <div class="sp-preview">
+                <div class="sp-preview-inner" id="demo1"
+                        {% if theme.Couleur.titre is defined %} style="background-color: {{ theme.Couleur.titre }} " {% else %}
+                            style="background-color: rgb(255, 0, 0);"
+                        {% endif %}
+
+                ></div>
+            </div>
+        </div>
+        changer le couleur des grands titres
+        <br>
+        <div class="sp-replacer ">
+            <div class="sp-preview">
+                <div class="sp-preview-inner sous_titre" id="sous_titres" {% if theme.Couleur.sous_titre_sec1 is defined %} style="background-color: {{ theme.Couleur.sous_titre_sec1 }} " {% else %}
+                    style="background-color: rgb(255, 0, 0);"
+                {% endif %}
+                ></div>
+            </div>
+        </div>
+        changer le couleur des sous titres
+        <br>
+
+        <div class="sp-replacer ">
+            <div class="sp-preview">
+                <div class="sp-preview-inner text_color" id="text_color"{% if theme.Couleur.text is defined %} style="background-color: {{ theme.Couleur.text }} " {% else %}
+                    style="background-color: rgb(255, 0, 0);"
+                        {% endif %}
+                ></div>
+            </div>
+        </div>
+        changer le couleur des textes
+        <br>
+        <div class="sp-replacer  ">
+            <div class="sp-preview">
+                <div class="sp-preview-inner "
+                     id="demo3"{% if theme.Couleur.btn is defined %} style="background-color: {{ theme.Couleur.btn }} " {% else %}
+                    style="background-color: rgb(255, 0, 0);"
+                        {% endif %}
+
+                ></div>
+            </div>
+        </div>
+        changer le couleur des boutons<br>
+
+        <div class="sp-replacer sp-light ">
+            <div class="sp-preview">
+                <div class="sp-preview-inner "
+                     id="demo4" {% if  theme.Couleur.fonticon is defined %} style="background-color: {{ theme.Couleur.fonticon }} " {% else %}
+                    style="background-color: rgb(255, 0, 0);"
+                {% endif %}
+                ></div>
+            </div>
+        </div>
+        changer le couleur des icon
+        <br>
+    </div>
+    <div class="s2">
+
+
+        <div class="sp-replacer   ">
+            <div class="sp-preview">
+                <div class="sp-preview-inner sec-serv-titre" id="demo7"></div>
+            </div>
+        </div>
+
+
+        changer les couleurs de sous titres<br>
+
+    </div>
+
+    <div class="s3">
+
+
+        <div class="sp-replacer   ">
+            <div class="sp-preview">
+                <div class="sp-preview-inner btn1" id="demo9"
+
+
+                ></div>
+            </div>
+        </div>
+
+
+        changer les couleurs des bouttons<br>
+
+    </div>
+
+    <div class="scontact">
+
+
+        <div class="sp-replacer   ">
+            <div class="sp-preview">
+                <div class="sp-preview-inner  btn_contact" id="text_contact"></div>
+            </div>
+        </div>
+        changer le couleur de text<br>
+        <div class="sp-replacer   ">
+            <div class="sp-preview">
+                <div class="sp-preview-inner   color_icon" id="flaticon"></div>
+            </div>
+        </div>
+        changer le couleur des icons<br>
+
+    </div>
+
+
+    <div class="s6">
+
+
+        <div class="sp-replacer   ">
+            <div class="sp-preview">
+                <div class="sp-preview-inner event-text" id="demo13"></div>
+            </div>
+        </div>
+        changer le couleur de text<br>
+
+
+    </div>
+
+
+    {% set tab=['#ffffff','#293364','rgba(18, 159, 210, 0.77)','#e0ca85','rgba(236, 208, 120, 0.61)','rgb(196, 166, 72)','#f0f7f2','#76c08a','rgba(216, 193, 122, 0.47)','rgba(178, 137, 27, 0.83)','#89c436','#75b6ce','#D5AD70','#c4733d', '#d1b501','rgba(173,122,48,0.75)','#eb42ff','#fd3f9c','rgba(125, 60, 243, 0.7)', '#ff8dae','#f7f8fa', 'rgba(216, 159, 245, 0.09)','rgba(128, 128, 128, 0.09)','rgba(216, 159, 245, 0.31)','rgba(245, 159, 230, 0.21)','rgba(128, 128, 128, 0.05)','rgba(128, 128, 128, 0.2)','rgba(239, 121, 121, 0.14)','rgba(216, 159, 245, 0)','rgba(216, 159, 245, 0.14)','#1a4a72','rgba(89, 43, 206, 0.09)','rgba(89, 43, 206, 0.08)','rgba(71, 34, 164, 0.08)','rgba(26, 74, 114, 0.21)','rgba(26, 74, 114, 0.12)','rgba(26, 74, 114, 0.07)','rgba(26, 74, 114, 0.56)','rgba(26, 74, 114, 0.82)','rgba(169, 68, 66, 0.65)'
+    ,'rgba(169, 68, 66, 0.87)','rgba(169, 68, 66, 0.07)','rgba(169, 68, 66, 0.18)','rgba(169, 68, 66, 0.38)'
+    ,'rgba(118, 192, 138, 0.18)','rgba(118, 192, 138, 0.42)','rgba(118, 192, 138, 0.68)', 'rgba(138, 109, 59, 0.59)','rgba(138, 109, 59, 0.34)','rgba(138, 109, 59, 0.17)','rgba(138, 109, 59, 0.64)
+','rgba(253, 108, 158, 0.94)','rgba(253, 108, 158, 0.27)','rgba(253, 108, 158, 0.41)'
+    ,'rgba(121, 18, 54, 0.41)','rgba(219, 0, 115, 0.3)','rgba(219, 0, 115, 0.82)','rgba(238, 238, 238, 0.31)','rgba(238, 238, 238, 0.96)','rgba(204, 204, 204, 0.54)','RGB(255, 160, 122)'] %}
+
+
+    <div class="panel-group" id="accordion">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <h6 data-toggle="collapse" data-parent="#accordion" href="#backgroundcolor"> Changer le couleur d'arrière
+                        plan</h6>
+                </h4>
+            </div>
+            <div id="backgroundcolor" class="panel-collapse collapse in">
+                <div class="panel-body color-container">
+
+                    {% for i in tab %}
+                        <div class="sp-replacer sp-light ">
+                            <div class="sp-preview">
+                                <div class="sp-preview-inner " onclick="selectColor('{{ i }}')"
+                                     style="background-color:{{ i }} "></div>
+                            </div>
+                        </div>
+                    {% endfor %}
+
+                    <div class="col-md-12">
+                        <button type="button" class="btn btn-primary btn_annuler " onClick="selectNonebackcolor()"
+                        >annuler
+                        </button>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <h6 data-toggle="collapse" data-parent="#accordion" href="#backgropundmotif"> Changer le Motif d'arrière
+                        plan</h6>
+                </h4>
+            </div>
+            <div id="backgropundmotif" class="panel-collapse collapse">
+                <div class="panel-body">
+                    <div class="motif-container">
+                        <div class="image" onclick="selectPattern(this,' ');"
+                             style=" background: blanchedalmond;
+                                     background-image: none; border: 2px solid rgb(255, 255, 255); margin: 2px; height: 30px ;width: 30px; ">
+                            &nbsp;</div>
+                        {% for m in patternImage() %}
+                        <div class="image" onclick="selectPattern(this, 'module/spa/patterns/{{ m }}');"
+                             style=" background: blanchedalmond;
+                                     background-image:
+                                     url('{{ asset('module/spa/patterns/') }}{{ m }}'); border: 2px solid rgb(255, 255, 255); margin: 2px; ">
+                            &nbsp;</div>
+                        {% endfor %}
+
+
+
+                    </div>
+                    <a class="btn btn-primary btn_annuler"  onClick="selectNone()">Annuler</a>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <h6 data-toggle="collapse" data-parent="#accordion" href="#backgroundanimation">Mettre image animé</h6>
+                </h4>
+            </div>
+            <div id="backgroundanimation" class="panel-collapse collapse in">
+                <div class="panel-body">
+
+                    <div data-pour="" class="motif-container">
+                        <div set_icon style="width: 30px;height: 30px;float: left;border: 1px gray dashed;">
+                            <img style="width:100%" src="" alt="">
+                        </div>
+                        <div set_icon style="width: 30px;height: 30px;float: left">
+                            <img style="width:100%" src="{{ asset('uploads/image/icon/1.png') }}" alt="">
+                        </div>
+                        <div set_icon style="width: 30px;height: 30px;float: left">
+                            <img style="width:100%" src="{{ asset('uploads/image/icon/3.png') }}" alt="">
+                        </div>
+                        <div set_icon style="width: 30px;height: 30px;float: left">
+                            <img style="width:100%" src="{{ asset('uploads/image/icon/4.png') }}" alt="">
+                        </div>
+                        <div set_icon style="width: 30px;height: 30px;float: left">
+                            <img style="width:100%" src="{{ asset('uploads/image/icon/5.png') }}" alt="">
+                        </div>
+                        <div set_icon style="width: 30px;height: 30px;float: left">
+                            <img style="width:100%" src="{{ asset('uploads/image/icon/6.png') }}" alt="">
+                        </div>
+                        <div set_icon style="width: 30px;height: 30px;float: left">
+                            <img style="width:100%" src="{{ asset('uploads/image/icon/7.png') }}" alt="">
+                        </div>
+                        <div set_icon style="width: 30px;height: 30px;float: left">
+                            <img style="width:100%" src="{{ asset('uploads/image/icon/8.png') }}" alt="">
+                        </div>
+                        <div set_icon style="width: 30px;height: 30px;float: left">
+                            <img style="width:100%" src="{{ asset('uploads/image/icon/9.png') }}" alt="">
+                        </div>
+                        <div set_icon style="width: 30px;height: 30px;float: left">
+                            <img style="width:100%" src="{{ asset('uploads/image/icon/10.png') }}" alt="">
+                        </div>
+                        <div set_icon style="width: 30px;height: 30px;float: left">
+                            <img style="width:100%" src="{{ asset('uploads/image/icon/11.png') }}" alt="">
+                        </div>
+                        <div set_icon style="width: 30px;height: 30px;float: left">
+                            <img style="width:100%"  src="{{ asset('uploads/image/icon/12.png') }}" alt="">
+                        </div>
+                        <div set_icon style="width: 30px;height: 30px;float: left">
+                            <img  style="width:100%" src="{{ asset('uploads/image/icon/14.png') }}" alt="">
+                        </div>
+                        <div set_icon style="width: 30px;height: 30px;float: left">
+                            <img  style="width:100%" src="{{ asset('uploads/image/icon/15.png') }}" alt="">
+                        </div>
+                        <div set_icon style="width: 30px;height: 30px;float: left">
+                            <img  style="width:100%" src="{{ asset('uploads/image/icon/16.png') }}" alt="">
+                        </div>
+                        <div set_icon style="width: 30px;height: 30px;float: left">
+                            <img style="width:100%" src="{{ asset('uploads/image/icon/17.png') }}" alt="">
+                        </div>
+                        <div set_icon style="width: 30px;height: 30px;float: left">
+                            <img  style="width:100%" src="{{ asset('uploads/image/icon/18.png') }}" alt="">
+                        </div>
+                        <div set_icon style="width: 30px;height: 30px;float: left">
+                            <img  style="width:100%" src="{{ asset('uploads/image/icon/19.png') }}" alt="">
+                        </div>
+                        <div set_icon style="width: 30px;height: 30px;float: left">
+                            <img  style="width:100%" src="{{ asset('uploads/image/icon/20.png') }}" alt="">
+                        </div>
+                        <div set_icon style="width: 30px;height: 30px;float: left">
+                            <img style="width:100%"  src="{{ asset('uploads/image/icon/21.png') }}" alt="">
+                        </div>
+                        <div set_icon style="width: 30px;height: 30px;float: left">
+                            <img style="width:100%"  src="{{ asset('uploads/image/icon/22.png') }}" alt="">
+                        </div>
+                        <div set_icon style="width: 30px;height: 30px;float: left">
+                            <img style="width:100%"  src="{{ asset('uploads/image/icon/23.png') }}" alt="">
+                        </div>
+                        <div set_icon style="width: 30px;height: 30px;float: left">
+                            <img style="width:100%"  src="{{ asset('uploads/image/icon/24.png') }}" alt="">
+                        </div>
+                        <div set_icon style="width: 30px;height: 30px;float: left">
+                            <img style="width:100%"  src="{{ asset('uploads/image/icon/25.png') }}" alt="">
+                        </div>
+                        <div set_icon style="width: 30px;height: 30px;float: left">
+                            <img style="width:100%"  src="{{ asset('uploads/image/icon/26.png') }}" alt="">
+                        </div>
+                        <div set_icon style="width: 30px;height: 30px;float: left">
+                            <img style="width:100%"  src="{{ asset('uploads/image/icon/27.png') }}" alt="">
+                        </div>
+                        <div set_icon style="width: 30px;height: 30px;float: left">
+                            <img style="width:100%"  src="{{ asset('uploads/image/icon/28.png') }}" alt="">
+                        </div>
+                        <div set_icon style="width: 30px;height: 30px;float: left">
+                            <img style="width:100%"  src="{{ asset('uploads/image/icon/29.png') }}" alt="">
+                        </div>
+                        <div set_icon style="width: 30px;height: 30px;float: left">
+                            <img style="width:100%"  src="{{ asset('uploads/image/icon/30.png') }}" alt="">
+                        </div>
+                        <div set_icon style="width: 30px;height: 30px;float: left">
+                            <img style="width:100%"  src="{{ asset('uploads/image/icon/31.png') }}" alt="">
+                        </div>
+                        <div set_icon style="width: 30px;height: 30px;float: left">
+                            <img style="width:100%"  src="{{ asset('uploads/image/icon/32.png') }}" alt="">
+                        </div>
+                        <div set_icon style="width: 30px;height: 30px;float: left">
+                            <img style="width:100%"  src="{{ asset('uploads/image/icon/34.png') }}" alt="">
+                        </div>
+                        <div set_icon style="width: 30px;height: 30px;float: left">
+                            <img style="width:100%"  src="{{ asset('uploads/image/icon/35.png') }}" alt="">
+                        </div>
+                        <div set_icon style="width: 30px;height: 30px;float: left">
+                            <img style="width:100%"  src="{{ asset('uploads/image/icon/36.png') }}" alt="">
+                        </div>
+
+                        <div set_icon style="width: 30px;height: 30px;float: left">
+                            <img  style="width:100%" src="{{ asset('uploads/image/icon/icone-avocat.png') }}" alt="">
+                        </div>
+                        <div set_icon style="width: 30px;height: 30px;float: left">
+                            <img style="width:100%"  src="{{ asset('uploads/image/icon/integrators-1.png') }}" alt="">
+                        </div>
+                        <div set_icon style="width: 30px;height: 30px;float: left">
+                            <img  style="width:100%" src="{{ asset('uploads/image/icon/key.png') }}" alt="">
+                        </div>
+                        <div set_icon style="width: 30px;height: 30px;float: left">
+                            <img  style="width:100%" src="{{ asset('uploads/image/icon/nutrition-icon.png') }}" alt="">
+                        </div>
+                        <div set_icon style="width: 30px;height: 30px;float: left">
+                            <img  style="width:100%" src="{{ asset('uploads/image/icon/payment-cards.png') }}" alt="">
+                        </div>
+                        <div set_icon style="width: 30px;height: 30px;float: left">
+                            <img  style="width:100%" src="{{ asset('uploads/image/icon/pic.png') }}" alt="">
+                        </div>
+                        <div set_icon style="width: 30px;height: 30px;float: left">
+                            <img  style="width:100%" src="{{ asset('uploads/image/icon/plane.png') }}" alt="">
+                        </div>
+                        <div set_icon style="width: 30px;height: 30px;float: left">
+                            <img  style="width:100%" src="{{ asset('uploads/image/icon/poop.png') }}" alt="">
+                        </div>
+                        <div set_icon style="width: 30px;height: 30px;float: left">
+                            <img  style="width:100%" src="{{ asset('uploads/image/icon/presentation-grisf.png') }}" alt="">
+                        </div>
+                        <div set_icon style="width: 30px;height: 30px;float: left">
+                            <img style="width:100%" src="{{ asset('uploads/image/icon/Shipping.png') }}" alt="">
+                        </div>
+                        <div set_icon style="width: 30px;height: 30px;float: left">
+                            <img style="width:100%"  src="{{ asset('uploads/image/icon/star.png') }}" alt="">
+                        </div>
+                        <div set_icon style="width: 30px;height: 30px;float: left">
+                            <img  style="width:100%" src="{{ asset('uploads/image/icon/star2.png') }}" alt="">
+                        </div>
+                        <div set_icon style="width: 30px;height: 30px;float: left">
+                            <img  style="width:100%" src="{{ asset('uploads/image/icon/star3.png') }}" alt="">
+                        </div>
+                        <div set_icon style="width: 30px;height: 30px;float: left">
+                            <img  style="width:100%" src="{{ asset('uploads/image/icon/symbole.png') }}" alt="">
+                        </div>
+                        <div set_icon style="width: 30px;height: 30px;float: left">
+                            <img  style="width:100%" src="{{ asset('uploads/image/icon/symbole3.png') }}" alt="">
+                        </div>
+                        <div set_icon style="width: 30px;height: 30px;float: left">
+                            <img  style="width:100%" src="{{ asset('uploads/image/icon/tree.png') }}" alt="">
+                        </div>
+
+                    </div>
+                    <a class="btn btn-primary btn_annuler"  onClick="selectNoneMotif()">Annuler</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class="col-md-8-md-offset-2">
+
+        <button type="button" class="btn btn-primary change-color"
+        >valider
+        </button>
+
+    </div>
+</div>
+<style>
+
+    .theme_changer {
+        top: 15%;
+        position: fixed;
+        width: 200px;
+        background: #e6d6d6;
+        z-index: 1051;
+        padding: 10px;
+        transform: translate(-200px);
+        transition: transform 2s;
+    }
+
+    .bfh-colorpicker-popover {
+        position: relative !important;
+    }
+
+    .motif-container {
+
+        overflow: auto;
+        height: 120px;
+
+    }
+    .color-container {
+
+        overflow: auto;
+        height: 200px;
+
+    }
+</style>
+{% endif %}

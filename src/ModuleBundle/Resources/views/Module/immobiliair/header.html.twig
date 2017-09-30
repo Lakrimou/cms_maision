@@ -1,0 +1,117 @@
+<header class="main-header header-style-one one-page-header">
+    <div class="auto-container">
+        <div class="outer-box clearfix">
+            <!--Logo-->
+            <div class="logo">
+
+                <a href="#"><h1 style="color: white;">{{ qouiqui.slug }}</h1></a>
+
+            </div>
+
+            <!--Header Right-->
+            <div class="header-right clearfix">
+                <!--Info Box-->
+                <div class="info-box clearfix">
+                    <ul class="clearfix">
+                        <li class="address">
+                            <div class="icon"><span class="flaticon-location74"></span></div>
+                            {{ qouiqui.address1 }}
+                        </li>
+                        <li class="separator"></li>
+                        <li class="contact-info">
+                            <div class="icon"><span class="flaticon-telephone51"></span></div>
+                            <a href="#">{{ qouiqui.phone }}</a> <br><a href="mailto:{{ qouiqui.mail }}">{{ qouiqui.mail }}</a>
+                        </li>
+                        <li class="contact-info"><a href="#contact-section" class="theme-btn btn-style-one">Contact Nous</a></li>
+                        <li class="contact-info"><a href="#map-section" class="theme-btn btn-style-one">Y aller</a></li>
+                    </ul>
+                </div>
+
+
+                <span class="clearfix"></span>
+
+                <!-- Main Menu -->
+                <nav class="main-menu">
+                    <div class="navbar-header">
+                        <!-- Toggle Button -->
+                        <button type="button" class="navbar-toggle" data-toggle="collapse"
+                                data-target=".navbar-collapse">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                    </div>
+
+                    <div class="navbar-collapse collapse clearfix">
+                        <ul class="navigation one-page-nav clearfix">
+                            <li class="current dropdown"><a href="#slider-section">Accueil</a></li>
+                            <li><a href="#agent-section">A Propos</a></li>
+                            <li><a href="#property-details">Nos Annonces</a></li>
+                            <li><a href="#gallery-section">Gallerie</a></li>
+                            <li><a href="#contact-section">Contactez nous</a></li>
+                            {% if app.user  %}
+                                <li><a href="#" style="color: #71b100">Bienvenu {{ app.user.username}}</a></li>
+                            {% else %}
+                                <li><a href="#" data-toggle="modal" data-target="#connexion">se connecter</a></li>
+                            {% endif %}
+                        </ul>
+                    </div>
+
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+{#===========================connection modal============================#}
+
+<div id="connexion" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Connection</h4>
+            </div>
+            <div class="modal-body">
+                <div class="col-md-12 btn-group btn-group-justified hidden-xs hidden-sm social" role="group">
+                    <div class="facebook btn-group" role="group">
+                        <a class="facebook-btn btn btn-primary" href="/login/facebook">
+                            <span>Connecter avec Facebook</span>
+                        </a>
+                    </div>
+                    <div class="btn-group" role="group">
+                        <a class="btn btn-danger" href="/login/google">
+                            <span>Connecter avec Google</span>
+                        </a>
+                    </div>
+                </div>
+                <form action="/login_check" method="post">
+                    <div class="form-group">
+                        <input type="hidden" name="_csrf_token" value="Kk4KcJ-i6lPzu7pUx0wOja7L0g5uu9CI6uWJYDGVT4Q">
+                    </div>
+                    <div class="form-group">
+                        <label for="username">Login</label>
+                        <input type="text" id="username" name="_username" value="" required="required" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Mot de passe</label>
+                        <input type="password" id="password" name="_password" required="required" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <input type="checkbox" id="remember_me" name="_remember_me" value="on">
+                        <label for="remember_me">Se souvenir de moi!</label>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" id="_submit" name="_submit" value="Se connecter" class="form-control btn btn-warning">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+{#===========================end connection modal============================#}

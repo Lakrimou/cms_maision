@@ -1,0 +1,83 @@
+<!--     modal d'ajout des Actualités -->
+
+<!-- Large modal -->
+<div class="modal fade ajout-actualités-modal-lg" tabindex="-1" role="dialog"
+     aria-labelledby="myLargeModalLabel">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Ajouter Actualités</h4>
+            </div>
+            <div class="modal-body">
+
+                <div class="col-md-12">
+                    <div class="well-block">
+
+                        <form action="{{ path('hotel_ajouterActualites', {'id_qq': qouiqui.id}) }}" method="POST"
+                              name="ajouter-actualites-form" enctype="multipart/form-data" id="form-actualites">
+                            <!-- Form start -->
+                            <div class="row">
+
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="control-label" for="name">Titre</label>
+                                        <input type="text" name="actualites[titre_actualites]" class="form-control"
+                                               required/>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <label class="control-label" for="name">Date</label>
+                                    <input type="date" class="form-control"  name="actualites[date_actualites]"  required/>
+                                </div>
+                                <!-- Text input-->
+
+                                <!-- Text input-->
+                                <!-- Text area -->
+                                <!-- Textarea -->
+                                <div class="form-group">
+                                    <label class="col-md-12 control-label"
+                                           for="keyinformation">Description</label>
+                                    <div class="col-md-12">
+                                        <textarea name="actualites[actualitesDetails]" class="ckeditor"></textarea>
+                                    </div>
+                                </div>
+                                <!-- Text area -->
+
+                                <div class="col-md-12 add-room ">
+                                    <div class="form-group">
+                                        <label class="btn-bs-file theme-btn btn-style-two">
+                                            Cliquer ici pour ajouter une photo
+                                            <input type="file"
+                                                   class="form-control inline-block uploadImage imageUps"
+                                                   name="actualites[image_actualites]" required/>
+                                        </label>
+                                        <img src="#" alt="image upload" class="upImg imageUplo"
+                                        />
+                                    </div>
+                                </div>
+                                <!-- Button -->
+
+                            </div>
+                            <button type="submit" class="theme-btn btn-style-two envoyerUpload"
+                                    id="ajouter-chambres">
+                                Ajouter
+                            </button>
+                            <button type="button" class="theme-btn btn-style-one pull-right " data-dismiss="modal">Fermer
+                            </button>
+
+                        </form>
+                        <!-- form end -->
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--     modal d'ajout des Actualités -->

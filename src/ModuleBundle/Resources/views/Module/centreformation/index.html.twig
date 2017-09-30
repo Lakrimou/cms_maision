@@ -1,0 +1,502 @@
+{% set catego =  centreFormationcategorie(module) %}
+{% set categories =  centreFormationCatego(module) %}
+{% set service=cfService(module) %}
+{% set path =  asset('uploads/image/')~qouiqui.user.id ~'/'~ qouiqui.id ~'/avatar/avatar.jpg' %}
+{% set connected = false %}
+{% if app.user %}
+    {% if app.user.id == qouiqui.user.id %}
+        {% set connected = true %}
+    {% endif %}
+{% endif %}
+{% set motif = false %}
+{% if  theme.color.background.motif is defined %}
+    {% set motif = true %}
+{% endif %}
+{% set animation = false %}
+{% if theme.color.background.animation is defined %}
+    {% set animation = true %}
+{% endif %}
+{% set connected = false %}
+{% if app.user %}
+    {% if app.user.id == qouiqui.user.id %}
+        {% set connected = true %}
+    {% endif %}
+{% endif %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>All Study</title>
+
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet"
+          type="text/css"/>
+    <!-- Google fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i" rel="stylesheet">
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('module/centre_frm/images/favicon.png') }}"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- Bootstrap -->
+    <link href="{{ asset('module/centre_frm/assets/css/bootstrap.min.css') }}" rel="stylesheet">
+
+    <!-- Font-awesome -->
+    <link href="{{ asset('module/centre_frm/assets/css/font-awesome.min.css') }}" rel="stylesheet">
+
+    <!-- Flaticon -->
+    <link href="{{ asset('module/centre_frm/assets/flaticon/flaticon.css') }}" rel="stylesheet">
+
+    <!-- lightcase -->
+    <link href="{{ asset('module/centre_frm/assets/css/lightcase.css') }}" rel="stylesheet">
+
+    <!-- Swiper -->
+    <link href="{{ asset('module/centre_frm/assets/css/swiper.min.css') }}" rel="stylesheet">
+
+    <!-- quick-view -->
+    <link href="{{ asset('module/centre_frm/assets/css/quick-view.css') }}" rel="stylesheet">
+
+    <!-- nstSlider -->
+    <link href="{{ asset('module/centre_frm/assets/css/jquery.nstSlider.css') }}" rel="stylesheet">
+
+    <!-- flexslider -->
+    <link href="{{ asset('module/centre_frm/assets/css/flexslider.css') }}" rel="stylesheet">
+
+    <!-- Style -->
+    <link href="{{ asset('module/centre_frm/assets/css/style.css') }}" rel="stylesheet">
+
+    <link href="{{ asset('module/immobiliair/css/animate.css') }}" type="text/css" rel="stylesheet"/>
+    {#<script src="//cdn.ckeditor.com/4.6.2/standard/ckeditor.js"></script>#}
+    <!-- Responsive -->
+    <link href="{{ asset('module/centre_frm/assets/css/responsive.css') }}" rel="stylesheet">
+    <link href="{{ asset('asset-back/css/dropzone.css') }}" type="text/css" rel="stylesheet"/>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link href="{{ asset('module/spa/picker/css/bootstrap-datetimepicker.min.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('asset-back/css/bootstrap-datetimepicker.css') }}" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="{{ asset('module/ecommerce/css/pnotify.custom.min.css') }}" id="theme-stylesheet">
+
+
+    {{ include('@Module/Module/centreformation/style.html.twig') }}
+
+
+</head>
+<body id="scroll-top">
+<table class="loader">
+    <tr>
+        <td>
+            <div class="spinner">
+                <div class="rect1"></div>
+                <div class="rect2"></div>
+                <div class="rect3"></div>
+                <div class="rect4"></div>
+                <div class="rect5"></div>
+                <div class="rect6"></div>
+            </div>
+        </td>
+    </tr>
+</table>
+<header class="header-fixed">
+    <div class="header-top">
+        <div class="container">
+            <ul class="left">
+                {#<li><span><i class="fa fa-phone" aria-hidden="true"></i></span> Téléphone: {{ qouiqui.phone }}</li>#}
+
+                {#<li><span><i class="fa fa-home" aria-hidden="true"></i></span> Addresse: {{ qouiqui.address1 }}</li>#}
+            </ul>
+            <ul class="right">
+                <ul class="right">
+                    <li class="font"><span><i class="fa fa-phone" aria-hidden="true"></i></span> {{ qouiqui.phone }}
+                    </li>
+                    <li>|</li>
+                    <li class="font"><span><i class="fa fa-envelope" aria-hidden="true"></i></span> {{ qouiqui.mail }}
+                    </li>
+                    <li>|</li>
+                    <li class="font"><span><i class="fa fa-home" aria-hidden="true"></i></span> {{ qouiqui.address1 }}
+                    </li>
+                </ul>
+            </ul>
+        </div><!-- container -->
+    </div><!-- header top -->
+    <div class="main-menu">
+        <nav class="navbar ">
+            <div class="container">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                            data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+
+                    {#logo-content#}
+                    <div class="navbar-brand logo-content ">
+
+                        {% if asset_exists(path) %}
+                            <img src="{{ asset('uploads/image/') }}{{ qouiqui.user.id }}/{{ qouiqui.id }}/avatar/avatar.jpg"
+                                 alt="">
+                        {% else %}
+                            <img src="{{ asset('module/centre_frm/images/logo.png') }}" alt="logo"
+                                 class="img-responsive">
+                        {% endif %}
+                    </div>
+                    <a class="navbar-brand-hidden ">
+
+                        <h2 style="font-size: 30px;margin-left: 23px;padding-top: 28px;position: absolute;">{{ qouiqui.firstName }}</h2>
+                    </a>
+
+                </div>
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav navbar-right" id="navbar-menus">
+
+                        <li class="acceuil"><a href="#acceuil"> Acceuil</a></li>
+
+                        <li class="propos"><a href="#propos"> A propos</a></li>
+                        {% if cfService(module) is not empty %}
+                            <li class="services"><a href="#service"> Formations</a></li>
+                        {% endif %}
+                        {#<li class="dropdown current">#}
+                        {#<a href="#event" class="dropdown-toggle" data-toggle="dropdown" role="button"#}
+                        {#aria-haspopup="true" aria-expanded="false"> Evenements <span class="caret"></span></a>#}
+
+                        {#</li>#}
+                        {% if cfEvent(module) is not empty %}
+                            <li class="evenements"><a href="#event"> Evenements</a></li>
+                        {% endif %}
+                        <li class="galleries"><a href="#gallery">Galleries</a></li>
+                        {% if getTrainer(module) is not empty %}
+                            <li class="formateurs"><a href="#formateur">formateur</a></li>
+                        {% endif %}
+
+                        <li class="contacts"><a href="#contact">Contact</a></li>
+                        <li class="footer" style="display: none"><a href="#footer">Footer</a></li>
+
+                        {% if app.user %}
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle"
+                                   data-toggle="dropdown">Bienvenue {{ app.user.username }}
+                                    <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="{{ path('fos_user_security_logout') }}">Déconnexion</a></li>
+
+                                </ul>
+
+                            </li>
+
+                        {% else %}
+                            <li><a href="#" data-toggle="modal" data-target="#modal_connexion">se connecter</a>
+                            </li>
+                        {% endif %}
+
+                    </ul>
+
+                </div><!-- /.navbar-collapse -->
+            </div><!-- /.container -->
+        </nav>
+    </div>
+    <!-- main menu -->
+</header>
+<!-- header End here -->
+
+
+<!-- Banner Start here -->
+{{ include('@Module/Module/centreformation/slider.html.twig') }}
+
+<!-- Banner End here -->
+{#{{ dump(qouiqui) }}#}
+<!-- categories Start here -->
+{#{{ include('@Module/Module/centreformation/categories_list.html.twig') }}#}
+<!-- categories -->
+<!-- categories End here -->
+<!-- slider Start here -->
+{{ include('@Module/Module/centreformation/about.html.twig') }}
+
+
+<!-- slider End here -->
+
+<!-- banner-search Start here -->
+
+<!-- banner-search End here -->
+
+
+<!-- Courses Start here -->
+{{ include('@Module/Module/centreformation/service.html.twig') }}
+
+<!-- Courses End here -->
+
+
+<!-- Achievements Start here -->
+{{ include('@Module/Module/centreformation/acheivment.html.twig') }}
+
+<!-- Achievements End here -->
+
+{#{{ include('@Module/Module/centreformation/price.html.twig') }}#}
+
+<!-- Event Start here -->
+{{ include('@Module/Module/centreformation/event.html.twig') }}
+
+<!-- event End here -->
+
+
+<!-- Gallery Start here -->
+{{ include('@Module/Module/centreformation/gallery.html.twig') }}
+
+<!-- Gallery End here -->
+
+<!-- Testimonial Start here -->
+{{ include('@Module/Module/centreformation/testimonial.html.twig') }}
+
+<!-- Testimonial End here -->
+
+<!-- Teachers Start here -->
+{{ include('@Module/Module/centreformation/trainer.html.twig') }}
+
+<!-- Teachers End here -->
+<!-- home contact Start here -->
+{{ include('@Module/Module/centreformation/contact.html.twig') }}
+{{ include('@Module/Module/centreformation/footer.html.twig') }}
+<!-- home contact End here -->
+
+
+<!-- Subscribe Start here -->
+{#{{ include('@Module/Module/centreformation/subscribe.html.twig') }}#}
+
+<!-- Subscribe End here -->
+<!-- modal connexion start here -->
+<div id="modal_connexion" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">bconnection</h4>
+            </div>
+            <div class="modal-body">
+                <div role="tabpanel">
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li role="presentation" class="active"><a href="#es_admin" aria-controls="es_admin"
+                                                                  role="tab"
+                                                                  data-toggle="tab">Espace Admin</a>
+                        </li>
+                        <li role="presentation"><a href="#es_client" aria-controls="es_client" role="tab"
+                                                   data-toggle="tab">Espace Utilisateur</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane active" id="es_admin">
+                            <div class="col-md-12 btn-group btn-group-justified hidden-xs hidden-sm social"
+                                 role="group">
+                                <div class="facebook btn-group" role="group">
+                                    <a class="facebook-btn btn btn-primary" href="/login/facebook">
+                                        <span>Connecter avec Facebook</span>
+                                    </a>
+                                </div>
+                                <div class="btn-group" role="group">
+                                    <a class="btn btn-danger" href="/login/google">
+                                        <span>Connecter avec Google</span>
+                                    </a>
+                                </div>
+                            </div>
+                            <form action="/login_check" method="post">
+                                <div class="form-group">
+                                    <input type="hidden" name="_csrf_token"
+                                           value="Kk4KcJ-i6lPzu7pUx0wOja7L0g5uu9CI6uWJYDGVT4Q">
+                                </div>
+                                <div class="form-group">
+                                    <label for="username">Nom d'utilisateur</label>
+                                    <input type="text" id="username" name="_username" value="" required="required"
+                                           class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label for="password">Mot de passe</label>
+                                    <input type="password" id="password" name="_password" required="required"
+                                           class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <input type="checkbox" id="remember_me" name="_remember_me" value="on">
+                                    <label for="remember_me">Se souvenir de moi!</label>
+                                </div>
+                                <div class="form-group">
+                                    <input type="submit" id="_submit" name="_submit" value="Se connecter"
+                                           class="form-control btn btn-warning">
+                                </div>
+                            </form>
+                        </div>
+                        <div role="tabpanel" class="tab-pane" id="es_client">
+                            <form action="/login_check" method="post">
+                                <div class="form-group">
+                                    <input type="hidden" name="_csrf_token"
+                                           value="Kk4KcJ-i6lPzu7pUx0wOja7L0g5uu9CI6uWJYDGVT4Q">
+                                </div>
+                                <div class="form-group">
+                                    <label for="username">Login</label>
+                                    <input type="text" id="username" name="_username" value="" required="required"
+                                           class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label for="password">Mot de passe</label>
+                                    <input type="password" id="password" name="_password" required="required"
+                                           class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <input type="checkbox" id="remember_me" name="_remember_me" value="on">
+                                    <label for="remember_me">Se souvenir de moi!</label>
+                                </div>
+                                <div class="form-group">
+                                    <input type="submit" id="_submit" name="_submit" value="Se connecter"
+                                           class="form-control btn btn-primary">
+                                </div>
+                            </form>
+                            Nouveau ? Insecrivez-vous
+
+                            <form name="fos_user_registration_form" method="post" action="/register/"
+                                  class="fos_user_registration_register">
+                                <div id="fos_user_registration_form">
+
+                                    <div class="form-group"><label class="control-label required"
+                                                                   for="fos_user_registration_form_email">E-mail</label><input
+                                                type="email" id="fos_user_registration_form_email"
+                                                name="fos_user_registration_form[email]" required="required"
+                                                class="form-control"></div>
+                                    <div class="form-group"><label class="control-label required"
+                                                                   for="fos_user_registration_form_username">Nom </label><input
+                                                type="text" id="fos_user_registration_form_username"
+                                                name="fos_user_registration_form[username]" required="required"
+                                                maxlength="180" pattern=".{2,}" class="form-control"></div>
+                                    <div class="form-group"><label class="control-label required"
+                                                                   for="fos_user_registration_form_prenom">
+                                            Prénom</label><input type="text" id="fos_user_registration_form_prenom"
+                                                                 name="fos_user_registration_form[prenom]"
+                                                                 required="required" maxlength="255"
+                                                                 class="form-control"></div>
+                                    <div class="form-group"><label class="control-label required"
+                                                                   for="fos_user_registration_form_phone_number">téléphonne</label><input
+                                                type="text" id="fos_user_registration_form_phone_number"
+                                                name="fos_user_registration_form[phone_number]" required="required"
+                                                class="form-control"></div>
+
+                                    <div class="form-group"><label class="control-label required"
+                                                                   for="fos_user_registration_form_adress">Adresse</label><input
+                                                type="text" id="fos_user_registration_form_adress"
+                                                name="fos_user_registration_form[adress]" required="required"
+                                                maxlength="1024" class="form-control"></div>
+                                    <div class="form-group"><label class="control-label required"
+                                                                   for="fos_user_registration_form_plainPassword_first">Entrer
+                                            le mot de passe</label><input type="password"
+                                                                          id="fos_user_registration_form_plainPassword_first"
+                                                                          name="fos_user_registration_form[plainPassword][first]"
+                                                                          required="required" class="form-control">
+                                    </div>
+                                    <div class="form-group"><label class="control-label required"
+                                                                   for="fos_user_registration_form_plainPassword_second">Confirmer
+                                            le mot de passe</label><input type="password"
+                                                                          id="fos_user_registration_form_plainPassword_second"
+                                                                          name="fos_user_registration_form[plainPassword][second]"
+                                                                          required="required" class="form-control">
+                                    </div>
+                                    {#<input type="text" id="fos_user_registration_form__token" name="fos_user_registration_form[_token]" value="">#}
+
+                                </div>
+
+
+                                <div>
+                                    <input type="submit" id="envoyer" value="S'inscrire"
+                                           class="form-control btn btn-primary">
+                                </div>
+
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- modal connexion end here -->
+
+<!-- Footer Start here -->
+
+{% block javascripts %}
+    <a class="page-scroll scroll-top" href="#scroll-top"><i class="fa fa-angle-up" aria-hidden="true"></i></a>
+    <!-- Footer End here -->
+
+
+    <!-- jquery -->
+    <script src="{{ asset('module/centre_frm/assets/js/jquery-1.12.4.min.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-one-page-nav/3.0.0/jquery.nav.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-formhelpers/2.3.0/js/bootstrap-formhelpers.js"></script>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-formhelpers/2.3.0/css/bootstrap-formhelpers.css">
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="{{ asset('module/spa/picker/js/bootstrap-datetimepicker.min.js') }}"></script>
+    {#<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.js"></script>#}
+
+    <!-- Bootstrap -->
+    <script src="{{ asset('module/centre_frm/assets/js/bootstrap.min.js') }}"></script>
+
+    <!-- counterup -->
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/waypoints/2.0.3/waypoints.min.js"></script>
+    <script src="{{ asset('module/centre_frm/assets/js/jquery.counterup.min.js') }}"></script>
+
+    <!-- Isotope -->
+    <script src="{{ asset('module/centre_frm/assets/js/isotope.min.js') }}"></script>
+
+    <!-- lightcase -->
+    <script src="{{ asset('module/centre_frm/assets/js/lightcase.js') }}"></script>
+
+    <!-- Swiper -->
+    <script src="{{ asset('module/centre_frm/assets/js/swiper.jquery.min.js') }}"></script>
+
+    <!--progress-->
+    <script src="{{ asset('module/centre_frm/assets/js/circle-progress.min.js') }}"></script>
+
+    <!--velocity-->
+    <script src="{{ asset('module/centre_frm/assets/js/velocity.min.js') }}"></script>
+
+    <!--quick-view-->
+    <script src="{{ asset('module/centre_frm/assets/js/quick-view.js') }}"></script>
+
+    <!--nstSlider-->
+    <script src="{{ asset('module/centre_frm/assets/js/jquery.nstSlider.js') }}"></script>
+
+    <!--flexslider-->
+    <script src="{{ asset('module/centre_frm/assets/js/flexslider-min.js') }}"></script>
+
+    <!--easing-->
+    <script src="{{ asset('module/centre_frm/assets/js/jquery.easing.min.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tokenfield/0.12.0/bootstrap-tokenfield.js"></script>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tokenfield/0.12.0/css/bootstrap-tokenfield.css">
+    <!-- Google Map -->
+
+
+    <!-- custom -->
+    <script src="{{ asset('module/centre_frm/assets/js/custom.js') }}"></script>
+    <script src="{{ asset('asset-back/js/dropzone.min.js') }}"></script>
+    <script src="http://boutique.ween.tn/module/ecommerce/js/pnotify.custom.min.js"></script>
+    <script src="https://cdn.ckeditor.com/4.6.2/standard/ckeditor.js"></script>
+    {#<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>#}
+    {#<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>#}
+
+
+
+
+
+    {{ include('@Module/Module/centreformation/js.html.twig') }}
+
+
+{% endblock %}
+
+
+</body>
+</html>

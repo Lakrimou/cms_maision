@@ -1,0 +1,72 @@
+##============================maher=============================
+ecommerce_mode_nouveau_produit:
+    path:     /mode/nouveau-produit
+    defaults: { _controller: "ModuleBundle:EcommMode:nouveauProduit" }
+    methods:  [GET, POST]
+
+#============================maher=============================
+
+
+ecommerce_nouveau_produit:
+    path:     /nouveau-produit
+    defaults: { _controller: "ModuleBundle:ModECommerce:nouveauProduit" }
+    methods:  [GET, POST]
+
+
+ecommerce_liste_produit:
+    path:     /liste-produit/{idQQ}
+    defaults: { _controller: "ModuleBundle:ModECommerce:listeProduit" }
+    methods:  [GET, POST]
+
+ecommerce_delete_produit:
+    path:     /delete-produit/{idQQ}/{idProd}
+    defaults: { _controller: "ModuleBundle:ModECommerce:deleteProduit" }
+    methods:  [POST]
+
+ecommerce_edit_produit:
+    path:     /edit-produit
+    defaults: { _controller: "ModuleBundle:ModECommerce:editProduit" }
+    methods:  [GET, POST]
+
+ecommerce_upload_logo:
+    path:     /upload-logo/{idQQ}
+    defaults: { _controller: "ModuleBundle:ModECommerce:uploadImageCroppingLogo" }
+    methods:  [POST]
+
+
+ecommerce_service_add:
+    path:     /service/add
+    defaults: { _controller: "ModuleBundle:ModECommerce:addService" }
+ecommerce_service_show:
+    path:     /service/show/{id}/{pos}
+    defaults: { _controller: "ModuleBundle:ModECommerce:showService" }
+ecommerce_service_remove:
+    path:     /service/delete/{id}/{pos}
+    defaults: { _controller: "ModuleBundle:ModECommerce:deleteService" }
+ecommerce_service_edit:
+    path:     /service/edit/{id}/{pos}
+    defaults: { _controller: "ModuleBundle:ModECommerce:editService" }
+ecommerce_service_update:
+    path:     /service/update/{id}
+    defaults: { _controller: "ModuleBundle:ModECommerce:updateService" }
+
+
+ecommerce_annonce_add:
+    path:     /annonce/add
+    defaults: { _controller: "ModuleBundle:ModECommerce:addAnnonces" }
+ecommerce_annonce_show:
+    path:     /annonce/show/{id}/{idq}
+    defaults: { _controller: "ModuleBundle:ModECommerce:showAnnonces" }
+ecommerce_annonce_remove:
+    path:     /annonce/delete/{id}
+    defaults: { _controller: "ModuleBundle:ModECommerce:deleteAnnonces" }
+ecommerce_annonce_edit:
+    path:     /annonce/edit/{id}
+    defaults: { _controller: "ModuleBundle:ModECommerce:editAnnonces" }
+ecommerce_annonce_update:
+    path:     /annonce/update
+    defaults: { _controller: "ModuleBundle:ModECommerce:updateAnnonces" }
+
+ecommerce_offre_add:
+    path:     /offre/add
+    defaults: { _controller: "ModuleBundle:ModECommerce:addOffre" }

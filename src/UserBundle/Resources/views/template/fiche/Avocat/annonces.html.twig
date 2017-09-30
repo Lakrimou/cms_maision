@@ -1,0 +1,446 @@
+<style>
+
+    .info_section {
+        background: url(../tpl/fiche/images/avocat.jpg) no-repeat;
+        background-size: cover!important;
+    }
+
+
+
+</style>
+<section class="info_section">
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-md-6 col-sm-4"></div>
+            <div class="col-md-6 col-sm-8 right_box">
+                <div class="right_box_inner clearfix padding">
+                    {% if attributes.connected %}
+                        <div class="row">
+                            <button type="button" class="theme-btn button11 btn-style-one pull-right " data-toggle="modal" data-target="#list-information" style="display: block;
+        z-index: 10;
+        position: relative;">Gérer mes informations personnelles
+                            </button>
+                        </div>
+
+
+                    {% endif %}
+                    <div class="row">
+                        {% if attributes["theme"]!=null and  attributes["theme"]["diploma"] is defined  and attributes["theme"]["diploma"]|length>0 %}
+                            <div class="col-md-6 col-sm-6 white_content top20 bottom30">
+                                <i class="fa fa-graduation-cap"></i>
+                                <h3 class="bottom10 top20 " >Diplômes</h3>
+                                {% for diploma in attributes["theme"]["diploma"] %}
+                                    <p class="list_diploma_paragraph"> - {{ diploma.school|capitalize }} ,{{ diploma.name|capitalize }},{{ diploma.date|date("d/m/Y") }}</p>
+
+
+                                {% endfor %}
+
+                            </div>
+                        {% endif %}
+                        {% if attributes["theme"]!=null and  attributes["theme"]["langue"] is defined and attributes["theme"]["langue"]|length>0 %}
+                        <div class="col-md-6 col-sm-6 white_content top20 bottom30">
+                            <i class="fa fa-language"></i>
+                            <h3 class="bottom10 top20 " >Langues</h3>
+                            {% for langue in attributes["theme"]["langue"]   %}
+                                <p class="list_diploma_paragraph" > - {{ langue.langue }}
+
+
+                                    {% endfor %}
+
+                        </div>
+
+                        {% endif %}
+                    </div>
+                    <div class="row">
+
+                        {% if attributes["theme"]!=null and  attributes["theme"]["skill"] is defined and attributes["theme"]["skill"]|length>0 %}
+                            <div class="col-md-6 col-sm-6 white_content top20 bottom30">
+                                <i class="fa fa-black-tie"></i>
+                                <h3 class="bottom10 top20 " >Compétences</h3>
+                                {% for skill in attributes["theme"]["skill"] %}
+                                <p  class="list_diploma_paragraph"> - {{ skill.skill|capitalize }}
+
+
+                                    {% endfor %}
+
+                            </div>
+
+                        {% endif %}
+
+                        {% if attributes["theme"]!=null and  attributes["theme"]["payment"] is defined  and attributes["theme"]["payment"] |length>0 %}
+                            <div class="col-md-6 col-sm-6 white_content top20 bottom30">
+                                <i class="fa fa-credit-card"></i>
+                                <h3 class="bottom10 top20 " >Mode de règlement</h3>
+                                {% for payment in attributes["theme"]["payment"]    %}
+                                <p  class="list_diploma_paragraph"> - {{ payment.payment }}
+
+
+                                    {% endfor %}
+
+                            </div>
+
+
+                        {% endif %}
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="modal fade" id="list-information" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-md" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLong">Modifier mes informations</h5>
+                <a type="a" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </a>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+
+                    <div class="box box-primary col-xs-6 col-sm-6 col-md6">
+                        <div class="box-header row">
+                            <div class="col-md-6">
+                                <h3 class="box-title">Diplômes</h3>
+                                <hr width="200%">
+                            </div>
+                            <div class="col-md-6 ">
+
+                                <button class="btn btn-xs btn-flat btn-primary form_add_information pull-right" href="#" data-toggle="modal" data-target="#add-diploma" data-information="diploma">
+                                    <i class="fa fa-plus"></i>
+                                    <span class="hidden-phone"></span>
+                                </button>
+                            </div>
+
+                        </div>
+                        <div class="row">
+
+                            <div class="col-md-12">
+
+                                <div id="listdiploma">
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                    <div class="box box-primary col-xs-6 col-sm-6 col-md6">
+                        <div class="box-header row">
+                            <div class="col-md-6">
+                                <h3 class="box-title">Compétence</h3>
+                                <hr width="200%">
+                            </div>
+                            <div class="col-md-6 ">
+                                <button class="btn btn-xs btn-flat btn-primary pull-right form_add_information" href="#" data-toggle="modal" data-target="#add-skill" data-information="skill">
+                                    <i class="fa fa-plus"></i>
+                                    <span class="hidden-phone"></span>
+                                </button>
+                            </div>
+
+
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+
+                                <div id="listskill">
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+                <div class="row">
+
+                    <div class="box box-primary col-xs-6 col-sm-6 col-md6">
+                        <div class="box-header row">
+                            <div class="col-md-6">
+                                <h3 class="box-title">Langues</h3>
+                                <hr width="200%">
+                            </div>
+                            <div class="col-md-6">
+
+                                <button class="btn btn-xs btn-flat btn-primary pull-right form_add_information" href="#" data-toggle="modal" data-target="#add-langue" data-information="langue">
+                                    <i class="fa fa-plus"></i>
+                                    <span class="hidden-phone"></span>
+                                </button>
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+
+                                <div id="listlangue">
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+
+                    <div class="box box-primary col-xs-6 col-sm-6 col-md6">
+                        <div class="box-header row">
+                            <div class="col-md-6">
+                                <h3 class="box-title">Mode de règlement</h3>
+                                <hr width="200%">
+                            </div>
+                            <div class="col-md-6">
+
+                                <button class="btn btn-xs btn-flat btn-primary form_add_information pull-right" href="#" data-toggle="modal" data-target="#add-payment" data-information="payment">
+                                    <i class="fa fa-plus"></i>
+                                    <span class="hidden-phone"></span>
+                                </button>
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+
+                                <div id="listpayment">
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+
+
+            </div>
+
+            <div class="modal-footer">
+                <a type="a" class="btn btn-secondary" data-dismiss="modal">Fermer</a>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="modal fade" id="add-diploma" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-md" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="text-center">Modification des données</h2>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+
+                    <div class="col-md-10 col-md-offset-1">
+                        <form id="add_diploma">
+
+
+                            <div class="form-group row element-form">
+
+                                <div class="col-md-3">
+                                    <label class="control-label">Ecole/Institue:</label>
+                                </div>
+
+                                <div class="col-sm-9">
+                                    <input type="text" id="school_update" class="form-control" placeholder="Entrez le nom de l'ecole" name="school" required>
+                                </div>
+                            </div>
+                            <div class="form-group row element-form">
+
+                                <div class="col-md-3">
+                                    <label class="control-label">Diplome</label>
+                                </div>
+
+                                <div class="col-sm-9">
+                                    <input type="text" id="name_update" school_updateclass="form-control" placeholder="Entrez le diplome respectif" name="name" required>
+                                </div>
+                            </div>
+                            <div class="form-group row element-form">
+
+                                <div class="col-md-3">
+                                    <label class="control-label">Date</label>
+                                </div>
+
+                                <div class="bfh-datepicker" id="date_update" data-name="date" data-format="y-m-d"
+                                     aria-required="true"></div>
+                            </div>
+
+
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Annuler</button>
+                <button type="submit" class="btn  btn-primary saveInformation" data-id="" data-information="diploma">Enregistrer</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="add-skill" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-md" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="text-center">Modification des données</h2>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+
+                    <div class="col-md-10 col-md-offset-1">
+                        <form id="add_skill">
+
+
+                            <div class="form-group row element-form">
+
+                                <div class="col-md-3">
+                                    <label class="control-label">Compétences</label>
+                                </div>
+
+                                <div class="col-sm-9">
+                                    <input type="text" id="skill_update" class="form-control" placeholder="Entrez une compétence" name="skill" required>
+                                </div>
+                            </div>
+
+
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Annuler</button>
+                <button type="submit" class="btn  btn-primary saveInformation" data-id="" data-information="skill">Enregistrer</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="add-langue" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-md" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="text-center">Modification des données</h2>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+
+                    <div class="col-md-10 col-md-offset-1">
+                        <form id="add_langue">
+
+
+                            <div class="form-group row element-form">
+
+                                <div class="col-md-2">
+                                    <label class="control-label">Langues:</label>
+                                </div>
+
+                                <div class="col-sm-3">
+
+                                    <select class="js-example-basic-multiple" id="langue_update" name="langue" style="width: 100%">
+                                        <option value="Français">Français</option>
+                                        <option value="Anglais">Anglais</option>
+                                        <option value="Allemand">Allemand</option>
+                                        <option value="autre">Autre</option>
+
+                                    </select>
+
+
+                                </div>
+                            </div>
+
+                            <div class="form-group row element-form" id="row_langue" hidden>
+                                <div class="col-md-2">
+                                    <label class="control-label">Ajoutez une langue:</label>
+                                </div>
+                                <div class="col-sm-3">
+
+                                    <input id="inputLangue" name="langue" disabled>
+                                </div>
+                            </div>
+
+
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Annuler</button>
+                <button type="submit" class="btn  btn-primary saveInformation" data-id="">Enregistrer</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="add-payment" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-md" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="text-center">Modification des données</h2>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+
+                    <div class="col-md-10 col-md-offset-1">
+                        <form id="add_payment">
+
+
+                            <div class="form-group row element-form">
+
+                                <div class="col-md-3">
+                                    <label class="control-label">Modes de règlement:</label>
+                                </div>
+
+                                <div class="col-sm-3">
+                                    <select class="js-example-basic-multiple " id="payment_update" name="payment" style="width: 100%">
+                                        <option value="Chèque">Chèque</option>
+                                        <option value="Carte bancaire">Carte bancaire</option>
+                                        <option value="Espèces">Espèces</option>
+                                        <option value="autre">Autre</option>
+
+                                    </select>
+
+                                </div>
+                            </div>
+                            <div class="form-group row element-form" id="row_payment" hidden>
+                                <div class="col-md-2">
+                                    <label class="control-label">Ajoutez un mode de règlement:</label>
+                                </div>
+                                <div class="col-sm-3">
+
+                                    <input id="inputPayment" name="payment" disabled>
+                                </div>
+                            </div>
+
+
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Annuler</button>
+                <button type="submit" class="btn  btn-primary saveInformation" data-id="">Enregistrer</button>
+
+            </div>
+        </div>
+    </div>
+</div>

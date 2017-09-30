@@ -1,0 +1,61 @@
+{# SCRIPT liste des services data table#}
+<script>
+//    $(document).ready(function () {
+//        $('#addAnnonce').modal('show');
+//    });
+</script>
+<script type="text/javascript">
+    $(function () {
+        $('.datetimepicker1').datetimepicker();
+    });
+</script>
+
+{#script liste des pays#}
+<script>
+    $(document).ready(function () {
+//        $('#addAnnonce').modal('show');
+
+        $.get("{{ path('agence_voyage_liste_pays') }}", {},
+            function (data, status) {
+                $.each($.parseJSON(data), function (index, value) {
+                    $('.placedepart').append($('<option>', {
+                        value: value.libelle,
+                        text: value.libelle
+                    }));
+                });
+
+            }
+        );
+//        $('select').select2();
+    });
+</script>
+{# SCRIPT GET MARK AND MODEL RECURSIVE JSON#}
+<script>
+    $('select').select2();
+    $.get("{{ path('location_voiture_liste_mark') }}", {},
+        function (data, status) {
+            $.each($.parseJSON(data), function (index, value) {
+                $('#marque').append($('<option>', {
+                    value: value.id,
+                    text: value.name
+                }));
+            });
+        }
+    );
+    $('#marque').on('change', function () {
+        var selected = $('#marque option:selected').val();
+
+        $.post("{{ path('location_voiture_liste_model') }}", {id: selected},
+            function (data, status) {
+                $('#modeles option').remove();
+                $.each($.parseJSON(data), function (index, value) {
+
+                    $('#modeles').append($('<option>', {
+                        value: value.id,
+                        text: value.name
+                    }));
+                });
+            }
+        )
+    })
+</script>

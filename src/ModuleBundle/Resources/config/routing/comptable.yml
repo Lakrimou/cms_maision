@@ -1,0 +1,19 @@
+comptable_service_add:
+    path:     /service/add
+    defaults: { _controller: "ModuleBundle:Comptable:addService" }
+comptable_service_show:
+    path:     /service/show/{id}/{pos}
+    defaults: { _controller: "ModuleBundle:Comptable:showService" }
+comptable_service_remove:
+    path:     /service/delete/{id}/{pos}
+    defaults: { _controller: "ModuleBundle:Comptable:deleteService" }
+comptable_service_edit:
+    path:     /service/edit/{id}/{pos}
+    defaults: { _controller: "ModuleBundle:Comptable:editService" }
+comptable_service_update:
+    path:     /service/update/{id}
+    defaults: { _controller: "ModuleBundle:Comptable:updateService" }
+
+comptable_appel_add:
+    path:     /appel
+    defaults: { _controller: "ModuleBundle:Comptable:appelAdd" }

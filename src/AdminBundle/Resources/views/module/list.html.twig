@@ -1,0 +1,24 @@
+{% extends 'back/layout_admin.html.twig' %}
+{% block contant %}
+
+
+    <div id="page-content">
+        <div class="panel">
+            <h1 style="padding:0 30px;">liste Immobilaire</h1>
+
+            <hr>
+            <div class="row padding90">
+
+                {% include 'AdminBundle:module/' ~ category ~ ':list.html.twig' %}
+
+            </div>
+        </div>
+    </div>
+    <script>
+        $(document).ready(function() {
+            $('#example').DataTable();
+        } );
+        </script>
+    <!--===================================================-->
+    <!--End page content-->
+{% endblock %}

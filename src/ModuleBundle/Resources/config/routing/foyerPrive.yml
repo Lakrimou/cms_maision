@@ -1,0 +1,4 @@
+module_foyer_prive_add_annonce:
+    path: /add-annonce-foyer/{idqq}
+    defaults: { _controller: ModuleBundle:FoyerPrive:addAnnonce}
+    methods: [GET, POST]

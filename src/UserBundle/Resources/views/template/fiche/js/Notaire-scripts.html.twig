@@ -1,0 +1,406 @@
+<style>
+    .gri{
+        padding: 12px;
+    }
+    figure.effe ct-layla {
+        height: 344px;
+        overflow: hidden;
+        display: grid;
+        align-items: center;
+
+    }
+    figure.effect-layla img{
+        min-width: 100%;
+        margin: 0 auto;
+    }
+    .gri figure {
+        height: 370px;
+    }
+    .gri img {
+        width: inherit;
+    }
+
+</style>
+<script>
+    $('.form_article').click(function () {
+        module = $(this).data('module');
+        if ((typeof module) == 'string'){
+            module = $(this).data('module').replace(/(\r\n|\n|\r)/g, '<br/>').toString();
+            module = JSON.parse(module);
+        }
+        link = $(this).data('link');
+        $('#Article-edit #AdminBundle_traiteur_titre').val(module.titre);
+        $('#Article-edit #AdminBundle_traiteur_details').val(module.details);
+        CKEDITOR.instances['#AdminBundle_traiteur_details'].setData(module.details);
+        $('#Article-edit #AdminBundle_traiteur_prix').val(module.prix);
+        $('#Article-edit form').attr('action',link);
+
+    })
+
+    $('.view').click(function () {
+
+        module = $(this).data('module');
+        if ((typeof module) == 'string'){
+            module = $(this).data('module').replace(/(\r\n|\n|\r)/g, '<br/>').toString();
+            module = JSON.parse(module);
+        }
+        $('.titre-view').html(module.titre);
+        $('.view-description').html(module.details);
+        $('.prix').html(module.prix);
+        $('.prev-img-view img').attr('src',module.image);
+
+    })
+
+
+    $("#servicess").change(function () {
+        selec = $("#servicess option:selected").text();
+        if (selec == "Choisir autre Service") {
+            $('#title-service-mod').show();
+            $('#service_update').attr('disabled', false);
+        } else {
+            $('#title-service-mod').hide();
+            $('#service_update').attr('disabled', true);
+        }
+    });
+    $("#services").change(function () {
+        selec = $("#services option:selected").text();
+        if (selec == "Choisir autre Service") {
+            $('#title-service-add').show();
+            $('#name-add').attr('disabled', false);
+        } else {
+            $('#title-service-add').hide();
+            $('#name-add').attr('disabled', true);
+        }
+    });
+
+
+    var langues = [];
+    {% if theme["langue"] is defined %}
+    {% for langue in theme["langue"] %}
+    langues.push("{{ langue["langue"] }}");
+    {% endfor %}
+    {% endif %}
+    var payments = [];
+    {% if theme["payment"] is defined %}
+    {% for payment in theme["payment"] %}
+    payments.push("{{ payment["payment"] }}");
+    {% endfor %}
+    {% endif %}
+
+    $(document).ready(function () {
+        getAllInformation();
+        $("#langue_update option").each(function () {
+            option = $(this);
+            $.each(langues, function (key, value) {
+                if (value == option.val()) {
+
+                    option.attr("disabled", "disabled");
+                }
+            });
+
+        });
+        $("#payment_update option").each(function () {
+            option = $(this);
+            $.each(payments, function (key, value) {
+                if (value == option.val()) {
+
+                    option.attr("disabled", "disabled");
+                }
+            });
+
+        });
+        {% if app.user %}
+
+        {% if app.user.phoneNumber %}
+        $("#tel_visit").val("{{ app.user.phoneNumber }}");
+        {% endif %}
+        $("#first_name_visit").val("{{ app.user.username }}");
+
+        $("#last_name_visit").val("{{ app.user.prenom }}");
+        $("#mail_visit").val("{{ app.user.email }}");
+
+
+
+        {% else %}
+        $("#footer_visit").append(" <a href='#' class='header-login' data-toggle='modal' data-target='#modalLoginToVisit'><i class='icon-icons179'></i>S'identifier/ S'inscrire</a>");
+        {% endif %}
+        {% if app.request.cookies.get('reserve')=="true" and app.user %}
+        $('#Demandervisite').modal('show');
+        {% endif %}
+    });
+
+
+    $("#connectToVisit").click(function () {
+
+        var date = new Date();
+        date.setTime(date.getTime() + (5 * 1000));
+        var expires = "; expires=" + date.toGMTString();
+
+        document.cookie = "reserve=true" + expires + "; path=/";
+    });
+
+    $(".saveInformation").click(function () {
+        var id = $(this).data('id');
+        var information = $(this).data('informationName');
+
+        getInformationList(information, id);
+
+
+    });
+    $(document).on("click", ".form_update_information", function () {
+        var information = $(this).data('information');
+
+
+        var informationName = $(this).data('informationname');
+        console.log("herere");
+
+        var id = $(this).data('id');
+
+        $('.saveInformation').data('id', id);
+        $('.saveInformation').data('informationName', informationName);
+
+
+        Object.keys(information).forEach(function (k1) {
+
+            $("#" + k1 + "_update").val(information[k1]);
+
+
+        });
+
+
+    });
+    function escapeSpecialCharacters(string) {
+        return string
+            .replace(/[']/g, "&apos;")
+
+    }
+
+    function stringifyReplacer(key, value) {
+        if (typeof value === 'string') {
+            return escapeSpecialCharacters(value);
+        }
+
+        return value;
+    }
+    $(document).on("click", ".form_add_information", function () {
+
+        var informationName = $(this).data('information');
+
+
+        $('.add_' + informationName).trigger("reset");
+
+        $('.saveInformation').data('id', null);
+        $('.saveInformation').data('informationName', informationName);
+
+
+    });
+
+    function getInformationList(information, id) {
+
+        jsonInput = {};
+        $("#add_" + information + " :input,#add_" + information + " select").each(function () {
+            console.log("here");
+            if ($(this).val() != "") {
+
+                jsonInput[$(this).attr("name")] = $(this).val();
+            }
+
+        });
+
+
+        $.ajax({
+            url: '{{ path('information_new') }}',
+            data: {
+                'theme': {{ themeId }},
+                'jsonInput': jsonInput,
+                'quoiqui':{{ qouiqui.id }},
+                'informationId': id,
+                'informationName': information
+
+            },
+            type: "POST",
+            success: function (response) {
+
+
+                $('#add-' + information).modal('hide');
+
+                arrayresponse = JSON.parse(response);
+
+                updatelistInformation(information, arrayresponse);
+
+
+            },
+            error: function (xhr, status, error) {
+                alert(xhr.responseText);
+            },
+
+
+        });
+    }
+    $(".js-example-basic-multiple").select2();
+    $("#langue_update").change(function () {
+
+
+        var index = $(this).prop('selectedIndex');
+        if ($('#row_langue').is(':visible')) {
+            $('#row_langue').hide();
+            $('#inputLangue').prop('disabled', true);
+        }
+
+        switch (index) {
+
+            case 3:
+
+                $('#inputLangue').prop('disabled', false);
+                $('#row_langue').show();
+
+
+                break;
+
+        }
+
+
+    });
+    $("#payment_update").change(function () {
+
+
+        var index = $(this).prop('selectedIndex');
+        if ($('#row_payment').is(':visible')) {
+            $('#row_payment').hide();
+            $('#inputPayment').prop('disabled', true);
+        }
+
+        switch (index) {
+
+            case 3:
+
+                $('#inputPayment').prop('disabled', false);
+                $('#row_payment').show();
+
+
+                break;
+
+        }
+
+
+    });
+    $(document).on("click", ".delete_information", function () {
+
+        var information = $(this).data('informationname');
+        var id = $(this).data('id');
+
+        $.ajax({
+            url: '{{ path('information_delete') }}',
+            data: {
+                'theme': {{ themeId }},
+
+
+                'informationId': id,
+                'informationName': information
+
+            },
+            type: "POST",
+            success: function (response) {
+
+
+                arrayresponse = JSON.parse(response);
+                updatelistInformation(information, arrayresponse);
+
+
+            },
+            error: function (xhr, status, error) {
+                alert(xhr.responseText);
+            },
+
+
+        });
+
+
+    });
+    function updatelistInformation(information, arrayresponse) {
+        $("#list" + information).empty();
+        var lastValue = "";
+
+        if(JSON.parse(arrayresponse.data)[information].length==0)
+        {
+            $("#list" + information).append("<div class='row'><div class='col-md-6' "+
+
+                "><p style='color: red; ' class='center-block'>Vous n'avez pas encore ajouté des informations,veuillez cliquer sur (+) ci dessus !</p></div></div> ");
+
+        }
+        else {
+            $.each(JSON.parse(arrayresponse.data)[information], function (key, value) {
+
+                    jsonStringResponse = JSON.stringify(value, stringifyReplacer);
+
+
+                    $("#list" + information).append(" <div class='row' >" +
+
+                        "<div class='col-md-6' id='list_result_" + information + "_" + key + "'></div>" +
+                        "<div class='col-md-6' id='list_actions_" + information + "_" + key + "' >" +
+                        "<a  href='#' class=' btn btn-danger btn-xs btn-flat pull-right spaced delete_information' data-id='" + key + "' data-informationname=" + information + "><span class='fa fa-trash' ></span></a>" +
+
+                        "</div>" +
+                        "</div><hr width='50%'>");
+
+                    if (information == "diploma" || information == "skill") {
+                        $("#list_actions_" + information + "_" + key).append("<a  href='#' data-toggle='modal' class=' btn btn-success btn-xs btn-flat pull-right spaced form_update_information' data-target='#add-" + information + "' data-information ='" + jsonStringResponse + "' data-id=" + key + " data-informationname=" + information + ">  <span class='fa fa-pencil'></span></a>"
+                        );
+
+                    }
+
+
+                    $.each(value, function (keyValue, valueValue) {
+
+                        lastValue = valueValue;
+                        $("#list_result_" + information + "_" + key).append("<p>"+valueValue+"</p>");
+                        $('#' + information + '_update option[value="' + valueValue + '"]').attr("disabled", "disabled");
+
+
+                    });
+                }
+            );
+        }
+
+
+        $('#' + information + '_update option[value="' + lastValue + '"]').attr("disabled", "disabled");
+        $('#add_' + information).trigger("reset");
+
+    }
+    function getAllInformation() {
+
+        var informations = ["diploma", "skill", "payment", "langue"];
+
+        $.ajax({
+            url: '{{ path('all_informations') }}',
+            data: {
+                'theme': {{ themeId }}
+
+
+
+            },
+            type: "POST",
+            success: function (response) {
+
+
+                arrayresponse = JSON.parse(response);
+                $.each(informations, function (key, value) {
+                    updatelistInformation(value, arrayresponse);
+
+                });
+
+
+
+
+
+            },
+            error: function (xhr, status, error) {
+                alert(xhr.responseText);
+            },
+
+
+        });
+    }
+
+
+</script>

@@ -1,0 +1,427 @@
+{% set tab=['#a1ad25','#964425','#798722','#f6bf00'] %}
+
+{# Section Service #}
+<section id="section-services" class="we_are bg_light padding">
+
+
+    <a herf="" data-toggle="modal" data-target="#etre_appeler" style="position: fixed;top: 50%;right:0;font-size: 20px;
+    z-index: 1;" class="btn_fill_about btn btn-default pull-right">Être rappelé</a>
+
+    {% if attributes.connected %}
+        <div class="row">
+            <div class="pull-righ" style="    margin-right: 24px;">
+                <div data-step="3" data-intro="This is a tooltip!" class="pull-right margin-bott-40">
+                    <button type="button" class="theme-btn button11 btn-style-one pull-right" data-toggle="modal"
+                            data-target="#listMissions">Gérer cette section
+                    </button>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+    <div class="container">
+
+        <div class="row">
+            <div class="col-md-10">
+                <h2 class="text-uppercase">Nos <span class="color_red">services</span></h2>
+                <div class="line_1"></div>
+                <div class="line_2"></div>
+                <div class="line_3"></div>
+            </div>
+
+
+        </div>
+        {% if mission.service is defined %}
+            {% set arraymission=mission.service %}
+
+            <div class="row">
+                {% for b in arraymission|sort|reverse %}
+
+                    {% if (arraymission|length == 1) %}
+                        <div class="col-md-4 col-sm-4 col-xs-12"></div>
+                    {% endif %}
+                    {% if (arraymission|length == 2) and (loop.index == 1) %}
+                        <div class="col-md-2 col-sm-2 col-xs-12"></div>
+                    {% endif %}
+
+
+                    <div class=" col-md-4 col-sm-4 top40 " style="min-height: 380px;">
+                        <div class="block-service block-service-border margin15 pad15" style="background: white;height: 325px;border: 10px solid; border-radius: 20px; box-shadow: 2px 2px 2px 2px #000000;">
+                            <div class="row">
+                                <div class="col-md-12 text-center">
+                                    <span class="icon-shortcode">
+                                    <i class=" fa fa-car" aria-hidden="true"></i>
+                                    </span>
+                                </div>
+                                <h3 class="serviceTitle text-center pad15" style="font-size: 21px">
+                                    {%  if b.mission is defined %}{{ b.mission }}<br>{%  endif %}
+                                </h3>
+                                <div class="clearfix">
+                                    <div class="separator" style="width: 100px;border-bottom-width: 2px; "></div>
+                                </div>
+                                <div class="pargraphe">
+                                    {%  if b.detail is defined %}{{  b.detail|slice(0,40)|raw }}..{%  endif %}
+                                </div>
+                            </div>
+
+                            <div class="text-center ">
+                                <a data-toggle="modal" data-target="#lireplus" id="savoirPlus" data-idqq="{{ attributes.quoiqui.id }}"
+                                   data-idServ="{{ b.idserv }}"
+                                   class="btn-default btn-lg  suite  top20  lire_plus" style="cursor: pointer;">En
+                                    savoir plus</a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+
+        {% endif %}
+    </div>
+
+</section>
+{# Liste des services #}
+<div class="modal fade" id="listMissions" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Liste des Services</h4>
+            </div>
+            <div class="modal-body">
+                <table class="table dataTable table-striped table-bordered " cellspacing="0" width="100%">
+                    <thead>
+                    <tr>
+                        {#<th>Image</th>#}
+                        <th>Les attributions</th>
+
+
+                        <th>Modifier</th>
+                        <th>Supprimer</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    {% if mission.service is defined %}
+                        {% set arraymission=mission.service %}
+                        {% for b in arraymission|sort|reverse %}
+                            {#{% for b in a %}#}
+                            <tr data-td="{{ b.idserv }}">
+                                <td>{{ b.mission }}</td>
+                                <td>
+                                    <a href="#" class=" btn btn-info a-btn-slide-text edit_huissier"
+                                       data-serv="{{ b.idserv }}"
+                                       data-id="{{ attributes.quoiqui.id }}" data-toggle="modal"
+                                       data-target="#editMission">
+
+                                        <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                                        <span><strong>Modifier</strong></span>
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href="{{ path('module_spa_supprim_services',{"idqq": attributes.quoiqui.id,"idserv":b.idserv }) }}"
+                                       class=" btn btn-danger a-btn-slide-text service_suprim"
+                                       onclick="clickOffConfirmed = confirm('Vous voulez le  supprimer ?');">
+                                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                        <span><strong>Supprimer</strong></span>
+                                    </a>
+                                </td>
+                            </tr>
+                            {#{% endfor %}#}
+                        {% endfor %}
+                    {% endif %}
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Fermer</button>
+                <button type="button" class="btn btn-primary addmissions" data-toggle="modal" data-target="#addMission"
+                >Ajouter un service
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+{# Formulaire d'ajout d'un Service #}
+<div class="modal fade" id="addMission" role="dialog">
+    <div class="modal-dialog modal-md">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <h4 class="modal-title">Ajouter nouveau service</h4>
+            </div>
+            <div class="modal-body">
+                <form id="addServicess" method="POST"
+                      action="{{ path('chauffeur_add_service',{"idqq":attributes.quoiqui.id}) }}"
+                      enctype="multipart/form-data">
+
+                    <input type="hidden" name="idserv" value="{{ uniqueId() }}">
+                        <div class="form-group">
+                            <label for="serviceselect" class="control-label">Service disponibles</label>
+                            <select class="selectpicker form-control selectOption" id="serviceselect" name="mission"
+                                    required="required">
+                                <option disabled selected>Sélectionner un service....</option>
+                                <option value="autre" style=" font-weight: bold;  font-weight: 900;">Ajouter nouveau
+                                    service
+                                </option>
+                                <option value="Demande de devis">Demande de devis</option>
+
+                                {#{% for k,a in  filterListServiceAmbu(attributes) %}
+                                    <option value='{{ k }}'>{{ k }}</option>
+                                {% endfor %}#}
+                            </select>
+                        </div>
+                        <div class="form-group ">
+                            <input type="text" name="autres" id="otherServices" class=" form-control otherSelected"
+                                   placeholder="ajoutre autre service">
+                            <span id="idError" class="errormsg" style="color:red;"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-12">Description</label>
+                            <textarea placeholder="Entrer la description.." rows="3"
+                                      class="form-control textarea ckeditor"
+                                      name="detail" required="required"></textarea>
+                        </div>
+                        <div class="col-sm-12 form-group">
+                            <label class="col-md-12">Choisissez une photo</label>
+                            <input autocomplete="off" class="form-control "
+                                   name="file" type="file" required="required"
+                                   placeholder="choisissez_image" data-items="8"/>
+                        </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Fermer</button>
+                <button type="submit" id="addServices" class=" btn btn-primary " data-target="modifier"
+                        data-selector="addServicess">
+                    Enregistrer
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+{# Détail de service #}
+
+<div class="modal fade" id="lireplus" role="dialog">
+    <div class="modal-dialog modal-md">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            {#<div class="modal-header">#}
+            <button type="button" class="close" data-dismiss="modal"
+                    style="margin-top: 15px; ;margin-right:32px;">&times;</button>
+
+            {#</div>#}
+            {#<div id="header" class="modal-header " style="text-align: center;font-size: 27px;color: {{ random(tab) }}">#}
+            {#<button type="button" class="close" data-dismiss="modal">&times;</button>#}
+
+            {#</div>#}
+            <div class="modal-body">
+                <div id="news-section-1">
+
+                    <div class="row">
+                        <div style="text-align: center">
+                            <span id="servamb" class="service-details-titre color_red G_titre"></span>
+                            {#<h3 class="text-uppercase" id="servamb"></h3>#}
+                        </div>
+                        <div class="col-md-12 col-md-offset-5 col-xs-12 col-xs-offset-3">
+
+
+                            <div class="line_1" style="width:180px;"></div>
+                            <div class="line_2"></div>
+                            <div class="line_3"></div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+
+                            <div class="col-md-6">
+
+                                <input type="hidden" id="idImgamb" value="">
+                                <div class="col-md-12 ">
+                                    <img id="AmbImg" src="" class="img-responsive" style="width: 100%">
+                                    {#<img src="http://logicsforest.com/ideahomes_demo_files/images/property-d-1-1.jpg" class="img-responsive" alt=""/>#}
+                                </div>
+
+
+                            </div>
+                            <div class="col-md-6 buttonsModal">
+
+                                <div class="col-xs-12 top40">
+                                    <h3 class="text-uppercase bottom30">Description <span
+                                                class="color_red"> Détaillé</span></h3>
+                                    <p class="bottom30" id="ambdetail"></p>
+                                    {#<span id="link1"></span>#}
+                                    {#<p id="lire_suite"></p>#}
+
+                                </div>
+                                <button data-toggle="modal" data-target="#modalSectionRappeler" style="font-size: 22px;"
+                                        class="col-md-12 col-xs-12 spacontact top10 btn btn-danger">
+                                    <i class="fa fa-phone"aria-hidden="true" style="margin-right: 10px;"></i>Demande de rappel
+                                </button>
+                                <a href="tel:{{ attributes.quoiqui.phone }}" style="font-size: 22px;"
+                                   class="col-md-12 col-xs-12 spacontact top10 btn btn-danger"> Contacter Nous:  <i
+                                            class="fa fa-phone"
+                                            aria-hidden="true"></i> {{ attributes.quoiqui.phone }}
+                                </a>
+                                <button data-toggle="modal" data-target="#devis" id ="demande" style="font-size: 22px;"
+                                        class="col-md-12 col-xs-12 spacontact top10 btn btn-danger">
+                                    <i class="fa fa-calendar"aria-hidden="true" style="margin-right: 10px;"></i>Demande de devis
+                                </button>
+
+                            </div>
+
+
+                        </div>
+                    </div>
+
+                </div>
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Fermer</button>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+{# Demande de devis #}
+<div class="modal fade" id="devis" role="dialog">
+    <div class="modal-dialog modal-lg">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Demande de devis</h4>
+            </div>
+            <div class="modal-body">
+                {% if app.user==null %}
+                    <div class="text-center" style="padding: 15px;">
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalLogin1">S'identifier</button>
+
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalLogin1">S'inscrire</button>
+                    </div>
+                {% endif %}
+                <div class="container-fluid">
+                    <form action="#" id="">
+
+                        <input type="hidden" name="idserv" value="{{ uniqueId() }}">
+                        <div class="col-lg-6 col-md-6">
+                            <div class="form-group">
+                                <label for="name" class="control-label">Nom et Prénom</label>
+                                <input type="text" class="form-control" name="nomPrenom" id="nomPrenom">
+                            </div>
+                            <div class="form-group">
+                                <label for="societe" class="control-label">Nom de votre de société</label>
+                                <input id="societe" type="text" class="form-control" name="societe">
+                            </div>
+                            <div class="form-group">
+                                <label for="telephone" class="control-label">Téléphone</label>
+                                <input type="tel" class="form-control" id="telephone" name="telephone">
+                            </div>
+                            <div class="form-group">
+                                <label for="email" class="control-label">Email</label>
+                                <input type="email" class="form-control" id="email" name="email">
+                            </div>
+                            <div class="form-group">
+                                <label for="adresse" class="control-label">Adresse</label>
+                                <input type="text" class="form-control" id="adresse" name="adresse">
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6">
+                            <div class="form-group"><label for="type" class="control-label">Type de document</label>
+                                <select type="text" name="type" id="type" class="form-control">
+                                    <option value="Affiches">Affiches</option>
+                                    <option value="Flyers">Flyers</option>
+                                    <option value="cartes de visites">cartes de visite</option>
+                                    <option value="cartes de voeux">cartes de voeux</option>
+                                    <option value="Invitations">Invitations</option>
+                                    <option value="cartes de fidelité">cartes de fidelité</option>
+                                    <option value="cartes postales">cartes postales</option>
+                                    <option value="Calendriers">Calendriers</option>
+                                    <option value="Journaux">Journaux</option>
+                                    <option value="Blocs notes">Blocs notes</option>
+                                    <option value="Brochures">Brochures</option>
+                                    <option value="Dépliant">Dépliant</option>
+                                    <option value="Entête de lettre">Entête de lettre</option>
+                                    <option value="Enveloppes">Enveloppes</option>
+                                    <option value="Catalogues">Catalogues</option>
+                                    <option value="Chemises">Chemises</option>
+                                    <option value="Livres">Livres</option>
+                                    <option value="Magazines">Magazines</option>
+                                    <option value="Étiquettes">Étiquettes</option>
+                                    <option value="Autocollant">Autocollant</option>
+                                    <option value="Billetterie">Billetterie</option>
+                                    <option value="Factures">Factures</option>
+                                    <option value="Emballages">Emballages</option>
+                                    <option value="Plaquette commerciale">Plaquette commerciale</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="nbrCopie" class="control-label">Nombre de copies</label>
+                                <input type="number" id="nbrCopie" class="form-control" name="nbrCopie">
+                            </div>
+                            <div class="form-group">
+                                <label for="formatDoc" class="control-label">Format du document</label>
+                                <select id="formaDoc" class="form-control" name="formatDoc" type="text">
+                                    <option value="A0 (841x1189 mm)">A0 (841x1189 mm)</option>
+                                    <option value="A1 (594x841 mm)">A1 (594x841 mm)</option>
+                                    <option value="A2 (420x594 mm)">A2 (420x594 mm)</option>
+                                    <option value="A3 (297x420 mm)">A3 (297x420 mm)</option>
+                                    <option value="A4 (210x297 mm)">A4 (210x297 mm)</option>
+                                    <option value="A5 (148x210 mm)">A5 (148x210 mm)</option>
+                                    <option value="A6 (105x148 mm)">A6 (105x148 mm)</option>
+                                    <option value="A7 (74x105 mm)">A7 (74x105 mm)</option>
+                                    <option value="A8 (52x75 mm)">A8 (52x75 mm)</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="typeImpress" class="control-label">Type d'impression</label>
+                                <select id="typeImpress" class="form-control" name="typeImpress" type="text">
+                                    <option value="Jet d'encre">Jet d'encre</option>
+                                    <option value="Électrophotographie ou xérographie (Laser)">Électrophotographie ou xérographie (Laser)</option>
+                                    <option value="Impression thermique">Impression thermique</option>
+                                    <option value="Impression 3D">Impression 3D</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="typePapier" class="control-label">Type de papier</label>
+                                <select id="typePapier" class="form-control" name="typePapier" type="text">
+                                    <option value="Papier couché de 70g/m² à 540g/m²">Papier couché de 70g/m² à 540g/m²</option>
+                                    <option value="Papier offset de 60g/m² à 320g/m²">Papier offset de 60g/m² à 320g/m²</option>
+                                    <option value="Papier autocopiant">Papier autocopiant</option>
+                                    <option value="Papiers de création de 70g/m² à 320g/m²">Papiers de création de 70g/m² à 320g/m²</option>
+                                    <option value="Papiers rigides de 180g/m² à 300g/m²">Papiers rigides de 180g/m² à 300g/m²</option>
+                                </select>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="loading text-center">
+                        <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                    <div class="text-center success">
+                        <i class="fa fa-check-circle-o fa-3x" aria-hidden="true"></i>
+                        <p>Vous serez contacter très prochainement</p>
+                    </div>
+                </div>
+
+                <div class="modal-footer" id="footer_rappeler">
+                    <button type="button" class="btn btn-primary " id="getDevis">Demande de devis</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Fermer</button>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div></div>

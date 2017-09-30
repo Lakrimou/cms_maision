@@ -1,0 +1,89 @@
+
+<style>
+
+    /* titre*/
+
+    h2,  li strog .icon, .sec-title h2 strong, .sec-title h2, .contact-section h2 {
+        color: {% if theme.color is defined %}{{ theme.color.titre }};
+    {% endif %}
+    }
+
+    /*sous titre*/
+
+      {#h4 {#}
+        {#color: {% if theme.color is defined %}{{ theme.color.Soustitre }};#}
+    {#{% endif %}#}
+    {#}#}
+
+    /* boutton*/
+
+    .theme-btn btn-style-one, button, .theme-btn {
+
+        background: {% if theme.color is defined %}{{ theme.color.bouton }};
+    {% endif %}
+    }
+
+    .text, p {
+
+        color: {% if theme.color is defined %}{{ theme.color.Text }};
+    {% endif %}
+    }
+
+    /* background */
+
+    .header-style-one .logo:before, .btn-style-one, .theme_bg_color {
+
+        background: {% if theme.color is defined %}{{ theme.color.bouton }};
+    {% endif %}
+
+    }
+    #propo{
+        background: {% if theme.color.background.about is defined %}{{ theme.color.background.about }};
+    {% endif %};
+    }
+    .proprety{
+        background: {% if theme.color.background.about is defined %}{{ theme.color.background.annone }};
+    {% endif %};
+    }
+    .property-details{
+        background: {% if theme.color.background.about is defined %}{{ theme.color.background.annone }};
+    {% endif %};
+    }
+    .horaires-section{
+        background: {% if theme.color.background.horaires is defined %}{{ theme.color.background.horaires }};
+    {% endif %};
+    }
+    .about-section,#services{
+        background: {% if theme.color.background.services is defined %}{{ theme.color.background.services }};
+    {% endif %};
+    }
+    .about-section,#services{
+        background: {% if theme.color.background.services is defined %}{{ theme.color.background.services }};
+    {% endif %};
+    }
+    .gallery-section{
+        background: {% if theme.color.background.gallery is defined %}{{ theme.color.background.gallery }};
+    {% endif %};
+    }
+    .section-contact{
+        background: {% if theme.color.background.gallery is defined %}{{ theme.color.background.gallery }};
+        background-image: none;
+    {% endif %};
+    }
+
+
+    {#/* color */#}
+    {#.btn-style-one:hover, .btn-style-two:hover, .header-style-one ,.theme_color{#}
+
+    {#color:{% if theme.color is defined %}{{ theme.color }};{% endif %}#}
+
+    {#}#}
+
+    {#.modal-content {#}
+        {#border-color: {% if theme.color is defined %}{{ theme.color.Soustitre }};#}
+    {#{% endif %};#}
+    {#}#}
+    .gallery-section .image-box .inner-box{
+        background: transparent;
+    }
+</style>

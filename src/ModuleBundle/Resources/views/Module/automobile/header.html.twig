@@ -1,0 +1,424 @@
+{% set link = "" %}
+ {% set name="" %}
+                                        {% set email="" %}
+                                        {% set address="" %}
+<header class="page-header" role="banner">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-md-3 col-sm-12">
+                <div class="logo "><a href="#home" title="AutoImage - Single Page Responsive HTML Template"> <img src="{{ asset('uploads/image/') }}{{ iduser }}/{{ qouiqui.id }}/avatar/avatar.jpg" alt="Vente voiture"/> </a></div>
+            </div>
+            <div class="col-sm-12 col-md-9 col-lg-9">
+                <nav class="main-nav clearfix" role="navigation">
+
+
+                    <ul id="main-menu" class="menu main-menu hidden-xs">
+                        {% if app.user %}
+                            <li><a href="#" class="btn-primary">Bienvenu {{ app.user.username }}</a></li>
+                        {% endif %}
+                        <li class="active"><a href="#home">Accueil</a></li>
+                        <li><a href="#about">A propos</a></li>
+                        <li><a href="#Offres">Offres</a></li>
+                        <li><a href="#contact">Contactez nous</a></li>
+                        {% if app.user %}
+                            <li>
+
+                                <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Compte
+                                    <span class="caret"></span></button>
+                                <ul>
+                                    {% if app.user.id == qouiqui.user.id %}
+                                        {% set personalInformation="personal-infomations" %}
+                                    {% else %}
+                                        {% set personalInformation="personal-infomations-simple-user" %}
+                                        {% set link = path('update-profile-simple-user',{'id':app.user.id}) %}
+                                        {% set name=app.user.userName %}
+                                        {% set email=app.user.email %}
+                                        {% set address=app.user.adress %}
+                                    {% endif %}
+                                    <li><a href="#" data-toggle="modal" data-target="#{{ personalInformation }}" class="personalInformation" data-link="{{ link }}" data-informations='{"name":"{{ name }}","email":"{{ email }}","address":"{{ address }}"}'>Informations personnelle</a></li>
+                                    <!--<li><a href="#" data-toggle="modal" data-target="#changePassword" class="change-password">Changer mot de passe</a></li>
+-->
+                                    <li><a href="{{ path("fos_user_security_logout") }}">Se déconnecter</a></li>
+                                </ul>
+                            </li>
+                        {% else %}
+
+                            <li><a href="#" data-toggle="modal" data-target="#connexion">Se connecter</a></li>
+                        {% endif %}
+
+                    </ul>
+                    <div id="mobile-menu" class="visible-xs">
+                        <div id="dl-menu" class="dl-menuwrapper menu">
+                            <button class="dl-trigger" title="Toggle Site Menu"><i class="icomoon-reorder"></i></button>
+                            <ul class="dl-menu">
+                                <li class="active"><a href="#home">Accueil</a></li>
+                                <li><a href="#about">A propos</a></li>
+                                <li><a href="#Offres">Offres</a></li>
+                                <li><a href="#contact">Contactez nous</a></li>
+                                {% if app.user %}
+                                    <li>
+                                        <div class="dropdown">
+                                            <ul class="dropdown-menu">
+                                                <li><a href="{{ path("fos_user_security_logout") }}">Se déconnecter</a></li>
+
+                                            </ul>
+                                        </div>
+                                    </li>
+                                {% else %}
+
+                                    <li><a href="#" data-toggle="modal" data-target="#connexion">Se connecter</a></li>
+                                {% endif %}
+                            </ul>
+                        </div>
+
+                        <!-- /dl-menuwrapper -->
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </div>
+
+</header>
+{#===========================connection modal============================#}
+
+<div id="connexion" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Connection</h4>
+            </div>
+            <div class="modal-body">
+                <div class="col-md-12 btn-group btn-group-justified hidden-xs hidden-sm social" role="group">
+                    <div class="facebook btn-group col-sm-6" role="group">
+                        <a class="facebook-btn btn btn-primary" href="/login/facebook">
+                            <span>Connecter avec Facebook</span>
+                        </a>
+                    </div>
+                    <div class="btn-group col-sm-6" role="group">
+                        <a class="btn btn-danger" href="/login/google">
+                            <span>Connecter avec Google</span>
+                        </a>
+                    </div>
+                </div>
+                <form action="/login_check" method="post">
+                    <div class="form-group">
+                        <input type="hidden" name="_csrf_token" value="Kk4KcJ-i6lPzu7pUx0wOja7L0g5uu9CI6uWJYDGVT4Q">
+                    </div>
+                    <div class="form-group">
+                        <label for="username">Login</label>
+                        <input type="text" id="username" name="_username" value="" required="required" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Mot de passe</label>
+                        <input type="password" id="password" name="_password" required="required" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <input type="checkbox" id="remember_me" name="_remember_me" value="on">
+                        <label for="remember_me">Se souvenir de moi!</label>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" id="_submit" name="_submit" value="Se connecter" class="form-control btn btn-warning">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+{#===========================end connection modal============================#}
+
+<div id="personal-infomations" class="modal fade" role="dialog">
+    <div class="modal-dialog" style=" width: 50%;">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+
+            <div class="wrapper">
+                <form id="update_personal_informations" name="adminbundle_qouiqui" action="{{ path('update-profile',{'id':qouiqui.id}) }}" method="post">
+                    <div class="form-group row">
+                        <div class="col-md-1">
+
+                        </div>
+                        <div class="col-md-3">
+                            <label class="control-label ">Nom</label>
+                        </div>
+                        <div class="col-sm-5">
+                            <input type="text" class="form-control" name="firstName" value="{{ qouiqui.firstName }}">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-1">
+
+                        </div>
+                        <div class="col-md-3">
+                            <label class="control-label ">Prenom</label>
+                        </div>
+                        <div class="col-sm-5">
+                            <input type="text" class="form-control" name="lastName" value="{{ qouiqui.lastName }}">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-1">
+
+                        </div>
+                        <div class="col-md-3">
+                            <label class="control-label ">Site web</label>
+                        </div>
+                        <div class="col-sm-5">
+                            <input type="text" class="form-control" name="website" value="{{ qouiqui.website }}">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-1">
+
+                        </div>
+                        {% set sociaux= jsonDecod(qouiqui.sociaux) %}
+                        <div class="col-md-3">
+                            <label class="control-label ">Facebook</label>
+                        </div>
+                        <div class="col-sm-5">
+                            <input type="text" class="form-control" name="facebook" value="{{ sociaux["facebook"] }}">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-1">
+
+                        </div>
+                        <div class="col-md-3">
+                            <label class="control-label ">Tweeter</label>
+                        </div>
+                        <div class="col-sm-5">
+                            <input type="text" class="form-control" name="twitter" value="{{ sociaux["twitter"] }}">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-1">
+
+                        </div>
+                        <div class="col-md-3">
+                            <label class="control-label ">Google</label>
+                        </div>
+                        <div class="col-sm-5">
+                            <input type="text" class="form-control" name="google" value="{{ sociaux["google"] }}">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-1">
+
+                        </div>
+                        <div class="col-md-3">
+                            <label class="control-label ">Linkedin</label>
+                        </div>
+                        <div class="col-sm-5">
+                            <input type="text" class="form-control" name="linkedin" value="{{ sociaux["linkedin"] }}">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+
+                        <div class="col-md-8 ">
+
+
+                        </div>
+                        <div class="col-md-2 ">
+                            <input class="btn btn-main btn-primary btn-lg" type="submit" value="Enregistrer">
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+<div id="personal-infomations-simple-user" class="modal fade" role="dialog">
+    <div class="modal-dialog" style=" ">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+
+            <div class="wrapper">
+                <form id="update_personal_informations_simple_user" name="adminbundle_qouiqui" action="" method="post">
+                    <div class="form-group row">
+                        <div class="col-md-1">
+
+                        </div>
+                        <div class="col-md-3">
+                            <label class="control-label ">Pseudo</label>
+                        </div>
+                        <div class="col-sm-5">
+                            <input type="text" class="form-control" name="firstName" id="pseudo_simple_user" value="">
+                        </div>
+                    </div>
+
+
+                    <div class="form-group row">
+                        <div class="col-md-1">
+
+                        </div>
+                        <div class="col-md-3">
+                            <label class="control-label ">Email</label>
+                        </div>
+                        <div class="col-sm-5">
+                            <input type="text" class="form-control" name="email" id="email_simple_user" value="">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-1">
+
+                        </div>
+                        <div class="col-md-3">
+                            <label class="control-label ">Adresse</label>
+                        </div>
+                        <div class="col-sm-5">
+                            <input type="text" class="form-control" name="address" value="" id="address_simple_user" value="">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+
+                        <div class="col-md-8 ">
+
+
+                        </div>
+                        <div class="col-md-2 ">
+                            <input class="btn btn-main btn-primary btn-lg" type="submit" value="Modifier">
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+<div id="changePassword" class="modal fade" role="dialog">
+    <div class="modal-dialog" style=" ">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+
+            <div class="wrapper" id="formChangePassword">
+
+
+            </div>
+
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div id="color-block" class="modal fade" role="dialog">
+    <div class="modal-dialog" style=" width: 50%;">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+
+            <div class="wrapper">
+                <a class="btn btn-default" href="#" id="cp4">Couleur Block Apropos</a>
+                </br>
+                <a href="#" id="cp4">Couleur Block Liste des voitures</a>
+                </br>
+                <a href="#" id="cp4">Couleur block voitures récentes</a>
+                </br>
+                <a href="#" id="cp4">Couleur block Contact</a>
+                </br>
+
+            </div>
+
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script>
+    $(function () {
+        $('#cp4').colorpicker().on('changeColor', function (e) {
+            $.ajax({
+                url: '{{ path('change_color_theme') }}',
+                data: {
+
+                    'quoiqui': {{ qouiqui.id }},
+                    'color': e.color.toString(
+                        'rgba'
+                    ),
+
+
+                },
+                type: "POST",
+                success: function (response) {
+                    document.documentElement.style.setProperty('--base', e.color.toString(
+                        'rgba'
+                        )
+                    );
+
+
+                },
+                error: function (xhr, status, error) {
+                    alert(xhr.responseText);
+                },
+
+
+            });
+
+
+        });
+    });
+
+    $(document).on("click", ".personalInformation", function () {
+        var link = $(this).data('link');
+        var informations = $(this).data('informations');
+        console.log(informations.name);
+        $("#update_personal_informations_simple_user").attr("action", link);
+        $("#pseudo_simple_user").val(informations["name"]);
+
+        $("#email_simple_user").val(informations["email"]);
+
+        $("#address_simple_user").val(informations["address"]);
+
+
+    });
+    $(document).on("click", ".change-password", function () {
+        $.ajax({
+            url: '{{ path('update_password') }}',
+
+            type: "POST",
+            success: function (response) {
+                $("#formChangePassword").html(response);
+
+
+            },
+            error: function (xhr, status, error) {
+                alert(xhr.responseText);
+            },
+
+
+        });
+
+    });
+
+</script>
+

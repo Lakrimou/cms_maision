@@ -1,0 +1,181 @@
+<section id="services-section" class="services-section" style="background-color: #fafafa;">
+    <div class="auto-container">
+        <!--Sec Title-->
+        {% if connected %}
+            <div class="pull-right margin-bott-40">
+                <button type="button" class="theme-btn btn-style-one blue" data-toggle="modal"
+                        data-target="#editservice"
+                        style="  z-index: 20; position: relative; ">modifier Les Sevices
+                </button>
+            </div>
+        {% endif %}
+        <div class="sec-title">
+            <h2>
+                <N>NOS SERVICES</N>
+            </h2>
+            <div class="text">The Love Boat promises something for everyone now to beat every of just one</div>
+        </div>
+
+        <div class="outer-box" style="background-image: url{{ asset('module/ambulance/images/background/dotted-map.png') }};">
+            <div class="row clearfix">
+
+                <!--Left Column-->
+                <div class="left-column col-md-4-offset-2 col-sm-6 col-xs-12 pull-left">
+                    <!--Service Block One-->
+                    <div class="service-block-two">
+                        <div class="inner-box">
+                            <div class="icon-box">
+                                <span class="icon flaticon-shield"></span>
+                            </div>
+                            <h3><a href="services-single.html">SECURITY CONSULTING</a></h3>
+                            <div class="text">The Love Boat promises something for <br> every the beat of just one drum.</div>
+                        </div>
+                    </div>
+
+                    <!--Service Block One-->
+                    <div class="service-block-two">
+                        <div class="inner-box">
+                            <div class="icon-box">
+                                <span class="icon flaticon-policeman-1"></span>
+                            </div>
+                            <h3><a href="services-single.html">SECURITY CONSULTING</a></h3>
+                            <div class="text">The Love Boat promises something for <br> every the beat of just one drum.</div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!--Right Column-->
+                <div class="right-column col-md-4 col-sm-6 col-xs-12 pull-right">
+                    <!--Service Block Two-->
+                    <div class="service-block-two">
+                        <div class="inner-box">
+                            <div class="icon-box">
+                                <span class="icon flaticon-eye"></span>
+                            </div>
+                            <h3><a href="services-single.html">CLOSE PROTECTIONS</a></h3>
+                            <div class="text">The Love Boat promises something for <br> every the beat of just one drum.</div>
+                        </div>
+                    </div>
+
+                    <!--Service Block Two-->
+                    <div class="service-block-two">
+                        <div class="inner-box">
+                            <div class="icon-box">
+                                <span class="icon flaticon-padlock"></span>
+                            </div>
+                            <h3><a href="services-single.html">PRIVATE SECURITY</a></h3>
+                            <div class="text">The Love Boat promises something for <br> every the beat of just one drum.</div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!--Image Column-->
+
+
+            </div>
+        </div>
+
+    </div>
+</section>
+{% if connected %}
+    <!-- Modal -->
+    <div id="editservice" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-lg">
+
+            <!-- Modal content-->
+
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Modifier les information</h4>
+                </div>
+                <div class="modal-body">
+                    <form id="edit_section1" method="POST" action="{{ path('section1') }}">
+
+                        <div class=" row">
+                            <div class="col-md-6">
+                                <div class="col-md-12">
+                                    <h4>Services - 1</h4>
+
+                                    <input type="text" name="section1[titre1]" class="form-control"
+                                           value="{% if theme is empty %}Titres Services{% else %}{{ theme.section.titre1 }}{% endif %}">
+                                    <input type="text" name="id_qq" class="hidden" value="{{ qouiqui.id }}">
+
+                                </div>
+                                <div class="col-md-12">
+
+                                            <textarea name="section1[text1]" class="edit" cols="30" rows="10">
+                                                {% if theme is empty %}Description Service{% else %}{{ theme.section.text1 }}{% endif %}
+                                            </textarea>
+
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="col-md-12">
+                                    <h4>Services - 2</h4>
+
+                                    <input type="text" name="section1[titre2]" class="form-control"
+                                           value="{% if theme is empty %}Titres Services{% else %}{{ theme.section.titre2 }}{% endif %}">
+                                    <input type="text" name="id_qq" class="hidden" value="{{ qouiqui.id }}">
+
+                                </div>
+                                <div class="col-md-12">
+
+                                            <textarea name="section1[text2]" class="edit" cols="30" rows="10">
+                                                {% if theme is empty %}Description Service{% else %}{{ theme.section.text2 }}{% endif %}
+                                            </textarea>
+
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="col-md-12">
+                                    <h4>Services - 3</h4>
+
+                                    <input type="text" name="section1[titre3]" class="form-control"
+                                           value="{% if theme is empty %}Titres Services{% else %}{{ theme.section.titre3 }}{% endif %}">
+                                    <input type="text" name="id_qq" class="hidden" value="{{ qouiqui.id }}">
+
+                                </div>
+                                <div class="col-md-12">
+
+                                            <textarea name="section1[text3]" class="edit" cols="30" rows="10">
+                                                {% if theme is empty %}Description Service{% else %}{{ theme.section.text3 }}{% endif %}
+                                            </textarea>
+
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="col-md-12">
+                                    <h4>Services - 4</h4>
+
+                                    <input type="text" name="section1[titre4]" class="form-control"
+                                           value="{% if theme is empty %}Titres Services{% else %}{{ theme.section.titre4 }}{% endif %}">
+                                    <input type="text" name="id_qq" class="hidden" value="{{ qouiqui.id }}">
+
+                                </div>
+                                <div class="col-md-12">
+
+                                            <textarea name="section1[text4]" class="edit" cols="30" rows="10">
+                                                {% if theme is empty %}Description Service{% else %}{{ theme.section.text4 }}{% endif %}
+                                            </textarea>
+
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+                    <button type="submit" class="btn btn-default " data-target="modifier" data-selector="edit_section1">
+                        enregistrer
+                    </button>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+{% endif %}

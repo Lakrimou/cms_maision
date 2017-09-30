@@ -1,0 +1,396 @@
+<link rel="stylesheet" type="text/css" href="{{ asset('module/Automobile/css/bootstrap-clockpicker.min.css ') }}">
+<script type="text/javascript" src="{{ asset('module/Automobile/js/bootstrap-clockpicker.min.js') }}"></script>
+{% set path =  asset('uploads/image/')~qouiqui.user.id ~'/'~ qouiqui.id ~'/avatar/avatar.jpg' %}
+<section class="section section-white" id="about">
+    <div class="container container-about">
+        <div class="row">
+            <div class="col-md-offset-3 col-md-6">
+                <header class="section-header">
+                    <div class=" animated" data-animation="bounceInLeft"><i class="autologo_avto"></i></div>
+                    <div class="heading-wrap">
+                        <h2 class="heading"><span>A Propos de Vente voiture</span></h2>
+                    </div>
+                </header>
+            </div>
+        </div>
+        <div class="row animated" data-animation="bounceInRight">
+
+            <!-- BEGIN -->
+            <div class="tab-content col-xs-12 col-sm-6 col-lg-6">
+                <div class="row">
+                    <div class="col-md-10">
+                        {% if asset_exists(path) %}
+                            <img style=" padding: 50px ;min-width: 100%;padding-top: 10px;" src="{{ asset('uploads/image/') }}{{ iduser }}/{{ qouiqui.id }}/avatar/avatar.jpg" class="img-responsive" alt="about" >
+                        {% else %}
+                            <div class="" style="padding: 50px">
+                                <h1 style="text-transform: uppercase;
+                                    font-family: 'Lobster', cursive;
+                                    margin: 0 auto;
+                                    white-space:normal;
+                                    text-align: center;">
+                                    {{ qouiqui.firstName }}
+                                </h1>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-lg-6">
+                <article class=" clearfix animated text-left" data-animation="fadeInDown">
+
+                    <!-- Nav tabs -->
+                    <ul class="nav nav-tabs ">
+                        <div class="col-md-6">
+                            <div class="row">
+                                <li class="active "><i class="auto9"></i><strong>Adresse</strong>{{ qouiqui.address1 }}</li>
+                            </div>
+                            <div class="row">
+                                <li class="active ">
+                                    <i class="auto8"></i><strong>Description</strong>{{ qouiqui.details|raw }}</li>
+                            </div>
+                            {% set horraire = jsonDecod(qouiqui.opening) %}
+                            {#<div class="row heur">#}
+                                {#<li class="active "><i class="auto11"></i><strong>Horraires du travail</strong>#}
+                                        {#<p class="hours">Du lundi jusqu'à Vendredi: {{ horraire['week1']['start'] }} A.M. à {{ horraire['week1']['end'] }} A.M. ET {{ horraire['week2']['start'] }} A.M. à {{ horraire['week2']['end'] }} A.M.<br>#}
+                                        {#{% if horraire['weekendsamedi']["open"]==null %}#}
+                                            {#Samedi: Fermé#}
+                                        {#{% else %}#}
+
+                                            {#Samedi: {{ horraire['weekendsamedi']['start'] }}A.M. à {{ horraire['weekendsamedi']['end'] }} A.M.#}
+                                        {#{% endif %}#}
+                                        {#<br>#}
+                                        {#{% if horraire['weekenddimanche']["open"]==null %}#}
+                                        {#Dimanche:Fermé#}
+                                        {#{% else %}#}
+                                        {#Dimanche: {{ horraire['weekenddimanche']['start'] }}A.M. à {{ horraire['weekenddimanche']['end'] }} A.M.</p>#}
+                                    {#{% endif %}#}
+                                    {#<p>&nbsp; </p></li>#}
+                            {#</div>#}
+
+                        </div>
+                        <div class="col-md-6">
+                            <div class="row">
+                                <li class="active "><i class="auto10"></i> <strong>Tel</strong>{{ qouiqui.phone }}</li>
+                            </div>
+                            <div class="row">
+                                <li class="active "><i class="auto11"></i><strong>Email</strong>{{ qouiqui.mail|slice(0, 3) }}***@***.com</li>
+                            </div>
+                            <div class="row">
+                                <li class="active "><i class="auto11"></i><strong>Web Site</strong>{{ qouiqui.website }}</li>
+                            </div>
+
+                        </div>
+
+                    </ul>
+                </article>
+                <div class="clearfix"></div>
+                <div class="col-md-6 pull-right">
+                    <a href="#contact" class="theme-btn btn-style-one">Contactez Nous</a>
+                    <a href="http://maps.google.com?q={{ qouiqui.geoLat }},{{ qouiqui.geoLong }}" class="theme-btn btn-style-one">Y aller</a>
+                    <div class="col-md-12 hidden-lg hidden-sm hidden-md pad-top imggoogle" style="padding-left:0">
+                        <a target="_blanck" href="http://maps.google.com?q={{ qouiqui.geoLat }},{{ qouiqui.geoLong }}">
+                            <img src="https://maps.googleapis.com/maps/api/staticmap?zoom=17&size=600x300&maptype=roadmap
+                                            &markers=color:blue%7C
+                                            label:webmaster-media%7C{{ qouiqui.geoLat }},{{ qouiqui.geoLong }}
+                                            &key=AIzaSyBTdMydc9PUE0gPkcgjRZXOuFPXc5BUSrg">
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col-md-6 pull-left rs" style="display: -webkit-box;">
+                    <a href="{% if sociaux.facebook is defined %}{{ sociaux['facebook'] }} {% endif %}" target="_blank"><span class="fa fa-facebook-f"></span></a>
+                    <a href="{% if sociaux.tweeter is defined %}{{ sociaux['tweeter'] }}{% endif %}" target="_blank"><span class="fa fa-twitter"></span></a>
+                    <a href="{% if sociaux.linkedin is defined %}{{ sociaux['linkedin'] }}{% endif %}" target="_blank"><span class="fa fa-linkedin"></span></a>
+                    <a href="{% if sociaux.google is defined %}{{ sociaux['google'] }}{% endif %}" target="_blank"><span class="fa fa-google-plus"></span></a>
+                </div>
+                <!-- END -->
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-md-10"></div>
+            {% if app.user and app.user.id == qouiqui.user.id %}
+                <div class="col-md-2">
+                    <a href="#" class="btn btn-default btn-main button-clignote " data-toggle="modal" data-target="#update-about"> <span>Modifier les données</span></a>
+                </div>
+            {% endif %}
+
+        </div>
+    </div>
+    <div class="particle elem1 anim-delay1"></div>
+    <div class="particle elem2 anim-delay5"></div>
+    <div class="particle elem3 anim-delay3"></div>
+    <div class="particle elem4 anim-delay8"></div>
+    <div class="particle elem5 anim-delay9"></div>
+    <div class="particle elem6 anim-delay2"></div>
+    <div class="particle elem7 anim-delay4"></div>
+    <div class="particle elem8 anim-delay3"></div>
+    <div class="particle elem9 anim-delay10"></div>
+    <div class="particle elem8 anim-delay11"></div>
+    <div class="particle elem6 anim-delay12"></div>
+    <div class="particle elem1 anim-delay14"></div>
+    <div class="particle elem13 anim-delay16"></div>
+    <div class="particle elem17 anim-delay18"></div>
+    <div class="particle elem2 anim-delay6"></div>
+    <div class="particle elem16 anim-delay9"></div>
+    <div class="particle elem8 anim-delay3"></div>
+    <div class="particle elem9 anim-delay10"></div>
+    <div class="particle elem18 anim-delay11"></div>
+    <div class="particle elem11 anim-delay12"></div>
+    <div class="particle elem12 anim-delay14"></div>
+    <div class="particle elem13 anim-delay16"></div>
+    <div class="particle elem14 anim-delay18"></div>
+    <div class="particle elem15 anim-delay6"></div>
+    <div class="particle elem16 anim-delay9"></div>
+    <div class="particle elem17 anim-delay7"></div>
+    <div class="particle elem18 anim-delay6"></div>
+    <div class="particle elem19 anim-delay3"></div>
+</section>
+
+
+<div class="modal fade" id="update-about" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h5 class="modal-title" id="exampleModalLongTitle">Modifier les informations</h5>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-10 col-md-offset-1">
+                        <form id="update_slider" name="adminbundle_slider" action="{{ path('update_about',{"id":qouiqui.id}) }}" method="post" enctype="multipart/form-data">
+                            <div class="form-group row element-form">
+                                <div class="col-md-3">
+                                    <label class="control-label " for="mark">Télécharger logo</label>
+                                </div>
+                                <div class="col-sm-9">
+                                    <input type="file" name="image" id="logo-about">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-9">
+
+                                    <table class="table table-bordered " id="table-about" hidden>
+                                        <thead>
+                                        <tr>
+                                            <th>Logo</th>
+                                            <th>Action</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody id="uploaded-logo-about">
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-md-3">
+                                    <label class="control-label " for="principal">Description</label>
+                                </div>
+                                <div class="col-sm-9">
+                                <textarea class="edit" cols="60" name="details"
+                                          rows="10">{{ qouiqui.details }}</textarea>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-md-3 ">
+                                    <label class="control-label " for="principal">Adresse</label>
+                                </div>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="secondaire" name="address" value="{{ qouiqui.address1 }}">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-md-3">
+                                    <label class="control-label " for="principal">Tel</label>
+                                </div>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="secondaire" name="phone" value="{{ qouiqui.phone }}">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-md-3">
+                                    <label class="control-label " for="principal">Email</label>
+                                </div>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="secondaire" name="email" value="{{ qouiqui.mail }}">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-md-3">
+                                    <label class="control-label " for="principal">Du lundi jusqu'a vendredi</label>
+                                </div>
+                                <div class="col-sm-9">
+                                    <label class="control-label " for="principal">Matin</label>
+                                    </br>
+                                    <label class="control-label " for="principal">Du:</label>
+                                    <div class="input-group clockpicker">
+                                        <input type="text" class="form-control" name="week1-start" value="08:00">
+                                        <span class="input-group-addon"></span>
+                                    </div>
+                                    <label class="control-label " for="principal">à</label>
+                                    <div class="input-group clockpicker">
+                                        <input type="text" class="form-control" name="week1-end" value="12:00">
+                                        <span class="input-group-addon"></span>
+                                    </div>
+                                    <label class="control-label " for="principal">Aprés midi</label>
+                                    </br>
+                                    <label class="control-label " for="principal">Du:</label>
+                                    <div class="input-group clockpicker">
+                                        <input type="text" class="form-control" value="14:00" name="week2-start">
+                                        <span class="input-group-addon"></span>
+                                    </div>
+                                    <label class="control-label " for="principal">à</label>
+                                    <div class="input-group clockpicker">
+                                        <input type="text" class="form-control" value="18:00" name="week2-end">
+                                        <span class="input-group-addon"></span>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="form-group row">
+
+                                <div class="col-md-3">
+                                    <label class="control-label " for="principal">Samedi</label>
+
+                                </div>
+                                <div class="col-sm-9">
+                                    <input type="checkbox" id="is-samedi" name="isSamedi" onclick="dateSamedi('samedi-date',this.id);"/>
+                                </div>
+                            </div>
+                            <div class="form-group row" id="samedi-date" hidden>
+
+                                <div class="col-md-3">
+
+                                </div>
+
+                                <div class="col-sm-9">
+
+
+                                    <label class="control-label " for="principal">Du:</label>
+                                    <div class="input-group clockpicker">
+                                        <input type="text" class="form-control" value="08:00" name="strat-samedi">
+                                        <span class="input-group-addon"></span>
+                                    </div>
+                                    <label class="control-label " for="principal">à</label>
+                                    <div class="input-group clockpicker">
+                                        <input type="text" class="form-control" value="12:00" name="end-samedi">
+                                        <span class="input-group-addon"></span>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                            <div class="form-group row">
+
+                                <div class="col-md-3">
+                                    <label class="control-label " for="principal">Dimanche</label>
+
+                                </div>
+                                <div class="col-sm-9">
+                                    <input type="checkbox" id="is-dimanche" name="isDimanche" onclick="dateSamedi('dimanche-date',this.id);"/>
+                                </div>
+                            </div>
+                            <div class="form-group row" id="dimanche-date" hidden>
+
+                                <div class="col-md-3">
+
+                                </div>
+
+                                <div class="col-sm-9">
+
+
+                                    <label class="control-label " for="principal">Du:</label>
+                                    <div class="input-group clockpicker">
+                                        <input type="text" class="form-control" value="08:00" name="start-dimanche">
+                                        <span class="input-group-addon"></span>
+                                    </div>
+                                    <label class="control-label " for="principal">à</label>
+                                    <div class="input-group clockpicker">
+                                        <input type="text" class="form-control" value="12:00" name="end-dimanche">
+                                        <span class="input-group-addon"></span>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                            <div class="form-group row">
+
+                                <div class="col-md-2 pull-right ">
+                                    <input class="btn btn-main btn-primary btn-lg" type="submit" value="Enregistrer">
+                                </div>
+                            </div>
+
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+
+        iImageFile = 0;
+        {% if asset_exists(path) %}
+        $("#uploaded-logo-about").html("<tr ><td><img id='blah-logo' style='width: 50%' src='{{ asset('uploads/image/') }}{{ iduser }}/{{ qouiqui.id }}/avatar/avatar.jpg' /></td><td><button  onclick='deleteLogoImage()'>Supprimer</button></td></tr>");
+        $("#table-about").show();
+        {% endif %}
+
+    });
+
+    function readURLFile(input) {
+
+
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+
+                $("#uploaded-logo-about").html("<tr ><td><img id='blah-logo' style='width: 50%' src='#' /></td><td><button  onclick='deleteLogoImage()'>Supprimer</button></td></tr>");
+                $('#blah-logo').attr('src', e.target.result);
+
+
+            }
+
+            reader.readAsDataURL(input.files[0]);
+        }
+
+
+    }
+    document.getElementById('logo-about').onchange = function () {
+
+        $("#uploaded-logo-about").empty();
+        $("#table-about").show();
+
+
+        readURLFile(this);
+    };
+    function deleteLogoImage() {
+        $("#logo-about").value = "";
+        $("#table-about").hide();
+        event.preventDefault();
+
+    }
+    $('.clockpicker').clockpicker({
+        template: 'modal'
+    });
+    function dateSamedi(day, id) {
+
+        if ($("#" + id).is(':checked') == true) {
+            $("#" + day).show();
+        }
+        else {
+
+
+            $("#" + day).hide();
+        }
+    }
+
+</script>

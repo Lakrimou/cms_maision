@@ -1,0 +1,11 @@
+AdminBundle\Entity\CAR:
+    type: entity
+    table: null
+    repositoryClass: AdminBundle\Repository\CARRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    lifecycleCallbacks: {  }

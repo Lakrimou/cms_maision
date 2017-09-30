@@ -1,0 +1,1974 @@
+{% set connected = false %}
+{% if app.user %}
+    {% if app.user.id == qouiqui.user.id %}
+        {% set connected = true %}
+    {% endif %}
+{% endif %}
+
+{% set horaire = jsonDecod(qouiqui.opening) %}
+
+{% set  data = jsonDecod(qouiqui.data) %}
+
+{% set motif = false %}
+{% if  theme.color.background.motif is defined%}
+    {% set motif = true %}
+{% endif %}
+
+{% set animation = false %}
+{% if theme.color.background.animation is defined %}
+    {% set animation = true %}
+{% endif %}
+<html>
+<head>
+
+    <meta charset="utf-8">
+    <title>Dreamland Property and Real Estate HTML5 Template | Homepage One Pager</title>
+    <meta name="keywords" content="{% if  data.tags is defined%}{{ data.tags }}{% endif %}"/>
+    <meta name="description" content="{{ qouiqui.details }}"/>
+    <!-- Stylesheets -->
+    <link href="{{ asset('module/immobiliair/css/bootstrap.css') }}" rel="stylesheet">
+    <link href="{{ asset('module/immobiliair/css/revolution-slider.css') }}" rel="stylesheet">
+    <link href="{{ asset('module/immobiliair/css/style.css') }}" rel="stylesheet">
+    <link href="{{ asset('module/immobiliair/css/animate.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/awesome-bootstrap-checkbox/0.3.7/awesome-bootstrap-checkbox.css">
+    <!-- Responsive -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link href="{{ asset('module/immobiliair/css/responsive.css') }}" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="//csshake.surge.sh/csshake.min.css">
+    <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+    <!--[if lt IE 9]>
+    <script src="{{asset('module/immobiliair/js//respond.js') }}"></script>
+
+    <![endif]-->
+
+    <script src="//cdn.ckeditor.com/4.6.2/standard/ckeditor.js"></script>
+
+    <link href="{{ asset('asset-back/css/dropzone.css') }}" type="text/css" rel="stylesheet"/>
+    <script src="{{ asset('asset-back/js/dropzone.min.js') }}"></script>
+
+
+</head>
+
+<body>
+{% set annonce_slider = randomAnnonce(module) %}
+<div class="page-wrapper" style="display: ">
+
+    <!-- Preloader -->
+    <!--<div class="preloader"></div>-->
+
+    <!-- Main Header / One Page Header-->
+    {{ include('ModuleBundle:Module:immobiliair/header.html.twig') }}
+
+
+    <!--End Main Header -->
+
+
+    <!--Main Slider-->
+
+    {{ include('@Module/Module/immobiliair/slider.html.twig') }}
+
+    <!--Agent Section-->
+
+    {{ include('@Module/Module/immobiliair/about.html.twig') }}
+
+    <!--About Section-->
+    <div id="service">
+        <section class="about-section" id="section-apropos">
+            <div class="auto-container">
+                {% if connected %}
+                    <div class="shake pull-right margin-bott-40">
+                        <button type="button" class="theme-btn btn-style-one blue" data-toggle="modal"
+                                data-target="#editsection1">modifier Cette section
+                        </button>
+                    </div>
+                {% endif %}
+                <!--Section Title-->
+                <div class="sec-title">
+
+                    <h2 class="theme_color">BIENVENUE À {{ qouiqui.slug }}</h2>
+                    <div class="separator small-separator"></div>
+                    <div class="text"><p>{{ qouiqui.details|raw }}</p></div>
+
+                </div>
+
+                <!--Full Image Box-->
+                <figure class="full-image-box"><img
+                            src="{{ asset('module/immobiliair/images/resource/featured-image-1.jpg') }}" alt=""></figure>
+
+                <div class="services-outer">
+                    <div class="row clearfix">
+
+                        {% if theme.section.titre1 is defined %}
+                            <!--Column-->
+                            <article class="col-md-4 col-sm-6 col-xs-12 column wow fadeInLeft" data-wow-delay="0ms"
+                                     data-wow-duration="1500ms">
+                                <div class="inner-box">
+                                    <div class="icon-left"><span class="icon flaticon-check52"></span><span
+                                                class="number">1</span></div>
+                                    <div class="content">
+                                        <h3>{{ theme.section.titre1 }}</h3>
+                                        {{ theme.section.text1|raw }}
+                                    </div>
+                                </div>
+                            </article>
+
+                            <!--Column-->
+                            <article class="col-md-4 col-sm-6 col-xs-12 column wow fadeInLeft" data-wow-delay="300ms"
+                                     data-wow-duration="1500ms">
+                                <div class="inner-box">
+                                    <div class="icon-left"><span class="icon flaticon-check52"></span><span
+                                                class="number">2</span></div>
+                                    <div class="content">
+                                        <h3>{{ theme.section.titre2 }}</h3>
+                                        {{ theme.section.text2|raw }}
+                                    </div>
+                                </div>
+                            </article>
+
+                            <!--Column-->
+                            <article class="col-md-4 col-sm-6 col-xs-12 column wow fadeInLeft" data-wow-delay="600ms"
+                                     data-wow-duration="1500ms">
+                                <div class="inner-box">
+                                    <div class="icon-left"><span class="icon flaticon-check52"></span><span
+                                                class="number">3</span></div>
+                                    <div class="content">
+                                        <h3>{{ theme.section.titre3 }}</h3>
+                                        {{ theme.section.text3|raw }}
+                                    </div>
+                                </div>
+                            </article>
+
+                        {% else %}
+                            <h4 class="centred">Pas de service présenté!</h4>
+                        {% endif %}
+
+                    </div>
+                </div>
+
+            </div>
+        </section>
+        <div class="particle elem1 anim-delay1"></div>
+        <div class="particle elem2 anim-delay5"></div>
+        <div class="particle elem3 anim-delay3"></div>
+        <div class="particle elem4 anim-delay8"></div>
+        <div class="particle elem5 anim-delay9"></div>
+        <div class="particle elem6 anim-delay2"></div>
+        <div class="particle elem7 anim-delay4"></div>
+        <div class="particle elem8 anim-delay3"></div>
+        <div class="particle elem9 anim-delay10"></div>
+        <div class="particle elem8 anim-delay11"></div>
+        <div class="particle elem6 anim-delay12"></div>
+        <div class="particle elem1 anim-delay14"></div>
+        <div class="particle elem13 anim-delay16"></div>
+        <div class="particle elem17 anim-delay18"></div>
+        <div class="particle elem2 anim-delay6"></div>
+        <div class="particle elem16 anim-delay9"></div>
+        <div class="particle elem8 anim-delay3"></div>
+        <div class="particle elem9 anim-delay10"></div>
+        <div class="particle elem18 anim-delay11"></div>
+        <div class="particle elem11 anim-delay12"></div>
+        <div class="particle elem12 anim-delay14"></div>
+        <div class="particle elem13 anim-delay16"></div>
+        <div class="particle elem14 anim-delay18"></div>
+        <div class="particle elem15 anim-delay6"></div>
+        <div class="particle elem16 anim-delay9"></div>
+        <div class="particle elem17 anim-delay7"></div>
+        <div class="particle elem18 anim-delay6"></div>
+        <div class="particle elem19 anim-delay3"></div>
+    </div>
+
+    {% if connected %}
+        <!-- Modal -->
+        <div id="editsection1" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Modifier les information</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div role="tabpanel">
+                            <!-- Nav tabs -->
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li role="presentation" class="active"><a href="#uploadTab" aria-controls="uploadTab"
+                                                                          role="tab" data-toggle="tab">mise a jour votre
+                                        info</a>
+                                </li>
+                            </ul>
+                            <!-- Tab panes -->
+                            <div class="tab-content">
+                                <div role="tabpanel" class="tab-pane active" id="uploadTab">
+                                    <form id="edit_section1" method="POST" action="{{ path('section1') }}">
+
+                                        <div class="row">
+
+
+                                            <div class="col-md-6">
+                                                <h4>Titre gauche</h4>
+                                                <input type="text" name="section1[titre1]" class="form-control"
+                                                       value="{% if theme.section.titre1 is defined %}{{ theme.section.titre1 }}{% endif %}">
+                                                <input type="text" name="id_qq" class="hidden" value="{{ qouiqui.id }}">
+                                            </div>
+                                            <div class="col-md-12">
+                                            <textarea name="section1[text1]" class="edit" cols="30"
+                                                      rows="10">{% if theme.section.text1 is defined %}{{ theme.section.text1 }}{% endif %}</textarea>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <h4>Titre center</h4>
+                                                <input type="text" name="section1[titre2]" class="form-control"
+                                                       value="{% if theme.section.titre2 is defined %}{{ theme.section.titre2 }}{% endif %}">
+                                            </div>
+                                            <div class="col-md-12">
+                                            <textarea name="section1[text2]" class="edit" cols="30"
+                                                      rows="10">{% if theme.section.texte2 is defined %}{{ theme.section.text2 }}{% endif %}</textarea>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <h4>Titre droite </h4>
+                                                <input type="text" name="section1[titre3]" class="form-control"
+                                                       value="{% if theme.section.titre3 is defined %}{{ theme.section.titre3 }}{% endif %}">
+                                            </div>
+                                            <div class="col-md-12">
+                                            <textarea name="section1[text3]" class="edit" cols="30"
+                                                      rows="10">{% if theme.section.text3 is defined %}{{ theme.section.text3 }}{% endif %}</textarea>
+
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+                        <button type="submit" class="btn btn-default " data-target="modifier" data-selector="edit_section1">enregistrer</button>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    {% endif %}
+
+
+    <!--Parallax Section-->
+    <section class="parallax-section" style="background-image:url(module/immobiliair/images/parallax/image-1.jpg);">
+        <div class="auto-container">
+            <div class="text-center wow fadeInUp" data-wow-delay="200ms" data-wow-duration="1500ms">
+                <h2>Demander une Visite<br>Gratuite</h2>
+                <a class="theme-btn btn-style-one" href="#map-section">Y aller</a>
+                <button type="button" class="theme-btn btn-style-two" data-toggle="modal" data-target="#Rappeler">Être rappelé</button>
+
+            </div>
+        </div>
+    </section>
+
+    {{ include('@Module/Module/immobiliair/property.html.twig') }}
+    <style>
+
+        div#section-gallery {
+            display: block;
+        }
+
+        .modal-title {
+            color: white;
+        }
+
+        .modal-content {
+            border: 1px solid;
+        }
+
+        .marg40 {
+            margin: 40px;
+        }
+
+        .list_prod_titre h2 {
+
+            line-height: 26px;
+        }
+
+        .tag {
+            color: #90948f;
+        }
+
+        .header-style-one.fixed-header {
+            z-index: 99;
+        }
+
+        div#example_filter {
+            border: 1px solid #569b0c;
+            padding: 8px;
+        }
+
+        .image.col-md-3 img {
+            width: 100%;
+        }
+
+        @media (max-width: 768px) {
+
+            .main-slider {
+                display: none;
+            }
+
+            .sidebtns {
+                display: none;
+            }
+        }
+
+        figure.agent-image.wow.rollIn.animated img {
+            width: 50%;
+            margin: 0 auto;
+            margin-left: 25%;
+        }
+
+        }
+
+        .col-md-6 h4 {
+            font-size: 14px;
+            text-transform: uppercase;
+            margin-bottom: 0px;
+            color: #253d4a;
+            font-weight: 700;
+            margin-top: 16px;
+        }
+
+        .pad-top {
+
+            padding-top: 15px;
+        }
+
+        .imggoogle img {
+            width: 100%;
+        }
+
+        .blue {
+            background: #236cb1 !important;
+        }
+
+        .fix-left {
+
+            top: 80px;
+            position: fixed;
+            z-index: 999;
+
+        }
+
+        .imgbtn {
+            top: 200px;
+            position: absolute;
+            z-index: 98;
+        }
+
+        .norow {
+            margin: 0;
+        }
+
+        .ween {
+            background: #ffbe00;
+        }
+
+        .img1 {
+            max-height: 370;
+            padding-bottom: 3px;
+        }
+    </style>
+    <!--Gallery Section-->
+    {{ include('@Module/Module/immobiliair/gallery.html.twig') }}
+    <!--Testimonials-->
+
+    {% if events is empty %}
+        <div style="padding-top:100px;padding-bottom:100px;background: #efefef;">
+            {{ include('@Module/Module/ambulance/events.html.twig') }}
+        </div>
+    {% else %}
+        {{ include('@Module/Module/ambulance/events.html.twig') }}
+    {% endif %}
+
+    {#{{ include('@Module/Module/spa/testimonial.html.twig') }}#}
+
+
+    <!--itineraire Section-->
+    <section class="itineraire-section" style="background-image: url(module/immobiliair/images/background/contact-bg.jpg);background-size: cover;background-position: -8px 700px;">
+        <div class="auto-container">
+
+            <!--Sec Title-->
+            <div class="sec-title map-title ">
+                <h2>MA<span class="theme_color">P</span></h2>
+                <div class="separator small-separator"></div>
+            </div>
+        </div>
+    </section>
+    <style>
+        .gallery-section .image-box .image img {
+            height: 390px;
+            width: auto;
+        }
+
+        .media-carousel {
+            margin-bottom: 0;
+            padding: 0 40px 30px 40px;
+            margin-top: 30px;
+        }
+
+        /* Previous button  */
+        .media-carousel .carousel-control.left {
+            left: -12px;
+            background-image: none;
+            background: none repeat scroll 0 0 #222222;
+            border: 4px solid #FFFFFF;
+            border-radius: 23px 23px 23px 23px;
+            height: 40px;
+            width: 40px;
+            margin-top: 30px
+        }
+
+        /* Next button  */
+        .media-carousel .carousel-control.right {
+            right: -12px !important;
+            background-image: none;
+            background: none repeat scroll 0 0 #222222;
+            border: 4px solid #FFFFFF;
+            border-radius: 23px 23px 23px 23px;
+            height: 40px;
+            width: 40px;
+            margin-top: 30px
+        }
+
+        /* Changes the position of the indicators */
+        .media-carousel .carousel-indicators {
+            right: 50%;
+            top: auto;
+            bottom: 0px;
+            margin-right: -19px;
+        }
+
+        /* Changes the colour of the indicators */
+        .media-carousel .carousel-indicators li {
+            background: #c0c0c0;
+        }
+
+        .media-carousel .carousel-indicators .active {
+            background: #333333;
+        }
+
+        .media-carousel img {
+            width: 250px;
+        }
+
+        /****  LISTING LAYOUT ****/
+        .list-inline > li {
+            padding: 0 10px 0 0;
+        }
+
+        .container-pad {
+            padding: 30px 15px;
+        }
+
+        /**** MODULE ****/
+        .bgc-fff {
+            background-color: #fff !important;
+        }
+
+        .box-shad {
+            -webkit-box-shadow: 1px 1px 0 rgba(0, 0, 0, .2);
+            box-shadow: 1px 1px 0 rgba(0, 0, 0, .2);
+        }
+
+        .brdr {
+            border: 1px solid #ededed;
+        }
+
+        /* Font changes */
+        .fnt-smaller {
+            font-size: .9em;
+        }
+
+        .fnt-lighter {
+            color: #bbb;
+        }
+
+        /* Padding - Margins */
+        .pad-10 {
+            padding: 10px !important;
+        }
+
+        .mrg-0 {
+            margin: 0 !important;
+        }
+
+        .btm-mrg-10 {
+            margin-bottom: 10px !important;
+        }
+
+        .btm-mrg-20 {
+            margin-bottom: 20px !important;
+        }
+
+        /* Color  */
+        .clr-535353 {
+            color: #535353;
+        }
+
+        /**** MEDIA QUERIES ****/
+        @media only screen and (max-width: 991px) {
+            #property-listings .property-listing {
+                padding: 5px !important;
+            }
+
+            #property-listings .property-listing a {
+                margin: 0;
+            }
+
+            #property-listings .property-listing .media-body {
+                padding: 10px;
+            }
+        }
+
+        @media only screen and (min-width: 992px) {
+            #property-listings .property-listing img {
+                max-width: 180px;
+            }
+
+            .bfh-colorpicker {
+                position: relative;
+                z-index: 97;
+
+            }
+
+            /* upload gallery */
+            .upload-drop-zone {
+                height: 200px;
+                border-width: 2px;
+                margin-bottom: 20px;
+            }
+
+            /* skin.css Style*/
+            .upload-drop-zone {
+                color: #ccc;
+                border-style: dashed;
+                border-color: #ccc;
+                line-height: 200px;
+                text-align: center
+            }
+
+            .upload-drop-zone.drop {
+                color: #222;
+                border-color: #222;
+            }
+
+            /* end upload gallery */
+            h1#auto {
+                font-size: 24px;
+                color: #d42f38;
+                position: absolute;
+                top: 50%;
+                left: 45%;
+                transform: translateX(-50%) translateY(-50%);
+            }
+
+            .header-top-area {
+
+                background: #d42f38;
+                margin: 0 auto;
+
+            }
+
+            div#ite {
+                padding-top: 10px;
+                width: 361px;
+                min-height: 93px;
+                position: absolute;
+                z-index: 97;
+                top: 55px;
+                background: rgba(113, 177, 0, 0.85);
+                /*overflow: hidden;*/
+                overflow-y: scroll;
+                margin: auto;
+                /* left: 25%; */
+                top: 1px;
+                max-height: 499px;
+            }
+
+
+
+            .input-group {
+                background: white;
+            }
+
+            .no-padding {
+                padding: 0 !important;
+            }
+
+            li.ui-state-defaul img {
+                max-width: 280px;
+            }
+
+
+            figure.image .logo img {
+                width: 80%;
+                left: 10%;
+                top: 160px;
+                position: relative;
+            }
+
+            .logologo {
+                width: 80%;
+                left: 10%;
+                position: relative;
+            }
+
+            .inner-box figure {
+                max-height: 267px;
+                overflow: hidden;
+                margin: 33px;
+            }
+        }
+
+        @media (min-width: 992px) {
+
+            .modal-lg {
+                width: 90%;
+                margin: 25px auto;
+            }
+
+        }
+
+        /*responsive correction */
+        @media (max-width: 767px) {
+            [data-target="#gallery-modal"], #change_color_form, .desc-text, #map-container, #ite, .sec-title.map-title {
+                display: none;
+            }
+
+            .pull-right.margin-bott-40 {
+                margin: 17px;
+                z-index: 88;
+                position: relative;
+            }
+
+            .agent-section {
+                padding: 0 0px 60px;
+            }
+
+            figure.image.logo{
+                display: grid!important;
+
+            }
+            figure.image.logo img{
+                padding-top: 50px;
+            }
+        }
+
+    </style>
+
+    <!--Map Section-->
+    <section id="map-section" class="map-section">
+        <div id="map-container" class="map-container"></div>
+        <div id="ite">
+            <div class="col-md-12 align-center">
+                <div class="col-md-12">
+                    <div style="    text-align: center;font-size: 20px; color:white">
+
+                        Y aller
+                    </div>
+                    <form class="form-inline">
+
+                        <div class="col-md-8 no-padding">
+                            <div class="input-group first-ch">
+                                <div class="input-group-addon btn btn-cta-primary" onclick="javascript:geolocate()"
+                                     data-toggle="tooltip" data-placement="bottom" title="Détecter ma position"><i
+                                            class="fa fa-location-arrow" aria-hidden="true"></i></div>
+                                <input type="text" name="origin" id="origin" placeholder="Indiquez un lieu"
+                                       class="form-control map-input" size="0" autocomplete="off">
+                            </div>
+                        </div>
+                        <div class="col-md-4 no-padding">
+
+
+                            <a class="btn btn-primary btn-block btn-sm" style="cursor:pointer;padding: 7px;"
+                               onclick="geoLocate();">Itinéraire</a>
+
+
+                            <input type="hidden" value="{{ qouiqui.geoLat }},{{ qouiqui.geoLong }}" name="destination" id="destination">
+
+                        </div>
+
+                    </form>
+                    <div id="panel"></div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+
+    <!--Contact Section-->
+    <section class="default-section faded-section contact-section" id="section-contact"
+             style="background-image:url(module/immobiliair/images/background/contact-bg.jpg);overflow: hidden;">
+        <div class="auto-container">
+            <div class="row clearfix">
+                <!--Column-->
+                <div class="col-md-5 col-sm-12 col-xs-12 column">
+                    <h2 class="theme_color">FACILE À NOUS TROUVER</h2>
+
+                    <!--Contact Info-->
+
+                    <div class="col-md-6">
+                        <ul class="clearfix">
+                            <li class="address">
+                                <div class="icon"><span class="flaticon-location74"></span></div>
+                                <h4>ADRESSE</h4>
+                                {{ qouiqui.address1 }} <br>{{ qouiqui.adress2 }}
+                            </li>
+                            <li class="contact-info">
+                                <div class="icon"><span class="flaticon-telephone51"></span></div>
+                                <h4>TELEPHONE</h4>
+                                {{ qouiqui.phone }}/ {{ qouiqui.phone2 }}
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6">
+                        <ul class="clearfix">
+
+                            <li class="contact-info">
+                                <div class="icon"><span class="flaticon-email2"></span></div>
+                                <h4>Email</h4>
+                                {{ qouiqui.mail }}
+                            </li>
+                            <li class="contact-info">
+                                <div class="icon"><span class="flaticon-house113"></span></div>
+                                <h4>Site Web</h4>
+                                <a href="{{ qouiqui.website }}">{{ qouiqui.website }}</a>
+                            </li>
+                        </ul>
+                    </div>
+
+
+                </div>
+
+                <!--Column-->
+                <div class="col-md-7 col-sm-12 col-xs-12 column">
+                    <h2 class="theme_color">FORMULAIRE DE CONTACT</h2>
+                    <!--Contact Form-->
+                    <div class="contact-form">
+                        <form method="post" action="{{ path('module_hotel_contactezNous',{'id_qq': qouiqui.id}) }}" id="contact-form">
+                            <div class="row clearfix">
+                                <div class="col-md-6 col-sm-6 col-xs-12 form-group">
+                                    <input type="text" name="name" value="" placeholder="Nom" required>
+                                </div>
+                                <div class="col-md-6 col-sm-6 col-xs-12 form-group">
+                                    <input type="email" name="email" value="" placeholder="Email" required>
+                                </div>
+                                <div class="col-md-12 col-sm-12 col-xs-12 form-group">
+                                    <input type="text" name="objet" value="" placeholder="Sujet" required>
+                                </div>
+                                <div class="col-md-12 col-sm-12 col-xs-12 form-group">
+                                    <textarea name="message" placeholder="Message" required></textarea>
+                                </div>
+                                <div class="col-md-12 col-sm-12 col-xs-12 form-group text-right">
+                                    <input type="submit" value="Envoyer" name="submit" class="theme-btn btn-style-one"/>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!--Separator-->
+            <div class="separator big-separator"></div>
+
+            <!--Footer Content-->
+            <div class="footer-content">
+                <a href="https://webmaster-media.tn/" target="_blank">
+                    <div class="copyright">&copy; 2017 Webmaster-Media All Right Reserved</div>
+                </a>
+            </div>
+        </div>
+
+        <div class="particle elem1 anim-delay1"></div>
+        <div class="particle elem6 anim-delay2"></div>
+        <div class="particle elem3 anim-delay3"></div>
+        <div class="particle elem7 anim-delay4"></div>
+        <div class="particle elem2 anim-delay5"></div>
+        <div class="particle elem4 anim-delay8"></div>
+        <div class="particle elem5 anim-delay9"></div>
+        <div class="particle elem8 anim-delay3"></div>
+        <div class="particle elem9 anim-delay10"></div>
+        <div class="particle elem8 anim-delay11"></div>
+        <div class="particle elem6 anim-delay12"></div>
+        <div class="particle elem1 anim-delay14"></div>
+        <div class="particle elem13 anim-delay16"></div>
+        <div class="particle elem17 anim-delay18"></div>
+        <div class="particle elem2 anim-delay6"></div>
+        <div class="particle elem16 anim-delay9"></div>
+        <div class="particle elem8 anim-delay3"></div>
+        <div class="particle elem9 anim-delay10"></div>
+        <div class="particle elem18 anim-delay11"></div>
+        <div class="particle elem11 anim-delay12"></div>
+        <div class="particle elem12 anim-delay14"></div>
+        <div class="particle elem13 anim-delay16"></div>
+        <div class="particle elem14 anim-delay18"></div>
+        <div class="particle elem15 anim-delay6"></div>
+        <div class="particle elem16 anim-delay9"></div>
+        <div class="particle elem17 anim-delay7"></div>
+        <div class="particle elem18 anim-delay6"></div>
+        <div class="particle elem19 anim-delay3"></div>
+    </section>
+
+
+    <!--etre Rappeler-->
+    <div id="Rappeler" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Être rappelé</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="well">Vous avez une question ou un commentaire ?
+                        <br>Remplissez les informations suivantes et nous vous appeler dans les plus brefs délais.
+                    </div>
+
+                    <form id="rapeler" class="form-horizontal" method="post" action="{{ path('rapeler',{'qq_id':qouiqui.id}) }}" role="form">
+                        <div class="form-group">
+                            <label for="email" class="col-sm-2 control-label">Téléphone</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control bfh-phone" name="rapele[phone]" placeholder="Numéro de Téléphone" required data-format="+216 (dd) ddd-ddd">
+
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="name" class="col-sm-2 control-label">Nom</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="name" name="rapele[nom]" placeholder="Nom" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="name" class="col-sm-2 control-label">Prenom</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="name" name="rapele[prenom]" placeholder="Prénom" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="name" class="col-sm-2 control-label">Mail</label>
+                            <div class="col-sm-9">
+                                <textarea id="mail" name="rapele[mail]" class="form-control" placeholder="votre Mail" rows="3" required></textarea>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+                    <button type="submit" class="btn btn-default " data-target="modifier" data-selector="rapeler">Envoyer</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!--end etre Rappeler-->
+
+    <!--Demander une Visite-->
+    <div id="Demandervisite" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Demande une visite !</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="well">
+                        Remplissez les informations suivantes et nous vous appeler dans les plus brefs délais.
+                    </div>
+
+                    <form id="visite" action="{{ path('visite',{'qq_id': qouiqui.id }) }}?ref=coderef" class="form-horizontal" method="post" role="form">
+                        <input value="Vous Demanderai une Visite!" name="visite[title]" hidden>
+                        <div class="form-group">
+                            <label for="email" class="col-sm-2 control-label">
+
+                                téléphone</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control bfh-phone" name="visite[phone]" placeholder="Numéro de Téléphone" required data-format="+216 (dd) ddd-ddd">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="name" class="col-sm-2 control-label">Nom</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="name" name="visite[nom]" placeholder="Nom" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="name" class="col-sm-2 control-label">Prenom</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="name" name="visite[prenom]" placeholder="Prénom" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="name" class="col-sm-2 control-label">Adresse</label>
+                            <div class="col-sm-9">
+                                <input id="message" type="mail" name="visite[mail]" class="form-control" placeholder="votre Mail" rows="3" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="name" class="col-sm-2 control-label">Date</label>
+                            <div class="col-sm-9">
+                                <div class="bfh-datepicker" data-name="visite[date]" data-close="false" data-required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="name" class="col-sm-2 control-label">heure</label>
+                            <div class="col-sm-9">
+                                <div class="bfh-timepicker" data-name="visite[time]" data-close="false" data-required></div>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+                    <button type="submit" class="btn btn-default " data-target="modifier" data-selector="visite">Envoyer</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!--end Demander une Visite-->
+
+
+</div>
+
+
+<div class="scroll-to-top"><span class="fa fa-arrow-up"></span></div>
+<!--End pagewrapper-->
+<!--Scroll to top-->
+<script src="https://code.jquery.com/jquery-2.2.4.js" integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI="
+        crossorigin="anonymous"></script>
+{#<script src="{{ asset('module/immobiliair/js/bootstrap.min.js') }}"></script>#}
+<script src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="{{ asset('module/immobiliair/js/revolution.min.js') }}"></script>
+<script src="{{ asset('module/immobiliair/js/jquery.mixitup.js') }}"></script>
+<script src="{{ asset('module/immobiliair/js/jquery.fancybox.pack.js') }}"></script>
+<script src="{{ asset('module/immobiliair/js/owl.js') }}"></script>
+<script src="{{ asset('module/immobiliair/js/jquery.nav.js') }}"></script>
+<script src="{{ asset('module/immobiliair/js/jquery.scrollTo.js') }}"></script>
+<script src="{{ asset('module/immobiliair/js/validate.js') }}"></script>
+{#<script src="http://maps.google.com/maps/api/js"></script>#}
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tokenfield/0.12.0/bootstrap-tokenfield.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tokenfield/0.12.0/css/bootstrap-tokenfield.css">
+<script src="{{ asset('module/immobiliair/js/wow.js') }}"></script>
+<script src="{{ asset('module/immobiliair/js/script.js') }}"></script>
+<script src="https://use.fontawesome.com/7209a80f07.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+{{ include('@Module/Module/immobiliair/color.html.twig') }}
+
+<script type="text/javascript"
+        src="https://cdn.datatables.net/v/dt/dt-1.10.15/r-2.1.1/sc-1.4.2/datatables.min.js"></script>
+<link rel="stylesheet" type="text/css"
+      href="https://cdn.datatables.net/v/dt/dt-1.10.15/r-2.1.1/sc-1.4.2/datatables.min.css"/>
+
+<script src="{{ asset('module/immobiliair/js/scroll.js') }}"></script>
+
+{#<link href="{{ asset('module/spa/dist/css/bootstrap-colorpicker-plus.css') }}" rel="stylesheet">#}
+{#<script src="{{ asset('module/spa/dist/js/bootstrap-colorpicker-plus.js') }}"></script>#}
+
+<link rel="stylesheet" href="https://rawgit.com/hawk-ip/jquery.tabSlideOut.js/master/jquery.tabSlideOut.css">
+<script src="https://rawgit.com/hawk-ip/jquery.tabSlideOut.js/master/jquery.tabSlideOut.js"></script>
+
+<script>
+    jQuery('#example').DataTable({
+        responsive: true,
+        "columns": [
+            {"width": "40%"},
+            {"width": "40%"},
+            {"width": "20%"}
+        ],
+        "language": {
+            "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/French.json"
+        },
+
+    });
+</script>
+
+<script type='text/javascript'
+        src='https://maps.googleapis.com/maps/api/js?key=AIzaSyBabWKVmMpB5ZVqYN2H2ubUXTITp9k5fuc&v=3.20&#038;libraries=places&#038;language=fr&#038;ver=4.4.1'></script>
+
+<script>
+
+    function getLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition);
+        } else {
+//            alert("Geolocation is not supported by this browser.");
+        }
+    }
+
+    function showPosition(position) {
+//        $('#origin').val(position.coords.latitude + "," + position.coords.longitude);
+        geo = position.coords.latitude + "," + position.coords.longitude;
+        $('#origin').val(position.coords.latitude + "," + position.coords.longitude);
+        return geo;
+    }
+
+
+</script>
+
+
+<!--{#============map iteneraire==============#}-->
+<script>
+    var map;
+    var panel;
+    var initialize;
+    //    var calculate;
+    var direction;
+    style = [
+        {
+            "elementType": "geometry",
+            "stylers": [
+                {
+                    "color": "#f5f5f5"
+                }
+            ]
+        },
+        {
+            "elementType": "labels.icon",
+            "stylers": [
+                {
+                    "visibility": "off"
+                }
+            ]
+        },
+        {
+            "elementType": "labels.text.fill",
+            "stylers": [
+                {
+                    "color": "#616161"
+                }
+            ]
+        },
+        {
+            "elementType": "labels.text.stroke",
+            "stylers": [
+                {
+                    "color": "#f5f5f5"
+                }
+            ]
+        },
+        {
+            "featureType": "administrative.land_parcel",
+            "elementType": "labels.text.fill",
+            "stylers": [
+                {
+                    "color": "#bdbdbd"
+                }
+            ]
+        },
+        {
+            "featureType": "poi",
+            "elementType": "geometry",
+            "stylers": [
+                {
+                    "color": "#eeeeee"
+                }
+            ]
+        },
+        {
+            "featureType": "poi",
+            "elementType": "labels.text.fill",
+            "stylers": [
+                {
+                    "color": "#757575"
+                }
+            ]
+        },
+        {
+            "featureType": "poi.park",
+            "elementType": "geometry",
+            "stylers": [
+                {
+                    "color": "#e5e5e5"
+                }
+            ]
+        },
+        {
+            "featureType": "poi.park",
+            "elementType": "labels.text.fill",
+            "stylers": [
+                {
+                    "color": "#9e9e9e"
+                }
+            ]
+        },
+        {
+            "featureType": "road",
+            "elementType": "geometry",
+            "stylers": [
+                {
+                    "color": "#ffffff"
+                }
+            ]
+        },
+        {
+            "featureType": "road.arterial",
+            "elementType": "labels.text.fill",
+            "stylers": [
+                {
+                    "color": "#757575"
+                }
+            ]
+        },
+        {
+            "featureType": "road.highway",
+            "elementType": "geometry",
+            "stylers": [
+                {
+                    "color": "#dadada"
+                }
+            ]
+        },
+        {
+            "featureType": "road.highway",
+            "elementType": "labels.text.fill",
+            "stylers": [
+                {
+                    "color": "#616161"
+                }
+            ]
+        },
+        {
+            "featureType": "road.local",
+            "elementType": "labels.text.fill",
+            "stylers": [
+                {
+                    "color": "#9e9e9e"
+                }
+            ]
+        },
+        {
+            "featureType": "transit.line",
+            "elementType": "geometry",
+            "stylers": [
+                {
+                    "color": "#e5e5e5"
+                }
+            ]
+        },
+        {
+            "featureType": "transit.station",
+            "elementType": "geometry",
+            "stylers": [
+                {
+                    "color": "#eeeeee"
+                }
+            ]
+        },
+        {
+            "featureType": "water",
+            "elementType": "geometry",
+            "stylers": [
+                {
+                    "color": "#c9c9c9"
+                }
+            ]
+        },
+        {
+            "featureType": "water",
+            "elementType": "labels.text.fill",
+            "stylers": [
+                {
+                    "color": "#9e9e9e"
+                }
+            ]
+        }
+    ];
+
+    initialize = function () {
+
+        var latLng = new google.maps.LatLng({{ qouiqui.geoLat }},{{ qouiqui.geoLong }}); // Correspond au coordonnées de Lille
+
+        var myOptions = {
+            zoom: 11,
+            center: new google.maps.LatLng({{ qouiqui.geoLat }},{{ qouiqui.geoLong }}),
+            mapTypeId: google.maps.MapTypeId.TERRAIN, // Type de carte, différentes valeurs possible HYBRID, ROADMAP, SATELLITE, TERRAIN
+            maxZoom: 20,
+//            styles: style,
+            scrollwheel: false
+
+        };
+
+        map2 = new google.maps.Map(document.getElementById('map-container'), myOptions);
+        //map.setOptions({styles: style2});
+
+
+        panel = document.getElementById('panel');
+        var marker = new google.maps.Marker({
+            position: latLng,
+            map: map2,
+            icon: 'https://cdn0.iconfinder.com/data/icons/small-n-flat/24/678111-map-marker-32.png',
+            title: "Lille",
+        });
+
+        var contentMarker = [].join('');
+        var infoWindow = new google.maps.InfoWindow({
+            content: contentMarker,
+            position: latLng
+        });
+        google.maps.event.addListener(marker, 'click', function () {
+            infoWindow.open(map2, marker);
+        });
+        google.maps.event.addListener(infoWindow, 'domready', function () { // infoWindow est biensûr notre info-bulle
+            jQuery("#tabs").tabs();
+        });
+        direction = new google.maps.DirectionsRenderer({
+            map: map2,
+            panel: panel // Dom element pour afficher les instructions d'itinéraire
+        });
+    };
+    function calculate(origin) {
+        origin = origin; // Le point départ
+        destination = document.getElementById('destination').value; // Le point d'arrivé
+        console.log("origin : " + origin, "destination : " + destination);
+        if (origin && destination) {
+            var request = {
+                origin: origin,
+                destination: destination,
+                travelMode: google.maps.DirectionsTravelMode.DRIVING // Mode de conduite
+            }
+            var directionsService = new google.maps.DirectionsService(); // Service de calcul d'itinéraire
+            directionsService.route(request, function (response, status) { // Envoie de la requête pour calculer le parcours
+                if (status == google.maps.DirectionsStatus.OK) {
+                    direction.setDirections(response); // Trace l'itinéraire sur la carte et les différentes étapes du parcours
+                }
+            });
+        }
+        jQuery("#ite").show();
+    }
+    ;
+    initialize();
+    function geoLocate() {
+
+        if($('#origin').val().length !== 0){
+            calculate($('#origin').val())
+        }else{
+        ori =true;
+        if (navigator.geolocation && ori ) {
+            navigator.geolocation.getCurrentPosition(function (position) {
+                var geolocation = {
+                    lat: position.coords.latitude,
+                    lng: position.coords.longitude
+                };
+                geo = position.coords.latitude + ',' + position.coords.longitude;
+                $('#origin').val(position.coords.latitude + ',' + position.coords.longitude).show('slow', calculate(geo));
+            });
+        }
+        }
+
+        ;
+    }
+</script>
+
+
+<script type="text/javascript">
+
+
+    (function ($) {
+        "use strict";
+        // ITEM DETAIL PAGE MAP FUNCTION STARTED --------------------------------------------------------------------------------------------
+        $.pfitemdetailpagemap = function () {
+            $(function () {
+                var inputMyLocation = document.getElementById("origin");
+                $("#origin").bind("keypress", function (e) {
+                    if (e.keyCode == 13) {
+                        e.preventDefault();
+                        return false;
+                    }
+                });
+                var autocomplete = new google.maps.places.Autocomplete(inputMyLocation);
+                google.maps.event.addListener(autocomplete, "place_changed", function () {
+                    var place = autocomplete.getPlace();
+                    if (!place.geometry) {
+                        return;
+                    }
+                    console.log(place);
+                });
+
+            });
+        };
+        // LOAD MAP STARTED --------------------------------------------------------------------------------------------
+        $(function () {
+            $.pfitemdetailpagemap();
+            // End
+        });
+        // GET DIRECTION BUTTON PRESSED END --------------------------------------------------------------------------------------------
+
+    })(jQuery);
+    function geolocate() {
+        console.log('aaa');
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function (position) {
+                var geolocation = {
+                    lat: position.coords.latitude,
+                    lng: position.coords.longitude
+                };
+                $('#originMobile').val(position.coords.latitude + ',' + position.coords.longitude).show('fast', calculateMobile);
+            });
+        }
+    }
+
+</script>
+
+
+{#**************************DROPZONE****************************#}
+
+
+<script>
+
+    var maxImageWidth = 800,
+        maxImageHeight = 800;
+    Dropzone.options.myDropzone = {
+        dictDefaultMessage: ' {{ 'dropzone'|trans }}',
+        addRemoveLinks: true,
+
+        acceptedFiles: ".png,.jpg,.gif,.jpeg",
+        clickable: true,
+        init: function () {
+
+
+            this.on("thumbnail", function (file) {
+                // Do the dimension checks you want to do
+                if (file.width <= maxImageWidth || file.height <= maxImageHeight) {
+                    file.rejectDimensions()
+                }
+                else {
+                    file.acceptDimensions();
+                }
+            });
+            this.on("error", function (file, message) {
+
+                return false;
+            });
+
+
+            thisDropzone = this;
+            this.on("removedfile", function (file) {
+
+                console.log(file.name),
+                    $.ajax({
+                        url: '{{ path('module_spa_delate') }}?filetodelete=' + file.name,
+                        data: {'filetodelete': file.name},
+                        type: "POST",
+                        success: function () {
+
+                        },
+                        error: function () {
+
+                        }
+                    });
+            });
+
+        },
+        accept: function (file, done) {
+            file.acceptDimensions = done;
+            file.rejectDimensions = function () {
+                done("Invalid dimension.");
+            };
+
+        }
+    };
+
+
+</script>
+<script>
+    jQuery(function () {
+        jQuery("#sortable").sortable();
+        jQuery("#sortable").disableSelection();
+    });
+
+    $('#gallery-modal').on('hidden.bs.modal', function () {
+        location.reload(true);
+    });
+</script>
+
+
+{#**************************DROPZONE****************************#}
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/css/bootstrap-select.min.css">
+
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/bootstrap-select.min.js"></script>
+
+
+{#----------------jquery-confirm-----------------------#}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.2.0/jquery-confirm.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.2.0/jquery-confirm.min.js"></script>
+{#----------------jquery-confirm-----------------------#}
+
+
+<script>
+    jQuery('.selectpicker').selectpicker({
+        style: 'btn-info',
+        size: 4
+    });
+
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-formhelpers/2.3.0/js/bootstrap-formhelpers.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-formhelpers/2.3.0/css/bootstrap-formhelpers.css">
+
+<script>
+
+
+    $(".DeleteIMG").click(function () {
+
+        var txt;
+        var r = confirm("Confirmation de Suppression image !");
+        if (r == true) {
+            img = $(this).attr('data-img');
+            div = $(this).attr('data-sup');
+            link = $(this).attr('data-link');
+alert(div);
+
+            var data = {
+                img: img,
+            };
+
+            $.ajax({
+                type: "POST",
+                url: link,
+                data: data,
+                success: function (result) {
+
+                    new PNotify({
+                        title: 'Succès!',
+                        text: 'votre image etait supprimer avec succès .',
+                        type: 'success'
+                    });
+                    $(div).hide('slow', function () {
+                        $(div).remove();
+                    });
+
+                }
+            });
+        } else {
+            txt = "You pressed Cancel!";
+        }
+
+    });
+
+
+</script>
+
+
+<script>
+
+
+    $(".carousel [data-slide='prev']").click(function () {
+        var idCarousel = $(this).attr('data-id-carousel');
+        $(idCarousel).carousel('prev');
+    })
+
+    $(".carousel [data-slide='next']").click(function () {
+        var idCarousel = $(this).attr('data-id-carousel');
+        $(idCarousel).carousel('next');
+    })
+
+
+</script>
+<script>
+    $('.remove').click(function () {
+
+
+        var r = confirm("Confirmation de Suppression image !");
+        if (r == true) {
+
+
+            var filetodelete = $(this).attr('data-name-remove');
+            var id = $(this).attr('data-id');
+            var div = $(this).attr('data-sup');
+
+            var data = {
+                id: id,
+                filetodelete: filetodelete
+            };
+
+
+            $.ajax({
+                url: '{{ path('module_spa_delate') }}',
+                data: data,
+                type: "POST",
+                success: function (data) {
+
+                    console.log(data);
+                    new PNotify({
+                        title: 'Succès!',
+                        text: 'votre image etait supprimer avec succès .',
+                        type: 'success'
+                    });
+
+                    $(div).hide('slow', function () {
+                        $(div).remove();
+                    });
+
+
+                }
+
+
+            });
+
+
+        } else {
+            console.log('false');
+        }
+
+
+    });
+
+
+</script>
+<style>
+    .error {
+        border: solid 2px #FF0000;
+    }
+</style>
+            <script>
+            {% if connected %}
+            CKEDITOR.replace('editor');
+            CKEDITOR.replaceClass = 'edit';
+            {% endif %}
+
+            function submit(id) {
+                return jQuery(id).submit()
+            }
+
+            function validateForm(id) {
+
+                if (jQuery(id + ' [required]').length > 0) {
+                    valid = true;
+
+                    jQuery(id + ' [required]').each(function () {
+                        if ($(this).val() === '') {
+                            $(this).addClass("error");
+                            valid = false;
+                            return false;
+                        } else {
+                            valid = true;
+                            $(this).removeClass("error");
+                        }
+                    });
+                    if (valid == true)
+                        return submit(id);
+                    else
+                        return false;
+                } else {
+            return submit(id);
+        }
+    }
+    ;
+    jQuery("[data-target='modifier']").click(function () {
+        var isValid = true;
+        id = $(this).attr("data-selector");
+        id = "#" + id;
+        validateForm(id);
+    });
+
+</script>
+
+{#===================resercvation button==========================#}
+<script>
+    jQuery('.Reserver').click(function () {
+        link = $(this).attr('data-link');
+        $('#resevation_form').attr('action', link);
+
+    })
+
+    $(document).ready(function () {
+        $('#media').carousel({
+            pause: true,
+            interval: false,
+        });
+    });
+</script>
+
+{#------------------img light box---------------------#}
+<script>
+    jQuery('.lightbox-img').click(function () {
+        src = $(this).find('img').attr('src');
+        jQuery('.imageopen').attr('src', src);
+    })
+</script>
+{#------------------end img light box---------------------#}
+
+
+{#------------------end img light box---------------------#}
+
+{#===================end resercvation button==========================#}
+{% if app.request.get('reservation') %}
+    <script>
+        {% if app.request.get('reservation') == 1 %}
+        new PNotify({
+            title: 'Succès!',
+            text: 'Votre réservation a bien été prise en compte. Merci pour votre confiance.',
+            type: 'success'
+        });
+        {% elseif app.request.get('reservation') == 0 %}
+        new PNotify({
+            title: 'Echec!',
+            text: 'Problem réservation.',
+            type: 'echec'
+        });
+        {% endif %}
+    </script>
+{% endif %}
+
+
+{#-----------------supprimer une ann----------------#}
+<script>
+    $('.delet-annonce').click(function () {
+        var link = $(this).attr('data-link')
+        $.confirm({
+            title: '',
+            content: '           <div class="alert alert-warning row" role="alert">' +
+            '                   <i class="fa fa-exclamation-circle col-md-1 col-sm-1 col-xs-1" aria-hidden="true"></i>' +
+            '                  <strong class="col-md-10 col-sm-10 col-xs-10">Confirmation Suppression !</strong>' +
+            '           </div>',
+
+            buttons: {
+                Confirmer: function () {
+                    $('#supp-ann').attr('action', link);
+                    $('#supp-ann').submit();
+                },
+                Annuler: function () {
+
+                }
+            }
+        });
+
+    })
+</script>
+{#-----------------supprimer une ann----------------#}
+{#-----------------color piker----------------#}
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        var left = $('#left').tabSlideOut({
+            tabLocation: 'left',
+            clickScreenToClose: false,
+            offset: '40px',
+            offsetReverse: true, // offset from bottom, not top
+            // handlers: enable and disable buttons when sliding open or closed
+            onOpen: function () {
+                $('#open').prop('disabled', true);
+                $('#close').prop('disabled', false);
+            },
+            onClose: function () {
+                $('#open').prop('disabled', false);
+                $('#close').prop('disabled', true);
+            }
+        });
+    });
+
+
+    {#-----------------color piker----------------#}
+</script>
+
+{#-------theme changer-------#}
+<script>
+    $(document).ready(function () {
+
+        jQuery('canvas.bfh-colorpicker-palette').click(function () {
+
+            data_pour = $(this).parent().parent().attr('data-pour');
+
+            color = $('[data-pour=' + data_pour + '] input').val()
+
+            console.log(color);
+            console.log(data_pour);
+
+            color = color + '!important';
+
+
+            if (data_pour == 'titre') {
+                jQuery('h2').attr('style', 'color:' + color);
+            }
+            else if (data_pour == 'Soustitre') {
+                jQuery('h4').attr('style', 'color:' + color);
+            }
+            else if (data_pour == 'bouton') {
+                jQuery('.theme-btn btn-style-one,button,.theme-btn').attr('style', 'background:' + color);
+            }
+            else if (data_pour == 'text') {
+                jQuery('.text, li').attr('style', 'color:' + color);
+            }
+            else if (data_pour == 'background-propo') {
+                jQuery('#propo').attr('style', 'background:' + color);
+            }
+            else if (data_pour == 'background-service') {
+                jQuery('#service,.about-section, #service').attr('style', 'background:' + color);
+            }
+            else if (data_pour == 'background-annonce') {
+                jQuery('.proprety,.property-details').attr('style', 'background:' + color);
+            }
+            else if (data_pour == 'background-gallery') {
+                jQuery('.gallery-section').attr('style', 'background:' + color);
+            }
+            else if (data_pour == 'background-contact') {
+                jQuery('.gallery-section').attr('style', 'background:' + color);
+            }
+
+
+//
+//            jQuery('.header-style-one .logo:before, .btn-style-one, .theme_bg_color').attr('style', 'background:' + color);
+//            $('color').append("<style>.header-style-one .logo:before{background:" + color + "}</style>");
+//            jQuery('.btn-style-one:hover, .btn-style-two:hover, .header-style-one .info-box li .icon ,.sec-title h2 strong ,.theme_color').css("color", color);
+
+        })
+
+        $('[setbg_color]').click(function() {
+
+            bg_color = $(this).css('background-color');
+            bg_data_pour = $('#backgroundcolor').attr('data-pour');
+
+
+
+            console.log(bg_color,bg_data_pour);
+            if (bg_data_pour == 'background-propo') {
+                bg_img = jQuery('#motif_propo').val();
+                jQuery('#propo').attr('style', 'background-image:' + bg_img+'!important; background-color:'+bg_color+'!important');
+                $('.background.about input').val(bg_color);
+            }
+            else if (bg_data_pour == 'background-service') {
+                jQuery('#service,.about-section, #service').attr('style', 'background:' + bg_color);
+                $('.background.service input').val(bg_color);
+            }
+            else if (bg_data_pour == 'background-annonce') {
+                bg_img = jQuery('#motif_annonce').val();
+                jQuery('.proprety,.property-details').attr('style', 'background-image:' + bg_img+'!important; background-color:'+bg_color+'!important');
+                $('.background.annonce input').val(bg_color);
+            }
+            else if (bg_data_pour == 'background-gallery') {
+                bg_img = jQuery('#motif_gallery').val();
+                jQuery('.gallery-section').attr('style', 'background-image:' + bg_img+'!important; background-color:'+bg_color+'!important');
+                $('.background.gallery input').val(bg_color);
+            }
+            else if (bg_data_pour == 'background-contact') {
+                bg_img = jQuery('#motif_contact').val();
+                jQuery('.gallery-section').attr('style', 'background-image:' + bg_img+'!important; background-color:'+bg_color+'!important');
+                $('.background.contact input').val(bg_color);
+            }
+
+        })
+
+
+
+
+        $('[set_m_bg_color]').click(function() {
+
+            bg_img = $(this).css('background-image');
+            bg_data_pour = $('#background-img').attr('data-pour');
+
+            if (bg_data_pour == 'background-propo') {
+
+                background_color = jQuery('input[data-pour="background-propo"]').val();
+                jQuery('#propo').attr('style', 'background-image:' + bg_img+'!important; background-color:'+background_color+'!important');
+                $('#motif_propo').val(bg_img);
+            }
+            else if (bg_data_pour == 'background-service') {
+
+                background_color = jQuery('input[data-pour="background-service"]').val();
+                jQuery('#service,.about-section, #service').attr('style', 'background-image:' + bg_img+'!important; background-color:'+background_color+'!important');
+                 $('#motif_propo').val(bg_img);
+
+            }
+            else if (bg_data_pour == 'background-annonce') {
+                background_color = jQuery('input[data-pour="background-annonce"]').val();
+                jQuery('.proprety,.property-details').attr('style', 'background-image:' + bg_img+'!important; background-color:'+background_color+'!important');
+               $('#motif_annonce').val(bg_img);
+            }
+            else if (bg_data_pour == 'background-gallery') {
+                background_color = jQuery('input[data-pour="background-gallery"]').val();
+                jQuery('.gallery-section').attr('style', 'background-image:' + bg_img+'!important; background-color:'+background_color+'!important');
+                $('#motif_gallery').val(bg_img);
+            }
+            else if (bg_data_pour == 'background-contact') {
+                background_color = jQuery('input[data-pour="background-contact"]').val();
+                jQuery('.gallery-section').attr('style', 'background-image:' + bg_img+'!important; background-color:'+background_color+'!important');
+                $('#motif_contact').val(bg_img);
+            }
+
+        })
+
+
+
+
+    })
+
+</script>
+{#-------theme changer-------#}
+<script>
+
+    $('tog').click(function () {
+
+        left = $('.theme_changer').position().left;
+
+        if (left < 0) {
+            $('.theme_changer').css('transform', 'translate(0px)')
+        } else {
+            $('.theme_changer').css('transform', 'translate(-200px)')
+        }
+    })
+
+</script>
+{#-------END theme changer-------#}
+
+{#-------RESERVATION-------#}
+<script>
+    jQuery('.Reserver').click(function () {
+        link = $(this).attr('data-link');
+        id_event = $(this).attr('data-event_id');
+        desc = $('.decription_event' + id_event).html();
+        titre = $('.titre_event' + id_event).html();
+        jQuery('.descriptrion_event_mo').html(desc);
+        jQuery('.titre_event_mo h2').html(titre);
+        jQuery('#resevation_form').attr('action', link);
+    })
+</script>
+{#-------END RESERVATION-------#}
+
+{#----------tag-------#}
+<script>
+    $('.tokenfield').tokenfield()
+</script>
+{#---------end tag--------#}
+<script>
+    $("[data-ref]").click(function () {
+        ref = $(this).attr('data-ref');
+        link = $("#visite").attr('action');
+        res = link.replace("coderef", ref);
+        $("#visite").attr('action', res);
+    })
+</script>
+
+
+{#-------------------------annimation background--------------------------------#}
+<script>
+
+
+
+
+    function chnageicon(iconlink , div_name ) {
+
+        for (var i = 1; i< 29 ; i++){
+
+            $(div_name+" .elem"+i).css('background-image','url(' + iconlink + ')')
+
+        }
+    }
+    $('[set_icon]').click(function () {
+
+        data_pour = $(this).parent().attr('data-pour');
+        section = $(this);
+        srcicon = section.find('img').attr('src')
+
+        if (data_pour == 'background-propo') {
+            chnageicon(srcicon , '#propo' );
+            $('#animation_propo').val(srcicon);
+        }
+        else if (data_pour == 'background-annonce') {
+            chnageicon(srcicon , '.property-details' );
+            $('#animation_annonce').val(srcicon);
+        }
+        else if (data_pour == 'background-gallery') {
+            chnageicon(srcicon , '.gallery-section' );
+        }
+        else if (data_pour == 'background-contact') {
+            chnageicon(srcicon , '#section-contact' );
+            $('#annimation_contact').val(srcicon);
+        }
+
+    });
+
+    {% if theme.color.background.animation is defined %}
+
+    {% if theme.color.background.animation.about is not empty %}
+    $(document).ready(function () {
+
+        propoicon ='{{ theme.color.background.animation.about }}';
+        chnageicon(propoicon, '#propo');
+
+    });
+    {% endif %}
+
+    {% if theme.color.background.animation.annone is not empty %}
+    $(document).ready(function () {
+
+        propoicon ='{{ theme.color.background.animation.annone }}';
+        chnageicon(propoicon,'.property-details');
+
+    });
+    {% endif %}
+
+    {% if theme.color.background.animation.gallery is not empty %}
+    $(document).ready(function () {
+
+        propoicon ='{{ theme.color.background.animation.gallery }}';
+        chnageicon(propoicon, '.gallery-section');
+
+    });
+    {% endif %}
+
+    {% if theme.color.background.animation.contact is not empty %}
+    $(document).ready(function () {
+
+        propoicon ='{{ theme.color.background.animation.contact }}';
+        chnageicon(propoicon, '#section-contact');
+
+    });
+    {% endif %}
+
+    {% endif %}
+
+
+
+
+//    -----------markes-----------
+
+function markes () {
+    json = {};
+    var x=0;
+    var model ="model";
+    $('.dhx_combo_list.dhx_skyblue_list:eq(1) div').each(function(){
+        x+=1;
+        x.toString();
+        json["model"+x] =$(this).html();
+
+    })
+}
+
+
+
+
+
+
+
+
+</script>
+{#------------------------- end annimation background--------------------------------#}
+
+<color></color>
+</body>
+</html>

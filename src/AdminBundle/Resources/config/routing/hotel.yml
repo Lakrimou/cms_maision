@@ -1,0 +1,24 @@
+hotel_index:
+    path:     /
+    defaults: { _controller: "AdminBundle:Hotel:index" }
+    methods:  GET
+
+hotel_show:
+    path:     /{id}/show
+    defaults: { _controller: "AdminBundle:Hotel:show" }
+    methods:  GET
+
+hotel_new:
+    path:     /new
+    defaults: { _controller: "AdminBundle:Hotel:new" }
+    methods:  [GET, POST]
+
+hotel_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "AdminBundle:Hotel:edit" }
+    methods:  [GET, POST]
+
+hotel_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "AdminBundle:Hotel:delete" }
+    methods:  DELETE

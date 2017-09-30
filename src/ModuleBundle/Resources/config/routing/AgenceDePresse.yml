@@ -1,0 +1,15 @@
+agence_presse_id:
+    path: /articles/{id}
+    defaults: { _controller: ModuleBundle:AgenceDePresse:getArticleById }
+    methods: [GET]
+agence_presse_add_article:
+    path: /add_article
+    defaults: { _controller: ModuleBundle:AgenceDePresse:addArticle }
+    methods: POST
+agence_presse_delete:
+    path: /article/supprimer
+    defaults: { _controller: ModuleBundle:AgenceDePresse:deleteArticleById}
+    methods: [POST,GET]
+agence_presse_annonce_page:
+    path:     /annonce/{page}/{id}
+    defaults: { _controller: "ModuleBundle:AgenceDePresse:ficheAnnoncesPages" }

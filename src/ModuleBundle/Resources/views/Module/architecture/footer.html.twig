@@ -1,0 +1,227 @@
+<div class="info-box">
+    <a class="info-toggle" href="#"><i class="fa fa-info-circle"></i></a>
+    <div class="info-content">
+        <ul>
+
+            <li><i class="fa fa fa-phone"></i>{{ qouiqui.phone }}</li>
+
+            <li><i class="fa fa fa-envelope-o"></i>{{ qouiqui.mail }}</li>
+
+            <li><i class="fa fa fa-home"></i>{{ qouiqui.address1 }}</li>
+        </ul>
+    </div>
+</div>
+
+<footer>
+
+
+    <div class="inner-footer">
+        <div class="wrapper clearfix">
+
+            <section class="section section-white" id="contact">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-offset-2 col-md-8">
+
+                            <header class="section-header">
+                                <div class=" animated" data-animation="bounceInLeft"><i class="autologo_avto"></i></div>
+                                <div class="contact">
+                                    <h4 style="text-align: center;font-weight:600!important">Contactez nous</h4>
+                                </div>
+
+                            </header>
+
+
+                        </div>
+                    </div>
+                    <div class="row contact-row">
+                        <div class="col-xs-12 col-sm-12 col-lg-6 send-message">
+                            <h4>Envoyez nous un email</h4>
+                            <div id="sh_contactus-2" class="widget widget_sh_contactus">
+                                <div id="sh_contactus-2" class="widget widget_sh_contactus">
+                                    <div class="send-message">
+
+
+                                        <form action="{{ path('send_mail') }}" class="form-full-width contact-form" method="post" id="contact" name="contactform">
+                                            <div class="text-fields">
+                                                <div class="float-input">
+
+
+                                                    <input placeholder="Nom*" type="text" id="contact_name1" name="name" required data-validate="^[ا-ی\w\s]{2,30}$"/>
+                                                </div>
+
+
+                                                <div class="float-input">
+                                                    <input placeholder="Email*" type="email" id="contact_email1" name="email" required data-validate="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$"/>
+                                                </div>
+
+                                            </div>
+                                            <div class="submit-area">
+                                                <div class="area-form-elem">
+
+
+                                                    <textarea placeholder="Message*" id="contact-message" name="body" required data-validate=".{2,400}$"></textarea>
+                                                    <input type="submit" id="submit" class="main-button" value="Envoyer">
+                                                </div>
+                                            </div>
+
+
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <!-- CONTACT FORM ALERTS -->
+                            <div class="alert alert-success" id="contact_success" style="display: none;">
+                                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                <div class="alert-inner">
+                                    <strong>Thanks,</strong> your message recieved successfully. We'll get back to you as soon as possible.
+                                </div>
+                            </div>
+                            <!-- /success msg -->
+
+                            <div class="alert alert-danger" id="contact_fail" style="display: none;">
+                                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                <div class="alert-inner"></div>
+                            </div>
+                            <!-- /error msg -->
+                            <!-- /CONTACT FORM ALERTS -->
+
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-lg-6 pull-right contact singup">
+                            <h4>{{ qouiqui.slug|upper }}</h4>
+                            <p>Address:{{ qouiqui.address1 }}<br>
+                                Tel: {{ qouiqui.phone }}<br>
+
+                                Email: <a href="mailto:info@delicategem.com">{{ qouiqui.mail }}</a></p>
+                            <p>&nbsp; </p>
+                            <h4>Horraires du travail</h4>
+                            {% set horraire = jsonDecod(qouiqui.opening) %}
+                            <p>Du lundi jusqu'à Vendredi: {{ horraire['week1']['start'] }} A.M. à {{ horraire['week1']['end'] }} A.M. ET {{ horraire['week2']['start'] }} A.M. à {{ horraire['week2']['end'] }} A.M.<br>
+                                Samedi: {{ horraire['weekendsamedi']['start'] }}A.M. à {{ horraire['weekendsamedi']['end'] }} A.M.<br>
+                                Dimanche: {{ horraire['weekenddimanche']['start'] }}A.M. à {{ horraire['weekenddimanche']['end'] }} A.M.</p>
+                            <p>&nbsp; </p>
+                            <a href="#"><i class="fa fa-facebook"></i></a> <a href="#"><i class="fa fa-twitter"></i></a> <a href="#"><i class="fa fa-html5"></i></a> <a href="#"><i class="fa fa-youtube"></i></a> <a href="#"><i class="fa fa-flickr"></i></a> <a href="#"><i class="fa fa-vk"></i></a></div>
+                    </div>
+                </div>
+
+                <div class="particle elem1 anim-delay1"></div>
+                <div class="particle elem2 anim-delay5"></div>
+                <div class="particle elem3 anim-delay3"></div>
+                <div class="particle elem4 anim-delay8"></div>
+                <div class="particle elem5 anim-delay9"></div>
+                <div class="particle elem6 anim-delay2"></div>
+                <div class="particle elem7 anim-delay4"></div>
+                <div class="particle elem8 anim-delay3"></div>
+                <div class="particle elem9 anim-delay10"></div>
+                <div class="particle elem8 anim-delay11"></div>
+                <div class="particle elem6 anim-delay12"></div>
+                <div class="particle elem1 anim-delay14"></div>
+                <div class="particle elem13 anim-delay16"></div>
+                <div class="particle elem17 anim-delay18"></div>
+                <div class="particle elem2 anim-delay6"></div>
+                <div class="particle elem16 anim-delay9"></div>
+                <div class="particle elem8 anim-delay3"></div>
+                <div class="particle elem9 anim-delay10"></div>
+                <div class="particle elem18 anim-delay11"></div>
+                <div class="particle elem11 anim-delay12"></div>
+                <div class="particle elem12 anim-delay14"></div>
+                <div class="particle elem13 anim-delay16"></div>
+                <div class="particle elem14 anim-delay18"></div>
+                <div class="particle elem15 anim-delay6"></div>
+                <div class="particle elem16 anim-delay9"></div>
+                <div class="particle elem17 anim-delay7"></div>
+                <div class="particle elem18 anim-delay6"></div>
+                <div class="particle elem19 anim-delay3"></div>
+
+            </section>
+            <section id="map-section" class="map-section">
+                <div id="map-container" class="map-container" style="width: 100%;height: 500px"></div>
+                <div id="ite" style="    padding-top: 10px;
+    width: 361px;
+    min-height: 93px;
+    position: relative;
+    z-index: 97;
+
+    background: rgba(113, 177, 0, 0.85);
+
+    overflow-y: scroll;
+    margin: auto;
+        top: -500px;
+            left: -30%;
+
+
+    max-height: 499px;">
+                    <div class="col-md-12 align-center">
+                        <div class="col-md-12">
+                            <div style="    text-align: center;font-size: 20px; color:white">
+
+                                Y aller
+                            </div>
+                            <form class="form-inline">
+
+                                <div class="no-padding hidden">
+                                    <div class="input-group first-ch">
+
+                                        <input type="hidden" name="origin" id="origin" placeholder="Indiquez un lieu"
+                                               class="form-control map-input" size="0" autocomplete="on">
+                                    </div>
+                                </div>
+                                <div class="col-md-8 no-padding col-sm-offset-2">
+
+
+                                    <a class="btn btn-primary btn-block btn-sm" style="cursor:pointer;padding: 7px;"
+                                       onclick="geoLocate();">Itinéraire</a>
+
+
+                                    <input type="hidden" value="{{ qouiqui.geoLat }},{{ qouiqui.geoLong }}" name="destination" id="destination">
+
+                                </div>
+
+                            </form>
+                            <div id="panel"></div>
+                        </div>
+                    </div>
+                </div>
+
+            </section>
+
+
+        </div>
+
+    </div>
+
+    <!-- End Inner Footer -->
+
+    <div class="last-div clearfix">
+        <div class="wrapper">
+            <div class="copyright">
+                © 2017 Webmaster-Media All Right Reserved
+            </div>
+
+            <div id="back-to-top">
+                <a href="#top">Back to Top</a>
+            </div>
+
+            <div class="f-socials">
+
+
+                <a target="_blank" href="http://google-plus.com/" title=""><i class="fa fa-google-plus"></i></a>
+
+                <a target="_blank" href="http://twitter.com/" title=""><i class="fa fa-twitter"></i></a>
+
+                <a target="_blank" href="http://pinterest.com/" title=""><i class="fa fa-pinterest"></i></a>
+
+                <a target="_blank" href="http://dribbble.com/" title=""><i class="fa fa-dribbble"></i></a>
+
+                <a target="_blank" href="http://linked-in.com/" title=""><i class="fa fa-linkedin"></i></a>
+
+                <a target="_blank" href="http://facebook.com/" title=""><i class="fa fa-facebook"></i></a>
+            </div>
+
+        </div>
+    </div>
+    <!-- End Last Div -->
+
+</footer>

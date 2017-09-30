@@ -1,0 +1,112 @@
+module_centreformation_insert_data:
+     path: /insert/data/{qq_id}
+     defaults: { _controller: ModuleBundle:CentreFormation:insertData}
+     methods: [GET, POST]
+module_centreformation_service:
+     path: /ajout
+     defaults: { _controller: ModuleBundle:CentreFormation:ajoutservice}
+     methods: [GET, POST]
+module_centreformation_modif_service:
+     path: /modif
+     defaults: { _controller: ModuleBundle:CentreFormation:modifservice}
+     methods: [GET, POST]
+module_centreformation_edit_service:
+     path: /edit
+     defaults: { _controller: ModuleBundle:CentreFormation:editservice}
+     methods: [GET, POST]
+module_centreformation_horaire:
+     path: /gethoraire
+     defaults: { _controller: ModuleBundle:CentreFormation:horaire}
+     methods: [GET, POST]
+module_centreformation_delate_service:
+     path: /supprim
+     defaults: { _controller: ModuleBundle:CentreFormation:delateservice}
+     methods: [GET, POST]
+module_centreformation_ajout_event:
+     path: /ajout_event
+     defaults: { _controller: ModuleBundle:CentreFormation:ajoutevent}
+     methods: [GET, POST]
+module_centreformation_edit_event:
+     path: /edit_event
+     defaults: { _controller: ModuleBundle:CentreFormation:editevent}
+     methods: [GET, POST]
+module_centreformation_modif_event:
+     path: /modif_event/{idqq}
+     defaults: { _controller: ModuleBundle:CentreFormation:modifevent}
+     methods: [GET, POST]
+module_centreformation_delate_event:
+     path: /delate_event
+     defaults: { _controller: ModuleBundle:CentreFormation:delateevent}
+     methods: [GET, POST]
+module_centreformation_ajout_trainer:
+     path: /add/trainer
+     defaults: { _controller: ModuleBundle:CentreFormation:addTrainer}
+     methods: [GET, POST]
+module_centreformation_edit_trainer:
+     path: /edit/trainer
+     defaults: { _controller: ModuleBundle:CentreFormation:editTrainer}
+     methods: [GET, POST]
+module_centreformation_modif_trainer:
+     path: /edit/tariner/{idqq}
+     defaults: { _controller: ModuleBundle:CentreFormation:modifTrainer}
+     methods: [GET, POST]
+module_centreformation_delate_trainer:
+     path: /delate/trainer
+     defaults: { _controller: ModuleBundle:CentreFormation:delateTrainer}
+     methods: [GET, POST]
+module_centreformation_booking:
+    path: /reservation
+    defaults: { _controller: ModuleBundle:CentreFormation:booking}
+    methods: [GET, POST]
+module_centreformation_about:
+     path: /profil
+     defaults: { _controller: ModuleBundle:CentreFormation:edit_about}
+     methods: [GET, POST]
+
+module_centreformation_section_ad:
+     path: /ad/{idqq}
+     defaults: { _controller: ModuleBundle:CentreFormation:sectionAd}
+     methods: [GET, POST]
+module_centreformation_ajout_categorie:
+     path: /categorie/{idqq}
+     defaults: { _controller: ModuleBundle:CentreFormation:addCategories}
+     methods: [GET, POST]
+module_centreformation_contactezNous:
+     path: /contact/{id_qq}
+     defaults: { _controller: ModuleBundle:CentreFormation:contactezNous}
+     methods: [GET, POST]
+module_centreformation_add-evnt:
+     path: /addEvent/{idqq}
+     defaults: { _controller: ModuleBundle:CentreFormation:AddEvents}
+     methods: [GET, POST]
+module_centreformation_get_event:
+     path: /GetEvent
+     defaults: { _controller: ModuleBundle:CentreFormation:getEvent}
+     methods: [GET, POST]
+module_centreformation_update_event:
+     path: /updateEvent/{qqId}
+     defaults: { _controller: ModuleBundle:CentreFormation:updateEvent}
+     methods: [GET, POST]
+
+
+module_centreformation_delate_events:
+     path: /delateEvents/{idEve}/{idqq}
+     defaults: { _controller: ModuleBundle:CentreFormation:delateEvents}
+     methods: [GET, POST]
+module_centreformation_get_horaire:
+     path: /horaire
+     defaults: { _controller: ModuleBundle:CentreFormation:getTimeWork}
+     methods: [GET, POST]
+module_centreformation_delate_services:
+     path: /delateServices/{idserv}/{idqq}
+     defaults: { _controller: ModuleBundle:CentreFormation:delateServices}
+     methods: [GET, POST]
+
+module_centreformation_get_detail:
+     path: /details
+     defaults: { _controller: ModuleBundle:CentreFormation:getDetail}
+     methods: [GET, POST]
+module_centreformation_service_paginate:
+     path: /servicepaginate
+     defaults: { _controller: ModuleBundle:CentreFormation:servicePaginate}
+     methods: [GET, POST]

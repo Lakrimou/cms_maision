@@ -1,0 +1,1908 @@
+{#<style>#}
+    {#@import url('https://fonts.googleapis.com/css?family=Montserrat');#}
+    {#@import url('https://fonts.googleapis.com/css?family=Roboto');#}
+    {#@import url('../../../../../../web/asset-front/fonts/monospace.ttf');#}
+{#</style>#}
+
+<script>
+    var modalUniqueClass = ".modal";
+    $('.modal').on('show.bs.modal', function (e) {
+        var $element = $(this);
+        var $uniques = $(modalUniqueClass + ':visible').not($(this));
+        if ($uniques.length) {
+            $uniques.modal('hide');
+            $uniques.one('hidden.bs.modal', function (e) {
+                $element.modal('show');
+            });
+            return false;
+        }
+    });
+</script>
+
+<script>
+    jQuery('.modal').on('shown.bs.modal', function () {
+        google.maps.event.trigger(map, "resize");
+    });
+
+
+    function to__OBJ(data) {
+        if ((typeof data) == 'string') {
+            data = data.replace(/\\/g, '\\');
+            if ((typeof data) == 'string') {
+                data = data.replace(/(\r\n|\n|\r)/g, '<br/>').toString();
+                data = JSON.parse(data);
+            }
+            return data;
+        }
+    }
+</script>
+
+<script>
+    $('.bfh-googlefonts').on('change.bfhselectbox', function () {
+        font = $('.bfh-googlefonts').find('.bfh-selectbox-option').html();
+        link = "https://fonts.googleapis.com/css?family=" + font.replace(' ', '+');
+        $('#googlefontlink').attr('href', link.toString())
+        $('#big-header,.header-company-title,h1, h2, h3, h4, h5, h6 ,body').attr('style', "font-family: " + font + "!important");
+    });
+</script>
+
+
+<link id="googlefontlink" href="" rel="stylesheet">
+
+
+{% if  theme.color.font|default %}
+    <link href="https://fonts.googleapis.com/css?family={{ theme.color.font|replace({' ': '+'} ) }}" rel="stylesheet">
+
+    <style>
+        #big-header, .header-company-title, h1, h2, h3, h4, h5, h6, body {
+            font-family: '{{ theme.color.font }}', sans-serif !important;
+        }
+    </style>
+
+{% endif %}
+
+
+{% if connected %}
+
+
+    <script>
+
+    </script>
+
+
+
+
+
+
+    <script>
+        ($('.ooo').show()).$
+    </script>
+{% endif %}
+<script>
+    {#==================================== text fill ===================================== #}
+    $('.my-header-fill').textfill({});
+    $('#big-header').textfill({});
+    $('.tlt').textillate({
+//        loop: true,
+    });
+    $(function () {
+//        $("#inputDate").datepicker({
+//            startDate: '-3d'
+//        });
+//        $("#inputHeur").timepicker(
+//        );
+    });
+
+</script>
+
+<script src=" https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.js"></script>
+<script src=" https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css">
+
+<script type="text/javascript">
+    $(function () {
+        $('#inputDate').datetimepicker({});
+    });
+</script>
+
+
+<script>
+    //callcenter upload lm and cv
+    $("#centre-appel-cv, #centre-appel-lettre-motivation").fileuploader({
+        extensions: ['pdf', 'doc', 'docx'],
+        addMore: true,
+    });
+</script>
+
+{% if connected %}
+    <script>
+        {#==================================== Upload image ===================================== #}
+        $('input[type="file"]').not("#image, #centre-appel-cv, #centre-appel-lettre-motivation").fileuploader({
+            extensions: ['jpg', 'jpeg', 'png'],
+            addMore: true,
+        });
+    </script>
+
+    {#==================================== upload image slider ===================================== #}
+    <script>
+
+        //    var Cropper = window.Cropper;
+        //    var cropper = new Cropper(document.getElementById('myImageCrop'), {});
+
+
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+
+
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#myImageCrop').attr('src', e.target.result);
+                };
+                reader.readAsDataURL(input.files[0]);
+
+
+                setTimeout(function () {
+                    var width, height;
+                    var img = document.createElement("img");
+                    img.onload = function () {
+                        width = img.naturalWidth || img.width;
+                        height = img.naturalHeight || img.height;
+                        if (width >= 1000) {
+
+                            $('#crop-info').hide();
+                            initCropper();
+
+                            $('.btn-upload').css('width', 'inherit');
+                            $('.btn-upload').removeClass('booster-shak');
+                            $('.corp-edit').fadeIn();
+                        } else {
+
+                            var $element = $('#crop-info');
+                            $('#crop-info').fadeIn().css('background', 'red');
+                            setInterval(function () {
+                                $element.fadeIn(1000, function () {
+                                    $element.fadeOut(1500, function () {
+                                        $element.fadeIn(1500)
+                                    });
+                                });
+                            }, 2000);
+
+
+                            $('.corp-edit').hide();
+                            $('.cropper-container').remove();
+                            $('.btn-upload').addClass('booster-shak');
+                            $('.btn-upload').css('width', '100%');
+                        }
+                    }
+                    img.src = $('#myImageCrop').attr('src');
+                }, 1000);
+            }
+        }
+
+        function initCropper() {
+            var image = document.getElementById('myImageCrop');
+            var options = {
+                dragMode: 'move',
+                aspectRatio: 16 / 6,
+                autoCropArea: 1,
+                restore: false,
+                guides: false,
+                center: false,
+                highlight: false,
+                cropBoxMovable: false,
+                cropBoxResizable: false,
+                toggleDragModeOnDblclick: false,
+                crop: function (e) {
+
+                },
+                zoom: function (e) {
+
+                }
+            };
+
+            cropper = new Cropper(image, options);
+            cropper.destroy();
+            $('.cropper-container').remove();
+            var cropper = new Cropper(image, options);
+
+
+            $('.method-zoom').on('click', function () {
+                cropper.zoom($(this).attr('data-option'));
+            });
+
+            $('.method-reset').on('click', function () {
+                cropper.reset();
+            });
+            $('.scaleX').on('click', function () {
+                if (cropper.imageData.scaleX == -1)
+                    cropper.scaleX(1);
+                else
+                    cropper.scaleX(-1);
+            });
+            $('.scaleY').on('click', function () {
+                if (cropper.imageData.scaleY == -1)
+                    cropper.scaleY(1);
+                else
+                    cropper.scaleY(-1);
+            });
+
+            // On crop button clicked
+            document.getElementById('btn-slider-upload').addEventListener('click', function () {
+                $(this).prop('disabled', true);
+                $('.crop-loading').fadeIn();
+
+                var imgurl = cropper.getCroppedCanvas().toDataURL();
+                var img = document.createElement("img");
+                img.src = imgurl;
+//            $('#cropped_result').html(img);
+
+                /* ----------------	SEND IMAGE TO THE SERVER-------------------------*/
+                cropper.getCroppedCanvas({
+                    width: 1600,
+                    height: 800,
+
+                }).toBlob(function (blob) {
+                    var formData = new FormData();
+                    formData.append('croppedImage', blob);
+                    $.ajax("{{ path('uploadslider',{'qq_id': qouiqui.id }) }}", {
+                        method: "POST",
+                        data: formData,
+                        processData: false,
+                        contentType: false,
+                        success: function (result) {
+                            $('#crop-info-success').fadeIn();
+                            setTimeout(function () {
+                                $('#crop-info-success').fadeOut('slow');
+                            }, 3000);
+                            setTimeout(function () {
+                                $('#crop-info').fadeIn().css('background', '#009688');
+                            }, 3000);
+                            $('#btn-slider-upload').prop('disabled', false);
+                            $('.crop-loading').fadeOut();
+                            $('.corp-edit').hide();
+                            $('.cropper-container').remove();
+                            $('.btn-upload').addClass('booster-shak');
+                            $('.btn-upload').css('width', '100%');
+                        },
+                        error: function () {
+                            alert('Upload error');
+                        }
+                    });
+                });
+
+            })
+        }
+
+
+    </script>
+
+{% endif %}
+<script>
+
+    //    var modalUniqueClass = ".modal";
+    //    $('.modal').on('show.bs.modal', function(e) {
+    //        var $element = $(this);
+    //        var $uniques = $(modalUniqueClass + ':visible').not($(this));
+    //        if ($uniques.length) {
+    //            $uniques.modal('hide');
+    //            $uniques.one('hidden.bs.modal', function(e) {
+    //                $element.modal('show');
+    //            });
+    //            return false;
+    //        }
+    //    });
+
+    // Popup Form
+    jQuery(".signUpClick").on('click', function () {
+        jQuery('.siginincontainer').fadeOut();
+        jQuery('.forgetpasswordcontainer').fadeOut();
+        jQuery('.siginupcontainer').fadeIn();
+    });
+    jQuery(".signInClick").on('click', function () {
+        jQuery('.forgetpasswordcontainer').fadeOut();
+        jQuery('.siginupcontainer').fadeOut();
+        jQuery('.siginincontainer').fadeIn();
+    });
+    jQuery(".forgetPasswordClick").on('click', function () {
+        jQuery('.siginupcontainer').fadeOut();
+        jQuery('.siginincontainer').fadeOut();
+        jQuery('.forgetpasswordcontainer').fadeIn();
+
+    });
+    jQuery(".cancelClick").on('click', function () {
+        jQuery('.siginupcontainer').fadeOut();
+        jQuery('.forgetpasswordcontainer').fadeOut();
+        jQuery('.siginincontainer').fadeIn();
+
+    });
+</script>
+
+
+<!-- Scripts section about -->
+<script>
+    {% if connected %}
+    var configCKEDITOR = {
+        toolbarGroups: [
+            {"name": "styles", "groups": ["styles"]},
+            {"name": 'colors', "groups": ['TextColor', 'BGColor']},
+            {"name": "basicstyles", "groups": ["basicstyles"]},
+            {"name": "links", "groups": ["links"]},
+            {"name": "paragraph", "groups": ["list", "blocks"]},
+            {"name": "document", "groups": ["mode"]},
+            {"name": "insert", "groups": ["insert"]},
+        ],
+        removeButtons: 'Strike,Subscript,Superscript,Anchor,Specialchar,Flash,Styles,Save,Source'
+    };
+
+
+    CKEDITOR.replace('det', configCKEDITOR);
+    CKEDITOR.replaceClass = 'edit';
+    CKEDITOR.replaceClass = 'ckeditor';
+
+
+
+    {% endif %}
+    var widthWindow = $(document).width();
+    if (widthWindow > 1268) {
+
+        $('a[href="#browseTab"]').click(function () {
+            $('#editpropo .modal-dialog').removeClass("modal-lg").addClass(" modal-xm");
+        });
+        $('a[href="#uploadTab"]').click(function () {
+            $('#editpropo .modal-dialog').removeClass("modal-md").addClass(" modal-lg");
+        });
+
+    }
+</script>
+
+{% if app.session.flashBag.has('success') %}
+    {% for msg in app.session.flashBag.get('success') %}
+
+        <script>
+            $(document).ready(function () {
+                new PNotify({
+                    title: 'Notification',
+                    text: '{{ msg }}'
+                });
+            });
+        </script>
+    {% endfor %}
+{% endif %}
+<!-- end Scripts section about -->
+
+
+<!-- start Scripts section map -->
+<script type='text/javascript' src='https://maps.googleapis.com/maps/api/js?key=AIzaSyBabWKVmMpB5ZVqYN2H2ubUXTITp9k5fuc&v=3.exp&#038;libraries=places&#038;language=fr&#038;ver=4.4.1'></script>
+
+<script>
+
+    //    function getLocation_global() {
+    //        if (navigator.geolocation) {
+    //            navigator.geolocation.getCurrentPosition(showPosition_global);
+    //        }
+    //    }
+    //
+    //    function showPosition_global(position) {
+    //
+    ////        $('#origin').val(position.coords.latitude + "," + position.coords.longitude);
+    //        geo = position.coords.latitude + "," + position.coords.longitude;
+    //        $('#origin').val(position.coords.latitude + "," + position.coords.longitude);
+    //        $('#position-help').val(position.coords.latitude + "," + position.coords.longitude);
+    //        return geo;
+    //    }
+
+
+    function showPosition_global() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition2);
+        }
+    }
+
+    function showPosition_global(position) {
+        //        $('#origin').val(position.coords.latitude + "," + position.coords.longitude);
+        geo = position.coords.latitude + "," + position.coords.longitude;
+        $('#origin').val(position.coords.latitude + "," + position.coords.longitude);
+        $('#position-help').val(position.coords.latitude + "," + position.coords.longitude);
+        return geo;
+    }
+
+
+    //    function getLocation2() {
+    //        if (navigator.geolocation) {
+    //            navigator.geolocation.getCurrentPosition(showPosition2);
+    //        }
+    //    }
+    //
+    //    function showPosition2(position) {
+    ////        $('#origin').val(position.coords.latitude + "," + position.coords.longitude);
+    //        geo = position.coords.latitude + "," + position.coords.longitude;
+    //        $('#origin').val(position.coords.latitude + "," + position.coords.longitude);
+    //        return geo;
+    //    }
+
+
+</script>
+<!--{#============map iteneraire==============#}-->
+{% if (qouiqui.geoLat and qouiqui.geoLong) is not empty %}
+    <script>
+        var map;
+        var panel;
+        var initialize;
+        //    var calculate;
+        var direction;
+        style = [
+            {
+                "elementType": "geometry",
+                "stylers": [
+                    {
+                        "color": "#f5f5f5"
+                    }
+                ]
+            },
+            {
+                "elementType": "labels.icon",
+                "stylers": [
+                    {
+                        "visibility": "off"
+                    }
+                ]
+            },
+            {
+                "elementType": "labels.text.fill",
+                "stylers": [
+                    {
+                        "color": "#616161"
+                    }
+                ]
+            },
+            {
+                "elementType": "labels.text.stroke",
+                "stylers": [
+                    {
+                        "color": "#f5f5f5"
+                    }
+                ]
+            },
+            {
+                "featureType": "administrative.land_parcel",
+                "elementType": "labels.text.fill",
+                "stylers": [
+                    {
+                        "color": "#bdbdbd"
+                    }
+                ]
+            },
+            {
+                "featureType": "poi",
+                "elementType": "geometry",
+                "stylers": [
+                    {
+                        "color": "#eeeeee"
+                    }
+                ]
+            },
+            {
+                "featureType": "poi",
+                "elementType": "labels.text.fill",
+                "stylers": [
+                    {
+                        "color": "#757575"
+                    }
+                ]
+            },
+            {
+                "featureType": "poi.park",
+                "elementType": "geometry",
+                "stylers": [
+                    {
+                        "color": "#e5e5e5"
+                    }
+                ]
+            },
+            {
+                "featureType": "poi.park",
+                "elementType": "labels.text.fill",
+                "stylers": [
+                    {
+                        "color": "#9e9e9e"
+                    }
+                ]
+            },
+            {
+                "featureType": "road",
+                "elementType": "geometry",
+                "stylers": [
+                    {
+                        "color": "#ffffff"
+                    }
+                ]
+            },
+            {
+                "featureType": "road.arterial",
+                "elementType": "labels.text.fill",
+                "stylers": [
+                    {
+                        "color": "#757575"
+                    }
+                ]
+            },
+            {
+                "featureType": "road.highway",
+                "elementType": "geometry",
+                "stylers": [
+                    {
+                        "color": "#dadada"
+                    }
+                ]
+            },
+            {
+                "featureType": "road.highway",
+                "elementType": "labels.text.fill",
+                "stylers": [
+                    {
+                        "color": "#616161"
+                    }
+                ]
+            },
+            {
+                "featureType": "road.local",
+                "elementType": "labels.text.fill",
+                "stylers": [
+                    {
+                        "color": "#9e9e9e"
+                    }
+                ]
+            },
+            {
+                "featureType": "transit.line",
+                "elementType": "geometry",
+                "stylers": [
+                    {
+                        "color": "#e5e5e5"
+                    }
+                ]
+            },
+            {
+                "featureType": "transit.station",
+                "elementType": "geometry",
+                "stylers": [
+                    {
+                        "color": "#eeeeee"
+                    }
+                ]
+            },
+            {
+                "featureType": "water",
+                "elementType": "geometry",
+                "stylers": [
+                    {
+                        "color": "#c9c9c9"
+                    }
+                ]
+            },
+            {
+                "featureType": "water",
+                "elementType": "labels.text.fill",
+                "stylers": [
+                    {
+                        "color": "#9e9e9e"
+                    }
+                ]
+            }
+        ];
+
+        initialize = function () {
+
+            var latLng = new google.maps.LatLng({{ qouiqui.geoLat }},{{ qouiqui.geoLong }}); // Correspond au coordonnées de Lille
+
+            var myOptions = {
+                zoom: 11,
+                center: new google.maps.LatLng({{ qouiqui.geoLat }},{{ qouiqui.geoLong }}),
+                mapTypeId: google.maps.MapTypeId.TERRAIN, // Type de carte, différentes valeurs possible HYBRID, ROADMAP, SATELLITE, TERRAIN
+                maxZoom: 20,
+//            styles: style,
+                scrollwheel: false
+
+            };
+
+            map2 = new google.maps.Map(document.getElementById('map-container'), myOptions);
+            //map.setOptions({styles: style2});
+
+
+            panel = document.getElementById('panel');
+            var marker = new google.maps.Marker({
+                position: latLng,
+                map: map2,
+                icon: 'https://cdn0.iconfinder.com/data/icons/small-n-flat/24/678111-map-marker-32.png',
+                title: "Lille",
+            });
+
+            var contentMarker = [].join('');
+            var infoWindow = new google.maps.InfoWindow({
+                content: contentMarker,
+                position: latLng
+            });
+            google.maps.event.addListener(marker, 'click', function () {
+                infoWindow.open(map2, marker);
+            });
+            google.maps.event.addListener(infoWindow, 'domready', function () { // infoWindow est biensûr notre info-bulle
+                jQuery("#tabs").tabs();
+            });
+            direction = new google.maps.DirectionsRenderer({
+                map: map2,
+                panel: panel // Dom element pour afficher les instructions d'itinéraire
+            });
+        };
+
+        function calculate(origin) {
+            origin = origin; // Le point départ
+            destination = document.getElementById('destination').value; // Le point d'arrivé
+            console.log("origin : " + origin, "destination : " + destination);
+            if (origin && destination) {
+                var request = {
+                    origin: origin,
+                    destination: destination,
+                    travelMode: google.maps.DirectionsTravelMode.DRIVING // Mode de conduite
+                }
+                var directionsService = new google.maps.DirectionsService(); // Service de calcul d'itinéraire
+                directionsService.route(request, function (response, status) { // Envoie de la requête pour calculer le parcours
+                    if (status == google.maps.DirectionsStatus.OK) {
+                        direction.setDirections(response); // Trace l'itinéraire sur la carte et les différentes étapes du parcours
+                    }
+                });
+            }
+            jQuery("#ite").show();
+        }
+        ;
+        initialize();
+
+        function geoLocate() {
+
+            if ($('#origin').val().length !== 0) {
+                calculate($('#origin').val())
+            } else {
+                ori = true;
+                if (navigator.geolocation && ori) {
+                    navigator.geolocation.getCurrentPosition(function (position) {
+                        var geolocation = {
+                            lat: position.coords.latitude,
+                            lng: position.coords.longitude
+                        };
+                        geo = position.coords.latitude + ',' + position.coords.longitude;
+                        $('#origin').val(position.coords.latitude + ',' + position.coords.longitude).show('slow', calculate(geo));
+                        $('#location').val(position.coords.latitude + ',' + position.coords.longitude);
+                    });
+                }
+            }
+
+            ;
+        }
+    </script>
+
+
+    <script type="text/javascript">
+
+
+        (function ($) {
+            "use strict";
+            // ITEM DETAIL PAGE MAP FUNCTION STARTED --------------------------------------------------------------------------------------------
+            $.pfitemdetailpagemap = function () {
+                $(function () {
+                    var inputMyLocation = document.getElementById("origin");
+                    $("#origin").bind("keypress", function (e) {
+                        if (e.keyCode == 13) {
+                            e.preventDefault();
+                            return false;
+                        }
+                    });
+                    var autocomplete = new google.maps.places.Autocomplete(inputMyLocation);
+                    google.maps.event.addListener(autocomplete, "place_changed", function () {
+                        var place = autocomplete.getPlace();
+                        if (!place.geometry) {
+                            return;
+                        }
+                        console.log(place);
+                    });
+
+                });
+            };
+            // LOAD MAP STARTED --------------------------------------------------------------------------------------------
+            $(function () {
+                $.pfitemdetailpagemap();
+                // End
+            });
+            // GET DIRECTION BUTTON PRESSED END --------------------------------------------------------------------------------------------
+
+        })(jQuery);
+
+        function geolocate() {
+            console.log('aaa');
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function (position) {
+                    var geolocation = {
+                        lat: position.coords.latitude,
+                        lng: position.coords.longitude
+                    };
+                    $('#originMobile').val(position.coords.latitude + ',' + position.coords.longitude).show('fast', calculateMobile);
+                });
+            }
+        }
+
+    </script>
+
+{% endif %}
+
+
+{#-------theme changer-------#}
+<script>
+
+    function openTog() {
+        left = $('.theme_changer').position().left;
+
+        if (left < 0) {
+            $('.theme_changer').css('transform', 'translate(0px)')
+        } else {
+            $('.theme_changer').css('transform', 'translate(-200px)')
+        }
+    }
+
+    $('tog').click(function () {
+        openTog();
+    })
+
+</script>
+
+<script>
+    {#--------------- collapse theme color option ----------------#}
+
+    $('.o').click(function () {
+
+        classTarget = $(this).attr('class');
+
+        $('.theme_changer').css('transform', 'translate(0px)');
+
+        switch (classTarget) {
+            case "o bg":
+                $('#accordion .panel-collapse').collapse('hide');
+                $('#backgroundcolor').collapse('show');
+                break;
+            case "o mt":
+                $('#accordion .panel-collapse').collapse('hide');
+                $('#background-img').collapse('show');
+                break;
+            case "o an":
+                $('#accordion .panel-collapse').collapse('hide');
+                $('#backgropundmotif').collapse('show');
+                break;
+        }
+
+    })
+
+    {#--------------- collapse theme color option ----------------#}
+</script>
+
+<script>
+    jQuery(function () {
+        jQuery("#sortable").sortable();
+        jQuery("#sortable").disableSelection();
+    });
+</script>
+<script>
+    $('.remove').click(function () {
+
+
+        var r = confirm("Confirmation de Suppression image !");
+        if (r == true) {
+
+
+            var filetodelete = $(this).attr('data-name-remove');
+            var id = $(this).attr('data-id');
+            var div = $(this).attr('data-sup');
+
+            var data = {
+                id: id,
+                filetodelete: filetodelete
+            };
+
+
+            $.ajax({
+                url: '{{ path('module_spa_delate') }}',
+                data: data,
+                type: "POST",
+                success: function (data) {
+
+                    console.log(data);
+                    new PNotify({
+                        title: 'Succès!',
+                        text: 'votre image etait supprimer avec succès .',
+                        type: 'success'
+                    });
+
+                    $(div).hide('slow', function () {
+                        $(div).remove();
+                    });
+
+
+                }
+
+
+            });
+
+
+        } else {
+            console.log('false');
+        }
+
+
+    });
+
+
+</script>
+<style>
+    .error {
+        border: solid 2px #FF0000;
+    }
+</style>
+<script>
+    {#{% if connected %}#}
+    {#//    CKEDITOR.replace('editor');#}
+    {#CKEDITOR.replaceClass = 'edit';#}
+    {#{% endif %}#}
+
+    function submit(id) {
+        return jQuery(id).submit()
+    }
+
+    function validateForm(id) {
+
+        if (jQuery(id + ' [required]').length > 0) {
+            valid = true;
+
+            jQuery(id + ' [required]').each(function () {
+                    if (($(this).val() === '') || ($(this).val() == null)) {
+                        $(this).addClass("error");
+
+                        if ($(this).hasClass('select2-hidden-accessible')) {
+                            var IdSelect2 = 'select2-' + $(this).attr('id') + '-container';
+                            $('#' + IdSelect2).addClass("error");
+                        }
+
+                        valid = false;
+                        return false;
+                    } else {
+                        valid = true;
+                        $(this).removeClass("error");
+                    }
+                }
+            );
+            if (valid == true)
+                return submit(id);
+            else
+                return false;
+        } else {
+            return submit(id);
+        }
+    }
+    ;
+    jQuery("[data-target='modifier']").click(function () {
+        console.log('ds');
+        var isValid = true;
+        id = $(this).attr("data-selector");
+        id = "#" + id;
+        validateForm(id);
+    });
+
+</script>
+
+{#**************************DROPZONE****************************#}
+<script>
+    var maxImageWidth = 2000,
+        maxImageHeight = 1000;
+
+
+    Dropzone.options.myDropzone = {
+        dictDefaultMessage: 'Cliquez ici pour ajouter des images',
+        addRemoveLinks: true,
+        acceptedFiles: ".png,.jpg,.jpeg",
+        clickable: true,
+        init: function () {
+
+
+            this.on("thumbnail", function (file) {
+                // Do the dimension checks you want to do
+                if ((file.width <= maxImageWidth || file.height <= maxImageHeight) && (file.width >= 2000 || file.height <= 2000)) {
+                    file.rejectDimensions()
+                }
+                else {
+                    file.acceptDimensions();
+                }
+            });
+            this.on("error", function (file, message) {
+
+                return false;
+            });
+
+
+            thisDropzone = this;
+            this.on("removedfile", function (file) {
+
+                console.log(file.name),
+                    $.ajax({
+                        url: '{{ path('module_spa_delate') }}?filetodelete=' + file.name,
+                        data: {'filetodelete': file.name},
+                        type: "POST",
+                        success: function () {
+
+                        },
+                        error: function () {
+
+                        }
+                    });
+            });
+
+        },
+        accept: function (file, done) {
+            file.acceptDimensions = done;
+            file.rejectDimensions = function () {
+                done("Invalid dimension.");
+            };
+
+        }
+    };
+
+
+</script>
+{#-------theme changer-------#}
+<script>
+    $(document).ready(function () {
+
+        jQuery('canvas.bfh-colorpicker-palette').click(function () {
+
+            data_pour = $(this).parent().parent().attr('data-pour');
+
+            color = $('[data-pour=' + data_pour + '] input').val()
+
+            console.log(color);
+            console.log(data_pour);
+
+            color = color + '!important';
+
+
+            if (data_pour == 'titre') {
+                jQuery('h2,.serviceTitle').attr('style', 'color:' + color);
+            }
+            else if (data_pour == 'Soustitre') {
+                jQuery('h4').attr('style', 'color:' + color);
+            }
+            else if (data_pour == 'bouton') {
+                jQuery('.theme-btn btn-style-one,button,.theme-btn').attr('style', 'background:' + color);
+            }
+            else if (data_pour == 'Text') {
+                jQuery('p,.text, li').attr('style', 'color:' + color);
+            }
+
+
+//
+//            jQuery('.header-style-one .logo:before, .btn-style-one, .theme_bg_color').attr('style', 'background:' + color);
+//            $('color').append("<style>.header-style-one .logo:before{background:" + color + "}</style>");
+//            jQuery('.btn-style-one:hover, .btn-style-two:hover, .header-style-one .info-box li .icon ,.sec-title h2 strong ,.theme_color').css("color", color);
+
+        });
+
+        $('[setbg_color]').click(function () {
+
+            bg_color = $(this).css('background-color');
+            bg_data_pour = $('#backgroundcolor').attr('data-pour');
+
+
+            console.log(bg_color, bg_data_pour);
+            if (bg_data_pour == 'section-apropos') {
+                bg_img = jQuery('#motif_apropos').val();
+                jQuery('section#section-apropos').attr('style', 'background-image:' + bg_img + '!important; background-color:' + bg_color + '!important');
+                $('#bgco_about').val(bg_color);
+            }
+            else if (bg_data_pour == 'section-services') {
+                bg_img = jQuery('#motif_services').val();
+                jQuery('section#section-services').attr('style', 'background-image:' + bg_img + '!important; background-color:' + bg_color + '!important');
+                $('#bgco_services').val(bg_color);
+            }
+            else if (bg_data_pour == 'section-annonces') {
+                bg_img = jQuery('#motif_annonces').val();
+                jQuery('section#section-annonces').attr('style', 'background-image:' + bg_img + '!important; background-color:' + bg_color + '!important');
+                $('#bgco_annonces').val(bg_color);
+            }
+            else if (bg_data_pour == 'section-gallerie') {
+                bg_img = jQuery('#motif_gallerie').val();
+                jQuery('section#section-gallerie').attr('style', 'background-image:' + bg_img + '!important; background-color:' + bg_color + '!important');
+                $('#bgco_gallerie').val(bg_color);
+            }
+            else if (bg_data_pour == 'section-contact') {
+                bg_img = jQuery('#motif_contact').val();
+                jQuery('section#section-contact').attr('style', 'background-image:' + bg_img + '!important; background-color:' + bg_color + '!important');
+                $('#bgco_contact').val(bg_color);
+            }
+
+        });
+
+        $('[set_m_bg_color]').click(function () {
+
+            bg_img = $(this).css('background-image');
+            bg_data_pour = $('#backgroundcolor').attr('data-pour');
+
+
+            if (bg_data_pour == 'section-apropos') {
+
+                background_color = jQuery('#bgco_about').val();
+                jQuery('section#section-apropos').attr('style', 'background-image:' + bg_img + '!important; background-color:' + background_color + '!important');
+                $('#motif_about').val(bg_img);
+            }
+            else if (bg_data_pour == 'section-services') {
+
+                background_color = jQuery('#bgco_services').val();
+                jQuery('section#section-services').attr('style', 'background-image:' + bg_img + '!important; background-color:' + background_color + '!important');
+                $('#motif_services').val(bg_img);
+
+            }
+            else if (bg_data_pour == 'section-annonces') {
+                background_color = jQuery('#bgco_annonces').val();
+                jQuery('section#section-annonces').attr('style', 'background-image:' + bg_img + '!important; background-color:' + background_color + '!important');
+                $('#motif_annonces').val(bg_img);
+            }
+            else if (bg_data_pour == 'section-gallerie') {
+                background_color = jQuery('#bgco_gallerie').val();
+                jQuery('section#section-gallerie').attr('style', 'background-image:' + bg_img + '!important; background-color:' + background_color + '!important');
+                $('#motif_gallerie').val(bg_img);
+            }
+            else if (bg_data_pour == 'section-contact') {
+                background_color = jQuery('#bgco_contact').val();
+                jQuery('section#section-contact').attr('style', 'background-image:' + bg_img + '!important; background-color:' + background_color + '!important');
+                $('#motif_contact').val(bg_img);
+            }
+
+        });
+
+
+    });
+
+    function chnageicon(iconlink, div_name) {
+
+        for (var i = 1; i < 29; i++) {
+
+            $(div_name + " .elem" + i).css('background-image', 'url(' + iconlink + ')')
+
+        }
+    }
+    ;
+    $('[set_icon]').click(function () {
+
+
+        data_pour = $('#backgroundcolor').attr('data-pour');
+        section = $(this);
+        srcicon = section.find('img').attr('src')
+        if (data_pour == 'section-apropos') {
+            chnageicon(srcicon, '#section-apropos');
+            $('#animation_about').val(srcicon);
+        }
+        else if (data_pour == 'section-services') {
+            chnageicon(srcicon, '#section-services');
+            $('#animation_services').val(srcicon);
+        }
+        else if (data_pour == 'section-annonces') {
+            chnageicon(srcicon, '#section-annonces');
+            $('#annimation_annonces').val(srcicon);
+        }
+        else if (data_pour == 'section-gallerie') {
+            chnageicon(srcicon, '#section-gallerie');
+            $('#annimation_gallerie').val(srcicon);
+        }
+        else if (data_pour == 'section-contact') {
+            chnageicon(srcicon, '#section-contact');
+            $('#annimation_contact').val(srcicon);
+        }
+
+    });
+
+    {% if theme.color.background.animation is defined %}
+
+    {% if theme.color.background.animation.about is not empty %}
+    $(document).ready(function () {
+
+        propoicon = '{{ theme.color.background.animation.about }}';
+        chnageicon(propoicon, '#section-apropos');
+
+    });
+    {% endif %}
+
+    {% if theme.color.background.animation.services is defined %}
+    $(document).ready(function () {
+
+        propoicon = '{{ theme.color.background.animation.services }}';
+        chnageicon(propoicon, '#section-services');
+
+    });
+    {% endif %}
+
+    {% if theme.color.background.animation.annonces is defined %}
+    $(document).ready(function () {
+
+        propoicon = '{{ theme.color.background.animation.annonces }}';
+        chnageicon(propoicon, '#section-annonces');
+
+    });
+    {% endif %}
+
+    {% if theme.color.background.animation.gallerie is defined %}
+    $(document).ready(function () {
+
+        propoicon = '{{ theme.color.background.animation.gallerie }}';
+        chnageicon(propoicon, '#section-gallerie');
+
+    });
+    {% endif %}
+    {% if theme.color.background.animation.contact is defined %}
+    $(document).ready(function () {
+
+        propoicon = '{{ theme.color.background.animation.contact }}';
+        chnageicon(propoicon, '#section-contact');
+
+    });
+    {% endif %}
+    {% endif %}
+
+
+</script>
+{#-------theme changer-------#}
+<script>
+    $(".DeleteIMG").click(function () {
+
+        var txt;
+        var r = confirm("Confirmation de Suppression image !");
+        if (r == true) {
+            img = $(this).attr('data-img');
+            div = $(this).attr('data-sup');
+            link = $(this).attr('data-link');
+
+
+            var data = {
+                img: img,
+            };
+
+            $.ajax({
+                type: "POST",
+                url: link,
+                data: data,
+                success: function (result) {
+
+                    new PNotify({
+                        title: 'Succès!',
+                        text: 'votre image etait supprimer avec succès .',
+                        type: 'success'
+                    });
+                    $(div).hide('slow', function () {
+                        $(div).remove();
+                    }, setTimeout("window.location.reload('/#section-gallerie', '_self');", 2000));
+
+                }
+            });
+        } else {
+            txt = "You pressed Cancel!";
+        }
+
+    });
+</script>
+<script>
+    $('#header-top_3').onePageNav({
+        currentClass: 'active',
+        changeHash: false,
+        scrollSpeed: 750,
+        scrollThreshold: 0.5,
+        filter: '',
+        easing: 'swing',
+        begin: function () {
+            //I get fired when the animation is starting
+        },
+        end: function () {
+            //I get fired when the animation is ending
+        },
+        scrollChange: function ($currentListItem) {
+            active = $currentListItem[0];
+            divAvtive = $(active).find('a').attr('href');
+            sectionName = divAvtive.replace("#", "");
+            if (sectionName == "") {
+                sectionName = "<span class='red'>Rien a changé ici !</span>"
+                $('#sectionName').html($active_section[0].id);
+            } else {
+                $('#sectionName').html(sectionName);
+                $('#backgroundcolor,.motif-container').attr('data-pour', sectionName);
+            }
+        }
+    });
+</script>
+<script>
+
+    $('.numService').click(function () {
+
+        x = new Date().getUTCMilliseconds();
+        $('[name="section1[titrex]"]').attr('name', 'section1[titre' + x + ']')
+        $('[name="section1[textx]"]').attr('name', 'section1[text' + x + ']')
+
+    })
+
+    //    $('[data-target="#add-service"]').click(function () {
+    //        $('#list-services').modal('hide');
+    //    })
+    {% if themeId!=null %}
+
+    $('#ajout_service_global').attr("action", "{{ path('service_new_common_template',{"themeId":themeId,"quoiquiId":qouiqui.id}) }}");
+    {% else %}
+    $('#ajout_service_global').attr("action", "{{ path('service_new_common_template',{"themeId":"null","quoiquiId":qouiqui.id}) }}");
+    {% endif %}
+
+    $(document).on("click", ".form_update_service_global", function () {
+        $(".upload_image_service_team").show();
+        id = $(this).data('id');
+        module = $(this).data('service');
+        test = $(this).data('service');
+
+        if ((typeof module) == 'string') {
+            module = module.replace(/\\/g, '\\');
+            if ((typeof module) == 'string') {
+                module = module.replace(/(\r\n|\n|\r)/g, '<br/>').toString();
+                module = JSON.parse(module);
+            }
+        }
+        link = $(this).data('link');
+        $(".deletetedImage").value = "false";
+        $('#update_service_form').attr("action", link);
+        tofind = module.icon_update;
+        $('[name="serviceIcon"]').val(tofind);
+        if (String(tofind).includes("fa ")) {
+            $('.current-icon i').attr('class', module.icon_update);
+            $('.current-icon img').attr('src', "");
+        } else {
+            $('.current-icon img').attr('src', module.icon_update);
+            $('.current-icon i').attr('class', "");
+        }
+        $('#description_update').html(decodeURI(module.description_update.replace(/codeDouble/g, '"').replace(/BracketOpen/g, '{').replace(/BracketClose/g, '}').replace(/doublePonctuation/g, ':').replace(/retunLine/g, '\n\r')));
+
+
+        $('#service_update').val(decodeURI(module.service_update.replace(/codeDouble/g, '"').replace(/BracketOpen/g, '{').replace(/BracketClose/g, '}').replace(/doublePonctuation/g, ':').replace(/retunLine/g, '\n\r')));
+
+        $('#title-service-mod').hide();
+        $flag = false;
+        $('#servicess option').each(function () {
+
+
+            if ($(this).val() == module.service_update) {
+                $flag = true;
+                $(this).prop('selected', true);
+                $('#service_update').val(module.service_update);
+            }
+        });
+
+        if ($flag == false) {
+            $("#servicess option[value='nouv']").prop('selected', true);
+            $('#service_update').val(module.service_update);
+            $('#title-service-mod').show();
+        }
+
+
+        $(".uploaded_image_service_team").html("<tr>" +
+            "<td>" +
+            "<img class='image_member_team_update' style='width: 100%' src='#' />" +
+            "</td>" +
+            "<td>" +
+            "<a class='btn btn-default' onclick='deleteNewServiceTeamImage(\"" + id + "\") '>Supprimer</a></td></tr>");
+
+        $('.image_member_team_update').attr('src', '{{ asset('/uploads/image/') }}{{ iduser }}/{{ qouiqui.id }}/Service/' + id + '/service.jpg');
+
+    });
+
+    function readURLService(input) {
+
+
+        if (input.files && input.files[0]) {
+
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+
+                $(".uploaded_image_service_team").html("<tr>" +
+                    "<td>" +
+                    "<img class='image_service' style='width: 100%' src='#' />" +
+                    "</td>" +
+                    "<td>" +
+                    "<a  class='btn btn-default' onclick='deleteNewServiceTeamImage()'>Supprimer</a></td></tr>");
+
+                $('.image_service').attr('src', e.target.result);
+
+
+            }
+
+            reader.readAsDataURL(input.files[0]);
+        }
+
+    }
+
+    $('.fileInputServiceTeam').change(function () {
+
+        $(".upload_image_service_team").show();
+        $(".uploaded_image_service_team").empty();
+
+        readURLService(this);
+    });
+
+
+    function deleteNewServiceTeamImage() {
+
+        $(".deletetedImage").val("true");
+
+        $(".fileInputServiceTeam").val('');
+
+        $(".upload_image_service_team").hide();
+    }
+
+    $('.service-details-btn').click(function () {
+
+        service = $(this).data('module');
+
+        if(service.image !=""){
+            $('#Icon-serv').empty();
+            $('#Img-serv').empty();
+//            $('#Img-serv').attr('src', service.image);
+            $('#Img-serv').append('<img  src="' +service.image +'" class="img-responsive" style="width: 100%">')
+
+        }
+       else{
+            $('#Img-serv').empty();
+            $('#Icon-serv').empty();
+            $('#Icon-serv').append('<img  src="' +service.icon +'" class=" image-content-serv img-responsive" style="width: 100%">')
+
+//            $('#Icon-serv').attr('src', service.icon);
+        }
+
+        $('#detail_description').html(decodeURI(service.description.replace(/codeDouble/g, '"').replace(/BracketOpen/g, '{').replace(/BracketClose/g, '}').replace(/doublePonctuation/g, ':').replace(/retunLine/g, '\n\r')));
+        $('#title_serv').html(decodeURI(service.service.replace(/codeDouble/g, '"').replace(/BracketOpen/g, '{').replace(/BracketClose/g, '}').replace(/doublePonctuation/g, ':').replace(/retunLine/g, '\n\r')));
+    });
+
+</script>
+
+<script>
+
+//    $('form#addserv').submit(function (e) {
+//        if($('.input_file').val()==''&& $('.name_service').val()=='' ){
+//            e.preventDefault();
+//            alert('Il faut sélectionner une image ou un icon');
+//
+//        }
+//    });
+</script>
+{#**********************************start Geo Localisation**************************************#}
+<script>
+    function getLocationAction() {
+
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition_alert);
+        }
+
+    }
+
+    function updatelocation(link, data) {
+        $.ajax({
+            type: "POST",
+            url: link,
+            data: data,
+            success: function (result) {
+
+
+                new PNotify({
+                    title: 'Succès!',
+                    text: 'position à été mise à jour !.',
+                    type: 'success'
+                }, location.reload());
+
+            },
+            error: function () {
+                new PNotify({
+                    title: 'Oh Non!',
+                    text: 'Position non Détecté !',
+                    type: 'error'
+                });
+            }
+        });
+    }
+
+    function showPosition_alert(position) {
+        qq_id = '{{ qouiqui.id }}';
+        lat = position.coords.latitude;
+        long = position.coords.longitude;
+        var data = {
+            qqid: qq_id,
+            lat: lat,
+            long: long
+        };
+
+        link = '{{ path('geoupdate') }}';
+
+        console.log(data, lat, long)
+        updatelocation(link, data);
+
+    }
+
+    function getLocation() {
+        $.confirm({
+            theme: 'supervan',
+            title: '<div style="color: cadetblue"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Déterminer votre position !</div>',
+            content: '<div class="qouiqui-liste">' +
+            '<div class="alert alert-danger row" role="alert">' +
+            '                   <i class="fa fa-exclamation-circle col-md-1 col-sm-1 col-xs-1" aria-hidden="true"></i>' +
+            '                  <strong class="col-md-10 col-sm-10 col-xs-10">Il faut que vous soyez dans votre Adresse Professionnelle afin de valider la Géolocalisation !!</strong>' +
+            '           </div>' +
+            '           <div class="alert alert-warning row" role="alert">' +
+            '                   <i class="fa fa-exclamation-circle col-md-1 col-sm-1 col-xs-1" aria-hidden="true"></i>' +
+            '                  <strong class="col-md-10 col-sm-10 col-xs-10">Si vous êtes actuellement dans votre Adresse Professionnelle cliquer sur <b>CONFIRMER</b> si non cliquer sur <b>ANNULER</b> !</strong>' +
+            '           </div>' +
+            '          </div>' +
+
+            ' {% for qouiqui in  qouiqui %}' +
+            {% if loop.index < 2 %}
+            '<input class="form-control hidden" value="{{ qouiqui.id }}" name="qq_id" id="qouiqui-liste"/>' +
+            {% endif %}
+            '{% endfor %}',
+
+            buttons: {
+                Confirmer: function () {
+                    getLocationAction();
+                },
+                Annuler: function () {
+
+                }
+            }
+        });
+    }
+</script>
+{#**********************************end Geo Localisation*****************************************#}
+
+
+
+{#================================================= Ville et Delegation ================================#}
+{% if connected %}
+    <link rel="stylesheet" type="text/css" href="{{ asset('asset-back/plugins/select2/css/select2.min.css') }}">
+
+    <script src="{{ asset('asset-back/plugins/select2/js/select2.min.js') }}"></script>
+    <script>
+        $.post("{{ path('template_get_all_ville') }}", function (data) {
+            ville = jQuery.parseJSON(data);
+            $.each(ville, function (k, v) {
+                $('#aboutEditVille').append($('<option/>', {
+                    value: v.id,
+                    text: v.libelle
+                }));
+            });
+
+            {% for qv in qouiqui.qvilles %}
+            {% if qv.ville %}
+            $('#aboutEditVille option[value="{{ qv.ville.id }}"]').prop("selected", true);
+            {% endif %}
+            {% endfor %}
+
+
+
+        });
+        $.post("{{ path('template_get_all_delegation') }}", function (data) {
+
+            $.each(jQuery.parseJSON(data), function (k, v) {
+                $('#aboutEditDelegationHidden').append($('<option/>', {
+                    value: v.id,
+                    text: v.libelle,
+                    'data-ville': v.ville.id
+                }));
+            });
+            delegation();
+
+            {% for qv in qouiqui.qvilles %}
+            {% if qv.delegation %}
+            $('#aboutEditDelegation option[value="{{ qv.delegation.id }}"]').prop("selected", true);
+            {% endif %}
+            {% endfor %}
+
+        });
+
+
+        function delegation() {
+            var parrentVal = $('#aboutEditVille').val();
+            $('#aboutEditDelegation').prop('selectedIndex', 0);
+
+            $('#aboutEditDelegation option').remove();
+            var dg = new Array();
+            $('#aboutEditDelegationHidden option').each(function () {
+                if (parrentVal == $(this).attr('data-ville')) {
+                    var dgOne = new Array();
+                    dgOne.push(this.value);
+                    dgOne.push(this.text);
+                    dg.push(dgOne);
+                }
+            });
+
+            $('#aboutEditDelegation').append('<option value="" disabled selected>Délegation</option>');
+            $.each(dg, function (ke, item) {
+                $('#aboutEditDelegation').append('<option value="' + item[0] + '" data-ville="' + item[1] + '">' + item[1] + '</option>');
+            });
+        }
+
+
+        $('#aboutEditVille').on('change', function () {
+            delegation();
+        });
+
+
+        $('.select22').select2({});
+    </script>
+
+{% endif %}
+{#================================================= END Ville et Delegation ================================#}
+{% if connected %}
+
+    <script>
+
+        $('.tokenfield').tokenfield()
+
+    </script>
+
+    <!------------------------ fontawsome filtre :source traiteur.ween.tn ----------------------------->
+    <script>
+
+
+        $('.DefaultIcon').on('click', 'img', function () {
+            img = $(this).attr('src');
+            $('[name="serviceIcon"]').val(img);
+            msgstr = '<div class="text-center">Vous avez choisi cette icon<br><img width="40px" src="' + img + '"></div>'
+            messageIcon(msgstr);
+        });
+
+
+        $('.fontawesome-icon-list,.icon_list-edit').on('click', '.fa-hover boutton', function () {
+            classs = $(this).find('i').attr('class');
+            msgstr = '<div class="text-center">Vous avez choisi cette icon<br><i class="' + classs + '" style="font-size: 25px;"></i></div>'
+            messageIcon(msgstr);
+            $('[name="serviceIcon"]').val(classs);
+            $(this).css('color', 'red');
+
+        });
+
+        function afficherLeIcon(tag) {
+            $(tag).show();
+            $(tag).parent().show();
+        }
+
+        function deplacerLesIcon() {
+            $('.pull-right.col-sm-9.icon_list.icon_list-edit').html($('.pull-right.col-sm-9.icon_list').html())
+        }
+
+        $(".icon-filtre,.icon-filtre2").change(function () {
+            tag = $(this).val();
+            result = $(".fa-hover boutton:contains('" + tag + "')");
+            count = $(".fa-hover boutton:contains('" + tag + "')").length;
+            jQuery('.fa-hover boutton').parent().hide();
+            $(result).each(function (a, b) {
+                afficherLeIcon(b);
+                console.log('run');
+                if (!--count) deplacerLesIcon();
+            })
+        });
+
+        function messageIcon(msg) {
+            new PNotify({
+                title: 'Service icon',
+                text: msg
+            });
+        }
+
+    </script>
+    <!------------------------ end fontawsome filtre ----------------------------->
+
+
+
+    <!------------------------ update map location  ----------------------------->
+    {% if qouiqui.isview == 0 %}
+        <style>
+            .theme_changer {
+                z-index: 1000000 !important;
+            }
+        </style>
+        <script>
+
+            $('body .introjs-tooltipbuttons').on('click', '.introjs-finish', function () {
+                introJs().exit();
+            });
+
+            introJs().onexit(function () {
+                updateisview();
+            }).start();
+
+            function updateisview() {
+                $.post("{{ path('update_isview') }}", {qqid: {{ qouiqui.id }} });
+            }
+        </script>
+
+    {% endif %}
+    {% if ((qouiqui.geoLat or qouiqui.geoLat) is empty) and (qouiqui.isview == 1) %}
+
+        <script>
+            setTimeout(alertLocation, 6000);
+
+            function alertLocation() {
+                $.confirm({
+
+                    theme: 'supervan',
+                    title: '<div style="color: cadetblue"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Votre position n\'est pas encore définie !</div>',
+                    content: '',
+                    buttons: {
+                        Définie: function () {
+
+                            location.href = '#map-empty'
+
+                        },
+                        Fermer: function () {
+
+                        }
+                    }
+                });
+            }
+        </script>
+
+    {% endif %}
+    <!------------------------ end update map location  ----------------------------->
+{% endif %}
+
+<script>
+    $(function () {
+        jQuery('img.svg').each(function () {
+            var $img = jQuery(this);
+            var imgID = $img.attr('id');
+            var imgClass = $img.attr('class');
+            var imgURL = $img.attr('src');
+
+            jQuery.get(imgURL, function (data) {
+                // Get the SVG tag, ignore the rest
+                var $svg = jQuery(data).find('svg');
+
+                // Add replaced image's ID to the new SVG
+                if (typeof imgID !== 'undefined') {
+                    $svg = $svg.attr('id', imgID);
+                }
+                // Add replaced image's classes to the new SVG
+                if (typeof imgClass !== 'undefined') {
+                    $svg = $svg.attr('class', imgClass + ' replaced-svg');
+                }
+                console.log('svg');
+
+                // Remove any invalid XML tags as per http://validator.w3.org
+                $svg = $svg.removeAttr('xmlns:a');
+                $svg.css('width', '128px');
+                // Check if the viewport is set, else we gonna set it if we can.
+                if (!$svg.attr('viewBox') && $svg.attr('height') && $svg.attr('width')) {
+                    $svg.attr('viewBox', '0 0 ' + $svg.attr('height') + ' ' + $svg.attr('width'))
+                }
+
+                // Replace image with new SVG
+                $img.replaceWith($svg);
+
+            }, 'xml');
+
+        });
+    });
+</script>
+
+{#remove url video#}
+<script>
+    $('#deleteUrlVideo').click(function () {
+        $('#inputUrlVideo').val('');
+    });
+</script>
+
+<script>
+    $("#servicess").change(function () {
+        selec = $("#servicess option:selected").text();
+        if (selec == "Choisir autre Service") {
+            $('#title-service-mod').show();
+            $('#service_update').attr('disabled', false);
+        } else {
+            $('#title-service-mod').hide();
+            $('#service_update').attr('disabled', true);
+        }
+    });
+    $("#services").change(function () {
+        selec = $("#services option:selected").text();
+        if (selec == "Choisir autre Service") {
+            $('#title-service-add').show();
+            $('#name-add').attr('disabled', false);
+        } else {
+            $('#title-service-add').hide();
+            $('#name-add').attr('disabled', true);
+        }
+    });
+
+    $('.form_article').click(function () {
+        module = $(this).data('module');
+        if ((typeof module) == 'string') {
+            module = $(this).data('module').replace(/(\r\n|\n|\r)/g, '<br/>').toString();
+            module = JSON.parse(module);
+        }
+        link = $(this).data('link');
+        $('#Article-edit #AdminBundle_traiteur_titre').val(module.titre);
+        $('#Article-edit #AdminBundle_traiteur_details').val(module.details);
+        CKEDITOR.instances['#AdminBundle_traiteur_details'].setData(module.details);
+        $('#Article-edit #AdminBundle_traiteur_prix').val(module.prix);
+        $('#Article-edit form').attr('action', link);
+
+    })
+
+    $('.view').click(function () {
+
+        module = $(this).data('module');
+        if ((typeof module) == 'string') {
+            module = $(this).data('module').replace(/(\r\n|\n|\r)/g, '<br/>').toString();
+            module = JSON.parse(module);
+        }
+        $('.titre-view').html(module.titre);
+        $('.view-description').html(module.details);
+        $('.prix').html(module.prix);
+        $('.prev-img-view img').attr('src', module.image);
+
+    })
+</script>
+
+{#--------------back to top----------------#}
+
+<script>
+
+    $(document).ready(function () {
+
+        $('[href="#section-accueil"]').click(function () {
+            backTo('0');
+        });
+
+        function SectionONscreen() {
+            var s = [];
+            $('section').appear(function () {
+                s.push($(this).attr('id'));
+//                console.log(s.length)
+                if (s.length < 2) {
+                    currentPosition = s[0];
+                } else {
+                    currentPosition = s[s.length - 2];
+                }
+
+            });
+        }
+
+        $("a.back-to").click(function (e) {
+            e.preventDefault();
+            newKey = null;
+            sectionTab = $('section');
+            SectionONscreen();
+            $('section').each(function (k, v) {
+//                console.log(currentPosition, $(this).attr('id'))
+                if (currentPosition == $(this).attr('id')) {
+                    newKey = k - 1;
+                    setTimeout(function () {
+                        position = $('#' + $(sectionTab[newKey]).attr('id')).position().top;
+                        backTo(position);
+//                        console.log(" test : " + currentPosition, k, v, 'scroll to', newKey)
+                    }, 500);
+                }
+            });
+        });
+
+        function backTo(variable) {
+            var backBtn = $("a.back-to");
+            $(function () {
+                $("html, body").animate({
+                    scrollTop: variable
+                }, 700);
+                return false;
+            });
+        }
+    });
+</script>
+
+<script>
+
+    $('.domainSearch').click(function () {
+        domainTofind = $('#inputDomain').val();
+        link = "https://domains.revved.com/v1/domainStatus?domains=" + domainTofind;
+        $.get(link, function (data) {
+            console.log(data['status'][0]['available']);
+            available = data['status'][0]['available'];
+            $('.domainTofind').html(domainTofind);
+            $('.resultfound').show('fast');
+
+            if (available == false) {
+                $('.resultnotfound button').prop('disable', true);
+                $('.col-md-4.disponible').html('Pas disponible !');
+                $('.domainResult input.btn.btn-primary').attr('disabled', '');
+            }
+            else if (available == true) {
+                $('.resultnotfound button').prop('disable', false);
+                $('.col-md-4.disponible').html('Disponible !');
+                $('.domainResult input.btn.btn-primary').removeAttr('disabled');
+            }
+        });
+    })
+
+
+</script>
+
+<script>
+    var b = 0;
+    var c = 0;
+    var isTyping = true;
+    var isLoop = true;
+    var isPlaceholder = true;
+    var i = 0;
+    var typingSpeed = 100;
+    var deleteSpeed = 40;
+    var waitTime = 600
+
+
+    function typing() {
+        if (isPlaceholder == true) {
+            document.getElementById("inputDomain").placeholder = strings[i].substring(c, b);
+        } else {
+            document.getElementById("inputDomain").innerHTML = strings[i].substring(c, b);
+        }
+
+        if (b == strings[i].length) {
+            setTimeout("b=0, c=strings[i].length, isTyping=true", waitTime);
+        } else {
+            if (c != 0) {
+                c--;
+                if ((i == strings.length - 1) && (isLoop == false)) {
+                    return;
+                }
+
+                if (c == 0) {
+                    i++;
+                    if (i == strings.length) {
+                        i = 0;
+                    }
+                }
+            } else {
+                var isTyping = false;
+                b++;
+            }
+        }
+
+        if (isTyping == false) {
+            setTimeout("typing()", typingSpeed);
+        } else {
+            setTimeout("typing()", deleteSpeed);
+        }
+    }
+
+    var strings = new Array(" exemple.com");
+    var typingSpeed = 100;
+    var deleteSpeed = 40;
+    var isLoop = true;
+    var isPlaceholder = true;
+    {% if connected %}
+    $(document).ready(function () {
+        setTimeout("typing()", waitTime);
+    })
+    {% endif %}
+</script>
+
+
+{% if is_mobile() %}
+    <script>
+        jQuery('.modal').on('shown.bs.modal', function () {
+            $('body').css('overflow', 'hidden');
+            $('body').css('position', 'fixed');
+        });
+        $('.modal').on('hidden.bs.modal', function () {
+            $('body').css('overflow', 'auto');
+            $('body').css('position', 'relative');
+        });
+    </script>
+{% endif %}

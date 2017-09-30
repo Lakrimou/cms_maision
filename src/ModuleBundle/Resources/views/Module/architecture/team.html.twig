@@ -1,0 +1,428 @@
+<section id="team" class="clearfix">
+    <div class="ro">
+        <div class="column12"><!-- Our Team -->
+            <div class="our-team" style="background-image:url({{ asset('module/Architecture/images/team-bg.jpg') }});">
+                <h3 class="main-title">NOTRE EQUIPE</h3>
+                <span class="main-subtitle">our cool &amp; professional staff</span>
+                <div class="slider3">
+                    {% if qouiqui.data !=null %}
+                        {% if jsonDecod(qouiqui.data)["team"]  is defined %}
+                            {% set team =jsonDecod(qouiqui.data)["team"] %}
+
+                            {% for person in team %}
+                                <div class="slide">
+                                    <a href="#">
+                                        <div class="team-mates">
+                                            <img width="258" height="222" src="{{ asset('/uploads/image/') }}{{ qouiqui.user.id }}/{{ qouiqui.id }}/Team/{{ person['id'] }}/{{ person['image'] }}" class="attachment-258x222 size-258x222 wp-post-image" alt=""/>
+
+                                            <div class="team-mask">
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <div class="team-descr">
+                                        <h3><a href="member/mike-william/index.html">{{ person["lastName"] }} {{ person["firstName"] }}</a></h3>
+                                        <h5>{{ person["post"] }}</h5>
+                                    </div>
+                                    <div class="additionalicons">
+                                        <a href="{{ person["social"]["Google"] }}" title="Google Pluse"><i class="fa fa-google-plus"></i></a>
+                                        <a href="{{ person["social"]["Tweeter"] }}" title="Twitter"><i class="fa fa-twitter"></i></a>
+                                        <a href="{{ person["social"]["Dribbble"] }}" title="Dribbble"><i class="fa fa-dribbble"></i></a>
+                                        <a href="{{ person["social"]["Facebook"] }}" title="Facebook"><i class="fa fa-facebook"></i></a>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+                    {% endif %}
+                </div>
+
+            </div>
+
+
+            {% if  app.user and app.user.id==qouiqui.user.id %}
+                <button type="button" class="theme-btn btn-style-one blue form_add_team" data-toggle="modal"
+                        data-target="#add-member">Ajouter un membre
+                </button>
+                <button type="button" class="theme-btn btn-style-one blue" data-toggle="modal"
+                        data-target="#list-members">Modifier les membres
+                </button>
+            {% endif %}
+        </div>
+    </div>
+</section>
+<div class="modal fade" id="add-member" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Ajouter un membre</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+
+                    <div class="col-md-10 col-md-offset-1">
+                        <form id="ajout_voiture" name="adminbundle_automobile" action="{{ path('member_new',{"id":qouiqui.id}) }}" method="post" enctype="multipart/form-data">
+
+                            <h2 class="text-center" id="title-form-ajout">Ajout membre</h2>
+                            <div class="form-group row element-form">
+
+                                <div class="col-md-3">
+                                    <label class="control-label">Nom</label>
+                                </div>
+
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" placeholder="nom*" name="lastName" required>
+                                </div>
+                            </div>
+                            <div class="form-group row element-form">
+
+                                <div class="col-md-3">
+                                    <label class="control-label">Prenom</label>
+                                </div>
+
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" placeholder="prenom*" name="firstName" required>
+                                </div>
+                            </div>
+                            <div class="form-group row element-form">
+
+                                <div class="col-md-3">
+                                    <label class="control-label">Poste</label>
+                                </div>
+
+                                <div class="col-sm-9">
+
+                                    <input type="text" class="form-control" placeholder="poste*" name="post" required>
+                                </div>
+                            </div>
+                            <div class="form-group row element-form">
+
+                                <div class="col-md-3">
+                                    <label class="control-label">Facebook</label>
+                                </div>
+
+                                <div class="col-sm-9">
+
+                                    <input type="text" class="form-control" placeholder="url facebook.." name="social[facebook]" value="">
+                                </div>
+                            </div>
+                            <div class="form-group row element-form">
+
+                                <div class="col-md-3">
+                                    <label class="control-label">Google +</label>
+                                </div>
+
+                                <div class="col-sm-9">
+
+                                    <input type="text" class="form-control" placeholder="url google plus.." name="social[google]" value="">
+                                </div>
+                            </div>
+                            <div class="form-group row element-form">
+
+                                <div class="col-md-3">
+                                    <label class="control-label">Tweeter</label>
+                                </div>
+
+                                <div class="col-sm-9">
+
+                                    <input type="text" class="form-control" placeholder="url tweeter.." name="social[tweeter]" value="">
+                                </div>
+                            </div>
+                            <div class="form-group row element-form">
+
+                                <div class="col-md-3">
+                                    <label class="control-label">Dribbble</label>
+                                </div>
+
+                                <div class="col-sm-9">
+
+                                    <input type="text" class="form-control" placeholder="url dribbble.." name="social[dribbble]" value="">
+                                </div>
+                            </div>
+
+
+                            <div class="form-group row">
+
+                                <div class="col-md-3">
+                                    <label class="control-label " for="image">Télécharger image</label>
+                                </div>
+                                <div class="col-sm-9">
+                                    <input type="file" name="images[]" class="fileInputServiceTeam">
+                                </div>
+                            </div>
+                            <div class="row">
+
+                                <div class="col-md-8">
+                                    <table class="table table-bordered upload_image_service_team " hidden>
+                                        <thead>
+                                        <tr>
+                                            <th>Images à télécharger</th>
+                                            <th>Action</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody class="uploaded_image_service_team">
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-8 ">
+                                </div>
+                                <div class="col-md-2 ">
+                                    <input class="btn btn-main btn-primary btn-lg" type="submit" value="Enregistrer">
+                                </div>
+                            </div>
+
+
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="list-members" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLong">Personnel</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+
+            {#ici#}
+
+
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-10 col-md-offset-1">
+                        <table class="table table-bordered " id="table_members">
+
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="update-member" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Modifier membre</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+
+                    <div class="col-md-10 col-md-offset-1">
+
+                        <form method="post" id="update_member_form" action="" enctype="multipart/form-data">
+
+                            <h2 class="text-center" id="title-form-ajout">Modifier membre</h2>
+                            <div class="form-group row element-form">
+
+                                <div class="col-md-3">
+                                    <label class="control-label">Nom</label>
+                                </div>
+
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" name="lastName" id="lastName" required>
+                                </div>
+                            </div>
+                            <div class="form-group row element-form">
+
+                                <div class="col-md-3">
+                                    <label class="control-label">Prenom</label>
+                                </div>
+
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" name="firstName" id="firstName" required>
+                                </div>
+                            </div>
+                            <div class="form-group row element-form">
+
+                                <div class="col-md-3">
+                                    <label class="control-label">Poste</label>
+                                </div>
+
+                                <div class="col-sm-9">
+
+                                    <input type="text" class="form-control" name="post" id="post" required>
+                                </div>
+                            </div>
+                            <div class="form-group row element-form">
+
+                                <div class="col-md-3">
+                                    <label class="control-label">Facebook</label>
+                                </div>
+
+                                <div class="col-sm-9">
+
+                                    <input type="text" class="form-control" placeholder="url facebook.." name="social[facebook]" id="facebook">
+                                </div>
+                            </div>
+                            <div class="form-group row element-form">
+
+                                <div class="col-md-3">
+                                    <label class="control-label">Google +</label>
+                                </div>
+
+                                <div class="col-sm-9">
+
+                                    <input type="text" class="form-control" name="social[google]" id="google">
+                                </div>
+                            </div>
+                            <div class="form-group row element-form">
+
+                                <div class="col-md-3">
+                                    <label class="control-label">Tweeter</label>
+                                </div>
+
+                                <div class="col-sm-9">
+
+                                    <input type="text" class="form-control" name="social[tweeter]" id="Tweeter">
+                                </div>
+                            </div>
+                            <div class="form-group row element-form">
+
+                                <div class="col-md-3">
+                                    <label class="control-label">Dribbble</label>
+                                </div>
+
+                                <div class="col-sm-9">
+
+                                    <input type="text" class="form-control" name="social[dribbble]" id="Dribbble">
+                                </div>
+                            </div>
+
+
+                            <div class="form-group row">
+
+                                <div class="col-md-3">
+                                    <label class="control-label " for="image">Télécharger image</label>
+                                </div>
+                                <div class="col-sm-9">
+                                    <input type="file" name="images[]" class="fileInputServiceTeam">
+                                    <input name="isDeleted" class="deletetedImage" value="false" hidden>
+                                </div>
+                            </div>
+                            <div class="row">
+
+                                <div class="col-md-8">
+                                    <table class="table table-bordered upload_image_service_team">
+                                        <thead>
+                                        <tr>
+                                            <th>Image</th>
+                                            <th>Action</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody class="uploaded_image_service_team">
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+
+                            <div class="row">
+                                <div class="col-md-8 ">
+                                </div>
+                                <div class="col-md-2 ">
+                                    <input class="btn btn-main btn-primary btn-lg" type="submit" value="Enregistrer">
+                                </div>
+                            </div>
+
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        getMembers();
+    });
+    function getMembers() {
+        $.ajax({
+            url: '{{ path('list_members') }}',
+            data: {
+
+
+                'quoiqui': {{ qouiqui.id }},
+
+
+            },
+
+            type: "POST",
+
+            success: function (response) {
+                $("#table_members").html(response);
+
+
+            },
+            error: function (xhr, status, error) {
+                alert(xhr.responseText);
+            },
+
+
+        });
+    }
+    $(document).on("click", ".form_update_member", function () {
+
+        var module = $(this).data('project');
+        var link = $(this).data('link');
+        var image = $(this).data('image');
+
+
+        Object.keys(module).forEach(function (k) {
+            if (k != "id") {
+                document.getElementById(k).value = module[k];
+            }
+        });
+
+        $("#update_member_form").attr("action", link);
+        $(".deletetedImage").value = "false";
+        $(".upload_image_service_team").show();
+        $(".uploaded_image_service_team").html("<tr>" +
+            "<td>" +
+            "<img class='image_member_team_update' style='width: 100%' src='#' />" +
+            "</td>" +
+            "<td>" +
+            "<a  class='btn btn-default' onclick='deleteNewServiceTeamImage(\"" + module.id + "\") '>Supprimer</a></td></tr>");
+
+        $('.image_member_team_update').attr('src', '{{ asset('/uploads/image/') }}{{ iduser }}/{{ qouiqui.id }}/Team/' + module["id"] + '/' + image);
+
+
+    });
+
+
+    $(document).on("click", ".form_add_team", function () {
+        $(".fileInputServiceTeam").val('');
+
+        $(".upload_image_service_team").hide();
+    });
+
+
+</script>
+
+

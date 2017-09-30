@@ -1,0 +1,62 @@
+{% extends 'dashboardLayaout/dashboardLayout.html.twig' %}
+{% block body %}
+    <div class="col-sm-9 col-md-12">
+        <div class="container target">
+
+
+            {#==============================Dashboard Content col-md-3==================================#}
+            {% include 'DashboardBundle::dashboardConetent.html.twig' %}
+            {#==============================Dashboard Content col-md-3==================================#}
+
+
+        </div>
+    </div>
+
+{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    {#=========================Test size and type of picture=============================#}
+
+    <script>
+        $('#profile_form_image').change(function () {
+
+            var ext = this.value.match(/\.(.+)$/)[1];
+            if (ext == 'jpg' || ext == 'jpeg' || ext == 'png' || ext == 'gif') {
+
+                $('#envoyer').attr('disabled', false);
+                //$('.errorSize').fadeOut();
+            } else {
+
+                $('#profile_form_image').after('<span class="errorSize" style="color:red;">Type non valide!(SVP entrer fichier de type["jpg", "png", "jpeg", "gif"])</span>');
+                $('.errorSize').fadeOut(10000);
+                $('#envoyer').attr('disabled', true);
+            }
+        });
+    </script>
+
+    <script>
+        $(document).on('change', '#profile_form_image', function () {
+            files = this.files;
+            size = files[0].size;
+            //max size 500kb => 50*1000
+            if (size <= 500000) {
+                $('#envoyer').attr('disabled', false);
+                return true;
+            }
+            else {
+                $('#profile_form_image').after('<span class="errorSize" style="color:red;">Assurer que  la taille taille de fichier inferieur à 500ko</span>');
+                $('.errorSize').fadeOut(10000);
+                $('#envoyer').attr('disabled', true);
+            }
+        });
+    </script>
+
+    {#=========================Test size and type of picture=============================#}
+
+{% endblock %}

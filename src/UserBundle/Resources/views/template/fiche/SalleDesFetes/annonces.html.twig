@@ -1,0 +1,852 @@
+<section id="section-annonces" class="property-details padding">
+    {% if attributes.connected %}
+        <div class="pull-righ" style="    margin-right: 24px;">
+            <div data-step="4" data-intro="This is a tooltip!" class="pull-right margin-bott-40">
+                <button type="button" class="theme-btn button11 btn-style-one pull-right" data-toggle="modal"
+                        data-target="#listOffres">Gérer cette section
+                </button>
+            </div>
+        </div>
+    {% endif %}
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 bottom40">
+                <h2 class="text-uppercase">Nos <span class="color_red">Offres</span></h2>
+                <div class="line_1"></div>
+                <div class="line_2"></div>
+                <div class="line_3"></div>
+
+            </div>
+        </div>
+        <div class="row bottom30">
+            {% if Spaevent.event is defined %}
+            {% set arrayEvent=Spaevent .event %}
+            {% for b in arrayEvent|sort|reverse %}
+                {% set image=(DirAssetParcour (asset('uploads/image/'~attributes.quoiqui.user.id ~'/'~ attributes.quoiqui.id~'/event/'~ b.idOffre))|first) %}
+
+                {% if "now"|date('Y-m-d') <= b.start_offre|date('Y-m-d') %}
+                    {% if(Spaevent .event|length == 1) %}
+
+                        <div class="col-md-4 col-sm-4 col-xs-12"></div>
+                    {% endif %}
+                    {% if (Spaevent .event|length == 2 and loop.index==1) %}
+                        <div class="col-md-2 col-sm-2 col-xs-12"></div>
+                    {% endif %}
+
+                    <div class="col-md-4 col-sm-4 col-xs-12 ">
+
+                        <div class="property_item bottom40">
+                            <div class="image image-content-offre"
+                                 style="background-image:url('{{ asset('uploads/image/'~attributes.quoiqui.user.id ~'/'~ attributes.quoiqui.id~'/event/'~b.idOffre ~'/'~image) }}')">
+
+                                <div class="price"><span class="tag"
+                                                         style="font-size: 26px;">-{{ b.prec|round(0, 'floor') }}
+                                        %</span></div>
+                                <div class="overlay">
+                                    <div class="centered"><a class="link_arrow white_border voir-plus"
+                                                             data-toggle="modal" data-target="#detail_offre-{{ b.idOffre }}"
+                                                             href="#" data-qq="{{ attributes.quoiqui.id }}"
+                                                             data-idevent="{{ b.idOffre }}">Voir
+                                            Plus </a></div>
+                                </div>
+                            </div>
+                            <div class="proerty_content">
+                                <div class="proerty_text" style="height: 145px">
+
+                                    <h3 class="text-center">{{ b.ServSpa }}</h3>
+                                    <p style="font-size: 20px;"><strong>
+                                            <span style="color:red;font-size: 25px;">{{ b.prix }}</span>
+                                            <sup-nvprix>Dt</sup-nvprix>
+                                            <del style="font-size: 16px;">{{ b.prev_prix }} Dt</del>
+                                        </strong></p>
+
+                                    {% if b.description is not empty %}
+                                        <p>{{ b.description|slice(0,40)|raw }}... </p>
+                                    {% endif %}
+                                </div>
+                                <div class="favroute clearfix">
+                                    <p class="pull-left" style="font-size: 20px;"><i class="icon-calendar2" style="font-size: 23px;"></i>{{ translateJourDate( b.start_offre) }}
+                                    </p>
+
+                                    <ul class="pull-right">
+                                        <li style="font-size: 19px;margin-right: 14px;"
+                                            class="voir-plus"
+                                            data-qq="{{ attributes.quoiqui.id }}"
+                                            data-idevent="{{ b.idOffre }}" data-toggle="modal"
+                                            data-target="#detail_offre-{{ b.idOffre }}"><i class="fa fa-eye"
+                                                                                           style=" margin-top: 14px; margin-right: 10px;"
+                                                                                           aria-hidden="true" about=""
+
+                                            ></i>Voir plus
+                                        </li>
+
+                                    </ul>
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+            {% endfor %}
+
+
+        </div>
+
+    </div>
+    {% endif %}
+
+
+    {% if not is_mobile() %}
+        <div class="paralax-icon">
+            <div class="particle elem1 anim-delay1"></div>
+            <div class="particle elem2 anim-delay5"></div>
+            <div class="particle elem3 anim-delay3"></div>
+            <div class="particle elem4 anim-delay8"></div>
+            <div class="particle elem5 anim-delay9"></div>
+            <div class="particle elem6 anim-delay2"></div>
+            <div class="particle elem7 anim-delay4"></div>
+            <div class="particle elem8 anim-delay3"></div>
+            <div class="particle elem9 anim-delay10"></div>
+            <div class="particle elem8 anim-delay11"></div>
+            <div class="particle elem6 anim-delay12"></div>
+            <div class="particle elem1 anim-delay14"></div>
+            <div class="particle elem13 anim-delay16"></div>
+            <div class="particle elem17 anim-delay18"></div>
+            <div class="particle elem2 anim-delay6"></div>
+            <div class="particle elem16 anim-delay9"></div>
+            <div class="particle elem8 anim-delay3"></div>
+            <div class="particle elem9 anim-delay10"></div>
+            <div class="particle elem18 anim-delay11"></div>
+            <div class="particle elem11 anim-delay12"></div>
+            <div class="particle elem12 anim-delay14"></div>
+            <div class="particle elem13 anim-delay16"></div>
+            <div class="particle elem14 anim-delay18"></div>
+            <div class="particle elem15 anim-delay6"></div>
+            <div class="particle elem16 anim-delay9"></div>
+            <div class="particle elem17 anim-delay7"></div>
+            <div class="particle elem18 anim-delay6"></div>
+            <div class="particle elem19 anim-delay3"></div>
+        </div>
+    {% endif %}
+</section>
+
+<div class="modal fade" id="listOffres" role="dialog">
+    <div class="modal-dialog modal-md">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Liste des promotions</h4>
+
+            </div>
+            <div class="modal-body">
+
+                <table class=" dataTable table  " cellspacing="0" width="100%">
+                    <thead>
+                    <tr>
+                        <th width="74">Image</th>
+                        <th width="100">Offres</th>
+                        <th width="100"> AncienPrix</th>
+                        <th width="100">Prix</th>
+                        <th width="100">Pourcentage</th>
+                        <th width="100">Modifier</th>
+                        <th width="100">Supprimer</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    {% if Spaevent .event is defined %}
+                        {% set arrayEvent=Spaevent .event %}
+                        {% for b in arrayEvent|sort|reverse %}
+
+                            <tr data-td="{{ b.idOffre }}">
+
+                                <td align="center">
+
+                                    {% set img=(DirAssetParcour (asset('uploads/image/'~attributes.quoiqui.user.id ~'/'~ attributes.quoiqui.id~'/event/'~ b.idOffre))|first) %}
+                                    <img src="{{ asset('uploads/image/'~attributes.quoiqui.user.id ~'/'~ attributes.quoiqui.id~'/event/'~  b.idOffre~'/'~img) }}" data-pin-nopin="true" style="width:74px;">
+
+                                </td>
+                                <td align="center"> {{ b.ServSpa }}</td>
+                                <td align="center">{{ b.prev_prix }} Dt</td>
+                                <td align="center">{{ b.prix }} Dt</td>
+                                <td align="center">-{{ b.prec|round(0,'floor') }}%</td>
+
+                                <td align="center">
+
+                                    <a href="#" class=" btn btn-info a-btn-slide-text edit-offre"
+                                       data-serv="{{ b.idOffre }}"
+                                       data-id="{{ attributes.quoiqui.id }}" data-toggle="modal"
+                                       data-target="#editSpaEvent">
+
+                                        <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                                        <span><strong>Modifier</strong></span>
+                                    </a>
+
+                                </td>
+
+
+                                <td align="center">
+
+                                    <a href="{{ path('module_spa_delate_events',{"idqq": attributes.quoiqui.id,"idevent":b.idOffre }) }}"
+                                       class=" btn btn-danger a-btn-slide-text service_suprim click-off"
+                                       onclick="clickOffConfirmed = confirm('Vous voulez le  supprimer ?');">
+                                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                        <span><strong>Supprimer</strong></span>
+                                    </a>
+                                </td>
+
+                            </tr>
+                            {#{% endfor %}#}
+                        {% endfor %}
+                    {% endif %}
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary addpromo" data-toggle="modal" data-target="#addEvent"
+                >Ajouter une promotion
+                </button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Fermer</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="addEvent" role="dialog">
+    <div class="modal-dialog modal-lg">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Ajouter une Promotion</h4>
+            </div>
+            <div class="modal-body">
+
+                <form id="addpromo" method="POST" class=" fileuploader"
+                      action="{{ path('module_salle_de_fete_add_offre',{"idqq":attributes.quoiqui.id}) }}"
+                      enctype="multipart/form-data">
+                    <div class="row">
+                        <input type="hidden" name="idOffre" value="{{ uniqueId() }}">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-md-12">Choisissez le service en promotion(*) </label>
+                                    <select class="selectpicker form-control" id="serviceselect-promo" name="ServSpa">
+                                        <option value="autre" style="font-weight: 700;font-size: 20px;">Ajouter le nouveau service en promotion
+                                        </option>
+                                        {% for k,a in  (promoListeSalledefete(attributes)) %}
+                                            <option value='{{ k }}'>{{ k }}</option>
+                                        {% endfor %}
+
+                                    </select>
+
+
+                                </div>
+
+                                <div class="form-group ">
+                                    <input type="text" name="autres" id="otherServices-promo" class="form-control"
+                                           placeholder="ajoutre autre service">
+                                    <span class="errormsg1" style="color:red;margin: 13px;"></span>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class=" form-group">
+                                    <label class="col-md-12">Date de promotion(*) </label>
+                                    <div class="form-group">
+                                        <div class="bfh-datepicker" data-name="start_offre"
+                                             data-min="today" data-format="y-m-d" aria-required="true"></div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class=" form-group">
+                                    <label class="col-md-12">Ancien Prix(*)</label>
+                                    <input id="An_prix" type="number" placeholder="Entrer l'ancien  prix."
+                                           required="required"
+                                           class="form-control " name="prev_prix" value="">
+                                </div>
+
+
+                                <div class=" form-group">
+                                    <label class="col-md-12"> Pourcentage de remise(%)(*) </label>
+                                    <input id="remise" type="number" placeholder="Entrer le pourcentage de solde."
+                                           required="required"
+                                           class="form-control " name="prec" value="">
+                                </div>
+
+                                <div class=" form-group">
+                                    <label class="col-md-12">Nouveau Prix(*)</label>
+                                    <input id="nv_prix" type="number" placeholder="Entrer le nouveaux prix."
+                                           required="required"
+                                           class="form-control" name="prix" value="">
+                                </div>
+
+
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-md-12">Description(*)</label>
+                                    <textarea placeholder="Entrer la description.." rows="5"
+                                              class="form-control textarea "
+                                              name="description" required="required"></textarea>
+                                </div>
+
+                                <div class=" form-group">
+                                    <label class="col-md-12" style="margin-top: 10px;">Choisissez une photo(*)</label>
+                                    <input autocomplete="off" class="form-control "
+                                           name="file" type="file"
+
+                                           placeholder="choisissez_image" data-items="8"/>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                </form>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Fermer</button>
+                <button type="submit" id="promo" class=" btn btn-primary button-default" data-target="modifier"
+                        data-selector="addpromo">
+                    Enrigistrer
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="editSpaEvent" role="dialog">
+    <div class="modal-dialog modal-lg">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Modifier la promotion</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <form id="editeve1" method="POST" class=" fileuploader"
+                          action="{{ path('module_spa_update_event',{"idqq":attributes.quoiqui.id}) }}"
+                          enctype="multipart/form-data">
+
+
+                        <input id="idEvent" type="hidden" name="idOffre" value="">
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-md-12">Choisissez un nouveau service en promotion(*)</label>
+                                    <select class="selectpicker form-control" id="serviceselect-edit-promo" name="ServSpa">
+                                        {#<option disabled selected>Sélectionner un service....</option>#}
+
+                                        {% for k,a in  (promoListeSalledefete(attributes)) %}
+                                            <option value='{{ k }}'>{{ k }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                                <span class="errormsg1" style="color:red;margin: 13px;"></span>
+                            </div>
+                            <div class="col-md-6">
+                                <div class=" form-group">
+                                    <label class="col-md-12">Date de promotion(*) </label>
+                                    <div class="form-group">
+                                        <div class="bfh-datepicker" id="date-start" data-name="start_offre"
+                                             data-min="today" data-format="y-m-d" aria-required="true"></div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class=" form-group">
+                                    <label class="col-md-12">Ancien Prix(*)</label>
+                                    <input id="PrvPrix" type="number" placeholder="Entrer l'ancien  prix."
+                                           required="required"
+                                           class="form-control An_prix previousprix " name="prev_prix" value="">
+                                </div>
+
+                                <div class=" form-group">
+                                    <label class="col-md-12">Pourcentage de remise(%)(*)</label>
+                                    <input id="Percentage" type="number" placeholder="Entrer le pourcentage de solde."
+                                           required="required"
+                                           class="form-control remise solde" name="prec" value="">
+                                </div>
+                                <div class=" form-group">
+                                    <label class="col-md-12">Nouveau Prix(*)</label>
+                                    <input id="AcPrix" type="number" placeholder="Entrer le nouveaux prix."
+                                           required="required"
+                                           class="form-control nv_prix nprix  " name="prix" value="">
+                                </div>
+
+
+                            </div>
+                            <div class="col-md-6">
+
+                                <div class="form-group">
+                                    <label class="col-md-12">Description(*)</label>
+                                    <textarea id="descr" placeholder="Entrer la description.." rows="5"
+                                              class="form-control textarea  description-edit "
+                                              name="description" required="required"></textarea>
+                                </div>
+
+                                <div class=" form-group">
+                                    <label class="col-md-12" style="margin-top: 10px;">Choisissez une photo(*)</label>
+                                    <input autocomplete="off" class="form-control "
+                                           name="file" type="file"
+
+                                           placeholder="choisissez_image" data-items="8"/>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Fermer</button>
+                <button type="submit" id="editServices-promo" class="btn btn-primary button-default" data-target="modifier"
+                        data-selector="editeve1">
+                    Enrigistrer
+                </button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+{% if Spaevent.event is defined %}
+    {% set arrayEvent=Spaevent .event %}
+    {% for b in arrayEvent|sort|reverse %}
+
+
+        <div id="detail_offre-{{ b.idOffre }}" class="modal fade" role="dialog">
+            {% set image=(DirAssetParcour (asset('uploads/image/'~attributes.quoiqui.user.id ~'/'~ attributes.quoiqui.id~'/event/'~ b.idOffre))) %}
+            <div class="modal-dialog modal-md">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 id="servspa" class=" color_red G_titre"> {{ b.ServSpa }}</h4>
+
+                    </div>
+
+                    <div class="modal-body ">
+                        <div id="news-section-1">
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="row row-eq-height">
+
+
+                                        <input type="hidden" id="idImgSpa" value="">
+                                        <div class="col-md-6 ">
+                                            <div id="slider">
+                                                <div class="" id="carousel-bounding-box">
+                                                    <div class="carousel slide myCarousel ">
+
+                                                        <div class="carousel-inner">
+                                                            {% for img in image %}
+                                                                {% if loop.index==1 %}
+                                                                    <div class=" image-content2 active item" data-slide-number="{{ loop.index-1 }} " style="background-image:url('{{ asset('uploads/image/'~attributes.quoiqui.user.id ~'/'~ attributes.quoiqui.id~'/event/'~b.idOffre ~'/'~img) }}') ">
+                                                                        <img src="">
+                                                                    </div>
+                                                                {% endif %}
+                                                                {% if loop.index>1 %}
+                                                                    <div class=" image-content2 item" data-slide-number="{{ loop.index-1 }}" style="background-image:url('{{ asset('uploads/image/'~attributes.quoiqui.user.id ~'/'~ attributes.quoiqui.id~'/event/'~b.idOffre ~'/'~img) }}') ">
+                                                                        {#<img src="{{ asset('uploads/image/'~attributes.quoiqui.user.id ~'/'~ attributes.quoiqui.id~'/event/'~b.idOffre~'/'~img) }}">#}
+                                                                    </div>
+                                                                {% endif %}
+                                                            {% endfor %}
+
+                                                        </div>
+                                                        <a class="left carousel-control" href=".myCarousel" role="button" data-slide="prev">
+                                                            <span class="glyphicon glyphicon-chevron-left"></span>
+                                                        </a>
+                                                        <a class="right carousel-control" href=".myCarousel" role="button" data-slide="next">
+                                                            <span class="glyphicon glyphicon-chevron-right"></span>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="blog_info blog-thumbnail">
+
+
+                                                <ul class="archieves">
+                                                    <li>
+                                                        <div class="col-md-12 padding_none  center-text">
+                                                            <div class="col-md-6 col-xs-12">
+                                                                <span class="span_font_size ">Seulement à</span>
+                                                            </div>
+                                                            <div class="col-md-6 col-xs-12  blink_me">
+                                                                <span id="solde" class="font_span  " style="color:red;">{{ b.prix }}</span>
+
+                                                                <sup-nvprix style="font-size: 35px;">Dt</sup-nvprix>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+
+                                                    <li>
+
+
+                                                        <div class="col-md-12 col-xs-12 padding_none center-text">
+                                                            <div class="col-md-6 col-xs-12">
+                                                                <span class="span_font_size">Ancien Prix</span>
+                                                            </div>
+
+                                                            <div class="col-md-6 col-xs-12">
+                                                                <span id="ancienprix" style="font-size: 25px; color:#1a118e; "> {{ b.prev_prix }}</span> <sup>Dt</sup>
+                                                            </div>
+                                                        </div>
+
+                                                    </li>
+                                                    <li>
+                                                        <div class="col-md-12 col-xs-12 padding_none center-text">
+                                                            <div class="col-md-6 col-xs-12">
+                                                                <span class="span_font_size">Remise</span>
+                                                            </div>
+
+
+                                                            <div class="col-md-6 col-xs-12">
+                                                                <span class=" " id="actprix" style="font-size: 25px ;color:#1a118e; ">-{{ b.prec|round(0, 'floor') }}%</span>
+                                                            </div>
+                                                        </div>
+
+                                                    </li>
+                                                    <li>
+                                                        <div class="col-md-12 col-xs-12 padding_none center-text">
+                                                            <div class="col-md-6 col-xs-12 ">
+                                                                <span class="span_font_size ">Valable jusqu'à</span>
+                                                            </div>
+                                                            <span class="span_font_size"></span>
+                                                            <div class="col-md-6 col-xs-12 ">
+                                                                <span id="dateOffre" style="font-size: 25px; color:#1a118e;">
+                                                                    {{ translateJourDate( b.start_offre) }}
+                                                                </span>
+                                                            </div>
+                                                        </div>
+
+                                                    </li>
+
+
+                                                </ul>
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+
+                                        <div class="col-xs-12 top16">
+                                            <h3 class="" style="margin-bottom: 14px;">Description <span class="color_red"> Détaillé</span></h3>
+
+                                            {% if b.description is defined and b.description!=null %}
+                                                <p style="margin-bottom: 20px">{{ b.description }}</p>{% endif %}
+                                            <span id="link1"></span>
+                                            <p id="lire_suite"></p>
+
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4 ">
+                                            <a href="#" data-toggle="modal" data-target="#inscription"
+                                               class="col-md-12 col-xs-12 spacontact ">Demande de Devis
+
+                                            </a>
+                                        </div>
+                                        <div class="col-md-4 ">
+                                            <a href="#" data-toggle="modal" data-target="#modalSectionRappeler"
+                                               class="col-md-12 col-xs-12 spacontact1 xs-btn-top"><i
+                                                        class="fa fa-phone" aria-hidden="true" style="margin-right: 5px"></i>Demande de rappel
+                                            </a>
+                                        </div>
+
+                                        <div class="col-md-4 ">
+                                            <a href="tel:{{ attributes.quoiqui.phone }}"
+                                               class="col-md-12 col-xs-12 spacontact2 xs-btn-top " style="margin-bottom: 19px;"> Contacter
+                                                nous:{{ attributes.quoiqui.phone }}
+                                            </a>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">Fermer</button>
+
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    {% endfor %}
+{% endif %}
+
+{% if  attributes.connected!=app.user %}
+
+    <div class="modal fade" id="inscription" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+                <div class="modal-body">
+                    <div class="row" style="padding: 15px;">
+                        <h3 class="text-uppercase text-center bottom40">Prendre <span class="color_red"> une Réservation</span></h3>
+
+
+                        <form id="send-res" action="{{ path('module_kine_booking',{"idqq": attributes.quoiqui.id }) }}" method="POST">
+
+                            <div class="row">
+
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input type="hidden" name="qqid" value="{{ attributes.quoiqui.id }}">
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <div class="single-query">
+                                        <div class="form-group">
+                                            <label>nom & prénom(*)</label>
+
+                                            <input type="text" name="name" class="keyword-input" placeholder="nom & prénom"
+                                                   required="required" value="{{ app.user.prenom }}">
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <div class="single-query">
+                                        <div class="form-group">
+                                            <label>Email(*)</label>
+                                            <input type="email" name="email" class="keyword-input" placeholder="Email"
+                                                   required="required" value=" {{ app.user.email }}">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6 col-sm-6">
+                                    <div class="single-query">
+                                        <div class="form-group">
+                                            <label>Tel(*)</label>
+                                            <input type="numbre" name="tel" class="keyword-input" placeholder="Tel"
+                                                   required="required" value="+216 {{ app.user.phoneNumber }}">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <div class="single-query">
+                                        <div class="form-group">
+                                            <label>Adresse(*)</label>
+                                            <input type="text" name="adr" class="keyword-input" placeholder="Adresse"
+                                                   required="required" value="{{ app.user.adress }}">
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+                            <div class="row">
+
+
+                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                    <div class="single-query">
+                                        <div class="intro">
+                                            <div class="form-group">
+                                                <label>Choisissez un service(*)</label>
+                                                <select class="selectpicker form-control" id="serviceselect" name="ServSpa">
+                                                    {#<option disabled selected>Sélectionner un service....</option>#}
+
+                                                    <option value="autre" style="font-weight: 700;font-size: 20px;">Choisissez un service
+                                                    </option>
+
+                                                    {% for k,a in promoListeSalledefete(attributes) %}
+                                                        <option value='{{ k }}'>{{ k }}</option>
+                                                    {% endfor %}
+
+
+                                                </select>
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <button class=" btn btn-primary buttn pull-right buttn-width-xs">
+                                Envoyer
+                            </button>
+                        </form>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger " data-dismiss="modal">Fermer</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+{% else %}
+
+
+    <div class="modal fade" id="inscription" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+                <div class="modal-body">
+                    <div class="row" style="padding: 15px;">
+                        <h3 class="text-uppercase text-center bottom40">Prendre <span class="color_red"> une Réservation</span></h3>
+
+
+                        <form id="send-res" action="{{ path('module_kine_booking',{"idqq":attributes.quoiqui.id}) }}" method="POST">
+                            <div class="row">
+
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input type="hidden" name="qqid" value="{{ attributes.quoiqui.id }}">
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <div class="single-query">
+                                        <div class="form-group">
+                                            <label>nom & prénom(*)</label>
+                                            <input type="text" name="name" class="keyword-input"
+                                                   placeholder="nom & prénom(*)"
+                                                   required="required">
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <div class="single-query">
+                                        <div class="form-group">
+                                            <label>Email(*)</label>
+                                            <input type="email" name="email" class="keyword-input" placeholder="Email(*)"
+                                                   required="required">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6 col-sm-6">
+                                    <div class="single-query">
+                                        <div class="form-group">
+                                            <label>Tel(*)</label>
+                                            <input type="number" name="tel" class="keyword-input" placeholder="Tel(*)"
+                                                   required="required">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <div class="single-query">
+                                        <div class="form-group">
+                                            <label>Adresse(*)</label>
+                                            <input type="text" name="adr" class="keyword-input" placeholder="Adresse(*)"
+                                                   required="required">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {#<div class="row">#}
+                            {#<div class="col-md-6 col-sm-6 col-xs-12">#}
+                            {#<div class="single-query">#}
+                            {#<input type="text" name="ville" class="keyword-input" placeholder="Ville"#}
+                            {#required="required">#}
+                            {#</div>#}
+                            {#</div>#}
+                            {##}
+                            {#</div>#}
+
+                            <div class="row">
+
+
+                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                    <div class="single-query">
+                                        <div class="intro">
+                                            <div class="form-group">
+                                                <label>Choisissez un service(*)</label>
+
+                                                <select class="selectpicker form-control" id="serviceselect" name="ServSpa">
+                                                    {#<option disabled selected>Sélectionner un service....</option>#}
+
+                                                    <option value="autre" style="font-weight: 700;font-size: 20px;">Choisissez un service
+                                                    </option>
+
+                                                    {% for k,a in  promoListeSalledefete(attributes) %}
+                                                        <option value='{{ k }}'>{{ k }}</option>
+                                                    {% endfor %}
+
+
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <button class=" btn btn-primary buttn pull-right buttn-width-xs">
+                                Envoyer
+                            </button>
+                        </form>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Fermer</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+{% endif %}
+<select class="selectpicker form-control " id="promo_enrolled" name="mission" style="display: none">
+    <option disabled selected>Sélectionner un service....</option>
+
+
+    {% if Spaevent.event is defined %}
+
+        {% for s in Spaevent.event %}
+            <option value='{{ s.ServSpa }}' class=''>{{ s.ServSpa }}</option>
+
+        {% endfor %}
+
+    {% endif %}
+</select>

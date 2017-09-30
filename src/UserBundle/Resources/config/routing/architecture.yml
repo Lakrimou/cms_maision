@@ -1,0 +1,12 @@
+service_new_common_template:
+     path:    addServiceGlobal/{themeId}/{quoiquiId}
+     defaults: { _controller: ModuleBundle:Architecture:addServiceGlobal}
+     methods: [GET, POST]
+delete_service_global:
+    path:    deleteServiceGlobal/{serviceId}/{themeId}
+    defaults: { _controller: ModuleBundle:Architecture:deleteServiceGlobal}
+    methods: [GET, POST]
+update_service_global:
+    path:    updateServiceGlobal/{serviceId}/{themeId}
+    defaults: { _controller: ModuleBundle:Architecture:updateServiceGlobal}
+    methods: [GET, POST]

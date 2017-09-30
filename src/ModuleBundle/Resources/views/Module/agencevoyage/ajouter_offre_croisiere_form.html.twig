@@ -1,0 +1,83 @@
+<div class="row">
+    <form name="AdminBundle_agencevoyage" method="post" action="{{ path("Ajouter_offre") }}" enctype="multipart/form-data">
+        <div class="col-md-12">
+            <div class="form-group">
+                <label class="control-label" for="time">Titre de votre OFFRE</label>
+                <input type="text" id="AdminBundle_agencevoyage_offreName" name="AdminBundle_agencevoyage[offreName]" maxlength="50" class="form-control">
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="form-group">
+                <label class="control-label" for="time">Départ</label>
+                <input type="text" id="AdminBundle_agencevoyage_departPlace" name="AdminBundle_agencevoyage[departPlace]" maxlength="50" class="form-control">
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="form-group">
+                <label class="control-label" for="time">Retour</label>
+                <input type="text" id="AdminBundle_agencevoyage_retourPlace" name="AdminBundle_agencevoyage[retourPlace]" maxlength="50" class="form-control">
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="form-group">
+                <label class="control-label" for="time">Date Depart</label>
+                <div class="bfh-datepicker" data-name="AdminBundle_agencevoyage[dateDepart]"></div>
+                <div class="bfh-timepicker" data-name="AdminBundle_agencevoyage[dateDepart_time]"></div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="form-group">
+                <label class="control-label" for="time">Date Retour</label>
+                <div class="bfh-datepicker" data-name="AdminBundle_agencevoyage[dateRetour]"></div>
+                <div class="bfh-timepicker" data-name="AdminBundle_agencevoyage[dateRetour_time]"></div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="form-group">
+                <label class="control-label" for="time">Prix</label>
+                <input type="number" id="AdminBundle_agencevoyage_prix" name="AdminBundle_agencevoyage[prix]" placeholder="199DT" class="form-control">
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="form-group">
+                <label class="control-label" for="time">Cabine</label>
+                <input type="text" id="AdminBundle_agencevoyage_cabine" name="AdminBundle_agencevoyage[cabine]" maxlength="50" class="form-control">
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="form-group">
+                <label class="control-label" for="time">Service</label>
+                <input type="text" id="AdminBundle_agencevoyage_service2" name="AdminBundle_agencevoyage[service]" maxlength="50" class="form-control">
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="form-group">
+                <label class="control-label" for="time">Escale</label>
+                <input type="number" id="AdminBundle_agencevoyage_nbrEscale" name="AdminBundle_agencevoyage[nbrEscale]" maxlength="50" class="form-control">
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="form-group">
+                <label class="control-label" for="time">Nom du Bateau</label>
+                <input type="text" id="AdminBundle_agencevoyage_boatPlaneModel" name="AdminBundle_agencevoyage[boatPlaneModel]" maxlength="50" class="form-control">
+
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="form-group">
+                <label class="control-label" for="time">couverture de l'annonce</label>
+                <label class="btn btn-default btn-sm center-block btn-file">
+                    <i class="fa fa-upload fa-2x" aria-hidden="true"></i>
+                    <input type="file" name="file[]" style="display: none;" accept="image/*">
+                </label>
+            </div>
+        </div>
+        <div class="col-md-12">
+        <input type="hidden" id="AdminBundle_agencevoyage_qouiqui" value="{{ qouiqui.id }}" name="AdminBundle_agencevoyage[qouiqui]" class="form-control">
+        <input type="hidden" id="AdminBundle_agencevoyage_type" value="croi" name="AdminBundle_agencevoyage[type]" class="form-control">
+            <div class="pull-right">
+                <input type="submit" value="Create">
+            </div>
+        </div>
+</form>
+</div>

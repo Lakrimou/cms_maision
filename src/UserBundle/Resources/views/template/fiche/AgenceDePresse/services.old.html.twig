@@ -1,0 +1,35 @@
+<!--===== WHAT WE DO =====-->
+<section id="section-services" class="we_are bg_light padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10">
+                <h2 class="text-uppercase">Nos <span class="color_red">services</span></h2>
+                <div class="line_1"></div>
+                <div class="line_2"></div>
+                <div class="line_3"></div>
+            </div>
+            <div class="col-md-2">
+                <div class="pull-right margin-bott-40">
+                    <button type="button" class="theme-btn btn-style-one blue" data-toggle="modal" data-target="#editpropo">modifier les information
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            {% for i in 1..6 %}
+                <div class="col-md-4 col-sm-4 top40">
+                    <div class="feature_box equal-height">
+                        <span class="icon"> <i class="icon-user-tie"></i></span>
+                        <div class="description">
+                            <h4>Service {{ loop.index }}</h4>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci aliquam aperiam </p>
+                            <a href="#" class="link_arrow top20">Lire la suite</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+</section>
+<!--===== #/WHAT WE DO =====-->

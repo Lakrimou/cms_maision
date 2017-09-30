@@ -1,0 +1,816 @@
+{% if connected %}
+    <div class="modal fade" id="Ajouter_events" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog modal-lg events">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">×</button>
+                    <h4 class="modal-title">Ajouter un Evenements</h4>
+                </div>
+
+                <div class="modal-body">
+                    <div class="row norow">
+
+
+                        <div class="col-md-12">
+                            <form action="{{ path('dashboard_event_ajout', {'qq_id': qouiqui.id }) }}" method="POST" enctype="multipart/form-data">
+
+                                <div id="accordion" class="checkout">
+                                    <div class="panel checkout-step">
+                                        <div><span class="checkout-step-number">1</span>
+                                            <h4 class="checkout-step-title"><a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">information
+                                                    sur l'événement</a></h4>
+                                        </div>
+                                        <div id="collapseOne" class="collapse in">
+                                            <div class="checkout-step-body">
+
+                                                <div class="row">
+                                                    <div class="col-md-offset-1 col-md-10">
+
+                                                        <div class="checkout-login">
+                                                            <div class="form-group">
+                                                                <label for="formGroupExampleInput">Nom de L'événement</label>
+                                                                <div class="form-group"><input type="text" id="adminbundle_events_eventName" name="adminbundle_events[eventName]" required="required" maxlength="45" class="form-control form-control"></div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <div class="form-group"><textarea id="adminbundle_events_details" name="adminbundle_events[details]" required="required" class="form-control form-control"></textarea></div>
+                                                            </div>
+
+                                                            <div class="form-group">
+                                                                <label class="control-label" for="adminbundle_events_location">Pays</label>
+                                                                {#<input type="text" id="adminbundle_events_location" name="adminbundle_events[location]" maxlength="45" class="form-control form-control"></div>#}
+                                                            <select id="countries_states1" class="form-control bfh-countries" name="adminbundle_events[location][pays]" data-country="US"></select>
+                                                            <br>
+                                                            <label class="control-label" for="adminbundle_events_location">Ville</label>
+                                                            <select class="form-control bfh-states" name="adminbundle_events[location][ville]" Data-country="countries_states1"></select>
+
+                                                            <input id="geoLong" class="hidden">
+                                                            <input id="geoLat" class="hidden">
+                                                        </div>
+
+
+                                                            <div class="form-group">
+                                                                <label class="col-sm-12" for="registration-date">Date de L'événement</label>
+                                                                <div class="input-group">
+
+
+                                                                    <div class="col-md-6">
+                                                                        <label class="control-label">lancement d'événement</label>
+                                                                        <div class="bfh-datepicker" data-name="date_start[date]" data-format="m/d/y">
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-6">
+                                                                        <label class="control-label">a</label>
+                                                                        <div class="bfh-timepicker" data-name="date_start[time]" data-mode="24h"></div>
+                                                                    </div>
+
+                                                                    <div class="col-md-6">
+                                                                        <label class="control-label">fin d'événement</label>
+                                                                        <div data-name="date_end[date]" data-format="m/d/y" class="bfh-datepicker">
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-6">
+                                                                        <label class="control-label">a</label>
+                                                                        <div class="bfh-timepicker" data-name="date_end[time]" data-mode="24h"></div>
+                                                                    </div>
+
+
+                                                                </div>
+
+                                                            </div>
+
+
+                                                        </div>
+                                                        <!-- /input-group -->
+                                                    </div>
+                                                    <!-- /.col-lg-6 -->
+                                                </div>
+                                                <div class="collapse" id="otp-verifaction">
+                                                    <div class="otp-verifaction">
+                                                        <div class="row">
+                                                            <div class="col-lg-8">
+                                                                <div class="row">
+
+                                                                    <!-- Button -->
+                                                                    <div class="form-group">
+                                                                        <label class="control-label sr-only" for="next">Suivant</label>
+                                                                        <div class="col-md-12">
+                                                                            <a class="collapsed btn btn-default" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">Next</a>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel checkout-step">
+                                        <div role="tab" id="headingThree"><span class="checkout-step-number">2</span>
+                                            <h4 class="checkout-step-title"><a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree"> Ticket &amp; Reservation </a></h4>
+                                        </div>
+                                        <div id="collapseThree" class="panel-collapse collapse">
+                                            <div class="checkout-step-body">
+                                                <div class="row">
+                                                    <div class="form-group">
+                                                        <label class="col-md-12 control-label" for="time">prix</label>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group"><input type="text" id="adminbundle_events_price" name="adminbundle_events[price]" maxlength="45" class="form-control form-control" value="Gratuit"></div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label class="col-md-12 control-label" for="time">Organisateur &amp; Infoline</label>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group"><textarea id="adminbundle_events_orgBy" name="adminbundle_events[orgBy]" required="required" class="form-control form-control"></textarea></div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                                <a class="collapsed btn btn-default" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFour"> Suivant </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel checkout-step">
+                                        <div role="tab" id="headingFour"><span class="checkout-step-number">3</span>
+                                            <h4 class="checkout-step-title"><a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFour"> Statut et Confirmation </a></h4>
+                                        </div>
+                                        <div id="collapseFour" class="panel-collapse collapse">
+                                            <div class="checkout-step-body " style="display: table-cell;">
+
+                                                <div class="form-group">
+                                                    <div class="col-md-9">
+                                                        <div class="form-group"><label class="control-label" for="adminbundle_events_statu">Statut de l'evenement</label>
+                                                            <input type="text" id="adminbundle_events_statu" name="adminbundle_events[statu]" maxlength="45" class="form-control form-control" value="active" placeholder="Active"></div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label class="col-md-12 control-label" for="time">upload une image</label>
+                                                    <div class="col-md-9">
+                                                        <div class="form-group"><input type="hidden" id="adminbundle_events_image" name="adminbundle_events[image]" required="required" class="form-control" accept="image/*"></div>
+                                                        <div class="form-group"><input type="file" onchange="uploadPhotos('#{imageUploadUrl}', '#adminbundle_events_image')"></div>
+                                                    </div>
+                                                </div>
+
+                                                <div style="clear: both;">
+                                                    <div class="pull-right">
+                                                        <input type="submit" id="envoyer" class="btn btn-primary" value="créer">
+                                                    </div>
+                                                </div>
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <input type="hidden" id="adminbundle_events__token" name="adminbundle_events[_token]" value="1aRHZLv1LoOuUChAHJeE32qUVIz3JWpbSxUo_hY8Kh4"></form>
+                        </div>
+
+                        <style>
+                            .checkout-wrapper {
+                                padding-top: 40px;
+                                padding-bottom: 40px;
+                                background-color: #fafbfa;
+                            }
+
+                            .checkout {
+                                background-color: #fff;
+                                border: 1px solid #eaefe9;
+
+                                font-size: 14px;
+                            }
+
+                            .panel {
+                                margin-bottom: 0px;
+                            }
+
+                            .checkout-step {
+
+                                border-top: 1px solid #f2f2f2;
+                                color: #666;
+                                font-size: 14px;
+                                padding: 30px;
+                                position: relative;
+                            }
+
+                            .checkout-step-number {
+                                border-radius: 50%;
+                                border: 1px solid #666;
+                                display: inline-block;
+                                font-size: 12px;
+                                height: 32px;
+                                margin-right: 26px;
+                                padding: 6px;
+                                text-align: center;
+                                width: 32px;
+                            }
+
+                            .checkout-step-title {
+                                font-size: 18px;
+                                font-weight: 500;
+                                vertical-align: middle;
+                                display: inline-block;
+                                margin: 0px;
+                            }
+
+                            .checout-address-step {
+                            }
+
+                            .checout-address-step .form-group {
+                                margin-bottom: 18px;
+                                display: inline-block;
+                                width: 100%;
+                            }
+
+                            .checkout-step-body {
+                                padding-left: 60px;
+                                padding-top: 30px;
+                            }
+
+                            .checkout-step-active {
+                                display: block;
+                            }
+
+                            .checkout-step-disabled {
+                                display: none;
+                            }
+
+                            .checkout-login {
+                            }
+
+                            .login-phone {
+                                display: inline-block;
+                            }
+
+                            .login-phone:after {
+                                content: '+91 - ';
+                                font-size: 14px;
+                                left: 36px;
+                            }
+
+                            .login-phone:before {
+                                content: "";
+                                font-style: normal;
+                                color: #333;
+                                font-size: 18px;
+                                left: 12px;
+                                display: inline-block;
+                                font: normal normal normal 14px/1 FontAwesome;
+                                font-size: inherit;
+                                text-rendering: auto;
+                                -webkit-font-smoothing: antialiased;
+                                -moz-osx-font-smoothing: grayscale;
+                            }
+
+                            .login-phone:after, .login-phone:before {
+                                position: absolute;
+                                top: 50%;
+                                -webkit-transform: translateY(-50%);
+                                transform: translateY(-50%);
+                            }
+
+                            .login-phone .form-control {
+                                padding-left: 68px;
+                                font-size: 14px;
+
+                            }
+
+                            .checkout-login .btn {
+                                height: 42px;
+                                line-height: 1.8;
+                            }
+
+                            .otp-verifaction {
+                                margin-top: 30px;
+                            }
+
+                            .checkout-sidebar {
+                                background-color: #fff;
+                                border: 1px solid #eaefe9;
+                                padding: 30px;
+                                margin-bottom: 30px;
+                            }
+
+                            .checkout-sidebar-merchant-box {
+                                background-color: #fff;
+                                border: 1px solid #eaefe9;
+                                margin-bottom: 30px;
+                            }
+
+                            .checkout-total {
+                                border-bottom: 1px solid #eaefe9;
+                                padding-bottom: 10px;
+                                margin-bottom: 10px;
+                            }
+
+                            .checkout-invoice {
+                                display: inline-block;
+                                width: 100%;
+                            }
+
+                            .checout-invoice-title {
+                                float: left;
+                                color: #30322f;
+                            }
+
+                            .checout-invoice-price {
+                                float: right;
+                                color: #30322f;
+                            }
+
+                            .checkout-charges {
+                                display: inline-block;
+                                width: 100%;
+                            }
+
+                            .checout-charges-title {
+                                float: left;
+                            }
+
+                            .checout-charges-price {
+                                float: right;
+                            }
+
+                            .charges-free {
+                                color: #43b02a;
+                                font-weight: 600;
+                            }
+
+                            .checkout-payable {
+                                display: inline-block;
+                                width: 100%;
+                                color: #333;
+                            }
+
+                            .checkout-payable-title {
+                                float: left;
+                            }
+
+                            .checkout-payable-price {
+                                float: right;
+                            }
+
+                            .checkout-cart-merchant-box {
+                                padding: 20px;
+                                display: inline-block;
+                                width: 100%;
+                                border-bottom: 1px solid #eaefe9;
+                                padding-bottom: 20px;
+                            }
+
+                            .checkout-cart-merchant-name {
+                                color: #30322f;
+                                float: left;
+                            }
+
+                            .checkout-cart-merchant-item {
+                                float: right;
+                                color: #30322f;
+                            }
+
+                            .checkout-cart-products {
+                            }
+
+                            .checkout-cart-products .checkout-charges {
+                                padding: 10px 20px;
+                                color: #333;
+                            }
+
+                            .checkout-cart-item {
+                                border-bottom: 1px solid #eaefe9;
+                                box-sizing: border-box;
+                                display: table;
+                                font-size: 12px;
+                                padding: 22px 20px;
+                                width: 100%;
+                            }
+
+                            .checkout-item-list {
+                            }
+
+                            .checkout-item-count {
+                                float: left;
+                            }
+
+                            .checkout-item-img {
+                                width: 60px;
+                                float: left;
+                            }
+
+                            .checkout-item-name-box {
+                                float: left;
+                            }
+
+                            .checkout-item-title {
+                                color: #30322f;
+                                font-size: 14px;
+                            }
+
+                            .checkout-item-unit {
+                            }
+
+                            .checkout-item-price {
+                                float: right;
+                                color: #30322f;
+                                font-size: 14px;
+                                font-weight: 600;
+                            }
+
+                            .checkout-viewmore-btn {
+                                padding: 10px;
+                                text-align: center;
+                            }
+
+                            .header-checkout-item {
+                                text-align: right;
+                                padding-top: 20px;
+                            }
+
+                            .checkout-promise-item {
+                                background-repeat: no-repeat;
+                                background-size: 14px;
+                                display: inline-block;
+                                margin-left: 20px;
+                                padding-left: 24px;
+                                color: #30322f;
+                            }
+
+                            .checkout-promise-item i {
+                                padding-right: 10px;
+                                color: #43b02a;
+                            }
+                        </style>
+
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+                    <button type="submit" class="btn btn-default " data-target="modifier" data-selector="#">
+                        enregistrer
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+{% endif %}
+{% if app.user %}
+    <div class="modal fade" id="Reserver" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">×</button>
+                    <h4 class="modal-title">Réservaton</h4>
+                </div>
+
+                <div class="modal-body">
+                    <div class="row" style="padding: 15px;">
+
+                        <div class="alert alert-info alert-dismissable page-alert">
+                            <button type="button" class="close"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                            <i class="fa fa-question-circle" aria-hidden="true"></i> Comfirmer votre reservation !!
+                        </div>
+                        <form id="resevation_form" action="event_id_replace" method="POST">
+                            <div class="col-md-12 align-center titre_event_mo" style="font-size: 18px;margin: 15px;"><h2>titre_event</h2></div>
+                            <div class="col-md-12 align-center card-media-body-heading descriptrion_event_mo" style="font-size: 16px;margin-left: 15px;">descriptrion_event</div>
+                        </form>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+                    <button type="submit" class="btn btn-default " data-target="modifier" data-selector="resevation_form">
+                        Réserver Maintenant
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+{% endif %}
+
+<section class="events-section padd_top40" style="background-image:url({{ asset('module/ambulance/images/background/dotted-map.png') }})">
+    <div class="auto-container">
+        <div class="row">
+            <div class='col-md-offset-2 col-md-8 text-center'>
+                <h2>Nos Evenements</h2>
+            </div>
+            {% if connected %}
+                <button class="theme-btn btn-style-one pull-right" data-toggle="modal" data-target="#Ajouter_events">
+                    ajouter un événement
+                </button>
+            {% endif %}
+        </div>
+        <div class='row'>
+            <div class='col-md-12 ici'>
+                <div class="carousel slide" data-ride="carousel" id="event-carr">
+
+
+                    <!-- Carousel Slides / Quotes -->
+                    <div class="carousel-inner">
+                        <!-- Quote 1 -->
+{% set active = 0 %}
+                        {% for event in events %}
+                            {% if  date(event.dateStart) > date() %}
+                                {% set active = active + 1 %}
+                                <div class="t3awed item {% if  active == "1" %}active{% endif %}">
+
+                                        <div class="card-media">
+                                            <!-- media container -->
+                                            <div class="card-media-object-container">
+
+                                                <div class="card-media-object" style="background-image: url({{ asset('uploads/image/') }}{{ qouiqui.user.id }}/{{ qouiqui.id }}/event/{{ event.image }}.jpg)"></div>
+                                                <span class="card-media-object-tag subtle">Encore Ouvert</span>
+                                            </div>
+                                            <!-- body container -->
+                                            <div class="card-media-body">
+                                                <div class="card-media-body-top">
+                                                    <span class="subtle">{{ event.dateStart|date('D/M/Y') }} | {{ event.dateStart|date("g:ia") }} </span>
+                                                    <h2 class="titre_event{{ event.id }}">
+                                                        {{ event.eventName }}
+                                                    </h2>
+                                                    <div class="card-media-body-top-icons u-float-right">
+                                                        <svg fill="#888888" height="16" viewBox="0 0 24 24" width="16" xmlns="http://www.w3.org/2000/svg">
+                                                            <path d="M0 0h24v24H0z" fill="none"/>
+                                                            <path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/>
+                                                        </svg>
+                                                        <svg fill="#888888" height="16" viewBox="0 0 24 24" width="16" xmlns="http://www.w3.org/2000/svg">
+                                                            <path d="M17 3H7c-1.1 0-1.99.9-1.99 2L5 21l7-3 7 3V5c0-1.1-.9-2-2-2z"/>
+                                                            <path d="M0 0h24v24H0z" fill="none"/>
+                                                        </svg>
+                                                    </div>
+                                                </div>
+                                                <span class="card-media-body-heading decription_event{{ event.id }}">{{ event.details }}</span>
+                                                <div class="card-media-body-supporting-bottom">
+                                                    <span class="card-media-body-supporting-bottom-text subtle">{{ event.location }}</span>
+                                                    <span class="card-media-body-supporting-bottom-text subtle u-float-right">{{ event.price }}</span>
+                                                </div>
+                                                <div class="card-media-body-supporting-bottom card-media-body-supporting-bottom-reveal">
+                                                    <a data-toggle="modal" data-target="#Reserver" data-event_id="{{ event.id }}" data-link="{{ path('reservation_event',{'event_id':event.id }) }}" class="Reserver card-media-body-supporting-bottom-text card-media-link u-float-right">Réserver Maintenant</a>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                </div>
+                            {% endif %}
+                        {% else %}
+                            <h2>Pas D'evenements</h2>
+                        {% endfor %}
+
+                    </div>
+
+                    <!-- Carousel Buttons Next/Prev -->
+                    <a data-slide="prev" data-id-carousel="#event-carr" href="#quote-carousel" class="left carousel-control"><i style="margin: 60px;" class="fa fa-chevron-left"></i></a>
+                    <a data-slide="next" data-id-carousel="#event-carr" href="#quote-carousel" class="right carousel-control"><i style="margin: 60px;" class="fa fa-chevron-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+<style>
+    @media (max-width: 767px) {
+
+        .card-media-body {
+            display: inline-table;
+            padding-bottom: 30px;
+        }
+
+        .card-media-body-supporting-bottom {
+            bottom: -6px;
+        }
+
+        .card-media-object-container {
+            display: none;
+        }
+
+        .card-media-body {
+            width: 100% !important;
+        }
+
+    }
+
+    .ui-pnotify.ui-pnotify-fade-normal.ui-pnotify-mobile-able.ui-pnotify-in.ui-pnotify-fade-in.ui-pnotify-move {
+        z-index: 999;
+        /*background:white;*/
+    }
+
+    .padd_top40 {
+        padding-top: 80px;
+    }
+
+    @media (min-width: 992px) {
+        .modal-dialog.modal-lg.events {
+            width: 64%;
+        }
+    }
+
+    .carousel-control {
+        background: transparent !important;
+    }
+
+    .u-float-right {
+        float: right;
+    }
+
+    .u-flex-center {
+        display: -webkit-flex;
+        display: flex;
+        -webkit-justify-content: center;
+        justify-content: center;
+        -webkit-align-items: center;
+        align-items: center;
+    }
+
+    .subtle {
+        color: #888;
+        font-size: 12px;
+    }
+
+    .card-media {
+        border-radius: 2px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, .12);
+        height: 200px;
+        margin-bottom: 25px;
+        transition: all 300ms ease-out;
+        width: 100%;
+    }
+
+    .card-media:hover {
+        box-shadow: 0 5px 14px rgba(0, 0, 0, .2);
+    }
+
+    .card-media-object-container {
+        background: none;
+        float: left;
+        height: 100%;
+        width: 35%;
+        position: relative;
+    }
+
+    .card-media-object {
+        background-position: center center;
+        background-size: cover;
+        height: 100%;
+    }
+
+    .card-media-object:after {
+        content: " ";
+        display: block;
+        height: 100%;
+        left: 0;
+        opacity: 0;
+        position: absolute;
+        right: 0;
+        top: 0;
+        transition: all 300ms ease-out;
+        z-index: 10;
+    }
+
+    .card-media:hover .card-media-object:after {
+        background: -moz-linear-gradient(top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 52%, rgba(0, 0, 0, 0.4) 100%);
+        background: -webkit-linear-gradient(top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 52%, rgba(0, 0, 0, 0.4) 100%);
+        background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 52%, rgba(0, 0, 0, 0.4) 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00000000', endColorstr='#a6000000', GradientType=0);
+        opacity: 1;
+    }
+
+    .card-media-object-tag {
+        background-color: #fff;
+        border-radius: 2px;
+        padding: 2px 7px;
+        position: absolute;
+        right: 10px;
+        top: 10px;
+    }
+
+    .card-media-object-social-list {
+        bottom: 4px;
+        left: 10px;
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        position: absolute;
+        z-index: 20;
+    }
+
+    .card-media-object-social-list li {
+        border-radius: 50%;
+        display: inline-block;
+        height: 30px;
+        margin-right: 6px;
+        opacity: 0;
+        overflow: hidden;
+        transform: translateY(5px);
+        transition: all 300ms ease-out;
+        width: 30px;
+    }
+
+    .card-media:hover .card-media-object-social-list li {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .card-media-object-social-list li:nth-child(1) {
+        transition-delay: 0;
+    }
+
+    .card-media-object-social-list li:nth-child(2) {
+        transition-delay: 75ms;
+    }
+
+    .card-media-object-social-list li:nth-child(3) {
+        transition-delay: 150ms;
+    }
+
+    .card-media-object-social-list-item-additional {
+        border: 1px solid #fff;
+        color: #fff;
+        font-size: 12px;
+        padding-top: 7px;
+        text-align: center;
+    }
+
+    .card-media-body {
+        background-color: #fff;
+        float: left;
+        height: 100%;
+        padding: 12px 15px;
+        position: relative;
+        width: 65%;
+    }
+
+    .card-media-body-top {
+        display: block;
+    }
+
+    .card-media-body-top-icons {
+        margin-top: -2px;
+        opacity: 0;
+        transition: all 300ms ease-out;
+        transform: translateY(-5px);
+    }
+
+    .card-media:hover .card-media-body-top-icons {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .card-media-body-top-icons > svg {
+        cursor: pointer;
+        margin-left: 10px;
+        transition: all 300ms ease-out;
+    }
+
+    .card-media-body-top-icons > svg:hover {
+        fill: #444;
+    }
+
+    .card-media-body-heading {
+        display: block;
+        margin-top: 10px;
+    }
+
+    .card-media-body-supporting-bottom {
+        position: absolute;
+        bottom: 10px;
+        left: 0;
+        opacity: 1;
+        padding: 0 15px;
+        transition: all 300ms ease-out;
+        width: 100%;
+    }
+
+    .card-media:hover .card-media-body-supporting-bottom {
+        opacity: 0;
+        transform: translateY(-8px);
+    }
+
+    .card-media-body-supporting-bottom-text {
+        display: inline-block;
+    }
+
+    .card-media-body-supporting-bottom-reveal {
+        opacity: 0;
+        transform: translateY(8px);
+        transition: all 300ms ease-out;
+    }
+
+    .card-media:hover .card-media-body-supporting-bottom-reveal {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .card-media-link {
+        color: #41C1F2;
+        text-decoration: none;
+    }
+</style>

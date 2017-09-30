@@ -1,0 +1,617 @@
+{% extends 'front/layout_front.html.twig' %}
+
+{% block body %}
+
+    <body>
+    {#{{ dump(qouiqui) }}#}
+    <div id="loader">
+        <div class="book">
+            <div class="book__page"></div>
+            <div class="book__page"></div>
+            <div class="book__page"></div>
+        </div>
+    </div>
+
+    {#=======================================header===========================================#}
+    {% include 'UserBundle::header.html.twig' %}
+    {#=======================================header===========================================#}
+
+    <!--start apartment-->
+    <div id="ajout_event">
+        <div class="container">
+            <div class="row">
+                <div class="container">
+                    <div class="row">
+
+
+                        <div class="col-md-12">
+                            {{ form_start(form) }}
+
+                            <div id="accordion" class="checkout">
+                                <div class="panel checkout-step">
+                                    <div><span class="checkout-step-number">1</span>
+                                        <h4 class="checkout-step-title"><a role="button" data-toggle="collapse"
+                                                                           data-parent="#accordion" href="#collapseOne">information
+                                                sur l'événement</a></h4>
+                                    </div>
+                                    <div id="collapseOne" class="collapse in">
+                                        <div class="checkout-step-body">
+
+                                            <div class="row">
+                                                <div class="col-lg-8">
+
+                                                    <div class="checkout-login">
+                                                        <div class="form-group">
+                                                            <label for="formGroupExampleInput">Nom de L'événement</label>
+                                                            {{ form_row(form.eventName ,{ 'attr': {'class': 'form-control'} }) }}
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="formGroupExampleInput">Description sur L'événement</label>
+                                                            {{ form_row(form.details,{ 'attr': {'class': 'form-control'} }) }}
+                                                        </div>
+                                                        <div id="myMap" style="width: 100%;height: 350px;">
+
+                                                        </div>
+                                                        {{ form_row(form.location,{ 'attr': {'class': 'form-control'} }) }}
+                                                        <input id="geoLong" class="hidden"/>
+                                                        <input id="geoLat" class="hidden"/>
+
+                                                        <div class="form-group">
+                                                            <label class="col-sm-12" for="registration-date">Date de L'événement</label>
+                                                            <div class="input-group">
+                                                                <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span></span>
+                                                                <input style="height: 42px;" class="form-control" name="date_start[date]" id="registration-date" type="date">
+                                                                <input style="height: 42px;" class="form-control" name="date_end[date]" id="registration-date" type="date">
+                                                                <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-time" aria-hidden="true"></span></span>
+                                                                <input  style="height: 42px;" class="form-control" name="date_start[time]"  id="registration-time" >
+                                                                <input  style="height: 42px;" class="form-control" name="date_end[time]"  id="registration-time" >
+                                                                <span class="input-group-btn">
+            	    	                                        <button class="btn btn-default" type="button" onclick="addNow()"><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span> Now</button>
+                                                                </span>
+                                                            </div>
+
+                                                    </div>
+
+
+                                                    </div>
+                                                    <!-- /input-group -->
+                                                </div>
+                                                <!-- /.col-lg-6 -->
+                                            </div>
+                                            <div class="collapse" id="otp-verifaction">
+                                                <div class="otp-verifaction">
+                                                    <div class="row">
+                                                        <div class="col-lg-8">
+                                                            <div class="row">
+
+                                                                <!-- Button -->
+                                                                <div class="form-group">
+                                                                    <label class="control-label sr-only"
+                                                                           for="next">next</label>
+                                                                    <div class="col-md-12">
+                                                                        <a class="collapsed btn btn-default"
+                                                                           role="button" data-toggle="collapse"
+                                                                           data-parent="#accordion" href="#collapseTwo">Next</a>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel checkout-step">
+                                    <div role="tab" id="headingThree"><span class="checkout-step-number">2</span>
+                                        <h4 class="checkout-step-title"><a class="collapsed" role="button" data-toggle="collapse"  data-parent="#accordion" href="#collapseThree"> Ticket & Reservation </a></h4>
+                                    </div>
+                                    <div id="collapseThree" class="panel-collapse collapse">
+                                        <div class="checkout-step-body">
+                                            <div class="row">
+                                                <div class="form-group">
+                                                    <label class="col-md-12 control-label" for="time">prix</label>
+                                                    <div class="col-md-6">
+                                                        {{ form_row(form.price,{ 'attr': {'class': 'form-control' ,'value':'Gratuit' ,'type':'radio' } }) }}
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label class="col-md-12 control-label" for="time">Organisateur & Infoline</label>
+                                                    <div class="col-md-6">
+                                                            {{ form_row(form.orgBy,{ 'attr': {'class': 'form-control'} }) }}
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <a class="collapsed btn btn-default" role="button" data-toggle="collapse"
+                                               data-parent="#accordion" href="#collapseFour"> Next </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel checkout-step">
+                                    <div role="tab" id="headingFour"><span class="checkout-step-number">3</span>
+                                        <h4 class="checkout-step-title"><a class="collapsed" role="button"  data-toggle="collapse"  data-parent="#accordion"  href="#collapseFour"> Statut et Confirmation </a></h4>
+                                    </div>
+                                    <div id="collapseFour" class="panel-collapse collapse">
+                                        <div class="checkout-step-body " style="display: table-cell;">
+
+                                            <div class="form-group">
+                                                <label class="col-md-12 control-label" for="time">statu</label>
+                                                <div class="col-md-9">
+                                                    {{ form_row(form.statu,{ 'attr': {'class': 'form-control'} }) }}
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="col-md-12 control-label" for="time">upload une image</label>
+                                                <div class="col-md-9">
+                                                    {{ form_row(form.image,{ 'attr': {'class': 'form-control','accept': 'image/*' } }) }}
+                                                </div>
+                                            </div>
+
+                                            <div   style="clear: both;">
+                                                <div class="pull-right">
+                                                    <input type="submit" id="envoyer" class="btn btn-primary" value="créer"/>
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {{ form_end(form) }}
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <style>
+                .checkout-wrapper {
+                    padding-top: 40px;
+                    padding-bottom: 40px;
+                    background-color: #fafbfa;
+                }
+
+                .checkout {
+                    background-color: #fff;
+                    border: 1px solid #eaefe9;
+
+                    font-size: 14px;
+                }
+
+                .panel {
+                    margin-bottom: 0px;
+                }
+
+                .checkout-step {
+
+                    border-top: 1px solid #f2f2f2;
+                    color: #666;
+                    font-size: 14px;
+                    padding: 30px;
+                    position: relative;
+                }
+
+                .checkout-step-number {
+                    border-radius: 50%;
+                    border: 1px solid #666;
+                    display: inline-block;
+                    font-size: 12px;
+                    height: 32px;
+                    margin-right: 26px;
+                    padding: 6px;
+                    text-align: center;
+                    width: 32px;
+                }
+
+                .checkout-step-title {
+                    font-size: 18px;
+                    font-weight: 500;
+                    vertical-align: middle;
+                    display: inline-block;
+                    margin: 0px;
+                }
+
+                .checout-address-step {
+                }
+
+                .checout-address-step .form-group {
+                    margin-bottom: 18px;
+                    display: inline-block;
+                    width: 100%;
+                }
+
+                .checkout-step-body {
+                    padding-left: 60px;
+                    padding-top: 30px;
+                }
+
+                .checkout-step-active {
+                    display: block;
+                }
+
+                .checkout-step-disabled {
+                    display: none;
+                }
+
+                .checkout-login {
+                }
+
+                .login-phone {
+                    display: inline-block;
+                }
+
+                .login-phone:after {
+                    content: '+91 - ';
+                    font-size: 14px;
+                    left: 36px;
+                }
+
+                .login-phone:before {
+                    content: "";
+                    font-style: normal;
+                    color: #333;
+                    font-size: 18px;
+                    left: 12px;
+                    display: inline-block;
+                    font: normal normal normal 14px/1 FontAwesome;
+                    font-size: inherit;
+                    text-rendering: auto;
+                    -webkit-font-smoothing: antialiased;
+                    -moz-osx-font-smoothing: grayscale;
+                }
+
+                .login-phone:after, .login-phone:before {
+                    position: absolute;
+                    top: 50%;
+                    -webkit-transform: translateY(-50%);
+                    transform: translateY(-50%);
+                }
+
+                .login-phone .form-control {
+                    padding-left: 68px;
+                    font-size: 14px;
+
+                }
+
+                .checkout-login .btn {
+                    height: 42px;
+                    line-height: 1.8;
+                }
+
+                .otp-verifaction {
+                    margin-top: 30px;
+                }
+
+                .checkout-sidebar {
+                    background-color: #fff;
+                    border: 1px solid #eaefe9;
+                    padding: 30px;
+                    margin-bottom: 30px;
+                }
+
+                .checkout-sidebar-merchant-box {
+                    background-color: #fff;
+                    border: 1px solid #eaefe9;
+                    margin-bottom: 30px;
+                }
+
+                .checkout-total {
+                    border-bottom: 1px solid #eaefe9;
+                    padding-bottom: 10px;
+                    margin-bottom: 10px;
+                }
+
+                .checkout-invoice {
+                    display: inline-block;
+                    width: 100%;
+                }
+
+                .checout-invoice-title {
+                    float: left;
+                    color: #30322f;
+                }
+
+                .checout-invoice-price {
+                    float: right;
+                    color: #30322f;
+                }
+
+                .checkout-charges {
+                    display: inline-block;
+                    width: 100%;
+                }
+
+                .checout-charges-title {
+                    float: left;
+                }
+
+                .checout-charges-price {
+                    float: right;
+                }
+
+                .charges-free {
+                    color: #43b02a;
+                    font-weight: 600;
+                }
+
+                .checkout-payable {
+                    display: inline-block;
+                    width: 100%;
+                    color: #333;
+                }
+
+                .checkout-payable-title {
+                    float: left;
+                }
+
+                .checkout-payable-price {
+                    float: right;
+                }
+
+                .checkout-cart-merchant-box {
+                    padding: 20px;
+                    display: inline-block;
+                    width: 100%;
+                    border-bottom: 1px solid #eaefe9;
+                    padding-bottom: 20px;
+                }
+
+                .checkout-cart-merchant-name {
+                    color: #30322f;
+                    float: left;
+                }
+
+                .checkout-cart-merchant-item {
+                    float: right;
+                    color: #30322f;
+                }
+
+                .checkout-cart-products {
+                }
+
+                .checkout-cart-products .checkout-charges {
+                    padding: 10px 20px;
+                    color: #333;
+                }
+
+                .checkout-cart-item {
+                    border-bottom: 1px solid #eaefe9;
+                    box-sizing: border-box;
+                    display: table;
+                    font-size: 12px;
+                    padding: 22px 20px;
+                    width: 100%;
+                }
+
+                .checkout-item-list {
+                }
+
+                .checkout-item-count {
+                    float: left;
+                }
+
+                .checkout-item-img {
+                    width: 60px;
+                    float: left;
+                }
+
+                .checkout-item-name-box {
+                    float: left;
+                }
+
+                .checkout-item-title {
+                    color: #30322f;
+                    font-size: 14px;
+                }
+
+                .checkout-item-unit {
+                }
+
+                .checkout-item-price {
+                    float: right;
+                    color: #30322f;
+                    font-size: 14px;
+                    font-weight: 600;
+                }
+
+                .checkout-viewmore-btn {
+                    padding: 10px;
+                    text-align: center;
+                }
+
+                .header-checkout-item {
+                    text-align: right;
+                    padding-top: 20px;
+                }
+
+                .checkout-promise-item {
+                    background-repeat: no-repeat;
+                    background-size: 14px;
+                    display: inline-block;
+                    margin-left: 20px;
+                    padding-left: 24px;
+                    color: #30322f;
+                }
+
+                .checkout-promise-item i {
+                    padding-right: 10px;
+                    color: #43b02a;
+                }
+            </style>
+        </div>
+    </div>
+    <!-- end apartment-->
+
+    {#=======================================footer===========================================#}
+    {% include 'UserBundle::footer.html.twig' %}
+    {#=======================================footer===========================================#}
+
+    {% endblock %}
+    {% block javascripts %}
+        {{ parent() }}
+
+        <!-- Scripts -->
+        <script src="http://momentjs.com/downloads/moment-with-locales.js"></script>
+        <script src="http://momentjs.com/downloads/moment-timezone-with-data.js"></script>
+        <script src="{{ asset('asset-front/js/wow.min.js') }}"></script>
+        <script src="{{ asset('asset-front/js/jquery-1.11.1.min.js') }}"></script>
+        <script src="{{ asset('asset-front/js/bootstrap.min.js') }}"></script>
+        <script src="{{ asset('asset-front/js/waypoints.js') }}"></script>
+        <script src="{{ asset('asset-front/js/jquery.counterup.js') }}"></script>
+        <script src="{{ asset('asset-front/js/jquery.bxslider-rahisified.min.js') }}"></script>
+        <script src="{{ asset('asset-front/js/custom.js') }}"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-validator/0.5.3/js/bootstrapValidator.js"></script>
+
+
+
+
+        <script type="text/javascript">
+
+
+
+                var map;
+                var marker;
+                var myLatlng = new google.maps.LatLng(36.679843, 10.207210);
+                var geocoder = new google.maps.Geocoder();
+                var infowindow = new google.maps.InfoWindow();
+
+                function initialize() {
+                    var mapOptions = {
+                        zoom: 7,
+                        center: myLatlng,
+                        mapTypeId: google.maps.MapTypeId.ROADMAP
+                    };
+
+                    map = new google.maps.Map(document.getElementById("myMap"), mapOptions);
+
+                    marker = new google.maps.Marker({
+                        map: map,
+                        position: myLatlng,
+                        draggable: true
+                    });
+
+                    geocoder.geocode({'latLng': myLatlng}, function (results, status) {
+                        if (status == google.maps.GeocoderStatus.OK) {
+                            if (results[0]) {
+                                $('#address').val(results[0].formatted_address);
+                                $('#latitude').val(marker.getPosition().lat());
+                                $('#longitude').val(marker.getPosition().lng());
+                                infowindow.setContent(results[0].formatted_address);
+                                infowindow.open(map, marker);
+                            }
+                        }
+                    });
+
+
+                    google.maps.event.addListener(marker, 'dragend', function () {
+
+                        geocoder.geocode({'latLng': marker.getPosition()}, function (results, status) {
+                            if (status == google.maps.GeocoderStatus.OK) {
+                                if (results[0]) {
+                                    $('#adminbundle_events_location').val(results[0].formatted_address);
+                                    $('#geoLat').val(marker.getPosition().lat());
+                                    $('#geoLong').val(marker.getPosition().lng());
+                                    infowindow.setContent(results[0].formatted_address);
+                                    infowindow.open(map, marker);
+                                }
+                            }
+                        });
+                    });
+
+                }
+
+                google.maps.event.addDomListener(window, 'load', initialize);
+
+
+        </script>
+        {#  <script type="text/javascript">
+            jQuery(function() {
+                $('form.review-form').on('submit', function(){
+                    $("<div />").addClass("formOverlay").appendTo($(this));
+                    var curForm = jQuery(this);
+                    $.ajax({
+                        url: 'mail.php',
+                        type: 'POST',
+                        data: jQuery(curForm).serialize(),
+                        success: function(data) {
+                            var res=data.split("::");
+                            jQuery(curForm).find("div.formOverlay").remove();
+                            jQuery(curForm).prev('.expMessage').html(res[1]);
+                            if(res[0]=='Success')
+                            {
+                                jQuery(curForm).remove();
+                                jQuery(curForm).prev('.expMessage').html('');
+                            }
+                        }
+                    });
+                    return false;
+                });
+            });
+        </script> #}
+
+        <script>
+
+            function addNow() {
+                nowDate = moment().tz("Europe/London").format('YYYY-MM-DD');
+                nowTime = moment().tz("Europe/London").format('HH:mm:ss');
+                document.getElementById('registration-date').value = nowDate;
+                document.getElementById('registration-time').value = nowTime;
+                set = setTimeout(function () {
+                    addNow();
+                }, 1000);
+            }
+
+            function stopNow() {
+                clearTimeout(set);
+            }
+
+        </script>
+
+
+        {#=========================Test size and type of picture=============================#}
+
+        <script>
+            $('#adminbundle_events_image').change(function () {
+
+                var ext = this.value.match(/\.(.+)$/)[1];
+                if (ext == 'jpg' || ext == 'jpeg' || ext == 'png' || ext == 'gif') {
+
+                    $('#envoyer').attr('disabled', false);
+                    //$('.errorSize').fadeOut();
+                } else {
+
+                    $('#adminbundle_events_image').after('<span class="errorSize" style="color:red;">Type non valide!(SVP entrer fichier de type["jpg", "png", "jpeg", "gif"])</span>');
+                    $('.errorSize').fadeOut(10000);
+                    $('#envoyer').attr('disabled', true);
+                }
+            });
+        </script>
+
+        <script>
+            $(document).on('change', '#adminbundle_events_image', function () {
+                files = this.files;
+                size = files[0].size;
+                //max size 500kb => 50*1000
+                if (size <= 500000) {
+                    $('#envoyer').attr('disabled', false);
+                    return true;
+                }
+                else {
+                    $('#adminbundle_events_image').after('<span class="errorSize" style="color:red;">Assurer que  la taille taille de fichier inferieur à 500ko</span>');
+                    $('.errorSize').fadeOut(10000);
+                    $('#envoyer').attr('disabled', true);
+                }
+            });
+        </script>
+
+        {#=========================Test size and type of picture=============================#}
+
+
+
+
+
+{% endblock %}

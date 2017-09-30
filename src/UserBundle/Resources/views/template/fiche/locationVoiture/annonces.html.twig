@@ -1,0 +1,1201 @@
+<style>
+    #image-text .image-text-heading span {
+        color: #ed2a28;
+        background: transparent;
+    }
+
+    .image-louer {
+        background: url("{{ asset('tpl/images/prettyPhoto/bg-text1.jpg') }}");
+    }
+
+    .filter-title {
+        color: #ffd8d8;
+        font-size: 16px;
+    }
+
+    .bfh-number-btn {
+        border-color: #f54242;
+    }
+
+    .bfh-selectbox-toggle {
+        background-color: transparent;
+    }
+
+    div[data-name="de"] .input-group .input-group-addon, div[data-name="au"] .input-group .input-group-addon {
+        border: 1px solid red;
+    }
+
+    .marque-lentille {
+        color: #c13737;
+    }
+
+    .modele-lentille {
+        margin-left: 7px;
+        color: #fa2020;
+    }
+
+    .marque-lentille sup {
+        color: #972020;
+        font-weight: 600;
+    }
+
+    .marque-lentille sub {
+        color: #f98c8c
+    }
+
+    .button-detail-marque {
+        -webkit-border-radius: 0px;
+        -moz-border-radius: 0px;
+        border-radius: 0px;
+        background: transparent;
+        border: 2px solid red;
+        color: red;
+        font-weight: 600;
+        padding: 7px 15px;
+        margin-bottom: 15px;
+        transition-duration: 1s;
+    }
+
+    .button-detail-marque-dashed {
+        -webkit-border-radius: 0px;
+        -moz-border-radius: 0px;
+        border-radius: 0px;
+        background: transparent;
+        border: 2px dashed #c2c2c2;
+        color: #c2c2c2;
+        font-weight: 600;
+        padding: 7px 15px;
+        margin-bottom: 15px;
+        transition-duration: 1s;
+    }
+
+    .button-detail-marque:hover, .button-detail-marque:active {
+        background: red;
+        color: #fff;
+    }
+
+    .price-lentille {
+        color: #f66363;
+    }
+
+    table.dataTable thead th, table.dataTable thead td {
+        border-bottom: #ef5555 !important;
+    }
+
+    .dataTable thead, .dataTable tfoot {
+        background: linear-gradient(#f40303, #ef5555) !important;
+        text-transform: uppercase;
+        color: white !important;
+    }
+
+    .dataTables_wrapper label, .dataTables_info, .dataTables_wrapper .dataTables_paginate .paginate_button.disabled, .dataTables_wrapper .dataTables_paginate .paginate_button.disabled:hover, .dataTables_wrapper .dataTables_paginate .paginate_button.disabled:active {
+        color: #bd5151 !important;
+    }
+
+    .dataTables_wrapper .dataTables_filter input {
+        border-radius: 6px;
+        border: solid #bd5151 1.3px;
+        padding: 4px;
+        margin: 10px 0px 10px 5px;
+    }
+
+    .select2-container--default .select2-results__option--highlighted[aria-selected] {
+        background-color: #f04646;
+        color: white;
+    }
+
+    .select2-container--open .select2-dropdown--below {
+        border-color: #bd5151;
+    }
+
+    table.dataTable.no-footer {
+        border-bottom: 0px;
+    }
+
+    tbody td {
+        text-align: center;
+    }
+
+    .color-car {
+        padding: 0px 9px;
+        margin: 2px;
+        border-radius: 5px;
+    }
+
+    .dataTables_wrapper .dataTables_paginate .paginate_button.current {
+        color: #c21313 !important;
+        border: 1.4px solid #c21313;
+        transition-duration: 1s;
+    }
+
+    .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
+        color: #fff !important;
+        border: 1.4px solid #c21313;
+        background: #c21313 !important;;
+    }
+
+    div[data-name="selectbox3"].bfh-selectbox-toggle {
+        border: 1px solid #fff;
+    }
+
+    .min-filter-voiture, .max-filter-voiture {
+        color: #fdc7c7;
+        background: transparent;
+        border: 1px solid #f39292 !important;
+    }
+
+    input[name="de"], input[name="au"] {
+        color: #fdc7c7;
+        border: 1px solid #f39292 !important;
+    }
+
+    .bfh-number-btn {
+        border-color: red;
+    }
+
+    .bfh-number-btn span {
+        border: none;
+    }
+
+    .margin-10 {
+        margin: 10px 0px;
+    }
+
+    .margin-10 label {
+        margin-top: 10px;
+        color: red;
+    }
+
+    .margin-10 input {
+        border: 1px solid rgba(246, 56, 56, 0.42) !important;
+        -webkit-border-radius: 5px;
+        -moz-border-radius: 5px;
+        border-radius: 5px;
+    }
+
+    .btn-search {
+        margin-top: 26px;
+        padding: 10px 19px;
+        background: transparent;
+        border: 1px solid red;
+        border-radius: 0px;
+        font-weight: 700;
+    }
+
+    .btn-add-car {
+        background: rgba(255, 0, 0, 0.69);
+        color: #fff;
+        padding: 5px 16px;
+        border-radius: 7px;
+        display: block;
+        margin: auto;
+        font-size: 20px;
+    }
+
+    .btn-add-car:hover, .btn-add-car:active {
+        background: rgba(255, 0, 0, 1);
+    }
+
+    .btn-reserver-car {
+        background: rgba(255, 0, 0, 0.69);
+        color: #fff;
+        padding: 5px 16px;
+        border-radius: 7px;
+        display: block;
+        margin: auto;
+        font-size: 20px;
+    }
+
+    .fileuploader {
+        display: block;
+        width: 100%;
+        padding: 15px;
+        margin: 15px 0;
+        background: rgba(255, 0, 0, 0.12);
+        border-radius: 4px;
+        line-height: normal;
+        text-align: left;
+        overflow: hidden;
+    }
+
+    .fileuploader-input-caption {
+        position: relative;
+        display: inline-block;
+        -webkit-box-flex: 1;
+        -ms-flex: 1;
+        flex: 1;
+        -ms-flex-item-align: start;
+        align-self: flex-start;
+        padding: 11px 15px;
+        margin-right: 15px;
+        background: #fff;
+        border: 1px solid rgba(255, 0, 0, 0.35);
+        border-radius: 4px;
+        color: #ff0000;
+        font-weight: bold;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        -webkit-transition: all .2s ease-out;
+        transition: all .2s ease-out;
+    }
+
+    .fileuploader-input-button {
+        display: inline-block;
+        background: #ff0000;
+        padding: 12px 20px;
+        border-radius: 4px;
+        color: #fff;
+        text-align: center;
+        font-weight: bold;
+        vertical-align: top;
+        cursor: pointer;
+        -webkit-transition: all .2s ease-out;
+        transition: all .2s ease-out;
+    }
+
+    .fileuploader-input-button:active, .fileuploader-input-button:hover {
+        background: #b62323;
+        box-shadow: inset 0 1px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    #cke_2_contents {
+        height: 88px !important;
+    }
+
+    #cke_64_contents, #cke_4_contents {
+        height: 75px !important;
+    }
+
+    #cke_3_contents {
+        height: 165px !important;
+    }
+
+    .popup-title {
+        color: #ff2424;
+        font-size: 40px;
+    }
+
+    .disponible-2 {
+        margin-left: 20px !important;
+    }
+
+    .other-marque {
+        border: 2px dashed #c2c2c2;
+        box-shadow: none;
+        height: 413px;
+    }
+
+    .marque-other {
+        color: #707070;
+    }
+
+    @media (max-width: 767px) {
+        .col-custom {
+            width: 50%;
+        }
+
+        .popup-title {
+            color: #ff2424;
+            font-size: 28px;
+        }
+
+        .delete-action {
+            margin-top: 15px;
+            margin-left: 0%;
+        }
+
+        .delete-action button {
+            width: 100%;
+            margin-bottom: 3px;
+        }
+
+    }
+
+    @media (max-width: 500px) {
+        .col-custom {
+            width: 100%;
+        }
+
+        #addCar {
+            margin-bottom: 22px;
+            width: 100%;
+        }
+    }
+
+    .bfh-selectbox .bfh-selectbox-options ul {
+        width: 100% !important;
+    }
+
+    .form-control, .select2-container--default .select2-selection--single {
+        border-radius: 0px !important;
+        border: 1px solid rgb(243, 146, 146) !important;
+    }
+
+    .form-group label {
+        color: #ff5b5b !important;
+    }
+
+    .modal-content {
+        border-radius: 20px !important;
+        -webkit-box-shadow: 0 5px 15px rgba(0, 0, 0, .5);
+        border: solid #ff0000 2px;
+    }
+
+    .delete-action {
+        margin-top: 15px;
+        margin-left: 30%;
+    }
+
+    .delete-action button {
+        width: 28%;
+    }
+</style>
+<!--<section id="image-text" class="padding-bottom-top-120 imgage-louer " style="background-position: 50% 4px;">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <div class="image-text-heading top30 bottom30">
+                    <h2 class="bottom40">Louer une Voiture</h2>
+                    <form action="{{ path('location_voiture_search') }}" method="post">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <label class="filter-title">Min</label>
+                                <input type="text" class="form-control bfh-number min-filter-voiture" data-min="50" data-max="450" data-name="min">
+                            </div>
+                            <div class="col-md-2">
+                                <label class="filter-title">Max</label>
+                                <input type="text" class="form-control bfh-number max-filter-voiture" data-min="50" data-max="450" data-name="max">
+                            </div>
+                            <div class="col-md-3">
+                                <label class="filter-title">De</label>
+                                <div class="bfh-datepicker" data-format="d-m-y" data-date="today" data-name="de"></div>
+                            </div>
+                            <div class="col-md-3">
+                                <label class="filter-title">Marque</label>
+                                <div class="bfh-selectbox" data-name="selectbox3" data-value="12" data-filter="true">
+                                    <div data-value="1">Choisi une Marque</div>
+                                    {# for m in marques %}
+                                        <div data-value="{{ m.id }}">{{ m.name }}</div>
+                                    {% endfor #}
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <button type="submit" class="btn btn-search"><span class="glyphicon glyphicon-search"> Rechecher</span></button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>-->
+<section class="property-details padding" id="section-annonces">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 bottom40">
+                <h2 class="text-uppercase">NOS <span class="color_red">VOITURES</span></h2>
+                <div class="line_1"></div>
+                <div class="line_2"></div>
+                <div class="line_3"></div>
+            </div>
+        </div>
+        <div class="row">
+            {% for m in marque %}
+                <div class="col-xs-12 col-sm-6 col-custom col-md-4 col-lg-3">
+                    <div class="property_item heading_space">
+                        <div class="image">
+                            <img src="{{ asset('uploads/image/marque/'~m.photo) }}" alt="listin" class="img-responsive" style="height: 230px;background-image: radial-gradient(closest-side ellipse at center, white, #ff3636);">
+                            <div class="overlay">
+                                <div class="centered">
+                                    <a class="link_arrow white_border show-marque-detail" data-toggle="modal" data-target=".liste-voiture-{{ m.nom }}" data-marque="{{ m.nom }}" data-lien="{{ path('Location_annonce_show',{'id':m.id,'idq':attributes.quoiqui.id}) }}" data-id="{{ m.id }}">Voir Plus
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="proerty_content">
+                            <div class="proerty_text">
+                                <h3>{{ m.nom }} <span class="pull-right price-lentille">{{ m.nb }}</span></h3>
+                                <p><strong class="marque-lentille">Min</strong> <span class="bottom10 modele-lentille">{{ m.min }}<sup>DT</sup><sub>/jour</sub></span></p>
+                                <p><strong class="marque-lentille">Max</strong> <span class="bottom10 modele-lentille">{{ m.max }}<sup>DT</sup><sub>/jour</sub></span></p>
+                                <p class="pull-right">
+                                    <a class="btn button-detail-marque ajout-marque"
+                                       data-toggle="modal" data-target=".liste-voiture-{{ m.nom }}" data-marque="{{ m.nom }}" data-lien="{{ path('Location_annonce_show',{'id':m.id,'idq':attributes.quoiqui.id}) }}" data-id="{{ m.id }}">Voir Plus
+                                    </a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+            {% if  app.user == attributes.quoiqui.user %}
+                <div class="col-xs-12 col-sm-6 col-custom col-md-4 col-lg-3">
+                    <div class="property_item heading_space other-marque">
+                        <div class="image">
+                            <img src="{{ asset('tpl/images/prettyPhoto/images.jpg') }}" alt="listin" class="img-responsive" style="height: 230px;">
+                            <div class="overlay">
+                                <div class="centered">
+                                    <a class="link_arrow white_border show-marque-detail"
+                                       data-toggle="modal"
+                                       data-target="#addVoitureOther">Ajouter
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="proerty_content">
+                            <div class="proerty_text">
+                                <h3>Autre Marque</h3>
+                                <p><strong class="marque-other">En cas d'ajout autre véhicule de noveau marque il faut clicker sur ajouter </strong></p>
+                                <p class="pull-right">
+                                    <a class="btn button-detail-marque-dashed show-verre-detail" data-toggle="modal" data-target="#addVoitureOther">Ajouter
+                                    </a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</section>
+{% for m in marque %}
+    <!-- modal de lister les annonces -->
+    <div class="modal fade liste-voiture-{{ m.nom }}" role="dialog" aria-labelledby="myLargeModalLabel">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Liste des Voitures</h4>
+                </div>
+                <div class="modal-body">
+                    {% if  app.user == attributes.quoiqui.user %}
+                        <div class="">
+                            <button type="button" class="btn btn-danger pull-right" data-toggle="modal" data-target="#addVoiture" id="addCar">
+                                Ajouter une Voiture
+                            </button>
+                        </div>
+                    {% endif %}
+                    <table class="table table-responsive table-hover table-striped dataTable" style="width: 100%;" id="service-tables">
+                        <thead>
+                        <tr>
+                            <th style="border:none;border-top-left-radius:5px;">Serie</th>
+                            <th style="border:none">Modele</th>
+                            <th style="border:none">Kilometrage</th>
+                            <th style="border:none">Disponibilité</th>
+                            <th style="border:none">Etat</th>
+                            <th style="border:none">Personne</th>
+                            <th style="border:none">Porte</th>
+                            <th style="border:none">Boite</th>
+                            <th style="border:none">Couleur</th>
+                            <th style="border:none">Prix</th>
+                            <th style="border:none;border-top-right-radius:5px;" class="text-center">Action</th>
+                        </tr>
+                        </thead>
+                        <tbody class="vehicule-marque">
+                        {% for v in voiture %}
+                            {% if v.marque.name == m.nom %}
+                                <tr data-voiture="{{ v.id }}">
+                                    <td> {{ v.serie }}</td>
+                                    <td> {{ v.model }}</td>
+                                    <td> {{ v.mileage }}Km</td>
+                                    <td> {{ v.disponibilite }}{% if v.position != null %} à {{ v.position.libelle }}{% endif %}</td>
+                                    <td> {{ v.etat }}%</td>
+                                    <td> {{ v.nbrPlace }}</td>
+                                    <td> {{ v.porte }}</td>
+                                    <td> {{ v.boite }}</td>
+                                    <td><span class="color-car" style="background:{{ v.couleur }}"></span></td>
+                                    <td> {{ v.tarif }}</td>
+                                    {% if app.user == attributes.quoiqui.user %}
+                                        <td>
+                                            <button type="button" class="btn btn-default icon-style-modifier edit-annonce"
+                                                    data-toggle="modal" data-target="#editVoiture"
+                                                    data-id="{{ v.id }}" data-lien="{{ path('location_voiture_show_edit',{'id':v.id}) }}"><span class="glyphicon glyphicon-pencil"></span></button>
+                                            <button type="button" class="btn btn-danger deleteAuto icon-annonce-supprimer"
+                                                    data-toggle="modal" data-target="#del-vehicule"
+                                                    data-id="{{ v.id }}" data-lien="{{ path('location_voiture_delete',{'id':v.id}) }}"><span class="glyphicon glyphicon-remove"></span></button>
+                                        </td>
+                                    {% else %}
+                                        <td>
+                                            <button type="button" class="btn btn-danger buttton-reserver" data-target="#reserver-voiture" data-toggle="modal" data-id="{{ v.id }}">Reserver</button>
+                                        </td>
+                                    {% endif %}
+                                </tr>
+                            {% endif %}
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endfor %}
+{% if app.user == attributes.quoiqui.user %}
+    {#modal add  voiture#}
+    <div class="modal fade" id="addVoiture" role="dialog" aria-labelledby="ajoutvoiture" aria-hidden="true">
+        <div class="modal-dialog modal-md" role="document" style="width: 90%;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="popup-title">
+                        <center>Ajout "Tunis"éhicule</center>
+                    </h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="add_vehicule" action="{{ path('location_voiture_add_vehicule') }}" method="post" enctype="multipart/form-data">
+                        <input type="hidden" name="qouiqui_id" value="{{ attributes.quoiqui.id }}"/>
+                        <input type="hidden" name="marque" class="marque"/>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group col-md-4">
+                                    <label>Série :</label>
+                                    <input type="text" class="form-control" id="serie" name="serie" placeholder="Exemples: 351,180,456...">
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label>Modele :</label>
+                                    <input type="text" class="form-control" id="model" name="model" placeholder="Fluence">
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label>Nombre de places :</label>
+                                    <input type="number" class="form-control" id="nbr_place" name="nbr_place" min="2" max="5" placeholder="Exemples: 1,2,3...">
+                                </div>
+                                <div class="form-group col-md-8">
+                                    <label>Disponibilité :</label><br/>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="bfh-datepicker" data-format="d-m-y" data-date="today" data-name="datee"></div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="bfh-timepicker" data-time="now" data-name="timee"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label>Couleur :</label>
+                                    <select class="selectpicker" id="energy" name="couleur" style="width: 100%">
+                                        <option value="red">Rouge</option>
+                                        <option value="gray">Gris</option>
+                                        <option value="black">Noir</option>
+                                        <option value="blue">Blue</option>
+                                        <option value="darkgray">Gris Foncé</option>
+                                        <option value="darkblue">Blue Foncé</option>
+                                        <option value="white">Blanc</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-9"></div>
+                                <div class="form-group col-md-4">
+                                    <label>Ports :</label>
+                                    <select id="ports" name="ports" class="form-control" style="width: 100%">
+                                        <option selected value="2">2</option>
+                                        <option value="4">4</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label>Energie :</label>
+                                    <select class="selectpicker" id="energy" name="energy" style="width: 100%">
+                                        <option value="diesel">Diesel</option>
+                                        <option value="essence">Essence</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label>Année-modèle:</label>
+                                    <input type="number" class="form-control" id="model_year" name="model_year" placeholder="exp:2015*">
+                                </div>
+                                <div class="form-group col-md-9"></div>
+                                <div class="form-group col-md-4">
+                                    <label>Energie en KW</label>
+                                    <input type="text" class="form-control" id="kiloW" name="kiloW" placeholder="exp:235*">
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label>Energie fiscale:</label>
+                                    <input type="number" class="form-control" id="fiscal_power" name="fiscal_power" placeholder="exp:6*">
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label>Kilométrage:</label>
+                                    <input type="number" class="form-control" id="mileage" name="mileage" placeholder="exp:40000*">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group col-md-4">
+                                    <label>Petits Valises:</label>
+                                    <select class="selectpicker" id="petitValises" name="petitValises" style="width: 100%">
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label>Grand valises:</label>
+                                    <select class="selectpicker" id="grandvalises" name="grandvalises" style="width: 100%">
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label>Boite:</label>
+                                    <select class="selectpicker" id="boite" name="boite" style="width: 100%;">
+                                        <option value="mecanique" selected>Mécanique</option>
+                                        <option value="automatique">Automatique</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-9"></div>
+                                <div class="form-group col-md-4">
+                                    <label>Avec Conducteur:</label>
+                                    <select class="selectpicker" id="conducteur" name="conducteur" style="width: 100%;">
+                                        <option value="1" selected>Oui</option>
+                                        <option value="0">Non</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label>Avec GPS:</label>
+                                    <select class="selectpicker" id="gps" name="gps" style="width: 100%;">
+                                        <option value="1" selected>Oui</option>
+                                        <option value="0">Non</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label>Avec air:</label>
+                                    <select class="selectpicker" id="aire" name="aire" style="width: 100%;">
+                                        <option value="1" selected>Oui</option>
+                                        <option value="0">Non</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label>Prix par jour :</label>
+                                    <input type="number" class="form-control" id="prix" name="prix" step="0.01" placeholder="Exemples:154,25 DT ">
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label>Position de Véhicule:</label>
+                                    <div class="bfh-selectbox" data-name="position" data-value="0" data-filter="true">
+                                        <div data-value="0">Choisi Position</div>
+                                        {% for d in delegation %}
+                                            <div data-value="{{ d.id }}">{{ d.libelle }}</div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label>Etat:</label>
+                                    <input type="number" class="form-control" id="etat" name="etat" placeholder="80%" min="1">
+                                </div>
+                                <div class="form-group col-md-12">
+                                    <label>Photo de l'image :</label>
+                                    <input type="file" class="form-control" name="img" alt="">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group col-md-12">
+                                    <label>Description:</label>
+                                    <textarea class="form-control ckeditor" id="editeur" name="editeur" rows="10"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <input type="submit" class="btn-add-car" id="add-car" name="add-car" value="Ajouter"/>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    {#modal ajout voiture d'autre marque#}
+    <div class="modal fade" id="addVoitureOther" role="dialog" aria-labelledby="ajoutvoitureother" aria-hidden="true">
+        <div class="modal-dialog modal-md" role="document" style="width: 90%;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="popup-title">
+                        <center>Ajout Véhicule de Marque Inconnu</center>
+                    </h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="add_vehicule" action="{{ path('location_voiture_add_vehicule') }}" method="post" enctype="multipart/form-data">
+                        <input type="hidden" name="qouiqui_id" value="{{ attributes.quoiqui.id }}">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group col-md-4">
+                                    <label>Série :</label>
+                                    <input type="text" class="form-control" id="serie" name="serie" placeholder="Exemples: 351,180,456...">
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label>Marque :</label>
+                                    <select id="marqueAdd" name="mark" class="form-control" style="width: 100%">
+                                        <option selected value="">Choisissez votre marque</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label>Modele :</label>
+                                    <input type="text" class="form-control" id="model" name="model" placeholder="Fluence">
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label>Nombre de places :</label>
+                                    <input type="number" class="form-control" id="nbr_place" name="nbr_place" min="2" max="5" placeholder="Exemples: 1,2,3...">
+                                </div>
+                                <div class="form-group col-md-8">
+                                    <label>Prix par jour :</label>
+                                    <input type="number" class="form-control" id="prix" name="prix" step="0.01" placeholder="Exemples:154,25 DT ">
+                                </div>
+                                <div class="form-group col-md-9"></div>
+                                <div class="form-group col-md-4">
+                                    <label>Ports :</label>
+                                    <select id="ports" name="ports" class="form-control" style="width: 100%">
+                                        <option selected value="2">2</option>
+                                        <option value="4">4</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label>Energie :</label>
+                                    <select class="selectpicker" id="energy" name="energy" style="width: 100%">
+                                        <option value="diesel">Diesel</option>
+                                        <option value="essence">Essence</option>
+
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label>Année-modèle:</label>
+                                    <input type="number" class="form-control" id="model_year" name="model_year" placeholder="exp:2015*">
+                                </div>
+                                <div class="form-group col-md-9"></div>
+                                <div class="form-group col-md-4">
+                                    <label>Energie en KW</label>
+                                    <input type="text" class="form-control" id="kiloW" name="kiloW" placeholder="exp:235*">
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label>Energie fiscale:</label>
+                                    <input type="number" class="form-control" id="fiscal_power" name="fiscal_power" placeholder="exp:6*">
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label>Kilométrage:</label>
+                                    <input type="number" class="form-control" id="mileage" name="mileage" placeholder="exp:40000*">
+                                </div>
+                                <div class="form-group col-md-12">
+                                    <label>Disponibilité :</label><br/>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="bfh-datepicker" data-format="d-m-y" data-date="today" data-name="datee"></div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="bfh-timepicker" data-time="now" data-name="timee"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group col-md-4">
+                                    <label>Petits Valises:</label>
+                                    <select class="selectpicker" id="petitValises" name="petitValises" style="width: 100%">
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label>Grand valises:</label>
+                                    <select class="selectpicker" id="grandvalises" name="grandvalises" style="width: 100%">
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label>Boite:</label>
+                                    <select class="selectpicker" id="boite" name="boite" style="width: 100%;">
+                                        <option value="mecanique" selected>Mécanique</option>
+                                        <option value="automatique">Automatique</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-9"></div>
+                                <div class="form-group col-md-4">
+                                    <label>Avec Conducteur:</label>
+                                    <select class="selectpicker" id="conducteur" name="conducteur" style="width: 100%;">
+                                        <option value="1" selected>Oui</option>
+                                        <option value="0">Non</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label>Avec GPS:</label>
+                                    <select class="selectpicker" id="gps" name="gps" style="width: 100%;">
+                                        <option value="1" selected>Oui</option>
+                                        <option value="0">Non</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label>Avec air:</label>
+                                    <select class="selectpicker" id="aire" name="aire" style="width: 100%;">
+                                        <option value="1" selected>Oui</option>
+                                        <option value="0">Non</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-12">
+                                    <label>Photo de l'image :</label>
+                                    <input type="file" class="form-control" name="img" alt="">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label>Postion de Véhicule:</label>
+                                    <div class="bfh-selectbox" data-name="position" data-value="0" data-filter="true">
+                                        <div data-value="0">Choisi Position</div>
+                                        {% for d in delegation %}
+                                            <div data-value="{{ d.id }}">{{ d.libelle }}</div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label>Etat:</label>
+                                    <input type="number" class="form-control" id="etat" name="etat" placeholder="80%" min="1">
+                                </div>
+                                <div class="form-group col-md-12">
+                                    <label>Couleur :</label>
+                                    <select class="selectpicker" id="energy" name="couleur" style="width: 100%">
+                                        <option value="red">Rouge</option>
+                                        <option value="gray">Gris</option>
+                                        <option value="black">Noir</option>
+                                        <option value="blue">Blue</option>
+                                        <option value="darkgray">Gris Foncé</option>
+                                        <option value="darkblue">Blue Foncé</option>
+                                        <option value="white">Blanc</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group col-md-12">
+                                    <label>Description:</label>
+                                    <textarea class="form-control ckeditor" id="editeur" name="editeur" rows="10"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <input type="submit" class="btn-add-car" id="add-car" name="add-car" value="Ajouter"/>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    {#modal Edit  voiture#}
+    <div class="modal fade" id="editVoiture" role="dialog" aria-labelledby="modifiervoiture" aria-hidden="true">
+        <div class="modal-dialog" role="document" style="width: 90%">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="popup-title">
+                        <center>Modification de Véhicule</center>
+                    </h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row loading">
+                    <span>
+                    <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+                    <span class="sr-only">Loading...</span>
+                    </span>
+                    </div>
+                    <div class="after_loading" style="display: none">
+                        <form id="add_vehicule" action="{{ path('location_edit_voiture') }}" method="post" enctype="multipart/form-data">
+                            <input type="hidden" name="qouiqui_id" value="{{ attributes.quoiqui.id }}"/>
+                            <input type="hidden" name="marque" class="edit-car-marque"/>
+                            <input type="hidden" class="edit-car-id" name="id"/>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group col-md-4">
+                                        <label>Série :</label>
+                                        <input type="text" class="form-control edit-car-serie" id="serie" name="serie" placeholder="Exemples: 351,180,456...">
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label>Modele :</label>
+                                        <input type="text" class="form-control edit-car-model" id="model" name="model" placeholder="Fluence">
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label>Nombre de places :</label>
+                                        <input type="number" class="form-control edit-car-place" id="nbr_place" name="nbr_place" min="2" max="5" placeholder="Exemples: 1,2,3...">
+                                    </div>
+                                    <div class="form-group col-md-8">
+                                        <label>Disponibilité :</label><br/>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="bfh-datepicker edit-car-datee" data-format="d-m-y" data-date="today" data-name="datee"></div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="bfh-timepicker edit-car-timee" data-time="now" data-name="timee"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label>Couleur :</label>
+                                        <select class="selectpicker edit-car-color" id="energy" name="couleur" style="width: 100%">
+                                            <option value="red">Rouge</option>
+                                            <option value="gray">Gris</option>
+                                            <option value="black">Noir</option>
+                                            <option value="blue">Blue</option>
+                                            <option value="darkgray">Gris Foncé</option>
+                                            <option value="darkblue">Blue Foncé</option>
+                                            <option value="white">Blanc</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-md-9"></div>
+                                    <div class="form-group col-md-4">
+                                        <label>Ports :</label>
+                                        <select id="ports" name="ports" class="form-control edit-car-port" style="width: 100%">
+                                            <option selected value="2">2</option>
+                                            <option value="4">4</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label>Energie :</label>
+                                        <select class="selectpicker edit-car-energy" id="energy" name="energy" style="width: 100%">
+                                            <option value="diesel">Diesel</option>
+                                            <option value="essence">Essence</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label>Année-modèle:</label>
+                                        <input type="number" class="form-control edit-car-modela" id="model_year" name="model_year" placeholder="exp:2015*">
+                                    </div>
+                                    <div class="form-group col-md-9"></div>
+                                    <div class="form-group col-md-4">
+                                        <label>Energie en KW</label>
+                                        <input type="text" class="form-control edit-car-kw" id="kiloW" name="kiloW" placeholder="exp:235*">
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label>Energie fiscale:</label>
+                                        <input type="number" class="form-control edit-car-fiscal" id="fiscal_power" name="fiscal_power" placeholder="exp:6*">
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label>Kilométrage:</label>
+                                        <input type="number" class="form-control edit-car-kilometer" id="mileage" name="mileage" placeholder="exp:40000*">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group col-md-4">
+                                        <label>Petits Valises:</label>
+                                        <select class="selectpicker edit-car-val1" id="petitValises" name="petitValises" style="width: 100%">
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label>Grand valises:</label>
+                                        <select class="selectpicker edit-car-val2" id="grandvalises" name="grandvalises" style="width: 100%">
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label>Boite:</label>
+                                        <select class="selectpicker edit-car-boite" id="boite" name="boite" style="width: 100%;">
+                                            <option value="mecanique" selected>Mécanique</option>
+                                            <option value="automatique">Automatique</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-md-9"></div>
+                                    <div class="form-group col-md-4">
+                                        <label>Avec Conducteur:</label>
+                                        <select class="selectpicker edit-car-cond" id="conducteur" name="conducteur" style="width: 100%;">
+                                            <option value="1" selected>Oui</option>
+                                            <option value="0">Non</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label>Avec GPS:</label>
+                                        <select class="selectpicker edit-car-gps" id="gps" name="gps" style="width: 100%;">
+                                            <option value="1" selected>Oui</option>
+                                            <option value="0">Non</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label>Avec air:</label>
+                                        <select class="selectpicker edit-car-air" id="aire" name="aire" style="width: 100%;">
+                                            <option value="1" selected>Oui</option>
+                                            <option value="0">Non</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label>Prix par jour :</label>
+                                        <input type="number" class="form-control edit-car-price" id="prix" name="prix" step="0.01" placeholder="Exemples:154,25 DT ">
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label>Postion de Véhicule:</label>
+                                        <div class="bfh-selectbox edit-car-position" data-name="position" data-value="0" data-filter="true">
+                                            <div data-value="0">Choisi Position</div>
+                                            {% for d in delegation %}
+                                                <div data-value="{{ d.id }}">{{ d.libelle }}</div>
+                                            {% endfor %}
+                                        </div>
+
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label>Etat:</label>
+                                        <input type="number" class="form-control edit-car-etat" id="etat" name="etat" placeholder="80%" min="1">
+                                    </div>
+                                    <div class="form-group col-md-12">
+                                        <label>Photo de l'image :</label>
+                                        <input type="file" class="form-control" name="img" alt="">
+                                        <div class="edit-car-picture"></div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group col-md-12">
+                                        <label>Description:</label>
+                                        <textarea class="form-control ckeditor" id="editeurr" name="editeur" rows="10"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <input type="submit" class="btn-add-car" id="update-car" name="add-car" value="Modifier"/>
+                            </div>
+                        </form>
+                        <div class="row"></div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--modal de suppression une vehicule -->
+    <div class="modal fade" role="dialog" id="del-vehicule">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Supprimer une Offre</h4>
+                </div>
+                <div class="modal-body">
+                    <center>Confirmer votre suppression de Produit <span class="nomSpan"></span></center>
+                    <div class="delete-action">
+                        <button type="button" class="btn btn-success confirm-del-annonce">Oui</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Non</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endif %}
+<!-- modal commander -->
+<div id="reserver-voiture" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Reservation</h4>
+            </div>
+            <div class="modal-body">
+                <form action="{{ path('location_voiture_resservation') }}" method="post" enctype="multipart/form-data" id="form-reservation">
+                    <div class="row margin-10">
+                        <div class="col-md-3">
+                            <label>Cin</label>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="inner-addon left-addon">
+                                <input type="text" class="form-control input-form" name="cin" placeholder="Saisie votre Cin" required/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row margin-10">
+                        <div class="col-md-3">
+                            <label>Nom</label>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="inner-addon left-addon">
+                                <input type="text" class="form-control input-form" name="nom" placeholder="Saisie votre Nom" required/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row margin-10">
+                        <div class="col-md-3">
+                            <label>Prénom</label>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="inner-addon left-addon">
+                                <input type="text" class="form-control input-form" name="prenom" placeholder="Saisie votre Prénom" required/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row margin-10">
+                        <div class="col-md-3">
+                            <label>Téléphone</label>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="inner-addon left-addon">
+                                <input type="tel" class="form-control input-form" name="tel" placeholder="71 111 000"
+                                       required/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row margin-10">
+                        <div class="col-md-3">
+                            <label>Email</label>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="inner-addon left-addon">
+                                <input type="email" class="form-control input-form" name="email"
+                                       placeholder="Saisie votre Email" required/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row margin-10">
+                        <div class="col-md-3">
+                            <label>Début</label>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="inner-addon left-addon">
+                                        <div class="bfh-datepicker" data-format="d-m-y" data-date="today" data-name="debut" data-align="right" data-min="today">></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="bfh-timepicker" data-time="now" data-name="debHeure"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row margin-10">
+                        <div class="col-md-3">
+                            <label>Fin</label>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="inner-addon left-addon">
+                                        <div class="bfh-datepicker" data-format="d-m-y" data-date="today" data-name="fin" data-align="right" data-min="{{ "now"|date_modify("+1 day")|date("d-m-y") }}"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="bfh-timepicker" data-time="now" data-name="finHeure"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row margin-10">
+                        <div class="col-md-3">
+                            <label class="filter-title">Position</label>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="bfh-selectbox" data-name="selectbox3" data-value="0" data-filter="true">
+                                <div data-value="0">Choisi une Delegation</div>
+                                {% for d in delegation %}
+                                    <div data-value="{{ d.id }}">{{ d.libelle }}</div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                    <input type="hidden" value="" name="reserver" id="reserver"/>
+                    <input type="hidden" value="{{ attributes.quoiqui.id }}" name="id"/>
+                    <div class="row confirm-block">
+                        <div class="col-sm-4 col-sm-offset-4 col-xs-12">
+                            <div class="inner-addon left-addon">
+                                <input type="submit" class="btn btn-bloc btn-danger col-xs-custom-btn" value="Confirmer" id="commander-menus-rest"/>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

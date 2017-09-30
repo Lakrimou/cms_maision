@@ -1,0 +1,969 @@
+<link rel="stylesheet" type="text/css" href="{{ asset('asset-front/css/animate.css') }}">
+
+<style>
+    th {
+        background: rgba(255, 0, 0, .7);
+        color: white;
+    }
+
+    input[type="search"] {
+        height: 35px;
+        border-radius: 5px;
+        border: 1px solid #e3e3e3;
+        margin-bottom: 10px;
+        padding: 10px;
+    }
+
+    select {
+        height: 40px;
+        border-radius: 5px;
+        border: 1px solid #e3e3e3;
+        margin-bottom: 10px;
+        padding: 8px;
+    }
+
+    table.dataTable.no-footer {
+        border: none;
+    }
+
+    table.dataTable tbody th, table.dataTable tbody td {
+        border: none;
+        padding: 8px 10px;
+    }
+
+    .col-space {
+        padding: 5px;
+    }
+
+    .menu-item-categorie {
+        font-size: 14px;
+        margin-left: 10px;
+    }
+
+    @media (max-width: 992px) {
+        .menu-item-description {
+            margin: 20px;
+        }
+
+        .menu-item-name {
+            margin-top: 90px;
+        }
+
+        .item-food-detail {
+            margin: 0px;
+        }
+    }
+
+    .remove-plat {
+        color: #ea5d5d;
+        cursor: pointer;
+    }
+
+    .notify-badge {
+        position: absolute;
+        background: red;
+        height: 21px;
+        top: 9px;
+        right: 8px;
+        width: 21px;
+        text-align: center;
+        line-height: 2rem;
+        font-size: 18px;
+        border-radius: 50%;
+        color: white;
+        border: 1px solid red;
+        cursor: pointer;
+    }
+
+    .menu-body {
+        max-width: 680px;
+        margin: 0 auto;
+        display: block;
+        color: rgb(92, 92, 92);
+    }
+
+    .menu-section {
+        margin-bottom: 80px;
+        background-size: cover;
+        height: 100%;
+    }
+
+    .menu-section-title {
+        font-family: georgia;
+        font-size: 50px;
+        display: block;
+        font-weight: normal;
+        margin: 20px 0;
+        text-align: Center;
+    }
+
+    .menu-item {
+        font-size: 18px;
+    }
+
+    .menu-item-name {
+        font-family: helvetica;
+        font-weight: bold;
+        border-bottom: 2px dotted rgb(213, 213, 213);
+    }
+
+    .menu-item-description {
+        font-style: italic;
+        font-size: .9em;
+        line-height: 1.5em;
+    }
+
+    .menu-body {
+        max-width: 680px;
+        margin: 0 auto;
+        display: block;
+        color: rgb(92, 92, 92);
+    }
+
+    .menu-section {
+        margin-bottom: 80px;
+    }
+
+    .menu-section-title {
+        font-family: georgia;
+        font-size: 50px;
+        display: block;
+        font-weight: normal;
+        margin: 20px 0;
+        text-align: Center;
+    }
+
+    .menu-item {
+        margin: 35px 0;
+        font-size: 18px;
+    }
+
+    .menu-item-name {
+        font-family: helvetica;
+        font-size: 28px;
+        margin-top: -24px;
+        font-weight: bold;
+        border-bottom: 2px dotted rgb(213, 213, 213);
+        padding-bottom: 17px;
+        color: rgba(255, 0, 0, 0.6);
+    }
+
+    .menu-item-description {
+        font-style: italic;
+        font-size: .9em;
+        line-height: 1.5em;
+    }
+
+    .menu-item-price {
+        float: right;
+        font-weight: bold;
+        font-family: arial;
+        margin-top: -26px;
+        font-size: 20px;
+        color: #925e19;
+    }
+
+    .filtr-item {
+        padding: 1rem;
+    }
+
+    .item-desc {
+        background-color: rgba(0, 0, 0, 0.5);
+        color: white;
+        position: absolute;
+        text-transform: uppercase;
+        text-align: center;
+        padding: 1rem;
+        z-index: 1;
+        bottom: 1rem;
+        left: 1rem;
+        right: 1rem;
+    }
+
+    /* Filter controls */
+    .simplefilter li, .multifilter li, .sortandshuffle li {
+        color: white;
+        cursor: pointer;
+        display: inline-block;
+        text-transform: uppercase;
+        padding: 1rem 2rem;
+    }
+
+    .simplefilter li {
+        background-color: #585858;
+        margin-top: 10px;
+    }
+
+    .simplefilter li.active {
+        background-color: #212121;
+    }
+
+    .multifilter li {
+        background-color: #4b9eff;
+    }
+
+    .multifilter li.active {
+        background-color: #2265b4;
+    }
+
+    /* Shuffle and sort controls */
+    select {
+        padding: 1rem 1rem;
+        text-transform: uppercase;
+    }
+
+    .sortandshuffle .shuffle-btn {
+        background-color: #dec800;
+    }
+
+    .sortandshuffle .sort-btn {
+        background-color: #de0000;
+    }
+
+    .sortandshuffle .sort-btn.active {
+        background-color: #9d0000;
+    }
+
+    /* Search control */
+    .search-row {
+        margin-left: 2.5rem;
+    }
+
+    .filtr-search {
+        padding: 0.5rem;
+        text-transform: uppercase;
+    }
+</style>
+<script type="text/javascript" src="{{ asset('tpl/js/jsCookies.js') }}"></script>
+<script type="text/javascript" src="https://cdn.ckeditor.com/4.7.1/basic/ckeditor.js"></script>
+<script>
+    $('.All').css({'background': 'red'});
+    $('.simplefilter li').click(function () {
+        $('.simplefilter li').css({'background': '#585858'});
+//        $('.nos-menu').fadeOut();
+        $('.nos-menu').css({'display': 'none'});
+        $(this).css({'background': 'red'});
+        cat = $(this).data('categorie');
+        cate = '.' + cat.toLowerCase();
+        $(cate + '.nos-menu').fadeIn();
+        if (cat == "All") {
+            $('.nos-menu').fadeIn();
+        }
+    });
+
+    CKEDITOR.replaceClass = 'ckeditor';
+
+    $(".icon-annonce-supprimer").click(function () {
+        var lien = $(this).data('lien');
+        var id = $(this).data('id');
+        $('.confirm-del-annonce').click(function () {
+            supprimProduit(lien, id);
+        });
+    });
+
+    function supprimProduit(lien, id) {
+        $.ajax({
+            url: lien,
+            method: 'post',
+            success: function () {
+                $('#service-tables tr[data-prod="' + id + '"]').fadeOut();
+                $('.nos-menu div[data-prod="' + id + '"]').hide();
+            }
+        });
+    }
+
+
+    $('.edit-annonce').click(function () {
+        lien = $(this).data('lien');
+        id = $(this).data('id');
+        $('.nomProduit').text($(this).data('nom'));
+        CKEDITOR.instances['editeur'].setData('');
+        pic = "";
+        $.ajax({
+            url: lien,
+            method: 'post',
+            success: function (data) {
+                var produit = JSON.parse(data);
+                console.log(produit);
+                $('.form-annonce-nom').val(produit.nom);
+                $('.form-annonce-prix').val(produit.prix);
+                val = produit.category;
+                if (val.indexOf("Pizza") != -1) {
+                    $('.form-annonce-categorie').val("Pizza");
+                    $('.categorie-sous-menus-mod').show();
+                    $('.categorie-sous-menus-mod').val(produit.category);
+                }
+                $('.form-annonce-categorie').val(produit.category);
+                CKEDITOR.instances['editeur'].setData(produit.contenu);
+                for (p = 0; p < produit.photo.length; p++) {
+                    pic += '<div class="col-md-4 col-xs-6 col-sm-4"><div style="margin-top: 20px;"><span class="notify-badge" data-lien="/module/restauarant/annonce/delete/picture/' + produit.id + '/' + produit.photoArr[p] + '" >x</span><img src="' + produit.photo[p] + '" alt="' + p + '" style="width:100%;height: 96px;"></div></div>';
+                }
+                $('.form-annonce-image').html(pic);
+                $('.id').val(produit.id);
+            }
+        });
+    });
+
+    lienModif = "";
+    lienSupp = "";
+    $('.item-food-content').on('click', '.show-annonce-detail', function () {
+        lien = $(this).data('lien');
+        lienModif = $(this).data('mod');
+        lienSupp = $(this).data('sup');
+        id = $(this).data('identifiant');
+        idItem = $(this).data('podui');
+        pic = "";
+        item = "";
+        $.ajax({
+            url: lien,
+            method: 'post',
+            success: function (data) {
+                var produit = JSON.parse(data);
+                $('.detail-annonce-title,.detail-annonce-nom').text(produit.nom);
+                $('.detail-annonce-description').html(produit.contenu);
+                $('.detail-annonce-prix').html(produit.prix + '<sup>DT</sup>');
+                $('.detail-annonce-categorie').text(produit.category);
+                base = '{"id":"' + produit.id + '","nom":"' + produit.nom + '","prix":"' + produit.prix + '","categorie":"' + produit.category + '","number":"1" }';
+                $('.btn-command').attr('data-base', base);
+                for (p = 0; p < produit.photo.length; p++) {
+                    if (p == 0) {
+                        item += '<li data-target="#myCarousel" data-slide-to="' + p + '" class="active"></li>';
+                        pic += '<div class="item active"><img src="' + produit.photo[p] + '" alt="' + p + '" style="width:100%;"></div>';
+                    } else {
+                        item += '<li data-target="#myCarousel" data-slide-to="' + p + '"></li>';
+                        pic += '<div class="item"><img src="' + produit.photo[p] + '" alt="' + p + '" style="width:100%;"></div>';
+                    }
+                }
+                if (produit.photo.length > 1) {
+                    $('.carousel-control').show();
+                    $('.carousel-indicators').show();
+                } else {
+                    $('.carousel-control').hide();
+                    $('.carousel-indicators').hide();
+                }
+
+                $('.carousel-indicators').html(item);
+                $('.carousel-inner').html(pic);
+            }
+        });
+    });
+    $('.annonce-modifier-1').click(function () {
+        $('.nomProduit').text($(this).data('nom'));
+        CKEDITOR.instances['editeur'].setData('');
+        pic = "";
+        $.ajax({
+            url: lienModif,
+            method: 'post',
+            success: function (data) {
+                var produit = JSON.parse(data);
+                $('.nomProduit').text(produit.nom);
+                $('.form-annonce-nom').val(produit.nom);
+                $('.form-annonce-prix').val(produit.prix);
+                val = produit.category;
+                if (val.indexOf("Pizza") != -1) {
+                    $('.form-annonce-categorie').val("Pizza");
+                    $('.categorie-sous-menus-mod').show();
+                    $('.categorie-sous-menus-mod').val(produit.category);
+                }
+                CKEDITOR.instances['editeur'].setData(produit.contenu);
+                for (p = 0; p < produit.photo.length; p++) {
+                    pic += '<div class="col-md-4 col-xs-6 col-sm-4"><div style="margin-top: 20px;"><span class="notify-badge" data-lien="/module/restaurant/annonce/delete/picture/' + produit.id + '/' + produit.photoArr[p] + '" >x</span><img src="' + produit.photo[p] + '" alt="' + p + '" style="width:100%;height: 96px;"></div></div>';
+                }
+                $('.form-annonce-image').html(pic);
+                $('.id').val(produit.id);
+            }
+        });
+    });
+
+    $('.annonce-supprimer-1').click(function () {
+        $(".confirm-del-annonce").click(function () {
+            $.ajax({
+                url: lienSupp,
+                method: 'post',
+                success: function (data) {
+                    $('#del-annonce').modal('hide');
+                    $('#showAnnonce').modal('hide');
+                    $('.item-produit[data-prod="' + idItem + '"]').fadeOut();
+                    $('.nos-menu div[data-prod="' + idItem + '"]').fadeOut();
+                }
+            });
+        });
+    });
+
+    $(".form-annonce-image").on('click', '.notify-badge', function () {
+        pic = "";
+        lien = $(this).attr('data-lien');
+        $.confirm({
+            title: '<div style="color: cadetblue"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Confirm de suppression photo</div>',
+            content: '',
+            buttons: {
+                Confirmer: function () {
+                    $.ajax({
+                        url: lien,
+                        method: 'post',
+                        success: function (data) {
+                            var produit = JSON.parse(data);
+                            console.log(produit);
+                            $('.form-annonce-nom').val(produit.nom);
+                            $('.form-annonce-prix').val(produit.prix);
+                            $('.form-annonce-categorie').val(produit.category);
+                            CKEDITOR.instances['editeur'].setData(produit.contenu);
+                            for (p = 0; p < produit.photo.length; p++) {
+                                pic += '<div class="col-md-4 col-xs-6 col-sm-4"><span class="notify-badge" data-lien="module/restaurant/annonce/delete/picture/' + produit.id + '/' + produit.photoArr[p] + '" >x</span><img src="' + produit.photo[p] + '" alt="' + p + '" style="width:100%;"></div>';
+                            }
+                            $('.form-annonce-image').html(pic);
+                            $('.id').val(produit.id);
+                        }
+                    });
+                },
+                Annuler: function () {
+                }
+            }
+        });
+    });
+
+    //service detail
+    $('.service-details-btn').click(function () {
+        data = $(this).attr('data-module');
+        $('.service-text-modal').text(data.service);
+        $('.service-description-modal').text(data.description);
+    });
+
+    //sous categorie ajout
+    $('.categorie-sous-menus-add').hide();
+    $('.categorie-menus-add').on('change.bfhselectbox', function () {
+        target =$('[name="categorie-add"]').val();
+        if (target == "Pizza") {
+            $(".categorie-sous-menus-add").show();
+        } else {
+            $('.categorie-sous-menus-add').hide();
+        }
+    });
+
+    //sous categorie modifier
+    $('.categorie-sous-menus-mod').hide();
+    $('.categorie-menus-mod').on('change.bfhselectbox', function () {
+        target = $('.categorie-menus-mod option:selected').attr('data-target');
+        if (target == "Pizza") {
+            $(".categorie-sous-menus-mod").show();
+        } else {
+            $('.categorie-sous-menus-mod').hide();
+        }
+    });
+
+    //filter par categorie
+    $('.sous-categorie').hide();
+    $('.categorie-menus').on('change.bfhselectbox', function () {
+        target =$('[name="categoriee"]').val();
+        lien = '/module/restaurant/annonce/filter/'+target+'/'+{{ qouiqui.id }};
+        if (target == "Pizza") {
+            $(".sous-categorie").show();
+            lien ='/module/restaurant/annonce/filter/Pizza Junior/'+{{ qouiqui.id }};
+        }else{
+            $('.sous-categorie').hide();
+        }
+        $.ajax({
+            url: lien,
+            method: 'post',
+            success: function (data) {
+               filterMenus(data);
+            }
+        });
+
+    });
+
+    $('.sous-categorie').on('change.bfhselectbox', function () {
+        target =$('[name="sous-categorieee"]').val();
+        alert(target);
+        lien = '/module/restaurant/annonce/filter/'+target+'/'+{{ qouiqui.id }};
+        $.ajax({
+            url: lien,
+            method: 'post',
+            success: function (data) {
+                filterMenus(data);
+            }
+        });
+
+    });
+
+     function filterMenus(data){
+        menus = "";
+        var produit = JSON.parse(data);
+        for (var i = 0; i < produit.length; i++) {
+            {% if app.user != qouiqui.user %}
+            menus += '<div class="col-md-6 col-sm-12 col-xs-12">';
+            {% else %}
+            menus += '<div class="col-xs-12 col-md-4">';
+            {% endif %}
+            menus += '<div class="property_item heading_space">' +
+                '<div class="image">' +
+                '<img src="' + produit[i].photo[0] + '" alt="listin" class="img-responsive" style="height: 230px;">' +
+                '<div class="overlay">' +
+                '<div class="centered"><a class="link_arrow white_border show-annonce-detail"' +
+                ' data-toggle="modal"\n' +
+                ' data-target="#showAnnonce"\n' +
+                ' data-lien="/module/restaurant/annonce/show/' + produit[i].id + '/' + produit[i].qouiqui.id + '"' +
+                ' data-mod="/module/restaurant/annonce/edit/' + produit[i].id + '"' +
+                ' data-sup="/module/restaurant/annonce/delete/' + produit[i].id + '"' +
+                ' data-identifiant="' + produit[i].id + '"' +
+                ' data-podui="' + i + '">View Detail</a></div></div></div>' +
+                '<div class="proerty_content">' +
+                '<div class="proerty_text">' +
+                '<h3><a>' + produit[i].nom + '</a></h3>' +
+                '<span class="bottom10">' + produit[i].category + '</span>' +
+                ' <p><strong>' + produit[i].prix + ' DT</strong></p>';
+            {% if app.user != qouiqui.user %}
+            menus += '<span class="glyphicon glyphicon-plus pull-right ajout-panier" data-base=\'{"id":"' + produit[i].id + '","nom":"' + produit[i].nom + '","prix":"' + produit[i].prix + '","categorie":"' + produit[i].category + '","number":"1"}\'></span>\n';
+            {% endif %}
+            menus += '</div></div></div></div>';
+        }
+        $('.item-food-content').fadeOut('slow', function () {
+            $(this).html(menus).fadeIn("slow");
+        });
+    }
+
+    //augmenter nombre de commande de chaque plat
+    $('.panier-bloc').on('click', '.augmenter-produit', function () {
+        id = $(this).attr('data-id');
+        var myCookies = getCookies();
+        data = JSON.parse(myCookies['panierRest']);
+        for (var i = 0; i < data.length; i++) {
+            if (data[i].id == id) {
+                numb = $('.panier-bloc .count-produit[data-id="' + data[i].id + '"]').attr('data-number');
+                numbe = parseInt(numb) + 1;
+                ne = numbe.toString();
+                data[i].number = ne;
+                Cookies.set('panierRest', data);
+                $('.panier-bloc .count-produit[data-id="' + data[i].id + '"]').attr('data-number', numbe).text(numbe);
+                $('.panier-bloc .media[data-id="' + data[i].id + '"] .prix-total-panier').text(numbe * data[i].prix);
+            }
+        }
+        calaculeSolde(data);
+    });
+
+    //deminuer nombre de commande de chaque plat
+    $('.panier-bloc').on('click', '.diminuer-produit', function () {
+        id = $(this).attr('data-id');
+        var myCookies = getCookies();
+        data = JSON.parse(myCookies['panierRest']);
+        for (var i = 0; i < data.length; i++) {
+            if (data[i].id == id) {
+                numb = $('.panier-bloc .count-produit[data-id="' + data[i].id + '"]').attr('data-number');
+                numbe = parseInt(numb) - 1;
+                if (numb > 1) {
+                    ne = numbe.toString();
+                    data[i].number = ne;
+                    Cookies.set('panierRest', data);
+                    $('.panier-bloc .count-produit[data-id="' + data[i].id + '"]').attr('data-number', numbe).text(numbe);
+                    $('.panier-bloc .media[data-id="' + data[i].id + '"] .prix-total-panier').text(numbe * data[i].prix);
+                } else {
+                    $('.panier-bloc .media[data-id="' + id + '"]').remove();
+                    data.splice(i, 1);
+                    Cookies.set('panierRest', data);
+                }
+            }
+        }
+        calaculeSolde(data);
+
+    });
+
+    //supprimer une commande de chaque plat
+    $('.panier-bloc').on('click', '.remove-plat', function () {
+        id = $(this).attr('data-id');
+        var x = 0;
+        var myCookies = getCookies();
+        data = JSON.parse(myCookies['panierRest']);
+        for (var i = 0; i < data.length; i++) {
+            if (data[i].id == id) {
+                $('.panier-bloc .media[data-id="' + id + '"]').hide("slow", function () {
+                    setTimeout($(this).remove(), 1000);
+                });
+            }
+            x = i;
+        }
+        data.splice(x, 1);
+        Cookies.set('panierRest', data);
+        d = $(window).width();
+        if (d < 768 && data.length === 0) {
+            $('.title-panier').html('<span id="detail-panier-xs-show">Voir Panier <span class="icon-wrapper"> <i class="glyphicon glyphicon-cutlery"></i> <span class="badge count-basket-plat">' + data.length + '</span></span></span>');
+        }
+        new PNotify({
+            title: 'L\'article a été supprimé avec succès',
+            theme: 'danger',
+            delay: 3000
+        });
+        calaculeSolde(data);
+    });
+
+    var getCookies = function () {
+        var pairs = document.cookie.split(";");
+        var cookies = {};
+        for (var i = 0; i < pairs.length; i++) {
+            var pair = pairs[i].split("=");
+            cookies[pair[0]] = unescape(pair[1]);
+        }
+        return cookies;
+    }
+
+    //ajout de plat dans le panier
+    $('.item-food-content ').on('click', '.ajout-panier', function () {
+        data = $(this).attr('data-base');
+        json = JSON.parse(data);
+        var j = [];
+        var myCookies = getCookies();
+        html = ' <div class="media in" data-id=' + json.id + '>' +
+            ' <div class="media-left media-middle">' +
+            ' <span class="glyphicon glyphicon-menu-up augmenter-produit" data-id="' + json.id + '"></span>' +
+            ' <p style="text-align: center;" class="count-produit" data-number="1" data-id="' + json.id + '"> 1 </p>' +
+            '  <span class="glyphicon glyphicon-menu-down diminuer-produit" data-id="' + json.id + '"></span>' +
+            '</div>' +
+            '<div class="media-body">' +
+            '<span class="glyphicon glyphicon-remove pull-right remove-plat" data-id="' + json.id + '"></span>' +
+            '<h4 class="media-heading"><a href="">' + json.nom + '</a></h4>' +
+            '<p class="plat-categorie">' + json.categorie + '</p>' +
+            ' <a href="" data-prix="' + json.prix + '" class="prix-unitaire"><span class="prix-produit-panier">' + json.prix + '</span><sup>DT</sup></a>' +
+            ' <a href="" class="pull-right prix-total"><span class="prix-total-panier">' + json.prix + '</span><sup>DT</sup></a>' +
+            '   </div>' +
+            '  </div>';
+
+        if ((myCookies["panierRest"]).length > 0) {
+            data = JSON.parse(myCookies['panierRest']);
+            var nb = 0;
+            for (var i = 0; i < data.length; i++) {
+                numb = 0;
+                if (data[i].id == json.id) {
+                    numb = parseInt($('.panier-bloc .count-produit[data-id="' + data[i].id + '"]').attr('data-number')) + 1;
+                    numbe = numb;
+                    json.number = numbe.toString();
+                    data[i].number = json.number;
+                    Cookies.set('panierRest', data);
+                    xe = parseInt(numbe) * parseFloat(data[i].prix);
+                    $('.panier-bloc .count-produit[data-id="' + data[i].id + '"]').attr('data-number', numbe).text(numbe);
+                    $('.panier-bloc .media[data-id="' + data[i].id + '"] .prix-total-panier').text(xe);
+                } else if (data[i].id != json.id) {
+                    nb++;
+                }
+            }
+            if (nb == data.length) {
+                data.push(json);
+                Cookies.set('panierRest', data);
+
+                function appanditem() {
+                    $(".basket-product").append(html);
+                };
+
+                function showitem() {
+                    $('.basket-product .in').show('slow');
+                };
+                $.when(appanditem()).then(showitem());
+            }
+        } else {
+            j.push(json);
+            Cookies.set('panierRest', j);
+            $('.basket-product').slideDown('slow', function () {
+                setTimeout($(this).append(html), 1000);
+            });
+        }
+        new PNotify({
+            title: 'L\'article a été ajouté avec succès',
+            type: 'success',
+            delay: 2000
+        });
+        calaculeSolde(data);
+    });
+
+    //ajout de plat dans le panier par modal
+    $('.btn-command').click(function () {
+        data = $(this).attr('data-base');
+        json = JSON.parse(data);
+        var j = [];
+        var myCookies = getCookies();
+        html = ' <div class="media" data-id=' + json.id + '>' +
+            ' <div class="media-left media-middle">' +
+            ' <span class="glyphicon glyphicon-menu-up augmenter-produit" data-id="' + json.id + '"></span>' +
+            ' <p style="text-align: center;" class="count-produit" data-number="1" data-id="' + json.id + '"> 1 </p>' +
+            '  <span class="glyphicon glyphicon-menu-down diminuer-produit" data-id="' + json.id + '"></span>' +
+            '</div>' +
+            '<div class="media-body">' +
+            '<span class="glyphicon glyphicon-remove pull-right remove-plat" data-id="' + json.id + '"></span>' +
+            '<h4 class="media-heading"><a href="">' + json.nom + '</a></h4>' +
+            '<p class="plat-categorie">' + json.categorie + '</p>' +
+            ' <a href="" data-prix="' + json.prix + '" class="prix-unitaire"><span class="prix-produit-panier">' + json.prix + '</span><sup>DT</sup></a>' +
+            ' <a href="" class="pull-right prix-total"><span class="prix-total-panier">' + json.prix + '</span><sup>DT</sup></a>' +
+            '   </div>' +
+            '  </div>';
+
+        if ((myCookies["panierRest"]).length != 0) {
+            data = JSON.parse(myCookies['panierRest']);
+            var nb = 0;
+            for (var i = 0; i < data.length; i++) {
+                numb = 0;
+                if (data[i].id == json.id) {
+                    numb = parseInt($('.panier-bloc .count-produit[data-id="' + data[i].id + '"]').attr('data-number')) + 1;
+                    numbe = numb;
+                    json.number = numbe.toString();
+                    data[i].number = json.number;
+                    Cookies.set('panierRest', data);
+                    xe = parseInt(numbe) * parseFloat(data[i].prix);
+                    $('.panier-bloc .count-produit[data-id="' + data[i].id + '"]').attr('data-number', numbe).text(numbe);
+                    $('.panier-bloc .media[data-id="' + data[i].id + '"] .prix-total-panier').text(xe);
+                } else if (data[i].id != json.id) {
+                    nb++;
+                }
+            }
+            if (nb == data.length) {
+                data.push(json);
+                Cookies.set('panierRest', data);
+                $('.basket-product').append(html).fadeIn('slow');
+            }
+        } else {
+            j.push(json);
+            Cookies.set('panierRest', j);
+            $('.basket-product').append(html).fadeIn('slow');
+        }
+        calaculeSolde(data);
+        new PNotify({
+            title: 'L\'article a été ajouté avec succès',
+            type: 'success',
+            delay: 2000
+        });
+    });
+    tap=false;
+    //fixation de panier(position) on scroll
+    $(window).scroll(function () {
+        a = $(window).scrollTop();
+        b = $("#section-annonces").position().top - 100;
+        d = $(window).width();
+        c = $("#section-annonces").height() + b;
+        if ((a > b) && (a < c)) {
+            if(d>768){
+            $(".panier-bloc").removeClass("fix-panier-orpanel");
+            $(".panier-bloc").addClass("fix-panier-panel");
+            $(".panier-bloc").css("width", $(".property_item").width);
+            }else if(d<768&& tap===false){
+                $('.title-panier').html('<span id="detail-panier-xs-hide">Cacher Panier<span class="icon-wrapper"> <i class="glyphicon glyphicon-cutlery"></i> <span class="badge count-basket-plat">' + data.length + '</span></span></span>').css({'margin-bottom':'15px'});
+                $('.content-basket-detail').slideDown('slow');
+            }
+        } else {
+            $('.panier-bloc').removeClass("fix-panier-panel");
+            $(".panier-bloc").addClass("fix-panier-orpanel");
+            if(d<768){
+                $('.content-basket-detail').slideUp('slow');
+                $('.title-panier').html('<span id="detail-panier-xs-show">Voir Panier<span class="icon-wrapper"> <i class="glyphicon glyphicon-cutlery"></i> <span class="badge count-basket-plat">' + data.length + '</span></span></span>').css({'margin-bottom':'7px'});
+            }
+        }
+    });
+
+    //chargement de panier
+    $(document).ready(function () {
+        html = "";
+        var myCookies = getCookies();
+        if (document.cookie.indexOf("panierRest") == -1) {
+            document.cookie = "panierRest=[]";
+            $('.btn-custom-commande').hide();
+            $('.l2').text(0);
+
+        } else if ((myCookies["panierRest"]).length < 3) {
+            $('.btn-custom-commande').hide();
+            $('.l2').text(0);
+        } else {
+            data = JSON.parse(myCookies['panierRest']);
+            data.forEach(function (a) {
+                html += ' <div class="media" data-id=' + a.id + '>' +
+                    ' <div class="media-left media-middle">' +
+                    ' <span class="glyphicon glyphicon-menu-up augmenter-produit" data-id="' + a.id + '"></span>' +
+                    ' <p style="text-align:center;font-size: 18px;" class="count-produit" data-number="' + a.number + '" data-id="' + a.id + '"> ' + a.number + ' </p>' +
+                    ' <span class="glyphicon glyphicon-menu-down diminuer-produit"data-id="' + a.id + '"></span>' +
+                    '</div>' +
+                    '<div class="media-body">' +
+                    '<span class="glyphicon glyphicon-remove pull-right remove-plat" data-id="' + a.id + '"></span>' +
+                    '<h4 class="media-heading"><a href="">' + a.nom + '</a></h4>' +
+                    '  <p class="plat-categorie">' + a.categorie + '</p>' +
+                    ' <a href="" data-prix="' + a.prix + '" class="prix-unitaire"><span class="prix-produit-panier">' + a.prix + '</span><sup>DT</sup></a>' +
+                    ' <a href="" class="pull-right prix-total"><span class="prix-total-panier">' + a.prix * a.number + '</span><sup>DT</sup></a>' +
+                    '   </div>' +
+                    '  </div>';
+            });
+            d = $(window).width();
+            $('.basket-product').append(html).fadeIn();
+            calaculeSolde(data);
+        }
+    });
+
+    //calcule solde de panier et afficher
+    function calaculeSolde(data) {
+        var t = 0;
+        if (data == [] || data.length == 0) {
+            $('.btn-custom-commande').hide();
+            $('.basket-product .media').remove();
+            $('.l1').text(0);
+            $('.l3').text(0);
+            $('.l2').text(0);
+        } else if (data != [] || data.length > 0) {
+            for (var i = 0; i < data.length; i++) {
+                prix = parseFloat(data[i].prix);
+                count = parseInt(data[i].number);
+                taux = prix * count;
+                t += taux;
+            }
+            $('.btn-custom-commande').show();
+            $('.l1').text(t);
+            $('.l2').text(5);
+            $('.l3').text(t + 5);
+        }
+        // test de height
+        if (data.length > 4) {
+            $('.basket-product').addClass('menu-product-rest');
+        } else {
+            $('.basket-product').removeClass('menu-product-rest');
+        }
+        $('.count-basket-plat').text(data.length);
+    }
+
+    $(document).ready(function () {
+        responsiveBasket();
+    });
+
+    //responsive panier
+    $(window).resize(function () {
+        responsiveBasket();
+    });
+
+    //fcnction de panier responsive
+    function responsiveBasket() {
+        var myCookies = getCookies();
+        data = JSON.parse(myCookies['panierRest']);
+        d = $(window).width();
+        if (d < 768) {
+            $('.title-panier').html('<span id="detail-panier-xs-show">Voir Panier <span class="icon-wrapper"> <i class="glyphicon glyphicon-cutlery"></i> <span class="badge count-basket-plat">' + data.length + '</span></span></span>').css({'margin-bottom':'7px'});
+            $(".content-basket-detail").hide();
+            $('.panier-bloc').on('click', '#detail-panier-xs-show', function () {
+                var myCookies = getCookies();
+                data = JSON.parse(myCookies['panierRest']);
+                if (data.length > 4) {
+                    $('.basket-product').addClass('menu-product-rest');
+                } else {
+                    $('.basket-product').removeClass('menu-product-rest');
+                }
+                $('.title-panier').html('<span id="detail-panier-xs-hide">Cacher Panier<span class="icon-wrapper"> <i class="glyphicon glyphicon-cutlery"></i> <span class="badge count-basket-plat">' + data.length + '</span></span></span>').css({'margin-bottom':'15px'});
+                $('.content-basket-detail').slideDown('slow');
+            });
+
+            $('.panier-bloc').on('click', '#detail-panier-xs-hide', function () {
+                tap=true;
+                $('.content-basket-detail').slideUp('slow');
+                $('.title-panier').html('<span id="detail-panier-xs-show">Voir Panier<span class="icon-wrapper"> <i class="glyphicon glyphicon-cutlery"></i> <span class="badge count-basket-plat">' + data.length + '</span></span></span>').css({'margin-bottom':'7px'});
+            });
+        } else {
+            $('.title-panier').html('<span>Panier <span class="icon-wrapper"> <i class="glyphicon glyphicon-cutlery"></i> <span class="badge count-basket-plat">' + data.length + '</span></span></span>');
+            $('.basket-product').show('slow');
+            $('.basket-product').removeClass('menu-product-rest');
+        }
+    }
+
+    $('.btn-custom-commande').click(function () {
+        var json = JSON.stringify(getCookies());
+        $('input[name="commande"]').val(json);
+    });
+
+    //verifier localisation et confirm
+    $('#form-conf-commande').submit(function (e) {
+        localisation = $("#location").val();
+        if (localisation == '' || localisation.empty()) {
+            new PNotify({
+                title: 'Localisation',
+                text: 'il Faut cliquer sur button Localiser pour envoyer votre localisation exacte',
+                type: 'error',
+                delay: 3000
+            });
+            return false;
+        }
+
+    });
+
+    /*
+        $('#commander-menus-restAAA').click(function () {
+            localisation = $("#origin").val();
+            nom = $('input[name="nom"]').val();
+            prenom = $('input[name="prenom"]').val();
+            mail = $('input[name="email"]').val();
+            adresse = $('input[name="adresse"]').val();
+            remarque = $('input[name="remarque"]').val();
+            tel = $('input[name="tel"]').val();
+            data = {
+                'nom': nom,
+                'prenom': prenom,
+                'mail': mail,
+                'adresse': adresse,
+                'remarque': remarque,
+                'tel': tel,
+                'origin': localisation
+            };
+            console.log(data);
+            $.ajax({
+                url: '{{ path('restaurant_annonce_commande') }}',
+            method: 'post',
+            data: data,
+            success: function (result) {
+
+                console.log(result);
+                $('.btn-custom-commande').hide();
+            },
+            echec: function (data) {
+                console.log(data);
+            }
+        });
+    });*/
+    $('.form_article').click(function () {
+        module = $(this).data('module');
+        if ((typeof module) == 'string') {
+            module = $(this).data('module').replace(/(\r\n|\n|\r)/g, '<br/>').toString();
+            module = JSON.parse(module);
+        }
+        link = $(this).data('link');
+        $('#Article-edit #AdminBundle_traiteur_titre').val(module.titre);
+        $('#Article-edit #AdminBundle_traiteur_details').val(module.details);
+        CKEDITOR.instances['#AdminBundle_traiteur_details'].setData(module.details);
+        $('#Article-edit #AdminBundle_traiteur_prix').val(module.prix);
+        $('#Article-edit form').attr('action', link);
+
+    });
+
+    $('.view').click(function () {
+        module = $(this).data('module');
+        if ((typeof module) == 'string') {
+            module = $(this).data('module').replace(/(\r\n|\n|\r)/g, '<br/>').toString();
+            module = JSON.parse(module);
+        }
+        $('.titre-view').html(module.titre);
+        $('.view-description').html(module.details);
+        $('.prix').html(module.prix);
+        $('.prev-img-view img').attr('src', module.image);
+
+    });
+
+    $('.categorie-autre').hide();
+    $("#produit").change(function () {
+        selec = $("#produit option:selected").text();
+        if (selec == "Choisir autre Categorie") {
+            $('.categorie-autre').show();
+        } else {
+            $('.categorie-autre').hide();
+        }
+    });
+
+</script>
+{% if app.session.flashbag.get('email') != null %}
+    <script type="text/javascript">
+        $(document).ready(function () {
+            j = [];
+            document.cookie = "panierRest=[]";
+            calaculeSolde(j);
+            new PNotify({
+                title: 'Email',
+                text: 'La demande reçue attend leur appel de confirmation de commande.',
+                delay: 2000
+            });
+        });
+    </script>
+{% endif %}

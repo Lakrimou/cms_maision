@@ -1,0 +1,215 @@
+<link rel="stylesheet" type="text/css" href="{{ asset('asset-front/css/animate.css') }}">
+<style>
+    th {
+        background: rgba(255, 0, 0, .7);
+        color: white;
+    }
+
+    input[type="search"] {
+        height: 35px;
+        border-radius: 5px;
+        border: 1px solid #e3e3e3;
+        margin-bottom: 10px;
+        padding: 10px;
+    }
+
+    select {
+        height: 35px;
+        border-radius: 5px;
+        border: 1px solid #e3e3e3;
+        margin-bottom: 10px;
+        padding: 8px;
+    }
+
+    table.dataTable.no-footer {
+        border: none;
+    }
+
+    table.dataTable tbody th, table.dataTable tbody td {
+        border: none;
+        padding: 8px 10px;
+    }
+
+    .col-space {
+        padding: 5px;
+    }
+
+    .menu-item-categorie {
+        font-size: 14px;
+        margin-left: 10px;
+    }
+
+    .service-item:hover {
+
+    }
+</style>
+<script type="text/javascript" src="{{ asset('tpl/js/moment.min.js') }}"></script>
+<link href="{{ asset('tpl/css/bootstrap-datetimepicker.min.css') }}" rel="stylesheet">
+<script type="text/javascript" src="{{ asset('tpl/js/bootstrap-datetimepicker.min.js') }}"></script>
+<script>
+    $(function () {
+        $('#datetimepicker1').datetimepicker();
+    });
+    $(document).ready(function () {
+        $('#service-table,#service-tables').DataTable();
+    });
+    $(".icon-style-supprimer").click(function () {
+        lien = $(this).data('lien');
+        id = $(this).data('id');
+        pos = $(this).data('pos');
+        var id = $(this).data('loop');
+        $('.nomSpan').text($(this).data('nom'));
+        $(".confirm-del").click(function () {
+            $.ajax({
+                url: lien,
+                method: 'post',
+                success: function (data) {
+                    $('#del-service').modal('hide');
+                    $('#service-table tr[data-serv="' + id + '"]').fadeOut();
+                }
+            });
+        });
+    });
+
+    $('.icon-style-modifier').click(function () {
+        lien = $(this).data('lien');
+        id = $(this).data('id');
+        pos = $(this).data('pos');
+        $.ajax({
+            url: lien,
+            method: 'post',
+            success: function (data) {
+                var service = JSON.parse(data);
+                $('.modif-description').val(service.description);
+                if (service.auto == 1) {
+                    $('.title-service-mod').hide();
+                    $('#servicess option[value="' + service.title + '"]').prop('selected', true);
+                } else {
+                    $('#servicess option[value=""]').prop('selected', true);
+                }
+                $('.modif-title').val(service.title);
+                $('.modal-service-updatee').text(service.title);
+                $('.id').val(id);
+                $('.position').val(pos);
+            }
+        });
+    });
+
+    $('.detail-service-show').click(function () {
+        lien = $(this).data('lien');
+        lien2 = $(this).data('mod');
+        lien3 = $(this).data('sup');
+        id = $(this).data('id');
+        idItem = $(this).data('services');
+        pos = $(this).data('pos');
+        $.ajax({
+            url: lien,
+            method: 'post',
+            success: function (data) {
+                var service = JSON.parse(data);
+                $('.modal-service-detail').text(service.title);
+                $('.detail-service-desc').text(service.description);
+            },
+            error: function (data) {
+                console.log(data);
+            }
+
+        });
+        $('.service-modifier-1').click(function () {
+            $.ajax({
+                url: lien2,
+                method: 'post',
+                success: function (data) {
+                    var service = JSON.parse(data);
+                    $('.modif-description').val(service.description);
+                    if (service.auto == 1) {
+                        $('.title-service-mod').hide();
+                        $('#servicess option[value="' + service.title + '"]').prop('selected', true);
+                    } else {
+                        $('#servicess option[value=""]').prop('selected', true);
+                    }
+                    $('.modif-title').val(service.title);
+                    $('.modal-service-updatee').text(service.title);
+                    $('.id').val(id);
+                    $('.position').val(pos);
+                }
+            });
+        });
+
+        $('.service-supprimer-1').click(function () {
+            $(".confirm-del").click(function () {
+                $.ajax({
+                    url: lien3,
+                    method: 'post',
+                    success: function () {
+                        $('#del-service').modal('hide');
+                        $('#showService').modal('hide');
+                        $('.service-item[data-service="' + idItem + '"]').fadeOut();
+                    }
+                })
+            });
+        });
+    });
+</script>
+<script type="text/javascript" src="{{ asset('tpl/js/jsCookies.js') }}"></script>
+<script>
+    $('#title-service-add').hide();
+    $('#title-service-mod').hide();
+
+    if ($('#update_service_form').find('select option:selected').val()=="vide"){
+        $('#title-service-mod').show();
+    }
+
+        $("#servicess").change(function () {
+        selec = $("#servicess option:selected").text();
+        if (selec == "Choisir autre Service") {
+            $('#title-service-mod').show();
+            $('#service_update').attr('disabled', false);
+        } else {
+            $('#title-service-mod').hide();
+            $('#service_update').attr('disabled', true);
+        }
+    });
+    $("#services").change(function () {
+        selec = $("#services option:selected").text();
+        if (selec == "Choisir autre Service") {
+            $('#title-service-add').show();
+            $('#name-add').attr('disabled', false);
+        } else {
+            $('#title-service-add').hide();
+            $('#name-add').attr('disabled', true);
+        }
+    });
+
+
+    $('.form_article').click(function () {
+
+
+        module = $(this).data('module');
+        if ((typeof module) == 'string') {
+            module = $(this).data('module').replace(/(\r\n|\n|\r)/g, '<br/>').toString();
+            module = JSON.parse(module);
+        }
+        link = $(this).data('link');
+        $('#Article-edit #AdminBundle_traiteur_titre').val(module.titre);
+        $('#Article-edit #AdminBundle_traiteur_details').val(module.details);
+        CKEDITOR.instances['#AdminBundle_traiteur_details'].setData(module.details);
+        $('#Article-edit #AdminBundle_traiteur_prix').val(module.prix);
+        $('#Article-edit form').attr('action', link);
+
+    });
+
+    $('.view').click(function () {
+
+        module = $(this).data('module');
+        if ((typeof module) == 'string') {
+            module = $(this).data('module').replace(/(\r\n|\n|\r)/g, '<br/>').toString();
+            module = JSON.parse(module);
+        }
+        $('.titre-view').html(module.titre);
+        $('.view-description').html(module.details);
+        $('.prix').html(module.prix);
+        $('.prev-img-view img').attr('src', module.image);
+
+    });
+</script>

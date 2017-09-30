@@ -1,0 +1,26 @@
+{% for h in module %}
+    {% if h.descriptionRoom is not null %}
+        <div class="modal fade display-model-delete" id="confirm-delete-chambre{{ loop.index }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="myModalLabel">Confirmer/Annuler</h4>
+                    </div>
+
+                    <div class="modal-body">
+                        <p>Confirmer la suppression</p>
+                        <p class="debug-url"></p>
+                    </div>
+
+                    <div class="modal-footer">
+                        <a href="{{ path('hotel_supprimerChambre', {'id_qq':qouiqui.id, 'id_ch':h.id}) }}" class="btn btn-danger btn-ok">Confirmer</a>
+                        <button type="button" class="btn btn-default hide-delete" data-dismiss="modal">Annuler</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+{% endfor %}

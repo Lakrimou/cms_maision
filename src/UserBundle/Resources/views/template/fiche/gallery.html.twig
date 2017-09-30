@@ -1,0 +1,157 @@
+<!--Gallery Here-->
+<section id="section-gallerie" class="padding bg_light">
+
+    <div class="ooo">
+
+        <span class="o bg" data-toggle="tooltip" data-placement="left" title="Couleur d'arrière plan!"></span>
+        <span class="o mt" data-toggle="tooltip" data-placement="left" title="Motif d'arrière plan!"></span>
+        <span class="o an" data-toggle="tooltip" data-placement="left" title="Animation d'arrière plan!"></span>
+
+    </div>
+
+    <div class="container">
+        {% if connected %}
+            <button data-step="11" data-intro="Cela vous permet dez gerer votre galeries !" class="theme-btn button11 btn-style-one pull-right" data-toggle="modal" data-target="#Ajouter_gallery">
+                ajouter des images Galleris
+            </button>
+        {% endif %}
+
+        <div class="row">
+            <div class="bottom40 text-center">
+                <div class="sorta-block">
+                    <div data-text="Gallerie" class="dashed-shadow sorta bottom40">Gallerie</div>
+                </div>
+                {#<h2 class="text-uppercase">Gallerie</h2>#}
+                {#<div class="line_1"></div>#}
+                {#<div class="line_2"></div>#}
+                {#<div class="line_3"></div>#}
+            </div>
+        </div>
+
+        <div id="projects" class="cbp">
+            {% for img in  img_gallery %}
+
+                {% if '~thumbs' not in img %}
+                    {% set imgThumb = img|split('.') %}
+
+                    <div class="cbp-item latest rent">
+                        <div class="image">
+                            <img src="{{ asset('/uploads/image/') }}{{ iduser }}/{{ qouiqui.id }}/gallery/{{ imgThumb[0] }}~thumbs.jpg" alt="">
+                            {#<img src="{{ asset('/uploads/image/') }}{{ iduser }}/{{ qouiqui.id }}/gallery/{{ img }}" alt="">#}
+                            <div class="overlay">
+                                <a href="{{ asset('/uploads/image/') }}{{ iduser }}/{{ qouiqui.id }}/gallery/{{ img }}" class="fancybox centered" data-fancybox-group="gallery">
+                                    <i class="icon-focus"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+            {% endfor %}
+
+        </div>
+    </div>
+    {% if not is_mobile() %}
+        <div class="paralax-icon">
+            <div class="particle elem1 anim-delay1"></div>
+            <div class="particle elem2 anim-delay5"></div>
+            <div class="particle elem3 anim-delay3"></div>
+            <div class="particle elem4 anim-delay8"></div>
+            <div class="particle elem5 anim-delay9"></div>
+            <div class="particle elem6 anim-delay2"></div>
+            <div class="particle elem7 anim-delay4"></div>
+            <div class="particle elem8 anim-delay3"></div>
+            <div class="particle elem9 anim-delay10"></div>
+            <div class="particle elem8 anim-delay11"></div>
+            <div class="particle elem6 anim-delay12"></div>
+            <div class="particle elem1 anim-delay14"></div>
+            <div class="particle elem13 anim-delay16"></div>
+            <div class="particle elem17 anim-delay18"></div>
+            <div class="particle elem2 anim-delay6"></div>
+            <div class="particle elem16 anim-delay9"></div>
+            <div class="particle elem8 anim-delay3"></div>
+            <div class="particle elem9 anim-delay10"></div>
+            <div class="particle elem18 anim-delay11"></div>
+            <div class="particle elem11 anim-delay12"></div>
+            <div class="particle elem12 anim-delay14"></div>
+            <div class="particle elem13 anim-delay16"></div>
+            <div class="particle elem14 anim-delay18"></div>
+            <div class="particle elem15 anim-delay6"></div>
+            <div class="particle elem16 anim-delay9"></div>
+            <div class="particle elem17 anim-delay7"></div>
+            <div class="particle elem18 anim-delay6"></div>
+            <div class="particle elem19 anim-delay3"></div>
+        </div>
+    {% endif %}
+</section>
+{% if connected %}
+    <div class="modal fade" id="Ajouter_gallery" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">×</button>
+                    <h4 class="modal-title">Gérer les images</h4>
+
+                </div>
+                <div class="modal-body">
+                    <div class="row norow">
+
+
+                        <div class="panel-body">
+
+                            <!-- Standar Form -->
+                            <div class="col-md-6 text-center">
+                                <h4 class="color-blue-f">Sélectionner les images depuis votre ordinateur</h4>
+                                <form id="upload_img_to_gallery" action="{{ path('uploadgallery',{'id_qq': qouiqui.id}) }}" method="post" enctype="multipart/form-data" id="js-upload-form">
+                                    <div class="col-md-12">
+                                        <div class="form-inline">
+                                            <div class="form-group" style="width: 100%">
+                                                <label class="btn btn-default btn-sm center-block btn-file">
+                                                    <i class="fa fa-upload fa-2x" aria-hidden="true"></i>
+                                                    <input type="file" name="files[]" style="display: none;" accept="image/*" multiple required>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <button type="submit" data-target="modifier" data-selector="upload_img_to_gallery" style="width: 100%" class="btn btn-sm btn-primary"><strong>Envoyer les images</strong></button>
+                                    </div>
+                                    <hr>
+                                </form>
+                            </div>
+                            <!-- Upload Finished -->
+                            <div class="col-md-6 text-center">
+                                <div class="container-fluid">
+                                    <div class="img-uploaded">
+                                        <h4 class="color-blue-f">Les images</h4>
+                                        <div class="list-group">
+                                            {% for img in  img_gallery %}
+                                                {% if '~thumbs' not in img %}
+                                                    {% set imgThumb = img|split('.') %}
+                                                    <div class=" row sup-gal-{{ loop.index }}">
+                                                        <div class="col-md-2">
+                                                            <img style="width:50px;height: 50px;margin: 5px" src="{{ asset('/uploads/image/') }}{{ iduser }}/{{ qouiqui.id }}/gallery/{{ imgThumb[0] }}~thumbs.jpg" alt=""></div>
+                                                        <div class="col-md-10">
+                                                            <a class="list-group-item list-group-item-success">
+                                                                <span class="badge alert-success pull-right DeleteIMG" data-img="{{ img }}" data-sup=".sup-gal-{{ loop.index }}" data-link="{{ path('suppr_gallery_img',{'id_qq': qouiqui.id }) }}">Supprimer</span>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                {% endif %}
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+{% endif %}
+<!-- Gallery ends -->

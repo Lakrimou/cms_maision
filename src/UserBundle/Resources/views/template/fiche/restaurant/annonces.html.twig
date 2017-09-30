@@ -1,0 +1,1236 @@
+<style xmlns="http://www.w3.org/1999/html">
+
+
+    #section-annonces {
+        font-family: Acme !important;
+    }
+
+    label, .valide-btn {
+        margin-top: 19px !important;
+    }
+
+    .input-form {
+        margin-top: 15px !important;
+    }
+
+    textarea {
+        margin-top: 5px;
+    }
+
+    .detail-annonce-title {
+        font-size: 36px;
+        text-transform: uppercase;
+        color: #fe5353;
+    }
+
+    .icon-style {
+        background: red;
+        color: #ffffff;
+        padding: 5px;
+    }
+
+    .item-food {
+        border-radius: 5px;
+        border: 1px solid #red;
+    }
+
+    .nom-produit {
+        font-size: 28px;
+        font-weight: 600;
+    }
+
+    .categorie-produit {
+        font-size: 22px;
+        font-weight: 500;
+        margin-top: 20px;
+    }
+
+    .description-produit {
+        font-size: 14px;
+        font-weight: 400;
+        margin-top: 10px;
+    }
+
+    .item-food-detail {
+        margin: 20px 20px -75px 20px;
+    }
+
+    .menu-item-description {
+        margin: 45px;
+    }
+
+    .espace-50 {
+        padding: 15px;
+    }
+
+    .description-plat {
+        margin: 20px 20px 20px 10px;
+        color: black;
+        font-weight: 500;
+    }
+
+    .categorie-plat {
+        font-size: 36px;
+        text-transform: capitalize;
+        color: rgba(255, 0, 0, 0.5);
+        font-weight: 600;
+    }
+
+    .prix-plat {
+        margin-right: 15px;
+        font-size: 35px;
+        color: rgba(255, 0, 0, 0.7);
+        font-weight: 600;
+    }
+
+    .btn-command, .btn-supprimer {
+        padding: 6px 15px;
+        background: transparent;
+        margin-right: 20px;
+        border: 2px solid red;
+        color: red;
+        font-weight: 600;
+    }
+
+    .btn-modif {
+        padding: 6px 15px;
+        background: transparent;
+        margin-right: 10px;
+        border: 2px solid #8f1010;
+        color: #8f1010;
+        font-weight: 600;
+    }
+
+    .btn-commmand {
+        padding: 6px 15px;
+        background: transparent;
+        margin-right: 6px;
+        border: 2px solid rgba(255, 0, 0, 0.7);
+        color: rgba(255, 0, 0, 0.7);
+        font-weight: 600;
+        margin-top: -20px;
+    }
+
+    .modal {
+        text-align: center;
+        padding: 0 !important;
+    }
+
+    .modal:before {
+        content: '';
+        display: inline-block;
+        height: 100%;
+        vertical-align: middle;
+        margin-right: -4px;
+    }
+
+    .modal-dialog {
+        display: inline-block;
+        text-align: left;
+        vertical-align: middle;
+    }
+
+    .single-query option {
+        background: #fff !important;
+        color: #999 !important;
+    }
+
+    .single-query option:hover {
+        background: red !important;
+        color: #fff !important;
+    }
+
+    .ajout-panier {
+        color: red;
+        border: 2px solid red;
+        padding: 5px 5px 5px 7px;
+        margin-bottom: 15px;
+        cursor: pointer;
+        transition-duration: 1s;
+    }
+
+    .ajout-panier:hover {
+        color: white;
+        background: red;
+    }
+
+    .augmenter-produit, .diminuer-produit {
+        color: #a63f3f;
+        font-weight: 600;
+    }
+
+    .augmenter-produit:hover, .diminuer-produit:hover {
+        color: red;
+    }
+
+    .panier-bloc {
+        padding: 20px 10px 10px 10px;
+        box-shadow: 0 0 5px 1px rgba(0, 0, 0, .15);
+        background: #fff;
+    }
+
+    .categorie-menus {
+        -webkit-background: white !important;
+        background: white !important;
+    }
+
+    .media {
+        margin-left: 10px !important;
+        margin-right: 10px !important;
+        border-bottom: 1px dashed #f47171;
+        padding-bottom: 10px;
+        margin-bottom: 0px !important;
+    }
+
+    .media-heading {
+        width: 90%;
+    }
+
+    .title-panier {
+        text-align: center;
+        font-size: 37px;
+        color: red;
+        font-family: Acme !important;
+    }
+
+    .prix-total {
+        font-size: 22px;
+        font-weight: 600;
+        color: #e89090;
+    }
+
+    .prix-unitaire {
+        color: #f26565;
+        font-size: 19px;
+    }
+
+    .plat-categorie {
+        color: #6e0303;
+    }
+
+    .detail-commande {
+        text-align: center;
+        color: #ea3c3c;
+        font-weight: 600;
+        font-size: 19px;
+    }
+
+    .detail-modal {
+        margin: 10px 0px;
+        text-align: center;
+    }
+
+    .sous-total, .frais-Livraison {
+        margin-left: 25px;
+        color: black;
+        font-size: 18px;
+        font-weight: 600;
+        font-size: 17px;
+    }
+
+    .livraison-model {
+        border-bottom: 1px dashed #f47171;
+        margin: 8px 12px 10px 11px !important;
+    }
+
+    .livraison-number, .total-number {
+        font-size: 24px;
+        margin-right: 20px;
+        font-weight: 600;
+        color: #f28383;
+    }
+
+    .taux-total {
+        margin-bottom: 15px;
+    }
+
+    .totall-number {
+        margin-right: 25px;
+        font-weight: 800;
+        color: #f88181;
+        font-size: 28px;
+    }
+
+    .fix-panier-panel {
+        position: fixed;
+        top: 84px;
+        z-index: 110;
+        width: 20%;
+    }
+
+    .fix-panier-orpanel {
+        position: fixed;
+        top: 84px;
+        z-index: 110;
+        width: 20%;
+        right: 2px;
+    }
+
+    .fix-panier-height-1 {
+        overflow-y: scroll;
+        height: 100px;
+    }
+
+    .menu-product-rest {
+        overflow-y: scroll;
+        height: 406px;
+    }
+
+    .commande-btn-bloc {
+        margin: 0 12px;
+    }
+
+    .btn-custom-commande {
+        width: 100%;
+        background: #ea5d5d;
+        color: #fff;
+        border-radius: 0px;
+    }
+
+    .media-heading a {
+        font-family: Acme !important;
+    }
+
+    .btn-custom-commande:hover, .btn-custom-commande:active {
+        background: #fff !important;
+        color: #ea5d5d !important;
+        border: 1px solid #ea5d5d !important;
+    }
+
+    .confirm-block {
+        margin-top: 15px;
+    }
+
+    textarea {
+        resize: vertical;
+    }
+
+    .sous-categorie-label {
+        margin-top: -15px !important;
+    }
+
+    .property_item {
+        background: #fff;
+        margin-bottom: 50px;
+        height: 400px;
+        -ms-box-shadow: 0 0 5px 1px rgba(0, 0, 0, .15);
+        -webkit-box-shadow: 0 0 5px 1px rgba(0, 0, 0, .15);
+        box-shadow: 0 0 5px 1px rgba(0, 0, 0, .15);
+    }
+
+    .nomProduit, .modal-title {
+        color: #fe5353;
+    }
+
+    .btn-modif-custom {
+        border: 2px solid #8f1010 !important;
+    }
+
+    .modal-footer .btn + .btn {
+        margin-left: -5px !important;
+    }
+
+    .badge {
+        background: rgb(234, 93, 93) !important;
+        width: auto;
+        height: auto;
+        margin: 0;
+        border-radius: 50%;
+        position: absolute;
+        top: 6px !important;
+        padding: 3px 6px;
+    }
+
+    .icon-wrapper {
+        position: relative;
+        color: #791a1a !important;
+    }
+
+    .modal-custom {
+        width: 60%;
+    }
+
+    @media (max-width: 992px) {
+        .fix-panier-orpanel {
+            position: fixed;
+            top: 84px;
+            z-index: 110;
+            width: 31%;
+            right: 2px;
+        }
+
+        .fix-panier-panel {
+            width: 38%;
+        }
+
+        .detail-annonce-title {
+            font-size: 25px;
+            text-transform: uppercase;
+            color: #fe5353;
+        }
+
+        .categorie-plat {
+            font-size: 23px;
+            text-transform: capitalize;
+            color: rgba(255, 0, 0, 0.5);
+            font-weight: 600;
+        }
+
+        .prix-plat {
+            margin-right: 4px;
+            font-size: 26px;
+            color: rgba(255, 0, 0, 0.7);
+            font-weight: 600;
+        }
+
+        .carousel-inner {
+            border-radius: 15px;
+        }
+
+        .btn-command, .btn-supprimer {
+            margin-right: 6px;
+            border-radius: 10px;
+        }
+
+        .btn-modif {
+            border-radius: 10px;
+        }
+    }
+
+    @media (max-width: 767px) {
+        .modal-custom {
+            width: 87%;
+        }
+
+        .detail-annonce-title, .nomProduit {
+            font-size: 21px !important;
+        }
+
+        .detail-annonce-categorie {
+            font-size: 14px !important;
+        }
+
+        .prix-plat {
+            margin-right: 15px;
+            font-size: 22px;
+            margin-top: 10px;
+            color: rgba(255, 0, 0, 0.7);
+            font-weight: 600;
+        }
+
+        .col-custom {
+            width: 50%;
+        }
+
+        .fix-panier-orpanel, .fix-panier-panel {
+            position: fixed;
+            bottom: 0;
+            z-index: 110;
+            width: 100%;
+            left: 0;
+            margin: 0;
+            top: auto;
+        }
+
+        .title-panier {
+            font-size: 25px;
+        }
+
+        .sous-total, .frais-Livraison {
+            margin-left: 25px;
+            font-weight: 600;
+            font-size: 15px;
+        }
+
+        .livraison-number, .total-number {
+            font-size: 18px;
+        }
+
+        .menu-product-rest {
+            overflow-y: scroll;
+            max-height: 420px;
+        }
+
+        .totall-number {
+            margin-right: 70px;
+            font-size: 21px;
+        }
+
+        .col-xs-custom-btn {
+            width: 40%;
+            margin-right: 5%;
+        }
+
+        .col-xs-custom-btnn {
+            width: 40%;
+            margin-left: 5%;
+        }
+
+        .badge {
+            background: rgb(234, 93, 93);
+            width: auto;
+            height: auto;
+            margin: 0;
+            border-radius: 50%;
+            position: absolute;
+            top: -4px !important;
+            right: -14px !important;
+        }
+
+        .sous-categorie-label {
+            margin-top: -15px !important;
+            margin-bottom: 35px;
+        }
+
+        .modal-footer .btn + .btn {
+            margin-left: 0px !important;
+            margin-top: 10px;
+        }
+    }
+
+    @media (max-width: 550px) {
+        .col-custom {
+            width: 100%;
+        }
+
+        .col-xs-offset-5 {
+            margin-left: 38%;
+        }
+    }
+
+    @media (max-width: 550px) {
+        .modal-custom {
+            width: 92%;
+        }
+    }
+
+    @media (max-width: 400px) {
+        .col-xs-offset-5 {
+            margin-left: 36%;
+        }
+    }
+
+    @media (max-width: 350px) {
+        .col-xs-offset-5 {
+            margin-left: 32%;
+        }
+    }
+
+    .fileuploader-input-button:active {
+        background: #d9534f;
+        box-shadow: inset 0 1px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .fileuploader-input-button:hover {
+        background: #d9534f;
+    }
+
+    .fileuploader-input-button {
+        display: inline-block;
+        background: #ff4c4c;
+        padding: 12px 20px;
+        border-radius: 4px;
+        color: #fff;
+        text-align: center;
+        font-weight: bold;
+        vertical-align: top;
+        cursor: pointer;
+        -webkit-transition: all .2s ease-out;
+        transition: all .2s ease-out;
+    }
+
+    .fileuploader-input-caption {
+        position: relative;
+        display: inline-block;
+        -webkit-box-flex: 1;
+        -ms-flex: 1;
+        flex: 1;
+        -ms-flex-item-align: start;
+        align-self: flex-start;
+        padding: 11px 15px;
+        margin-right: 15px;
+        background: #fff;
+        border: 1px solid #f2adad;
+        border-radius: 4px;
+        color: #ff4c4c;
+        font-weight: bold;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        -webkit-transition: all .2s ease-out;
+        transition: all .2s ease-out;
+    }
+
+    .fileuploader {
+        display: block;
+        width: 100%;
+        padding: 15px;
+        margin: 15px 0;
+        background: #ffe8e8;
+        border-radius: 4px;
+        line-height: normal;
+        text-align: left;
+        overflow: hidden;
+    }
+
+    .media.in {
+        display: none;
+    }
+
+    .categorie-sous-menus {
+        background: #fff !important;
+    }
+</style>
+<section id="section-annonces" class="property-details padding" style="background: #fff2f2;">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-md-9 bottom40">
+                <h2 class="text-uppercase">Nos <span class="color_red">Menus </span></h2>
+                <div class="line_1"></div>
+                <div class="line_2"></div>
+                <div class="line_3"></div>
+            </div>
+            <div class="col-xs-12 col-md-3">
+                {% if app.user != null and app.user == attributes.quoiqui.user %}
+                    <div class="pull-right theme-btn ">
+                        <button type="button" class="theme-btn b theme-btn button11 btn-style-one pull-right" data-toggle="modal" data-target=".liste-produit">liste des Plats</button>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+        <!-- Section starts: Appetizers -->
+        <div class="menu-section">
+            <div class="container">
+                <!-- LISTING STYLE-->
+                <section id="agent-p-2" class="listing-1 padding_top">
+                    <div class="row">
+                        {% if app.user != attributes.quoiqui.user %}
+                        <div class="col-md-8 col-sm-6 col-xs-12">
+                            {% else %}
+                            <div class="col-xs-12">
+                                {% endif %}
+                                <form class="findus">
+                                    <div class="row bottom30">
+                                        <div class="col-md-12">
+                                            <div id="mapDiv"></div>
+                                            <div class="single-query">
+                                                <div class="intros">
+                                                    <div class="bfh-selectbox categorie-menus" data-name="categoriee" data-filter="true">
+                                                        <div data-value="Meilleures ventes du moment">Meilleures ventes du moment</div>
+                                                        <div data-value="Offre spéciale : 3 pour 2">Offre spéciale : 3 pour 2</div>
+                                                        <div data-value="Menus Midi">Menus Midi</div>
+                                                        <div data-value="Menus Burgers">Menus Burgers</div>
+                                                        <div data-value="Menus Sandwiches">Menus Sandwiches</div>
+                                                        <div data-value="Menus Panini">Menus Panini</div>
+                                                        <div data-value="Salades">Salades</div>
+                                                        <div data-value="Pizza">Pizza</div>
+                                                        <div data-value="Pâtes">Pâtes</div>
+                                                        <div data-value="Assiettes">Assiettes</div>
+                                                        <div data-value="Tacos">Tacos</div>
+                                                        <div data-value="Panini">Panini</div>
+                                                        <div data-value="Pizzanini">Pizzanini</div>
+                                                        <div data-value="Tex-Mex">Tex-Mex</div>
+                                                        <div data-value="Desserts">Desserts</div>
+                                                        <div data-value="Boissons">Boissons</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="single-query">
+                                                <div class="intros">
+                                                    <div class="bfh-selectbox sous-categorie" data-name="sous-categorieee" data-value="Meilleures ventes du moment" data-filter="true">
+                                                        <div data-value="Pizza Junior">Pizza Junior</div>
+                                                        <div data-value="Pizza Senior">Pizza Sénior</div>
+                                                        <div data-value="Pizza Méga">Pizza Méga</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="item-food-content">
+                                        {% for p in produit %}
+                                        {% if app.user != attributes.quoiqui.user %}
+                                        <div class="col-md-6 col-xs-12">
+                                            {% else %}
+                                            <div class="col-xs-12 col-sm-6 col-custom col-md-4">
+                                                {% endif %}
+                                                <div class="property_item heading_space">
+                                                    <div class="image">
+                                                        <img src="{{ p.photo|first }}" alt="listin" class="img-responsive" style="height: 230px;">
+                                                        <div class="overlay">
+                                                            <div class="centered">
+                                                                <a class="link_arrow white_border show-annonce-detail"
+                                                                   data-toggle="modal"
+                                                                   data-target="#showAnnonce"
+                                                                   data-lien="{{ path('restaurant_annonce_show',{'id':p.id,'idq':attributes.quoiqui.id}) }}"
+                                                                   data-mod="{{ path('restaurant_annonce_edit',{'id':p.id}) }}"
+                                                                   data-sup="{{ path('restaurant_annonce_remove',{'id':p.id}) }}"
+                                                                   data-identifiant="{{ p.id }}"
+                                                                   data-podui="{{ loop.index }}">View Detail
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="proerty_content">
+                                                        <div class="proerty_text">
+                                                            <a class="show-annonce-detail"
+                                                               data-toggle="modal"
+                                                               data-target="#showAnnonce"
+                                                               data-lien="{{ path('restaurant_annonce_show',{'id':p.id,'idq':attributes.quoiqui.id}) }}"
+                                                               data-mod="{{ path('restaurant_annonce_edit',{'id':p.id}) }}"
+                                                               data-sup="{{ path('restaurant_annonce_remove',{'id':p.id}) }}"
+                                                               data-identifiant="{{ p.id }}"
+                                                               data-podui="{{ loop.index }}">
+                                                                <h3><a>{{ p.nom }}</a></h3>
+                                                                <span class="bottom10">{{ p.category }}</span>
+                                                                <p><strong>{{ p.prix }} DT</strong></p>
+                                                            </a>
+                                                            {% if app.user != attributes.quoiqui.user %}
+                                                                <span class="glyphicon glyphicon-plus pull-right ajout-panier"
+                                                                      data-base='{"id":"{{ p.id }}","nom":"{{ p.nom }}","prix":"{{ p.prix }}","categorie":"{{ p.category }}","number":"1" }'></span>
+                                                            {% endif %}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            {% endfor %}
+                                        </div>
+                                </form>
+                            </div>
+                            {% if app.user != attributes.quoiqui.user %}
+                                <div class="col-md-4 col-sm-6 col-xs-12">
+                                    <div class="panier-bloc">
+                                        <div class="panier-content">
+                                            <h3 class="text-uppercase title-panier bottom40">Panier</h3>
+                                        </div>
+                                        <div class="content-basket-detail">
+                                            <div class="basket-product" style=""></div>
+                                            <div style="margin-top:15px"></div>
+                                            <div class="row">
+                                                <span class="sous-total pull-left">Sous-total</span>
+                                                <span class="total-number pull-right"><span class="l1">0</span><sup>DT</sup></span>
+                                            </div>
+                                            <div class="row">
+                                                <span class="frais-Livraison pull-left">Frais de Livraison</span>
+                                                <span class="livraison-number pull-right"><span
+                                                            class="l2">0</span><sup>DT</sup></span>
+                                            </div>
+                                            <div class="livraison-model"></div>
+                                            <div class="row taux-total">
+                                                <span class="frais-Livraison pull-left">Total</span>
+                                                <span class="totall-number pull-right"><span
+                                                            class="l3">0</span><sup>DT</sup></span>
+                                            </div>
+                                            <div class="row commande-btn-bloc">
+                                                <button class="btn btn-custom-commande" data-target="#commande-annonce" data-toggle="modal">Commander</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endif %}
+                        </div>
+                </section>
+                <!-- LISTING -->
+                <!-- Filter Controls - Simple Mode -->
+            </div>
+        </div>
+        <!-- Section ends: Appetizers -->
+    </div>
+</section>
+
+<!-- modal detail annonce -->
+<div id="showAnnonce" class="modal fade in" role="dialog">
+    <div class="modal-dialog modal-custom">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title"><span class="detail-annonce-title"></span></h4>
+            </div>
+            <div class="modal-body">
+                <div style="margin-top:20px;"></div>
+                <div class="row">
+                    <div class="col-md-5">
+                        <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                            <!-- Indicators -->
+                            <ol class="carousel-indicators show-indicators">
+                            </ol>
+
+                            <!-- Wrapper for slides -->
+                            <div class="carousel-inner show-image">
+                            </div>
+
+                            <!-- Left and right controls -->
+                            <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+                                <span class="glyphicon glyphicon-chevron-left"></span>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                            <a class="right carousel-control" href="#myCarousel" data-slide="next">
+                                <span class="glyphicon glyphicon-chevron-right"></span>
+                                <span class="sr-only">Next</span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-md-7">
+                        <div class="prix-plat">
+                            <span class="detail-annonce-prix pull-right"></span>
+                        </div>
+                        <div class="categorie-plat">
+                            <span class="detail-annonce-categorie"></span>
+                        </div>
+                        <div class="espace-50"></div>
+                        <div class="description-plat">
+                            <span class="detail-annonce-description"></span>
+                        </div>
+                        {% if app.user == attributes.quoiqui.user %}
+                            <div class="pull-right">
+                                <button type="button" class="btn-modif annonce-modifier-1" data-toggle="modal" data-target="#edit-annonce">Modifier</button>
+                                <button type="button" class="btn-supprimer annonce-supprimer-1" data-toggle="modal" data-target="#del-annonce">Supprimer</button>
+                            </div>
+                        {% else %}
+                            <div class="commander-plat">
+                                <button class="btn-command pull-right" data-base="">Commander</button>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% if app.user != null and  app.user == attributes.quoiqui.user %}
+    <!-- modal de lister les annonces -->
+    <div class="modal fade liste-produit" role="dialog" aria-labelledby="myLargeModalLabel">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Liste des Menus</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="pull-right">
+                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#addProduit">
+                            Ajouter un Produit
+                        </button>
+                    </div>
+                    <table class="table table-responsive table-hover table-striped dataTable" style="width: 100%;"
+                           id="service-tables">
+                        <thead>
+                        <tr>
+                            <th style="border:none;border-top-left-radius:5px;">Nom</th>
+                            <th style="border:none">Description</th>
+                            <th style="border:none">Prix</th>
+                            <th style="border:none">Categorie</th>
+                            <th style="border:none">Diponibilité</th>
+                            <th style="border:none;border-top-right-radius:5px;" class="text-center">Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for p in plats %}
+                            <tr data-prod="{{ loop.index }}">
+                                <td>{{ p.nom }}</td>
+                                <td>{{ p.contenu[:100]|raw }}</td>
+                                <td>{{ p.prix }}</td>
+                                <td>{{ p.category }}</td>
+                                <td>Disponible</td>
+                                <td>
+                                    <div class="btn-group pull-right">
+                                        <button type="button" class="btn btn-default icon-style-modifier edit-annonce"
+                                                data-toggle="modal" data-target="#edit-annonce" data-nom="{{ p.nom }}"
+                                                data-id="{{ p.id }}"
+                                                data-lien="{{ path('restaurant_annonce_edit',{'id':p.id}) }}">Modifier
+                                        </button>
+                                        <button type="button" class="btn btn-danger icon-annonce-supprimer"
+                                                data-nom="{{ p.nom }}"
+                                                data-id="{{ p.id }}"
+                                                data-lien="{{ path('restaurant_annonce_remove',{'id':p.id}) }}"
+                                                data-loop="{{ loop.index }}" data-toggle="modal" data-target="#del-annonce">Supprimer
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- modal d'ajout service -->
+    <div id="addProduit" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Ajouter un Produit</h4>
+                </div>
+                <div class="modal-body">
+                    <form action="{{ path('restaurant_annonce_add') }}" method="post" enctype="multipart/form-data">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <label>Nom</label>
+                            </div>
+                            <div class="col-md-10">
+                                <div class="inner-addon left-addon">
+                                    <input type="text" class="form-control input-form" name="title" required="required"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-2">
+                                <label>Prix</label>
+                            </div>
+                            <div class="col-md-10">
+                                <div class="inner-addon left-addon">
+                                    <input type="text" class="form-control input-form" name="prix" min="1" required="required"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-2">
+                                <label>Categorie</label>
+                            </div>
+                            <div class="col-md-10">
+                                <div class="inner-addon left-addon" style="margin-top: 15px;margin-bottom: 16px;">
+                                    <div class="bfh-selectbox categorie-menus-add" data-name="categorie-add" data-filter="true">
+                                        <div data-value="Meilleures ventes du moment"
+                                             data-lien="{{ path("restaurant_annonce_filter",{'filter':'Meilleures ventes du moment','id':attributes.quoiqui.id}) }}">
+                                            Meilleures ventes du moment
+                                        </div>
+                                        <div data-value="Offre spéciale : 3 pour 2"
+                                             data-lien="{{ path("restaurant_annonce_filter",{'filter':'Offre spéciale : 3 pour 2','id':attributes.quoiqui.id}) }}">
+                                            Offre spéciale : 3 pour 2
+                                        </div>
+                                        <div data-value="Menus Midi"
+                                             data-lien="{{ path("restaurant_annonce_filter",{'filter':'Menus Midi','id':attributes.quoiqui.id}) }}">
+                                            Menus Midi
+                                        </div>
+                                        <div data-value="Menus Burgers"
+                                             data-lien="{{ path("restaurant_annonce_filter",{'filter':'Menus Burgers','id':attributes.quoiqui.id}) }}">
+                                            Menus Burgers
+                                        </div>
+                                        <div data-value="Menus Sandwiches"
+                                             data-lien="{{ path("restaurant_annonce_filter",{'filter':'Menus Sandwiches','id':attributes.quoiqui.id}) }}">
+                                            Menus Sandwiches
+                                        </div>
+                                        <div data-value="Menus Panini"
+                                             data-lien="{{ path("restaurant_annonce_filter",{'filter':'Menus Panini','id':attributes.quoiqui.id}) }}">
+                                            Menus Panini
+                                        </div>
+                                        <div data-value="Salades"
+                                             data-lien="{{ path("restaurant_annonce_filter",{'filter':'Salades','id':attributes.quoiqui.id}) }}">
+                                            Salades
+                                        </div>
+                                        <div data-value="Pizza"
+                                             data-lien="{{ path("restaurant_annonce_filter",{'filter':'Pizza Junior','id':attributes.quoiqui.id}) }}">
+                                            Pizza
+                                        </div>
+                                        <div data-value="Pâtes"
+                                             data-lien="{{ path("restaurant_annonce_filter",{'filter':'Pâtes','id':attributes.quoiqui.id}) }}">
+                                            Pâtes
+                                        </div>
+                                        <div data-value="Assiettes"
+                                             data-lien="{{ path("restaurant_annonce_filter",{'filter':'Assiettes','id':attributes.quoiqui.id}) }}">
+                                            Assiettes
+                                        </div>
+                                        <div data-value="Tacos"
+                                             data-lien="{{ path("restaurant_annonce_filter",{'filter':'Tacos','id':attributes.quoiqui.id}) }}">
+                                            Tacos
+                                        </div>
+                                        <div data-value="Panini"
+                                             data-lien="{{ path("restaurant_annonce_filter",{'filter':'Panini','id':attributes.quoiqui.id}) }}">
+                                            Panini
+                                        </div>
+                                        <div data-value="Pizzanini"
+                                             data-lien="{{ path("restaurant_annonce_filter",{'filter':'Pizzanini','id':attributes.quoiqui.id}) }}">
+                                            Pizzanini
+                                        </div>
+                                        <div data-value="Tex-Mex"
+                                             data-lien="{{ path("restaurant_annonce_filter",{'filter':'Tex-Mex','id':attributes.quoiqui.id}) }}">
+                                            Tex-Mex
+                                        </div>
+                                        <div data-value="Desserts"
+                                             data-lien="{{ path("restaurant_annonce_filter",{'filter':'Desserts','id':attributes.quoiqui.id}) }}">
+                                            Desserts
+                                        </div>
+                                        <div data-value="Boissons"
+                                             data-lien="{{ path("restaurant_annonce_filter",{'filter':'Boissons','id':attributes.quoiqui.id}) }}">
+                                            Boissons
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row categorie-sous-menus-add">
+                            <div class="col-md-2">
+                                <label class="sous-categorie-label">Sous Categorie</label>
+                            </div>
+                            <div class="col-md-10">
+                                <div class="inner-addon left-addon" style="margin-bottom: 15px;margin-top: -16px;">
+                                    <div class="bfh-selectbox categorie-sous-menus-add" data-name="sous-categorie" data-filter="true">
+                                        <div data-value="Pizza Junior">Pizza Junior</div>
+                                        <div data-value="Pizza Senior">Pizza Sénior</div>
+                                        <div data-value="Pizza Méga">Pizza Méga</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-2">
+                                <label>Contenu</label>
+                            </div>
+                            <div class="col-md-10">
+                                <div class="inner-addon left-addon">
+                                    <textarea class="form-control ckeditor" id="editeur" name="editeur" rows="10"
+                                              required="required"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-2">
+                                <label>Photo</label>
+                            </div>
+                            <div class="col-md-10">
+                                <div class="inner-addon left-addon">
+                                    <input type="file" class="form-control input-form" name="photo"
+                                           required="required"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-2 col-xs-offset-5">
+                                <input type="submit" class="btn btn-danger valide-btn" value="Enregistrer"/>
+                            </div>
+                        </div>
+                        <input type="hidden" value="{{ attributes.quoiqui.id }}" name="id"/>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!--modal de modifier une annonce -->
+    <div class="modal fade" role="dialog" id="edit-annonce">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title"><span class="nomProduit"></span></h4>
+                </div>
+                <div class="modal-body">
+                    <form action="{{ path('restaurant_annonce_update') }}" method="post" enctype="multipart/form-data">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <label>Nom</label>
+                            </div>
+                            <div class="col-md-10">
+                                <div class="inner-addon left-addon">
+                                    <input type="text" class="form-control input-form form-annonce-nom" name="title" required/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-2">
+                                <label>Prix</label>
+                            </div>
+                            <div class="col-md-10">
+                                <div class="inner-addon left-addon">
+                                    <input type="text" class="form-control input-form form-annonce-prix" name="prix" min="1" required="required"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-2">
+                                <label>Categorie</label>
+                            </div>
+                            <div class="col-md-10">
+                                <div class="inner-addon left-addon">
+                                    <div class="bfh-selectbox form-annonce-categorie categorie-menus-mod" data-name="categorie" data-filter="true" style="margin-top: 13px;margin-bottom: 16px;">
+                                        <div data-value="Meilleures ventes du moment">Meilleures ventes du moment</div>
+                                        <div data-value="Offre spéciale : 3 pour 2">Offre spéciale : 3 pour 2</div>
+                                        <div data-value="Menus Midi">Menus Midi</div>
+                                        <div data-value="Menus Burgers">Menus Burgers</div>
+                                        <div data-value="Menus Sandwiches">Menus Sandwiches</div>
+                                        <div data-value="Menus Panini">Menus Panini</div>
+                                        <div data-value="Salades">Salades</div>
+                                        <div data-value="Pizza">Pizza</div>
+                                        <div data-value="Pâtes">Pâtes</div>
+                                        <div data-value="Assiettes">Assiettes</div>
+                                        <div data-value="Tacos">Tacos</div>
+                                        <div data-value="Panini">Panini</div>
+                                        <div data-value="Pizzanini">Pizzanini</div>
+                                        <div data-value="Tex-Mex">Tex-Mex</div>
+                                        <div data-value="Desserts">Desserts</div>
+                                        <div data-value="Boissons">Boissons</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row categorie-sous-menus-mod">
+                            <div class="col-md-2">
+                                <label style="margin-top: 9px !important;">Sous Categorie</label>
+                            </div>
+                            <div class="col-md-10">
+                                <div class="inner-addon left-addon" style="margin-bottom: 15px;margin-top: 11px;">
+                                    <div class="bfh-selectbox" data-name="sous-categorie" data-filter="true">
+                                        <div data-value="Pizza Junior">Pizza Junior</div>
+                                        <div data-value="Pizza Sénior">Pizza Sénior</div>
+                                        <div data-value="Pizza Méga">Pizza Méga</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-2">
+                                <label>Description</label>
+                            </div>
+                            <div class="col-md-10">
+                                <div class="inner-addon left-addon">
+                                    <textarea cols="80" class="ckeditor form-annonce-desc" id="editeur" name="editeur" rows="10" required="required"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-2">
+                                <label>Photo</label>
+                            </div>
+                            <div class="col-md-10">
+                                <div class="inner-addon left-addon">
+                                    <input type="file" class="form-control input-form" name="photo"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-10 col-md-offset-2 form-annonce-image"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-2 col-xs-offset-5">
+                                <input type="submit" class="btn btn-modif valide-btn btn-modif-custom"
+                                       value="Modifier"/>
+                            </div>
+                        </div>
+                        <input type="hidden" value="" name="id" class="id"/>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!--modal de suppression un service -->
+    <div class="modal fade" role="dialog" id="del-annonce">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Supprimer ce Plat</h4>
+                </div>
+                <div class="modal-body">
+                    <center>Confirmer votre suppression de Plat <span class="nomSpan"></span></center>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-modif-custom btn-modif confirm-del-annonce">Oui</button>
+                    <button type="button" class="btn btn-supprimer" data-dismiss="modal">Non</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+{% endif %}
+<!-- modal commander -->
+<div id="commande-annonce" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-custom">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Commander</h4>
+            </div>
+            <div class="modal-body">
+                <form action="/module/restaurant/annonce/commande" method="post" enctype="multipart/form-data" id="form-conf-commande">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label>Nom</label>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="inner-addon left-addon">
+                                <input type="text" class="form-control input-form" name="nom"
+                                       placeholder="Saisie votre Nom" required/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label>Prénom</label>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="inner-addon left-addon">
+                                <input type="text" class="form-control input-form" name="prenom"
+                                       placeholder="Saisie votre Prénom" required/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label>Adresse</label>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="inner-addon left-addon">
+                                <input type="text" class="form-control input-form" name="adresse"
+                                       placeholder="Saisie votre Adresse" required/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label>Téléphone</label>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="inner-addon left-addon">
+                                <input type="tel" class="form-control input-form" name="tel" placeholder="71 111 000"
+                                       required/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label>Email</label>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="inner-addon left-addon">
+                                <input type="email" class="form-control input-form" name="email"
+                                       placeholder="Saisie votre Email" required/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label>Remarque</label>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="inner-addon left-addon">
+                                <textarea class="form-control input-form" name="remarque"
+                                          placeholder="par exemple, pâte sans gluten pour les raviolis s'il vous plaît!"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <input type="hidden" value="" name="commande" id="commande"/>
+                    <input type="hidden" value="{{ attributes.quoiqui.id }}" name="id"/>
+                    <input type="hidden" name="origin" id="location" placeholder="Indiquez un lieu" class="form-control map-input" size="0" autocomplete="off" style="">
+                    <div class="row confirm-block">
+                        <div class="col-sm-4 col-sm-offset-4 col-xs-12">
+                            <div class="inner-addon left-addon">
+                                <button type="button" class="btn btn-primary btn-sm col-xs-custom-btnn" style="cursor:pointer;padding: 6px;" onclick="geoLocate();"/>
+                                Localiser</button>
+                                <input type="submit" class="btn btn-bloc btn-danger col-xs-custom-btn" value="Confirmer" id="commander-menus-rest"/>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>

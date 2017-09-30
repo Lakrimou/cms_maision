@@ -1,0 +1,55 @@
+chauffeur_supp:
+    path: /{id}/supp/
+    defaults: { _controller: ModuleBundle:ChauffeurPrive:delete }
+    methods: GET
+chauffeur_add:
+    path: /add_traiteur
+    defaults: { _controller: ModuleBundle:ChauffeurPrive:new }
+chauffeur_modif:
+    path: /{id}/edit/
+    defaults: { _controller: ModuleBundle:ChauffeurPrive:edit }
+
+chauffeur_index:
+    path:     /
+    defaults: { _controller: "AdminBundle:ChauffeurPrive:index" }
+    methods:  GET
+
+chauffeur_show:
+    path:     /{id}/show
+    defaults: { _controller: "AdminBundle:ChauffeurPrive:show" }
+    methods:  GET
+
+chauffeur_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "AdminBundle:ChauffeurPrive:delete" }
+    methods:  DELETE
+
+chauffeur_add_offre:
+      path: /offre/{idqq}
+      defaults: { _controller: ModuleBundle:ChauffeurPrive:addOffres}
+      methods: [GET, POST]
+
+chauffeur_model_marks:
+    path:     /chauffeur_models_marks
+    defaults: { _controller: "ModuleBundle:ChauffeurPrive:findModels" }
+
+chauffeur_reserver_course:
+    path:    /reserver_course
+    defaults: { _controller: "ModuleBundle:ChauffeurPrive:reserverCourse" }
+
+chauffeur_estimer_course:
+    path:    /estimer_course
+    defaults: { _controller: "ModuleBundle:ChauffeurPrive:estimerCourse" }
+
+chauffeur_add_service:
+     path: /service/{idqq}
+     defaults: { _controller: ModuleBundle:ChauffeurPrive:addService}
+     methods: [GET, POST]
+
+chauffeur_get_marks:
+    path: /marks
+    defaults: { _controller: ModuleBundle:ChauffeurPrive:getMarks}
+
+chauffeur_get_priceMetre:
+    path: /calculate-price
+    defaults: { _controller: ModuleBundle:ChauffeurPrive:calculatePrice}
