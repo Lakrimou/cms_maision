@@ -1,0 +1,115 @@
+﻿/* -----------------------------------------------------------------------------
+
+    This file is used to add your own CSS definitions.
+	Don't forget to link this CSS to all your HTML files (uncomment it in HEAD tag).
+
+----------------------------------------------------------------------------- */
+
+	/* your CSS here */
+
+
+/* -----------------------------------------------------------------------------
+
+    RESPONSIVE DEFINITIONS
+
+----------------------------------------------------------------------------- */
+
+    /* -------------------------------------------------------------------------
+        LARGE DEVICES
+		devices with width between 992px and 1199px
+    ------------------------------------------------------------------------- */
+
+    @media ( max-width: 1199px ) {
+
+		/* your CSS here */
+
+	}
+
+    /* -------------------------------------------------------------------------
+        MEDIUM DEVICES
+		devices with width between 768px and 991px
+    ------------------------------------------------------------------------- */
+
+    @media ( max-width: 991px ) {
+
+		/* your CSS here */
+
+	}
+
+	/* -------------------------------------------------------------------------
+        SMALL DEVICES
+		devices with width between 481px and 767px
+    ------------------------------------------------------------------------- */
+
+    @media ( max-width: 767px ) {
+
+		/* your CSS here */
+
+	}
+
+	/* -------------------------------------------------------------------------
+        EXTRA SMALL DEVICES
+		devices with width up to 480px
+    ------------------------------------------------------------------------- */
+
+	@media ( max-width: 480px ) {
+
+		/* your CSS here */
+
+	}
+.e-intro-photo img
+	 {
+		 max-width: 100%;
+    height: 248px;
+	 margin: 0 auto;
+	 }
+.m-enable-fixed-topbar #inner-body {
+
+	background: url(https://s11.postimg.org/wn508h4ab/2a9f7141191007.579bdda074582.png) no-repeat center center fixed;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+
+}
+
+.map-input {
+	margin: 0;
+	padding: 10px 15px;
+	width: 100%;
+	border-radius: 6px;
+	border: 1px solid rgb(204, 203, 203);
+	font: 16px 'Varela Round', sans-serif;
+	-webkit-transition: all 300ms ease-in-out;
+	-moz-transition: all 300ms ease-in-out;
+	-ms-transition: all 300ms ease-in-out;
+	-o-transition: all 300ms ease-in-out;
+	transition: all 300ms ease-in-out;
+}
+a.btn.btn-cta-primary {
+	color: #fff;
+}
+.adp-legal{
+	display: none;
+}
+.e-header-info-block .e-info-title{
+	font-size: 38px;
+}
+.e-header-info-block p {
+	padding-top: 10px;
+}
+.e-header-links > a {
+	width: 150px;
+}
+#big {
+	text-align: right;
+	text-align: right;
+	top: 57px;
+	position: relative;
+	z-index: 9;
+	margin: 7px;
+}
+#big p {
+
+
+}

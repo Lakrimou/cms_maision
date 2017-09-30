@@ -1,0 +1,21 @@
+* { zoom: 1; }
+
+.m-default-form .b-radio-input label:before { display: none; }
+.m-default-form .b-radio-input input { display: inline; width: auto; }
+
+.m-default-form .b-checkbox-input { position: relative; }
+.m-default-form .b-checkbox-input label:before { display: none; position: relative; top: 3px; margin-right: 10px; content: ""; width: 16px; height: 16px; line-height: 1em; font-size: 12px; text-align: center; border-radius: 2px; border: 1px solid transparent; }
+.m-default-form .b-checkbox-input input  { display: inline; }
+.m-default-form .b-checkbox-input label { display: inline; }
+
+.b-radial-progress-bar .e-loader-bg { border: 0; }
+.b-radial-progress-bar .e-spiner-holder-one { display: none; }
+
+.b-tabs .e-tab-title:hover,
+.b-tabs .e-tab-title.m-active:hover { margin-top: 0; padding-bottom: 0; }
+
+.b-project .e-overlay { display: none; }
+.b-project .e-project-thumb:hover .e-overlay { display: block; }
+
+.b-profile-portfolio ul > li a .e-overlay { display: none; }
+.b-profile-portfolio ul > li a:hover .e-overlay { display: block; }

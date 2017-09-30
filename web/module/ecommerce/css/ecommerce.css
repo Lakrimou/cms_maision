@@ -1,0 +1,128 @@
+.navbar-header {
+    padding-top: 20px;
+    height: 0px;
+    font-family: "Open Sans", sans-serif;
+    font-weight: 700;
+    color: #222;
+}
+
+.modal-dialog {
+    width: 600px;
+    width: 90%;
+}
+
+@media (min-width: 768px) {
+    .modal-dialog {
+        width: 600px;
+        width: 90%;
+    }
+
+    .item {
+        height: 440px;
+        margin-bottom: 30px;
+    }
+}
+
+i.fa.fa-eye.fa-2x {
+    color: #2196F3;
+}
+
+i.fa.fa-eye-slash.fa-2x {
+    color: red;
+}
+
+#tableListProduit img {
+    max-width: 100px !important;
+}
+
+#txtAjouterImage {
+    max-width: 150px;
+}
+
+.modal-dialog {
+    overflow-y: initial !important
+}
+
+.modal-body {
+    max-height: 600px;
+    overflow-y: auto;
+}
+
+
+.navbar>.container{
+    padding: 10px 0;
+}
+#btnEditLogoNav {
+    margin-top: -38px;
+}
+
+.navbar-brand.logo-text img{
+    width: 250px;
+}
+
+/*======================================== CROP ======================================================*/
+.input-button-crop {
+    margin-right: 0;
+    margin-left: 0;
+    border-radius: 0px;
+}
+
+.imageBox {
+    position: relative;
+    height: 400px;
+    /*width: 400px;*/
+    width: 100%;
+    border: 2px solid #016ab3;
+    background: #fff;
+    overflow: hidden;
+    background-repeat: no-repeat;
+    cursor: move;
+}
+
+.imageBox .thumbBox {
+    position: absolute;
+    top: 38%;
+    left: 38%;
+    width: 300px;
+    height: 300px;
+    margin-top: -100px;
+    margin-left: -100px;
+    box-sizing: border-box;
+    border: 1px solid rgb(102, 102, 102);
+    box-shadow: 0 0 0 1000px rgba(9, 88, 154, 0.56);
+    background: none repeat scroll 0% 0% transparent;
+}
+
+.imageBox .spinner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    text-align: center;
+    line-height: 400px;
+    background: rgba(0, 0, 0, 0.7);
+}
+
+.control {
+    display: grid;
+    position: absolute;
+    right: 0;
+}
+
+.action .btn {
+    margin-bottom: 0px;
+    font-weight: 600;
+}
+
+
+.imageBox .thumbBoxLogo {
+    position: absolute;
+    top: 63%;
+    left: 41%;
+    width: 300px;
+    height: 100px;
+
+}
+
+/*======================================== CROP ======================================================*/

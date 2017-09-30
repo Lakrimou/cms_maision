@@ -1,0 +1,241 @@
+.contact-us-section {
+    position: relative;
+    text-align: center;
+    padding: 90px 0px 90px 0px;
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+#modal-booking .modal-lg {
+    width: 90% !important;
+}
+
+#modal-booking .modal-header {
+    border-bottom: none;
+}
+
+#modal-booking .modal-content {
+    margin-top: 100px;
+}
+
+.single-room .room-info .room-services > li {
+    background-color: rgba(247, 0, 94, 0.09);
+    border-radius: 5px;
+    color: rgb(31, 114, 165);
+    float: left;
+    font-size: 14px;
+    font-weight: bold;
+    margin: 0 0 7px;
+    padding: 18px 0;
+    text-align: left;
+    -webkit-width: calc(50% - 7px);
+    width: calc(50% - 7px);
+}
+
+.single-room .room-info .room-services > li:nth-child(2n+1) {
+    margin-right: 7px;
+}
+
+.single-room .room-info .room-services > li i.fa {
+    font-size: 18px;
+    margin: -3px 20px 0;
+}
+
+.single-room.list .room-info .room-structure {
+    font-size: 16px;
+    font-family: "Montserrat", sans-serif;
+    color: #4d4d4d;
+    margin-bottom: 20px;
+}
+
+#modal-booking .row {
+    margin-right: 15px;
+    margin-left: 15px;
+}
+
+.single-room.list .btn.btn-details {
+    display: block;
+    font-size: 16px;
+    font-weight: 600;
+    padding: 13px;
+    margin-top: 10px
+}
+
+.btn-details {
+    background-color: #f8f8f8;
+}
+
+.single-room img {
+    width: 100%;
+    display: block;
+    margin: auto;
+}
+
+.single-room .room-info h5 {
+    font-family: inherit;
+    color: #9d9d9d;
+    font-size: 13px;
+    margin: 10px 0 10px;
+    font-weight: 600;
+}
+
+.single-room.list .room-info h5 {
+    margin-bottom: 40px;
+}
+
+/* Using panels to display blog date */
+.panel.date {
+    margin: 0px;
+    width: 60px;
+    text-align: center;
+}
+
+.panel.date .month {
+    padding: 2px 0px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.panel.date .day {
+    padding: 3px 0px;
+    font-weight: 700;
+    font-size: 1.5em;
+}
+
+#Contactez-nous .btn-style-two:hover {
+    background: none;
+    border-color: #fffefe;
+    color: #ffffff;
+}
+
+#map {
+    width: 100%;
+    height: 500px;
+}
+
+.contact-us-section .btn-style-one, .close-btn-style-one .btn-style-one, .modal-footer .btn-style-one {
+    color: #ff3d54;
+    border: 2px solid #ff3d54;
+}
+
+.contact-us-section .btn-style-two-modifier {
+    position: relative;
+    padding: 10px 23px;
+    line-height: 26px;
+    background: #ff3d54;
+    font-size: 15px;
+    color: #ffffff;
+    text-transform: uppercase;
+    border: 2px solid transparent;
+}
+
+.contact-us-section .btn-style-two-modifier:hover {
+    background: none;
+    border-color: #ff3d54;
+    color: #0e385d;
+}
+
+.contact-us-section .panel-heading {
+    color: #fff;
+    background-color: #ff3d54;
+    border-color: #0e385d;
+}
+
+.contact-us-section .form-controle {
+    border-radius: none !important;
+}
+
+.contact-us-section .text-avis {
+    text-align: left;
+    font-size: 21px;
+}
+
+.contact-nav {
+    font-size: 20px;
+}
+
+.contact-nav strong, .login-color {
+    color: #ffd600;
+}
+
+.login-color {
+    cursor: pointer;
+}
+
+.strong-slidre strong {
+    position: relative;
+    color: #ffffff;
+    font-size: 30px !important;
+    font-weight: 700;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+}
+
+@media (max-width: 768px) {
+    .information-section {
+        display: block !important;
+        border-bottom: 5px solid #acff7e!important;
+    }
+}
+
+@media (max-width: 768px) {
+    .main-slider {
+        display: none !important;
+    }
+}
+
+@media (max-width: 768px) {
+
+    .logo-box {
+        padding: 10px !important;
+    }
+
+}
+
+@media (max-width: 768px) {
+
+    .information-section .fa {
+        color: #ff3d54 !important;
+    }
+
+}
+
+@media (max-width: 768px) {
+
+    .information-section .well {
+        background-color: #ffffff;
+    }
+
+}
+
+.add-room .btn-bs-file input[type="file"] {
+    position: absolute;
+    top: -9999999;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    width: 0;
+    height: 0;
+    outline: none;
+    cursor: inherit;
+}
+
+.rooms-section .modal-footer, .css-modal-galerie .modal-footer {
+    border-top: none !important;
+}
+
+.btn-style-ajout {
+    position: relative;
+    padding: 10px 23px;
+    line-height: 26px;
+    background: #ED7F10;
+    font-size: 15px;
+    color: #ffffff;
+    text-transform: uppercase;
+    border: 2px solid transparent;
+}
+
+.rooms-section .owl-controls .owl-nav [class*="owl-"] {
+    margin-top: 107px !important;
+}

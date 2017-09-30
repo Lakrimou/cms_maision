@@ -1,0 +1,13 @@
+.avatar{
+    max-width: 300px;
+}
+.crop{
+    width: 200px;
+    height: 200px;
+    overflow: hidden;
+    border-radius: 50%;
+    margin: 0 auto;
+ }
+.padding90{
+    padding:90px;
+}
